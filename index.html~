@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+
+    <title>Woodruff Scientific Inc.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar.css" rel="stylesheet">
+	<link href="sticky-footer.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+    <div id="wrap">
+    <div class="container">
+
+	<h4>
+	<a href="index.html"><img src="logo.png"></a>
+	Accelerating the development of commercial fusion energy systems since 2005</h4>
+	
+	
+
+<!--<div class="row" id="header">
+	<div class="col-md-3">	
+	<img src="logo.png"></img>
+	</div>
+	<div class="col-md-9" id="header-content">
+	<h4>Accelerating the development of commercial fusion energy systems since 2005</h4>
+	</div>
+	</div>-->
+
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+	      <li><a href="#">Testimonials</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </div>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2>Products and Services for Plasma Physics and Pulsed Power</h2>
+        <p>Woodruff Scientific inc. can help your lab get up and running quickly and at low cost</p>
+
+      </div>
+	<div class="col-md-6">
+		<h2>Products</h2>
+		<ul>
+		<li><a href="prod/circuit"> Pulsed power</a></li>
+		<li><a href="prod/magnets"> Magnets</a></li>
+		<li><a href="prod/chambers"> Confinement chambers</a></li>
+		<li><a href="prod/coda"> CODAC</a></li>
+		<li><a href="prod/diagnostics"> Diagnostics </a></li>
+		<li><a href="prod/device"> Devices</a></li>
+		<li><a href="prod/hpc"> Computers</a></li>
+		</ul>
+	</div>
+	<div class="col-md-6">
+		<h2>Services</h2>
+		<ul>
+		<li><a href="http://woodruffscientific.com/wp/serv/physic">Physics</a></li>
+		<li><a href="http://woodruffscientific.com/wp/serv/engineering">Engineering</a></li>
+		<li><a href="http://woodruffscientific.com/wp/serv/purchase">Purchase</a></li>
+		<li><a href="http://woodruffscientific.com/wp/serv/fabtes">Fabrication / Integration</a></li>
+		<li><a href="http://woodruffscientific.com/wp/serv/installation-testing">Installation / Testing</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10 center">
+	<h2>Our Mission</h2>
+	<p>
+Nuclear fusion powers our sun and all the stars in the night sky; if harnessed on earth, it could be the ultimate energy source: safe, clean, and with plentiful fuel. Commercial fusion energy will ultimately provide energy independence, national security, and new jobs in the emerging clean-tech market sector.  For the last decade, Woodruff Scientific has sought to accelerate the development of commercial fusion by tackling critical scientific problems in the <a href="http://science.energy.gov/fes/">US DOE Fusion Energy Sciences program</a>.  What we&#8217;ve built, we can now offer as <a href="prod">products.</a> What we&#8217;ve learned to do, we offer as <a href="serv">services</a>.
+	</p>
+	</div>
+    </div> <!-- /container -->
+    </div> <!-- /wrap -->
+    <div id="footer">
+      <div class="container">
+        <div class="col-md-4">
+	<p class="text-muted">
+	4000 Aurora Ave N.<br />
+	Seattle, WA 98103-7583<br />
+	United States
+	</p>
+	</div>
+        <div class="col-md-4">
+	<p class="text-muted">
+	Phone: 206-905-9477<br />
+	Email: <a href="mailto:sales@woodruffscientific.com">sales@woodruffscientific.com</a><br />
+	Hours: 8am to 5pm PST
+	</p>
+	</div>
+	<div class="col-md-4">
+	</div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
