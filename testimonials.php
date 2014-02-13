@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,69 +16,19 @@
 	echo $navbar;	
 	?>	
 
-      <!-- Main component for a primary marketing message or call to action -->
+	<h1>Testimonials</h1>
+	<p>Woodruff Scientific has provided products and services to universities, national labs, and private companies. See what our customers are saying:</p>
+	<h3>Vacuum compatible Helmholtz Coil</h3>
+	<blockquote>“Woodruff Scientific designed and manufactured an in-vacuum Helmholtz coil and mounting structure to our specifications. We will be using the coils to generate an applied magnetic field for basic plasma physics and fusion-energy-science related experiments. Simon and his team were highly responsive to our needs and remained engaged and helpful even after the coils were delivered. Thank you very much!”
+<p class="text-muted">Dr. Scott Hsu, P 24 Plasma Physics Group, Los Alamos National Laboratory</p></blockquote>
 
-	<div class="menu col-md-4">
-        <h2>Magnets</h2>        		
-		<ul>
-		<li><a href="#solenoids">Solenoids</a></li>
-		<li><a href="#helmholtzcoils">Helmholtz Coils</a></li>
-		<li><a href="#">PF Coil Sets</a></li>
-		<li><a href="#">Non-Circular Coils</a></li>
-		<li><a href="#">Low L High Current</a></li>
-		<li><a href="#">Flat/Pancake Coils</a></li>
-		</ul>
-	</div>
-	<div class="col-md-8">
+	<h3>Control and Data Aquisition System</h3>
+	<blockquote>“Woodruff Scientific have made an excellent complete control and data acquisition system for our Laboratory Astrophysical Jet experiment. The system was expertly tailored to our needs with COTS National Instruments and proprietary custom hardware, operated by a full set of LabView interfaces coded to best practise design patterns. The hardware and services provided by Woodruff Scientific are among the most cost-effective in the industry. Highly recommended.”
+<p class="text-muted">Prof. Sett You and Jens Von der Linden, University of Washington, 2013</p></blockquote>
 
-	<h2></h2>
-	<img class="left" src="LANLcoils.jpg" width="224" height="300"><p> We produce custom magnetic field coils designed for specific pulsed power applications in fusion energy sciences, requiring high field strengths, high currents, high voltages, often UH vacuum compatibility (see e.g. Fig 1) and to withstand large forces. Typical coil sets have been designed, and built for poloidal field generation, but also for applications for calibration of diagnostics. Offerings below can be tailored to specific applications.</p>
-	<p class="text-muted">
-		Fig 1. Example: vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.
-	</p>
-      </div>
-
-
-
-      <div><!--products -->
-	<a id="solenoids"></a>
-	<h3>Solenoids</h3>
-	<div class="col-md-6">
-		
-		<p><a href="Coil1.jpg"><img alt="Coil1" src="Coil1-300x129.jpg" width="300" height="129" /></a><br />
-		<a href="Coil1.jpg">Flux plot</a><br />
-		Circuit (<a href="Coil1.1-8mF-5O-0.3089H.pdf">schematic</a>, <a href="Coil1.1-8mF-5O-0.3089Ht.pdf">analysis</a>)</p>
-	</div>
-
-	<div class="col-md-6">
-		<p><a href="Coil2.jpg"><img alt="Coil2" src="Coil2-300x129.jpg" width="300" height="129" /></a><br />
-		<a href="Coil21.jpg">Flux plot</a><br />
-		Circuit (<a href="Coil2.1-2mF-32mO-0.021mH.pdf">schematic</a>, <a href="Coil2.1-2mF-32mO-21mHt.pdf">analysis</a>)</p>	
-		
-	</div>
-
-	<div class="col-md-6">
-		<p><a href="Coil3.jpg"><img alt="Coil3" src="Coil3-300x159.jpg" width="300" height="159" /></a><br />
-<a href="Coil31.jpg">Flux plot</a><br />
-Circuit (<a href="Coil3.1-2mF-0.3mO-3uH.pdf">schematic</a>, <a href="Coil3.1-2mF-0.3mO-3uHt.pdf">analysis</a>)</p>
-	</div>
-
-	<div class="col-md-6">
-		<p><a href="Coil41.jpg"><img alt="Coil4" src="Coil41-300x159.jpg" width="300" height="159" /></a><br />
-<a href="Coil4.jpg">Flux plot</a><br />
-Circuit (<a href="Coil4.1-2mF-0.16O-9.3mH1.pdf">schematic</a>, <a href="Coil4.1-2mF-0.16O-9.3mHt.pdf">analysis</a>)</p>
-	</div>
-
-	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
-
-	<a id="helmholtzcoils"></a>
-	<h3>Helmholtz Coils</h3>
-	<div class="col-md-6">
-	</div>
-	<div class="col-md-6">
-	</div>
-    </div> <!-- /products -->
-
+	<h3>Pulsed Power Plasma Experiment</h3>
+	<blockquote>“Woodruff Scientific Inc. constructed the Florida A&M University (FAMU)/Center for Plasma Science and Technology (CePaST) STPX (Spheromak Turbulent Plasma Experiment) under a subcontract funded by the U.S. Department of Energy… The STPX achieved plasma during the first attempt and CePaST is very pleased with the work performed by Woodruff Scientific Inc.” <a href="Woodruff-Testimonial.pdf">Full Testimonial (pdf)</a>
+	<p class="text-muted">Charles A. Weatherford, Professor of Physics and Director of the Florida A&M University Center for Plasma Science and Technology 2013</p></blockquote>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 

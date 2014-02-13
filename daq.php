@@ -16,11 +16,12 @@
 	echo $navbar;	
 	?>	
 	<ol class="breadcrumb">
-  		<li><a href="#">Home</a></li>
- 	 	<li><a href="#">Subsection</a></li>
-  		<li class="active">Current Page</li>
+  		<li><a href="index.php">Home</a></li>
+ 	 	<li><a href="products.php">Products</a></li>
+ 	 	<li><a href="codac.php">CODAC</a></li>
+  		<li class="active">DAQ</li>
 	</ol>
-	<h1>Title</h1>
+	<h1>Data Acquisition</h1>
 	<p>Paragraph</p>
 
     </div> <!-- /container -->

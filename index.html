@@ -2,31 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
-
-    <title>Woodruff Scientific Inc.</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="navbar.css" rel="stylesheet">
-	<link href="sticky-footer.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+	<?php
+	$head = file_get_contents('header.html');
+	echo $head;	
+	?>
   </head>
 
   <body>
@@ -142,32 +121,10 @@ Nuclear fusion powers our sun and all the stars in the night sky; if harnessed o
 	</div>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
-    <div id="footer">
-      <div class="container">
-        <div class="col-md-4">
-	<p class="text-muted">
-	4000 Aurora Ave N.<br />
-	Seattle, WA 98103-7583<br />
-	United States
-	</p>
-	</div>
-        <div class="col-md-4">
-	<p class="text-muted">
-	Phone: 206-905-9477<br />
-	Email: <a href="mailto:sales@woodruffscientific.com">sales@woodruffscientific.com</a><br />
-	Hours: 8am to 5pm PST
-	</p>
-	</div>
-	<div class="col-md-4">
-	</div>
-      </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="../dist/js/bootstrap.min.js"></script>
+	<?php
+	$footer = file_get_contents('footer.html');
+	echo $footer;	
+	?>	
   </body>
 </html>
 
