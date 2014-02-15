@@ -21,7 +21,9 @@
   		<li class="active">Physics</li>
 	</ol>
 	<h1>Physics</h1>
-	<p>We can provide equilibrium, time-dependent MHD simulations for most Magnetic Fusion Energy (MFE) systems, using various state-of-the-art numerical models. Accounts are available on our local cluster for pre-production runs (up to 32 processors). Support for compilation, pre-, and post-processing offered. We also run various FEM fluid codes and have a broad range of circuit modeling capabilities. </p>
+	<p>We can provide equilibrium, time-dependent MHD simulations for most Magnetic Fusion Energy (MFE) systems, using various state-of-the-art numerical models. Accounts are available on our local cluster for pre-production runs (up to 32 processors). Support for compilation, pre-, and post-processing offered. We also run various FEM fluid codes and have a broad range of circuit modeling capabilities. Use our expertise to get the most out of your simulations.</p>
+
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->

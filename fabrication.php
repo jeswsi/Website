@@ -21,7 +21,9 @@
   		<li class="active">Fabrication &amp; Integration</li>
 	</ol>
 	<h1>Fabrication &amp; Integration</h1>
-	<p>Paragraph</p>
+	<p>After more than a decade of machining prototypes, working with state-of-the-art fabrication techniques (laser cutting, CNC mills/lathes, and now: additive manufacturing) we now offer fabrication services. For components fabricated elsewere, we offer integration services (we will put it together for you and ship completed systems). Let us know what you need fabricated or assembled.</p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->

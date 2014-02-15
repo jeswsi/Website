@@ -21,7 +21,9 @@
   		<li class="active">Installation</li>
 	</ol>
 	<h1>Installation</h1>
-	<p>Paragraph</p>
+	<p>For systems shipped to your location, we offer installation and testing services – we will arrive onsite with our own equipment and get your system / subsystem functional. An experienced team will ensure safe operation, train your staff in safety protocols and ensure that all systems are working to specifications.</p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
