@@ -16,20 +16,20 @@
 	echo $navbar;	
 	?>	
 	<ol class="breadcrumb">
-  		<li><a href="index.php">Home</a></li>
+  		<li><a href="index">Home</a></li>
   		<li class="active">Products</li>
 	</ol>
 
 	<h1>Products</h1>
 		<ul class="left">
-		  <li><a href="pulsedpower.php">Pulsed Power</a></li>
-                  <li><a href="magnets.php">Magnets</a></li>
-                  <li><a href="sources.php">Plasma Sources</a></li>
-                  <li><a href="chambers.php">Confinement Chambers</a></li>
-                  <li><a href="codac.php">CODAC</a></li>
-                  <li><a href="diagnostics.php">Diagnostics</a></li>
-                  <li><a href="devices.php">Devices</a></li>
-                  <li><a href="computers.php">Computers</a></li>
+		  <li><a href="pulsedpower">Pulsed Power</a></li>
+                  <li><a href="magnets">Magnets</a></li>
+                  <li><a href="sources">Plasma Sources</a></li>
+                  <li><a href="chambers">Confinement Chambers</a></li>
+                  <li><a href="codac">CODAC</a></li>
+                  <li><a href="diagnostics">Diagnostics</a></li>
+                  <li><a href="devices">Devices</a></li>
+                  <li><a href="computers">Computers</a></li>
 		</ul>
 
 	<p>Woodruff Scientific offers products that can be tailored to suit specific pulsed power and plasma physics applications, with the philosophy of providing all subsystems necessary for fusion energy development and research. </p>

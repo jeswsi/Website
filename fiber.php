@@ -16,9 +16,9 @@
 	echo $navbar;	
 	?>	
 	<ol class="breadcrumb">
-  		<li><a href="index.php">Home</a></li>
- 	 	<li><a href="products.php">Products</a></li>
- 	 	<li><a href="codac.php">CODAC</a></li>
+  		<li><a href="index">Home</a></li>
+ 	 	<li><a href="products">Products</a></li>
+ 	 	<li><a href="codac">CODAC</a></li>
   		<li class="active">Fiber-optic Relay Controls</li>
 	</ol>
 	<h1>Fiber-Optic Relay Controls</h1>

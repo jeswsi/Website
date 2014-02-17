@@ -16,9 +16,9 @@
 	echo $navbar;	
 	?>	
 	<ol class="breadcrumb">
-  		<li><a href="index.php">Home</a></li>
- 	 	<li><a href="products.php">Products</a></li>
-		<li><a href="Diagnostics.php">Diagnostics</a></li>
+  		<li><a href="index">Home</a></li>
+ 	 	<li><a href="products">Products</a></li>
+		<li><a href="Diagnostics">Diagnostics</a></li>
   		<li class="active">Neutral Particle Diagnostics</li>
 	</ol>
 	<h1>Neutral Particle Diagnostics</h1>

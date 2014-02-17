@@ -16,8 +16,8 @@
 	echo $navbar;	
 	?>	
 	<ol class="breadcrumb">
-  		<li><a href="index.php">Home</a></li>
- 	 	<li><a href="company.php">Company</a></li>
+  		<li><a href="index">Home</a></li>
+ 	 	<li><a href="company">Company</a></li>
   		<li class="active">Terms &amp; Conditions</li>
 	</ol>
 	<h1>Terms &amp; Conditions</h1>

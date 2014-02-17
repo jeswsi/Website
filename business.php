@@ -16,14 +16,14 @@
 	echo $navbar;	
 	?>	
 	<ol class="breadcrumb">
-  		<li><a href="index.php">Home</a></li>
- 	 	<li><a href="company.php">Company</a></li>
+  		<li><a href="index">Home</a></li>
+ 	 	<li><a href="company">Company</a></li>
   		<li class="active">Business Team</li>
 	</ol>
 	<h1>Business Team</h1>
 			<h3><strong><a href="http://www.researchgate.net/profile/Simon_Woodruff/">Dr. Simon Woodruff</a>
 </strong><span class="text-muted">CEO</span></h3>
-<p>Since 2005, Woodruff has lead the company through initial start-up phases.  He has established advisory boards consisting of  energy industry and scientific leaders, building the company from the ground up and opening the laboratory in Ballard, managing contracts from DOE, national laboratories and universities.  In the last year, under his direction, WSI beat 40 other companies for the opportunity to present to investors for the first time at the Northwest Entrepreneur Network&#8217;s <a href="http://www.nwen.org/index.php?option=com_events&amp;Itemid=15&amp;id=526">&#8216;First Look Forum&#8217;</a>, and subsequently was able to meet with leading venture capitalists.  He developed the strategy for the business over several years taking in advice at annual strategic planning meetings, inviting local experts and business leaders, following leadership during his employment in the Lawrence Livermore National Laboratory Fusion Energy Program.  Woodruff has ensure that the company maintains strategic partnerships with many organizations locally, nationally and internationally, and aims to continue to grow the business.</p>
+<p>Since 2005, Woodruff has lead the company through initial start-up phases.  He has established advisory boards consisting of  energy industry and scientific leaders, building the company from the ground up and opening the laboratory in Ballard, managing contracts from DOE, national laboratories and universities.  In the last year, under his direction, WSI beat 40 other companies for the opportunity to present to investors for the first time at the Northwest Entrepreneur Network&#8217;s <a href="http://www.nwen.org/index?option=com_events&amp;Itemid=15&amp;id=526">&#8216;First Look Forum&#8217;</a>, and subsequently was able to meet with leading venture capitalists.  He developed the strategy for the business over several years taking in advice at annual strategic planning meetings, inviting local experts and business leaders, following leadership during his employment in the Lawrence Livermore National Laboratory Fusion Energy Program.  Woodruff has ensure that the company maintains strategic partnerships with many organizations locally, nationally and internationally, and aims to continue to grow the business.</p>
 
 <h3><strong><a href="http://www.linkedin.com/pub/don-stoulil/3/a05/634">Donald Stoulil</a></strong>
 

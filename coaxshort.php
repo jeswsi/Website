@@ -16,10 +16,10 @@
 	echo $navbar;	
 	?>	
 	<ol class="breadcrumb">
-  		<li><a href="index.php">Home</a></li>
- 	 	<li><a href="products.php">Products</a></li>
- 	 	<li><a href="plasmasources.php">Plasma Sources</a></li>
- 	 	<li><a href="magnetized.php">Magnetized</a></li>
+  		<li><a href="index">Home</a></li>
+ 	 	<li><a href="products">Products</a></li>
+ 	 	<li><a href="plasmasources">Plasma Sources</a></li>
+ 	 	<li><a href="magnetized">Magnetized</a></li>
   		<li class="active">Coaxial Short</li>
 	</ol>
 	<h1>Coaxial Short</h1>
