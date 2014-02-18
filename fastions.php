@@ -22,7 +22,9 @@
   		<li class="active">Fast Ions &amp; Fusion Products</li>
 	</ol>
 	<h1>Fast Ions &amp; Fusion Products</h1>
-	<p>Paragraph</p>
+	<p>Scintillator Type</p>
+	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
