@@ -22,7 +22,24 @@
   		<li class="active">Fiber-optic Relay Controls</li>
 	</ol>
 	<h1>Fiber-Optic Relay Controls</h1>
-	<p>Paragraph</p>
+		<div class="col-md-6">
+		<p class="center"><a href="img/board3.jpg"><img src="img/board3-small.jpg"></a><br />
+		Emitter Board</p>
+	</div>
+	<div class="col-md-6">
+		<p class="center"><a href="img/board2.jpg"><img src="img/board2-small.jpg"></a><br />
+		Receiver Board</p><br />
+	</div>
+	<p>Fiber-Optic Control relays:
+		<ul>
+			<li>For charge, dump, any signaling within an enclosure</li>
+			<li>Emitter boards connect to NI equipment</li>
+			<li>Boards can be enclosed in 1U rack-mountable units, or any custom enclosure</li>
+			<li>Fully customizable to spec</li>
+		</ul>
+	</p>
+	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Optical relay controls RFQ &#038;body=How%20many:%0D%0A%0D%0AIntegrate%20with%20which%20system(NI/CAMAC/etc):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0ANeeded%20by(Date):%0D%0A%0D%0AContact(Name/email/phone/fax/etc):" role="button">Get a Quote &raquo;</a></p>
+
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
