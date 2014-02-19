@@ -28,12 +28,12 @@
 	<div class="menu col-md-4">
         <h2>Magnets</h2>        		
 		<ul>
-		<li><a href="#solenoids">Solenoids</a></li>
-		<li><a href="#helmholtzcoils">Helmholtz Coils</a></li>
-		<li><a href="#">PF Coil Sets</a></li>
-		<li><a href="#">Non-Circular Coils</a></li>
-		<li><a href="#">Low L High Current</a></li>
-		<li><a href="#">Flat/Pancake Coils</a></li>
+		<li><a href="solenoids">Solenoids</a></li>
+		<li><a href="hh">Helmholtz Coils</a></li>
+		<li><a href="pfcoil">PF Coil Sets</a></li>
+		<li><a href="noncircular">Non-Circular Coils</a></li>
+		<li><a href="lowlhighc">Low L High Current</a></li>
+		<li><a href="pancake">Flat/Pancake Coils</a></li>
 		</ul>
 	</div>
 	<div class="col-md-8">
@@ -47,44 +47,7 @@
 
 
 
-      <div><!--products -->
-	<a id="solenoids"></a>
-	<h3>Solenoids</h3>
-	<div class="col-md-6">
-		
-		<p><a href="img/Coil1.jpg"><img alt="Coil1" src="img/Coil1-300x129.jpg" width="300" height="129" /></a><br />
-		<a href="img/Coil1.jpg">Flux plot</a><br />
-		Circuit (<a href="Coil1.1-8mF-5O-0.3089H.pdf">schematic</a>, <a href="Coil1.1-8mF-5O-0.3089Ht.pdf">analysis</a>)</p>
-	</div>
-
-	<div class="col-md-6">
-		<p><a href="img/Coil2.jpg"><img alt="Coil2" src="img/Coil2-300x129.jpg" width="300" height="129" /></a><br />
-		<a href="img/Coil21.jpg">Flux plot</a><br />
-		Circuit (<a href="Coil2.1-2mF-32mO-0.021mH.pdf">schematic</a>, <a href="Coil2.1-2mF-32mO-21mHt.pdf">analysis</a>)</p>	
-		
-	</div>
-
-	<div class="col-md-6">
-		<p><a href="img/Coil3.jpg"><img alt="Coil3" src="img/Coil3-300x159.jpg" width="300" height="159" /></a><br />
-<a href="img/Coil31.jpg">Flux plot</a><br />
-Circuit (<a href="Coil3.1-2mF-0.3mO-3uH.pdf">schematic</a>, <a href="Coil3.1-2mF-0.3mO-3uHt.pdf">analysis</a>)</p>
-	</div>
-
-	<div class="col-md-6">
-		<p><a href="img/Coil41.jpg"><img alt="Coil4" src="img/Coil41-300x159.jpg" width="300" height="159" /></a><br />
-<a href="img/Coil4.jpg">Flux plot</a><br />
-Circuit (<a href="Coil4.1-2mF-0.16O-9.3mH1.pdf">schematic</a>, <a href="Coil4.1-2mF-0.16O-9.3mHt.pdf">analysis</a>)</p>
-	</div>
-
-	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
-
-	<a id="helmholtzcoils"></a>
-	<h3>Helmholtz Coils</h3>
-	<div class="col-md-6">
-	</div>
-	<div class="col-md-6">
-	</div>
-    </div> <!-- /products -->
+     
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
