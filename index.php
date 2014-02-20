@@ -30,7 +30,7 @@
           <img src="img/STPX-carousel.jpg" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-            
+            	<p>STPX Plasma Experiment</p>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
           <img src="img/stpx_banks_carousel.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-      
+      			<p>STPX Capacitor Banks</p>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
           <img src="img/LANLcoils-carousel.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-            
+            	<p>Helmholtz Coils for LANL's PLX</p>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@
     <div class="clearfix"></div>
 
 	<div class="col-md-6">
-		<h2>Products</h2>
+		<a class="black" href="products"><h2>Products</h2></a>
 		<ul>
 		<li><a href="prod/circuit"> Pulsed power</a></li>
 		<li><a href="prod/magnets"> Magnets</a></li>
@@ -75,7 +75,7 @@
 		</ul>
 	</div>
 	<div class="col-md-6">
-		<h2>Services</h2>
+		<a class="black" href="services"><h2>Services</h2></a>
 		<ul>
 		<li><a href="http://woodruffscientific.com/wp/serv/physic">Physics</a></li>
 		<li><a href="http://woodruffscientific.com/wp/serv/engineering">Engineering</a></li>
