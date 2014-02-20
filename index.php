@@ -65,13 +65,13 @@
 	<div class="col-md-6">
 		<a class="black" href="products"><h2>Products</h2></a>
 		<ul>
-		<li><a href="prod/circuit"> Pulsed power</a></li>
-		<li><a href="prod/magnets"> Magnets</a></li>
-		<li><a href="prod/chambers"> Confinement chambers</a></li>
-		<li><a href="prod/coda"> CODAC</a></li>
-		<li><a href="prod/diagnostics"> Diagnostics </a></li>
-		<li><a href="prod/device"> Devices</a></li>
-		<li><a href="prod/hpc"> Computers</a></li>
+		<li><a href="prod/circuit">Pulsed power</a></li>
+		<li><a href="prod/magnets">Magnets</a></li>
+		<li><a href="prod/chambers">Confinement chambers</a></li>
+		<li><a href="prod/coda">CODAC</a></li>
+		<li><a href="prod/diagnostics">Diagnostics</a></li>
+		<li><a href="prod/device">Devices</a></li>
+		<li><a href="prod/hpc">Computers</a></li>
 		</ul>
 	</div>
 	<div class="col-md-6">
