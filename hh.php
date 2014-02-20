@@ -45,14 +45,14 @@
   </div>
   <p><a class="btn btn-lg btn-primary" href="mailto: sales@woodruffscientific.com?subject=HH RFQ &amp;body=L:%0D%0A%0D%0APeak%20current%20:%0D%0A%0D%0AOD:%0D%0A%0D%0AID:%0D%0A%0D%0AVacuum-compatible?(yes/no):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0ANeeded%20by(Date):%0D%0A%0D%0AContact(Name/email/phone/fax/etc):" role="button">Get a Quote &raquo;</a></p>
 
-	<!--
+<!--
 	<div class="panel panel-default">
   <div class="panel-heading">Helmholtz Coils</div>
   <div class="panel-body">
     <p>Custom sizes or materials are also available. <a href="mailto:sales@woodruffscientific.com">Email us</a> for a consultation.</p>
   </div>
 
-  <!-- Table -/->
+  <!-- Table --/>
   <table class="table">
     <thead><tr>
 	<th>Inner Dia</th>

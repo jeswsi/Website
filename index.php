@@ -17,12 +17,51 @@
 	echo $navbar;	
 	?>	
 
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+    <!-- Carousel -->
+	<div id="myCarousel" class="carousel slide col-md-4" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="img/STPX-carousel.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+            
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/stpx_banks_carousel.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+      
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/LANLcoils-carousel.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+
+      <div class="jumbotron col-md-8">
+    
         <h2>Products and Services for Plasma Physics and Pulsed Power</h2>
         <p>Woodruff Scientific inc. can help your lab get up and running quickly and at low cost</p>
+    </div>
+    <div class="clearfix"></div>
 
-      </div>
 	<div class="col-md-6">
 		<h2>Products</h2>
 		<ul>

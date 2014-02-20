@@ -28,6 +28,15 @@ p.center {
   text-align: center;
 }
 
+/* Remove carousel gradient */
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+/* center carousel images */
+.carousel-inner > .item > img { margin: 0 auto; }
+
+
+/* Add in submenus for navbar */
 .dropdown-submenu{position:relative;}
 .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
 .dropdown-submenu:hover>.dropdown-menu{display:block;}
