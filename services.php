@@ -20,7 +20,6 @@
   		<li class="active">Services</li>
 	</ol>
 
-	<h1>Services</h1>
 		<ul class="left">
                   <li><a href="physics">Physics</a></li>
                   <li><a href="engineering">Engineering</a></li>
@@ -28,6 +27,7 @@
                   <li><a href="fabrication">Fabrication / Integration</a></li>
                   <li><a href="installation">Installation / Testing</a></li>
 		</ul>
+<h1>Services</h1>
 <p>We offer assistance with all stages of innovation: concept design, engineering design, procurement, fabrication, installation, testing, and operations. We can offer support packages to suit your application and budget.</p>
 
 

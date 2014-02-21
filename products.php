@@ -20,7 +20,6 @@
   		<li class="active">Products</li>
 	</ol>
 
-	<h1>Products</h1>
 		<ul class="left">
 		  <li><a href="pulsedpower">Pulsed Power</a></li>
                   <li><a href="magnets">Magnets</a></li>
@@ -31,7 +30,7 @@
                   <li><a href="devices">Devices</a></li>
                   <li><a href="computers">Computers</a></li>
 		</ul>
-
+	<h1>Products</h1>
 	<p>Woodruff Scientific offers products that can be tailored to suit specific pulsed power and plasma physics applications, with the philosophy of providing all subsystems necessary for fusion energy development and research. </p>
 
     </div> <!-- /container -->

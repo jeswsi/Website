@@ -20,18 +20,19 @@
  	 	<li><a href="products">Products</a></li>
   		<li class="active">Pulsed Power</li>
 	</ol>
-	<h1>Pulsed Power</h1>
 				<ul class="left">
 					<li><a href="#bankmodules">Bank Modules</a></li>
         			<li><a href="#pfn">Pulse Forming Networks</a></li>
        			</ul>
+    <h1>Pulsed Power</h1>
+	<p>We have built, installed and tested pulsed power capacitor banks for a variety of applications. Fig. 1 shows an example arrangement for the banks we have built for an R&amp;D environment, for which the room served as the enclosure. Banks are custom built for specific applications, although small modules have a fast turn around time. Spec sheets available on request. For design only, please see our <a href="services">Services</a></p>
+
 	<p class="center">
 	<a href="img/stpx_banks.jpg"><img src="img/stpx_banks_small.jpg"></a><br />
 	<span class="text-muted">Fig. 1. Pulsed banks, dumps and ancil hardware for FAMU STPX.</span></p>
-	<p>We have built, installed and tested pulsed power capacitor banks for a variety of applications. Fig. 1 shows an example arrangement for the banks we have built for an R&amp;D environment, for which the room served as the enclosure. Banks are custom built for specific applications, although small modules have a fast turn around time. Spec sheets available on request. For design only, please see our <a href="services">Services</a></p>
 
 <a id="bankmodules"></a>
-<h2>Bank Modules</h2>
+<h3>Bank Modules</h3>
 <h4>Module A <small>(based on 4uF, 12kV, 300J caps)</small></h4>
 	<div class="col-md-6">
 		<p class="center"><a href="img/BankAC1.jpg"><img src="img/BankAC1-small.jpg"></a><br />
@@ -63,7 +64,7 @@
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
 <a id="pfn"></a>
-<h2>Pulse Forming Networks</h2>
+<h3>Pulse Forming Networks</h3>
 
 	<div class="col-md-6">
 		

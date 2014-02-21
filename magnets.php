@@ -25,9 +25,8 @@
 
       <!-- Main component for a primary marketing message or call to action -->
 
-	<div class="menu col-md-4">
-        <h2>Magnets</h2>        		
-		<ul>
+	<div>       		
+		<ul class="left">
 		<li><a href="solenoids">Solenoids</a></li>
 		<li><a href="hh">Helmholtz Coils</a></li>
 		<li><a href="pfcoil">PF Coil Sets</a></li>
@@ -36,9 +35,9 @@
 		<li><a href="pancake">Flat/Pancake Coils</a></li>
 		</ul>
 	</div>
-	<div class="col-md-8">
+	<div class="">
 
-	<h2></h2>
+	<h1>Magnets</h1>
 	<img class="left" src="img/LANLcoils.jpg" width="224" height="300"><p> We produce custom magnetic field coils designed for specific pulsed power applications in fusion energy sciences, requiring high field strengths, high currents, high voltages, often UH vacuum compatibility (see e.g. Fig 1) and to withstand large forces. Typical coil sets have been designed, and built for poloidal field generation, but also for applications for calibration of diagnostics. Offerings below can be tailored to specific applications.</p>
 	<p class="text-muted">
 		Fig 1. Example: vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.

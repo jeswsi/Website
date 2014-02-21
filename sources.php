@@ -20,7 +20,6 @@
  	 	<li><a href="products">Products</a></li>
   		<li class="active">Plasma Sources</li>
 	</ol>
-	<h1>Plasma Sources</h1>
 		  	<ul class="left">
 				<li><a href="#magnetized">Magnetized</a>
 					<ul>
@@ -40,14 +39,14 @@
         			<li><a href="gashandling">Gas Handling</a></li>
         			
        			</ul>
-
+	<h1>Plasma Sources</h1>
 	<p>We produce custom magnetized plasma sources designed for specific formation requirements in fusion energy sciences, requiring high field strengths, high currents, high voltages, often UH vacuum compatibility and to withstand large forces. Typical sources we have designed and tested have been used for a range of compact torus configurations. Offerings below can be tailored to specific requirements.</p>
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Sources RFQ &#038;" role="button">Get a Quote &raquo;</a></p><br />
 
  	
 	<div class="col-md-12"><!-- Products -->
  		<a id="magnetized"></a><a id="planarcoax"></a>
- 		<h2>Magnetized Planar Coaxial</h2>
+ 		<h3>Magnetized Planar Coaxial</h3>
 
 	<div class="col-md-6">
 		<p><a href="img/planar.jpg"><img alt="Planar" src="img/planar-small.jpg" width="300" height="159" /></a></p>
@@ -65,7 +64,7 @@
 
 	<div class="clearfix"></div>
 	<a id="coaxshort"></a>
-	<h2>Magnetized Coaxial Short</h2>
+	<h3>Magnetized Coaxial Short</h3>
 	<div class="col-md-6">
 		<p><a href="img/Coaxial-short.jpg"><img alt="CoaxShort" src="img/Coaxial-short-small.jpg" width="300" height="159" /></a></p>
 	</div>
@@ -82,24 +81,31 @@
 
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />
 
-	<h2>Magnetized Coaxial Long (Marshall Gun)</h2>
+	<a id="coaxlong"></a>
+	<h3>Magnetized Coaxial Long (Marshall Gun)</h3>
 	<div class="col-md-6">
 		<p><a href="img/Coaxial-long2.jpg"><img alt="CoaxShort" src="img/Coaxial-long2-small.jpg" width="300" height="159" /></a></p>
 	</div>
 	<div class="col-md-6">
 			<p><a href="img/coaxial-long.jpg"><img alt="CoaxShort" src="img/coaxial-long-small.jpg" width="300" height="159" /></a><br />Model MCL-18</p>
 	</div>
-	<h2>Magnetized Conical Theta Pinch</h2>
+
+	<a id="conicaltheta"></a>
+	<h3>Magnetized Conical Theta Pinch</h3>
 		<p>Model MCT-5</p>
 		<p>Model MCT-10</p>
-	<h2>Inductive Radial Implosion and Peristaltic Acceleration</h2>
+	<a id="radialimplosion"></a>
+	<h3>Inductive Radial Implosion and Peristaltic Acceleration</h3>
 		<p>Model IRIPA-18</p>
 		<p>Model IRIPA-40</p>
-	<h2>Magnetized Radial Formation (Electrostatic)</h2>
+	<a id="radialform"></a>
+	<h3>Magnetized Radial Formation (Electrostatic)</h3>
 		<p>Model S1-40</p>
 		<p>Model S1-60</p>
-	<h2>Magnetized Radial Formation (Inductive)</h2>
-	<h2>Gas Handling</h2>
+	<a id="radialformation"></a>
+	<h3>Magnetized Radial Formation (Inductive)</h3>
+	<a id="gashandling"></a>
+	<h3>Gas Handling</h3>
 		<p>8 Valve Manifold</p>
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
