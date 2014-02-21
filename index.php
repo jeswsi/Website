@@ -30,7 +30,7 @@
           <img src="img/STPX-carousel.jpg" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-            	<p>STPX Plasma Experiment</p>
+            	<p><a class="white" href="devices">STPX Plasma Experiment</a></p>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
           <img src="img/stpx_banks_carousel.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-      			<p>STPX Capacitor Banks</p>
+      			<p><a class="white" href="pulsedpower">STPX Capacitor Banks</a></p>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
           <img src="img/LANLcoils-carousel.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-            	<p>Helmholtz Coils for LANL's PLX</p>
+            	<p><a class="white" href="magnets">Helmholtz Coils for LANL's PLX</a></p>
             </div>
           </div>
         </div>
