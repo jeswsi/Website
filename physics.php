@@ -25,6 +25,21 @@
 
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
+    <h3>Equilibrium / Stability</h3>
+    <h3>Resistive MHD</h3>
+
+    <h3>Hydrodynamics</h3>
+
+    <h3>Multiphysics</h3>
+
+    <h3>Electrostatics</h3>
+
+    <h3>Systems Analysis</h3>
+
+    <h3>Stray Light Modeling</h3>
+
+    <h3>Pre-production HPC</h3>
+
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 

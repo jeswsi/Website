@@ -55,6 +55,7 @@ Safety must be the number one priority in all labs. The high-voltage used in our
 		Module BL960</p>
 	</div>
 <h4>Module C <small>(based on 2mF, 5kV, 25kJ caps)</small></h4>
+	<p>Module C can be wall mounted or shelf mounted (plans available on request).</p>
 	<div class="col-md-6">
 		<p class="center"><a href="img/BankCL3.jpg"><img src="img/BankCL3-small.jpg"></a><br />
 		Module CL4000</p>
@@ -68,7 +69,6 @@ Safety must be the number one priority in all labs. The high-voltage used in our
 
 <a id="pfn"></a>
 <h3>Pulse Forming Networks</h3>
-
 	<div class="col-md-6">
 		
 	</div>
