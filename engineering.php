@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Engineering design and analysis for fusion, plasma energy, and physics labs. WSI has engineered and built vacuum systems, pulsed power systems, and high field magnets. We can perform basic Thermal and Structural analysis with FEM software.">
+  <title>Engineering | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

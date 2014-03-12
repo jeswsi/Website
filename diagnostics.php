@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Custom diagnostics for fusion, plasma energy, and physics labs. WSI has nearly a decade of experience designing and manufacturing diagnostics for plasma experiments.">
+  <title>Diagnostics | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

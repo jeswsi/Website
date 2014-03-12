@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+		<meta name="description" content="Conical Theta-Pinch magnetized plasma source for fusion, plasma energy, and physics labs.">
+  <title>Conical Theta-Pinch | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

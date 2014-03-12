@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+  <meta name="description" content="Helmholtz coils for fusion, plasma energy, and physics labs. Custom sizing and materials available.">
+  <title>Helmholtz Coils | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

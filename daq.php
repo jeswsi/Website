@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+		<meta name="description" content="Custom Data Acquisition setup, configuration, and installation for fusion, plasma energy, and physics labs.">
+  <title>DAQ | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

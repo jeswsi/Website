@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Gas handling and gas puffs for fusion, plasma energy, and physics labs.">
+  <title>Gas Handling | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

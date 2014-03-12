@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Product information for Coaxial Short Plasma Source.">
+  <title>Coaxial Short Source | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

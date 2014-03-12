@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Low Inductance High Current magnets for fusion, plasma energy, and physics labs.">
+  <title>Low L High Current Magnets | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

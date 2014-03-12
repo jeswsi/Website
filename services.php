@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+		<meta name="description" content="Services WSI can provide for all stages of fusion, plasma energy, and physics labs.">
+  <title>Services | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

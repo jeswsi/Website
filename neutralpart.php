@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Neutral particle diagnostics for fusion, plasma energy, and physics labs.">
+  <title>Neutral Particle Diagnostics | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

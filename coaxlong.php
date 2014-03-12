@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Product information for Coaxial Long Plasma Source (Marshall Gun)">
+  <title>Coaxial Long Source | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

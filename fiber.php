@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Fiber-Optic relay controls for fusion, plasma energy, and physics labs. Fiber optic emitters and receivers can be used to control and isolate dangerous high-voltage banks.">
+  <title>Fiber-Optic Relays | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

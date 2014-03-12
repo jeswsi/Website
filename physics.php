@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+  <meta name="description" content="Physics analysis and computational physics which  WSI can provide for all stages of fusion, plasma energy, and physics labs.">
+  <title>Physics | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

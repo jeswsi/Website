@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Terms and Conditions for conducting business with WSI">
+  <title>Terms and Conditions | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

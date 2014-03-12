@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+		<meta name="description" content="Solenoid Magnets for fusion, plasma energy, and physics labs. Custom and stock sizes and materials available.">
+  <title>Solenoids | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

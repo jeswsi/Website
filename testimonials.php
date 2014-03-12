@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Testimonials from WSI's customers.">
+  <title>Testimonials | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

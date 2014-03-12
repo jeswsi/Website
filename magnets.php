@@ -6,6 +6,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Magnets for fusion, plasma energy, and physics labs. Custom sizing, materials, and configurations available.">
+  <title>Magnets | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

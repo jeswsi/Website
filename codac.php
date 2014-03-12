@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Controls, Data Access, and Communication (CODAC) products and services. WSI can build, install and configure your lab's CODAC needs.">
+  <title>CODAC | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

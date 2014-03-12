@@ -6,6 +6,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+  <meta name="description" content="Products and Services for Plasma Physics, Fusion, and Pulsed Power">
+  <title>Woodruff Scientific, Inc. | Accelerating the development of commericial fusion energy systems since 2005</title>
   </head>
 
   <body>

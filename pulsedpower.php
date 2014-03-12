@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Pulsed Power capacitor banks and pulse forming networks for fusion, pulsed power, plasma energy, and physics labs. We can design and construct custom capacitor banks.">
+  <title>Pulsed Power | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

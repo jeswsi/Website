@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+  <meta name="description" content="Thomson Scattering diagnostics for fusion, plasma energy, and physics labs.">
+  <title>Thomson Scattering | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

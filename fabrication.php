@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Fabrication and Integration of lab equipment for fusion, plasma energy, and physics labs.">
+  <title>Fabrication | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

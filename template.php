@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+  <meta name="description" content="">
+  <title>TITLE | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

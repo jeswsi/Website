@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Optical Diagnostics for fusion, plasma energy, and physics labs. HeNe Interferometers, CO2 Interferometers, Polarimeters, and more.">
+  <title>Optical Diagnostics | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

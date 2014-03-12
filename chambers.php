@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Vacuum compatible confinement chambers for fusion and plasma systems.">
+  <title>Confinement Chambers | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Poloidal field coils for fusion, plasma energy, and physics labs.">
+  <title>Poloidal Field Coil | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

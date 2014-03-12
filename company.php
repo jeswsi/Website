@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Company information about Woodruff Scientific, Inc. WSI seeks to accelerate the development of commercial fusion">
+  <title>Company | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

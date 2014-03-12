@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Pancake Coil magnets for fusion, plasma energy, and physics labs.">
+  <title>Pancake Coils | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

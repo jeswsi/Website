@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Planar coaxial magnetized plasma sources for fusion, plasma energy, and physics labs.">
+  <title>Planar Coaxial | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="LabVIEW experiment management system for fusion, plasma energy, and physics labs.">
+  <title>LabVIEW Experiment Management System | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

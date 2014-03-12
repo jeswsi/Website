@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="Radial Implosion inductive plasma sources for fusion, plasma energy, and physics labs.">
+  <title>Radial Implosion | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

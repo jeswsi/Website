@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+	<meta name="description" content="WSI provides linux based computing clusters and thin-clients for computational physics, CODAC, and other lab needs.">
+  <title>Computers | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>

@@ -5,6 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
+		<meta name="description" content="Custom devices for fusion, plasma energy, and physics labs. WSI has built complete devices for clients such as Florida A&M (STPX)">
+  <title>Devices | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
