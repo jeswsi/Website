@@ -7,7 +7,15 @@ body {
   margin-bottom: 20px;
 }
 
+/*.bottom {
+  position: relative;
+}
 
+.bottom span {
+  position: absolute;
+  bottom: 5px ;
+  right: 0;
+}*/
 
 img.left {
   float: left;
@@ -52,4 +60,9 @@ a.white {
 /* index products and services links */
 a.black {
 	color: #000;
+}
+
+#map_canvas {
+     width: 500px;
+     height: 400px;
 }

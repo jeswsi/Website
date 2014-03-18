@@ -27,10 +27,6 @@
 </strong><span class="text-muted">CEO</span></h3>
 <p>Since 2005, Woodruff has lead the company through initial start-up phases.  He has established advisory boards consisting of  energy industry and scientific leaders, building the company from the ground up and opening the laboratory in Ballard, managing contracts from DOE, national laboratories and universities.  In the last year, under his direction, WSI beat 40 other companies for the opportunity to present to investors for the first time at the Northwest Entrepreneur Network&#8217;s <a href="http://www.nwen.org/index?option=com_events&amp;Itemid=15&amp;id=526">&#8216;First Look Forum&#8217;</a>, and subsequently was able to meet with leading venture capitalists.  He developed the strategy for the business over several years taking in advice at annual strategic planning meetings, inviting local experts and business leaders, following leadership during his employment in the Lawrence Livermore National Laboratory Fusion Energy Program.  Woodruff has ensure that the company maintains strategic partnerships with many organizations locally, nationally and internationally, and aims to continue to grow the business.</p>
 
-<h3><strong><a href="http://www.linkedin.com/pub/don-stoulil/3/a05/634">Donald Stoulil</a></strong>
-
-<span class="text-muted">Busdev Consultant, Donlin Associates</span></h3>
-<p>Don Stoulil is a CPA and MBA with over 30 years of experience with a focus on preparing and evaluating long-range business plans, economic forecasting and modeling, and development of domestic and international joint ventures. His experience includes both public and private accounting in a variety of industries including aerospace and technology. He has provided advisory services to Woodruff Scientific since 2007.</p>
 
 <h3><strong>Christine Kakos</strong>
 <span class="text-muted">Accountant</span></h3>
