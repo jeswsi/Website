@@ -29,12 +29,12 @@
 
 	<div>       		
 		<ul class="left">
-		<li><a href="solenoids">Solenoids</a></li>
-		<li><a href="hh">Helmholtz Coils</a></li>
-		<li><a href="pfcoil">PF Coil Sets</a></li>
-		<li><a href="noncircular">Non-Circular Coils</a></li>
-		<li><a href="lowlhighc">Low L High Current</a></li>
-		<li><a href="pancake">Flat/Pancake Coils</a></li>
+		<li><a href="magnets/solenoids">Solenoids</a></li>
+		<li><a href="magnets/hh">Helmholtz Coils</a></li>
+		<li><a href="magnets/pfcoil">PF Coil Sets</a></li>
+		<li><a href="magnets/noncircular">Non-Circular Coils</a></li>
+		<li><a href="magnets/lowlhighc">Low L High Current</a></li>
+		<li><a href="magnets/pancake">Flat/Pancake Coils</a></li>
 		</ul>
 	</div>
 	<div class="">
