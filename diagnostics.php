@@ -23,17 +23,18 @@
   		<li class="active">Diagnostics</li>
 	</ol>
 				<ul class="left">
-				<li><a href="#magnetic">Magnetic &amp; Electrostatic Probes</a></li>
-        			<li><a href="#optical">Optical</a></li>
-        			<li><a href="#spectroscopy">Spectroscopy</a></li>
-        			<li><a href="#thomson">Thomson Scattering</a></li>
-        			<li><a href="#neutralpart">Neutral Particle Diagnostics</a></li>
-        			<li><a href="#fastions">Fast Ions/Fusion Products</a></li>
+					<li><a href="magnetic">Magnetic Field</a></li>
+					<li><a href="electrostatic">Plasma Particle Flux</a></li>
+        			<li><a href="optical">Refractive-Index Measurements</a></li>
+        			<li><a href="spectroscopy">Spectroscopic</a></li>
+        			<li><a href="thomson">Scattering</a></li>
+        			<li><a href="neutralpart">Neutral Particles</a></li>
+        			<li><a href="neutrons">Neutrons</a></li>
        			</ul>
-       				<h1>Diagnostics</h1>
+    				<h1>Diagnostics</h1>
 
 	<p>WSI has nearly a decade of experience designing and manufacturing diagnostics for plasma experiments. Browse our product listings to the left or download a <a href="pdf/Diagnostics.pdf">flyer (pdf)</a>.</p>
-	<div class="col-md-12"><!-- Products -->
+	 <!--  <div class="col-md-12">
 	<a id="magnetic"></a>
 	<h3>Magnetic &amp; Electrostatic Probes</h3>
 	<h4>Magnetic Field Coils (B-Dot)</h4>
@@ -105,7 +106,7 @@
 	<h3>Fast Ions / Fusion Products</h3>
 		<h4>Scintillator Type</h4>
 		<p><a class="btn btn-lg btn-primary" href="mailto: sales@woodruffscientific.com?subject=Scintillator RFQ &#038;body=Short%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):" role="button">Get a Quote &raquo;</a></p>
-	</div><!-- /products -->
+	</div> -->
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 
