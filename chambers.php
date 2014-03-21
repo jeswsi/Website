@@ -22,6 +22,14 @@
   		<li><a href="products">Products</a></li>
   		<li class="active">Confinement Chambers</li>
 	</ol>
+
+        <!--<ul class="left">
+            <li><a href="chambers/vacuumboundary">Vacuum Boundary</a></li>
+            <li><a href="chambers/firstwall">First Wall & Blankets</a></li>
+            <li><a href="chambers/stabilization">Stabilization</a></li>
+            <li><a href="chambers/integration">Integration</a></li>
+        </ul>-->
+
 	<h1>Confinement Chambers</h1>
 	<p class="center">
 	<a href="img/Chamber-layers.jpg"><img src="img/Chamber-layers-small.jpg"></a><br />
