@@ -1,5 +1,53 @@
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST} !^woodruffscientific.com [NC]
+#RewriteRule ^/?(.*)$ http://woodruffscientific.com/$1 [L,R=301]
+
+RedirectMatch 301 /wp/aboutus/terms-and-conditions /terms
+
+RedirectMatch 301 /wp/aboutus/contact-us /contact
+
+RedirectMatch 301 /wp/aboutus/careers /careers
+
+RedirectMatch 301 /wp/aboutus/scientific /scientific
+
+RedirectMatch 301 /wp/aboutus/busines /business
+
+RedirectMatch 301 /wp/aboutus /company
+
+RedirectMatch 301 /wp/serv/installation-testing /installation
+
+RedirectMatch 301 /wp/serv/fabtes /fabrication
+
+RedirectMatch 301 /wp/serv/purchase /purchase
+
+RedirectMatch 301 /wp/serv/engineering /engineering
+
+RedirectMatch 301 /wp/serv/physics /physics
+
+RedirectMatch 301 /wp/serv /services
+
+RedirectMatch 301 /wp/prod/hpc /computers
+
+RedirectMatch 301 /wp/prod/device /devices
+
+RedirectMatch 301 /wp/prod/diagnostics /diagnostics
+
+RedirectMatch 301 /wp/prod/coda /codac
+
+RedirectMatch 301 /wp/prod/chambers /chambers
+
+RedirectMatch 301 /wp/prod/sources /sources
+
+RedirectMatch 301 /wp/prod/magnets /magnets
+
+RedirectMatch 301 /wp/prod/circuit /pulsedpower
+
+RedirectMatch 301 /wp/prod /products
+
+RedirectMatch 301 /wp /
+
 directoryIndex index.php
-RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php

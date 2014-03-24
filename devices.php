@@ -23,7 +23,7 @@
   		<li class="active">Devices</li>
 	</ol>
 	<h1>Devices</h1>
-	<p class="center"><a href="img/STPX.jpg"><img src="img/STPX-300x199.jpg" alt="STPX" width="300" height="199" class="aligncenter size-medium wp-image-1971" /></a><br />
+	<p class="center"><a href="img/STPX.jpg"><img src="img/STPX-300x199.jpg" alt="STPX" width="300" height="199"  /></a><br />
 <span class="text-muted">Fig. 1: FAMU Spheromak (STPX). L to R: Baysha Bernales (Physics undergrad) and Brandon Alexander (lead technician).</span></p>
 	<p>WSI can integrate diagnostics, power, magnets, DAQ, and vacuum to produce turn-key plasma research devices. We can deliver Spheromaks, Field Reversed Configurations, Mirrors, Dense Plasma Foci, Inertial Electrostatic Confinement, and many other devices. Let us know what you want built.</p>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />
