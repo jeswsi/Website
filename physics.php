@@ -24,15 +24,14 @@
 	</ol>
 
           <ul class="left">
-            <li><a href="#equil">Equilibrium</a></li>
-            <li><a href="#rmhd">Resistive MHD</a></li>
-            <li><a href="#hydro">Hydrodynamics</a></li>
-            <li><a href="#multi">Multiphysics</a></li>
-            <li><a href="#electro">Electrostatics</a></li>
-            <li><a href="#rf">RF</a></li>
-            <li><a href="#systems">Systems Analysis</a></li>
-            <li><a href="#straylight">Stray Light Modeling</a></li>
-            <li><a href="#hpc">Pre-production HPC</a></li>
+            <li><a href="equilibrium">Equilibrium</a></li>
+            <li><a href="resistivemhd">Resistive MHD</a></li>
+            <li><a href="hydrodynamics">Hydrodynamics</a></li>
+            <li><a href="multiphysics">Multiphysics</a></li>
+            <li><a href="electrostatics">Electrostatics</a></li>
+            <li><a href="rf">RF</a></li>
+            <li><a href="systems">Systems Analysis</a></li>
+            <li><a href="hpc">Pre-production HPC</a></li>
           </ul>
 
 	<h1>Physics</h1>
@@ -122,8 +121,6 @@ Dam Break: <a href="img/output.avi">DamBreak.avi</a>, <a href="img/output.wmv">D
 <a id="systems"></a>
     <h3>Systems Analysis</h3>
 
-<a id="straylight"></a>
-    <h3>Stray Light Modeling</h3>
 
 <a id="hpc"></a>
     <h3>Pre-production HPC</h3>
