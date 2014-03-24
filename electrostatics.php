@@ -25,6 +25,7 @@
     </ol>
 
 	<h1>Electrostatics</h1>
+  <p>Primary tools for Electrostatics are Poisson/Superfish.</p>
     <p><a href="img/COAXTEST00.png"><img src="img/COAXTEST00-300x190.png" alt="COAXTEST00" width="300" height="190" /></a></p>
 
     <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>

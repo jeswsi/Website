@@ -25,13 +25,11 @@
 
           <ul class="left">
             <li><a href="equilibrium">Equilibrium</a></li>
-            <li><a href="resistivemhd">Resistive MHD</a></li>
-            <li><a href="hydrodynamics">Hydrodynamics</a></li>
-            <li><a href="multiphysics">Multiphysics</a></li>
+            <li><a href="mhd">MHD</a></li>
+            <li><a href="fluids">Fluids</a></li>
             <li><a href="electrostatics">Electrostatics</a></li>
             <li><a href="rf">RF</a></li>
-            <li><a href="systems">Systems Analysis</a></li>
-            <li><a href="hpc">Pre-production HPC</a></li>
+            <li><a href="systems">Systems</a></li>
           </ul>
 
 	<h1>Physics</h1>
@@ -40,6 +38,7 @@
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
   <div class="clearfix"></div>
+<!--
 <a id="equil"></a>
     <h3>Equilibrium / Stability</h3>
     <div class="col-md-6">
@@ -126,6 +125,7 @@ Dam Break: <a href="img/output.avi">DamBreak.avi</a>, <a href="img/output.wmv">D
     <h3>Pre-production HPC</h3>
 
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+-->
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 

@@ -6,7 +6,7 @@
 	echo $head;	
 	?>
 	<meta name="description" content="WSI provides linux based computing clusters and thin-clients for computational physics, CODAC, and other lab needs.">
-  <title>Computers | Woodruff Scientific, Inc.</title>
+  <title>High Performance Computing | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
@@ -20,12 +20,22 @@
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="products">Products</a></li>
-  		<li class="active">Computers</li>
+  		<li class="active">High Performance Computing</li>
 	</ol>
-	<h1>Computers</h1>
+	<h1>High Performance Computing</h1>
 	<p>Most of our computing is performed at <a href="http://www.nersc.gov/">NERSC</a> (on <a href="http://www.nersc.gov/systems/hopper-cray-xe6/">Hopper</a>, currently 24th in the <a href="http://www.top500.org/list/2013/06/">top 500</a>), however for pre-production runs and private contracts we perform jobs in-house on a small cluster.  Periodically we update our 2U 19&#8243; rack-mountable cluster (or debug node), with the latest architecture (see Fig. 1) and operating systems, libraries and applications and so could build to order.  Capable &#8216;thin clients&#8217; are then used to connect to centralized scientific computing resources on the cluster. (Accounts are available on our cluster currently only through our Associates Program).</p>
 
 <p>WSI can assemble and configure computing clusters and thin-clients (linux based) for your needs.</p>
+
+    <div class="col-md-6">
+      <p><a href="img/cluster.JPG"><img src="img/cluster.JPG" alt="itersob" width="300" /></a><br />
+        Computing Cluster (rack mount)</p>
+    </div>
+    <div class="col-md-6">
+      <p><a href="img/thinclient.JPG"><img src="img/thinclient.JPG" alt="nstx" width="300"   /></a><br />
+        Thin Client</p>
+    </div>
+    <div class="clearfix"></div>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
