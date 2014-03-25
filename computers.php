@@ -22,11 +22,17 @@
  	 	<li><a href="products">Products</a></li>
   		<li class="active">High Performance Computing</li>
 	</ol>
+
+    <ul class="left">
+      <li><a href="#computing">Computing Clusters</a></li>
+      <li><a href="#thin">Thin Client</a></li>
+    </ul>
 	<h1>High Performance Computing</h1>
 	<p>Most of our computing is performed at <a href="http://www.nersc.gov/">NERSC</a> (on <a href="http://www.nersc.gov/systems/hopper-cray-xe6/">Hopper</a>, currently 24th in the <a href="http://www.top500.org/list/2013/06/">top 500</a>), however for pre-production runs and private contracts we perform jobs in-house on a small cluster.  Periodically we update our 2U 19&#8243; rack-mountable cluster (or debug node), with the latest architecture (see Fig. 1) and operating systems, libraries and applications and built to order.  Capable &#8216;thin clients&#8217; are then used to connect to centralized scientific computing resources on the cluster. (Accounts are available on our cluster currently only through our Associates Program).</p>
 
 <p>WSI can assemble and configure computing clusters and thin-clients (linux based) for your needs.</p>
 
+<a id="computing"></a>
 <h3>Computing Clusters</h3>
 
     <div class="col-md-6">
@@ -43,6 +49,7 @@ sequence processors at 2.66GHz; 32Gb RAM</p>
     </div>
 <div class="clearfix"></div>
 
+<a id="thin"></a>
 <h3>Thin Clients</h3>
     <div class="col-md-6">
       <p><a href="img/thinclient.JPG"><img src="img/thinclient.JPG" alt="thin client" width="300"   /></a><br />
