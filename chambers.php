@@ -5,8 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-	<meta name="description" content="Vacuum compatible confinement chambers for fusion and plasma systems.">
-  <title>Confinement Chambers | Woodruff Scientific, Inc.</title>
+	<meta name="description" content="Plasma-materials interface. Vacuum compatible confinement chambers for fusion and plasma systems.">
+  <title>Plasma-Material Interface | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
@@ -20,8 +20,16 @@
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
   		<li><a href="products">Products</a></li>
-  		<li class="active">Confinement Chambers</li>
+  		<li class="active">Plasma-Material Interface</li>
 	</ol>
+
+	<ul class="left">
+		            <li><a href="vacuumboundary">Vacuum Boundary</a></li>
+                    <li><a href="firstwall">First Wall</a></li>
+                    <li><a href="blankets">Blankets</a></li>     
+                    <li><a href="stabilization">Stabilization</a></li>
+                    <li><a href="integration">Integration</a></li>
+    </ul>
 
         <!--<ul class="left">
             <li><a href="chambers/vacuumboundary">Vacuum Boundary</a></li>
@@ -30,7 +38,22 @@
             <li><a href="chambers/integration">Integration</a></li>
         </ul>-->
 
-	<h1>Confinement Chambers</h1>
+	<h1>Plasma-Material Interface</h1>
+	<p class="center">
+	<a href="img/Chamber-layers.jpg"><img src="img/Chamber-layers-small.jpg"></a><br />
+	<span class="text-muted">Fig. 1. Blanket layers typical of fusion confinement chambers. From the inside out: First wall; Blanket I; Blanket II; High temperature shield; Vacuum vessel.</span></p>
+	<p>The plasma-materials interface includes the first wall components,
+blankets, divertor and vacuum vessel.  In fusion energy systems that
+will handle very high power loadings, these subsystems are distinct (see
+e.g. <a href="https://www.iter.org/mach/blanket">ITER blanket</a>), requiring an integrated
+design approach.  In research devices, power loadings are not generally
+a concern (though need some consideration), and sometimes PMI subsystems
+can be integrated into a whole (for example combining the vacuum
+boundary with the first wall and passive stabilization). <a href="pdf/CT.pdf">Our thoughts on confinement chambers were published as a white paper</a> as proceedings to the ReNeW workshops.</p></p>
+
+
+
+<!--
 	<p class="center">
 	<a href="img/Chamber-layers.jpg"><img src="img/Chamber-layers-small.jpg"></a><br />
 	<span class="text-muted">Fig. 1. Blanket layers typical of fusion confinement chambers. From the inside out: First wall; Blanket I; Blanket II; High temperature shield; Vacuum vessel.</span></p>
@@ -46,7 +69,7 @@
 	<p><a href="img/Chamber2-1.jpg"><img src="img/Chamber2-1-small.jpg"></a></p>
 	<p><a href="img/Chamber4-4.jpg"><img src="img/Chamber4-4-small.jpg"></a></p>
 </div>
-	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />
+	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />-->
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
@@ -57,3 +80,4 @@
 	?>	   
   </body>
 </html>
+

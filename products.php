@@ -26,7 +26,7 @@
 		  <li><a href="pulsedpower">Pulsed Power</a></li>
                   <li><a href="magnets">Magnets</a></li>
                   <li><a href="sources">Plasma Sources</a></li>
-                  <li><a href="chambers">Confinement Chambers</a></li>
+                  <li><a href="chambers">Plasma-Material Interface</a></li>
                   <li><a href="codac">CODAC</a></li>
                   <li><a href="diagnostics">Diagnostics</a></li>
                   <li><a href="devices">Devices</a></li>
