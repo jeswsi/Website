@@ -31,6 +31,14 @@
 	of Electromagnetic Radiation 2nd Edition</a></p>
 
 	<h3>Thomson Scattering</h3>
+	<div class="col-md-6">
+      <p><a href="img/thomson2.jpg"><img src="img/thomson2-small.jpg" alt="Thomson Scattering" /></a><br />
+        Thomson beamline, dump, and collection optics</p>
+    </div>    
+    <div class="col-md-6">
+      <p><a href="img/collection.jpg"><img src="img/collection-small.jpg" alt="Thomson collector" /></a><br />
+        Thomson collection optics: primary lens to fibers</p>
+    </div>
 
 <!-- 	FIGURE of thomson from John's textbook.
  -->
