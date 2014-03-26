@@ -30,8 +30,8 @@
 	references for Thomson scattering include Sheffield's <a href="http://www.sciencedirect.com/science/book/9780123748775">Plasma Scattering
 	of Electromagnetic Radiation 2nd Edition</a></p>
 
-	<blockquote><a href="PTSrefs.html">Thomson Scattering References</a></blockquote>
 	<h3>Thomson Scattering</h3>
+	<blockquote><a href="PTSrefs.html">Thomson Scattering References</a></blockquote>
 	<div class="col-md-6">
       <p><a href="img/thomson2.jpg"><img src="img/thomson2-small.jpg" alt="Thomson Scattering" /></a><br />
         Thomson beamline, dump, and collection optics</p>

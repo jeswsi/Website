@@ -1,0 +1,658 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta name="description" content="Useful Langmuir Probes references for fusion, plasma energy, and physics labs.">
+
+<title>Langmuir Probes JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="471662620010401" class="entry">
+	<td>Amatucci, W.E., Schuck, P.W., Walker, D.N., Kintner, P.M., Powell, S., Holback, B. &amp; Leonhardt, D.</td>
+	<td>Contamination-free sounding rocket Langmuir probe.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(4), pp. 2052&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4716626&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3515030820081001" class="entry">
+	<td>Azooz, A.A.</td>
+	<td>Four free parameter empirical parametrization of glow discharge Langmuir probe data.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10), pp. 103501&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=35150308&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471669020010201" class="entry">
+	<td>Boedo, J., Gunner, G., Gray, D. &amp; Conn, R.</td>
+	<td>Robust Langmuir probe circuitry for fusion research.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(2), pp. 1379&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4716690&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1999659520060201" class="entry">
+	<td>Brandt, C., Testrich, H., Kozakov, R. &amp; Wilke, C.</td>
+	<td>Investigation of the disturbance of a Langmuir probe and its influence on measurement results.</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(2), pp. 023504&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=19996595&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484209120041001" class="entry">
+	<td>Calderón, E., Hidalgo, C., Pedrosa, M.A. &amp; Silva, C.</td>
+	<td>On the interpretation of fluctuation and E×B turbulent transport measured by Langmuir probes in fusion plasmas.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 4293 - 4295&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842091&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="427279119990601" class="entry">
+	<td>Chiodini, G., Riccardi, C. &amp; Fontanesi, M.</td>
+	<td>A 400 kHz, fast-sweep Langmuir probe for measuring plasma fluctuations.</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(6), pp. 2681&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4272791&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1850573820050801" class="entry">
+	<td>DeJoseph Jr., C.A. &amp; Demidov, V.I.</td>
+	<td>Diode calibration of a Langmuir probe system for measurement of electron energy distribution functions in a plasma.</td>
+	<td>2005</td>
+	<td>Review of Scientific Instruments<br/>Vol. 76(8), pp. 086105&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=18505738&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2779853820071101" class="entry">
+	<td>Deline, C., Gilchrist, B.E., Dobson, C., Jones, J.E. &amp; Chavers, D.G.</td>
+	<td>High accuracy plasma density measurement using hybrid Langmuir probe and microwave interferometer method.</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(11), pp. 113504&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=27798538&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1497486820041101" class="entry">
+	<td>Gerhardt, S.P., Anderson, D.T., Anderson, F.S.B. &amp; Talmadge, J.N.</td>
+	<td>Electrode and Langmuir probe tools used for flow damping studies in the Helically Symmetric Experiment.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(11), pp. 4621 - 4628&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14974868&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="429585219990901" class="entry">
+	<td>Grigull, S., Foltyn, S., Hollander, M., Evans, C. &amp; Nastasi, M.</td>
+	<td>Setup for in situ x-ray diffraction and ion-channeling studies of..</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(9), pp. 3656&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4295852&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484228620041001" class="entry">
+	<td>Guttenfelder, W., Lechte, C., Koepke, M.E. &amp; Demidov, V.I.</td>
+	<td>Utility of a baffled Langmuir probe for applications to edge plasma and turbulence characterization in stellarator plasma.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 3622 - 3624&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842286&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="430233919970201" class="entry">
+	<td>Hartfuss, H., Brakel, R., Endler, M., Geist, T., Grigull, P., Hofmann, J., Junker, J., Kick, M., Kuhner, G., Niedermeyer, H., Ringler, H., Teubel, A., Wagner, F. &amp; Weller, A.</td>
+	<td>Diagnostic strategy of the W7-X stellarator.</td>
+	<td>1997</td>
+	<td>Review of Scientific Instruments<br/>Vol. 68(2), pp. 1244&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4302339&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="63087119970101" class="entry">
+	<td>Hartfuss, H.J., Brakel, R., Endler, M., Geist, T., Grigull, P., Hofmann, J.V., Junker, J., Kick, M., Kuhner, G., Niedermeyer, H., Ringler, H., Teubel, A., Wagner, F. &amp; Weller, A.</td>
+	<td>Diagnostic strategy of the W7-X stellarator (abstract).</td>
+	<td>1997</td>
+	<td>Review of Scientific Instruments<br/>Vol. 68(1), pp. 888&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=630871&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="229126619990701" class="entry">
+	<td>Hoegy, W.R. &amp; Brace, L.H.</td>
+	<td>Use of Langmuir probes in non-Maxwellian space plasmas.</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(7), pp. 3015&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=2291266&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2568472920070401" class="entry">
+	<td>Jauberteau, J.L. &amp; Jauberteau, I.</td>
+	<td>Electron energy distribution function in plasma determined using numerical simulations of multiple harmonic components on Langmuir probe characteristic—Efficiency of the method.</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(4), pp. 046102&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=25684729&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485797720101001" class="entry">
+	<td>Jaworski, M.A., Kallman, J., Kaita, R., Kugel, H., LeBlanc, B., Marsala, R. &amp; Ruzic, D.N.</td>
+	<td>Biasing, acquisition, and interpretation of a dense Langmuir probe array in NSTX.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10E130&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54857977&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="617823920020201" class="entry">
+	<td>Jeon, S.J., Eom, G.S., Kim, J.H. &amp; Choe, W.</td>
+	<td>Multichannel rf-compensated Langmuir probe array driven by a single bias supply.</td>
+	<td>2002</td>
+	<td>Review of Scientific Instruments<br/>Vol. 73(2), pp. 277&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=6178239&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485812620101001" class="entry">
+	<td>Kallman, J., Jaworski, M.A., Kaita, R., Kugel, H. &amp; Gray, T.K.</td>
+	<td>High density Langmuir probe array for NSTX scrape-off layer measurements under lithiated divertor conditions.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10E117&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858126&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="617815920020201" class="entry">
+	<td>Kene´z, L., Biri, S., Kara´csony, J., Valek, A., Nakagawa, T., Stiebing, K.E. &amp; Mironov, V.</td>
+	<td>Diagnostic research of plasmas generated by a 14.5 GHz ECR ion source using Langmuir-probe.</td>
+	<td>2002</td>
+	<td>Review of Scientific Instruments<br/>Vol. 73(2), pp. 617&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=6178159&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8377923420121101" class="entry">
+	<td>Klenzing, J. &amp; Rowland, D.</td>
+	<td>The fixed-bias Langmuir probe on the Communication/Navigation Outage Forecast System satellite: Calibration and validation.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(11), pp. 114501 - 114501-5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=83779234&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2568465920070301" class="entry">
+	<td>Klindworth, M., Arp, O. &amp; Piel, A.</td>
+	<td>Langmuir probe system for dusty plasmas under microgravity.</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(3), pp. 033502&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=25684659&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="920870520030301" class="entry">
+	<td>König, R., Ramasubramanian, N., McCormick, K., Grigull, P., Gadelmeier, F., Wenzel, U., Schweer, B. &amp; Brix, M.</td>
+	<td>Island divertor spectroscopy at the Wendelstein W7-AS stellarator.</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(3), pp. 2052&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9208705&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2622231520070701" class="entry">
+	<td>LaBombard, B. &amp; Lyons, L.</td>
+	<td>Mirror Langmuir probe: A technique for real-time measurement of magnetized plasma conditions using a single Langmuir electrode.</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(7), pp. 073501&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=26222315&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="440973620000201" class="entry">
+	<td>Laubé, S., Mostefaoui, T. &amp; Rowe, B.</td>
+	<td>Continuous heatable Langmuir probe for flowing afterglow measurements.</td>
+	<td>2000</td>
+	<td>Review of Scientific Instruments<br/>Vol. 71(2), pp. 519&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4409736&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471687020010101" class="entry">
+	<td>Lee, S.G. &amp; Bak, J.G.</td>
+	<td>Triple Langmuir probe measurements in the Hanbit magnetic mirror device.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(1), pp. 442&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4716870&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="7210746820120201" class="entry">
+	<td>Li, M., Xiang, W., Xiao, K.X. &amp; Chen, L.</td>
+	<td>Dynamical changes of ion current distribution for a Penning discharge source using a Langmuir probe array.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(2), pp. 02B722&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=72107468&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5261636820100701" class="entry">
+	<td>Lobbia, R.B. &amp; Gallimore, A.D.</td>
+	<td>High-speed dual Langmuir probe.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(7), pp. 073503&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=52616368&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3354722920080701" class="entry">
+	<td>Magnus, F. &amp; Gudmundsson, J.T.</td>
+	<td>Digital smoothing of the Langmuir probe I-V characteristic.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(7), pp. 073503&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=33547229&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2742044420071001" class="entry">
+	<td>Martin, A.K. &amp; Koelfgen, S.J.</td>
+	<td>A maximum-likelihood algorithm for reduction of Langmuir probe data.</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(10), pp. 103508&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=27420444&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484208920041001" class="entry">
+	<td>Nakashima, Y., Islam, M.K., Natori, T., Katanuma, I., Ohki, T., Watanabe, K., Higashizono, Y., Cho, T. &amp; Ishimoto, Y.</td>
+	<td>Edge plasma measurements near the minimum-B anchor cell of GAMMA10 using Langmuir probe and calorimeter arrays.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 4308 - 4310&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842089&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5404980820100901" class="entry">
+	<td>Oh, S.-J., Oh, S.-J. &amp; Chung, C.-W.</td>
+	<td>Radio frequency-compensated Langmuir probe with auxiliary double probes.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(9), pp. 093501&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54049808&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471686920010101" class="entry">
+	<td>Ohkuni, K. &amp; Toi, K.</td>
+	<td>Study of structural effects of Langmuir probe array on edge fluctuation measurement in the compact helical system heliotron/torsatron.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(1), pp. 446&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4716869&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="427029519990101" class="entry">
+	<td>Ohkuni, K., Toi, K., Ohdachi, S. &amp; Takagi, S.</td>
+	<td>Langmuir probe array for edge plasma study on the compact helical system heliotron/torsatron.</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(1), pp. 419&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4270295&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485794220101001" class="entry">
+	<td>Ohshima, S., Yamamoto, S., Takeuchi, M., Nagasaki, K., Mizuuchi, T., Okada, H., Minami, T., Kobayashi, S., Hanatani, K., Konoshima, S. &amp; Sano, F.</td>
+	<td>Multichannel Langmuir probe for turbulence study in Heliotron J.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10E137&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54857942&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485811320101001" class="entry">
+	<td>Olson, J., Brenning, N., Wahlund, J.-E. &amp; Gunell, H.</td>
+	<td>On the interpretation of Langmuir probe data inside a spacecraft sheath.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 105106&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858113&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="7627340220120501" class="entry">
+	<td>Oyama, K.-I., Lee, C.H., Fang, H.K. &amp; Cheng, C.Z.</td>
+	<td>Means to remove electrode contamination effect of Langmuir probe measurement in space.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(5), pp. 055113&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=76273402&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296470320121001" class="entry">
+	<td>Patterson, J.R., Emig, J.A., Fournier, K.B., Jenkins, P.P., Trautz, K.M., Seiler, S.W. &amp; Davis, J.F.</td>
+	<td>A Langmuir probe diagnostic for time-of-flight measurements of transient plasmas produced by high-energy laser ablation.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10D725 - 10D725-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964703&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="427029419990101" class="entry">
+	<td>Pedrosa, M., Lopez-Sanchez, A., Hidalgo, C., Montoro, A., Gabriel, A., Encabo, J., de la Gama, J., Martinez, L., Sanchez, E., Perez, R. &amp; Sierra, C.</td>
+	<td>Fast movable remotely controlled Langmuir probe system.</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(1), pp. 415&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4270294&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1010657220030701" class="entry">
+	<td>Pilling, L.S., Bydder, E.L. &amp; Carnegie, D.A.</td>
+	<td>A computerized Langmuir probe system.</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(7), pp. 3341&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=10106572&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471686520010101" class="entry">
+	<td>Riccardi, C., Longoni, G., Chiodini, G. &amp; Fontanesi, M.</td>
+	<td>Comparison between fast-sweep Langmuir probe and triple probe for fluctuations measurements.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(1), pp. 461&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4716865&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471686720010101" class="entry">
+	<td>Rudakov, D.L., Boedo, J.A., Moyer, R.A., Lehmer, R.D., Gunner, G. &amp; Watkins, J.G.</td>
+	<td>Fast electron temperature diagnostic based on Langmuir probe current harmonic detection on DIII-D.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(1), pp. 453&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4716867&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484207420041001" class="entry">
+	<td>Rudakov, D.L., Boedo, J.A., Moyer, R.A., Stangeby, P.C., McLean, A. &amp; Watkins, J.G.</td>
+	<td>Effect of electron temperature fluctuations on slowly swept Langmuir probe measurements.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 4334 - 4337&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842074&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="7210752320120201" class="entry">
+	<td>Schmitzer, C., Kronberger, M., Lettry, J., Sanchez-Arias, J. &amp; Störi, H.</td>
+	<td>Plasma characterization of the superconducting proton linear accelerator plasma generator using a 2 MHz compensated Langmuir probe.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(2), pp. 02A715&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=72107523&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2568475620070501" class="entry">
+	<td>Schubert, M., Endler, M. &amp; Thomsen, H.</td>
+	<td>Spatiotemporal temperature fluctuation measurements by means of a fast swept Langmuir probe array.</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(5), pp. 053505&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=25684756&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1554391720050101" class="entry">
+	<td>Sicard, P., Boucher, C., Litnovsky, A. &amp; St-Germain, J.-P.</td>
+	<td>A compact and portable PC-based Gundestrup–Langmuir probe diagnostic system.</td>
+	<td>2005</td>
+	<td>Review of Scientific Instruments<br/>Vol. 76(1), pp. 013505&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=15543917&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="542051320011101" class="entry">
+	<td>Sreenivasulu, M., Patra, S.K. &amp; Rao, G.M.</td>
+	<td>Powered automatic measuring system for Langmuir probe plasma analysis.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(11), pp. 4312&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=5420513&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8206861320120901" class="entry">
+	<td>Srivastava, P.K., Singh, S.K., Awasthi, L.M. &amp; Mattoo, S.K.</td>
+	<td>Revisiting plasma hysteresis with an electronically compensated Langmuir probe.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(9), pp. 093504 - 093504-5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82068613&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8377924620121101" class="entry">
+	<td>Steigies, C.T. &amp; Barjatya, A.</td>
+	<td>Contamination effects on fixed-bias Langmuir probes.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(11), pp. 113502&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=83779246&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296483020121001" class="entry">
+	<td>Watkins, J.G., Rajpal, R., Mandaliya, H., Watkins, M. &amp; Boivin, R.L.</td>
+	<td>Embedded calibration system for the DIII-D Langmuir probe analog fiber optic links.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10D710 - 10D710-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964830&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3515011320081001" class="entry">
+	<td>Watkins, J.G., Taussig, D., Boivin, R.L., Mahdavi, M.A. &amp; Nygren, R.E.</td>
+	<td>High heat flux Langmuir probe array for the DIII-D divertor plates.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10), pp. 10F125&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=35150113&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="429577519990301" class="entry">
+	<td>Weaver, I., Martin, G., Graham, W., Morrow, T. &amp; Lewis, C.</td>
+	<td>The Langmuir probe as a diagnostic of the electron component within low temperature laser ablated..</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(3), pp. 1801&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4295775&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471002520010701" class="entry">
+	<td>Wendt, A.E.</td>
+	<td>Passive external radio frequency filter for Langmuir probes.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(7), pp. 2926&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4710025&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471664820010201" class="entry">
+	<td>Wild, J., Kudrna, P., Gronych, T., Broz, J., Zelinger, Z., Kubát, P. &amp; Civis, S.</td>
+	<td>Langmuir probe measurement of plasma splitting during pulsed laser deposition.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(2), pp. 1597&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4716648&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 26/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

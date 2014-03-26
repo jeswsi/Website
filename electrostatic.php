@@ -34,6 +34,7 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 ">Plasma Diagnostics: Discharge Parameters and Chemistry</a></p>
 
 	<h3>Langmuir Probes</h3>
+		<blockquote><a href="langmuirrefs.html">Langmuir Probes References</a></blockquote>
 	<div class="col-md-6">
 		<p class="center"><a href="img/Langmuir2.jpg"><img src="img/Langmuir2-small.jpg"></a><br />Langmuir Probe</p>
 	</div>
