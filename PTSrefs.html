@@ -1,0 +1,472 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="8296476720121001" class="entry">
+	<td>Aftanas, M., Bohm, P., Bilkova, P., Weinzettl, V., Zajac, J., Zacek, F., Stockel, J., Hron, M., Panek, R., Scannell, R. &amp; Walsh, M.J.</td>
+	<td>High-resolution Thomson scattering system on the COMPASS tokamak: Evaluation of plasma parameters and error analysis.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E350 - 10E350-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964767&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296496320121001" class="entry">
+	<td>Diallo, A., LeBlanc, B.P., Labik, G. &amp; Stevens, D.</td>
+	<td>Prospects for the Thomson scattering system on NSTX-Upgrade.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10D532 - 10D532-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964963&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296495520121001" class="entry">
+	<td>Eldon, D., Bray, B.D., Deterly, T.M., Liu, C., Watkins, M., Groebner, R.J., Leonard, A.W., Osborne, T.H., Snyder, P.B., Boivin, R.L. &amp; Tynan, G.R.</td>
+	<td>Initial results of the high resolution edge Thomson scattering upgrade at DIII-D.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E343 - 10E343-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964955&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="7094591120120101" class="entry">
+	<td>Frassinetti, L., Beurskens, M.N.A., Scannell, R., Osborne, T.H., Flanagan, J., Kempenaars, M., Maslov, M., Pasqualotto, R. &amp; Walsh, M.</td>
+	<td>Spatial resolution of the JET Thomson scattering system.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(1), pp. 013506&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=70945911&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296485220121001" class="entry">
+	<td>Gamboa, E.J., Huntington, C.M., Trantham, M.R., Keiter, P.A., Drake, R.P., Montgomery, D.S., Benage, J.F. &amp; Letzring, S.A.</td>
+	<td>Imaging x-ray Thomson scattering spectrometer design and demonstration (invited).</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E108 - 10E108-5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964852&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296493720121001" class="entry">
+	<td>Hatae, T., Yatsuka, E., Hayashi, T., Yoshida, H., Ono, T. &amp; Kusama, Y.</td>
+	<td>Development of a YAG laser system for the edge Thomson scattering system in ITER.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E344 - 10E344-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964937&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296470720121001" class="entry">
+	<td>Katz, J., Boni, R., Sorce, C., Follett, R., Shoup, M.J. &amp; Froula, D.H.</td>
+	<td>A reflective optical transport system for ultraviolet Thomson scattering from electron plasma waves on OMEGA.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E349 - 10E349-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964707&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296468820121001" class="entry">
+	<td>Keiter, P.A., Gamboa, E.J., Huntington, C.M. &amp; Kuranz, C.C.</td>
+	<td>Concept to diagnose mix with imaging x-ray Thomson scattering.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E534 - 10E534-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964688&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296493120121001" class="entry">
+	<td>LeBlanc, B.P., Diallo, A., Labik, G. &amp; Stevens, D.R.</td>
+	<td>Radial resolution enhancement of the NSTX Thomson scattering diagnostic.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10D527 - 10D527-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964931&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296479820121001" class="entry">
+	<td>Lee, J., Oh, S., Wi, H., Oh, Y., Yamada, I., Narihara, K., Kawahata, K. &amp; Jeon, J.</td>
+	<td>Conceptual design of new polychromator on Thomson scattering system to measure Zeff.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E334 - 10E334-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964798&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8206861620120901" class="entry">
+	<td>Lee, W.R., Kim, H.S., Park, M.K., Lee, J.H. &amp; Kim, K.H.</td>
+	<td>Synchronized operation by field programmable gate array based signal controller for the Thomson scattering diagnostic system in KSTAR.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(9), pp. 093505 - 093505-4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82068616&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8206858920120901" class="entry">
+	<td>Maslov, M., Beurskens, M.N.A., Flanagan, J., Kempenaars, M. &amp; JET-EFDA, C.</td>
+	<td>Note: Statistical errors estimation for Thomson scattering diagnostics.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(9), pp. 096106 - 096106-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82068589&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8462337020121201" class="entry">
+	<td>van der Meiden, H.J., Lof, A.R., van den Berg, M.A., Brons, S., Donné, A.J.H., van Eck, H.J.N., Koelman, P.M.J., Koppers, W.R., Kruijt, O.G., Naumenko, N.N., Oyevaar, T., Prins, P.R., Rapp, J., Scholten, J., Schram, D.C., Smeets, P.H.M., van der Star, G., Tugarinov, S.N. &amp; Zeijlmans van Emmichoven, P.A.</td>
+	<td>Advanced Thomson scattering system for high-flux linear plasma generator.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(12), pp. 123505&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=84623370&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296474120121001" class="entry">
+	<td>Moseev, D., Meo, F., Korsholm, S.B., Bindslev, H., Furtula, V., Kantor, M., Leipold, F., Michelsen, P.K., Nielsen, S.K., Salewski, M. &amp; Stejner, M.</td>
+	<td>Elevation angle alignment of quasi optical receiver mirrors of collective Thomson scattering diagnostic by sawtooth measurements.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E337 - 10E337-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964741&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8377926620121101" class="entry">
+	<td>Nielsen, S.K., Salewski, M., Bongers, W., Korsholm, S.B., Leipold, F., Meo, F., Michelsen, P., Moseev, D., Oosterbeek, J.W., Stejner, M. &amp; Westerhof, E.</td>
+	<td>Modification of the collective Thomson scattering radiometer in the search for parametric decay on TEXTOR.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(11), pp. 113508&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=83779266&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296485820121001" class="entry">
+	<td>Ogasawara, S., Kubo, S., Nishiura, M., Tatematsu, Y., Saito, T., Tanaka, K., Shimozuma, T., Yoshimura, Y., Igami, H., Takahashi, H., Ito, S., Takita, Y., Kobayashi, S., Mizuno, Y., Okada, K., Minami, R., Kariya, T. &amp; Imai, T.</td>
+	<td>Suppression of spurious mode oscillation in mega-watt 77-GHz gyrotron as a high quality probe beam source for the collective Thomson scattering in LHD.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10D731 - 10D731-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964858&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296482320121001" class="entry">
+	<td>Oh, S., Lee, J.H. &amp; Wi, H.</td>
+	<td>Examinations of electron temperature calculation methods in Thomson scattering diagnostics.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10D525 - 10D525-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964823&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296496520121001" class="entry">
+	<td>Parke, E., Den Hartog, D.J., Morton, L.A., Stephens, H.D., Kasten, C.P., Reusch, J.A., Harris, W.H., Borchardt, M.T., Falkowski, A.F., Hurst, N.C., Plunkett, A. &amp; Goglio, J.</td>
+	<td>Improvements to the calibration of the MST Thomson scattering diagnostic.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E324 - 10E324-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964965&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296476320121001" class="entry">
+	<td>Pollock, B.B., Meinecke, J., Kuschel, S., Ross, J.S., Shaw, J.L., Stoafer, C., Divol, L., Tynan, G.R. &amp; Glenzer, S.H.</td>
+	<td>Simultaneous imaging electron- and ion-feature Thomson scattering measurements of radiatively heated Xe.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E348 - 10E348-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964763&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296471120121001" class="entry">
+	<td>Ross, J.S., Park, H.-S., Amendt, P., Divol, L., Kugland, N.L., Rozmus, W. &amp; Glenzer, S.H.</td>
+	<td>Thomson scattering diagnostic for the measurement of ion species fraction.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E323 - 10E323-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964711&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296486620121001" class="entry">
+	<td>Schlossberg, D.J., Schoenbeck, N.L., Dowd, A.S., Fonck, R.J., Moritz, J.I., Thome, K.E. &amp; Winz, G.R.</td>
+	<td>A Thomson scattering diagnostic on the Pegasus Toroidal experiment.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E335 - 10E335-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964866&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296494920121001" class="entry">
+	<td>Schoenbeck, N.L., Schlossberg, D.J., Dowd, A.S., Fonck, R.J. &amp; Winz, G.R.</td>
+	<td>A compact multichannel spectrometer for Thomson scattering.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E330 - 10E330-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964949&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296496220121001" class="entry">
+	<td>Stejner, M., Korsholm, S.B., Nielsen, S.K., Salewski, M., Bindslev, H., Leipold, F., Michelsen, P.K., Meo, F., Moseev, D., Bürger, A., Kantor, M. &amp; de Baar, M.</td>
+	<td>Temporally resolved plasma composition measurements by collective Thomson scattering in TEXTOR (invited).</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E307 - 10E307-6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964962&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="7210747320120201" class="entry">
+	<td>Tojo, H., Ejiri, A., Hiratsuka, J., Yamaguchi, T., Takase, Y., Itami, K. &amp; Hatae, T.</td>
+	<td>First measurement of electron temperature from signal ratios in a double-pass Thomson scattering system.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(2), pp. 023507&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=72107473&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296480120121001" class="entry">
+	<td>Tojo, H., Hatae, T., Yatsuka, E. &amp; Itami, K.</td>
+	<td>Anisotropic electron temperature measurements without knowing the spectral transmissivity for a JT-60SA Thomson scattering diagnostic.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E346 - 10E346-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964801&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296470420121001" class="entry">
+	<td>Yamada, I., Narihara, K., Funaba, H., Yasuhara, R., Hayashi, H. &amp; Kohmoto, T.</td>
+	<td>Extension of the measurable temperature range of the LHD Thomson scattering system.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E340 - 10E340-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964704&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="7822004220120701" class="entry">
+	<td>Yamamoto, N., Tomita, K., Sugita, K., Kurita, T., Nakashima, H. &amp; Uchino, K.</td>
+	<td>Measurement of xenon plasma properties in an ion thruster using laser Thomson scattering technique.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(7), pp. 073106 - 073106-6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=78220042&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296471420121001" class="entry">
+	<td>Yasuhara, R., Yoshikawa, M., Morimoto, M., Yamada, I., Kawahata, K., Funaba, H., Shima, Y., Kohagura, J., Sakamoto, M., Nakashima, Y., Imai, T. &amp; Minami, T.</td>
+	<td>Design of the polarization multi-pass Thomson scattering system.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E326 - 10E326-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964714&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296468420121001" class="entry">
+	<td>Yatsuka, E., Hatae, T., Fujie, D., Kurokawa, A. &amp; Kusama, Y.</td>
+	<td>Polychromator for the edge Thomson scattering system in ITER.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E328 - 10E328-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964684&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296488220121001" class="entry">
+	<td>Yoshikawa, M., Yasuhara, R., Morimoto, M., Shima, Y., Kohagura, J., Sakamoto, M., Nakashima, Y., Imai, T., Yamada, I., Kawahata, K., Funaba, H. &amp; Minami, T.</td>
+	<td>Development of polarization-controlled multi-pass Thomson scattering system in the GAMMA 10 tandem mirror.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 10E333 - 10E333-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964882&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 26/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->
