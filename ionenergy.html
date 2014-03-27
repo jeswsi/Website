@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Ion Energy references for fusion, plasma energy, and physics labs.">
+
+<title>Ion Energy JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="8644671220130301" class="entry">
+	<td>Brunner, D., LaBombard, B., Ochoukov, R. &amp; Whyte, D.</td>
+	<td>Scanning retarding field analyzer for plasma profile measurements in the boundary of the Alcator C-Mod tokamak.</td>
+	<td>2013</td>
+	<td>Review of Scientific Instruments<br/>Vol. 84(3), pp. 033502 - 033502-14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=86446712&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978354019930101" class="entry">
+	<td>Böhm, C. &amp; Perrin, J.</td>
+	<td>Retarding-field analyzer for measurements of ion energy distributions and secondary electron emission coefficients in low-pressure radio frequency discharges.</td>
+	<td>1993</td>
+	<td>Review of Scientific Instruments<br/>Vol. 64(1), pp. 31&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9783540&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1422778520040801" class="entry">
+	<td>Cui, Y., Zou, Y., Valfells, A., Reiser, M., Walter, M., Haber, I., Kishek, R.A., Bernal, S. &amp; O'Shea, P.G.</td>
+	<td>Design and operation of a retarding field energy analyzer with variable focusing for space-charge-dominated electron beams.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(8), pp. 2736 - 2745&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14227785&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="4490975020091001" class="entry">
+	<td>Dreval, M., Rohraff, D., Xiao, C. &amp; Hirose, A.</td>
+	<td>Retarding field energy analyzer for the Saskatchewan Torus–Modified plasma boundary.</td>
+	<td>2009</td>
+	<td>Review of Scientific Instruments<br/>Vol. 80(10), pp. 103505&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=44909750&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="427279219990601" class="entry">
+	<td>Edelberg, E.A., Perry, A., Benjamin, N. &amp; Aydil, E.S.</td>
+	<td>Compact floating ion energy analyzer for measuring energy distributions of ions bombarding..</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(6), pp. 2689&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4272792&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3154667120080301" class="entry">
+	<td>Gahan, D., Dolinaj, B. &amp; Hopkins, M.B.</td>
+	<td>Retarding field analyzer for ion energy distribution measurements at a radio-frequency biased electrode.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(3), pp. 033502&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=31546671&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978597419871101" class="entry">
+	<td>Hairapetian, G. &amp; Stenzel, R.L.</td>
+	<td>Mass-sensitive ion energy analyzer for multispecies plasmas.</td>
+	<td>1987</td>
+	<td>Review of Scientific Instruments<br/>Vol. 58(11), pp. 2099&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9785974&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978651819891001" class="entry">
+	<td>Inaba, S.</td>
+	<td>Secondary electron multiplier for a retarding field energy analyzer with coaxial cylindrical electrodes.</td>
+	<td>1989</td>
+	<td>Review of Scientific Instruments<br/>Vol. 60(10), pp. 3341&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9786518&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978398719890701" class="entry">
+	<td>Kanayama, S., Owari, M., Nakamura, E. &amp; Nihei, Y.</td>
+	<td>Two-dimensional x-ray photoelectron diffraction measurements by a retarding field-type analyzer.</td>
+	<td>1989</td>
+	<td>Review of Scientific Instruments<br/>Vol. 60(7), pp. 2231&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9783987&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3354723420080701" class="entry">
+	<td>Kocˇan, M., Gunn, J.P., Komm, M., Pascal, J.-Y., Gauthier, E. &amp; Bonhomme, G.</td>
+	<td>On the reliability of scrape-off layer ion temperature measurements by retarding field analyzers.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(7), pp. 073502&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=33547234&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978111619940401" class="entry">
+	<td>Kuwabara, T., Cho, T., Sakamoto, Y., Takahashi, E., Nakashima, Y., Hirata, M., Yatsu, K., Tamano, T. &amp; Miyoshi, S.</td>
+	<td>A new end-loss-ion energy analyzer with obliquely placed multigrids for open-ended plasma diagnostics.</td>
+	<td>1994</td>
+	<td>Review of Scientific Instruments<br/>Vol. 65(4), pp. 936&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9781116&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="437646419960801" class="entry">
+	<td>Mathew, J., Meger, R., Fernsler, R. &amp; Gregor, J.</td>
+	<td>Retarding field energy analyzer for the characterization of negative glow sheet plasmas in a..</td>
+	<td>1996</td>
+	<td>Review of Scientific Instruments<br/>Vol. 67(8), pp. 2818&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4376464&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978365919850701" class="entry">
+	<td>McCarrick, M.J., Ellis, R.F., Koepke, M. &amp; Majeski, R.P.</td>
+	<td>Perpendicular ion energy analyzer for hot-ion plasmas.</td>
+	<td>1985</td>
+	<td>Review of Scientific Instruments<br/>Vol. 56(7), pp. 1463&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9783659&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="6028351620110401" class="entry">
+	<td>Nedzelskiy, I.S., Silva, C., Duarte, P. &amp; Fernandes, H.</td>
+	<td>Ion temperature fluctuation measurements using a retarding field analyzer.</td>
+	<td>2011</td>
+	<td>Review of Scientific Instruments<br/>Vol. 82(4), pp. 043505&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=60283516&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2307307820061001" class="entry">
+	<td>Nedzelskiy, I.S., Silva, C., Figueiredo, H., Fernandes, H. &amp; Varandas, C.A.F.</td>
+	<td>Compact retarding field energy analyzer for the tokamak ISTTOK boundary plasma.</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(10), pp. 10E729&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=23073078&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1120997420031101" class="entry">
+	<td>Pitts, R., Chavan, R., Davies, S., Erents, S., Kaveney, G., Matthews, G., Neill, G., Vince, J., JET-EFDA workprogramme contributors, J. &amp; Duran, I.</td>
+	<td>Retarding field energy analyzer for the JET plasma boundary.</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(11), pp. 4644&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=11209974&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978534719850501" class="entry">
+	<td>Rhodes, M. &amp; Corbett, J.</td>
+	<td>Ion energy analyzer for direct insertion in a dense hot ion plasma.</td>
+	<td>1985</td>
+	<td>Review of Scientific Instruments<br/>Vol. 56(5), pp. 1123&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9785347&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="430183019951001" class="entry">
+	<td>Sakamoto, Y., Cho, T., Hirata, M., Yoshimura, T., Makino, K., Nakashima, Y., Yatsu, K., Tamano, T. &amp; Miyoshi, S.</td>
+	<td>A differential-spectrum ion-energy analyzer with electrostatic slanted grids.</td>
+	<td>1995</td>
+	<td>Review of Scientific Instruments<br/>Vol. 66(10), pp. 4928&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4301830&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="8296495020121001" class="entry">
+	<td>Sokolov, V. &amp; Sen, A.K.</td>
+	<td>Ion energy analyzer for measurement of ion turbulent transport.</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10), pp. 103503 - 103503-4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=82964950&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978113819850801" class="entry">
+	<td>Thompson, P.M., Taylor, J.W. &amp; Negri, R.E.</td>
+	<td>Retarding-field differential-output energy prefilter for high-performance secondary ion mass spectrometry.</td>
+	<td>1985</td>
+	<td>Review of Scientific Instruments<br/>Vol. 56(8), pp. 1557&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9781138&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 26/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

@@ -6,7 +6,7 @@
 	echo $head;	
 	?>
 		<meta name="description" content="Custom Data Acquisition setup, configuration, and installation for fusion, plasma energy, and physics labs.">
-  <title>DAQ | Woodruff Scientific, Inc.</title>
+  <title>Data Acquisition and Control | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
@@ -23,7 +23,7 @@
  	 	<li><a href="codac">CODAC</a></li>
   		<li class="active">DAQ</li>
 	</ol>
-	<h1>Data Acquisition</h1>
+	<h1>Data Acquisition and Control</h1>
 	<p>WSI uses <a href="http://www.ni.com/data-acquisition/">National Instruments</a> hardware for data acquisition. We can tailor hardware setups for your lab.</p>
 	<div class="col-md-6">
 		<p class="center"><img src="img/minDAQ.jpg"><br />

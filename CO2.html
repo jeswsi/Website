@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful CO2 Interferometers references for fusion, plasma energy, and physics labs.">
+
+<title>CO2 Interferometers JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="1497487120041101" class="entry">
+	<td>Acedo, P., Lamela, H., Sánchez, M., Estrada, T. &amp; Sánchez, J.</td>
+	<td>CO2 (λm=10.6 μm) He–Ne (λc=633 nm) two-color laser interferometry for low and medium electron density measurements in the TJ-II Stellarator.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(11), pp. 4671 - 4677&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14974871&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485826020101001" class="entry">
+	<td>Akiyama, T., Kawahata, K., Okajima, S. &amp; Nakayama, K.</td>
+	<td>Development of CO2 laser dispersion interferometer with photoelastic modulator.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D501&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858260&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2112627920060501" class="entry">
+	<td>Bagryansky, P.A., Khilchenko, A.D., Kvashnin, A.N., Lizunov, A.A., Voskoboynikov, R.V., Solomakhin, A.L. &amp; Koslowski, H.R.</td>
+	<td>Dispersion interferometer based on a CO2 laser for TEXTOR and burning plasma experiments.</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(5), pp. 053501&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=21126279&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978381019880701" class="entry">
+	<td>Carlstrom, T.N., Ahlgren, D.R. &amp; Crosbie, J.</td>
+	<td>Real-time, vibration-compensated CO2 interferometer operation on the DIII-D tokamak.</td>
+	<td>1988</td>
+	<td>Review of Scientific Instruments<br/>Vol. 59(7), pp. 1063&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9783810&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978540819850501" class="entry">
+	<td>Fairbanks, E.S.</td>
+	<td>CO2 laser interferometer array for Big Dee.</td>
+	<td>1985</td>
+	<td>Review of Scientific Instruments<br/>Vol. 56(5), pp. 905&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9785408&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485820720101001" class="entry">
+	<td>Gornostaeva, O., Deng, B.H., Garate, E., Gota, H., Kinley, J., Schroeder, J. &amp; Tuszewski, M.</td>
+	<td>Two-color CO2/HeNe laser interferometer for C-2 experiment.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D516&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858207&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978156419880801" class="entry">
+	<td>Innocente, P. &amp; Martini, S.</td>
+	<td>Two-color CO2 interferometer with single Bragg cell and improved vibration compensation at 3.39 μm.</td>
+	<td>1988</td>
+	<td>Review of Scientific Instruments<br/>Vol. 59(8), pp. 1571&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9781564&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="63081519970101" class="entry">
+	<td>Innocente, P., Martini, S., Canton, A. &amp; Tasinato, L.</td>
+	<td>Upgrade of the RFX CO2 interferometer using in-vessel optics for extended edge resolution.</td>
+	<td>1997</td>
+	<td>Review of Scientific Instruments<br/>Vol. 68(1), pp. 694&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=630815&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978676219901001" class="entry">
+	<td>Innocente, P., Martini, S., Schio, A. &amp; Roca, C.F.</td>
+	<td>Development of a vibration-compensated CO2 interferometer for the RFX experiment.</td>
+	<td>1990</td>
+	<td>Review of Scientific Instruments<br/>Vol. 61(10), pp. 2885&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9786762&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978699819921001" class="entry">
+	<td>Kawano, Y., Nagashima, A., Ishida, S., Fukuda, T. &amp; Matoba, T.</td>
+	<td>CO2 laser interferometer for electron density measurement in JT-60U tokamak.</td>
+	<td>1992</td>
+	<td>Review of Scientific Instruments<br/>Vol. 63(10), pp. 4971&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9786998&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978599719871101" class="entry">
+	<td>Nazikian, R. &amp; Sharp, L.E.</td>
+	<td>CO2 laser scintillation interferometer for the measurement of density fluctuations in plasma confinement devices.</td>
+	<td>1987</td>
+	<td>Review of Scientific Instruments<br/>Vol. 58(11), pp. 2086&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9785997&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978699519921001" class="entry">
+	<td>Nazikian, R.M., Robinson, J., Wright, J. &amp; Kaita, R.</td>
+	<td>A CO2 laser tangential imaging system for CDX-U (abstract).</td>
+	<td>1992</td>
+	<td>Review of Scientific Instruments<br/>Vol. 63(10), pp. 4983&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9786995&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484234820041001" class="entry">
+	<td>Sánchez, M., Sánchez, J., Estrada, T., Sánchez, E., Acedo, P. &amp; Lamela, H.</td>
+	<td>High resolution CO2 interferometry on the TJ-II stellarator by using an ADC-based phase meter.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 3414 - 3416&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842348&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="978372519860701" class="entry">
+	<td>Takahashi, H., Kimura, M., Sano, R., Nagayama, Y. &amp; Miyamoto, K.</td>
+	<td>Heterodyne interferometer of coaxial CO2 and He–Ne lasers for plasma density measurements.</td>
+	<td>1986</td>
+	<td>Review of Scientific Instruments<br/>Vol. 57(7), pp. 1286&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9783725&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484234320041001" class="entry">
+	<td>Tanaka, K., Sanin, A.L., Vyacheslavov, L.N., Akiyama, T., Kawahata, K., Tokuzawa, T., Ito, Y. &amp; Okajima, S.</td>
+	<td>Precise density profile measurements by using a two color YAG/CO2 laser imaging Interferometer on LHD.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 3429 - 3432&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842343&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3515018020081001" class="entry">
+	<td>Van Zeeland, M.A., Boivin, R.L., Carlstrom, T.N. &amp; Deterly, T.M.</td>
+	<td>CO2 laser polarimeter for Faraday rotation measurements in the DIII-D tokamak.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10), pp. 10E719&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=35150180&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2307327920061001" class="entry">
+	<td>Vyacheslavov, L.N., Khilchenko, A.D., Zubarev, P.V., Tanaka, K., Michael, C., Sanin, A.L., Kawahata, K. &amp; Okajima, S.</td>
+	<td>Application of precise phase detector for density profile and fluctuation measurements using CO2 imaging heterodyne interferometer on LHD.</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(10), pp. 10E909&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=23073279&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 26/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

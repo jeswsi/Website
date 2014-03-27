@@ -40,11 +40,15 @@
 --Other HeNe interferometers -->
 
 	<h3>CO2 Interferometer</h3>
+			<blockquote><a href="CO2.html">CO2 Interferometer References</a></blockquote>
+
 <!-- 	--ZEMAX image
 --components for download
 --other CO2 interferometers
  -->
 	<h3>Polarimeter</h3>
+			<blockquote><a href="polarimeters.html">Polarimeter References</a></blockquote>
+
 <!-- 	--ZEMAX image
 --components for download
 --other polarimeters in the world -->

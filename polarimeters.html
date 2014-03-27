@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Polarimeter references for fusion, plasma energy, and physics labs.">
+
+<title>Polarimeter JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="3515017120081001" class="entry">
+	<td>Akiyama, T., Kawahata, K., Tanaka, K., Okajima, S. &amp; Nakayama, K.</td>
+	<td>Short wavelength far infrared laser polarimeter with silicon photoelastic modulators.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10), pp. 10E720&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=35150171&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="963029820030501" class="entry">
+	<td>Akiyama, T., Tsuji-Iio, S., Shimada, R., Nakayama, K., Okajima, S., Takahashi, M., Terai, K., Tanaka, K., Tokuzawa, T. &amp; Kawahata, K.</td>
+	<td>CO[sub 2] laser polarimeter for electron density profile measurement on the Large Helical Device.</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(5), pp. 2695&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=9630298&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2307330920061001" class="entry">
+	<td>Blanchard, P., Behn, R., Weisen, H. &amp; Zhuchkova, A.</td>
+	<td>10-channel far-infrared polarimeter for the tokamak à configuration variable.</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(10), pp. 10F101&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=23073309&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485793220101001" class="entry">
+	<td>Boboc, A., Gelfusa, M., Murari, A., Gaudio, P. &amp; JET-EFDA, C.</td>
+	<td>Recent developments of the JET far-infrared interferometer-polarimeter diagnostic.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D538&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54857932&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="6028355820110401" class="entry">
+	<td>Brault, C., Gil, C., Boboc, A., Spuig, P. &amp; JET-EFDA, C.</td>
+	<td>Evaluation of the Faraday angle by numerical methods and comparison with the Tore Supra and JET polarimeter electronics.</td>
+	<td>2011</td>
+	<td>Review of Scientific Instruments<br/>Vol. 82(4), pp. 043502&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=60283558&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3515027120081001" class="entry">
+	<td>Brimhall, N., Turner, M., Herrick, N., Allred, D.D., Turley, R.S., Ware, M. &amp; Peatross, J.</td>
+	<td>Extreme-ultraviolet polarimeter utilizing laser-generated high-order harmonics.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10), pp. 103108&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=35150271&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471700720010101" class="entry">
+	<td>Brower, D.L., Jiang, Y., Ding, W.X., Terry, S.D., Lanier, N.E., Anderson, J.K., Forest, C.B. &amp; Holly, D.</td>
+	<td>Multichannel far-infrared polarimeter-interferometer system on the MST reversed field pinch.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(1), pp. 1077&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4717007&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3861190920090401" class="entry">
+	<td>Cacho, C.M., Vlaic, S., Malvestuto, M., Ressel, B., Seddon, E.A. &amp; Parmigiani, F.</td>
+	<td>Absolute spin calibration of an electron spin polarimeter by spin-resolved photoemission from the Au(111) surface states.</td>
+	<td>2009</td>
+	<td>Review of Scientific Instruments<br/>Vol. 80(4), pp. 043904 - 043907&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=38611909&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485825920101001" class="entry">
+	<td>Chen, J., Gao, L., Zhuang, G., Wang, Z.J. &amp; Gentle, K.W.</td>
+	<td>Design of far-infrared three-wave polarimeter-interferometer system for the J-TEXT tokamak.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D502&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858259&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484235220041001" class="entry">
+	<td>Cheon, M.S., Nam, Y.U., Ha, J.H. &amp; Hwang, Y.S.</td>
+	<td>Design of a far-infrared interferometer/polarimeter system for Korea Superconducting Tokamak Advanced Research.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 3402 - 3404&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842352&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="2307328520061001" class="entry">
+	<td>Deng, B.H., Brower, D.L., Ding, W.X., Wyman, M.D., Chapman, B.E. &amp; Sarff, J.S.</td>
+	<td>High-speed three-wave polarimeter-interferometer diagnostic for Madison symmetric torus.</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(10), pp. 10F108&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=23073285&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1497487020041101" class="entry">
+	<td>Donné, A.J.H., Graswinckel, M.F., Cavinato, M., Giudicotti, L., Zilli, E., Gil, C., Koslowski, H.R., McCarthy, P., Nyhan, C., Prunty, S., Spillane, M. &amp; Walker, C.</td>
+	<td>Poloidal polarimeter for current density measurements in ITER.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(11), pp. 4694 - 4701&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14974870&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5105904620100501" class="entry">
+	<td>Gelfusa, M., Murari, A., Gaudio, P., Boboc, A., Brombin, M., Orsitto, F.P. &amp; Giovannozzi, E.</td>
+	<td>A new calibration code for the JET polarimeter.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(5), pp. 053507&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=51059046&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5870046520110201" class="entry">
+	<td>Imazawa, R., Kawano, Y., Ono, T. &amp; Kusama, Y.</td>
+	<td>Terrace retro-reflector array for poloidal polarimeter on ITER.</td>
+	<td>2011</td>
+	<td>Review of Scientific Instruments<br/>Vol. 82(2), pp. 023116&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=58700465&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="4397541120090801" class="entry">
+	<td>Imazono, T., Sano, K., Suzuki, Y., Kawachi, T. &amp; Koike, M.</td>
+	<td>Development and performance test of a soft x-ray polarimeter and ellipsometer for complete polarization analysis.</td>
+	<td>2009</td>
+	<td>Review of Scientific Instruments<br/>Vol. 80(8), pp. 085109&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=43975411&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485793020101001" class="entry">
+	<td>Juhn, J.-W., Lee, K.C., Hwang, Y.S., Domier, C.W., Luhmann, N.C., Leblanc, B.P., Mueller, D., Gates, D.A. &amp; Kaita, R.</td>
+	<td>Fringe-jump corrected far infrared tangential interferometer/polarimeter for a real-time density feedback control system of NSTX plasmas.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D540&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54857930&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485794420101001" class="entry">
+	<td>Kawahata, K., Akiyama, T., Tanaka, K., Nakayama, K. &amp; Okajima, S.</td>
+	<td>Development of two color laser diagnostics for the ITER poloidal polarimeter.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D537&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54857944&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485803720101001" class="entry">
+	<td>Kim, J., Lee, K.C., Kaita, R., Phillips, C.K., Domier, C.W., Valeo, E., Luhmann, N.C., Bonoli, P.T. &amp; Park, H.</td>
+	<td>Use of the Far Infrared Tangential Interferometer/Polarimeter diagnostic for the study of rf driven plasma waves on NSTX.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D527&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858037&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="4835263420100201" class="entry">
+	<td>Kitamoto, S., Murakami, H., Shishido, Y., Gotoh, N., Shibata, T., Saito, K., Watanabe, T., Kanai, J., Takenaka, E., Nagasaki, K., Yoshida, M., Takei, D. &amp; Morii, M.</td>
+	<td>X-ray polarimeter with a transmission multilayer.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(2), pp. 023105&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=48352634&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="1484234620041001" class="entry">
+	<td>Kondoh, T., Costley, A.E., Sugie, T., Kawano, Y., Malaquias, A. &amp; Walker, C.I.</td>
+	<td>Toroidal interferometer/polarimeter density measurement system on ITER.</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10), pp. 3420 - 3422&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=14842346&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="471701120010101" class="entry">
+	<td>O'Gorman, M., Zilli, E., Giudicotti, L., Prunty, S., Milani, F., Murari, A. &amp; Boboc, A.</td>
+	<td>The multichord far infrared polarimeter of the RFX experiment.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(1), pp. 1063&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=4717011&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3422487620080801" class="entry">
+	<td>Spillmann, U., Bräuning, H., Hess, S., Beyer, H., Stöhlker, T., Dousse, J.-C., Protic, D. &amp; Krings, T.</td>
+	<td>Performance of a Ge-microstrip imaging detector and polarimeter.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(8), pp. 083101&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=34224876&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485803820101001" class="entry">
+	<td>Tsai, W.C., Domier, C.W., Lee, K.C., Luhmann, N.C., Kaita, R. &amp; Park, H.K.</td>
+	<td>NSTX far infrared tangential interferometer/polarimeter electronics upgrade.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D526&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858038&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="3515018020081001" class="entry">
+	<td>Van Zeeland, M.A., Boivin, R.L., Carlstrom, T.N. &amp; Deterly, T.M.</td>
+	<td>CO2 laser polarimeter for Faraday rotation measurements in the DIII-D tokamak.</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10), pp. 10E719&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=35150180&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="5485825520101001" class="entry">
+	<td>Xu, P., Irby, J.H., Bergerson, W.F., Bosco, J., Brower, D.L., Ding, W.X., Kanojia, A., Leccacorvi, R., Mansfield, D.K., Marmar, E.S., Michael, P., Murray, R., Rokhman, Y. &amp; Vieira, R.</td>
+	<td>Preliminary results from the Alcator C-Mod polarimeter.</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10), pp. 10D507&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=54858255&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+<tr id="542054720011101" class="entry">
+	<td>Zilli, E., Milani, F., O’Gorman, M., Giudicotti, L. &amp; Prunty, S.L.</td>
+	<td>Electronics and signal processing for the multichord far-infrared polarimeter of the RFX experiment.</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(11), pp. 4125&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://offcampus.lib.washington.edu/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=5420547&site=ehost-live">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 26/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

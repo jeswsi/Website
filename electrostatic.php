@@ -46,6 +46,9 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 
 <!-- --Download design for CNC milling
  -->	<h3>Gridded Ion Energy Analyzers</h3>
+ 
+ 		<blockquote><a href="ionenergy.html">Ion Energy References</a></blockquote>
+
 	<div class="col-md-6">
 		<p class="center"><a href="img/RGFA2.jpg"><img src="img/RGFA2-small.jpg"></a><br />Retarding Field Analyzer</p>
 	</div>

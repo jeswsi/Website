@@ -24,7 +24,7 @@
   		<li class="active">LabVIEW Experiment Management System</li>
 	</ol>
 	<h1>LabVIEW Experiment Management System</h1>
-	<p class="center"><a href="img/labview.png"><img src="img/labview-small.png"></a></p>
+	<p class="center"><a href="img/labview.png"><img src="img/labview-small.png"></a>&nbsp;<a href="img/codac-lite.png"><img src="img/codac-lite.png" height="200"></a></p>
 	<p>WSI uses National Instruments <a href="http://www.ni.com/labview/">LabVIEW</a> for experiment control.
 	<p>Our software includes:
 		<ul>
