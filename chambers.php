@@ -51,6 +51,10 @@ a concern (though need some consideration), and sometimes PMI subsystems
 can be integrated into a whole (for example combining the vacuum
 boundary with the first wall and passive stabilization). <a href="pdf/CT.pdf">Our thoughts on confinement chambers were published as a white paper</a> as proceedings to the ReNeW workshops.</p></p>
 
+<h3>References</h3>
+<blockquote><a href="vacuum.html">Vacuum Boundary References</blockquote>
+<blockquote><a href="walls.html">First Wall References</blockquote>
+<blockquote><a href="blankets.html">Blanket References</blockquote>
 
 
 <!--

@@ -33,6 +33,7 @@ to this subject area in the coming years.
 </p>
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />
 
+<blockquote><a href="blankets.html">Blanket References</blockquote>
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->

@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Vacuum Boundary references for fusion, plasma energy, and physics labs.">
+<title>Vacuum Boundary JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="4921933" class="entry">
+	<td>Akaishi, K., Nakasuga, M. &amp; Funato, Y.</td>
+	<td>Simulation of hydrogen outgassing in ultrahigh vacuum chamber and fusion device by recombination limited model</td>
+	<td>2002</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 20(3), pp. 848-856&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.1471354">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4928756" class="entry">
+	<td>Batzer, T.H., Lang, D.D. &amp; Moir, R.W.</td>
+	<td>Large, all #x2010;metal #x2010;sealed, vacuum gate valve for fusion application</td>
+	<td>1992</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 10(6), pp. 3579-3583&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.577787">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4952663" class="entry">
+	<td>Cullingford, H.S. &amp; Beal, J.W.</td>
+	<td>Pumping and vacuum requirements for the magnetic fusion energy program</td>
+	<td>1977</td>
+	<td>Journal of Vacuum Science and Technology<br/>Vol. 14(1), pp. 567-569&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.569309">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5725804" class="entry">
+	<td>Dong, J., Montalvo, E., Arslanoglu, R., Becker, E., Carrera, R., Khayrudinov, R., Walls, A. &amp; Weldon, W.</td>
+	<td>Preliminary analysis of the vacuum vessel in the fusion ignition experiment IGNITEX</td>
+	<td>1990</td>
+	<td>Plasma Science, 1990. IEEE Conference Record - Abstracts., 1990 IEEE International Conference on, pp. 91-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.1990.110527">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4929427" class="entry">
+	<td>Dylla, H.F.</td>
+	<td>Development of ultrahigh vacuum technology for particle accelerators and magnetic fusion devices</td>
+	<td>1994</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 12(4), pp. 962-978&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.579074">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4931770" class="entry">
+	<td>Fuller, G.M. &amp; Haines, J.R.</td>
+	<td>Design considerations for achieving high vacuum integrity in fusion devices</td>
+	<td>1984</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 2(2), pp. 1162-1169&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.572694">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4932946" class="entry">
+	<td>Gerich, J.W.</td>
+	<td>The design, construction, and testing of the vacuum vessel for the tandem Mirror Fusion Test Facility</td>
+	<td>1986</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 4(3), pp. 1742-1748&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.573970">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6635290" class="entry">
+	<td>Giegerich, T. &amp; Day, C.</td>
+	<td>The THESEUS facility #x2014; A test environment for the Torus exhaust vacuum pumping system of a fusion power plant</td>
+	<td>2013</td>
+	<td>Fusion Engineering (SOFE), 2013 IEEE 25th Symposium on, pp. 1-6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SOFE.2013.6635290">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4952666" class="entry">
+	<td>Heiland, W.</td>
+	<td>Special aspects of vacuum systems for fusion experiments</td>
+	<td>1977</td>
+	<td>Journal of Vacuum Science and Technology<br/>Vol. 14(1), pp. 576-581&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.569152">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4934122" class="entry">
+	<td>Hemmerich, J.L.</td>
+	<td>Primary vacuum pumps for the fusion reactor fuel cycle</td>
+	<td>1988</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 6(1), pp. 144-153&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.574998">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4135129" class="entry">
+	<td>Huang, X., Sun, Q. &amp; Fan, K.</td>
+	<td>Study on Atoms Diffusion of Vacuum Fusion Sintering WC-Co Composite Nano-coatings</td>
+	<td>2006</td>
+	<td>Nano/Micro Engineered and Molecular Systems, 2006. NEMS '06. 1st IEEE International Conference on, pp. 1060-1063&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/NEMS.2006.334612">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4929817" class="entry">
+	<td>Kitamura, K., Itoh, K., Uchida, T., Kondoh, M., Obara, K., Nakamura, K. &amp; Murakami, Y.</td>
+	<td>Experimental and analytical studies on mechanical behavior of knife #x2010;edge #x2010;type metal #x2010;seal flange for fusion vacuum sealing</td>
+	<td>1994</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 12(6), pp. 3217-3223&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.579240">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6154981" class="entry">
+	<td>Kojima, A., Hanada, M., Hilmi, A., Inoue, T., Watanabe, K., Taniguchi, M., Kashiwagi, M., Umeda, N., Tobari, H., Kobayashi, S., Yamano, Y. &amp; Grisham, L.</td>
+	<td>Vacuum insulation of the high energy negative ion source for fusion application</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(2), pp. 02B117-02B117-5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3672471">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4995726" class="entry">
+	<td>Liu, F., Qi, N., Gensler, S., Prasad, R., Krishnan, M. &amp; Brown, I.</td>
+	<td>Vacuum arc ion source for heavy ion fusion</td>
+	<td>1998</td>
+	<td>Review of Scientific Instruments<br/>Vol. 69(2), pp. 819-821&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1148467">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4955097" class="entry">
+	<td>Livesey, R.L.</td>
+	<td>Summary Abstract: Vacuum system problems of EBT #x2014;a steady #x2010;state fusion experiment</td>
+	<td>1982</td>
+	<td>Journal of Vacuum Science and Technology<br/>Vol. 20(4), pp. 1188-1189&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.571515">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6207605" class="entry">
+	<td>McKay, K., Wolter, S. &amp; Kim, J.</td>
+	<td>A ultra-high-vacuum wafer-fusion-bonding system</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(5), pp. 055108-055108-7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4718357">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4932518" class="entry">
+	<td>Medley, S.S.</td>
+	<td>Vacuum system design and tritium inventory for the charge exchange diagnostic on the Tokamak Fusion Test Reactor</td>
+	<td>1986</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 4(1), pp. 97-106&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.573462">DOI</a> &nbsp;</td>
+</tr>
+<tr id="849878" class="entry">
+	<td>Nelson, B., Burgess, T., Brown, T., Fan, H. &amp; Heitzenroeder, P.</td>
+	<td>Fusion Ignition Research Experiment vacuum vessel design and configuration</td>
+	<td>1999</td>
+	<td>Fusion Engineering, 1999. 18th Symposium on, pp. 459-462&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1999.849878">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4952665" class="entry">
+	<td>Pittenger, L.C.</td>
+	<td>Abstract: Vacuum engineering for fusion research and fusion reactors</td>
+	<td>1977</td>
+	<td>Journal of Vacuum Science and Technology<br/>Vol. 14(1), pp. 575-575&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.569151">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4936078" class="entry">
+	<td>Pitts, J.H. &amp; Patton, H.G.</td>
+	<td>Vacuum pumping for inertial #x2010;confinement #x2010;fusion reactors</td>
+	<td>1990</td>
+	<td>Journal of Vacuum Science Technology A: Vacuum, Surfaces, and Films<br/>Vol. 8(3), pp. 3052-3057&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.576585">DOI</a> &nbsp;</td>
+</tr>
+<tr id="605228" class="entry">
+	<td>Qi, N., Gensler, S., Prasad, R., Krishnan, M., Liu, F. &amp; Brown, I.</td>
+	<td>A high current vacuum arc ion source for heavy ion fusion</td>
+	<td>1997</td>
+	<td>Plasma Science, 1997. IEEE Conference Record - Abstracts., 1997 IEEE International Conference on, pp. 328-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.1997.605228">DOI</a> &nbsp;</td>
+</tr>
+<tr id="829528" class="entry">
+	<td>Qi, N., Schein, J., Gensler, S., Prasad, R., Krishnan, M. &amp; Brown, I.</td>
+	<td>High current vacuum arc ion source for heavy ion fusion</td>
+	<td>1999</td>
+	<td>Plasma Science, 1999. ICOPS '99. IEEE Conference Record - Abstracts. 1999 IEEE International Conference on, pp. 223-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.1999.829528">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4955094" class="entry">
+	<td>Reddan, W.G.</td>
+	<td>Design and fabrication of the vacuum vessel for the tokamak fusion test reactor</td>
+	<td>1982</td>
+	<td>Journal of Vacuum Science and Technology<br/>Vol. 20(4), pp. 1173-1176&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.571512">DOI</a> &nbsp;</td>
+</tr>
+<tr id="218647" class="entry">
+	<td>Sedgley, D.W., Walthers, C. &amp; Jenkins, E.</td>
+	<td>Fusion reactor high vacuum pumping: charcoal cryosorber tritium exposure results</td>
+	<td>1991</td>
+	<td>Fusion Engineering, 1991. Proceedings., 14th IEEE/NPSS Symposium on, pp. 1233-1236 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1991.218647">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5000017" class="entry">
+	<td>Soukhanovskii, V.A., Regan, S., May, M., Finkenthal, M. &amp; Moos, H.W.</td>
+	<td>Development of phosphor scintillator-based detectors for soft x-ray and vacuum ultraviolet spectroscopy of magnetically confined fusion plasmas</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(10), pp. 4331-4335&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1605493">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4998767" class="entry">
+	<td>Soukhanovskii, V.A., Stutman, D., Finkenthal, M., Moos, H.W., Kaita, R. &amp; Majeski, R.</td>
+	<td>Compact collimated vacuum ultraviolet diagnostics for localized impurity measurements in fusion boundary plasmas</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(8), pp. 3270-3276&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1386906">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4997302" class="entry">
+	<td>Takahashi, K., Sakamoto, K., Kasugai, A., Imai, T., Brandon, J.R. &amp; Sussmann, R.S.</td>
+	<td>Chemical vapor deposition diamond window as vacuum and tritium confinement barrier for fusion application</td>
+	<td>2000</td>
+	<td>Review of Scientific Instruments<br/>Vol. 71(11), pp. 4139-4143&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1313799">DOI</a> &nbsp;</td>
+</tr>
+<tr id="999230" class="entry">
+	<td>Thumm, M.</td>
+	<td>Powerful vacuum electron tubes used in European particle accelerators and thermonuclear fusion systems</td>
+	<td>2002</td>
+	<td>Vacuum Electronics Conference, 2002. IVEC 2002. Third IEEE International, pp. 3-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IVELEC.2002.999230">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5658666" class="entry">
+	<td>Zhao, Z., Guo, X., Xin, H., Ren, Y. &amp; Wang, L.</td>
+	<td>Data fusion of vacuum measurement in vacuum switchgears</td>
+	<td>2010</td>
+	<td><br/>Vol. 1Intelligent Computing and Intelligent Systems (ICIS), 2010 IEEE International Conference on, pp. 321-324&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICICISYS.2010.5658666">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5358386" class="entry">
+	<td>Zhao, Z., Liu, T., Wang, Y. &amp; Xin, H.</td>
+	<td>Data fusion in vacuum level measuring system</td>
+	<td>2009</td>
+	<td><br/>Vol. 2Intelligent Computing and Intelligent Systems, 2009. ICIS 2009. IEEE International Conference on, pp. 383-386&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICICISYS.2009.5358386">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

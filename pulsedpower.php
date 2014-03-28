@@ -23,8 +23,13 @@
   		<li class="active">Pulsed Power</li>
 	</ol>
 				<ul class="left">
-					<li><a href="#bankmodules">Bank Modules</a></li>
-        			<li><a href="#pfn">Pulse Forming Networks</a></li>
+					<li>Bank Modules</li>
+						<ul>
+							<li><a href="moduleA">Module A</a></li>
+							<li><a href="moduleB">Module B</a></li>
+							<!--<li><a href="moduleC">Module C</a></li>-->
+						</ul>
+        			<li><a href="pfn">Pulse Forming Networks</a></li>
        			</ul>
     <h1>Pulsed Power</h1>
 	<p>We have built, installed and tested pulsed power capacitor banks for a variety of applications. Fig. 1 shows an example arrangement for the banks we have built for an R&amp;D environment, for which the room served as the enclosure. Banks are custom built for specific applications, although small modules have a fast turn around time. Spec sheets available on request. For design only, please see our <a href="services">Services</a></p>
@@ -67,48 +72,6 @@ Safety must be the number one priority in all labs. The high-voltage used in our
 	<blockquote><a href="blumlein.html">Blumlein References</a></blockquote>
 
 
-<a id="bankmodules"></a>
-<h3>Bank Modules</h3>
-<h4>Module A <small>(based on 4uF, 12kV, 300J caps)</small></h4>
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankAC1.jpg"><img src="img/BankAC1-small.jpg"></a><br />
-		Module AC32</p>
-	</div>
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankAC2.jpg"><img src="img/BankAC2-small.jpg"></a><br />
-		Module AC64</p>
-	</div>
-<h4>Module B <small>(based on 120uF, 12kV, 9kJ caps)</small></h4>
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankBL1.jpg"><img src="img/BankBL1-small.jpg"></a><br />
-		Module BL480</p>
-	</div>
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankBL2.jpg"><img src="img/BankBL2-small.jpg"></a><br />
-		Module BL960</p>
-	</div>
-<!--<h4>Module C <small>(based on 2mF, 5kV, 25kJ caps)</small></h4>
-	<p>Module C can be wall mounted or shelf mounted (plans available on request).</p>
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankCL3.jpg"><img src="img/BankCL3-small.jpg"></a><br />
-		Module CL4000</p>
-	</div>
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankCL1.jpg"><img src="img/BankCL1-small.jpg"></a><br />
-		Module CL10000</p><br />
-	</div>-->
-
-	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
-
-<a id="pfn"></a>
-<h3>Pulse Forming Networks</h3>
-	<div class="col-md-6">
-		
-	</div>
-	<div class="col-md-6">
-
-	</div>
-	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 

@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful blanket references for fusion, plasma energy, and physics labs.">
+<title>Blankets JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="534182" class="entry">
+	<td>Barzilov, A.P., Gulevich, A.V., Zrodnikov, A.V., Kukharchuk, O.F., Polevoy, V.B. &amp; Feoktistov, L.P.</td>
+	<td>Concept of a coupled blanket system for the hybrid fission-fusion reactor</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Fusion Engineering, 1995. SOFE '95. Seeking a New Energy Era., 16th IEEE/NPSS Symposium, pp. 93-96 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1995.534182">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4316656" class="entry">
+	<td>Brzosko, J.S., Robouch, B.V. &amp; Ingrosso, L.</td>
+	<td>Openings in a fusion reactor blanket (tokamak type)-trends in nuclear characteristics</td>
+	<td>1987</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 15(1), pp. 16-27&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.1987.4316656">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6052306" class="entry">
+	<td>Buhler, L., Mistrangelo, C. &amp; Koehly, C.</td>
+	<td>Design of a flexible liquid metal loop for investigation of MHD flows related to fusion blanket applications</td>
+	<td>2011</td>
+	<td>Fusion Engineering (SOFE), 2011 IEEE/NPSS 24th Symposium on, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SOFE.2011.6052306">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4018932" class="entry">
+	<td>Cheng, E.T.</td>
+	<td>Blanket Concepts for Alternate Fusion Energy Options</td>
+	<td>2005</td>
+	<td>Fusion Engineering 2005, Twenty-First IEEE/NPS Symposium on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.2005.252898">DOI</a> &nbsp;</td>
+</tr>
+<tr id="849824" class="entry">
+	<td>Cheng, E.T., Cerbone, R. &amp; Sze, D.-K.</td>
+	<td>Tritium breeding and activation characteristics in Sn-Li bimetallic alloy based fusion blankets</td>
+	<td>1999</td>
+	<td>Fusion Engineering, 1999. 18th Symposium on, pp. 223-226&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1999.849824">DOI</a> &nbsp;</td>
+</tr>
+<tr id="518330" class="entry">
+	<td>Cheng, E.T., Garner, J.K., Simnad, M. &amp; Talbot, J.</td>
+	<td>A low-activation fusion blanket with SiC structure and Pb-Li breeder</td>
+	<td>1993</td>
+	<td><br/>Vol. 1Fusion Engineering, 1993., 15th IEEE/NPSS Symposium on, pp. 277-281 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1993.518330">DOI</a> &nbsp;</td>
+</tr>
+<tr id="102191" class="entry">
+	<td>Chiu, H.K., Bennett, E.F. &amp; Micklich, B.J.</td>
+	<td>The measurement of gamma heating in a fusion blanket test assembly</td>
+	<td>1989</td>
+	<td>Fusion Engineering, 1989. Proceedings., IEEE Thirteenth Symposium on, pp. 141-144 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1989.102191">DOI</a> &nbsp;</td>
+</tr>
+<tr id="534216" class="entry">
+	<td>Furuya, K., Kitamura, K., Miura, H., Itoh, Y., Kurasawa, T., Kuroda, T., Tokami, I., Sato, S., Hatano, T., Takatsu, H. &amp; Hashimoto, T.</td>
+	<td>Design development of shielding blanket for fusion experimental reactors</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Fusion Engineering, 1995. SOFE '95. Seeking a New Energy Era., 16th IEEE/NPSS Symposium, pp. 256-259 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1995.534216">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4337867" class="entry">
+	<td>Minami, T., Niigawa, S., Ueno, Y., Hinoki, T., Yamamoto, Y. &amp; Konishi, S.</td>
+	<td>Hydrogen isotopes permeation evaluation in the advanced material for nuclear fusion blanket use</td>
+	<td>2007</td>
+	<td>Fusion Engineering, 2007. SOFE 2007. 2007 IEEE 22nd Symposium on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.2007.4337867">DOI</a> &nbsp;</td>
+</tr>
+<tr id="534384" class="entry">
+	<td>Park, J.-H. &amp; Kassner, T.F.</td>
+	<td>CaO insulator and Be intermetallic coatings on V-base alloys for liquid-lithium fusion blanket applications</td>
+	<td>1995</td>
+	<td><br/>Vol. 2Fusion Engineering, 1995. SOFE '95. Seeking a New Energy Era., 16th IEEE/NPSS Symposium, pp. 960-963 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1995.534384">DOI</a> &nbsp;</td>
+</tr>
+<tr id="849794" class="entry">
+	<td>Raffray, A.R., El-Guebaly, L., Sze, D.-K., Billone, M., Sviatoslavsky, I., Mogahed, E., Najmabadi, F., Tillack, M. &amp; Wang, X.</td>
+	<td>SiC/SiC composite for an advanced fusion power plant blanket</td>
+	<td>1999</td>
+	<td>Fusion Engineering, 1999. 18th Symposium on, pp. 73-76&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1999.849794">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4316100" class="entry">
+	<td>Rosa, R.</td>
+	<td>Blanket-Coupled MHD for Fusion to Electric Energy Conversion</td>
+	<td>1973</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 1(3), pp. 107-107&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.1973.4316100">DOI</a> &nbsp;</td>
+</tr>
+<tr id="518327" class="entry">
+	<td>Sato, S., Takatsu, H., Hashimoto, T., Kurasawa, T., Mori, S., Tada, E., Akiba, M., Kuroda, T., Mohri, K. &amp; Sato, K.</td>
+	<td>Fabrication of a blanket box structure integrated with the first wall for a fusion experimental reactor</td>
+	<td>1993</td>
+	<td><br/>Vol. 1Fusion Engineering, 1993., 15th IEEE/NPSS Symposium on, pp. 259-262 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1993.518327">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4337949" class="entry">
+	<td>Sawan, M., Aplin, C.S., Sviatoslavsky, G. &amp; Raffray, A.R.</td>
+	<td>Neutronics Analysis of a Molten Salt Blanket for the HAPL Laser Fusion Power Plant with Magnetic Intervention</td>
+	<td>2007</td>
+	<td>Fusion Engineering, 2007. SOFE 2007. 2007 IEEE 22nd Symposium on, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.2007.4337949">DOI</a> &nbsp;</td>
+</tr>
+<tr id="518441" class="entry">
+	<td>Sawan, M. &amp; Khater, H.Y.</td>
+	<td>Nuclear analysis for the blanket and shield of the KrF laser driven inertial fusion reactor SOMBRERO</td>
+	<td>1993</td>
+	<td><br/>Vol. 2Fusion Engineering, 1993., 15th IEEE/NPSS Symposium on, pp. 769-772 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1993.518441">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4018938" class="entry">
+	<td>Sawan, M., Sviatoslavsky, I.N., Raffray, A.R. &amp; Wang, X.</td>
+	<td>Neutronics Assessment of Blanket Options for the HAPL Laser Inertial Fusion Energy Chamber</td>
+	<td>2005</td>
+	<td>Fusion Engineering 2005, Twenty-First IEEE/NPS Symposium on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.2005.252904">DOI</a> &nbsp;</td>
+</tr>
+<tr id="534242" class="entry">
+	<td>Seki, Y., Kurihara, R., Ueda, S., Sugaya, S. &amp; Kawasaki, H.</td>
+	<td>Nuclear-thermal coupled calculation of a shielding blanket for an experimental fusion reactor</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Fusion Engineering, 1995. SOFE '95. Seeking a New Energy Era., 16th IEEE/NPSS Symposium, pp. 361-364 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1995.534242">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5226379" class="entry">
+	<td>Zucchetti, M., Balma, S. &amp; Ciampichetti, A.</td>
+	<td>Models and experiments for liquid metal-water interaction in fusion reactor blankets</td>
+	<td>2009</td>
+	<td>Fusion Engineering, 2009. SOFE 2009. 23rd IEEE/NPSS Symposium on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.2009.5226379">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->
