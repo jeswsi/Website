@@ -1,0 +1,1456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="13034409" class="entry">
+	<td>Abdou, A., Ismail, M., Mohamed, A., Lee, S., Saw, S. &amp; Verma, R.</td>
+	<td>Preliminary Results of Kansas State University Dense Plasma Focus</td>
+	<td>2012/10/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  40( 10), pp. 2741 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2012.2209682">URL</a>&nbsp;</td>
+</tr>
+<tr id="13332085" class="entry">
+	<td>Afrashteh, M. &amp; Habibi, M.</td>
+	<td>Study of Dense Nitrogen Plasma Irradiation of Aluminum Targets by APF Plasma Focus Device</td>
+	<td>2012/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  31( 3), pp. 223 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9463-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="5682981" class="entry">
+	<td>Agarwala, P., Annapoorni, S., Srivastava, M., Rawat, R. &amp; Chauhan, P.</td>
+	<td>Magnetite phase due to energetic argon ion irradiation from a dense plasma focus on hematite thin film</td>
+	<td>1997/07/14</td>
+	<td>Physics Letters A<br/>Vol.  231( 5-6), pp. 434 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0375-9601(97)00328-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="6218131" class="entry">
+	<td>Agarwala, P., Srivastava, M., Dheer, P., Padmanaban, V. &amp; Gupta, A.</td>
+	<td>Enhancement in Tc of superconducting BPSCCO thick films due to irradiation of energetic argon ions of dense plasma focus</td>
+	<td>1999/02/10</td>
+	<td>Physica C<br/>Vol.  313( 1-2), pp. 87 - 92&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0921-4534(98)00682-0">URL</a>&nbsp;</td>
+</tr>
+<tr id="3395646" class="entry">
+	<td>Asai, H. &amp; Ueno, I.</td>
+	<td>Neutron source based on the repetitive dense plasma focus model</td>
+	<td>1989/01/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  7( 3-4), pp. 335 - 43&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="736605" class="entry">
+	<td>Avraham, E. &amp; Porath, Y.</td>
+	<td>The use of a dense plasma focus accelerator in nuclear physics</td>
+	<td>1975/01/01</td>
+	<td>Nuclear Instruments and Methods<br/>Vol.  123( 1), pp. 5 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="39345" class="entry">
+	<td>Baconnet, J., Cesari, G., Coudeville, A. &amp; Watteau, J.</td>
+	<td>90 laser light scattering by a dense plasma focus</td>
+	<td>1969/03/24</td>
+	<td>Physics Letters A<br/>Vol.  29A( 1), pp. 19 - 20&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1119278" class="entry">
+	<td>Bernard, A., Coudeville, A., Jolas, A., Cloth, P., Conrads, H., Gourlan, G., Maisonnier, C. &amp; Rager, J.</td>
+	<td>The dense plasma focus-a high intensity neutron source</td>
+	<td>1977/08/15</td>
+	<td>Nuclear Instruments and Methods<br/>Vol.  145( 1), pp. 191 - 218&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0029-554X(77)90569-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="7133090" class="entry">
+	<td>Bhuyan, H., Mohanty, S., Borthakur, T. &amp; Rawat, R.</td>
+	<td>Analysis of nitrogen ion beam produced in dense plasma focus device using Faraday Cup</td>
+	<td>2001/11/</td>
+	<td>Indian Journal of Pure and Applied Physics<br/>Vol.  39( 11), pp. 698 - 703&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7873277" class="entry">
+	<td>Bhuyan, H., Mohanty, S., Neog, N., Bujarbarua, S. &amp; Rout, R.</td>
+	<td>Comparative study of soft X-ray emission characteristics in a low energy dense plasma focus device</td>
+	<td>2004/03/15</td>
+	<td>Journal of Applied Physics<br/>Vol.  95( 6), pp. 2975 - 81&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1647269">URL</a>&nbsp;</td>
+</tr>
+<tr id="1955914" class="entry">
+	<td>Bondar', A., Vyskubov, V., Gerasimov, S., Ershova, Z., Zhogov, L., Il'in, Y., Kapyshev, V., Lavrov, N., Mukhamet-Galeeva, Z., Ovechkin, V., Rivkis, L., Suvorov, V., Starshina, L. &amp; Cheblukov, Y.</td>
+	<td>System for filling the working chamber of a dense plasma focus facility with a D-T mixture</td>
+	<td>1981/12/</td>
+	<td>Soviet Atomic Energy<br/>Vol.  51( 6), pp. 779 - 81&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2245526" class="entry">
+	<td>Brzosko, J., Conrads, H., Rager, J., Robouch, B. &amp; Steinmetz, K.</td>
+	<td>Investigations of high-energy deuterons in a dense plasma focus device by means of neutrons emitted in the 7Li+D process</td>
+	<td>1984/03/</td>
+	<td>Nuclear Technology/Fusion<br/>Vol.  5( 2), pp. 209 - 23&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1031285" class="entry">
+	<td>Burnett, J., Meyer, J. &amp; Rankin, G.</td>
+	<td>Time resolved X-ray photography of a dense plasma focus</td>
+	<td>1977/02/01</td>
+	<td>Canadian Journal of Physics<br/>Vol.  55( 3), pp. 194 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3294386" class="entry">
+	<td>Burns, E., Falacy, S., Hill, R., Thacher, P., Koehler, H., Davis, B. &amp; Shafer, R.</td>
+	<td>A high-neutron-output dense plasma focus</td>
+	<td>1988/11/07</td>
+	<td>Physics Letters A<br/>Vol.  133( 3), pp. 144 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0375-9601(88)90775-X">URL</a>&nbsp;</td>
+</tr>
+<tr id="9934256" class="entry">
+	<td>Castillo, F., Gamboa-deBuen, I., Herrera, J., Rangel, J. &amp; Villalobos, S.</td>
+	<td>High contrast radiography using a small dense plasma focus</td>
+	<td>2008/02/04</td>
+	<td>Applied Physics Letters<br/>Vol.  92( 5), pp. 051502 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2840191">URL</a>&nbsp;</td>
+</tr>
+<tr id="9402740" class="entry">
+	<td>Castillo, F., Herrera, J., Gamboa, I., Rangel, J., Golzarri, J. &amp; Espinosa, G.</td>
+	<td>Angular distribution of fusion products and x rays emitted by a small dense plasma focus machine</td>
+	<td>2007/01/01</td>
+	<td>Journal of Applied Physics<br/>Vol.  101( 1), pp. 13303 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2403965">URL</a>&nbsp;</td>
+</tr>
+<tr id="9975294" class="entry">
+	<td>Castillo, F., Herrera, J. &amp; Rangel, J.</td>
+	<td>Neutron yield and pressure evolution during a dense plasma focus device shot series</td>
+	<td>2007/10/07</td>
+	<td>Journal of Physics D: Applied Physics<br/>Vol.  40( 19), pp. 5902 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/40/19/018">URL</a>&nbsp;</td>
+</tr>
+<tr id="7700376" class="entry">
+	<td>Castillo, F., Herreral, J., Rangel, J., Milanese, M., Moroso, R., Pouzo, J., Golzarri, J. &amp; Espinosa, G.</td>
+	<td>Isotropic and anisotropic components of neutron emissions at the FN-II and PACO dense plasma focus devices</td>
+	<td>2003/03/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  45( 3), pp. 289 - 300&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/45/3/309">URL</a>&nbsp;</td>
+</tr>
+<tr id="6486751" class="entry">
+	<td>Castillo, F., Milanese, M., Moroso, R. &amp; Pouzo, J.</td>
+	<td>Evidence of thermal and non-thermal mechanisms coexisting in dense plasma focus D-D nuclear reactions</td>
+	<td>2000/01/21</td>
+	<td>Journal of Physics D (Applied Physics)<br/>Vol.  33( 2), pp. 141 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/33/2/308">URL</a>&nbsp;</td>
+</tr>
+<tr id="3581220" class="entry">
+	<td>Choi, P., Wong, C. &amp; Herold, H.</td>
+	<td>Studies of the spatial and temporal evolution of a dense plasma focus in the X-ray region</td>
+	<td>1989/11/</td>
+	<td>Laser and Particle Beams<br/>Vol.  7, pp. 763 - 72&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1043105" class="entry">
+	<td>Cloth, P. &amp; Conrads, H.</td>
+	<td>Neutronics of a dense-plasma focus-an investigation of a fusion plasma</td>
+	<td>1977/04/</td>
+	<td>Nuclear Science and Engineering<br/>Vol.  62, pp. 591 - 600&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="69688" class="entry">
+	<td>Comisar, G.</td>
+	<td>Hydromagnetic instabilities in the dense plasma focus</td>
+	<td>1969/05/</td>
+	<td>Physics of Fluids<br/>Vol.  12( 5), pp. 1000 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3796091" class="entry">
+	<td>Conrads, H.</td>
+	<td>Dense plasma focus as a neutron source for fusion research</td>
+	<td>1990/11/</td>
+	<td>Nuclear Science and Engineering<br/>Vol.  106( 3), pp. 299 - 307&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="831223" class="entry">
+	<td>Downing, J. &amp; Eisner, M.</td>
+	<td>Dynamics of the dense plasma focus as determined from an analysis of laser scattering spectra</td>
+	<td>1975/08/</td>
+	<td>Physics of Fluids<br/>Vol.  18( 8), pp. 991 - 1001&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9385721" class="entry">
+	<td>Dubrovsky, A., Gribkov, V., Ivanov, Y., Karpinski, L., Orlova, M., Romanova, V., Scholz, M. &amp; Volobuev, I.</td>
+	<td>Dense plasma focus as a powerful source of monochromatic X-ray radiation</td>
+	<td>2006//</td>
+	<td>Nukleonika<br/>Vol.  51( 1), pp. 21 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2261610" class="entry">
+	<td>Fanning, J. &amp; Kim, K.</td>
+	<td>Mather-type dense plasma focus as a new optical pump for short-wavelength high-power lasers</td>
+	<td>1984/04/01</td>
+	<td>Journal of Applied Physics<br/>Vol.  55( 7), pp. 2795 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.333262">URL</a>&nbsp;</td>
+</tr>
+<tr id="11408980" class="entry">
+	<td>Feugeas, J., Rico, L., Nosei, L., Gomez, B., Bemporad, E., Lesage, J. &amp; Ferron, J.</td>
+	<td>Austenite modification of AISI 316L SS by pulsed nitrogen ion beams generated in dense plasma focus discharges</td>
+	<td>2010/01/15</td>
+	<td>Surface &amp;amp; Coatings Technology<br/>Vol.  204( 8), pp. 1193 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.surfcoat.2009.10.034">URL</a>&nbsp;</td>
+</tr>
+<tr id="8259445" class="entry">
+	<td>Fomenkov, I., Bowering, N., Rettig, C., Melnychuk, S., Oliver, I., Hoffman, J., Khodykin, O., Ness, R. &amp; Partlo, W.</td>
+	<td>EUV discharge light source based on a dense plasma focus operated with positive and negative polarity</td>
+	<td>2004/12/07</td>
+	<td>Journal of Physics D (Applied Physics)<br/>Vol.  37( 23), pp. 3266 - 76&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/37/23/007">URL</a>&nbsp;</td>
+</tr>
+<tr id="1003304" class="entry">
+	<td>Forrest, M., Morgan, P., Peacock, N., Kuriki, K., Goldman, M. &amp; Rudolph, T.</td>
+	<td>CO2-laser-excited Langmuir turbulence in a dense-plasma focus</td>
+	<td>1976/12/20</td>
+	<td>Physical Review Letters<br/>Vol.  37( 25), pp. 1681 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.37.1681">URL</a>&nbsp;</td>
+</tr>
+<tr id="635274" class="entry">
+	<td>Forrest, M. &amp; Peacock, N.</td>
+	<td>Measurement of the ion temperature in the dense plasma focus by laser beam scattering</td>
+	<td>1974/06/</td>
+	<td>Plasma Physics<br/>Vol.  16( 6), pp. 489 - 98&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0032-1028/16/6/001">URL</a>&nbsp;</td>
+</tr>
+<tr id="317392" class="entry">
+	<td>Freiwald, D., Prestwich, K., Kuswa, G. &amp; Beckner, E.</td>
+	<td>Neutron enhancement from relativistic electron beam-dense plasma focus interactions</td>
+	<td>13 Sept. 1971</td>
+	<td>Physics Letters A<br/>Vol.  36a( 4), pp. 297 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8827610" class="entry">
+	<td>Frignani, M., Mostacci, D., Rocchi, F. &amp; Sumini, M.</td>
+	<td>Monte Carlo simulation of neutron backscattering from concrete walls in the dense plasma focus Laboratory of Bologna University</td>
+	<td>2005//</td>
+	<td>Radiation Protection Dosimetry<br/>Vol.  115( 1-4), pp. 380 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1093/rpd/nci113">URL</a>&nbsp;</td>
+</tr>
+<tr id="1415767" class="entry">
+	<td>Gentilini, A., Maisonnier, C. &amp; Rager, J.</td>
+	<td>On neutron-production mechanisms in a dense plasma focus</td>
+	<td>1979//</td>
+	<td>Comments on Plasma Physics and Controlled Fusion<br/>Vol.  5( 2), pp. 41 - 53&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1756634" class="entry">
+	<td>Gerdin, G., Stygar, W. &amp; Venneri, F.</td>
+	<td>Faraday cup analysis of ion beams produced by a dense plasma focus</td>
+	<td>1981/05/</td>
+	<td>Journal of Applied Physics<br/>Vol.  52( 5), pp. 3269 - 75&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.329145">URL</a>&nbsp;</td>
+</tr>
+<tr id="14012351" class="entry">
+	<td>Goh, B.T., Ngoi, S.K., Yap, S.L., Wong, C.S. &amp; Abdul Rahman, S.</td>
+	<td>Improvements in the structural and optical properties of a-Si:H by a dense plasma focus</td>
+	<td>2013/12/</td>
+	<td>Materials Science in Semiconductor Processing<br/>Vol.  16( 6), pp. 1925 - 30&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.mssp.2013.07.028">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757747" class="entry">
+	<td>Goldin, F., Meehan, B., Hagen, E. &amp; Wilkins, P.</td>
+	<td>Time-resolved spectra of dense plasma focus using spectrometer, streak camera, and CCD combination</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 531&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3491207">URL</a>&nbsp;</td>
+</tr>
+<tr id="5071258" class="entry">
+	<td>Gribkov, V.</td>
+	<td>Dense plasma focus as a tool for material science and technology</td>
+	<td>1993/08/</td>
+	<td>Journal of the Moscow Physical Society<br/>Vol.  3( 3), pp. 231 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12325227" class="entry">
+	<td>Gribkov, V., Demin, A., Demina, E., Dubrovskii, A., Karpinski, L., Maslyaev, S., Padukh, M., Pimenov, V. &amp; Sholz, M.</td>
+	<td>Physical processes of interaction between ion and plasma streams and target surface in the Dense Plasma Focus device</td>
+	<td>2011//</td>
+	<td>Applied Physics( 3), pp. 43 - 51&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13262634" class="entry">
+	<td>Gribkov, V., Demin, A., Demina, E., Dubrovsky, A., Karpinski, L., Maslyaev, S., Pimenov, V., Padukh, M. &amp; Sholz, M.</td>
+	<td>Physical processes of the interaction of ion and plasma streams with a target surface in a dense plasma focus device</td>
+	<td>2012/12/</td>
+	<td>Plasma Physics Reports<br/>Vol.  38( 13), pp. 1082 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S1063780X12060025">URL</a>&nbsp;</td>
+</tr>
+<tr id="11171287" class="entry">
+	<td>Gribkov, V., Latyshev, S., Miklaszewski, R., Chernyshova, M., Drozdowicz, K., Wiacek, U., Tomaszewski, K. &amp; Lemeshko, B.</td>
+	<td>A dense plasma focus-based neutron source for a single-shot detection of illicit materials and explosives by a nanosecond neutron pulse</td>
+	<td>2010/03/</td>
+	<td>Physica Scripta<br/>Vol.  81( 3), pp. 035502 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0031-8949/81/03/035502">URL</a>&nbsp;</td>
+</tr>
+<tr id="7806850" class="entry">
+	<td>Gribkov, V., Pimenov, V., Ivanov, L., Dyomina, E., Maslyaev, S., Miklaszewski, R., Scholz, M., Ugaste, U., Dubrovsky, A., Kulikauskas, V. &amp; Zatekin, V.</td>
+	<td>Interaction of high temperature deuterium plasma streams and fast ion beams with stainless steels in dense plasma focus device</td>
+	<td>2003/08/07</td>
+	<td>Journal of Physics D (Applied Physics)<br/>Vol.  36( 15), pp. 1817 - 25&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/36/15/312">URL</a>&nbsp;</td>
+</tr>
+<tr id="13461896" class="entry">
+	<td>Gribkov, V., Pimenov, V., Roschupkin, V., Maslyaev, S., Demina, E., Lyakhovitsky, M., Dubrovsky, A., Sasinovskaya, I., Chernyshova, M., Scholz, M., Crespo, M., Chicutin, A. &amp; Tuniz, C.</td>
+	<td>Irradiation of austenitic steel 10Cr12Mn14Ni4AlMo and titanium alloy Ti-Al-V by pulsed streams of fast nitrogen ions and plasma in a dense plasma focus</td>
+	<td>2012//</td>
+	<td>Nukleonika<br/>Vol.  57( 2), pp. 291 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7538034" class="entry">
+	<td>Gribkov, V., Srivastava, A., Keat, P., Kudryashov, V. &amp; Lee, S.</td>
+	<td>Operation of NX2 dense plasma focus device with argon filling as a possible radiation source for micro-machining</td>
+	<td>2002/06/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  30( 3), pp. 1331 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2002.802156">URL</a>&nbsp;</td>
+</tr>
+<tr id="191631" class="entry">
+	<td>Guillaneux, P., Patou, C. &amp; Tonon, G.</td>
+	<td>Laser driven axial flow pinch in a dense plasma Focus</td>
+	<td>1970/08/24</td>
+	<td>Physics Letters A<br/>Vol.  32a( 6), pp. 370 - 1&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6624052" class="entry">
+	<td>Guo, H., Gong, J., He, B., Peng, H., Chang, D., Yang, H., Lin, D., Wang, W., Wang, Y. &amp; Luo, Y.</td>
+	<td>Measurement of DPF pulse X-ray spectrum [dense plasma focus]</td>
+	<td>2000/01/</td>
+	<td>Nuclear Techniques<br/>Vol.  23( 1), pp. 22 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6835389" class="entry">
+	<td>Gupta, R., Mohanty, S., Rawat, R. &amp; Srivastava, M.</td>
+	<td>Current sheath dynamics and X-ray emission studies from sequential dense plasma focus device</td>
+	<td>2000/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  28( 4), pp. 1263 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/27.893315">URL</a>&nbsp;</td>
+</tr>
+<tr id="8124631" class="entry">
+	<td>Gupta, R. &amp; Srivastava, M.</td>
+	<td>Carbon ion implantation on titanium for TiC formation using a dense plasma focus device</td>
+	<td>2004/08/</td>
+	<td>Plasma Sources, Science and Technology<br/>Vol.  13( 3), pp. 371 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0963-0252/13/3/002">URL</a>&nbsp;</td>
+</tr>
+<tr id="8019443" class="entry">
+	<td>Gupta, R., Srivastava, M., Balakrishnan, V., Kodama, R. &amp; Peterson, M.</td>
+	<td>Deposition of nanosized grains of ferroelectric lead zirconate titanate on thin films using dense plasma focus</td>
+	<td>2004/04/07</td>
+	<td>Journal of Physics D (Applied Physics)<br/>Vol.  37( 7), pp. 1091 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/37/7/022">URL</a>&nbsp;</td>
+</tr>
+<tr id="12830426" class="entry">
+	<td>Habibi, M.</td>
+	<td>Study of Reflected Shock Wave Perturbations at the Central Axis of Dense Plasma Column in a Plasma Focus</td>
+	<td>2011/12/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  30( 6), pp. 526 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9424-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="10460724" class="entry">
+	<td>Habibi, M., Amrollahi, R. &amp; Farrahi, M.</td>
+	<td>Study of dense plasma-surface interaction by a Filippov type plasma focus device</td>
+	<td>2008/06/</td>
+	<td>Brazilian Journal of Physics<br/>Vol.  38( 2), pp. 264 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1590/S0103-97332008000200009">URL</a>&nbsp;</td>
+</tr>
+<tr id="1734215" class="entry">
+	<td>Haines, M.</td>
+	<td>Dense plasma in Z-pinches and the plasma focus</td>
+	<td>1981//</td>
+	<td>Philosophical Transactions of the Royal Society of London A (Mathematical and Physical Sciences)<br/>Vol.  300( 1456), pp. 649 - 63&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1186499" class="entry">
+	<td>Harms, A. &amp; Heindler, M.</td>
+	<td>The matching of dense plasma focus devices with fission reactors</td>
+	<td>1978/04/</td>
+	<td>Nuclear Science and Engineering<br/>Vol.  66( 1), pp. 1 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9407060" class="entry">
+	<td>Hassan, M., Ahmad, R., Qayyum, A., Murtaza, G., Waheed, A. &amp; Zakaullah, M.</td>
+	<td>Surface modification of AlFe1.8Zn0.8 alloy by using dense plasma focus</td>
+	<td>2006/10/24</td>
+	<td>Vacuum<br/>Vol.  81( 3), pp. 291 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.vacuum.2006.05.001">URL</a>&nbsp;</td>
+</tr>
+<tr id="10945626" class="entry">
+	<td>Hassan, M., Qayyum, A., Ahmad, R., Rawat, R., Lee, P., Hassan, S., Murtaza, G. &amp; Zakaullah, M.</td>
+	<td>Dense plasma focus ion-based titanium nitride coating on titanium</td>
+	<td>2009/06/01</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section B (Beam Interactions with Materials and Atoms)<br/>Vol.  267( 11), pp. 1911 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nimb.2009.03.102">URL</a>&nbsp;</td>
+</tr>
+<tr id="2184108" class="entry">
+	<td>Hill, R. &amp; Hubbs, J.</td>
+	<td>A multi-shot dense plasma focus with improved cathode design</td>
+	<td>1983/11/07</td>
+	<td>Physics Letters A<br/>Vol.  98A( 8-9), pp. 417 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0375-9601(83)90252-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="13852042" class="entry">
+	<td>Hussain, T., Ahmad, R., Khalid, N., Umar, Z. &amp; Hussnain, A.</td>
+	<td>Synthesis of TiN/a-Si3N4 thin film by using a Mather type dense plasma focus system</td>
+	<td>2013/05/</td>
+	<td>Chinese Physics B<br/>Vol.  22( 5), pp. 055204 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1674-1056/22/5/055204">URL</a>&nbsp;</td>
+</tr>
+<tr id="12841680" class="entry">
+	<td>Hussain, T., Ahmad, R., Khalid, N., Umar, Z. &amp; Hussnain, A.</td>
+	<td>Synthesis of nanostructured multiphase (Ti,Al)N/a-Si3N4 thin films using dense plasma focus device</td>
+	<td>15 Sept. 2011</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section B (Beam Interactions with Materials and Atoms)<br/>Vol.  269( 18), pp. 1951 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nimb.2011.05.023">URL</a>&nbsp;</td>
+</tr>
+<tr id="12348339" class="entry">
+	<td>Hussain, T., Ahmad, R., Siddiqui, J. &amp; Khalid, N.</td>
+	<td>TiAlN Coatings Synthesised Using a Dense Plasma Focus System and Varied Focus Shots</td>
+	<td>2011/11/</td>
+	<td>Radiation Effects and Defects in Solids<br/>Vol.  166( 11), pp. 873 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1080/10420150.2011.616957">URL</a>&nbsp;</td>
+</tr>
+<tr id="292627" class="entry">
+	<td>Infeld, E. &amp; Skorupski, A.</td>
+	<td>Comments on `hydromagnetic instabilities in the dense plasma focus' [by G.G. Comisar]</td>
+	<td>1971/08/</td>
+	<td>Physics of Fluids<br/>Vol.  14( 18), pp. 1812 - 13&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13159320" class="entry">
+	<td>Ito, H., Nishino, Y. &amp; Masugata, K.</td>
+	<td>Emission characteristics of a high-energy pulsed-ion-beam produced in a dense plasma focus device</td>
+	<td>2011/12/</td>
+	<td>Journal of the Korean Physical Society<br/>Vol.  59, pp. 3674 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.3938/jkps.59.3674">URL</a>&nbsp;</td>
+</tr>
+<tr id="665613" class="entry">
+	<td>Johnson, D.</td>
+	<td>Study of the X-ray production mechanism of a dense plasma focus</td>
+	<td>1974/03/</td>
+	<td>Journal of Applied Physics<br/>Vol.  45( 3), pp. 1147 - 53&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6728777" class="entry">
+	<td>Junkel, G., Gunderson, M., Hooper, C.F., J. &amp; Haynes, D.A., J.</td>
+	<td>Full Coulomb calculation of Stark broadened spectra from multielectron ions: A focus on the dense plasma line shift</td>
+	<td>2000/10/</td>
+	<td>Physical Review E (Statistical Physics, Plasmas, Fluids, and Related Interdisciplinary Topics)<br/>Vol.  62( 4), pp. 5584 - 93&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.62.5584">URL</a>&nbsp;</td>
+</tr>
+<tr id="14018972" class="entry">
+	<td>Kalaiselvi, S., Tan, T., Talebitaher, A., Lee, P. &amp; Rawat, R.</td>
+	<td>Optimization of neon soft X-rays emission from 200 J fast miniature dense plasma focus device: A potential source for soft X-ray lithography</td>
+	<td>2013/08/01</td>
+	<td>Physics Letters A<br/>Vol.  377( 18), pp. 1290 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.physleta.2013.03.023">URL</a>&nbsp;</td>
+</tr>
+<tr id="1230215" class="entry">
+	<td>Kamrukov, A., Kozlov, N., Malashchenko, V. &amp; Protasov, Y.</td>
+	<td>Formation of a plasma focus in a plasma erosion accelerator. III. Radiation properties of the dense plasma focus</td>
+	<td>1977/08/</td>
+	<td>Soviet Physics - Technical Physics<br/>Vol.  22( 8), pp. 967 - 74&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5918046" class="entry">
+	<td>Kant, C., Srivastava, M. &amp; Rawat, R.</td>
+	<td>Dense plasma focus energetic ions based fullerene films on a Si(111) substrate</td>
+	<td>1998/02/23</td>
+	<td>Physics Letters A<br/>Vol.  239( 1-2), pp. 109 - 14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0375-9601(97)00953-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="5544166" class="entry">
+	<td>Kant, C., Srivastava, M. &amp; Rawat, R.</td>
+	<td>Thin carbon film deposition using energetic ions of a dense plasma focus</td>
+	<td>1997/02/17</td>
+	<td>Physics Letters A<br/>Vol.  226( 3-4), pp. 212 - 16&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0375-9601(96)00916-4">URL</a>&nbsp;</td>
+</tr>
+<tr id="11724870" class="entry">
+	<td>Karamat, S., Rawat, R., Tan, T., Lee, P., Springham, S., Ghareshabani, E., Chen, R. &amp; Sun, H.</td>
+	<td>Nitrogen doping in pulsed laser deposited ZnO thin films using dense plasma focus</td>
+	<td>2011/01/01</td>
+	<td>Applied Surface Science<br/>Vol.  257( 6), pp. 1979 - 85&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.apsusc.2010.09.038">URL</a>&nbsp;</td>
+</tr>
+<tr id="1003233" class="entry">
+	<td>Karpov, G., Smirnov, E. &amp; Suvorov, V.</td>
+	<td>Axial motion of current shell in a dense plasma focus</td>
+	<td>1976/03/</td>
+	<td>Soviet Physics - Technical Physics<br/>Vol.  21( 3), pp. 293 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12737831" class="entry">
+	<td>Keegan, R., Tsang, F., Hagen, C., O'Brien, R. &amp; Lowe, D.</td>
+	<td>Viability of Using a Dense Plasma Focus Device for Shipping Container Interrogation</td>
+	<td>2011//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  104, pp. 213 - 14&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10517585" class="entry">
+	<td>Khan, I., Hassan, M., Hussain, T., Ahmad, R., Zakaullah, M. &amp; Rawat, R.</td>
+	<td>Synthesis of nano-crystalline zirconium aluminium oxynitride (ZrAlON) composite films by dense plasma focus device</td>
+	<td>2009/04/01</td>
+	<td>Applied Surface Science<br/>Vol.  255( 12), pp. 6132 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.apsusc.2009.01.066">URL</a>&nbsp;</td>
+</tr>
+<tr id="5141439" class="entry">
+	<td>Kitaoka, H., Sakurai, A., Yamamoto, T., Shimoda, K. &amp; Hirano, K.</td>
+	<td>Enhanced soft X-ray emission in a dense plasma focus with additional high z gas puff</td>
+	<td>1995/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  64( 11), pp. 4191 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8979211" class="entry">
+	<td>Knecht, S., Thomas, R., Mead, F., Miley, G. &amp; Froning, D.</td>
+	<td>Propulsion and power generation capabilities of a dense plasma focus (DPF) fusion system for future military aerospace vehicles</td>
+	<td>2006//</td>
+	<td>AIP Conference Proceedings( 813), pp. 1232 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4755651" class="entry">
+	<td>Koshelev, K., Sidel'nikov, Y., Decker, G., Kies, V., Malzig, M., Rowekamp, P., Rozmej, F., Schulz, A. &amp; Kunze, H.-I.</td>
+	<td>X-ray spectroscopic diagnostics of nonstationary and optically dense high-temperature micropinch plasma in the fast plasma focus discharge</td>
+	<td>1994/02/</td>
+	<td>Optics and Spectroscopy<br/>Vol.  76( 2), pp. 198 - 202&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="823928" class="entry">
+	<td>Kozlov, N., Leskov, L., Protasov, Y. &amp; Khvesyuk, V.</td>
+	<td>Formation of a plasma focus in a plasma erosion accelerator. II. Energy characteristics of the dense plasma focus</td>
+	<td>1975/06/</td>
+	<td>Soviet Physics - Technical Physics<br/>Vol.  19( 12), pp. 1558 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="710035" class="entry">
+	<td>Kozlov, N., Leskov, L., Protasov, Y. &amp; Khvesyuk, V.</td>
+	<td>Plasma focus as a source of dense plasma</td>
+	<td>1973/01/</td>
+	<td>High Temperature<br/>Vol.  11( 1), pp. 162 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="724388" class="entry">
+	<td>Kozlov, N. &amp; Protasov, Y.</td>
+	<td>Radiative properties of a dense plasma focus</td>
+	<td>1972/11/</td>
+	<td>High Temperature<br/>Vol.  10( 6), pp. 1187 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13167725" class="entry">
+	<td>Krishnan, M.</td>
+	<td>The dense plasma focus: a versatile dense pinch for diverse applications</td>
+	<td>2012/12/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  40( 12), pp. 3189 - 221&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2012.2222676">URL</a>&nbsp;</td>
+</tr>
+<tr id="1539390" class="entry">
+	<td>Krompholz, H., Neff, W., Schonbach, K. &amp; Herziger, G.</td>
+	<td>Strong subnanosecond field variations in the dense plasma focus</td>
+	<td>1980/04/14</td>
+	<td>Physics Letters A<br/>Vol.  76A( 5-6), pp. 388 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0375-9601(80)90739-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="12701395" class="entry">
+	<td>Krupakar Murali, S., Blake, A. &amp; Haboub, A.</td>
+	<td>Simultaneity of Spark Gap Switch Firing in the Dense Plasma Focus Device</td>
+	<td>2011/10/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  30( 5), pp. 442 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9401-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="10130875" class="entry">
+	<td>Lei, A., Yu, W., Tian, Y., Xu, H., Wang, X., Yang, X., Senecha, V., Tanaka, K. &amp; Kodama, R.</td>
+	<td>Effect of focus position on a high intensity laser propagation in a dense plasma</td>
+	<td>2008/05/01</td>
+	<td>Journal of Physics: Conference Series<br/>Vol.  112( 2), pp. 022089 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1742-6596/112/2/022089">URL</a>&nbsp;</td>
+</tr>
+<tr id="13440429" class="entry">
+	<td>Lerner, E., Murali, S., Blake, A., Shannon, D. &amp; van Roessel, F.</td>
+	<td>Fusion reaction scaling in a mega-amp dense plasma focus</td>
+	<td>2012//</td>
+	<td>Nukleonika<br/>Vol.  57( 2), pp. 205 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12701384" class="entry">
+	<td>Lerner, E., Murali, S. &amp; Haboub, A.</td>
+	<td>Theory and Experimental Program for p-B11 Fusion with the Dense Plasma Focus</td>
+	<td>2011/10/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  30( 5), pp. 367 - 76&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9385-4">URL</a>&nbsp;</td>
+</tr>
+<tr id="12668467" class="entry">
+	<td>Lerner, E., Murali, S., Shannon, D., Blake, A. &amp; Van Roessel, F.</td>
+	<td>Fusion reactions from 150 keV ions in a dense plasma focus plasmoid</td>
+	<td>2012/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  19( 3), pp. 032704 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3694746">URL</a>&nbsp;</td>
+</tr>
+<tr id="1875105" class="entry">
+	<td>Lindemuth, I. &amp; Freeman, B.</td>
+	<td>Shock dynamics and neutron production in an explosive generator driven dense plasma focus</td>
+	<td>1982/03/15</td>
+	<td>Applied Physics Letters<br/>Vol.  40( 6), pp. 462 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.93149">URL</a>&nbsp;</td>
+</tr>
+<tr id="2205179" class="entry">
+	<td>Lue, J., Yeh, C.-K. &amp; Kuo, Y.-Y.</td>
+	<td>Annealing of ion-implanted silicon by a dense plasma focus</td>
+	<td>1983/12/</td>
+	<td>IEEE Electron Device Letters<br/>Vol.  ED-4( 12), pp. 457 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10856437" class="entry">
+	<td>Malhotra, Y., Roy, S., Srivastava, M., Kant, C. &amp; Ostrikov, K.</td>
+	<td>Extremely non-equilibrium synthesis of luminescent zinc oxide nanoparticles through energetic ion condensation in a dense plasma focus device</td>
+	<td>2009/08/07</td>
+	<td>Journal of Physics D: Applied Physics<br/>Vol.  42( 15), pp. 155202 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/42/15/155202">URL</a>&nbsp;</td>
+</tr>
+<tr id="12990319" class="entry">
+	<td>Maslyaev, S., Pimenov, V., Gribkov, V. &amp; Demin, A.</td>
+	<td>Damage of chrome-manganese steels by pulsed fluxes of ions and dense plasma under their separate action on the material in the plasma focus setup</td>
+	<td>2011/10/</td>
+	<td>Inorganic Materials: Applied Research<br/>Vol.  2( 5), pp. 445 - 51&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S2075113311050157">URL</a>&nbsp;</td>
+</tr>
+<tr id="115349" class="entry">
+	<td>Mather, J., Bottoms, P., Carpenter, J., Williams, A. &amp; Ware, K.</td>
+	<td>Stability of the dense plasma focus</td>
+	<td>1969/11/</td>
+	<td>Physics of Fluids<br/>Vol.  12( 11), pp. 2343 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="622698" class="entry">
+	<td>Mather, J., Carpenter, J., Freiwald, D., Ware, K. &amp; Williams, A.</td>
+	<td>Electron beam and dense plasma focus interaction heating experiments</td>
+	<td>1973/11/</td>
+	<td>Journal of Applied Physics<br/>Vol.  44( 11), pp. 4913 - 19&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1967A04150" class="entry">
+	<td>Mather, J. &amp; Williams, A.</td>
+	<td>Image converter observations of the development of the dense plasma focus discharge</td>
+	<td>1966/10/</td>
+	<td>Physics of Fluids<br/>Vol. 9(10), pp. 2080 - 2082&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1761573">URL</a>&nbsp;</td>
+</tr>
+<tr id="1968A21221" class="entry">
+	<td>Mather, W. &amp; Bottoms, P.</td>
+	<td>Characteristics of the dense plasma focus discharge</td>
+	<td>1968/03/</td>
+	<td>Physics of Fluids<br/>Vol. 11(3), pp. 611 - 618&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1691959">URL</a>&nbsp;</td>
+</tr>
+<tr id="5599206" class="entry">
+	<td>Mejia, F., Milanese, M., Moroso, R. &amp; Pouzo, J.</td>
+	<td>Some experimental research on anisotropic effects in the neutron emission of dense plasma-focus devices</td>
+	<td>1997/05/21</td>
+	<td>Journal of Physics D (Applied Physics)<br/>Vol.  30( 10), pp. 1499 - 506&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/30/10/017">URL</a>&nbsp;</td>
+</tr>
+<tr id="8628259" class="entry">
+	<td>Milanese, M. &amp; Moroso, R.</td>
+	<td>The first stages of the discharge in a low-energy dense plasma focus</td>
+	<td>2005/10/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  33( 5), pp. 1658 - 61&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2005.856511">URL</a>&nbsp;</td>
+</tr>
+<tr id="8041169" class="entry">
+	<td>Milanese, M., Moroso, R. &amp; Pouzo, J.</td>
+	<td>D-D neutron yield in the 125 J dense plasma focus nanofocus</td>
+	<td>2003/11/</td>
+	<td>European Physical Journal D<br/>Vol.  27( 1), pp. 77 - 81&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1140/epjd/e2003-00247-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="5839746" class="entry">
+	<td>Milanese, M., Moroso, R. &amp; Pouzo, J.</td>
+	<td>A study of the production of neutrons in a dense plasma focus source operated with a non-uniform density of deuterium neutral gas</td>
+	<td>1998/01/07</td>
+	<td>Journal of Physics D (Applied Physics)<br/>Vol.  31( 1), pp. 85 - 92&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/31/1/012">URL</a>&nbsp;</td>
+</tr>
+<tr id="9607906" class="entry">
+	<td>Milanese, M., Niedbalski, J. &amp; Moroso, R.</td>
+	<td>Filaments in the sheath evolution of the dense plasma focus as applied to intense auroral observations</td>
+	<td>2007/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  35( 4), pp. 808 - 12&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2007.897483">URL</a>&nbsp;</td>
+</tr>
+<tr id="5765116" class="entry">
+	<td>Mohanty, S., Srivastava, M. &amp; Rawat, R.</td>
+	<td>Study of X-ray emission of dense plasma focus device in the presence of external magnetic field</td>
+	<td>1997/10/13</td>
+	<td>Physics Letters A<br/>Vol.  234( 6), pp. 472 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0375-9601(97)00526-4">URL</a>&nbsp;</td>
+</tr>
+<tr id="7244712" class="entry">
+	<td>Nikolaus, B., Partlo, W. &amp; Fomenkov, I.</td>
+	<td>Dense plasma focus for production-level EUV lithography</td>
+	<td>2002/02/</td>
+	<td>Solid State Technology<br/>Vol.  45( 2), pp. 43 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9375283" class="entry">
+	<td>O'Brien, R. &amp; Culbreth, W.</td>
+	<td>MCNPX dose analysis for a dense plasma focus neutron source</td>
+	<td>2006//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  95, pp. 599 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="201960" class="entry">
+	<td>van Paassen, H., Vandre, R. &amp; White, R.</td>
+	<td>X-ray spectra from dense plasma focus devices</td>
+	<td>1970/10/</td>
+	<td>Physics of Fluids<br/>Vol.  13( 10), pp. 2606 - 12&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10863238" class="entry">
+	<td>Pan, Z., Rawat, R., Roshan, M., Lin, J., Verma, R., Lee, P., Springham, S. &amp; Tan, T.</td>
+	<td>Nanostructured magnetic CoPt thin films synthesis using dense plasma focus device operating at sub-kilojoule range</td>
+	<td>7 Sept. 2009</td>
+	<td>Journal of Physics D: Applied Physics<br/>Vol.  42( 17), pp. 175001 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3727/42/17/175001">URL</a>&nbsp;</td>
+</tr>
+<tr id="12987601" class="entry">
+	<td>Pavez, C., Pedreros, J., Zambra, M., Veloso, F., Moreno, J., Ariel, T.-S. &amp; Soto, L.</td>
+	<td>Potentiality of a Small and fast Dense Plasma Focus as hard X-ray Source for Radiographic Applications</td>
+	<td>2012/10/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  54( 10), pp. 105018 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/54/10/105018">URL</a>&nbsp;</td>
+</tr>
+<tr id="1075692" class="entry">
+	<td>Pecorella, F., Samuelli, M., Messina, A. &amp; Strangio, C.</td>
+	<td>Time and space resolved neutron measurements on a dense plasma focus</td>
+	<td>1977/04/</td>
+	<td>Physics of Fluids<br/>Vol.  20( 4), pp. 675 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.861927">URL</a>&nbsp;</td>
+</tr>
+<tr id="8087174" class="entry">
+	<td>Petr, R., Bykanov, A., Freshman, J., Reilly, D., Mangano, J., Roche, M., Dickenson, J., Burte, M. &amp; Heaton, J.</td>
+	<td>Performance summary on a high power dense plasma focus x-ray lithography point source producing 70 nm line features in AlGaAs microcircuits</td>
+	<td>2004/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  75( 8), pp. 2551 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1771502">URL</a>&nbsp;</td>
+</tr>
+<tr id="6557153" class="entry">
+	<td>Petr, R., Reilly, D., Freshman, J., Orozco, N., Pham, D., Ngo, L. &amp; Mangano, J.</td>
+	<td>Solid-state pulsed power for driving a high-power dense plasma focus X-ray source</td>
+	<td>2000/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  71( 3), pp. 1360 - 2&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1150463">URL</a>&nbsp;</td>
+</tr>
+<tr id="6524571" class="entry">
+	<td>Petr, R., Reilly, D., Freshman, J., Orozco, N., Pham, D., Ngo, L. &amp; Mangano, J.</td>
+	<td>Solid-state pulser development for high power dense plasma focus X-ray sources</td>
+	<td>2000/02/</td>
+	<td>Japanese Journal of Applied Physics, Part 1 (Regular Papers, Short Notes &amp;amp; Review Papers)<br/>Vol.  39( 2A), pp. 607 - 11&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1143/JJAP.39.607">URL</a>&nbsp;</td>
+</tr>
+<tr id="10539680" class="entry">
+	<td>Pimenov, V., Demina, E., Maslyaev, S., Ivanov, L., Gribkov, V., Dubrovsky, A., Ugaste, U., Laas, T., Scholz, M., Miklaszewski, R., Kolman, B. &amp; Tartari, A.</td>
+	<td>Damage and modification of materials produced by pulsed ion and plasma streams in dense plasma focus device</td>
+	<td>2008//</td>
+	<td>Nukleonika<br/>Vol.  53( 3), pp. 111 - 21&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9385728" class="entry">
+	<td>Pimenov, V., Maslyaev, S., Ivanov, L., Dyomina, E., Gribkov, V., Dubrovsky, A., Scholz, M., Miklaszewski, R., Ugaste, U. &amp; Kolman, B.</td>
+	<td>Surface and bulk processes in materials induced by pulsed ion and plasma beams at dense plasma focus devices</td>
+	<td>2006//</td>
+	<td>Nukleonika<br/>Vol.  51( 1), pp. 71 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="695982" class="entry">
+	<td>Post, R. &amp; Marshall, T.</td>
+	<td>Infrared radiation from the dense plasma focus</td>
+	<td>1974/02/</td>
+	<td>Physics of Fluids<br/>Vol.  17( 2), pp. 452 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7485374" class="entry">
+	<td>Pouzo, J., Acuna, H., Milanese, M. &amp; Moroso, R.</td>
+	<td>Relativistic electron beams detection in a dense plasma focus</td>
+	<td>2002/10/</td>
+	<td>European Physical Journal D<br/>Vol.  21( 1), pp. 97 - 100&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1140/epjd/e2002-00183-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="7950497" class="entry">
+	<td>Pouzo, J. &amp; Milanese, M.</td>
+	<td>Applications of the dense plasma focus to nuclear fusion and plasma astrophysics</td>
+	<td>2003/12/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  31( 6), pp. 1237 - 42&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2003.821475">URL</a>&nbsp;</td>
+</tr>
+<tr id="8398009" class="entry">
+	<td>Pouzo, J., Milanese, M., Cortazar, O. &amp; Moroso, R.</td>
+	<td>Images of the dense plasma focus phenomenon in the 2-kJ PACO device</td>
+	<td>2005/04/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  33( 2), pp. 438 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2005.845007">URL</a>&nbsp;</td>
+</tr>
+<tr id="6065018" class="entry">
+	<td>Qi, N., Fulghum, S., Prasad, R. &amp; Krishnan, M.</td>
+	<td>Space and time resolved electron density and current measurements in a dense plasma focus Z-pinch</td>
+	<td>1998/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  26( 4), pp. 1127 - 37&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/27.725142">URL</a>&nbsp;</td>
+</tr>
+<tr id="6675550" class="entry">
+	<td>Rawat, R., Arun, P., Vedeshwar, A., Lam, Y., Liu, M., Lee, P., Lee, S. &amp; Huan, A.</td>
+	<td>Effect of argon ion irradiation on Sb2Te3 films in a dense plasma focus device</td>
+	<td>2000/02/</td>
+	<td>Materials Research Bulletin<br/>Vol.  35( 3), pp. 477 - 86&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0025-5408(00)00235-X">URL</a>&nbsp;</td>
+</tr>
+<tr id="6909082" class="entry">
+	<td>Rawat, R., Lee, P., White, T., Ying, L. &amp; Lee, S.</td>
+	<td>Room temperature deposition of titanium carbide thin films using dense plasma focus device</td>
+	<td>2001/04/16</td>
+	<td>Surface &amp;amp; Coatings Technology<br/>Vol.  138( 2-3), pp. 159 - 65&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0257-8972(00)01094-X">URL</a>&nbsp;</td>
+</tr>
+<tr id="4842815" class="entry">
+	<td>Rawat, R., Srivastava, M. &amp; Mohanty, S.</td>
+	<td>Study of current sheath dynamics in dense plasma focus in the presence of axial magnetic field using laser shadowgraphic technique</td>
+	<td>1994/10/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  22( 5), pp. 967 - 72&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/27.338314">URL</a>&nbsp;</td>
+</tr>
+<tr id="4402345" class="entry">
+	<td>Rawat, R., Srivastava, M., Tandon, S. &amp; Mansingh, A.</td>
+	<td>Crystallization of an amorphous lead zirconate titanate thin film with a dense-plasma-focus device</td>
+	<td>1993/03/01</td>
+	<td>Physical Review B (Condensed Matter)<br/>Vol.  47( 9), pp. 4858 - 62&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevB.47.4858">URL</a>&nbsp;</td>
+</tr>
+<tr id="13523455" class="entry">
+	<td>Roomi, A. &amp; Habibi, M.</td>
+	<td>A Comprehensive Time-Resolved Study of X-Ray Signals in a 4 kJ Dense Plasma Focus Facility</td>
+	<td>2012/10/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  31( 5), pp. 480 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9501-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="12236392" class="entry">
+	<td>Roomi, A., Habibi, M., Saion, E. &amp; Amrollahi, R.</td>
+	<td>Modified Reconstruction of Neutron Spectrum Emitted in Dense Plasma Focus Devices by MCNP Code and Monte-Carlo Method</td>
+	<td>2011/02/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  30( 1), pp. 78 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-010-9348-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="9457950" class="entry">
+	<td>Sadiq, M., Ahmad, S., Shafiq, M. &amp; Zakaullah, M.</td>
+	<td>Enhanced crystallinity of PTFE by ion irradiation in a dense plasma focus</td>
+	<td>2007/02/22</td>
+	<td>Plasma Processes and Polymers<br/>Vol.  4( 2), pp. 186 - 91&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/ppap.200600064">URL</a>&nbsp;</td>
+</tr>
+<tr id="9202374" class="entry">
+	<td>Sadiq, M., Ahmad, S., Shafiq, M., Zakaullah, M., Ahmad, R. &amp; Waheed, A.</td>
+	<td>Reactive sputter-deposition of AlN films by dense plasma focus</td>
+	<td>2006/11/</td>
+	<td>Journal of Vacuum Science &amp;amp; Technology A (Vacuum, Surfaces, and Films)<br/>Vol.  24( 6), pp. 2122 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1116/1.2357743">URL</a>&nbsp;</td>
+</tr>
+<tr id="8993980" class="entry">
+	<td>Sadiq, M., Ahmad, S., Waheed, A. &amp; Zakaullah, M.</td>
+	<td>The nitriding of aluminium by dense plasma focus</td>
+	<td>2006/08/</td>
+	<td>Plasma Sources, Science and Technology<br/>Vol.  15( 3), pp. 295 - 301&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0963-0252/15/3/001">URL</a>&nbsp;</td>
+</tr>
+<tr id="4594613" class="entry">
+	<td>Sagar, R. &amp; Srivastava, M.</td>
+	<td>Amorphization of thin film of CdS due to ion irradiation by dense plasma focus</td>
+	<td>1993/12/06</td>
+	<td>Physics Letters A<br/>Vol.  183( 2-3), pp. 209 - 13&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0375-9601(93)91172-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="13868644" class="entry">
+	<td>Salehizadeh, A., Movahhed, M., Zaeem, A., Heidarnia, A., Sabri, R., Mahmoudi, M., Rahimi, H., Rahimi, S., Johari, E., Torabi, M. &amp; Damideh, V.</td>
+	<td>Preliminary Results of the 115 kJ Dense Plasma Focus Device IR-MPF-100</td>
+	<td>2013/04/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  32( 2), pp. 293 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-012-9567-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="11552448" class="entry">
+	<td>Savelov, A., Salakhutdinov, G., Koltunov, M., Lemeshko, B., Yurkov, D. &amp; Sidorov, P.</td>
+	<td>Dense plasma focus wide energy range pulsed X-ray radiation investigation</td>
+	<td>2010//</td>
+	<td>Applied Physics( 4), pp. 52 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13100761" class="entry">
+	<td>Schmidt, A., Tang, V. &amp; Welch, D.</td>
+	<td>Fully Kinetic Simulations of Dense Plasma Focus Z-Pinch Devices</td>
+	<td>2012/11/16</td>
+	<td>Physical Review Letters<br/>Vol.  109( 20), pp. 205003 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.109.205003">URL</a>&nbsp;</td>
+</tr>
+<tr id="10295544" class="entry">
+	<td>Shafiq, M., Asghar, M., Ahmad, S., Sadiq, M., Qayyum, A. &amp; Zakaullah, M.</td>
+	<td>Dense plasma focus-assisted nitriding of AISI-304</td>
+	<td>Sept. 2008</td>
+	<td>Radiation Effects and Defects in Solids<br/>Vol.  163( 9), pp. 729 - 36&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1080/10420150701365664">URL</a>&nbsp;</td>
+</tr>
+<tr id="2382631" class="entry">
+	<td>Sharma, A.</td>
+	<td>Kinetic theory of the stability of dense plasma focus</td>
+	<td>1984/05/</td>
+	<td>Atomkernenergie Kerntechnik<br/>Vol.  44( 3), pp. 201 - 3&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="352398" class="entry">
+	<td>Shatas, R., Stettler, J., Meyer, H. &amp; Roberts, T.</td>
+	<td>Soft X-rays from a laser-heated dense plasma focus</td>
+	<td>1971/12/</td>
+	<td>Journal of Applied Physics<br/>Vol.  42( 13), pp. 5884 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8051533" class="entry">
+	<td>Soh, L., Lee, P., Shuyan, X., Lee, S. &amp; Rawat, R.</td>
+	<td>Shadowgraphic studies of DLC film deposition process in dense plasma focus device</td>
+	<td>2004/04/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  32( 2), pp. 448 - 55&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2004.826031">URL</a>&nbsp;</td>
+</tr>
+<tr id="14012196" class="entry">
+	<td>Sohrabi, M., Habibi, M., Yousefi, H. &amp; Roshani, G.</td>
+	<td>Angular distribution analysis of nitrogen ions in a low energy dense plasma focus device</td>
+	<td>Sept. 2013</td>
+	<td>Contributions to Plasma Physics<br/>Vol.  53( 8), pp. 592 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/ctpp.201200099">URL</a>&nbsp;</td>
+</tr>
+<tr id="10464211" class="entry">
+	<td>Soto, L., Pavez, C., Moreno, J., Barbaglia, M. &amp; Clausse, A.</td>
+	<td>Nanofocus: an ultra-miniature dense pinch plasma focus device with submillimetric anode operating at 0.1 J</td>
+	<td>2009/02/</td>
+	<td>Plasma Sources, Science and Technology<br/>Vol.  18( 1), pp. 015007 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0963-0252/18/1/015007">URL</a>&nbsp;</td>
+</tr>
+<tr id="11863830" class="entry">
+	<td>Srivastava, A., Nahar, R., Sarkar, C., Singh, W. &amp; Malhotra, Y.</td>
+	<td>Study of hafnium oxide deposited using dense plasma focus machine for film structure and electrical properties as a MOS device</td>
+	<td>2011/04/</td>
+	<td>Microelectronics Reliability<br/>Vol.  51( 4), pp. 751 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.microrel.2010.12.002">URL</a>&nbsp;</td>
+</tr>
+<tr id="1961243" class="entry">
+	<td>Stygar, W., Gerdin, G., Venneri, F. &amp; Mandrekas, J.</td>
+	<td>Particle beams generated by a 6-12.5 kJ dense plasma focus</td>
+	<td>Sept. 1982</td>
+	<td>Nuclear Fusion<br/>Vol.  22( 9), pp. 1161 - 72&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11228264" class="entry">
+	<td>Tang, V., Adams, M. &amp; Rusnak, B.</td>
+	<td>Dense Plasma Focus Z-Pinches for High-Gradient Particle Acceleration</td>
+	<td>2010/04/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  38( 4), pp. 719 - 27&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2009.2037504">URL</a>&nbsp;</td>
+</tr>
+<tr id="8979166" class="entry">
+	<td>Thomas, R., Miley, G. &amp; Mead, F.</td>
+	<td>An investigation of Bremsstrahlung reflection in a dense plasma focus (DPF) propulsion device</td>
+	<td>2006//</td>
+	<td>AIP Conference Proceedings( 813), pp. 795 - 802&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="230219" class="entry">
+	<td>Toepfer, A., Smith, D. &amp; Beckner, E.</td>
+	<td>Ion heating in the dense plasma focus</td>
+	<td>1971/01/</td>
+	<td>Physics of Fluids<br/>Vol.  14( 1), pp. 52 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="740884" class="entry">
+	<td>Trunk, M.</td>
+	<td>Numerical parameter studies for the dense plasma focus</td>
+	<td>1975/04/</td>
+	<td>Plasma Physics<br/>Vol.  17( 4), pp. 237 - 48&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0032-1028/17/4/001">URL</a>&nbsp;</td>
+</tr>
+<tr id="1588461" class="entry">
+	<td>Tsuda, I., Ishizaki, A., Yamada, Y., Kitagawa, Y. &amp; Yokoyama, M.</td>
+	<td>Diagnostics of dense plasma focus by ruby laser holography</td>
+	<td>1980/03/</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  30( 1517-1550), pp. 185 - 91&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2038775" class="entry">
+	<td>Ueno, I., Ikuta, K., Taguchi, Y., Tanimoto, M., Nakazawa, M. &amp; Kido, G.</td>
+	<td>Neutron yield in a repetitive dense plasma focus</td>
+	<td>1982/12/</td>
+	<td>Japanese Journal of Applied Physics, Part 1 (Regular Papers &amp;amp; Short Notes)<br/>Vol.  21( 12), pp. 746 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2050735" class="entry">
+	<td>Ueno, I., Ikuta, K., Taguchi, Y., Tanimoto, M., Nakazawa, M. &amp; Kido, G.</td>
+	<td>Neutron yield in a repetitive dense plasma focus</td>
+	<td>1982/12/</td>
+	<td>Japanese Journal of Applied Physics, Part 2 (Letters)<br/>Vol.  21( 12), pp. 746 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1392680" class="entry">
+	<td>Ueno, I., Salge, J., Fell, B., Braunsberger, U. &amp; Conrads, H.</td>
+	<td>Production of repetitive dense plasmas in a focus device with inductive energy storage</td>
+	<td>1979/06/</td>
+	<td>Japanese Journal of Applied Physics<br/>Vol.  18( 6), pp. 1189 - 90&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1677674" class="entry">
+	<td>Vyskubov, V., Gribkov, V., Zhogov, L., Il'in, Y., Isakov, A., Krokhin, O., Lavrov, N., Ovechkin, V., Suvorov, V., Fedorov, Y. &amp; Cheblukov, Y.</td>
+	<td>Operation of a setup with a dense plasma focus using a deuterium-tritium mixture</td>
+	<td>1979//</td>
+	<td>Soviet Physics - Lebedev Institute Reports( 12), pp. 32 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11252781" class="entry">
+	<td>Wang, Z., Yousefi, H., Nishino, Y., Ito, H. &amp; Masugata, K.</td>
+	<td>Fabrication of DLC films by pulsed ion beam ablation in a dense plasma focus device</td>
+	<td>2009/11/02</td>
+	<td>Physics Letters A<br/>Vol.  373( 45), pp. 4169 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.physleta.2009.09.033">URL</a>&nbsp;</td>
+</tr>
+<tr id="2139041" class="entry">
+	<td>Witalis, E.</td>
+	<td>Magnetically induced plasma rotation and the dense plasma focus</td>
+	<td>Sept. 1983</td>
+	<td>Zeitschrift fur Naturforschung, Teil A (Physik, Physikalische Chemie, Kosmophysik)<br/>Vol.  38A( 9), pp. 949 - 58&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8342134" class="entry">
+	<td>Wong, D., Patran, A., Tan, T., Rawat, R. &amp; Lee, P.</td>
+	<td>Soft X-ray optimization studies on a dense plasma focus device operated in neon and argon in repetitive mode</td>
+	<td>2004/12/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  32( 6), pp. 2227 - 35&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2004.838596">URL</a>&nbsp;</td>
+</tr>
+<tr id="2448961" class="entry">
+	<td>Yamamoto, Y., Kisoda, A., Yamada, A., Niki, H., Kitagawa, Y., Yamanaka, M., Yokoyama, M. &amp; Yamanaka, C.</td>
+	<td>Localization of neutrons generated in a dense plasma focus</td>
+	<td>1984/10/</td>
+	<td>Japanese Journal of Applied Physics, Part 1 (Regular Papers &amp;amp; Short Notes)<br/>Vol.  23( 10), pp. 1410 - 11&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9050047" class="entry">
+	<td>Yordanov, V., Ivanova-Stanik, I. &amp; Blagoev, A.</td>
+	<td>PIC-MCC method with finite element solver for Poisson equation used in simulation of the breakdown phase in dense plasma focus devices</td>
+	<td>2006//</td>
+	<td>Journal of Physics: Conference Series<br/>Vol.  44( 1), pp. 215 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1742-6596/44/1/031">URL</a>&nbsp;</td>
+</tr>
+<tr id="12830424" class="entry">
+	<td>Yousefi, H. &amp; Masugata, K.</td>
+	<td>Effect of Anode Impurity on the Neutron Production in a Dense Plasma Focus</td>
+	<td>2011/12/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  30( 6), pp. 490 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9419-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="9324583" class="entry">
+	<td>Zakaullah, M., Sadiq, M., Ahmad, S. &amp; Shafiq, M.</td>
+	<td>Nitrogen ion implantation of silicon in dense plasma focus</td>
+	<td>2006/11/</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section B (Beam Interactions with Materials and Atoms)<br/>Vol.  252( 2), pp. 219 - 24&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nimb.2006.08.020">URL</a>&nbsp;</td>
+</tr>
+<tr id="8965698" class="entry">
+	<td>Zakaullah, M., Sadiq, M., Shafiq, M., Waheed, A. &amp; Ahmad, R.</td>
+	<td>Amorphization of silicon by ion irradiation in dense plasma focus</td>
+	<td>2006/03/20</td>
+	<td>Physics Letters A<br/>Vol.  352( 1-2), pp. 150 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.physleta.2005.11.058">URL</a>&nbsp;</td>
+</tr>
+<tr id="9555179" class="entry">
+	<td>Zakaullah, M., Zeb, S., Sadiq, M., Qayyum, A. &amp; Murtaza, G.</td>
+	<td>Deposition of diamond-like carbon film using dense plasma focus</td>
+	<td>2007/06/15</td>
+	<td>Materials Chemistry and Physics<br/>Vol.  103( 2-3), pp. 235 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.matchemphys.2007.02.020">URL</a>&nbsp;</td>
+</tr>
+<tr id="861673" class="entry">
+	<td></td>
+	<td>A study of the dense plasma focus</td>
+	<td>Sept. 1975</td>
+	<td>Acta Physica Sinica<br/>Vol.  24( 5), pp. 309 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 28/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

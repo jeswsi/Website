@@ -1,0 +1,4216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="2346573" class="entry">
+	<td>ming, W.H. &amp; ru, P.L.</td>
+	<td>Approximate calculation of the tilting mode instability in an elliptical spheromak by variational methods</td>
+	<td>1984/08/</td>
+	<td>Acta Physica Sinica<br/>Vol.  33( 8), pp. 1100 - 11&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2334169" class="entry">
+	<td>Ag, A., Paris, G. &amp; Nemeth, G.</td>
+	<td>Magnetic surfaces in a non-linear time-dependent compact torus</td>
+	<td>1984/08/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  26( 8), pp. 959 - 69&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/26/8/001">URL</a>&nbsp;</td>
+</tr>
+<tr id="13733195" class="entry">
+	<td>Akcay, C., Kim, C., Victor, B. &amp; Jarboe, T.</td>
+	<td>Validation of single-fluid and two-fluid magnetohydrodynamic models of the helicity injected torus spheromak experiment with the NIMROD code</td>
+	<td>2013/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 8), pp. 082512 (18 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4817951">URL</a>&nbsp;</td>
+</tr>
+<tr id="9586786" class="entry">
+	<td>Alladio, F., Mancuso, A., Micozzi, P. &amp; Rogier, F.</td>
+	<td>Integration of vacuum potential energy into ideal magnetohydrodynamic stability calculations for flux-core-spheromak configurations</td>
+	<td>2007/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  14( 8), pp. 82508 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2754632">URL</a>&nbsp;</td>
+</tr>
+<tr id="5813608" class="entry">
+	<td>Alladio, F. &amp; Micozzi, P.</td>
+	<td>Reconstruction of spherical torus equilibria in absence of magnetic measurements in the central cavity</td>
+	<td>1997/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  37( 12), pp. 1759 - 74&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/37/12/I08">URL</a>&nbsp;</td>
+</tr>
+<tr id="4005108" class="entry">
+	<td>Amemiya, N., Hayakawa, A. &amp; Katsurai, M.</td>
+	<td>Formation of free-boundary flux-core spheromaks</td>
+	<td>1991/08/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  60( 8), pp. 2632 - 44&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4448275" class="entry">
+	<td>Amemiya, N., Morita, A. &amp; Katsurai, M.</td>
+	<td>Experiments of axial compression of flux-core spheromak</td>
+	<td>1993/05/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  62( 5), pp. 1552 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3457580" class="entry">
+	<td>Amemiya, N., Takaichi, K. &amp; Katsurai, M.</td>
+	<td>Magnetic structure in the entrance region of spheromaks sustained by a magnetized coaxial plasma gun under long pulse operation</td>
+	<td>1989/06/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  58( 6), pp. 2049 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2619530" class="entry">
+	<td>Arata, M. &amp; Katsurai, M.</td>
+	<td>Studies on spheromak plasma produced by external-flux-core method. II</td>
+	<td>1985/03/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  105(2), pp. 41 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9490094" class="entry">
+	<td>Asai, T., Nishida, T., Kiguchi, T., Takahashi, T., Matsuzawa, Y., Okano, T. &amp; Nogi, Y.</td>
+	<td>Application of a magnetized coaxial plasma gun for formation of a high-beta field-reversed configuration</td>
+	<td>2006/11/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  81( 23-24), pp. 2843 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2006.07.033">URL</a>&nbsp;</td>
+</tr>
+<tr id="5090202" class="entry">
+	<td>Ashida, H., Sugimoto, H. &amp; Kurasawa, T.</td>
+	<td>Magnetohydrodynamic instability in axisymmetric spherical plasma with parallel flow to magnetic field</td>
+	<td>Sept. 1995</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  64( 9), pp. 3291 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12129531" class="entry">
+	<td>Baerny, J., Woodruff, S. &amp; Smith, C.</td>
+	<td>Diagnostics for Lab and Astrophysical Plasmas</td>
+	<td>2010/12/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  29( 6), pp. 510 - 16&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-010-9333-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="7304077" class="entry">
+	<td>Baker, K., Horton, R., Hwang, D., Evans, R. &amp; Howard, S.</td>
+	<td>Simulation of the "Blowby" effect in an accelerating compact toroid</td>
+	<td>2002/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  30( 1), pp. 48 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2002.1003917">URL</a>&nbsp;</td>
+</tr>
+<tr id="2821250" class="entry">
+	<td>Barnes, C., Fernandez, J., Henins, I., Hoida, H., Jarboe, T., Knox, S., Marklin, G. &amp; McKenna, K.</td>
+	<td>Experimental determination of the conservation of magnetic helicity from the balance between source and spheromak</td>
+	<td>1986/10/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 10), pp. 3415 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865858">URL</a>&nbsp;</td>
+</tr>
+<tr id="2612644" class="entry">
+	<td>Barnes, C., Hoida, H., Henins, I., Fernandez, J., Jarboe, T. &amp; Marklin, G.</td>
+	<td>Increased particle confinement observed with the use of an external DC bias field in a spheromak experiment</td>
+	<td>1985/12/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 12), pp. 3443 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865296">URL</a>&nbsp;</td>
+</tr>
+<tr id="2261969" class="entry">
+	<td>Barnes, C., Jarboe, T., Henins, I., Sherwood, A., Knox, S., Gribble, R., Hoida, H., Klinger, P., Lilliequist, C., Linford, R., Platts, D., Spencer, R. &amp; Tuszewski, M.</td>
+	<td>Spheromak formation and operation with background filling gas and a solid flux conserver in CTX</td>
+	<td>1984/03/</td>
+	<td>Nuclear Fusion<br/>Vol.  24( 3), pp. 267 - 81&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2622649" class="entry">
+	<td>Barnes, C., Jarboe, T., Hoida, H., Wright, B., Hulse, R. &amp; Post, D.</td>
+	<td>Zero-dimensional energy balance modelling of the CTX spheromak experiment</td>
+	<td>1985/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  25( 11), pp. 1657 - 75&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3727434" class="entry">
+	<td>Barnes, C., Jarboe, T., Marklin, G., Knox, S. &amp; Henins, I.</td>
+	<td>The impedance and energy efficiency of a coaxial magnetized plasma source used for spheromak formation and sustainment</td>
+	<td>1990/08/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 8), pp. 1871 - 88&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859459">URL</a>&nbsp;</td>
+</tr>
+<tr id="3245533" class="entry">
+	<td>Barnes, D.</td>
+	<td>Mechanical injection of magnetic helicity</td>
+	<td>1988/08/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 8), pp. 2214 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866622">URL</a>&nbsp;</td>
+</tr>
+<tr id="3634365" class="entry">
+	<td>Barrow, B. &amp; Goldenbaum, G.</td>
+	<td>Mechanical injection of magnetic helicity during spheromak formation</td>
+	<td>1990/03/19</td>
+	<td>Physical Review Letters<br/>Vol.  64( 12), pp. 1369 - 72&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.64.1369">URL</a>&nbsp;</td>
+</tr>
+<tr id="8428565" class="entry">
+	<td>Bellan, P.</td>
+	<td>Miniconference on astrophysical jets</td>
+	<td>2005/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 5), pp. 58301 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1900563">URL</a>&nbsp;</td>
+</tr>
+<tr id="7354465" class="entry">
+	<td>Bellan, P.</td>
+	<td>Thermal instability of electrolytic capacitor bank used for gas puff valve</td>
+	<td>2002/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  73( 8), pp. 2900 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1488677">URL</a>&nbsp;</td>
+</tr>
+<tr id="7330483" class="entry">
+	<td>Bellan, P.</td>
+	<td>Generalization of cylindrical spheromak solution to finite beta and large reversed shear</td>
+	<td>2002/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 7), pp. 3050 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1482071">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541377" class="entry">
+	<td>Bellan, P., You, S. &amp; Yun, G.</td>
+	<td>Measurements of plasma jets and collimated flux tubes that are the precursors of spheromak self-organization</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 25 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9048-z">URL</a>&nbsp;</td>
+</tr>
+<tr id="9028871" class="entry">
+	<td>Belova, E., Davidson, R., Ji, H. &amp; Yamada, M.</td>
+	<td>Advances in the numerical modeling of field-reversed configurations</td>
+	<td>2006/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 5), pp. 56115 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2179426">URL</a>&nbsp;</td>
+</tr>
+<tr id="8713451" class="entry">
+	<td>Belova, E., Davidson, R., Ji, H., Yamada, M., Cothran, C., Brown, M. &amp; Schaffer, M.</td>
+	<td>Numerical study of the formation, ion spin-up and nonlinear stability properties of field-reversed configurations</td>
+	<td>2006/01/</td>
+	<td>Nuclear Fusion<br/>Vol.  46( 1), pp. 162 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/46/1/018">URL</a>&nbsp;</td>
+</tr>
+<tr id="3080761" class="entry">
+	<td>Bennett, C.</td>
+	<td>Spheromak model of planetary nebulae</td>
+	<td>1987/12/15</td>
+	<td>Astrophysical Journal. Letters to the Editor<br/>Vol.  323( 2), pp. 123 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1847261" class="entry">
+	<td>Bernard, L., Helton, F. &amp; Moore, R.</td>
+	<td>GATO: an MHD stability code for axisymmetric plasmas with internal separatrices</td>
+	<td>1981/12/</td>
+	<td>Computer Physics Communications<br/>Vol.  24( 3-4), pp. 377 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7654505" class="entry">
+	<td>Bhattacharyya, R., Janaki, M. &amp; Dasgupta, B.</td>
+	<td>Relaxation phenomenon in the field reversed configuration</td>
+	<td>2003/01/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  45( 1), pp. 63 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/45/1/305">URL</a>&nbsp;</td>
+</tr>
+<tr id="5214880" class="entry">
+	<td>Bickford Hooper, E., Hammer, J., Barnes, C., Fernandez, J. &amp; Wysocki, F.</td>
+	<td>A re-examination of spheromak experiments and opportunities</td>
+	<td>1996/03/</td>
+	<td>Fusion Technology<br/>Vol.  29( 2), pp. 191 - 205&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1773464" class="entry">
+	<td>Bondeson, A., Marklin, G., An, Z., Chen, H., Lee, Y. &amp; Liu, C.</td>
+	<td>Tilting instability of a cylindrical Spheromak</td>
+	<td>Sept. 1981</td>
+	<td>Physics of Fluids<br/>Vol.  24( 9), pp. 1682 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863579">URL</a>&nbsp;</td>
+</tr>
+<tr id="3325382" class="entry">
+	<td>Boozer, A.</td>
+	<td>Oscillating field current drive in spheromaks</td>
+	<td>1988/11/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 11), pp. 3338 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866948">URL</a>&nbsp;</td>
+</tr>
+<tr id="6796927" class="entry">
+	<td>Bourque, R.</td>
+	<td>The colliding compact torus: a steady state fusion reactor with pulsed heating, fuelling, and current drives</td>
+	<td>Sept. 1998</td>
+	<td>Journal of Fusion Energy<br/>Vol.  17( 3), pp. 207 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/A:1021897910457">URL</a>&nbsp;</td>
+</tr>
+<tr id="9236912" class="entry">
+	<td>Bouzat, S. &amp; Farengo, R.</td>
+	<td>Analytical solutions for minimum dissipation states: flux core spheromak sustained by helicity injection</td>
+	<td>2006/08/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  72, pp. 443 - 56&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1017/S0022377805004113">URL</a>&nbsp;</td>
+</tr>
+<tr id="10546885" class="entry">
+	<td>Brennan, D., Browning, P., Gates, J. &amp; Van der Linden, R.</td>
+	<td>Helicity-injected current drive and open flux instabilities in spherical tokamaks</td>
+	<td>2009/04/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  51( 4), pp. 045004 (19 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/51/4/045004">URL</a>&nbsp;</td>
+</tr>
+<tr id="7405783" class="entry">
+	<td>Brennan, D., Browning, P. &amp; Van der Linden, R.</td>
+	<td>A two-dimensional magnetohydrodynamic stability model for helicity-injected devices with open flux</td>
+	<td>2002/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 8), pp. 3526 - 35&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1494984">URL</a>&nbsp;</td>
+</tr>
+<tr id="6404476" class="entry">
+	<td>Brennan, D., Browning, P., Van der Linden, R., Hood, A. &amp; Woodruff, S.</td>
+	<td>Stability studies and the origin of the n=1 mode in the SPHEX spheromak experiment</td>
+	<td>1999/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 11), pp. 4248 - 59&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873692">URL</a>&nbsp;</td>
+</tr>
+<tr id="10163669" class="entry">
+	<td>Broderick, A. &amp; Narayan, R.</td>
+	<td>Magnetic helicity and the relaxation of fossil fields</td>
+	<td>2008/01/21</td>
+	<td>Monthly Notices of the Royal Astronomical Society<br/>Vol.  383( 3), pp. 943 - 56&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1111/j.1365-2966.2007.12634.x">URL</a>&nbsp;</td>
+</tr>
+<tr id="5618548" class="entry">
+	<td>Brown, M.</td>
+	<td>Experimental evidence of rapid relaxation to large-scale structures in turbulent fluids: selective decay and maximal entropy</td>
+	<td>1997/01/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  57, pp. 203 - 30&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1017/S0022377896005211">URL</a>&nbsp;</td>
+</tr>
+<tr id="3950338" class="entry">
+	<td>Brown, M., Bailey, A. &amp; Bellan, P.</td>
+	<td>Characterization of a spheromak plasma gun: The effect of refractory electrode coatings</td>
+	<td>1991/05/01</td>
+	<td>Journal of Applied Physics<br/>Vol.  69( 9), pp. 6302 - 12&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.348828">URL</a>&nbsp;</td>
+</tr>
+<tr id="4228249" class="entry">
+	<td>Brown, M. &amp; Bellan, P.</td>
+	<td>Efficiency and scaling of current drive and refuelling by spheromak injection into a tokamak</td>
+	<td>1992/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  32( 7), pp. 1125 - 37&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/32/7/I04">URL</a>&nbsp;</td>
+</tr>
+<tr id="3665807" class="entry">
+	<td>Brown, M. &amp; Bellan, P.</td>
+	<td>Current drive by Spheromak injection into a tokamak</td>
+	<td>1990/04/30</td>
+	<td>Physical Review Letters<br/>Vol.  64( 18), pp. 2144 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.64.2144">URL</a>&nbsp;</td>
+</tr>
+<tr id="10128434" class="entry">
+	<td>Brown, M., Cothran, C., Cohen, D., Horwitz, J. &amp; Chaplin, V.</td>
+	<td>Flow dynamics and plasma heating of spheromaks in SSX</td>
+	<td>2008/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  27( 1), pp. 16 - 19&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-007-9097-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="9028902" class="entry">
+	<td>Brown, M., Cothran, C. &amp; Fung, J.</td>
+	<td>Two fluid effects on three-dimensional reconnection in the Swarthmore Spheromak experiment with comparisons to space data</td>
+	<td>2006/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 5), pp. 56503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2180729">URL</a>&nbsp;</td>
+</tr>
+<tr id="9167237" class="entry">
+	<td>Brown, M., Cothran, C., Fung, J., Chang, M., Horwitz, J., Schaffer, M., Leuer, J. &amp; Belova, E.</td>
+	<td>Dipole trapped spheromak in a prolate flux conserver</td>
+	<td>2006/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 10), pp. 102503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2356690">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541382" class="entry">
+	<td>Brown, M., Cothran, C., Fung, J., Schaffer, M. &amp; Belova, E.</td>
+	<td>Novel dipole trapped spheromak configuration</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 31 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9071-0">URL</a>&nbsp;</td>
+</tr>
+<tr id="7248680" class="entry">
+	<td>Brown, M., Cothran, C., Landreman, M., Schlossberg, D., Matthaeus, W., Qin, G., Lukin, V. &amp; Gray, T.</td>
+	<td>Energetic particles from three-dimensional magnetic reconnection events in the Swarthmore Spheromak Experiment</td>
+	<td>2002/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 5), pp. 2077 - 84&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1458589">URL</a>&nbsp;</td>
+</tr>
+<tr id="3941804" class="entry">
+	<td>Brown, M., Cutrer, D. &amp; Bellan, P.</td>
+	<td>Motion and equilibrium of a spheromak in a toroidal flux conserver</td>
+	<td>1991/05/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 5), pp. 1198 - 1213&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859813">URL</a>&nbsp;</td>
+</tr>
+<tr id="5486827" class="entry">
+	<td>Brown, M. &amp; Martin, A.</td>
+	<td>Spheromak experiment using separate guns for formation and sustainment</td>
+	<td>1996/12/</td>
+	<td>Fusion Technology<br/>Vol.  30( 3), pp. 300 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3300896" class="entry">
+	<td>Browning, P.</td>
+	<td>Helicity injection and relaxation in a solar-coronal magnetic loop with a free surface</td>
+	<td>1988/10/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  40, pp. 263 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4536386" class="entry">
+	<td>Browning, P., Clegg, J., Duck, R. &amp; Rusbridge, M.</td>
+	<td>Relaxed and partially relaxed magnetic equilibria in tight-aspect-ratio tori</td>
+	<td>1993/11/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  35( 11), pp. 1563 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/35/11/006">URL</a>&nbsp;</td>
+</tr>
+<tr id="4142117" class="entry">
+	<td>Browning, P., Cunningham, G., Duck, R., Gee, S., Gibson, K., Kitson, D., Martin, R. &amp; Rusbridge, M.</td>
+	<td>Injection and sustainment of plasma in a preexisting toroidal field using a coaxial helicity source</td>
+	<td>1992/03/16</td>
+	<td>Physical Review Letters<br/>Vol.  68( 11), pp. 1722 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.68.1722">URL</a>&nbsp;</td>
+</tr>
+<tr id="4142116" class="entry">
+	<td>Browning, P., Cunningham, G., Gee, S., Gibson, K., al Karkhy, A., Kitson, D., Martin, R. &amp; Rusbridge, M.</td>
+	<td>Power flow in a gun-injected spheromak plasma</td>
+	<td>1992/03/16</td>
+	<td>Physical Review Letters<br/>Vol.  68( 11), pp. 1718 - 21&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.68.1718">URL</a>&nbsp;</td>
+</tr>
+<tr id="3088701" class="entry">
+	<td>Bruhns, H., Brendel, R., Raupp, G. &amp; Steiger, J.</td>
+	<td>Study of the low aspect ratio limit tokamak in the Heidelberg spheromak experiment</td>
+	<td>1987/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  27( 12), pp. 2178 - 82&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2098826" class="entry">
+	<td>Bruhns, H., Chin-Fatt, C., Chong, Y., DeSilva, A., Goldenbaum, G., Griem, H., Hart, G., Hess, R., Irby, J. &amp; Shaw, R.</td>
+	<td>Experimental studies of spheromak formation</td>
+	<td>1983/06/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 6), pp. 1616 - 25&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864297">URL</a>&nbsp;</td>
+</tr>
+<tr id="2042777" class="entry">
+	<td>Brunel, F. &amp; Tajima, T.</td>
+	<td>Confinement of a high-beta plasma column</td>
+	<td>1983/02/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 2), pp. 535 - 44&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864138">URL</a>&nbsp;</td>
+</tr>
+<tr id="10933255" class="entry">
+	<td>Buchenauer, D., Clift, W., Klauser, R., Horton, R., Howard, S., Brockington, S., Evans, R. &amp; Hwang, D.</td>
+	<td>Impurity production and acceleration in CTIX</td>
+	<td>2009/06/15</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  390-391, pp. 223 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jnucmat.2009.01.058">URL</a>&nbsp;</td>
+</tr>
+<tr id="10789678" class="entry">
+	<td>Callen, J., Anderson, J., Arlen, T., Bateman, G., Budny, R., Fujita, T., Greenfield, C., Greenwald, M., Groebner, R., Hill, D., Hogeweij, G., Kaye, S., Kritz, A., Lazarus, E., Leonard, A., Mahdavi, M., McLean, H., Osborne, T., Pankin, A., Petty, C., Sarff, J., St. John, H., Stacey, W., Stutman, D., Synakowski, E. &amp; Tritz, K.</td>
+	<td>Experimental tests of paleoclassical transport</td>
+	<td>2007/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  47( 11), pp. 1449 - 57&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/47/11/006">URL</a>&nbsp;</td>
+</tr>
+<tr id="6630621" class="entry">
+	<td>Cantarella, J., DeTurck, D., Gluck, H. &amp; Teytel, M.</td>
+	<td>The spectrum of the curl operator on spherically symmetric domains</td>
+	<td>2000/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 7), pp. 2766 - 75&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.874127">URL</a>&nbsp;</td>
+</tr>
+<tr id="13733275" class="entry">
+	<td>Carle, P., Howard, S. &amp; Morelli, J.</td>
+	<td>High-bandwidth polarimeter for a high density, accelerated spheromak</td>
+	<td>2013/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 8), pp. 083509 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4819307">URL</a>&nbsp;</td>
+</tr>
+<tr id="11240884" class="entry">
+	<td>Cerfon, A. &amp; Freidberg, J.</td>
+	<td>One size fits all analytic solutions to the Grad-Shafranov equation</td>
+	<td>2010/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 3), pp. 032502 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3328818">URL</a>&nbsp;</td>
+</tr>
+<tr id="13993255" class="entry">
+	<td>Chai, K.-B. &amp; Bellan, P.</td>
+	<td>Extreme ultra-violet movie camera for imaging microsecond time scale magnetic reconnection</td>
+	<td>2013/12/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 12), pp. 123504 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4841915">URL</a>&nbsp;</td>
+</tr>
+<tr id="10629748" class="entry">
+	<td>Chaplin, V., Brown, M., Cohen, D., Gray, T. &amp; Cothran, C.</td>
+	<td>Spectroscopic measurements of temperature and plasma impurity concentration during magnetic reconnection at the Swarthmore spheromak experiment</td>
+	<td>2009/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 4), pp. 042505 (11 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3099603">URL</a>&nbsp;</td>
+</tr>
+<tr id="4466114" class="entry">
+	<td>Chin-Fatt, C., DeSilva, A., Goldenbaum, G., Hess, R., Cote, C., Filuk, A., Gauvreau, J.-L. &amp; Hwang, F.</td>
+	<td>Formation and decay of a spheromak plasma</td>
+	<td>1993/06/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 6), pp. 1816 - 27&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860818">URL</a>&nbsp;</td>
+</tr>
+<tr id="1562094" class="entry">
+	<td>Chiyoda, K. &amp; Hirota, I.</td>
+	<td>Magnetohydrostatic equilibrium configuration in spheroimak devices</td>
+	<td>1979//</td>
+	<td>Bulletin of the Electrotechnical Laboratory<br/>Vol.  43( 7-8), pp. 513 - 46&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2179674" class="entry">
+	<td>sup Cho, G. &amp; in Choi, D.</td>
+	<td>Tilting mode stability of spheromaks</td>
+	<td>Sept. 1983</td>
+	<td>Journal of the Korean Physical Society<br/>Vol.  16( 2), pp. 128 - 35&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3973777" class="entry">
+	<td>Chrien, R., Fernandez, J., Henins, I., Mayo, R. &amp; Wysocki, F.</td>
+	<td>Evidence for runaway electrons in a spheromak plasma</td>
+	<td>1991/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  31( 7), pp. 1390 - 3&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3891543" class="entry">
+	<td>Clegg, J., Browning, P. &amp; Rusbridge, M.</td>
+	<td>Magnetic field diffusion and flux loss within a spheromak</td>
+	<td>1991/01/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  27( 1), pp. 688 - 97&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.101118">URL</a>&nbsp;</td>
+</tr>
+<tr id="2745944" class="entry">
+	<td>Clemente, R. &amp; Freire, E.</td>
+	<td>Classical particle-diffusion time for analytical compact tori equilibria</td>
+	<td>1986/07/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  28( 7), pp. 951 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/28/7/001">URL</a>&nbsp;</td>
+</tr>
+<tr id="10310392" class="entry">
+	<td>Clementson, J., Beiersdorfer, P. &amp; Magee, E.</td>
+	<td>Grazing-incidence spectrometer on the SSPX spheromak</td>
+	<td>2008/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 10), pp. 10 - 538&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2965776">URL</a>&nbsp;</td>
+</tr>
+<tr id="11430570" class="entry">
+	<td>Clementson, J., Beiersdorfer, P., Magee, E., McLean, H. &amp; Wood, R.</td>
+	<td>Tungsten spectroscopy relevant to the diagnostics of ITER divertor plasmas</td>
+	<td>2010/07/28</td>
+	<td>Journal of Physics B: Atomic, Molecular and Optical Physics<br/>Vol.  43( 14), pp. 144009 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0953-4075/43/14/144009">URL</a>&nbsp;</td>
+</tr>
+<tr id="8447524" class="entry">
+	<td>Cohen, B., Hooper, E., Cohen, R., Hill, D., McLean, H., Wood, R., Woodruff, S., Sovinec, C. &amp; Cone, G.</td>
+	<td>Simulation of spheromak evolution and energy confinement</td>
+	<td>2005/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 5), pp. 56106 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1869501">URL</a>&nbsp;</td>
+</tr>
+<tr id="6188261" class="entry">
+	<td>Cohen, B., Hooper, E., Spang, M. &amp; Domier, C.</td>
+	<td>Theoretical aspects of the use of pulsed reflectometry in a spheromak plasma</td>
+	<td>1999/02/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  70( 2), pp. 1407 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1149578">URL</a>&nbsp;</td>
+</tr>
+<tr id="5831777" class="entry">
+	<td>Cohen, B., LoDestro, L., Hooper, E. &amp; Casper, T.</td>
+	<td>Simulations of broadband short-pulse reflectometry for diagnosing plasma density and magnetic-field profiles</td>
+	<td>1998/01/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  40( 1), pp. 75 - 89&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/40/1/003">URL</a>&nbsp;</td>
+</tr>
+<tr id="10629744" class="entry">
+	<td>Cohen, B., Romero-Talamas, C., Ryutov, D., Hooper, E., LoDestro, L., McLean, H., Stewart, T. &amp; Wood, R.</td>
+	<td>The role of the n=1 column mode in spheromak formation</td>
+	<td>2009/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 4), pp. 042501 (15 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3097909">URL</a>&nbsp;</td>
+</tr>
+<tr id="7784863" class="entry">
+	<td>Cohen, R., Berk, H., Cohen, B., Fowled, T., Hooper, E., LoDestro, L., Morse, E., Pearlstein, L., Rognlien, T., Ryutov, D., Sovinec, C. &amp; Woodruff, S.</td>
+	<td>Theoretical investigation of field-line quality in a driven spheromak</td>
+	<td>2003/10/</td>
+	<td>Nuclear Fusion<br/>Vol.  43( 10), pp. 1220 - 34&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/43/2/601">URL</a>&nbsp;</td>
+</tr>
+<tr id="12416577" class="entry">
+	<td>Coleman, E., Cohen, S. &amp; Mahoney, M.</td>
+	<td>Greek fire: Nicholas Christofilos and the Astron project in america's early fusion program</td>
+	<td>2011/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  30( 3), pp. 238 - 56&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9392-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="6760028" class="entry">
+	<td>Coomer, E., Hartman, C., Morse, E. &amp; Reisman, D.</td>
+	<td>An experimental and computational study of compact torus formation, decay and heating in the Berkeley Compact Torus Experiment</td>
+	<td>Sept. 2000</td>
+	<td>Nuclear Fusion<br/>Vol.  40( 9), pp. 1669 - 81&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/40/9/310">URL</a>&nbsp;</td>
+</tr>
+<tr id="11364769" class="entry">
+	<td>Cothran, C., Brown, M., Gray, T., Schaffer, M., Marklin, G. &amp; Lukin, V.</td>
+	<td>Observation of a nonaxisymmetric magnetohydrodynamic self-organized state</td>
+	<td>2010/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 5), pp. 055705 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3327214">URL</a>&nbsp;</td>
+</tr>
+<tr id="7598782" class="entry">
+	<td>Cothran, C., Falk, A., Fefferman, A., Landreman, M., Brown, M. &amp; Schaffer, M.</td>
+	<td>Spheromak merging and field reversed configuration formation at the Swarthmore Spheromak experiment</td>
+	<td>2003/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 5), pp. 1748 - 54&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1564084">URL</a>&nbsp;</td>
+</tr>
+<tr id="9003663" class="entry">
+	<td>Cothran, C., Fung, J., Brown, M. &amp; Schaffer, M.</td>
+	<td>Fast high resolution echelle spectroscopy of a laboratory plasma</td>
+	<td>2006/06/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 6), pp. 63504 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2212405">URL</a>&nbsp;</td>
+</tr>
+<tr id="9551664" class="entry">
+	<td>Cothran, C., Fung, J., Brown, M., Schaffer, M. &amp; Belova, E.</td>
+	<td>Spectroscopic flow and ion temperature studies of a large s FRC</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 37 - 41&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9045-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="8026574" class="entry">
+	<td>Cothran, C., Landreman, M., Brown, M. &amp; Matthaeus, W.</td>
+	<td>Three-dimensional structure of magnetic reconnection in a laboratory plasma</td>
+	<td>2003/03/01</td>
+	<td>Geophysical Research Letters<br/>Vol.  30( 5), pp. 17 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2002GL016497">URL</a>&nbsp;</td>
+</tr>
+<tr id="5719301" class="entry">
+	<td>Cunningham, G.</td>
+	<td>Impurities and impurity transport in the spheromak SPHEX</td>
+	<td>Sept. 1997</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  39( 9), pp. 1339 - 54&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/39/9/006">URL</a>&nbsp;</td>
+</tr>
+<tr id="2660928" class="entry">
+	<td>Daido, H., Fujita, M., Terai, K., Miki, F., Nishihara, K., Murakami, M., Mima, K., Nakai, S., Yamanaka, C. &amp; Hasegawa, A.</td>
+	<td>Observation of long life plasma generated in a cavity by CO2 lasers</td>
+	<td>1986/02/</td>
+	<td>Laser and Particle Beams<br/>Vol.  4, pp. 17 - 25&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7279706" class="entry">
+	<td>Dasgupta, B., Janaki, M., Bhattacharyya, R., Dasgupta, P., Watanabe, T. &amp; Sato, T.</td>
+	<td>Spheromak as a relaxed state with minimum dissipation</td>
+	<td>2002/04/</td>
+	<td>Physical Review E (Statistical, Nonlinear, and Soft Matter Physics)<br/>Vol.  65( 4), pp. 046405 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.65.046405">URL</a>&nbsp;</td>
+</tr>
+<tr id="4496847" class="entry">
+	<td>Degnan, J., Peterkin, R.E., J., Baca, G., Beason, J., Bell, D., Dearborn, M., Dietz, D., Douglas, M., Englert, S., Englert, T., Hackett, K., Holmes, J., Hussey, T., Kiuttu, G., Lehr, F., Marklin, G., Mullins, B., Price, D., Roderick, N., Ruden, E., Sovinec, C., Turchi, P., Bird, G., Coffey, S., Seiler, S., Chen, Y., Gale, D., Graham, J., Scott, M. &amp; Sommars, W.</td>
+	<td>Compact toroid formation, compression, and acceleration</td>
+	<td>1993/08/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 8), pp. 2938 - 58&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860681">URL</a>&nbsp;</td>
+</tr>
+<tr id="2330107" class="entry">
+	<td>DeLucia, J. &amp; Jardin, S.</td>
+	<td>Nonlinear evolution of the resistive interchange mode in the cylindrical spheromak</td>
+	<td>1984/07/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 7), pp. 1773 - 84&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864788">URL</a>&nbsp;</td>
+</tr>
+<tr id="2294879" class="entry">
+	<td>DeLucia, J., Jardin, S. &amp; Glasser, A.</td>
+	<td>Resistive stability of the cylindrical spheromak</td>
+	<td>1984/06/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 6), pp. 1470 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864769">URL</a>&nbsp;</td>
+</tr>
+<tr id="3590838" class="entry">
+	<td>Dixon, A., Berger, M., Browning, P. &amp; Priest, E.</td>
+	<td>A generalization of the Woltjer minimum-energy principle</td>
+	<td>1989/11/</td>
+	<td>Astronomy and Astrophysics<br/>Vol.  225( 1), pp. 156 - 66&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3747441" class="entry">
+	<td>Dixon, A., Browning, P., Bevir, M., Gimblett, C. &amp; Priest, E.</td>
+	<td>Relaxed states in a spheromak with inhomogeneous boundary fields</td>
+	<td>1990/06/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  43, pp. 357 - 83&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11929352" class="entry">
+	<td>Dove, J., Gibson, S., Rachmeler, L., Tomczyk, S. &amp; Judge, P.</td>
+	<td>A ring of Polarized Light: Evidence for Twisted Coronal Magnetism in Cavities</td>
+	<td>2011/04/10</td>
+	<td>Astrophysical Journal, Letters<br/>Vol.  731( 1), pp. L1 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/2041-8205/731/1/L1">URL</a>&nbsp;</td>
+</tr>
+<tr id="5486828" class="entry">
+	<td>Drake, R., Hammer, J., Hartman, C., Perkins, L. &amp; Ryutov, D.</td>
+	<td>Submegajoule liner implosion of a closed field line configuration</td>
+	<td>1996/12/</td>
+	<td>Fusion Technology<br/>Vol.  30( 3), pp. 310 - 25&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5598111" class="entry">
+	<td>Duck, R., Browning, P., Cunningham, G., Gee, S., Al-Karkhy, A., Martin, R. &amp; Rusbridge, M.</td>
+	<td>Structure of the n=1 mode responsible for relaxation and current drive during sustainment of the SPHEX spheromak</td>
+	<td>1997/05/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  39( 5), pp. 715 - 36&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/39/5/004">URL</a>&nbsp;</td>
+</tr>
+<tr id="12151278" class="entry">
+	<td>Duez, V. &amp; Mathis, S.</td>
+	<td>Relaxed equilibrium configurations to model fossil fields - I. A first family</td>
+	<td>2010/07/</td>
+	<td>Astronomy &amp;amp; Astrophysics<br/>Vol.  517, pp. A58 (13 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1051/0004-6361/200913496">URL</a>&nbsp;</td>
+</tr>
+<tr id="9902037" class="entry">
+	<td>Eliasson, B. &amp; Shukla, P.</td>
+	<td>Dynamics of whistler spheromaks in magnetized plasmas</td>
+	<td>2007/11/16</td>
+	<td>Physical Review Letters<br/>Vol.  99( 20), pp. 205005 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.99.205005">URL</a>&nbsp;</td>
+</tr>
+<tr id="4177497" class="entry">
+	<td>Eliezer, S., Paiss, Y. &amp; Strauss, H.</td>
+	<td>Generation of a poloidal magnetic field by circularly polarized laser light</td>
+	<td>1992/04/27</td>
+	<td>Physics Letters A<br/>Vol.  164( 5-6), pp. 416 - 18&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0375-9601(92)90105-U">URL</a>&nbsp;</td>
+</tr>
+<tr id="11364929" class="entry">
+	<td>Ennis, D., Victor, B., Wrobel, J., Akcay, C., Jarboe, T., Marklin, G., Nelson, B. &amp; Smith, R.</td>
+	<td>New understandings and achievements from independent-injector drive experiments on HIT-SI</td>
+	<td>2010/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  50( 7), pp. 072001 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/50/7/072001">URL</a>&nbsp;</td>
+</tr>
+<tr id="7406606" class="entry">
+	<td>Farengo, R. &amp; Caputi, K.</td>
+	<td>Relaxed, minimum dissipation states, for a flux core spheromak sustained by helicity injection</td>
+	<td>2002/08/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  44( 8), pp. 1707 - 22&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/44/8/318">URL</a>&nbsp;</td>
+</tr>
+<tr id="4632503" class="entry">
+	<td>Farengo, R. &amp; Sobehart, J.</td>
+	<td>Minimum dissipation states in tokamak plasmas</td>
+	<td>1994/03/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  36( 3), pp. 465 - 71&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/36/3/007">URL</a>&nbsp;</td>
+</tr>
+<tr id="5047656" class="entry">
+	<td>Farrugia, C., Osherovich, V. &amp; Burlaga, L.</td>
+	<td>Magnetic flux rope versus the spheromak as models for interplanetary magnetic clouds</td>
+	<td>1995/07/01</td>
+	<td>Journal of Geophysical Research<br/>Vol.  100( A7), pp. 12293 - 306&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/95JA00272">URL</a>&nbsp;</td>
+</tr>
+<tr id="3302646" class="entry">
+	<td>Fernandez, J., Barnes, C., Jarboe, T., Henins, I., Hoida, H., Klingner, P., Knox, S., Marklin, G. &amp; Wright, B.</td>
+	<td>Energy confinement studies in spheromaks with mesh flux conservers</td>
+	<td>Sept. 1988</td>
+	<td>Nuclear Fusion<br/>Vol.  28( 9), pp. 1555 - 94&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3598028" class="entry">
+	<td>Fernandez, J., Jarboe, T., Knox, S., Henins, I. &amp; Marklin, G.</td>
+	<td>Ion heating and current drive from relaxation in decaying spheromaks in mesh flux conservers</td>
+	<td>1990/01/</td>
+	<td>Nuclear Fusion<br/>Vol.  30( 1), pp. 67 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3480544" class="entry">
+	<td>Fernandez, J., Wright, B., Marklin, G., Platts, D. &amp; Jarboe, T.</td>
+	<td>The m=1 helicity source spheromak experiment</td>
+	<td>1989/06/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 6), pp. 1254 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859000">URL</a>&nbsp;</td>
+</tr>
+<tr id="2419404" class="entry">
+	<td>Finn, J.</td>
+	<td>Tilt and shift mode stability in a spheromak with a flux core</td>
+	<td>1984/12/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 12), pp. 2973 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864585">URL</a>&nbsp;</td>
+</tr>
+<tr id="1842779" class="entry">
+	<td>Finn, J.</td>
+	<td>Tilt and shift mode stability in spheromaks with line tying</td>
+	<td>1982/01/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 1), pp. 116 - 25&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863610">URL</a>&nbsp;</td>
+</tr>
+<tr id="1823435" class="entry">
+	<td>Finn, J.</td>
+	<td>Free boundary n=1 magnetohydrodynamic modes in spheromaks with line tying</td>
+	<td>1981/11/</td>
+	<td>Physical Review A (General Physics)<br/>Vol.  24( 5), pp. 2835 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevA.24.2835">URL</a>&nbsp;</td>
+</tr>
+<tr id="2839096" class="entry">
+	<td>Finn, J. &amp; Drake, J.</td>
+	<td>Magnetic curvature drift instability</td>
+	<td>1986/11/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 11), pp. 3672 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865799">URL</a>&nbsp;</td>
+</tr>
+<tr id="2401266" class="entry">
+	<td>Finn, J. &amp; Drake, J.</td>
+	<td>Magnetic curvature-drift instability</td>
+	<td>1984/12/10</td>
+	<td>Physical Review Letters<br/>Vol.  53( 24), pp. 2308 - 11&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.53.2308">URL</a>&nbsp;</td>
+</tr>
+<tr id="3904571" class="entry">
+	<td>Finn, J. &amp; Guzdar, P.</td>
+	<td>Formation of a flux core spheromak</td>
+	<td>1991/04/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 4), pp. 1041 - 51&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859832">URL</a>&nbsp;</td>
+</tr>
+<tr id="2068696" class="entry">
+	<td>Finn, J. &amp; Manheimer, W.</td>
+	<td>Drift-resistive interchange and tearing modes in cylindrical geometry</td>
+	<td>1983/04/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 4), pp. 962 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864248">URL</a>&nbsp;</td>
+</tr>
+<tr id="1740763" class="entry">
+	<td>Finn, J., Manheimer, W. &amp; Ott, E.</td>
+	<td>Spheromak tilting instability in cylindrical geometry</td>
+	<td>1981/07/</td>
+	<td>Physics of Fluids<br/>Vol.  24( 7), pp. 1336 - 41&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863536">URL</a>&nbsp;</td>
+</tr>
+<tr id="6793721" class="entry">
+	<td>Finn, J., Sovinec, C. &amp; del Castillo-Negrete, D.</td>
+	<td>Chaotic scattering and self-organization in spheromak sustainment</td>
+	<td>2000/11/20</td>
+	<td>Physical Review Letters<br/>Vol.  85( 21), pp. 4538 - 41&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.85.4538">URL</a>&nbsp;</td>
+</tr>
+<tr id="5214881" class="entry">
+	<td>Fowler, T.</td>
+	<td>Theoretical aspects of energy confinement in spheromaks</td>
+	<td>1996/03/</td>
+	<td>Fusion Technology<br/>Vol.  29( 2), pp. 206 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9951494" class="entry">
+	<td>Fowler, T. &amp; Gatto, R.</td>
+	<td>Magnetic relaxation and hyper-resistivity during helicity injection</td>
+	<td>2007/10/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  49( 10), pp. 1673 - 87&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/49/10/006">URL</a>&nbsp;</td>
+</tr>
+<tr id="4860389" class="entry">
+	<td>Fowler, T., Hardwick, J. &amp; Jarboe, T.</td>
+	<td>On the possibility of ohmic ignition in a spheromak</td>
+	<td>1994//</td>
+	<td>Comments on Plasma Physics and Controlled Fusion<br/>Vol.  16( 2), pp. 91 - 104&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7441159" class="entry">
+	<td>Fowler, T. &amp; Hua, D.</td>
+	<td>Heat confinement in spheromaks</td>
+	<td>Sept. 2002</td>
+	<td>Plasma Physics Reports<br/>Vol.  28( 9), pp. 773 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5732728" class="entry">
+	<td>Fowler, T. &amp; Hua, D.</td>
+	<td>Model predictions for auxiliary heating in spheromaks</td>
+	<td>Sept. 1997</td>
+	<td>Plasma Physics Reports<br/>Vol.  23( 9), pp. 719 - 22&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5275612" class="entry">
+	<td>Fowler, T. &amp; Hua, D.</td>
+	<td>Prospects for spheromak fusion reactors</td>
+	<td>1995/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  14( 2), pp. 181 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10980397" class="entry">
+	<td>Fowler, T., Jayakumar, R. &amp; McLean, H.</td>
+	<td>Stable spheromaks sustained by neutral beam injection</td>
+	<td>2009/03/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  28( 1), pp. 118 - 23&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-008-9157-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="2484379" class="entry">
+	<td>Freire, E. &amp; Clemente, R.</td>
+	<td>Critical beta for analytical spheromak equilibria</td>
+	<td>1985/04/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  27( 4), pp. 389 - 94&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/27/4/002">URL</a>&nbsp;</td>
+</tr>
+<tr id="8284056" class="entry">
+	<td>Fukumoto, N., Ogawa, H., Nagata, M., Uyama, T., Shibata, T., Kashiwa, Y. &amp; Kusama, Y.</td>
+	<td>Characteristics of modified CT injector for JFT-2M</td>
+	<td>2004/10/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  70( 4), pp. 289 - 97&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2004.06.001">URL</a>&nbsp;</td>
+</tr>
+<tr id="11364686" class="entry">
+	<td>Garcia-Martinez, P. &amp; Farengo, R.</td>
+	<td>Spheromak formation and sustainment by tangential boundary flows</td>
+	<td>2010/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 5), pp. 050701 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3398482">URL</a>&nbsp;</td>
+</tr>
+<tr id="11007431" class="entry">
+	<td>Garcia-Martinez, P. &amp; Farengo, R.</td>
+	<td>Relaxation of spheromak configurations with open flux</td>
+	<td>2009/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 11), pp. 112508 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3264077">URL</a>&nbsp;</td>
+</tr>
+<tr id="10869697" class="entry">
+	<td>Garcia-Martinez, P. &amp; Farengo, R.</td>
+	<td>Nonlinear dynamics of kink-unstable spheromak equilibria</td>
+	<td>2009/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 8), pp. 082507 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3204639">URL</a>&nbsp;</td>
+</tr>
+<tr id="1807379" class="entry">
+	<td>Gautier, P., Gruber, R. &amp; Troyon, F.</td>
+	<td>Numerical study of the ideal-MHD stability limits in oblate spheromaks</td>
+	<td>1981/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  21( 11), pp. 1399 - 407&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5878388" class="entry">
+	<td>Geddes, C., Kornack, T. &amp; Brown, M.</td>
+	<td>Scaling studies of spheromak formation and equilibrium</td>
+	<td>1998/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  5( 4), pp. 1027 - 34&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872632">URL</a>&nbsp;</td>
+</tr>
+<tr id="9972239" class="entry">
+	<td>Gerhardt, S., Belova, E., Yamada, M., Ji, H., Inomoto, M., Ren, Y. &amp; McGeehan, B.</td>
+	<td>New method for inductively forming an oblate field reversed configuration from a spheromak</td>
+	<td>2008/03/</td>
+	<td>Nuclear Fusion<br/>Vol.  48( 3), pp. 032001 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/48/3/032001">URL</a>&nbsp;</td>
+</tr>
+<tr id="9950149" class="entry">
+	<td>Gerhardt, S., Belova, E., Yamada, M., Ji, H., Ren, Y., McGeehan, B. &amp; Inomoto, M.</td>
+	<td>Field-reversed configuration formation scheme utilizing a spheromak and solenoid induction</td>
+	<td>2008/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 3), pp. 032503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2889428">URL</a>&nbsp;</td>
+</tr>
+<tr id="6834559" class="entry">
+	<td>Gibson, K., Browning, P., Gee, S., Woodruff, S. &amp; Willett, D.</td>
+	<td>Current amplification in SPHEX operated as a spherical tokamak</td>
+	<td>2000/12/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  42( 12), pp. 1331 - 47&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/42/12/308">URL</a>&nbsp;</td>
+</tr>
+<tr id="4866425" class="entry">
+	<td>Gibson, K., Gee, S. &amp; Rusbridge, M.</td>
+	<td>Ion energy measurements in the SPHEX spheromak</td>
+	<td>1995/01/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  37( 1), pp. 31 - 41&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/37/1/003">URL</a>&nbsp;</td>
+</tr>
+<tr id="10618851" class="entry">
+	<td>Gibson, S. &amp; Fan, Y.</td>
+	<td>Partially ejected flux ropes: implications for interplanetary coronal mass ejections</td>
+	<td>2007/06/</td>
+	<td>Journal of Geophysical Research - Part F - Solid Earth<br/>Vol.  113( A9), pp. A09103 (20 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2008JA013151">URL</a>&nbsp;</td>
+</tr>
+<tr id="6700335" class="entry">
+	<td>Gibson, S. &amp; Low, B.</td>
+	<td>Three-dimensional and twisted: an MHD interpretation of on-disk observational characteristics of coronal mass ejections</td>
+	<td>2000/08/01</td>
+	<td>Journal of Geophysical Research<br/>Vol.  105( A8), pp. 18187 - 202&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/1999JA000317">URL</a>&nbsp;</td>
+</tr>
+<tr id="2851558" class="entry">
+	<td>Goldenbaum, G., Hess, R. &amp; Shaw, R.</td>
+	<td>Critical field index for passive coil stabilization of the spheromak shift instability</td>
+	<td>1986/12/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  57( 12), pp. 2961 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1139024">URL</a>&nbsp;</td>
+</tr>
+<tr id="1500522" class="entry">
+	<td>Goldenbaum, G., Irby, J., Chong, Y. &amp; Hart, G.</td>
+	<td>Formation of a spheromak plasma configuration</td>
+	<td>1980/02/11</td>
+	<td>Physical Review Letters<br/>Vol.  44( 6), pp. 393 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.44.393">URL</a>&nbsp;</td>
+</tr>
+<tr id="12839859" class="entry">
+	<td>Gourgouliatos, K. &amp; Lyutikov, M.</td>
+	<td>Dynamics of rising magnetized cavities and ultrahigh energy cosmic ray acceleration in clusters of galaxies</td>
+	<td>2012/02/</td>
+	<td>Monthly Notices of the Royal Astronomical Society<br/>Vol.  420( 1), pp. 505 - 13&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1111/j.1365-2966.2011.20058.x">URL</a>&nbsp;</td>
+</tr>
+<tr id="2308973" class="entry">
+	<td>Granatstein, V. &amp; Chu, K.</td>
+	<td>Electron cyclotron resonance heating (ECRH) of a spheromak plasma</td>
+	<td>1984/06/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  PS-12( 2), pp. 144 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11240892" class="entry">
+	<td>Gray, T., Brown, M., Cothran, C., Marklin, G. &amp; Schaffer, M.</td>
+	<td>Stable spheromak formation by merging in an oblate flux conserver</td>
+	<td>2010/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 3), pp. 032510 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3334324">URL</a>&nbsp;</td>
+</tr>
+<tr id="11769432" class="entry">
+	<td>Gray, T., Lukin, V., Brown, M. &amp; Cothran, C.</td>
+	<td>Three-dimensional reconnection and relaxation of merging spheromak plasmas</td>
+	<td>2010/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 10), pp. 102106 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3492726">URL</a>&nbsp;</td>
+</tr>
+<tr id="7406588" class="entry">
+	<td>Greenwald, M.</td>
+	<td>Density limits in toroidal plasmas</td>
+	<td>2002/08/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  44( 8), pp. 27 - 80&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/44/8/201">URL</a>&nbsp;</td>
+</tr>
+<tr id="9118558" class="entry">
+	<td>Gribkov, V., Van Oost, G., Malaquias, A. &amp; Herrera, J.</td>
+	<td>Summary of the 16th IAEA technical meeting on `Research using small fusion devices'</td>
+	<td>2006/10/</td>
+	<td>Nuclear Fusion<br/>Vol.  46( 10), pp. 868 - 74&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/46/10/005">URL</a>&nbsp;</td>
+</tr>
+<tr id="2022559" class="entry">
+	<td>Grimm, R., Dewar, R. &amp; Manickam, J.</td>
+	<td>Ideal MHD stability calculations in axisymmetric toroidal coordinate systems</td>
+	<td>1983/01/</td>
+	<td>Journal of Computational Physics<br/>Vol.  49( 1), pp. 94 - 117&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12282013" class="entry">
+	<td>Gumerov, N., Karavaev, A., Surjalal Sharma, A., Shao, X. &amp; Papadopoulos, K.</td>
+	<td>Efficient spectral and pseudospectral algorithms for 3D simulations of whistler-mode waves in a plasma</td>
+	<td>2011/04/01</td>
+	<td>Journal of Computational Physics<br/>Vol.  230( 7), pp. 2605 - 19&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jcp.2010.12.038">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541434" class="entry">
+	<td>Guo, H., Hoffman, A., Miller, K. &amp; Steinhauer, L.</td>
+	<td>Improved stability and confinement in a high- relaxed plasma state</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 53 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9066-x">URL</a>&nbsp;</td>
+</tr>
+<tr id="2584450" class="entry">
+	<td>Guzdar, P., Finn, J., Whang, K. &amp; Bondeson, A.</td>
+	<td>The role of magnetic reconnection and differential rotation in spheromak formation</td>
+	<td>1985/10/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 10), pp. 3154 - 66&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865357">URL</a>&nbsp;</td>
+</tr>
+<tr id="2179566" class="entry">
+	<td>Hammett, G. &amp; Tang, W.</td>
+	<td>Kinetic and resistive effects on interchange instabilities for a cylindrical model spheromak</td>
+	<td>1983/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  23( 11), pp. 1503 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2155417" class="entry">
+	<td>Hart, G., Chin-Fatt, C., DeSilva, A., Goldenbaum, G., Hess, R. &amp; Shaw, R.</td>
+	<td>Finite-pressure-gradient influences on ideal spheromak equilibrium</td>
+	<td>1983/10/24</td>
+	<td>Physical Review Letters<br/>Vol.  51( 17), pp. 1558 - 61&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.51.1558">URL</a>&nbsp;</td>
+</tr>
+<tr id="2733287" class="entry">
+	<td>Hart, G., Janos, A., Meyerhofer, D. &amp; Yamada, M.</td>
+	<td>Verification of the Taylor (minimum energy) state in a spheromak</td>
+	<td>1986/06/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 6), pp. 1994 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865627">URL</a>&nbsp;</td>
+</tr>
+<tr id="2796142" class="entry">
+	<td>Hart, G., Levinton, F. &amp; McNeill, D.</td>
+	<td>Study of the effects of photoelectron statistics on Thomson scattering data</td>
+	<td>Sept. 1986</td>
+	<td>Review of Scientific Instruments<br/>Vol.  57( 9), pp. 2218 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1138685">URL</a>&nbsp;</td>
+</tr>
+<tr id="3033761" class="entry">
+	<td>Hayashi, T. &amp; Sato, T.</td>
+	<td>A three dimensional study of spinning spheromak</td>
+	<td>1987/06/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  56( 6), pp. 2039 - 45&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2612669" class="entry">
+	<td>Hayashi, T. &amp; Sato, T.</td>
+	<td>Speromak global instabilities and stabilization by nearby conductors</td>
+	<td>1985/12/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 12), pp. 3654 - 66&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865320">URL</a>&nbsp;</td>
+</tr>
+<tr id="2261931" class="entry">
+	<td>Hayashi, T. &amp; Sato, T.</td>
+	<td>Simulation studies on line-tying stabilization of spheromak tilting instability</td>
+	<td>1984/04/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 4), pp. 778 - 80&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864696">URL</a>&nbsp;</td>
+</tr>
+<tr id="2610926" class="entry">
+	<td>Hayashi, T., Sato, T., Wysocki, F., Meyerhofer, D. &amp; Yamada, M.</td>
+	<td>Spheromak tilting instability and magnetic reconnection: simulation and experiment</td>
+	<td>1985/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 11), pp. 4172 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8296370" class="entry">
+	<td>Hayashiya, H., Asaka, T. &amp; Katsurai, M.</td>
+	<td>Comparative study of electron density profiles in compact torus plasma merging experiments</td>
+	<td>2004/07/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  148( 2), pp. 14 - 21&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/eej.10312">URL</a>&nbsp;</td>
+</tr>
+<tr id="7780016" class="entry">
+	<td>Hayashiya, H., Asaka, T. &amp; Katsurai, M.</td>
+	<td>Comparative study of the electron density profiles in the compact torus plasma merging experiments</td>
+	<td>2003/04/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  123-A( 4), pp. 357 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1541/ieejfms.123.357">URL</a>&nbsp;</td>
+</tr>
+<tr id="7856653" class="entry">
+	<td>Hayashiya, H. &amp; Katsurai, M.</td>
+	<td>Measurements of electron density profile characteristics in various kinds of plasma configurations in the TS-3 plasma merging device</td>
+	<td>2003/11/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  145( 2), pp. 35 - 41&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/eej.10158">URL</a>&nbsp;</td>
+</tr>
+<tr id="7402600" class="entry">
+	<td>Hayashiya, H. &amp; Katsurai, M.</td>
+	<td>Measurements of electron density profile characteristics in various kinds of plasma configurations in the TS-3 plasma merging device</td>
+	<td>2002/06/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  122-A( 6), pp. 569 - 74&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1902954" class="entry">
+	<td>Heidbrink, W., Jardin, S. &amp; Chance, M.</td>
+	<td>Tearing-mode stability of a forming Spheromak plasma</td>
+	<td>1982/04/</td>
+	<td>Nuclear Fusion<br/>Vol.  22( 4), pp. 459 - 64&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8827813" class="entry">
+	<td>Holcomb, C., Jarboe, T., Hill, D., Woodruff, S. &amp; Wood, R.</td>
+	<td>Sustained spheromak coaxial gun operation in the presence of an n=1 magnetic distortion</td>
+	<td>2006/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 2), pp. 22504 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2167911">URL</a>&nbsp;</td>
+</tr>
+<tr id="3162156" class="entry">
+	<td>Honda, Y., Kato, Y., Satomi, N., Nishikawa, M. &amp; Watanabe, K.</td>
+	<td>The instability observed in the CTCC-I spheromak plasma</td>
+	<td>1988/04/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  57( 4), pp. 1273 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3185603" class="entry">
+	<td>Honda, Y., Kato, Y., Satomi, N., Nishikawa, M. &amp; Watanabe, K.</td>
+	<td>Mode analysis of the stepwise instability in a CTCC-I spheromak plasma</td>
+	<td>1988/03/15</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  38( 1909-1929), pp. 43 - 50&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2282514" class="entry">
+	<td>Honma, T., Kito, M., Kaji, I. &amp; Fukai, I.</td>
+	<td>MHD stability analysis of axisymmetric surface current model Tokamaks close to the spheromak regime</td>
+	<td>1984/05/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  53( 5), pp. 1737 - 45&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12028704" class="entry">
+	<td>Hooper, E.</td>
+	<td>Physics Issues of a Spheromak Refluxing Scenario</td>
+	<td>2011/08/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  53( 8), pp. 085008 (18 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/53/8/085008">URL</a>&nbsp;</td>
+</tr>
+<tr id="13053821" class="entry">
+	<td>Hooper, E., Bulmer, R., Cohen, B., Hill, D., Holcomb, C., Hudson, B., McLean, H., Pearlstein, L., Romero-Talamas, C., Sovinec, C., Stallard, B., Wood, R. &amp; Woodruff, S.</td>
+	<td>Sustained Spheromak Physics Experiment (sspx): Design and Physics Results</td>
+	<td>2012/11/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  54( 11), pp. 113001 (26 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/54/11/113001">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541439" class="entry">
+	<td>Hooper, E., Cohen, B., Hill, D., LoDestro, L., McLean, H., Romero-Talamas, C., Wood, R. &amp; Sovinec, C.</td>
+	<td>Magnetic reconnection in the spheromak: physics and consequences</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 71 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9065-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="9950148" class="entry">
+	<td>Hooper, E., Cohen, B., McLean, H., Wood, R., Romero-Talamas, C. &amp; Sovinec, C.</td>
+	<td>NIMROD resistive magnetohydrodynamic simulations of spheromak physics</td>
+	<td>2008/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 3), pp. 032502 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2890772">URL</a>&nbsp;</td>
+</tr>
+<tr id="6533316" class="entry">
+	<td>Hooper, E., Cohen, R. &amp; Ryutov, D.</td>
+	<td>Theory of edge plasma in a spheromak</td>
+	<td>2000/03/</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  278( 1), pp. 104 - 10&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0022-3115(99)00217-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="9592806" class="entry">
+	<td>Hooper, E., Hill, D., McLean, H., Romero-Talamas, C. &amp; Wood, R.</td>
+	<td>Achieving high flux amplification in a gun-driven, flux-core spheromak</td>
+	<td>2007/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  47( 8), pp. 1064 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/47/8/042">URL</a>&nbsp;</td>
+</tr>
+<tr id="8626060" class="entry">
+	<td>Hooper, E., Kopriva, T., Cohen, B., Hill, D., McLean, H., Wood, R., Woodruff, S. &amp; Sovinec, C.</td>
+	<td>Magnetic reconnection during flux conversion in a driven spheromak</td>
+	<td>Sept. 2005</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 9), pp. 92503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2040207">URL</a>&nbsp;</td>
+</tr>
+<tr id="7441158" class="entry">
+	<td>Hooper, E. &amp; Pearlstein, L.</td>
+	<td>Hyper-resistive modeling in the spheromak</td>
+	<td>Sept. 2002</td>
+	<td>Plasma Physics Reports<br/>Vol.  28( 9), pp. 765 - 72&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6343902" class="entry">
+	<td>Hooper, E., Pearlstein, L. &amp; Bulmer, R.</td>
+	<td>MHD equilibria in a spheromak sustained by coaxial helicity injection</td>
+	<td>1999/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  39( 7), pp. 863 - 71&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/39/7/303">URL</a>&nbsp;</td>
+</tr>
+<tr id="10715437" class="entry">
+	<td>Hooper, E., Romero-Talamas, C., LoDestro, L., Wood, R. &amp; McLean, H.</td>
+	<td>Aspect-ratio effects in the driven, flux-core spheromak</td>
+	<td>2009/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 5), pp. 052506 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3134064">URL</a>&nbsp;</td>
+</tr>
+<tr id="4141424" class="entry">
+	<td>Horiuchi, R., Sato, T. &amp; Uchida, M.</td>
+	<td>Simulation study of stepwise relaxation in a spheromak plasma</td>
+	<td>1992/03/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  4( 3), pp. 672 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860265">URL</a>&nbsp;</td>
+</tr>
+<tr id="10501901" class="entry">
+	<td>Horton, R., Hwang, D., Howard, S., Brockington, S. &amp; Evans, R.</td>
+	<td>Poloidal field amplification in a coaxial compact toroid accelerator</td>
+	<td>Sept. 2008</td>
+	<td>Nuclear Fusion<br/>Vol.  48( 9), pp. 095002 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/48/9/095002">URL</a>&nbsp;</td>
+</tr>
+<tr id="13865603" class="entry">
+	<td>Hossack, A., Firman, T., Jarboe, T., Prager, J., Victor, B., Wrobel, J. &amp; Ziemba, T.</td>
+	<td>Reduction of plasma density in the Helicity Injected Torus with Steady Inductance experiment by using a helicon pre-ionization source</td>
+	<td>2013/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 10), pp. 103506 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4824707">URL</a>&nbsp;</td>
+</tr>
+<tr id="10986304" class="entry">
+	<td>Howard, S., Laberge, M., McIlwraith, L., Richardson, D. &amp; Gregson, J.</td>
+	<td>Development of merged compact toroids for use as a magnetized target fusion plasma</td>
+	<td>2009/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  28( 2), pp. 156 - 61&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-008-9167-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="8317016" class="entry">
+	<td>Hsu, S. &amp; Bellan, P.</td>
+	<td>On the jets, kinks, and spheromaks formed by a planar magnetized coaxial gun</td>
+	<td>2005/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 3), pp. 32103 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1850921">URL</a>&nbsp;</td>
+</tr>
+<tr id="8667904" class="entry">
+	<td>Hsu, S. &amp; Bellan, P.</td>
+	<td>Experimental identification of the kink instability as a poloidal flux amplification mechanism for coaxial gun Spheromak formation</td>
+	<td>2003/05/30</td>
+	<td>Physical Review Letters<br/>Vol.  90( 21), pp. 215002 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.90.215002">URL</a>&nbsp;</td>
+</tr>
+<tr id="7409525" class="entry">
+	<td>Hsu, S. &amp; Bellan, P.</td>
+	<td>A laboratory plasma experiment for studying magnetic dynamics of accretion discs and jets</td>
+	<td>2002/08/01</td>
+	<td>Monthly Notices of the Royal Astronomical Society<br/>Vol.  334( 2), pp. 257 - 61&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1046/j.1365-8711.2002.05422.x">URL</a>&nbsp;</td>
+</tr>
+<tr id="7304058" class="entry">
+	<td>Hsu, S. &amp; Bellan, P.</td>
+	<td>Study of magnetic helicity injection via plasma imaging using a high-speed digital camera</td>
+	<td>2002/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  30( 1), pp. 10 - 11&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2002.1003898">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541414" class="entry">
+	<td>Hsu, S. &amp; Tang, X.</td>
+	<td>Proposed experiment to study relaxation formation of a spherical tokamak with a plasma center column</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 85 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9032-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="7208305" class="entry">
+	<td>Hua, D., Fowler, T. &amp; Morse, E.</td>
+	<td>Magnetic relaxation in spheromaks using spectral expansions in cylindrical geometry</td>
+	<td>2001/10/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  66( 4), pp. 275 - 94&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1017/80022377801001416">URL</a>&nbsp;</td>
+</tr>
+<tr id="10015243" class="entry">
+	<td>Hudson, B., Wood, R., McLean, H., Hooper, E., Hill, D., Jayakumar, J., Moller, J., Montez, D., Romero-Talamas, C., Casper, T., Johnson, J., LoDestro, L., Mezonlin, E. &amp; Pearlstein, L.</td>
+	<td>Energy confinement and magnetic field generation in the SSPX spheromak</td>
+	<td>2008/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 5), pp. 056112 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2890121">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541440" class="entry">
+	<td>Hwang, D., Horton, R., Howard, S., Evans, R. &amp; Brockington, S.</td>
+	<td>Advances in CTIX accelerator study</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 81 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9060-3">URL</a>&nbsp;</td>
+</tr>
+<tr id="6613590" class="entry">
+	<td>Hwang, D., McLean, H., Baker, K., Evans, R., Horton, R., Terry, S., Howard, S. &amp; Schmidt, G.</td>
+	<td>Interaction of a spheromak-like compact toroid with a high beta spherical tokamak plasma</td>
+	<td>2000/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  40( 5), pp. 897 - 905&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/40/5/302">URL</a>&nbsp;</td>
+</tr>
+<tr id="9685193" class="entry">
+	<td>Inomoto, M. &amp; Ono, Y.</td>
+	<td>Merging formation and current amplification of field-reversed configuration</td>
+	<td>2007/07/</td>
+	<td>IEEJ Transactions on Electrical and Electronic Engineering<br/>Vol.  2( 4), pp. 424 - 30&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/tee.20183">URL</a>&nbsp;</td>
+</tr>
+<tr id="9692051" class="entry">
+	<td>Intrator, T., Furno, I., Ryutov, D., Lapenta, G., Dorf, L. &amp; Sun, X.</td>
+	<td>Long-lifetime current-driven rotating kink modes in a non-line-tied plasma column with a free end</td>
+	<td>2007/05/</td>
+	<td>Journal of Geophysical Research-Part A-Space Physics<br/>Vol.  112, pp. 05 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2006JA011995">URL</a>&nbsp;</td>
+</tr>
+<tr id="8932555" class="entry">
+	<td>Intrator, T., Nagata, M., Hoffman, A., Guo, H., Steinhauer, L., Ryutov, D., Miller, R. &amp; Okada, S.</td>
+	<td>Summary of US-Japan exchange 2004: new directions and physics for compact toroids</td>
+	<td>Sept. 2004</td>
+	<td>Journal of Fusion Energy<br/>Vol.  23( 3), pp. 175 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-005-5597-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="12912218" class="entry">
+	<td>Itagaki, H., Numazawa, H., Kishi, K., Terashima, Y., Fujita, Y., Awane, T., Asai, T., Takahashi, T. &amp; Hirano, Y.</td>
+	<td>Characteristic of a Repetitively Injected Spheromak in a Vertical Guide-field</td>
+	<td>2010//</td>
+	<td>Plasma and Fusion Research<br/>Vol.  5, pp. S2031 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.5.S2031">URL</a>&nbsp;</td>
+</tr>
+<tr id="2733798" class="entry">
+	<td>Ivanov, K. &amp; Harshiladze, A.</td>
+	<td>Interplanetary hydromagnetic clouds as flare-generated spheromaks</td>
+	<td>1985/08/</td>
+	<td>Solar Physics<br/>Vol.  98( 2), pp. 379 - 86&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2762129" class="entry">
+	<td>Ivanov, K. &amp; Kharshiladze, A.</td>
+	<td>Interplanetary spheromaks</td>
+	<td>1985//</td>
+	<td>Geomagnetism and Aeronomy<br/>Vol.  25( 3), pp. 314 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7560828" class="entry">
+	<td>Iwase, E., Suzuki, T., Tobari, H., Yagai, T., Hattori, K., Ando, A. &amp; Inutake, M.</td>
+	<td>Effect of poloidal magnetic field on MPD arcjet plasma</td>
+	<td>2002/10/</td>
+	<td>Record of Electrical and Communication Engineering Conversazione Tohoku University<br/>Vol.  71( 1), pp. 299 - 300&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8428500" class="entry">
+	<td>Izzo, V. &amp; Jarboe, T.</td>
+	<td>Three-dimensional magnetohydrodynamic simulations of the Helicity Injected Torus with Steady Inductive drive</td>
+	<td>2005/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 5), pp. 56109 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1882312">URL</a>&nbsp;</td>
+</tr>
+<tr id="7672785" class="entry">
+	<td>Izzo, V. &amp; Jarboe, T.</td>
+	<td>A numerical assessment of the Lundquist number requirement for relaxation current drive</td>
+	<td>2003/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 7), pp. 2903 - 11&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1578636">URL</a>&nbsp;</td>
+</tr>
+<tr id="2821241" class="entry">
+	<td>Janos, A.</td>
+	<td>Magnetic flux conversion and relaxation toward a minimum-energy state in spheromak plasmas</td>
+	<td>1986/10/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 10), pp. 3342 - 55&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865849">URL</a>&nbsp;</td>
+</tr>
+<tr id="2612670" class="entry">
+	<td>Janos, A., Hart, G., Nam, C. &amp; Yamada, M.</td>
+	<td>Global magnetic fluctuations in spheromak plasmas and relaxation toward a minimum-energy state</td>
+	<td>1985/12/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 12), pp. 3667 - 75&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865321">URL</a>&nbsp;</td>
+</tr>
+<tr id="2622972" class="entry">
+	<td>Janos, A., Hart, G. &amp; Yamada, M.</td>
+	<td>Relaxation of spheromak plasmas toward a minimum-energy state and global magnetic fluctuations</td>
+	<td>1985/12/23</td>
+	<td>Physical Review Letters<br/>Vol.  55( 26), pp. 2868 - 71&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.55.2868">URL</a>&nbsp;</td>
+</tr>
+<tr id="2707275" class="entry">
+	<td>Janos, A. &amp; Yamada, M.</td>
+	<td>Inductive sustainment of spheromaks</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 58 - 68&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8428563" class="entry">
+	<td>Jarboe, T.</td>
+	<td>The spheromak confinement device</td>
+	<td>2005/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 5), pp. 58103 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1891729">URL</a>&nbsp;</td>
+</tr>
+<tr id="6310726" class="entry">
+	<td>Jarboe, T.</td>
+	<td>Steady inductive helicity injection and its application to a high-beta spheromak</td>
+	<td>1999/07/</td>
+	<td>Fusion Technology<br/>Vol.  36( 1), pp. 85 - 91&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4702607" class="entry">
+	<td>Jarboe, T.</td>
+	<td>Review of spheromak research</td>
+	<td>1994/06/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  36( 6), pp. 945 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/36/6/002">URL</a>&nbsp;</td>
+</tr>
+<tr id="12005975" class="entry">
+	<td>Jarboe, T., Akcay, C., Chilenski, M., Ennis, D., Hansen, C., Hicks, N., Hosn, R., Hossack, A., Marklin, G., Nelson, B., O'Neill, R., Sieck, P., Smith, R., Victor, B., Wrobel, J. &amp; Nagata, M.</td>
+	<td>Recent Results from the Hit-SI Experiment</td>
+	<td>2011/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  51( 6), pp. 063029 (15 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/51/6/063029">URL</a>&nbsp;</td>
+</tr>
+<tr id="2917381" class="entry">
+	<td>Jarboe, T. &amp; Alper, B.</td>
+	<td>A model for the loop voltage of reversed field pinches</td>
+	<td>1987/04/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 4), pp. 1177 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866317">URL</a>&nbsp;</td>
+</tr>
+<tr id="2211053" class="entry">
+	<td>Jarboe, T., Barnes, C., Henins, I., Hoida, H., Knox, S., Linford, R. &amp; Sherwood, A.</td>
+	<td>The Ohmic heating of a spheromak to 100 eV</td>
+	<td>1984/01/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 1), pp. 13 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864495">URL</a>&nbsp;</td>
+</tr>
+<tr id="2549241" class="entry">
+	<td>Jarboe, T., Barnes, C., Platts, D. &amp; Wright, B.</td>
+	<td>A kinked Z-pinch as the helicity source for spheromak generation and sustainment</td>
+	<td>1985//</td>
+	<td>Comments on Plasma Physics and Controlled Fusion<br/>Vol.  9( 4), pp. 161 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9094077" class="entry">
+	<td>Jarboe, T., Hamp, W., Marklin, G., Nelson, B., O'Neill, R., Redd, A., Sieck, P., Smith, R. &amp; Wrobel, J.</td>
+	<td>Spheromak formation by steady inductive helicity injection</td>
+	<td>15 Sept. 2006</td>
+	<td>Physical Review Letters<br/>Vol.  97( 11), pp. 115003 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.97.115003">URL</a>&nbsp;</td>
+</tr>
+<tr id="2102749" class="entry">
+	<td>Jarboe, T., Henins, I., Sherwood, A., Barnes, C. &amp; Hoida, H.</td>
+	<td>Slow formation and sustainment of spheromaks by a coaxial magnetized plasma source</td>
+	<td>1983/07/04</td>
+	<td>Physical Review Letters<br/>Vol.  51( 1), pp. 39 - 42&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.51.39">URL</a>&nbsp;</td>
+</tr>
+<tr id="12877761" class="entry">
+	<td>Jarboe, T., Victor, B., Nelson, B., Hansen, C., Akcay, C., Ennis, D., Hicks, N., Hossack, A., Marklin, G. &amp; Smith, R.</td>
+	<td>Imposed-dynamo current drive</td>
+	<td>2012/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  52( 8), pp. 083017 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/52/8/083017">URL</a>&nbsp;</td>
+</tr>
+<tr id="2766934" class="entry">
+	<td>Jardin, S.</td>
+	<td>The spheromak</td>
+	<td>1986/06/</td>
+	<td>Europhysics News<br/>Vol.  17( 6), pp. 73 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1924587" class="entry">
+	<td>Jardin, S.</td>
+	<td>Ideal magnetohydrodynamic stability of the spheromak configuration</td>
+	<td>1982/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  22( 5), pp. 629 - 42&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1769324" class="entry">
+	<td>Jardin, S., Chance, M., Dear, R., Grimm, R. &amp; Monticello, D.</td>
+	<td>Tilting and shifting modes in a spheromak</td>
+	<td>Sept. 1981</td>
+	<td>Nuclear Fusion<br/>Vol.  21( 9), pp. 1203 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1838737" class="entry">
+	<td>Jardin, S. &amp; Christensen, U.</td>
+	<td>Stabilizing windings for the tilting and shifting modes in an inductively formed spheromak</td>
+	<td>1981/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  21( 12), pp. 1665 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2718361" class="entry">
+	<td>Jardin, S., Janos, A. &amp; Yamada, M.</td>
+	<td>The effect of a column inductive transformer on the S-1 Spheromak</td>
+	<td>1986/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 5), pp. 647 - 65&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1705584" class="entry">
+	<td>Jardin, S. &amp; Park, W.</td>
+	<td>Two-dimensional modeling of the formation of spheromak configurations</td>
+	<td>1981/04/</td>
+	<td>Physics of Fluids<br/>Vol.  24( 4), pp. 679 - 88&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863431">URL</a>&nbsp;</td>
+</tr>
+<tr id="1734209" class="entry">
+	<td>Jensen, T. &amp; Chu, M.S.</td>
+	<td>The bumpy Z-pinch</td>
+	<td>1981/06/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  25, pp. 459 - 64&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6283484" class="entry">
+	<td>Jensen, T. &amp; Garofalo, A.</td>
+	<td>Effects of finite feedback loop gain and bandwidth on stabilization of magnetohydrodynamic instabilities by an intelligent shell</td>
+	<td>1999/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 7), pp. 2757 - 61&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873232">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541421" class="entry">
+	<td>Ji, H., Belova, E., Gerhardt, S. &amp; Yamada, M.</td>
+	<td>Recent advances in the SPIRIT (Self-organized Plasma with Induction, Reconnection, and Injection Techniques) concept</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 93 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9043-4">URL</a>&nbsp;</td>
+</tr>
+<tr id="10503459" class="entry">
+	<td>Ji, J.-Y., Held, E. &amp; Sovinec, C.</td>
+	<td>Moment approach to deriving parallel heat flow for general collisionality</td>
+	<td>2009/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 2), pp. 022312 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3079072">URL</a>&nbsp;</td>
+</tr>
+<tr id="6980375" class="entry">
+	<td>Jones, S., Parker, S. &amp; Kim, C.</td>
+	<td>Low-cost high-performance scientific visualization</td>
+	<td>2001/07/</td>
+	<td>Computing in Science &amp;amp; Engineering<br/>Vol.  3( 4), pp. 12 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/5992.931899">URL</a>&nbsp;</td>
+</tr>
+<tr id="3333043" class="entry">
+	<td>Kamitani, A.</td>
+	<td>Stability of spheromak against current driven modes-effects of flux hole on stability</td>
+	<td>1988/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  57( 11), pp. 3809 - 19&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3881188" class="entry">
+	<td>Kamitani, A., Kaneko, S., Tsunematsu, T., Tokuda, S. &amp; Takeda, T.</td>
+	<td>Stability analysis of spheromak by ERATO-J code against internal modes*</td>
+	<td>1991/02/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  60( 2), pp. 512 - 17&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2993967" class="entry">
+	<td>Kamitani, A., Kaneko, S., Uyama, T. &amp; Watanabe, K.</td>
+	<td>Magnetohydrodynamic equilibrium and stability of spheromak by boundary-fitted curvilinear coordinate system improvement of plasma confinement by external coil</td>
+	<td>1987/08/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  56( 8), pp. 2755 - 64&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5114128" class="entry">
+	<td>Kamitani, A., Kanki, T., Nagata, M. &amp; Uyama, T.</td>
+	<td>Magnetohydrodynamic equilibrium of helicity-injected spheromak by combination of FDM and BEM</td>
+	<td>1994//</td>
+	<td>Periodica Polytechnica Electrical Engineering<br/>Vol.  38( 3), pp. 257 - 66&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2747337" class="entry">
+	<td>Kaneko, S. &amp; Kamitani, A.</td>
+	<td>Magnetohydrodynamic stability of spheromak plasma in spheroidal flux conserver. Application of Mercier criterion</td>
+	<td>1986/06/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  55( 6), pp. 1918 - 24&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2449955" class="entry">
+	<td>Kaneko, S. &amp; Kamitani, A.</td>
+	<td>Magnetohydrodynamic equilibrium configuration by body-fitted curvilinear coordinate system. Application to Spheromak</td>
+	<td>1985/02/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 2), pp. 458 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2582887" class="entry">
+	<td>Kaneko, S., Kamitani, A. &amp; Takimoto, A.</td>
+	<td>Magnetohydrodynamic equilibrium and stability of Spheromak with spheroidal plasma-vacuum interface</td>
+	<td>Sept. 1985</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 9), pp. 3347 - 57&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2228259" class="entry">
+	<td>Kaneko, S., Takimoto, A., Taguchi, M. &amp; Miyazaki, T.</td>
+	<td>Magnetohydrodynamic equilibrium and stability of spheromak plasma in flux conserver</td>
+	<td>1984/01/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  53( 1), pp. 201 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3111246" class="entry">
+	<td>Kaneko, S. &amp; Tsutsui, H.</td>
+	<td>Stability of force-free spheromak plasma in spheroidal flux conserver</td>
+	<td>1988/01/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  57( 1), pp. 108 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2640903" class="entry">
+	<td>Kaneko, S., Tsutsui, H., Miyazaki, T. &amp; Taguchi, M.</td>
+	<td>Magnetohydrodynamic stability of spheromak plasma in toroidal flux conserver with rectangular cross section. II. Application of Mercier criterion</td>
+	<td>1985/12/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 12), pp. 4570 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3619620" class="entry">
+	<td>Kaneko, S. &amp; Wang, Y.P.</td>
+	<td>Effects of central conducting pole and choking current on confinement of spheromak with flux hole</td>
+	<td>1990/02/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  59( 2), pp. 553 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3073126" class="entry">
+	<td>Kaneko, S., Wang, Y.P. &amp; Tsutsui, H.</td>
+	<td>Magnetohydrodynamic stability of spheromak plasma in toroidal flux conserver with rectangular cross section. III. Stability for symmetric modes</td>
+	<td>1987/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  56( 11), pp. 4188 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9400258" class="entry">
+	<td>Kanki, T. &amp; Nagata, M.</td>
+	<td>Influence of vacuum toroidal field on two-fluid flowing equilibria of helicity-driven spherical torus plasmas</td>
+	<td>2006/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 7), pp. 72506 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2231685">URL</a>&nbsp;</td>
+</tr>
+<tr id="8951918" class="entry">
+	<td>Kanki, T., Nagata, M. &amp; Uyama, T.</td>
+	<td>Computation of two-fluid flowing equilibrium of helicity-injected spherical torus plasma</td>
+	<td>2006/04/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  42( 4), pp. 1403 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TMAG.2006.871391">URL</a>&nbsp;</td>
+</tr>
+<tr id="8823713" class="entry">
+	<td>Kanki, T., Nagata, M. &amp; Uyama, T.</td>
+	<td>Two-fluid flowing equilibria of helicity-driven spherical torus plasmas</td>
+	<td>2005//</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  125-A( 11), pp. 962 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1541/ieejfms.125.962">URL</a>&nbsp;</td>
+</tr>
+<tr id="5845659" class="entry">
+	<td>Kanki, T., Nagata, M., Uyama, T., Ikuno, S. &amp; Kamitani, A.</td>
+	<td>Partially relaxed magnetohydrodynamic equilibria with bias-flux leakage obtained in a helicity-driven spheromak</td>
+	<td>1998/01/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  67( 1), pp. 140 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4402189" class="entry">
+	<td>al Karkhy, A., Browning, P., Cunningham, G., Gee, S. &amp; Rusbridge, M.</td>
+	<td>Observations of the magnetohydrodynamic dynamo effect in a spheromak plasma</td>
+	<td>1993/03/22</td>
+	<td>Physical Review Letters<br/>Vol.  70( 12), pp. 1814 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.70.1814">URL</a>&nbsp;</td>
+</tr>
+<tr id="11492091" class="entry">
+	<td>Kataoka, R., Ebisuzaki, T., Kusano, K., Shiota, D., Inoue, S., Yamamoto, T. &amp; Tokumaru, M.</td>
+	<td>Three-dimensional MHD modeling of the solar wind structures associated with 13 December 2006 coronal mass ejection</td>
+	<td>2009/10/01</td>
+	<td>Journal of Geophysical Research - Part A - Space Physics<br/>Vol.  114( A10), pp. A10102 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2009JA014167">URL</a>&nbsp;</td>
+</tr>
+<tr id="2733281" class="entry">
+	<td>Katayama, K. &amp; Katsurai, M.</td>
+	<td>Three-dimensional numerical simulations of the relaxation process in spheromak plasmas</td>
+	<td>1986/06/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 6), pp. 1939 - 47&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865621">URL</a>&nbsp;</td>
+</tr>
+<tr id="2542985" class="entry">
+	<td>Katayama, K., Osaki, H. &amp; Katsurai, M.</td>
+	<td>Three-dimensional simulation of tilting instability of Spheromak</td>
+	<td>1985/07/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  104( 4), pp. 54 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3360146" class="entry">
+	<td>Kato, Y., Nishikawa, M., Honda, Y., Satomi, N. &amp; Watanabe, K.</td>
+	<td>Configuration of gun-generated spheromak in effectively closed metal flux conserver</td>
+	<td>1988/10/15</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  38( 1930-1946), pp. 209 - 15&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4536382" class="entry">
+	<td>Kato, Y., Satomi, N., Nishikawa, M. &amp; Watanabe, K.</td>
+	<td>Electron temperature measurement using the line-intensity ratio on the CTCC spheromak</td>
+	<td>1993/11/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  35( 11), pp. 1513 - 28&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/35/11/002">URL</a>&nbsp;</td>
+</tr>
+<tr id="3654018" class="entry">
+	<td>Kato, Y., Satomi, N., Nishikawa, M. &amp; Watanabe, K.</td>
+	<td>Impurity behavior and energy balance on CTCC-spheromak</td>
+	<td>1990/03/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  59( 3), pp. 939 - 53&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2266326" class="entry">
+	<td>Katsurai, M., Katayama, K., Arata, M., Nishimae, J., Kaneko, S. &amp; Suzuki, K.</td>
+	<td>Studies on spheromak plasma production by external flux core method</td>
+	<td>1983/05/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan<br/>Vol.  103( 3), pp. 22 - 30&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2688717" class="entry">
+	<td>Katsurai, M., Nishimae, J. &amp; Katayama, K.</td>
+	<td>Experimental studies on toroidal current driving of spheromak</td>
+	<td>Sept.-Oct. 1985</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  105( 5), pp. 18 - 25&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2004762" class="entry">
+	<td>Katsurai, M. &amp; Yamada, M.</td>
+	<td>Studies of conceptual spheromak fusion reactors</td>
+	<td>1982/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  22( 11), pp. 1407 - 19&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3007154" class="entry">
+	<td>Kawai, K., Pietrzyk, Z. &amp; Hunter, H.</td>
+	<td>Generation of poloidally rotating spheromaks by the conical theta pinch</td>
+	<td>1987/08/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 8), pp. 2561 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866094">URL</a>&nbsp;</td>
+</tr>
+<tr id="8546437" class="entry">
+	<td>Kawamori, E., Murata, Y., Umeda, K., Hirota, D., Ogawa, T., Sumikawa, T., Iwama, T., Ishii, K., Kado, T., Itagaki, T., Katsurai, M., Balandin, A. &amp; Ono, Y.</td>
+	<td>Ion kinetic effect on bifurcated relaxation to a field-reversed configuration in TS-4 CT experiment</td>
+	<td>2005/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  45( 8), pp. 843 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/45/8/010">URL</a>&nbsp;</td>
+</tr>
+<tr id="8562994" class="entry">
+	<td>Kawamori, E. &amp; Ono, Y.</td>
+	<td>Effect of ion skin depth on relaxation of merging Spheromaks to a field-reversed configuration</td>
+	<td>2005/08/19</td>
+	<td>Physical Review Letters<br/>Vol.  95( 8), pp. 085003 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.95.085003">URL</a>&nbsp;</td>
+</tr>
+<tr id="8322453" class="entry">
+	<td>Kawamori, E., Sumikawa, T., Igarashi, T. &amp; Ono, Y.</td>
+	<td>Ion kinetic effect on the low-n toroidal modes in compact torus plasmas</td>
+	<td>2004//</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  124-A( 10), pp. 915 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1541/ieejfms.124.915">URL</a>&nbsp;</td>
+</tr>
+<tr id="10310389" class="entry">
+	<td>King, J., McLean, H., Wood, R., Romero-Talamas, C., Moller, J. &amp; Morse, E.</td>
+	<td>An ion Doppler spectrometer instrument for ion temperature and flow measurements on SSPX</td>
+	<td>2008/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 10), pp. 10 - 535&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2957842">URL</a>&nbsp;</td>
+</tr>
+<tr id="3824657" class="entry">
+	<td>Kitson, D. &amp; Browning, P.</td>
+	<td>Partially relaxed magnetic field equilibria in a gun-injected spheromak</td>
+	<td>1990/12/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  32( 14), pp. 1265 - 87&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/32/14/002">URL</a>&nbsp;</td>
+</tr>
+<tr id="8985372" class="entry">
+	<td>Kliem, B. &amp; Torok, T.</td>
+	<td>Torus instability</td>
+	<td>2006/06/30</td>
+	<td>Physical Review Letters<br/>Vol.  96( 25), pp. 255002 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.96.255002">URL</a>&nbsp;</td>
+</tr>
+<tr id="2664832" class="entry">
+	<td>Knox, S., Barnes, C., Marklin, G., Jarboe, T., Henins, I., Hoida, H. &amp; Wright, B.</td>
+	<td>Observations of spheromak equilibria which differ from the minimum-energy state and have internal kink distortions</td>
+	<td>1986/02/24</td>
+	<td>Physical Review Letters<br/>Vol.  56( 8), pp. 842 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.56.842">URL</a>&nbsp;</td>
+</tr>
+<tr id="2537729" class="entry">
+	<td>Kondoh, Y.</td>
+	<td>Available beta-value for tokamak, screw-pinch, spheromak, and reversed-field pinch in partially relaxed states</td>
+	<td>1985/06/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 6), pp. 2065 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6011614" class="entry">
+	<td>Kornack, T., Sollins, P. &amp; Brown, M.</td>
+	<td>Experimental observation of correlated magnetic reconnection and Alfvenic ion jets</td>
+	<td>1998/07/</td>
+	<td>Physical Review E (Statistical Physics, Plasmas, Fluids, and Related Interdisciplinary Topics)<br/>Vol.  58( 1), pp. 36 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.58.R36">URL</a>&nbsp;</td>
+</tr>
+<tr id="2878129" class="entry">
+	<td>Krakowski, R., Miller, R. &amp; Hagenson, R.</td>
+	<td>The need and prospects for improved fusion reactors</td>
+	<td>Sept. 1986</td>
+	<td>Journal of Fusion Energy<br/>Vol.  5( 3), pp. 213 - 30&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5687299" class="entry">
+	<td>Kukushkin, A., Rantsev-Kartinov, V. &amp; Terentiev, A.</td>
+	<td>Formation of a spheromak-like magnetic configuration by a plasma focus self-transformed magnetic field</td>
+	<td>1997/08/</td>
+	<td>Fusion Technology<br/>Vol.  32( 1), pp. 83 - 93&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10863318" class="entry">
+	<td>Kumar, D. &amp; Bellan, P.</td>
+	<td>Nonequilibrium Alfvenic plasma jets associated with spheromak formation</td>
+	<td>4 Sept. 2009</td>
+	<td>Physical Review Letters<br/>Vol.  103( 10), pp. 105003 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.103.105003">URL</a>&nbsp;</td>
+</tr>
+<tr id="9083996" class="entry">
+	<td>Kumar, D. &amp; Bellan, P.</td>
+	<td>Heterodyne interferometer with unequal path lengths</td>
+	<td>2006/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 8), pp. 83503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2336769">URL</a>&nbsp;</td>
+</tr>
+<tr id="11054180" class="entry">
+	<td>Kumar, D., Moser, A. &amp; Bellan, P.</td>
+	<td>Energy efficiency analysis of the discharge circuit of Caltech spheromak experiment</td>
+	<td>2010/01/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  38( 1), pp. 47 - 52&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2009.2034744">URL</a>&nbsp;</td>
+</tr>
+<tr id="14082785" class="entry">
+	<td>Kuwahata, A., Tanabe, H., Ito, S., Inomoto, M. &amp; Ono, Y.</td>
+	<td>Low-Frequency Magnetic Fluctuation Measurement during Magnetic Reconnection in Counter-Helicity Plasma Merging Experiment</td>
+	<td>2014/04/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  187( 2), pp. 233 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/eej.22401">URL</a>&nbsp;</td>
+</tr>
+<tr id="10986318" class="entry">
+	<td>Laberge, M.</td>
+	<td>Experimental results for an acoustic driver for MTF</td>
+	<td>2009/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  28( 2), pp. 179 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-008-9181-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="7590360" class="entry">
+	<td>Landreman, M., Cothran, C., Brown, M., Kostora, M. &amp; Slough, J.</td>
+	<td>Rapid multiplexed data acquisition: application to three-dimensional magnetic field measurements in a turbulent laboratory plasma</td>
+	<td>2003/04/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 4), pp. 2361 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1544417">URL</a>&nbsp;</td>
+</tr>
+<tr id="3674500" class="entry">
+	<td>Levington, F., Meyerhofer, D., Mayo, R., Janos, A., Ono, Y., Ueda, Y. &amp; Yamada, M.</td>
+	<td>Confinement and power balance in the S-1 spheromak</td>
+	<td>1990/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  30( 5), pp. 871 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2997304" class="entry">
+	<td>Levinton, F. &amp; Meyerhofer, D.</td>
+	<td>Measurement of the local particle diffusion coefficient in a magnetized plasma</td>
+	<td>1987/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  58( 8), pp. 1393 - 400&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1139420">URL</a>&nbsp;</td>
+</tr>
+<tr id="7427865" class="entry">
+	<td>Lifschitz, A., Farengo, R. &amp; Arista, N.</td>
+	<td>Numerical calculations of neutral beam injection in spheromaks</td>
+	<td>Sept. 2002</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  44( 9), pp. 1979 - 97&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/44/9/314">URL</a>&nbsp;</td>
+</tr>
+<tr id="10116615" class="entry">
+	<td>Lin, Y., Wang, X., Brown, M., Schaffer, M. &amp; Cothran, C.</td>
+	<td>Modeling Swarthmore spheromak reconnection experiment using hybrid code</td>
+	<td>2008/07/01</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  50( 7), pp. 074012 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/50/7/074012">URL</a>&nbsp;</td>
+</tr>
+<tr id="3155482" class="entry">
+	<td>Litwin, C. &amp; Sudan, R.</td>
+	<td>Effect of a strong-current ion ring on spheromak stability</td>
+	<td>1988/03/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 3), pp. 423 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866823">URL</a>&nbsp;</td>
+</tr>
+<tr id="2414636" class="entry">
+	<td>Litwin, C., Sudan, R. &amp; Turnbull, A.</td>
+	<td>Stabilization of the spheromak tilt instability</td>
+	<td>1984/12/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 12), pp. 2791 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864593">URL</a>&nbsp;</td>
+</tr>
+<tr id="4922146" class="entry">
+	<td>Loewenhardt, P., Brown, M., Yee, J. &amp; Bellan, P.</td>
+	<td>Performance characterization of the Caltech compact torus injector</td>
+	<td>1995/02/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  66( 2), pp. 1050 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1146044">URL</a>&nbsp;</td>
+</tr>
+<tr id="4712471" class="entry">
+	<td>Lortz, D. &amp; Spies, G.</td>
+	<td>Spheromak instability</td>
+	<td>1994/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  1( 3), pp. 682 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.870813">URL</a>&nbsp;</td>
+</tr>
+<tr id="1705589" class="entry">
+	<td>Lui, H., Chu, C. &amp; Aydemir, A.</td>
+	<td>Two-dimensional simulation of the formation of the Princeton spheromak</td>
+	<td>1981/04/</td>
+	<td>Physics of Fluids<br/>Vol.  24( 4), pp. 673 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863430">URL</a>&nbsp;</td>
+</tr>
+<tr id="6925450" class="entry">
+	<td>Lukin, V., Qin, G., Matthaeus, W. &amp; Brown, M.</td>
+	<td>Numerical modeling of magnetohydrodynamic activity in the Swarthmore Spheromak Experiment</td>
+	<td>2001/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 5), pp. 1600 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1362294">URL</a>&nbsp;</td>
+</tr>
+<tr id="3828481" class="entry">
+	<td>Lyster, P. &amp; Sudan, R.</td>
+	<td>The dynamics of ion rings in highly conductive plasmas</td>
+	<td>1990/11/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 11), pp. 2661 - 78&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859389">URL</a>&nbsp;</td>
+</tr>
+<tr id="12633371" class="entry">
+	<td>Lyutikov, M. &amp; Gourgouliatos, K.</td>
+	<td>Coronal Mass Ejections as Expanding Force-free Structures</td>
+	<td>2011/06/</td>
+	<td>Solar Physics<br/>Vol.  270( 2), pp. 537 - 49&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s11207-011-9761-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="5845848" class="entry">
+	<td>MacLeod, M.</td>
+	<td>The spherical curl transform of a linear force-free magnetic field</td>
+	<td>1998/03/</td>
+	<td>Journal of Mathematical Physics<br/>Vol.  39( 3), pp. 1642 - 58&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.532305">URL</a>&nbsp;</td>
+</tr>
+<tr id="10986308" class="entry">
+	<td>Macnab, A. &amp; Woodruff, S.</td>
+	<td>Extended MHD simulations of the compression and stability of spheromaks for current drive</td>
+	<td>2009/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  28( 2), pp. 183 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-008-9171-0">URL</a>&nbsp;</td>
+</tr>
+<tr id="5085282" class="entry">
+	<td>Maeyama, M. &amp; Hotta, E.</td>
+	<td>Toroidal equilibrium analysis of an axisymmetric free-boundary plasma</td>
+	<td>1995/06/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  115-A( 6), pp. 505 - 10&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1993918" class="entry">
+	<td>Marchand, R. &amp; Guzdar, P.</td>
+	<td>Collisional drift waves in a spheromak geometry</td>
+	<td>1982/11/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 11), pp. 2037 - 44&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863693">URL</a>&nbsp;</td>
+</tr>
+<tr id="1838675" class="entry">
+	<td>Marchand, R. &amp; Guzdar, P.</td>
+	<td>Universal drift waves in a low-aspect-ratio spheromak geometry</td>
+	<td>1981/12/</td>
+	<td>Physics of Fluids<br/>Vol.  24( 12), pp. 2183 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4369810" class="entry">
+	<td>Martin, R., Gee, S., Browning, P. &amp; Rusbridge, M.</td>
+	<td>The direct determination of the current density and profiles of a spheromak</td>
+	<td>1993/02/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  35( 2), pp. 269 - 79&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/35/2/012">URL</a>&nbsp;</td>
+</tr>
+<tr id="10382778" class="entry">
+	<td>Mastrano, A. &amp; Melatos, A.</td>
+	<td>Non-ideal evolution of non-axisymmetric, force-free magnetic fields in a magnetar</td>
+	<td>2008/07/</td>
+	<td>Monthly Notices of the Royal Astronomical Society<br/>Vol.  387( 4), pp. 1735 - 44&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1111/j.1365-2966.2008.13365.x">URL</a>&nbsp;</td>
+</tr>
+<tr id="9009225" class="entry">
+	<td>Matthaeus, W., Cothran, C., Landreman, M. &amp; Brown, M.</td>
+	<td>Fluid and kinetic structure of magnetic merging in the Swarthmore Spheromak Experiment</td>
+	<td>2005/12/16</td>
+	<td>Geophysical Research Letters<br/>Vol.  32( 23), pp. 4 pp. - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2005GL023973">URL</a>&nbsp;</td>
+</tr>
+<tr id="6701818" class="entry">
+	<td>Mattor, N.</td>
+	<td>Spatiotemporal signal analysis via the phase velocity transform</td>
+	<td>2000/06/26</td>
+	<td>Physical Review Letters<br/>Vol.  84( 26), pp. 6022 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.84.6022">URL</a>&nbsp;</td>
+</tr>
+<tr id="5304558" class="entry">
+	<td>Mattor, N.</td>
+	<td>Scaling of magnetic turbulence with Lundquist number in relaxed state devices</td>
+	<td>1996/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  3( 5), pp. 1578 - 84&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872016">URL</a>&nbsp;</td>
+</tr>
+<tr id="5488194" class="entry">
+	<td>Mayo, R.</td>
+	<td>Approach to ignition conditions in a two fluid spheromak with direct ion heating</td>
+	<td>1996/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  36( 12), pp. 1599 - 608&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/36/12/I01">URL</a>&nbsp;</td>
+</tr>
+<tr id="3597832" class="entry">
+	<td>Mayo, R., Choi, C., Levinton, F., Janos, A. &amp; Yamada, M.</td>
+	<td>Effect of neutral particles on the energy confinement of spheromaks</td>
+	<td>1990/01/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 1), pp. 115 - 22&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859583">URL</a>&nbsp;</td>
+</tr>
+<tr id="4053229" class="entry">
+	<td>Mayo, R., Fernandez, J., Henins, I., Kirschenbaum, L., Munson, C. &amp; Wysocki, F.</td>
+	<td>Time of flight measurement of ion temperatures in spheromaks</td>
+	<td>1991/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  31( 11), pp. 2087 - 95&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4551089" class="entry">
+	<td>Mayo, R. &amp; Hurlburt, D.</td>
+	<td>Ion temperature profile deconvolution and corrections to confinement parameters in spheromaks</td>
+	<td>1993/11/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 11), pp. 4002 - 10&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860619">URL</a>&nbsp;</td>
+</tr>
+<tr id="3994924" class="entry">
+	<td>Mayo, R. &amp; Kirschenbaum, L.</td>
+	<td>Neutral particle energy analysis and charge exchange power loss in edge-dominated spheromaks</td>
+	<td>1991/08/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 8), pp. 2096 - 100&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859989">URL</a>&nbsp;</td>
+</tr>
+<tr id="3541347" class="entry">
+	<td>Mayo, R., Levinton, F., Meyerhofer, D., Chu, T., Paul, S. &amp; Yamada, M.</td>
+	<td>Measurement of the local carbon diffusion coefficient in the S-1 spheromak</td>
+	<td>Sept. 1989</td>
+	<td>Nuclear Fusion<br/>Vol.  29( 9), pp. 1493 - 504&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3225611" class="entry">
+	<td>Mayo, R. &amp; Marklin, G.</td>
+	<td>Numerical calculation of Mercier beta limits in spheromaks</td>
+	<td>1988/06/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 6), pp. 1812 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866674">URL</a>&nbsp;</td>
+</tr>
+<tr id="4058466" class="entry">
+	<td>Mayo, R., Wysocki, F. &amp; Fernandez, J.</td>
+	<td>A model for determining relaxation electric fields in spheromaks</td>
+	<td>1991/11/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 11), pp. 3160 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859795">URL</a>&nbsp;</td>
+</tr>
+<tr id="7500777" class="entry">
+	<td>Mayuko, T., Yasushi, O. &amp; Makoto, K.</td>
+	<td>Comparative experiments of co- and counter-helicity merging in the compact toroid merging device TS-4</td>
+	<td>Sept. 2002</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  122-A( 9), pp. 840 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7590185" class="entry">
+	<td>McLean, H., Hill, D., Ryutov, D. &amp; Chen, H.</td>
+	<td>Laser-based diagnostic for tracing magnetic-field lines in spheromaks and other self-organized magnetically confined plasmas</td>
+	<td>2003/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 3), pp. 1547 - 50&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1538357">URL</a>&nbsp;</td>
+</tr>
+<tr id="6007850" class="entry">
+	<td>McLean, H., Hwang, D., Horton, R., Evans, R., Terry, S., Thomas, J. &amp; Raman, R.</td>
+	<td>Design and operation of a passively switched repetitive compact toroid plasma accelerator</td>
+	<td>1998/05/</td>
+	<td>Fusion Technology<br/>Vol.  33( 3), pp. 252 - 72&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9028861" class="entry">
+	<td>McLean, H., Wood, R., Cohen, B., Hooper, E., Hill, D., Moller, J., Romero-Talamas, C. &amp; Woodruff, S.</td>
+	<td>Transport and fluctuations in high temperature spheromak plasmas</td>
+	<td>2006/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 5), pp. 56105 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2192469">URL</a>&nbsp;</td>
+</tr>
+<tr id="7273363" class="entry">
+	<td>McLean, H., Woodruff, S., Hooper, E., Bulmer, R., Hill, D., Holcomb, C., Moller, J., Stallard, B., Wood, R. &amp; Wang, Z.</td>
+	<td>Suppression of MHD fluctuations leading to improved confinement in a gun-driven spheromak</td>
+	<td>2002/03/25</td>
+	<td>Physical Review Letters<br/>Vol.  88( 12), pp. 125004 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.88.125004">URL</a>&nbsp;</td>
+</tr>
+<tr id="3225594" class="entry">
+	<td>Mehanian, C. &amp; Lovelace, R.</td>
+	<td>Spheromak tilt stabilization with an energetic particle component</td>
+	<td>1988/06/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 6), pp. 1681 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.867015">URL</a>&nbsp;</td>
+</tr>
+<tr id="2653863" class="entry">
+	<td>Meyerhofer, D., Hulse, R. &amp; Zweibel, E.</td>
+	<td>Zero-dimensional study of the compression of low-temperature spheromaks</td>
+	<td>1986/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 2), pp. 235 - 41&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3155508" class="entry">
+	<td>Meyerhofer, D., Levinton, F. &amp; Yamada, M.</td>
+	<td>Particle diffusion in a spheromak</td>
+	<td>1988/03/07</td>
+	<td>Physical Review Letters<br/>Vol.  60( 10), pp. 933 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.60.933">URL</a>&nbsp;</td>
+</tr>
+<tr id="2378395" class="entry">
+	<td>Meyerhofer, D. &amp; Perkins, F.</td>
+	<td>Current-driven instabilities of the kinetic shear Alfven wave: application to reversed field pinches and spheromaks</td>
+	<td>1984/10/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 10), pp. 2483 - 92&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864530">URL</a>&nbsp;</td>
+</tr>
+<tr id="9595618" class="entry">
+	<td>Mezonlin, E., Roberson, S., Raynor, C., Appartaim, R., Johnson, J., Afanasyev, V., Kozlovsky, S., Moller, J., Hill, D., Hooper, E., McLean, H. &amp; Wood, R.</td>
+	<td>Neutral particle analyzer measurements on the SSPX spheromak</td>
+	<td>2007/05/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  78( 5), pp. 53504 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2737756">URL</a>&nbsp;</td>
+</tr>
+<tr id="11556799" class="entry">
+	<td>Micozzi, P., Alladio, F., Mancuso, A. &amp; Rogier, F.</td>
+	<td>Ideal MHD stability limits of the PROTO-SPHERA configuration</td>
+	<td>Sept. 2010</td>
+	<td>Nuclear Fusion<br/>Vol.  50( 9), pp. 095004 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/50/9/095004">URL</a>&nbsp;</td>
+</tr>
+<tr id="3017277" class="entry">
+	<td>Mikic, Z. &amp; Morse, E.</td>
+	<td>Linear stability analysis of compact toroidal plasmas using particle simulation</td>
+	<td>Sept. 1987</td>
+	<td>Physics of Fluids<br/>Vol.  30( 9), pp. 2806 - 24&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866046">URL</a>&nbsp;</td>
+</tr>
+<tr id="9472995" class="entry">
+	<td>Miley, G., Momota, H., Shrestha, P. &amp; Santarius, J.</td>
+	<td>On use of D-3He in fusion space propulsion</td>
+	<td>2006//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  94, pp. 634 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6848243" class="entry">
+	<td>Miyazawa, J., Yamada, H., Yasui, K., Kato, S., Fukumoto, N., Nagata, M. &amp; Uyama, T.</td>
+	<td>Design of spheromak injector using conical accelerator for Large Helical Device</td>
+	<td>2001//</td>
+	<td>Fusion Engineering and Design<br/>Vol.  54( 1), pp. 1 - 12&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(00)00097-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="1944459" class="entry">
+	<td>Mohri, A., Narihara, K., Tomita, Y., Tsuzuki, T., Hasegawa, M., Ukegawa, K. &amp; Miyake, S.</td>
+	<td>Formation of relativistic electron beam rings in a conducting cavity</td>
+	<td>1982/08/</td>
+	<td>Japanese Journal of Applied Physics, Part 2 (Letters)<br/>Vol.  21( 8), pp. 467 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5589426" class="entry">
+	<td>Moir, R.</td>
+	<td>Liquid first walls for magnetic fusion energy configurations</td>
+	<td>1997/04/</td>
+	<td>Nuclear Fusion<br/>Vol.  37( 4), pp. 557 - 66&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/37/4/I13">URL</a>&nbsp;</td>
+</tr>
+<tr id="4381812" class="entry">
+	<td>Morita, A., Hayakawa, A. &amp; Katsurai, M.</td>
+	<td>Equilibrium analysis of flux-core spheromaks in a spheroidal conductive vessel</td>
+	<td>1992/08/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  112-A( 8), pp. 706 - 12&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5502781" class="entry">
+	<td>Morita, A., Ono, Y., Katsurai, M., Yamada, M. &amp; Yoshikawa, S.</td>
+	<td>Experimental investigation on tilt stabilizing effect of external toroidal field in low aspect ratio tokamak</td>
+	<td>1997/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  4( 2), pp. 315 - 22&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872092">URL</a>&nbsp;</td>
+</tr>
+<tr id="5806753" class="entry">
+	<td>Moroz, P.</td>
+	<td>Stellarator-spheromak</td>
+	<td>1997/12/01</td>
+	<td>Physics Letters A<br/>Vol.  236( 1-2), pp. 79 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0375-9601(97)00668-3">URL</a>&nbsp;</td>
+</tr>
+<tr id="10128444" class="entry">
+	<td>Munsat, T., Ellison, C., Light, A., Nuger, J., Willcockson, W. &amp; Wurzel, S.</td>
+	<td>The Colorado FRC experiment</td>
+	<td>2008/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  27( 1), pp. 82 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-007-9108-z">URL</a>&nbsp;</td>
+</tr>
+<tr id="2488567" class="entry">
+	<td>Munson, C., Janos, A., Wysocki, F. &amp; Yamada, M.</td>
+	<td>Experimental control of the spheromak tilting instability</td>
+	<td>1985/05/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 5), pp. 1525 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864986">URL</a>&nbsp;</td>
+</tr>
+<tr id="11685249" class="entry">
+	<td>Murphy, G., Dieckmann, M. &amp; Drury, L.</td>
+	<td>Magnetic vortex growth in the transition layer of a mildly relativistic plasma shock</td>
+	<td>2010/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 11), pp. 110701 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3493627">URL</a>&nbsp;</td>
+</tr>
+<tr id="12150585" class="entry">
+	<td>Murphy, N., Sovinec, C. &amp; Cassak, P.</td>
+	<td>Magnetic reconnection with asymmetry in the outflow direction</td>
+	<td>1 Sept. 2010</td>
+	<td>Journal of Geophysical Research - Part A - Space Physics<br/>Vol.  115( A9), pp. A09206 (13 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2009JA015183">URL</a>&nbsp;</td>
+</tr>
+<tr id="12546007" class="entry">
+	<td>Myers, C., Belova, E., Brown, M., Gray, T., Cothran, C. &amp; Schaffer, M.</td>
+	<td>Three-dimensional magnetohydrodynamics simulations of counter-helicity spheromak merging in the Swarthmore Spheromak Experiment</td>
+	<td>2011/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  18( 11), pp. 112512 (15 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3660533">URL</a>&nbsp;</td>
+</tr>
+<tr id="3705218" class="entry">
+	<td>Nagata, M., Furuya, H. &amp; Uyama, T.</td>
+	<td>Flux amplification of spheromak by magnetic helicity injection</td>
+	<td>1989//</td>
+	<td>Reports of Himeji Institute of Technology( 42A), pp. 54 - 69&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4583204" class="entry">
+	<td>Nagata, M., Kanki, T., Masuda, T., Naito, S., Tatsumi, H. &amp; Uyama, T.</td>
+	<td>Relaxation oscillations and toroidal-current regeneration in a helicity-driven spheromak</td>
+	<td>1993/12/27</td>
+	<td>Physical Review Letters<br/>Vol.  71( 26), pp. 4342 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.71.4342">URL</a>&nbsp;</td>
+</tr>
+<tr id="4048026" class="entry">
+	<td>Nagata, M., Masuda, T., Naito, S. &amp; Uyama, T.</td>
+	<td>Formation and sustainment of a spheromak with bias flux by DC helicity injection</td>
+	<td>1991/10/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  60( 10), pp. 3203 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8167804" class="entry">
+	<td>Nagata, M. &amp; Uyama, T.</td>
+	<td>Ion Doppler spectroscopic measurement with a multi-channel PMT on spheromak plasmas</td>
+	<td>2004/02/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  124-A( 2), pp. 217 - 18&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7135338" class="entry">
+	<td>Nagata, N., Fukumoto, N., Ogawa, H., Ogawa, T., Uehara, K., Niimi, H., Shibata, T., Suzuki, Y., Miura, Y., Kayukawa, N., Uyama, T. &amp; Kimura, H.</td>
+	<td>Behaviour of compact toroid injected into an external magnetic field</td>
+	<td>2001/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  41( 11), pp. 1687 - 94&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/41/11/318">URL</a>&nbsp;</td>
+</tr>
+<tr id="8086493" class="entry">
+	<td>Nandy, D., Hahn, M., Canfield, R. &amp; Longcope, D.</td>
+	<td>Detection of a Taylor-like plasma relaxation process in the Sun</td>
+	<td>2003/11/01</td>
+	<td>Astrophysical Journal, Letters<br/>Vol.  597( 1), pp. 73 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1086/379815">URL</a>&nbsp;</td>
+</tr>
+<tr id="1837846" class="entry">
+	<td>Nebel, R., Moses, R., Hewett, D. &amp; Miley, G.</td>
+	<td>Ideal and resistive magnetohydrodynamic stable startup and burn for the reversed-field pinch reactor</td>
+	<td>1982/01/</td>
+	<td>Nuclear Technology/Fusion<br/>Vol.  2( 1), pp. 85 - 90&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2707280" class="entry">
+	<td>Nishikawa, M., Narikawa, T., Iwamoto, M. &amp; Watanabe, K.</td>
+	<td>Conceptual design of a cassette compact toroid reactor (the zero-phase study)-quick replacement of the reactor core</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 101 - 15&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1600190" class="entry">
+	<td>Nogi, Y., Ogura, H., Osanai, Y., Saito, K., Shiina, S. &amp; Yoshimura, H.</td>
+	<td>Spheromak formation by theta pinch</td>
+	<td>1980/08/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  49( 2), pp. 710 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9541432" class="entry">
+	<td>O'Neill, R., Smith, R., Akcay, C., Hamp, W., Aboul Hosn, R., Jarboe, T., Redd, A., Sieck, P., Sutphin, G. &amp; Wrobel, J.</td>
+	<td>Overview of HIT-SI diagnostic systems</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 131 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9076-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="2488498" class="entry">
+	<td>Oda, Y.</td>
+	<td>3D MHD simulation study on pressure-driven instability of spheromak in a flux conserver</td>
+	<td>1985/03/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 3), pp. 958 - 66&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2591088" class="entry">
+	<td>Odagiri, K., Miyauchi, Y. &amp; Oomura, H.</td>
+	<td>Spheromak type plasma experiment apparatus</td>
+	<td>1985/05/</td>
+	<td>Ishikawajima-Harima Engineering Review<br/>Vol.  25( 3), pp. 141 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2037845" class="entry">
+	<td>Ohnishi, M. &amp; Yoshikawa, K.</td>
+	<td>Limitation of burn time due to ash accumulation in a moving ring reactor</td>
+	<td>1982/12/</td>
+	<td>Journal of Nuclear Science and Technology<br/>Vol.  19( 12), pp. 1054 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1546822" class="entry">
+	<td>Okabayashi, M. &amp; Todd, A.</td>
+	<td>A numerical study of MHD equilibrium and stability of the Spheromak</td>
+	<td>1980/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  20( 5), pp. 571 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5677436" class="entry">
+	<td>Ono, R. &amp; Katsurai, M.</td>
+	<td>Analytical expression of equilibrium configuration of low aspect ratio Tokamaks with helicity injection</td>
+	<td>1997/06/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  117-A( 6), pp. 591 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7774767" class="entry">
+	<td>Ono, V., Kimura, T., Kawamori, E., Murata, Y., Miyazaki, S., Ueda, Y., Inomoto, M., Balandin, A. &amp; Katsurai, M.</td>
+	<td>High-beta characteristics of first and second-stable spherical tokamaks in reconnection heating experiments of TS-3</td>
+	<td>2003/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  43( 8), pp. 789 - 94&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/43/2/601">URL</a>&nbsp;</td>
+</tr>
+<tr id="8823711" class="entry">
+	<td>Ono, Y.</td>
+	<td>Heating properties of merging/reconnection startup of high-beta ST</td>
+	<td>2005//</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  125-A( 11), pp. 958 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1541/ieejfms.125.958">URL</a>&nbsp;</td>
+</tr>
+<tr id="3358621" class="entry">
+	<td>Ono, Y., Ellis, R.A., J., Janos, A., Levinton, F., Mayo, R., Motley, R., Ueda, Y. &amp; Yamada, M.</td>
+	<td>Relaxation phenomena in the high-temperature S-1 spheromak</td>
+	<td>1988/12/19</td>
+	<td>Physical Review Letters<br/>Vol.  61( 25), pp. 2847 - 50&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.61.2847">URL</a>&nbsp;</td>
+</tr>
+<tr id="3860638" class="entry">
+	<td>Ono, Y. &amp; Katsurai, M.</td>
+	<td>Three-dimensional numerical simulation of the multi-helicity magnetohydrodynamic relaxation process in low-q spheromaks</td>
+	<td>1991/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  31( 2), pp. 233 - 44&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7774747" class="entry">
+	<td>Ono, Y., Matsuyama, T., Umeda, K. &amp; Kawamori, E.</td>
+	<td>Spontaneous and artificial generation of sheared-flow in oblate FRCs in TS-3 and 4 FRC Experiments</td>
+	<td>2003/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  43( 8), pp. 649 - 54&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/43/2/601">URL</a>&nbsp;</td>
+</tr>
+<tr id="4532470" class="entry">
+	<td>Ono, Y., Morita, A., Katsurai, M. &amp; Yamada, M.</td>
+	<td>Experimental investigation of three-dimensional magnetic reconnection by use of two colliding spheromaks</td>
+	<td>1993/10/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 10), pp. 3691 - 701&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860840">URL</a>&nbsp;</td>
+</tr>
+<tr id="7999908" class="entry">
+	<td>Ono, Y. &amp; Umeda, K.</td>
+	<td>FRC formation process of two colliding spheromaks with counterhelicity</td>
+	<td>2004/01/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  124-A( 1), pp. 62 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1541/ieejfms.124.62">URL</a>&nbsp;</td>
+</tr>
+<tr id="3953057" class="entry">
+	<td>Ono, Y., Yamada, M., Janos, A. &amp; Levinton, F.</td>
+	<td>Experimental study of the relaxation cycle of a decaying spheromak in an external magnetic field</td>
+	<td>1991/06/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 6), pp. 1452 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859711">URL</a>&nbsp;</td>
+</tr>
+<tr id="3072586" class="entry">
+	<td>Ono, Y., Yumoto, A. &amp; Katsurai, M.</td>
+	<td>Experimental studies on the sustainment of spheromak plasmas by an inductive drive of the toroidal current</td>
+	<td>1987/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  PS-15( 4), pp. 418 - 27&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8017755" class="entry">
+	<td>Pandya, H. &amp; Jain, K.</td>
+	<td>Electron cyclotron emission as diagnostic tool in spheromak</td>
+	<td>2004/08/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  46( 8), pp. 1231 - 46&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/46/8/005">URL</a>&nbsp;</td>
+</tr>
+<tr id="2114877" class="entry">
+	<td>Park, W. &amp; Jardin, S.</td>
+	<td>Nonlinear saturation of nonresonant internal instabilities in a straight spheromak</td>
+	<td>1983/07/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 7), pp. 1871 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864364">URL</a>&nbsp;</td>
+</tr>
+<tr id="3284922" class="entry">
+	<td>Parks, P.</td>
+	<td>Refueling tokamaks by injection of compact toroids</td>
+	<td>19 Sept. 1988</td>
+	<td>Physical Review Letters<br/>Vol.  61( 12), pp. 1364 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.61.1364">URL</a>&nbsp;</td>
+</tr>
+<tr id="13389148" class="entry">
+	<td>Patrov, M., Petrov, Y., Gusev, V., Kurskiev, G., Novokhatskii, A., Sakharov, S. &amp; Tolstyakov, S.</td>
+	<td>Snake Instability in the Plasma of the Globus-M Spherical Tokamak</td>
+	<td>Sept. 2011</td>
+	<td>Technical Physics<br/>Vol.  56( 9), pp. 1259 - 65&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S1063784211090180">URL</a>&nbsp;</td>
+</tr>
+<tr id="2740246" class="entry">
+	<td>Peng, Y.-K. &amp; Strickler, D.</td>
+	<td>Features of spherical torus plasmas</td>
+	<td>1986/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 6), pp. 769 - 77&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3255169" class="entry">
+	<td>Peyser, T. &amp; Goldenbaum, G.</td>
+	<td>Plasma rotation during spheromak formation</td>
+	<td>1988/08/22</td>
+	<td>Physical Review Letters<br/>Vol.  61( 8), pp. 955 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.61.955">URL</a>&nbsp;</td>
+</tr>
+<tr id="2150770" class="entry">
+	<td>Pfersich, C., Gruber, R. &amp; Troyon, F.</td>
+	<td>Free-boundary MHD stability of pressureless oblate spheromaks-dependence on aspect ratio and elongation</td>
+	<td>Sept. 1983</td>
+	<td>Nuclear Fusion<br/>Vol.  23( 9), pp. 1127 - 34&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7099984" class="entry">
+	<td>Qin, G., Lukin, V., Cothran, C., Brown, M. &amp; Matthaeus, W.</td>
+	<td>Energetic particles and magnetohydrodynamic activity in the Swarthmore Spheromak Experiment</td>
+	<td>2001/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 11), pp. 4816 - 25&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1405015">URL</a>&nbsp;</td>
+</tr>
+<tr id="11904625" class="entry">
+	<td>Rakowski, C., Laming, J. &amp; Lyutikov, M.</td>
+	<td>In situ heating of the 2007 May 19 CME ejecta detected by stereo/plastic and ace</td>
+	<td>2011/03/20</td>
+	<td>Astrophysical Journal<br/>Vol.  730( 1), pp. 30 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0004-637X/730/1/30">URL</a>&nbsp;</td>
+</tr>
+<tr id="7259285" class="entry">
+	<td>Raman, R., Jarboe, T., Mueller, D., Schaffer, M., Maqueda, R., Nelson, B., Sabbagh, S., Bell, M., Ewig, R., Fredrickson, E., Gates, D., Hosea, J., Jardin, S., Ji, H., Kaita, R., Kaye, S., Kugel, H., Lao, L., Maingi, R., Menard, J., Ono, M., Orvis, D., Paoletti, F., Paul, S., Peng, Y.-K., Skinner, C., Wilgen, J. &amp; Zweben, S.</td>
+	<td>Non-inductive current generation in NSTX using coaxial helicity injection</td>
+	<td>2001/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  41( 8), pp. 1081 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/41/8/311">URL</a>&nbsp;</td>
+</tr>
+<tr id="5682673" class="entry">
+	<td>Raman, R., Martin, F., Haddad, E., St-Onge, M., Abel, G., Cote, C., Richard, N., Blanchard, N., Mai, H., Quirion, B., LaChambre, J.-L., Gauvreau, J.-L., Pacher, G., DeCoste, R., Gierszewski, P., Hwang, D., Hirose, A., Savoie, S., LeBlanc, B.-J., McLean, H., Xiao, C., Stansfield, B., Cote, A., Michaud, D. &amp; Chartre, M.</td>
+	<td>Experimental demonstration of tokamak fuelling by compact toroid injection</td>
+	<td>1997/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  37( 7), pp. 967 - 72&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/37/7/I05">URL</a>&nbsp;</td>
+</tr>
+<tr id="4850467" class="entry">
+	<td>Raman, R., Martin, F., Quirion, B., St-Onge, M., Lachambre, J.-L., Michaud, D., Sawatzky, B., Thomas, J., Hirose, A., Hwang, D., Richard, N., Cote, C., Abel, G., Pinsonneault, D., Gauvreau, J.-L., Stansfield, B., Decoste, R., Cote, A., Zuzak, W. &amp; Boucher, C.</td>
+	<td>Experimental demonstration of nondisruptive, central fuelling of a tokamak by compact toroid injection</td>
+	<td>1994/12/05</td>
+	<td>Physical Review Letters<br/>Vol.  73( 23), pp. 3101 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.73.3101">URL</a>&nbsp;</td>
+</tr>
+<tr id="4609645" class="entry">
+	<td>Raman, R., Thomas, J., Hwang, D., Conway, G., Martin, F., Hirose, A., Gierszewski, P. &amp; Decoste, R.</td>
+	<td>Design of the compact toroid fueler for center fueling Tokamak de Varennes</td>
+	<td>1993/11/</td>
+	<td>Fusion Technology<br/>Vol.  24( 3), pp. 239 - 50&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1575250" class="entry">
+	<td>Rebhan, E. &amp; Salat, A.</td>
+	<td>Combined n=0 and n0 MHD stability analysis of axisymmetric surface current model equilibria</td>
+	<td>1980/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  20( 7), pp. 839 - 47&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10128443" class="entry">
+	<td>Redd, A., Jarboe, T., AboulHosn, R., Akcay, C., Hamp, W., Marklin, G., Nelson, B., O'Neill, R., Sieck, P., Smith, R., Stewart, B. &amp; Wrobel, J.</td>
+	<td>Internal fields in helicity injected torus with steady inductive helicity injection (HIT-SI) discharges</td>
+	<td>2008/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  27( 1), pp. 100 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-007-9107-0">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541398" class="entry">
+	<td>Redd, A., Jarboe, T., Hamp, W., Nelson, B., O'Neill, R., Sieck, P., Smith, R., Sutphin, G. &amp; Wrobel, J.</td>
+	<td>Overview of the Helicity Injected Torus (HIT) program</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 163 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9049-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="1978038" class="entry">
+	<td>Reiman, A.</td>
+	<td>Coalescence of Spheromaks</td>
+	<td>1982/10/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 10), pp. 1885 - 93&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863667">URL</a>&nbsp;</td>
+</tr>
+<tr id="2930661" class="entry">
+	<td>Robertson, S. &amp; Schmid, P.</td>
+	<td>Operation of a reversed field pinch without a conducting shell</td>
+	<td>1987/03/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 3), pp. 884 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866341">URL</a>&nbsp;</td>
+</tr>
+<tr id="2903850" class="entry">
+	<td>Robertson, S. &amp; Schmid, P.</td>
+	<td>Instability of a reversed field pinch without a conducting shell</td>
+	<td>1987/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  27( 2), pp. 267 - 75&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7590179" class="entry">
+	<td>Roh, Y., Domier, C. &amp; Luhmann, N.</td>
+	<td>Ultrashort pulse reflectometry for density profile and fluctuation measurements on SSPX</td>
+	<td>2003/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 3), pp. 1518 - 21&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1527254">URL</a>&nbsp;</td>
+</tr>
+<tr id="11965625" class="entry">
+	<td>Roh, Y. &amp; Lee, S.H.</td>
+	<td>Simulation of electron density profile reconstruction on ultrashort-pulse reflectometry</td>
+	<td>2010/06/</td>
+	<td>Japanese Journal of Applied Physics<br/>Vol.  49( 6), pp. 060214 (3 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1143/JJAP.49.060214">URL</a>&nbsp;</td>
+</tr>
+<tr id="7942683" class="entry">
+	<td>Roh, Y.-S.</td>
+	<td>Ultrashort pulse reflectometry for the measurement of electron density profiles</td>
+	<td>2004/01/</td>
+	<td>Transactions of the Korean Institute of Electrical Engineers, C<br/>Vol.  53( 1), pp. 8 - 14&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8087190" class="entry">
+	<td>Romero-Talamas, C., Bellan, P. &amp; Hsu, S.</td>
+	<td>Multielement magnetic probe using commercial chip inductors</td>
+	<td>2004/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  75( 8), pp. 2664 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1771483">URL</a>&nbsp;</td>
+</tr>
+<tr id="8827811" class="entry">
+	<td>Romero-Talamas, C., Holcomb, C., Bellan, P. &amp; Hill, D.</td>
+	<td>Spheromak formation and sustainment studies at the sustained spheromak physics experiment using high-speed imaging and magnetic diagnostics</td>
+	<td>2006/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 2), pp. 22502 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2140682">URL</a>&nbsp;</td>
+</tr>
+<tr id="9551512" class="entry">
+	<td>Romero-Talamas, C., Hooper, E., Hill, D., Cohen, B., McLean, H., Wood, R. &amp; Moller, J.</td>
+	<td>Comparison between experimental measurements and numerical simulations of spheromak formation in SSPX</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 169 - 72&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9040-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="9976554" class="entry">
+	<td>Romero-Talamas, C., Hooper, E., Jayakumar, R., McLean, H., Wood, R. &amp; Moller, J.</td>
+	<td>Measurements and phenomenological modeling of magnetic flux buildup in spheromak plasmas</td>
+	<td>2008/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 4), pp. 042503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2904917">URL</a>&nbsp;</td>
+</tr>
+<tr id="10128446" class="entry">
+	<td>Romero-Talamas, C., McLean, H., Hooper, E., Wood, R., LoDestro, L. &amp; Moller, J.</td>
+	<td>The search for reconnection and helicity during formation of a bounded spheromak</td>
+	<td>2008/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  27( 1), pp. 104 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-007-9110-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="1340678" class="entry">
+	<td>Rosenbluth, M. &amp; Bussac, M.</td>
+	<td>MHD stability of Spheromak</td>
+	<td>1979/04/</td>
+	<td>Nuclear Fusion<br/>Vol.  19( 4), pp. 489 - 98&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5598110" class="entry">
+	<td>Rusbridge, M., Gee, S., Browning, P., Cunningham, G., Duck, R., Al-Karkhy, A., Martin, R. &amp; Bradley, J.</td>
+	<td>The design and operation of the SPHEX spheromak</td>
+	<td>1997/05/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  39( 5), pp. 683 - 714&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/39/5/003">URL</a>&nbsp;</td>
+</tr>
+<tr id="9344633" class="entry">
+	<td>Ryutov, D.</td>
+	<td>A model of plasma rotation in the livermore spheromak for the regimes of large connection lengths</td>
+	<td>2007/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  14( 2), pp. 22506 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2435705">URL</a>&nbsp;</td>
+</tr>
+<tr id="7798902" class="entry">
+	<td>Ryutov, D., Cohen, R. &amp; Hill, D.</td>
+	<td>A phenomenological model of the current filamentation instability driven by cathode processes in the Livermore spheromak</td>
+	<td>2003/07/</td>
+	<td>Plasma Physics Reports<br/>Vol.  29( 7), pp. 605 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/1.1592560">URL</a>&nbsp;</td>
+</tr>
+<tr id="3644507" class="entry">
+	<td>Sahlin, P., Pierce, W., Biglari, H., Fleischmann, H. &amp; Jardin, S.</td>
+	<td>Numerical drift orbit calculations for force-free spheromak configurations</td>
+	<td>1990/03/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 3), pp. 554 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859292">URL</a>&nbsp;</td>
+</tr>
+<tr id="3563597" class="entry">
+	<td>Salingaros, N.</td>
+	<td>The Spheromak as an axisymmetric spherical dynamo: clarification of an old ambiguity</td>
+	<td>1989/11/20</td>
+	<td>Modern Physics Letters B<br/>Vol.  3( 17), pp. 1285 - 92&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4434408" class="entry">
+	<td>Salingaros, N. &amp; Carrera, R.</td>
+	<td>Oscillation and reconnection of plasma fibers in a description of Tokamak phenomena</td>
+	<td>1993/05/</td>
+	<td>Fusion Technology<br/>Vol.  23( 3), pp. 257 - 66&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2010472" class="entry">
+	<td>Sato, T. &amp; Hayashi, T.</td>
+	<td>Three-dimensional simulation of spheromak creation and tilting disruption</td>
+	<td>1983/01/03</td>
+	<td>Physical Review Letters<br/>Vol.  50( 1), pp. 38 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.50.38">URL</a>&nbsp;</td>
+</tr>
+<tr id="2194792" class="entry">
+	<td>Sato, T., Oda, Y., Otsuka, S., Katayama, K. &amp; Katsurai, M.</td>
+	<td>Numerical simulation of axisymmetric spheromak merging</td>
+	<td>1983/12/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 12), pp. 3602 - 11&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864120">URL</a>&nbsp;</td>
+</tr>
+<tr id="2057798" class="entry">
+	<td>Sato, T., Todd, A. &amp; Okuda, H.</td>
+	<td>Numerical simulation of slow spheromak formation: flux control by formation speed</td>
+	<td>1983/03/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 3), pp. 775 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864201">URL</a>&nbsp;</td>
+</tr>
+<tr id="6796940" class="entry">
+	<td>Schultz, J.</td>
+	<td>Cost-effective superconducting magnet design for next-step fusion experiments</td>
+	<td>Sept. 1998</td>
+	<td>Journal of Fusion Energy<br/>Vol.  17( 3), pp. 261 - 2&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/A:1021874732747">URL</a>&nbsp;</td>
+</tr>
+<tr id="5549369" class="entry">
+	<td>Semyonov, V., Starodubtseva, L. &amp; Fokin, A.</td>
+	<td>Calculation of the strength of radiation lines of admixtures of light elements in a deuterium plasma</td>
+	<td>1996/05/</td>
+	<td>Journal of Applied Spectroscopy<br/>Vol.  63( 3), pp. 414 - 20&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="14134126" class="entry">
+	<td>Seward, C.</td>
+	<td>Ball Lightning Events Explained as Self-Stable Spinning High-Density Plasma Toroids or Atmospheric Spheromaks</td>
+	<td>2014//</td>
+	<td>IEEE Access<br/>Vol.  2, pp. 153 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/ACCESS.2014.2308476">URL</a>&nbsp;</td>
+</tr>
+<tr id="3055631" class="entry">
+	<td>Sgro, A., Mirin, A. &amp; Marklin, G.</td>
+	<td>The evolution of a decaying spheromak</td>
+	<td>1987/10/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 10), pp. 3219 - 36&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866497">URL</a>&nbsp;</td>
+</tr>
+<tr id="1740757" class="entry">
+	<td>Sgro, A. &amp; Winske, D.</td>
+	<td>Simulation of the formation of the Ps-1 spheromak</td>
+	<td>1981/06/</td>
+	<td>Physics of Fluids<br/>Vol.  24( 6), pp. 1156 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863505">URL</a>&nbsp;</td>
+</tr>
+<tr id="2986019" class="entry">
+	<td>Shaw, R., Booske, J. &amp; McCarrick, M.</td>
+	<td>Broadband calibration for magnetic probes for use in the Maryland spheromak</td>
+	<td>1987/07/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  58( 7), pp. 1204 - 10&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1139440">URL</a>&nbsp;</td>
+</tr>
+<tr id="3035578" class="entry">
+	<td>Shaw, R. &amp; Finn, J.</td>
+	<td>Axisymmetric equilibria in the Maryland Spheromak</td>
+	<td>1987/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  27( 8), pp. 1309 - 17&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4987509" class="entry">
+	<td>Sheffield, J.</td>
+	<td>Magnetic fusion commercial power plants</td>
+	<td>Sept. 1994</td>
+	<td>Journal of Fusion Energy<br/>Vol.  13( 2-3), pp. 167 - 70&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13353599" class="entry">
+	<td>Shikama, T. &amp; Bellan, P.</td>
+	<td>Development of a polarization resolved spectroscopic diagnostic for measurements of the vector magnetic field in the Caltech coaxial magnetized plasma jet experiment</td>
+	<td>2013/02/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 2), pp. 023507 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4793403">URL</a>&nbsp;</td>
+</tr>
+<tr id="4099282" class="entry">
+	<td>Shimamura, S.</td>
+	<td>Formation and sustainment of spheromak by using oscillating gun current with DC component</td>
+	<td>1991/12/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  60( 12), pp. 4384 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11432798" class="entry">
+	<td>Shiota, D., Kusano, K., Miyoshi, T. &amp; Shibata, K.</td>
+	<td>Magnetohydrodynamic modeling for a formation process of coronal mass ejections: interaction between an ejecting flux rope and an ambient field</td>
+	<td>2010/08/01</td>
+	<td>Astrophysical Journal<br/>Vol.  718( 2), pp. 1305 - 14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0004-637X/718/2/1305">URL</a>&nbsp;</td>
+</tr>
+<tr id="2245414" class="entry">
+	<td>Shumaker, D.</td>
+	<td>Numerical calculation of compact torus equilibria</td>
+	<td>1984/03/</td>
+	<td>Journal of Computational Physics<br/>Vol.  53( 3), pp. 456 - 71&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4712467" class="entry">
+	<td>Shumlak, U., Fowler, T. &amp; Morse, E.</td>
+	<td>Rotational effects on the m=1 magnetohydrodynamic instability in spheromaks</td>
+	<td>1994/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  1( 3), pp. 643 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.870809">URL</a>&nbsp;</td>
+</tr>
+<tr id="6630659" class="entry">
+	<td>Shumlak, U. &amp; Jarboe, T.</td>
+	<td>Stable high beta spheromak equilibria using concave flux conservers</td>
+	<td>2000/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 7), pp. 2959 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.874147">URL</a>&nbsp;</td>
+</tr>
+<tr id="6404471" class="entry">
+	<td>Shumlak, U. &amp; Jarboe, T.</td>
+	<td>Higher mode stability in spheromak equilibria</td>
+	<td>1999/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 11), pp. 4382 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873703">URL</a>&nbsp;</td>
+</tr>
+<tr id="8387537" class="entry">
+	<td>Sieck, P., Hamp, W., Izzo, V., Jarboe, T., Nelson, B., O'Neill, R., Redd, A. &amp; Smith, R.</td>
+	<td>Initial studies of steady inductive helicity injection on the HIT-SI experiment</td>
+	<td>2005/04/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  33( 2), pp. 723 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2005.845303">URL</a>&nbsp;</td>
+</tr>
+<tr id="8758503" class="entry">
+	<td>Sieck, P., Jarboe, T., Izzo, V., Hamp, W., Nelson, B., O'Neill, R., Redd, A. &amp; Smith, R.</td>
+	<td>Demonstration of steady inductive helicity injection</td>
+	<td>2006/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  46( 2), pp. 254 - 61&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/46/2/008">URL</a>&nbsp;</td>
+</tr>
+<tr id="2707282" class="entry">
+	<td>Smith, A.C., J., Carlson, G., Neef, W.S., J., Ashworth, C., Abreu, K., Fleischmann, H., Schultz, K., Wong, C., Bhadra, D., Creedon, R., Cheng, E., Hopkins, G., Grossmann, W., Woodall, D. &amp; Kammash, T.</td>
+	<td>Conceptual design of a moving-ring reactor</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 136 - 70&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13330467" class="entry">
+	<td>Sonnerup, B. &amp; Hasegawa, H.</td>
+	<td>Reconstruction of steady, three-dimensional, magnetohydrostatic field and plasma structures in space: theory and benchmarking</td>
+	<td>1 Sept. 2011</td>
+	<td>Journal of Geophysical Research: Space Physics<br/>Vol.  116( A9), pp. A09230 (13 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2011JA016675">URL</a>&nbsp;</td>
+</tr>
+<tr id="8270971" class="entry">
+	<td>Sovinec, C., Cohen, B., Cone, G., Hooper, E. &amp; McLean, H.</td>
+	<td>Numerical investigation of transients in the SSPX Spheromak</td>
+	<td>2005/01/28</td>
+	<td>Physical Review Letters<br/>Vol.  94( 3), pp. 035003 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.94.035003">URL</a>&nbsp;</td>
+</tr>
+<tr id="6854405" class="entry">
+	<td>Sovinec, C., Finn, J. &amp; del Castillo-Negrete, D.</td>
+	<td>Formation and sustainment of electrostatically driven spheromaks in the resistive magnetohydrodynamic model</td>
+	<td>2001/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 2), pp. 475 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1335585">URL</a>&nbsp;</td>
+</tr>
+<tr id="7598779" class="entry">
+	<td>Sovinec, C., Gianakon, T., Held, E., Kruger, S. &amp; Schnack, D.</td>
+	<td>NIMROD: a computational laboratory for studying nonlinear fusion magnetohydrodynamics</td>
+	<td>2003/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 5), pp. 1727 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1560920">URL</a>&nbsp;</td>
+</tr>
+<tr id="11557389" class="entry">
+	<td>Spizzo, G., Scarin, P., Agostini, M., Alfier, A., Auriemma, F., Bonfiglio, D., Cappello, S., Fassina, A., Franz, P., Piron, L., Piovesan, P., Puiatti, M., Valisa, M. &amp; Vianello, N.</td>
+	<td>Investigation on the relation between edge radial electric field asymmetries in RFX-mod and density limit</td>
+	<td>Sept. 2010</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  52( 9), pp. 095011 (22 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/52/9/095011">URL</a>&nbsp;</td>
+</tr>
+<tr id="7099971" class="entry">
+	<td>Srinivasan, R., Avinash, K. &amp; Kaw, P.</td>
+	<td>High compact toroidal equilibria</td>
+	<td>2001/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 10), pp. 4483 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1403696">URL</a>&nbsp;</td>
+</tr>
+<tr id="7672786" class="entry">
+	<td>Stallard, B., Hooper, E., Woodruff, S., Bulmer, R., Hill, D., McLean, H. &amp; Wood, R.</td>
+	<td>Magnetic helicity balance in the sustained Spheromak plasma experiment</td>
+	<td>2003/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 7), pp. 2912 - 24&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1580121">URL</a>&nbsp;</td>
+</tr>
+<tr id="9933152" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Equilibrium rotation in field-reversed configurations</td>
+	<td>2008/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 1), pp. 012505 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2834271">URL</a>&nbsp;</td>
+</tr>
+<tr id="7030105" class="entry">
+	<td>Steinhauer, L., Yamada, H. &amp; Ishida, A.</td>
+	<td>Two-fluid flowing equilibria of compact plasmas</td>
+	<td>Sept. 2001</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 9), pp. 4053 - 61&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1388034">URL</a>&nbsp;</td>
+</tr>
+<tr id="10687137" class="entry">
+	<td>Stenzel, R., Strohmaier, K. &amp; Urrutia, J.</td>
+	<td>Nonlinear electron magnetohydrodynamics physics. V. Triggered whistler emissions</td>
+	<td>2008/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 6), pp. 062110 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2934699">URL</a>&nbsp;</td>
+</tr>
+<tr id="6432719" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Griskey, M.</td>
+	<td>Laboratory studies of magnetic vortices. II. Helicity reversal during reflection of a magnetic vortex at a conducting boundary</td>
+	<td>1999/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 12), pp. 4458 - 66&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873732">URL</a>&nbsp;</td>
+</tr>
+<tr id="6320977" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Griskey, M.</td>
+	<td>Laboratory studies of magnetic vortices. II. Helicity reversal during reflection of a magnetic vortex at a conducting boundary</td>
+	<td>1999/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 8), pp. 3217 - 25&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873561">URL</a>&nbsp;</td>
+</tr>
+<tr id="10139019" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Whistler spheromaks, instabilities and triggered emission experiments</td>
+	<td>2008/07/01</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  50( 7), pp. 074009 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/50/7/074009">URL</a>&nbsp;</td>
+</tr>
+<tr id="9976542" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Nonlinear electron magnetohydrodynamics physics. I. Whistler spheromaks, mirrors, and field reversed configurations</td>
+	<td>2008/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 4), pp. 042307 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2903065">URL</a>&nbsp;</td>
+</tr>
+<tr id="9907734" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Whistler instability in an electron-magnetohydrodynamic spheromak</td>
+	<td>2007/12/31</td>
+	<td>Physical Review Letters<br/>Vol.  99( 26), pp. 265005 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.99.265005">URL</a>&nbsp;</td>
+</tr>
+<tr id="9015277" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Whistler modes with wave magnetic fields exceeding the ambient field</td>
+	<td>2006/03/10</td>
+	<td>Physical Review Letters<br/>Vol.  96( 9), pp. 095004 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.96.095004">URL</a>&nbsp;</td>
+</tr>
+<tr id="7863215" class="entry">
+	<td>Strauss, H.</td>
+	<td>Nonlinear magnetohydrodynamics in the dag confinement configuration</td>
+	<td>2004/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 3), pp. 1236 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1644579">URL</a>&nbsp;</td>
+</tr>
+<tr id="9976544" class="entry">
+	<td>Strohmaier, K., Urrutia, J. &amp; Stenzel, R.</td>
+	<td>Nonlinear electron magnetohydrodynamics physics. III. Electron energization</td>
+	<td>2008/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 4), pp. 042309 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2903070">URL</a>&nbsp;</td>
+</tr>
+<tr id="1756619" class="entry">
+	<td>Sudan, R. &amp; Kaw, P.</td>
+	<td>Stabilizing effect of finite-gyroradius beam particles on the tilting mode of spheromaks</td>
+	<td>1981/08/24</td>
+	<td>Physical Review Letters<br/>Vol.  47( 8), pp. 575 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.47.575">URL</a>&nbsp;</td>
+</tr>
+<tr id="7003532" class="entry">
+	<td>Suzuki, Y., Hayashi, T. &amp; Kishimoto, Y.</td>
+	<td>Theory and MHD simulation of fuelling by compact toroid injection</td>
+	<td>2001/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  41( 7), pp. 873 - 81&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/41/7/308">URL</a>&nbsp;</td>
+</tr>
+<tr id="6982534" class="entry">
+	<td>Suzuki, Y., Hayashi, T. &amp; Kishimoto, Y.</td>
+	<td>Dynamics of spheromak-like compact toroids in a drift tube</td>
+	<td>2001/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  41( 6), pp. 769 - 77&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/41/6/313">URL</a>&nbsp;</td>
+</tr>
+<tr id="6772564" class="entry">
+	<td>Suzuki, Y., Hayashi, T. &amp; Kishimoto, Y.</td>
+	<td>Deceleration mechanism of spheromak-like compact toroid penetrating into magnetized plasmas</td>
+	<td>2000/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 12), pp. 5033 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1322061">URL</a>&nbsp;</td>
+</tr>
+<tr id="6534121" class="entry">
+	<td>Suzuki, Y., Watanabe, T.-H., Sato, T. &amp; Hayashi, T.</td>
+	<td>Three dimensional simulation study of spheromak injection into magnetized plasmas</td>
+	<td>2000/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  40( 2), pp. 277 - 88&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/40/2/310">URL</a>&nbsp;</td>
+</tr>
+<tr id="2524494" class="entry">
+	<td>Taguchi, M., Miyazaki, T. &amp; Kaneko, S.</td>
+	<td>Magnetohydrodynamic stability of spheromak plasma in toroidal flux conserver with rectangular cross section</td>
+	<td>1985/06/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 6), pp. 2163 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10381124" class="entry">
+	<td>Tang, X.</td>
+	<td>Self-organization of radio lobe magnetic fields by driven relaxation</td>
+	<td>2008/06/01</td>
+	<td>Astrophysical Journal<br/>Vol.  679( 2), pp. 1000 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1086/586697">URL</a>&nbsp;</td>
+</tr>
+<tr id="10218404" class="entry">
+	<td>Tang, X. &amp; Boozer, A.</td>
+	<td>Reactor prospect of spheromak concept by electrostatic helicity injection</td>
+	<td>2008/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 7), pp. 072510 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2952294">URL</a>&nbsp;</td>
+</tr>
+<tr id="9911558" class="entry">
+	<td>Tang, X. &amp; Boozer, A.</td>
+	<td>Scale-up of spherical tokamak solenoid-free startup by coaxial helicity injection</td>
+	<td>2007/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  14( 10), pp. 100704 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2798052">URL</a>&nbsp;</td>
+</tr>
+<tr id="8905507" class="entry">
+	<td>Tang, X. &amp; Boozer, A.</td>
+	<td>Spherical tokamak with a plasma center column</td>
+	<td>2006/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 4), pp. 42514 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2195381">URL</a>&nbsp;</td>
+</tr>
+<tr id="8519566" class="entry">
+	<td>Tang, X. &amp; Boozer, A.</td>
+	<td>Force-free magnetic relaxation in driven plasmas</td>
+	<td>2005/06/10</td>
+	<td>Physical Review Letters<br/>Vol.  94( 22), pp. 225004 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.94.225004">URL</a>&nbsp;</td>
+</tr>
+<tr id="8428339" class="entry">
+	<td>Tang, X. &amp; Boozer, A.</td>
+	<td>Flux amplification in helicity injected spherical tori</td>
+	<td>2005/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 4), pp. 42113 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1884127">URL</a>&nbsp;</td>
+</tr>
+<tr id="2788269" class="entry">
+	<td>Taylor, J.</td>
+	<td>Relaxation and magnetic reconnection in plasmas</td>
+	<td>1986/07/</td>
+	<td>Reviews of Modern Physics<br/>Vol.  58( 3), pp. 741 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/RevModPhys.58.741">URL</a>&nbsp;</td>
+</tr>
+<tr id="6753724" class="entry">
+	<td>Terry, S., Hwang, D., McLean, H., Horton, R., Evans, R. &amp; Baker, K.</td>
+	<td>The Compact Toroid Injection Experiment tomographic imaging system</td>
+	<td>2000/11/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  71( 11), pp. 4119 - 26&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1318920">URL</a>&nbsp;</td>
+</tr>
+<tr id="6796925" class="entry">
+	<td>Thomassen, K., Hooper, E. &amp; Ryutov, D.</td>
+	<td>The spheromak path to fusion</td>
+	<td>Sept. 1998</td>
+	<td>Journal of Fusion Energy<br/>Vol.  17( 3), pp. 193 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/A:1021893809548">URL</a>&nbsp;</td>
+</tr>
+<tr id="3710282" class="entry">
+	<td>Throumoulopoulos, G. &amp; Pantis, G.</td>
+	<td>Axisymmetric force-free states and relaxation of a spheroidal Spheromak</td>
+	<td>1990/07/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  32( 7), pp. 541 - 51&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/32/7/003">URL</a>&nbsp;</td>
+</tr>
+<tr id="2974259" class="entry">
+	<td>Throumoulopoulos, G. &amp; Pantis, G.</td>
+	<td>Analytic, axisymmetric MHD spheromak type equilibria in parabolic coordinates</td>
+	<td>1987/05/18</td>
+	<td>Physics Letters A<br/>Vol.  121( 8-9), pp. 423 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0375-9601(87)90491-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="8533186" class="entry">
+	<td>Tsuruda, M., Ono, Y. &amp; Katsurai, M.</td>
+	<td>Comparative studies on magnetic flux relaxations of varied spherical toroids produced by co-helicity merging</td>
+	<td>2005/06/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  151( 4), pp. 7 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/eej.20069">URL</a>&nbsp;</td>
+</tr>
+<tr id="8167803" class="entry">
+	<td>Tsuruda, M., Ono, Y. &amp; Katsurai, M.</td>
+	<td>Comparative studies on magnetic flux relaxations of varied spherical toroids produced by co-helicity merging</td>
+	<td>2004/02/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  124-A( 2), pp. 209 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7856658" class="entry">
+	<td>Tsuruda, M., Ono, Y. &amp; Katsurai, M.</td>
+	<td>Comparative experiments of co- and counter-helicity merging in the compact toroid merging device TS-4</td>
+	<td>2003/12/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  145( 4), pp. 1 - 11&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/eej.10207">URL</a>&nbsp;</td>
+</tr>
+<tr id="6203988" class="entry">
+	<td>Tsypin, V., Nascimento, I., Galvao, R., Elfimov, A., Tendler, M., de Azevedo, C. &amp; de Assis, A.</td>
+	<td>Alfven and fast wave forces, affecting ions in magnetic traps with closed magnetic surfaces</td>
+	<td>1999/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 4), pp. 1378 - 81&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873377">URL</a>&nbsp;</td>
+</tr>
+<tr id="2733280" class="entry">
+	<td>Turnbull, A. &amp; Sudan, R.</td>
+	<td>Stability of compact-torus ion-ring hybrid systems to magnetohydrodynamic tilt and shift modes</td>
+	<td>1986/06/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 6), pp. 1923 - 38&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865620">URL</a>&nbsp;</td>
+</tr>
+<tr id="2330101" class="entry">
+	<td>Turner, L.</td>
+	<td>Analytic solutions of B=B having separatrices for geometries with one ignorable coordinate</td>
+	<td>1984/07/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 7), pp. 1677 - 85&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864822">URL</a>&nbsp;</td>
+</tr>
+<tr id="3586387" class="entry">
+	<td>Tuszewski, M. &amp; Wright, B.</td>
+	<td>Observation of field-reversed configurations with spheromak magnetic field profiles</td>
+	<td>1989/11/13</td>
+	<td>Physical Review Letters<br/>Vol.  63( 20), pp. 2236 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.63.2236">URL</a>&nbsp;</td>
+</tr>
+<tr id="7259276" class="entry">
+	<td>Ueda, Y. &amp; Ono, Y.</td>
+	<td>Experimental comparison of compact RFPs, spheromaks and STs under controlled current drive</td>
+	<td>2001/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  41( 8), pp. 981 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/41/8/302">URL</a>&nbsp;</td>
+</tr>
+<tr id="8807066" class="entry">
+	<td>Umansky, M., Bulmer, R., Hill, D., LoDestro, L., McLean, H., Nevins, W., Ryutov, D. &amp; Woodruff, S.</td>
+	<td>Modelling of magnetic perturbations and confinement in SSPX spheromak</td>
+	<td>2006/02/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  48( 2), pp. 235 - 44&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/48/2/005">URL</a>&nbsp;</td>
+</tr>
+<tr id="6491117" class="entry">
+	<td>Urrutia, J., Stenzel, R. &amp; Griskey, M.</td>
+	<td>Laboratory studies of magnetic vortices. III. Collisions of electron magnetohydrodynamic vortices</td>
+	<td>2000/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 2), pp. 519 - 28&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873837">URL</a>&nbsp;</td>
+</tr>
+<tr id="10144608" class="entry">
+	<td>Urrutia, J., Stenzel, R. &amp; Strohmaier, K.</td>
+	<td>Whistler spheromaks</td>
+	<td>2008/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  36( 4), pp. 1170 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2008.924508">URL</a>&nbsp;</td>
+</tr>
+<tr id="10687136" class="entry">
+	<td>Urrutia, J., Stenzel, R. &amp; Strohmaier, K.</td>
+	<td>Nonlinear electron magnetohydrodynamics physics. IV. Whistler instabilities</td>
+	<td>2008/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 6), pp. 062109 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2934680">URL</a>&nbsp;</td>
+</tr>
+<tr id="9976543" class="entry">
+	<td>Urrutia, J., Stenzel, R. &amp; Strohmaier, K.</td>
+	<td>Nonlinear electron magnetohydrodynamics physics. II. Wave propagation and wave-wave interactions</td>
+	<td>2008/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 4), pp. 042308 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2903067">URL</a>&nbsp;</td>
+</tr>
+<tr id="2984771" class="entry">
+	<td>Uyama, T., Honda, Y., Nagata, M., Nishikawa, M., Ozaki, A., Satomi, N. &amp; Watanabe, K.</td>
+	<td>Temporal evolution of the decaying spheromak in the CTCC-I experiment</td>
+	<td>1987/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  27( 5), pp. 799 - 813&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1515911" class="entry">
+	<td>Vahala, G.</td>
+	<td>Nonlinearly stable equilibrium statistical states for spheromaks</td>
+	<td>1980/02/</td>
+	<td>Physics of Fluids<br/>Vol.  32( 2), pp. 418 - 19&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1367765" class="entry">
+	<td>Vahala, G. &amp; Vahala, L.</td>
+	<td>Stable equilibrium statistical states for spheromaks</td>
+	<td>1979/05/</td>
+	<td>Physics of Fluids<br/>Vol.  22( 5), pp. 871 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.862675">URL</a>&nbsp;</td>
+</tr>
+<tr id="6144778" class="entry">
+	<td>Vandas, M., Fischer, S., Dryer, M., Smith, Z. &amp; Detman, T.</td>
+	<td>Propagation of a spheromak. 2. Three-dimensional structure of a spheromak</td>
+	<td>1998/10/01</td>
+	<td>Journal of Geophysical Research<br/>Vol.  103( A10), pp. 23717 - 25&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/98JA01902">URL</a>&nbsp;</td>
+</tr>
+<tr id="5805350" class="entry">
+	<td>Vandas, M., Fischer, S., Pelant, P., Dryer, M., Smith, Z. &amp; Detman, T.</td>
+	<td>Propagation of a spheromak. 1. Some comparisons of cylindrical and spherical magnetic clouds</td>
+	<td>1997/11/01</td>
+	<td>Journal of Geophysical Research<br/>Vol.  102( A11), pp. 24183 - 93&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/97JA02257">URL</a>&nbsp;</td>
+</tr>
+<tr id="6884300" class="entry">
+	<td>Vandas, M. &amp; Geranios, A.</td>
+	<td>November 17-18, 1975, event: A clue to an internal structure of magnetic clouds?</td>
+	<td>2001/02/01</td>
+	<td>Journal of Geophysical Research<br/>Vol.  106( A2), pp. 1849 - 58&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2000JA900121">URL</a>&nbsp;</td>
+</tr>
+<tr id="6150899" class="entry">
+	<td>Viana, R.</td>
+	<td>MHD equilibrium equation with azimuthal rotation in a curvilinear coordinate system</td>
+	<td>1998/10/</td>
+	<td>International Journal of Theoretical Physics<br/>Vol.  37( 10), pp. 2657 - 67&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/A:1026628822705">URL</a>&nbsp;</td>
+</tr>
+<tr id="12325175" class="entry">
+	<td>Victor, B., Jarboe, T., Hossack, A., Ennis, D., Nelson, B., Smith, R., Akcay, C., Hansen, C., Marklin, G., Hicks, N. &amp; Wrobel, J.</td>
+	<td>Evidence for Separatrix Formation and Sustainment with Steady Inductive Helicity Injection</td>
+	<td>2011/10/14</td>
+	<td>Physical Review Letters<br/>Vol.  107( 16), pp. 165005 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.107.165005">URL</a>&nbsp;</td>
+</tr>
+<tr id="4048047" class="entry">
+	<td>Wang, Y.P.</td>
+	<td>Equilibrium and stability of flux-core spheromak with finite pressure</td>
+	<td>1991/10/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  60( 10), pp. 3359 - 66&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6881862" class="entry">
+	<td>Wang, Z. &amp; Barnes, C.</td>
+	<td>Exact solutions to magnetized plasma flow</td>
+	<td>2001/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 3), pp. 957 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1343505">URL</a>&nbsp;</td>
+</tr>
+<tr id="7353642" class="entry">
+	<td>Wang, Z., Barnes, C., Wurden, G., Hill, D., Hooper, E., McLean, H., Wood, R. &amp; Woodruff, S.</td>
+	<td>Large-amplitude electron density and H fluctuations in the sustained spheromak physics experiment</td>
+	<td>2002/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  42( 6), pp. 643 - 52&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/42/6/302">URL</a>&nbsp;</td>
+</tr>
+<tr id="8002579" class="entry">
+	<td>Wang, Z. &amp; Tang, X.</td>
+	<td>Compact toroids with Alfvenic flows</td>
+	<td>2004/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 7), pp. 3502 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1755707">URL</a>&nbsp;</td>
+</tr>
+<tr id="7590259" class="entry">
+	<td>Wang, Z. &amp; Wurden, G.</td>
+	<td>Hypervelocity dust beam injection for internal magnetic field mapping</td>
+	<td>2003/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 3), pp. 1887 - 91&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1534894">URL</a>&nbsp;</td>
+</tr>
+<tr id="6203978" class="entry">
+	<td>Watanabe, T.-H., Hayashi, T., Sato, T., Yamada, M. &amp; Ji, H.</td>
+	<td>Modeling of magnetic island formation in magnetic reconnection experiment</td>
+	<td>1999/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 4), pp. 1253 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873368">URL</a>&nbsp;</td>
+</tr>
+<tr id="5586150" class="entry">
+	<td>Watanabe, T.-H., Sato, T. &amp; Hayashi, T.</td>
+	<td>Magnetohydrodynamic simulation on co- and counter-helicity merging of spheromaks and driven magnetic reconnection</td>
+	<td>1997/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  4( 5), pp. 1297 - 307&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872305">URL</a>&nbsp;</td>
+</tr>
+<tr id="8910225" class="entry">
+	<td>Weil, D.</td>
+	<td>Helical Dag mode in sustained spheromak devices</td>
+	<td>2005/12/</td>
+	<td>Nuovo Cimento B<br/>Vol.  120B( 12), pp. 1261 - 77&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1393/ncb/i2005-10072-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="3548191" class="entry">
+	<td>Weil, D.</td>
+	<td>The Dag topology: an RFP with inner divertor free of linking coil</td>
+	<td>1989//</td>
+	<td>Comments on Plasma Physics and Controlled Fusion<br/>Vol.  13( 1), pp. 45 - 56&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13083991" class="entry">
+	<td>Weller, M., Safronova, A., Clementson, J., Kantsyrev, V., Safronova, U., Beiersdorfer, P., Petkov, E., Wilcox, P. &amp; Osborne, G.</td>
+	<td>Extreme ultraviolet spectroscopy and modeling of Cu on the SSPX Spheromak and laser plasma Sparky</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 101&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4727916">URL</a>&nbsp;</td>
+</tr>
+<tr id="2522063" class="entry">
+	<td>Whang, K.-W.</td>
+	<td>A computer simulation of spheromak plasma formation</td>
+	<td>1985//</td>
+	<td>Transactions of the Korean Institute of Electrical Engineers<br/>Vol.  34( 2), pp. 80 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10310397" class="entry">
+	<td>Wilcox, P., Safronova, A., Kantsyrev, V., Safronova, U., Williamson, K., Yilmaz, M., Clementson, J., Beiersdorfer, P. &amp; Struve, K.</td>
+	<td>Extreme ultraviolet spectroscopy of low-Z ion plasmas for fusion applications</td>
+	<td>2008/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 10), pp. 10 - 543&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2956745">URL</a>&nbsp;</td>
+</tr>
+<tr id="6278435" class="entry">
+	<td>Willem, D., Browning, P., Woodruff, S. &amp; Gibson, K.</td>
+	<td>The internal magnetic structure and current drive in the SPHEX spheromak</td>
+	<td>1999/05/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  41( 5), pp. 595 - 612&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/41/5/303">URL</a>&nbsp;</td>
+</tr>
+<tr id="8491918" class="entry">
+	<td>Wood, R., Hill, D., Hooper, E., McLean, H., Ryutov, D. &amp; Woodruff, S.</td>
+	<td>Comparison of deuterium and hydrogen experiments in the Sustained Spheromak Physics Experiment</td>
+	<td>2005/03/01</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  337-339, pp. 548 - 52&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jnucmat.2004.10.125">URL</a>&nbsp;</td>
+</tr>
+<tr id="8964738" class="entry">
+	<td>Wood, R., Hill, D., Hooper, E., Woodruff, S., McLean, H. &amp; Stallard, B.</td>
+	<td>Improved operation of the SSPX spheromak</td>
+	<td>2005/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  45( 12), pp. 1582 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/45/12/013">URL</a>&nbsp;</td>
+</tr>
+<tr id="10450369" class="entry">
+	<td>Wood, R., Hill, D., McLean, H., Hooper, E., Hudson, B., Moller, J. &amp; Romero-Talamas, C.</td>
+	<td>Improved magnetic field generation efficiency and higher temperature spheromak plasmas</td>
+	<td>2009/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  49( 2), pp. 025001 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/49/2/025001">URL</a>&nbsp;</td>
+</tr>
+<tr id="10128436" class="entry">
+	<td>Woodruff, S.</td>
+	<td>Technical survey of simply connected compact tori (CTs): spheromaks, FRCs and compression schemes</td>
+	<td>2008/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  27( 1), pp. 134 - 48&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-007-9099-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="8589639" class="entry">
+	<td>Woodruff, S.</td>
+	<td>An overview of tokamak alternatives in the US fusion program with the aim of fostering concept innovation</td>
+	<td>2004/03/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  23( 1), pp. 27 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-004-1869-z">URL</a>&nbsp;</td>
+</tr>
+<tr id="12809379" class="entry">
+	<td>Woodruff, S., Baerny, J., Mattor, N., Stoulil, D., Miller, R. &amp; Marston, T.</td>
+	<td>Path to market for compact modular fusion power cores</td>
+	<td>2012/08/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  31( 4), pp. 305 - 16&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9472-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="8428440" class="entry">
+	<td>Woodruff, S., Cohen, B., Hooper, E., Mclean, H., Stallard, B., Hill, D., Holcomb, C., Romero-Talamas, C., Wood, R., Cone, G. &amp; Sovinec, C.</td>
+	<td>Controlled and spontaneous magnetic field generation in a gun-driven spheromak</td>
+	<td>2005/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 5), pp. 52502 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1878772">URL</a>&nbsp;</td>
+</tr>
+<tr id="7595835" class="entry">
+	<td>Woodruff, S., Hill, D., Stallard, B., Bulmer, R., Cohen, B., Holcomb, C., Hooper, E., McLean, H., Moller, J. &amp; Wood, R.</td>
+	<td>New mode of operating a magnetized coaxial plasma gun for injecting magnetic helicity into a spheromak</td>
+	<td>2003/03/07</td>
+	<td>Physical Review Letters<br/>Vol.  90( 9), pp. 095001 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.90.095001">URL</a>&nbsp;</td>
+</tr>
+<tr id="8905528" class="entry">
+	<td>Woodruff, S., Hooper, E., Pearlstein, L., Bulmer, R., Hill, D., Holcomb, C., McLean, H., Moller, J., Stallard, B. &amp; Wood, R.</td>
+	<td>Observation of a pressure limit in a gun-driven spheromak</td>
+	<td>2006/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 4), pp. 44506 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2188086">URL</a>&nbsp;</td>
+</tr>
+<tr id="10986315" class="entry">
+	<td>Woodruff, S., Macnab, A., Ziemba, T. &amp; Miller, K.</td>
+	<td>Spheromak formation and current sustainment using a repetitively pulsed source</td>
+	<td>2009/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  28( 2), pp. 229 - 34&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-008-9178-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="7518708" class="entry">
+	<td>Woodruff, S. &amp; Nagata, M.</td>
+	<td>Instantaneous current and field structure of a gun-driven spheromak for two gun polarities</td>
+	<td>2002/12/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  44( 12), pp. 2539 - 53&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/44/12/304">URL</a>&nbsp;</td>
+</tr>
+<tr id="8187189" class="entry">
+	<td>Woodruff, S., Stallard, B., McLean, H., Hooper, E., Bulmer, R., Cohen, B., Hill, D., Holcomb, C., Moller, J. &amp; Wood, R.</td>
+	<td>Increasing the magnetic helicity content of a plasma by pulsing a magnetized source</td>
+	<td>2004/11/12</td>
+	<td>Physical Review Letters<br/>Vol.  93( 20), pp. 205002 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.93.205002">URL</a>&nbsp;</td>
+</tr>
+<tr id="3772153" class="entry">
+	<td>Wright, B.</td>
+	<td>Field reversed configurations and spheromaks</td>
+	<td>Sept. 1990</td>
+	<td>Nuclear Fusion<br/>Vol.  30( 9), pp. 1739 - 60&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2612264" class="entry">
+	<td>Wright, B., Sherwood, A., Sgro, A., Platts, D., Marshall, J., Marklin, G., Linford, R., Knox, S., Klingner, P., Jarboe, T., Hoida, H., Henins, I., Fernandez, J. &amp; Barnes, C.</td>
+	<td>The Los Alamos spheromak programme</td>
+	<td>Sept. 1985</td>
+	<td>Nuclear Fusion<br/>Vol.  25( 9), pp. 1313 - 15&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13257174" class="entry">
+	<td>Wrobel, J., Hansen, C., Jarboe, T., Smith, R., Hossack, A., Nelson, B., Marklin, G., Ennis, D., Akcay, C. &amp; Victor, B.</td>
+	<td>Relaxation-time measurement via a time-dependent helicity balance model</td>
+	<td>2013/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 1), pp. 012503 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4773401">URL</a>&nbsp;</td>
+</tr>
+<tr id="3468542" class="entry">
+	<td>Wu, H. &amp; Chen, Y.</td>
+	<td>Magnetohydrodynamic equilibrium of plasma ball lightning</td>
+	<td>1989/08/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 8), pp. 1753 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.858903">URL</a>&nbsp;</td>
+</tr>
+<tr id="2892926" class="entry">
+	<td>Wysocki, F.</td>
+	<td>Experimental investigation of line-tying effects on the spheromak tilt mode</td>
+	<td>1987/02/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 2), pp. 482 - 98&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866399">URL</a>&nbsp;</td>
+</tr>
+<tr id="3716371" class="entry">
+	<td>Wysocki, F., Fernandez, J., Henins, I., Jarboe, T. &amp; Marklin, G.</td>
+	<td>Improved energy confinement in spheromaks with reduced field errors</td>
+	<td>1990/07/02</td>
+	<td>Physical Review Letters<br/>Vol.  65( 1), pp. 40 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.65.40">URL</a>&nbsp;</td>
+</tr>
+<tr id="3302903" class="entry">
+	<td>Wysocki, F., Fernandez, J., Henins, I., Jarboe, T. &amp; Marklin, G.</td>
+	<td>Evidence for a pressure-driven instability in the CTX spheromak</td>
+	<td>1988/11/21</td>
+	<td>Physical Review Letters<br/>Vol.  61( 21), pp. 2457 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.61.2457">URL</a>&nbsp;</td>
+</tr>
+<tr id="2794373" class="entry">
+	<td>Wysocki, F. &amp; Grimm, R.</td>
+	<td>A new method for computing normal modes in axisymmetric toroidal geometry using a scalar form of ideal MHD</td>
+	<td>1986/10/</td>
+	<td>Journal of Computational Physics<br/>Vol.  66( 2), pp. 255 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0021-9991(86)90066-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="2612267" class="entry">
+	<td>Yamada, M.</td>
+	<td>S-1 spheromak</td>
+	<td>Sept. 1985</td>
+	<td>Nuclear Fusion<br/>Vol.  25( 9), pp. 1327 - 30&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2707273" class="entry">
+	<td>Yamada, M.</td>
+	<td>Review of experimental spheromak research and future prospects</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 38 - 47&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3828506" class="entry">
+	<td>Yamada, M., Chu, T., Ellis, R.A., J., Janos, A., Levinton, F., Mayo, R., Motley, R., Nagata, M., Ono, Y., Satomi, N. &amp; Ueda, Y.</td>
+	<td>Experimental investigation of magnetic compression of a spheromak plasma</td>
+	<td>1990/12/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 12), pp. 3074 - 80&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859218">URL</a>&nbsp;</td>
+</tr>
+<tr id="1677671" class="entry">
+	<td>Yamada, M., Furth, H., Hsu, W., Janos, A., Jardin, S., Okabayashi, M., Sinnis, J., Stix, T. &amp; Yamazaki, K.</td>
+	<td>Quasistatic formation of the spheromak plasma configuration</td>
+	<td>1981/01/19</td>
+	<td>Physical Review Letters<br/>Vol.  46( 3), pp. 188 - 91&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.46.188">URL</a>&nbsp;</td>
+</tr>
+<tr id="5576139" class="entry">
+	<td>Yamada, M., Ji, H., Hsu, S., Carter, T., Kulsrud, R., Ono, Y. &amp; Perkins, F.</td>
+	<td>Identification of Y-shaped and O-shaped diffusion regions during magnetic reconnection in a laboratory plasma</td>
+	<td>1997/04/21</td>
+	<td>Physical Review Letters<br/>Vol.  78( 16), pp. 3117 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.78.3117">URL</a>&nbsp;</td>
+</tr>
+<tr id="5410010" class="entry">
+	<td>Yamada, M., Pomphrey, N., Morita, A., Ono, Y. &amp; Katsurai, M.</td>
+	<td>Global stability study of the ultralow aspect ratio tokamak, ULART</td>
+	<td>Sept. 1996</td>
+	<td>Nuclear Fusion<br/>Vol.  36( 9), pp. 1210 - 16&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/36/9/I10">URL</a>&nbsp;</td>
+</tr>
+<tr id="1651431" class="entry">
+	<td>Yamazaki, K.</td>
+	<td>Internal tilting-mode stability of a slightly non-spherical spheromak</td>
+	<td>1980/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  20( 11), pp. 1459 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6679147" class="entry">
+	<td>Yee, J. &amp; Bellan, P.</td>
+	<td>Taylor relaxation and decay of unbounded, freely expanding spheromaks</td>
+	<td>Sept. 2000</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 9), pp. 3625 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1287137">URL</a>&nbsp;</td>
+</tr>
+<tr id="2709728" class="entry">
+	<td>Yoshioka, K., Antonsen, T.M., J. &amp; Ott, E.</td>
+	<td>Feasibility of steady-state spheromak operation by ECRH current drive</td>
+	<td>1986/04/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 4), pp. 439 - 47&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12129520" class="entry">
+	<td>You, S., Tanabe, H., Ono, Y. &amp; Balandin, A.</td>
+	<td>Vector and Scalar Tomography of Compact Toroid Plasmas</td>
+	<td>2010/12/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  29( 6), pp. 592 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-010-9317-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="4019661" class="entry">
+	<td>Young, P., Wysocki, F., Yamada, M. &amp; Janos, A.</td>
+	<td>Experimental study of a transformer-driven spheromak plasma</td>
+	<td>Sept. 1991</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 9), pp. 2591 - 600&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859971">URL</a>&nbsp;</td>
+</tr>
+<tr id="9385732" class="entry">
+	<td>Yun, G., You, S. &amp; Bellan, P.</td>
+	<td>Large density amplification measured on jets ejected from a magnetized plasma gun</td>
+	<td>2007/03/</td>
+	<td>Nuclear Fusion<br/>Vol.  47( 3), pp. 181 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/47/3/003">URL</a>&nbsp;</td>
+</tr>
+<tr id="2539174" class="entry">
+	<td>Zweibel, E. &amp; Pomphrey, N.</td>
+	<td>Tilt stability of rotating current rings with resistive conductors</td>
+	<td>1985/08/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 8), pp. 2517 - 23&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865260">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 28/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

@@ -1,0 +1,1872 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="13855879" class="entry">
+	<td>Akbari-Moghanjoughi, M.</td>
+	<td>Shukla-Eliasson attractive force: revisited</td>
+	<td>2013/04/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  79, pp. 189 - 96&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1017/S0022377812000839">URL</a>&nbsp;</td>
+</tr>
+<tr id="12884058" class="entry">
+	<td>Ando, B., Baglio, S., L'Episcopo, G. &amp; Trigona, C.</td>
+	<td>Investigation on Mechanically Bistable MEMS Devices for Energy Harvesting From Vibrations</td>
+	<td>2012/08/</td>
+	<td>Journal of Microelectromechanical Systems<br/>Vol.  21( 4), pp. 779 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/JMEMS.2012.2192912">URL</a>&nbsp;</td>
+</tr>
+<tr id="13659861" class="entry">
+	<td>Bandara, R. &amp; Khachan, J.</td>
+	<td>Spherical ion oscillations in a positive polarity gridded inertial-electrostatic confinement device</td>
+	<td>2013/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 7), pp. 072705 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4813801">URL</a>&nbsp;</td>
+</tr>
+<tr id="5954321" class="entry">
+	<td>Barnes, D. &amp; Nebel, R.</td>
+	<td>Stable, thermal equilibrium, large-amplitude, spherical plasma oscillations in electrostatic confinement devices</td>
+	<td>1998/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  5( 7), pp. 2498 - 503&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872933">URL</a>&nbsp;</td>
+</tr>
+<tr id="4532467" class="entry">
+	<td>Barnes, D., Nebel, R. &amp; Turner, L.</td>
+	<td>Production and application of dense Penning trap plasmas</td>
+	<td>1993/10/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 10), pp. 3651 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860837">URL</a>&nbsp;</td>
+</tr>
+<tr id="1923648" class="entry">
+	<td>Baxter, D. &amp; Stuart, G.</td>
+	<td>The effect of charge exchange on ion guns and an application to inertial-electrostatic confinement devices</td>
+	<td>1982/07/</td>
+	<td>Journal of Applied Physics<br/>Vol.  53( 7), pp. 4597 - 601&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.331309">URL</a>&nbsp;</td>
+</tr>
+<tr id="8888016" class="entry">
+	<td>Bieniosek, F., Eylon, S., Faltens, A., Friedman, A., Kwan, J., Leitner, M., Molvik, A., Prost, L., Roy, P., Seidl, P. &amp; Westenskow, G.</td>
+	<td>Diagnostics for intense heavy-ion beams in the HIF-VNL</td>
+	<td>2005/05/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  544( 1-2), pp. 268 - 76&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2005.01.220">URL</a>&nbsp;</td>
+</tr>
+<tr id="10998170" class="entry">
+	<td>Boris, D., Alderson, E., Becerra, G., Donovan, D., Egle, B., Emmert, G., Garrison, L., Kulcinski, G., Santarius, J., Schuff, C. &amp; Zenobia, S.</td>
+	<td>Deuterium anions in inertial electrostatic confinement devices</td>
+	<td>Sept. 2009</td>
+	<td>Physical Review E (Statistical, Nonlinear, and Soft Matter Physics)<br/>Vol.  80( 3), pp. 036408 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.80.036408">URL</a>&nbsp;</td>
+</tr>
+<tr id="10201010" class="entry">
+	<td>Boris, D. &amp; Emmert, G.</td>
+	<td>Composition of the source region plasma in inertial electrostatic confinement devices</td>
+	<td>2008/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 8), pp. 083502 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2965148">URL</a>&nbsp;</td>
+</tr>
+<tr id="11402310" class="entry">
+	<td>Boris, D., Kulcinski, G., Santarius, J., Donovan, D. &amp; Piefer, G.</td>
+	<td>Measuring D(d,p)T fusion reactant energy spectra with Doppler shifted fusion products</td>
+	<td>2010/06/15</td>
+	<td>Journal of Applied Physics<br/>Vol.  107( 12), pp. 123305 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3437629">URL</a>&nbsp;</td>
+</tr>
+<tr id="4982302" class="entry">
+	<td>Borisov, A., Shiryaev, O., McPherson, A., Boyer, K. &amp; Rhodes, C.</td>
+	<td>Stability analysis of relativistic and charge-displacement self-channelling of intense laser pulses in underdense plasmas</td>
+	<td>1995/05/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  37( 5), pp. 569 - 97&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/37/5/008">URL</a>&nbsp;</td>
+</tr>
+<tr id="7187803" class="entry">
+	<td>Bromley, B.</td>
+	<td>Pressure sensitivity studies of an electrostatic fusion neutron device using a particle-in-cell model</td>
+	<td>2002/01/</td>
+	<td>Fusion Science and Technology<br/>Vol.  41( 1), pp. 24 - 31&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8858243" class="entry">
+	<td>Burton, R., Momota, H., Richardson, N., Shaban, Y. &amp; Miley, G.</td>
+	<td>Fusion Ship II- a fast manned interplanetary space vehicle using inertial electrostatic fusion</td>
+	<td>2003//</td>
+	<td>AIP Conference Proceedings( 654), pp. 553 - 62&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1541339">URL</a>&nbsp;</td>
+</tr>
+<tr id="3920048" class="entry">
+	<td>Bussard, R.</td>
+	<td>Some physics considerations of magnetic inertial-electrostatic confinement: a new concept for spherical converging-flow fusion</td>
+	<td>1991/03/</td>
+	<td>Fusion Technology<br/>Vol.  19( 2), pp. 273 - 93&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4849044" class="entry">
+	<td>Bussard, R. &amp; Krall, N.</td>
+	<td>Inherent characteristics of fusion power systems: physics, engineering, and economics</td>
+	<td>1994/12/</td>
+	<td>Fusion Technology<br/>Vol.  26( 4), pp. 1326 - 36&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10721122" class="entry">
+	<td>Cai, H.-b., Mima, K., min Zhou, W., Jozaki, T., Nagatomo, H., Sunahara, A. &amp; Mason, R.</td>
+	<td>Enhancing the number of high-energy electrons deposited to a compressed pellet via double cones in fast ignition</td>
+	<td>2009/06/19</td>
+	<td>Physical Review Letters<br/>Vol.  102( 24), pp. 245001 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.102.245001">URL</a>&nbsp;</td>
+</tr>
+<tr id="11364719" class="entry">
+	<td>Carr, M. &amp; Khachan, J.</td>
+	<td>The dependence of the virtual cathode in a Polywell on the coil current and background gas pressure</td>
+	<td>2010/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 5), pp. 052510 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3428744">URL</a>&nbsp;</td>
+</tr>
+<tr id="6895071" class="entry">
+	<td>Chacon, L., Barnes, D., Knoll, D. &amp; Miley, G.</td>
+	<td>A bounce-averaged ion Fokker-Planck code for Penning fusion devices</td>
+	<td>2001/02/15</td>
+	<td>Computer Physics Communications<br/>Vol.  134( 2), pp. 183 - 208&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0010-4655(00)00200-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="5891744" class="entry">
+	<td>Chacon, L. &amp; Miley, G.</td>
+	<td>Inertial electrostatic confinement 3He breeder for D-3He satellite systems</td>
+	<td>1998/03/</td>
+	<td>Fusion Technology<br/>Vol.  33( 2), pp. 182 - 209&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8820436" class="entry">
+	<td>Cipiti, B. &amp; Kulcinski, G.</td>
+	<td>Helium and deuterium implantation in tungsten at elevated temperatures</td>
+	<td>2005/12/15</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  347( 3), pp. 298 - 306&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jnucmat.2005.08.009">URL</a>&nbsp;</td>
+</tr>
+<tr id="8697182" class="entry">
+	<td>Cipiti, B. &amp; Kulcinski, G.</td>
+	<td>The production of 13N using beam-target D-3He fusion reactions</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1245 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12331265" class="entry">
+	<td>Corujeira Gallo, S., Crespi, A., Cemin, F., Figueroa, C. &amp; Baumvol, I.</td>
+	<td>Electrostatically Confined Plasma in Segmented Hollow Cathode Geometries for Surface Engineering</td>
+	<td>2011/11/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  39( 11), pp. 3028 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2011.2141690">URL</a>&nbsp;</td>
+</tr>
+<tr id="4914798" class="entry">
+	<td>D'Avanzo, J., Lontano, M., Tome', E. &amp; Bortignon, P.</td>
+	<td>Alpha particle stopping in a dense burning plasma</td>
+	<td>1995/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  35( 2), pp. 210 - 14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/35/2/I11">URL</a>&nbsp;</td>
+</tr>
+<tr id="9522532" class="entry">
+	<td>Davidson, R., Kaganovich, I., Qin, H., Startsev, E., Welch, D., Rose, D. &amp; Uhm, H.</td>
+	<td>Collective instabilities and beam-plasma interactions in intense heavy ion beams</td>
+	<td>2004/11/</td>
+	<td>Physical Review Special Topics-Accelerators and Beams<br/>Vol.  7( 11)&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2308918" class="entry">
+	<td>Davidson, R. &amp; Tsang, K.</td>
+	<td>Macroscopic electrostatic stability properties of nonrelativistic non-neutral electron flow in a cylindrical diode with applied magnetic field</td>
+	<td>1984/07/</td>
+	<td>Physical Review A (General Physics)<br/>Vol.  30( 1), pp. 488 - 503&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevA.30.488">URL</a>&nbsp;</td>
+</tr>
+<tr id="8264755" class="entry">
+	<td>Dean, S.</td>
+	<td>Fusion innovative confinement concepts: 2004</td>
+	<td>Sept. 2003</td>
+	<td>Journal of Fusion Energy<br/>Vol.  22( 3), pp. 181 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/B:JOFE.0000037785.25116.b4">URL</a>&nbsp;</td>
+</tr>
+<tr id="7877772" class="entry">
+	<td>Dean, S.</td>
+	<td>Fusion news: 2001</td>
+	<td>2002/03/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  21( 1), pp. 9 - 46&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/A:1024739327259">URL</a>&nbsp;</td>
+</tr>
+<tr id="7997989" class="entry">
+	<td>Dobson, C. &amp; Hrbud, I.</td>
+	<td>Electron density and two-channel neutron emission measurements in steady-state spherical inertial-electrostatically confined plasmas, with review of the one-dimensional kinetic model</td>
+	<td>2004/07/01</td>
+	<td>Journal of Applied Physics<br/>Vol.  96( 1), pp. 94 - 108&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1755854">URL</a>&nbsp;</td>
+</tr>
+<tr id="380007" class="entry">
+	<td>Dolan, T., Verdeyen, J., Meeker, D. &amp; Cherrington, B.</td>
+	<td>Electrostatic-inertial plasma confinement</td>
+	<td>1972/04/</td>
+	<td>Journal of Applied Physics<br/>Vol.  43( 4), pp. 1590 - 600&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11090795" class="entry">
+	<td>Donovan, D., Boris, D., Kulcinski, G. &amp; Santarius, J.</td>
+	<td>Optimization of an IEC fusion device to increase steady-state d-d neutron generation rates</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 507 - 11&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13412192" class="entry">
+	<td>Donovan, D., Boris, D., Kulcinski, G., Santarius, J. &amp; Piefer, G.</td>
+	<td>Measuring time of flight of fusion products in an inertial electrostatic confinement fusion device for spatial profiling of fusion reactions</td>
+	<td>2013/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 3), pp. 033501 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4793771">URL</a>&nbsp;</td>
+</tr>
+<tr id="13755816" class="entry">
+	<td>Ebrahimi, E., Amrollahi, R., Sadighzadeh, A., Torabi, M., Sedaghat, M., Sabri, R., Pourshahab, B. &amp; Damideh, V.</td>
+	<td>The Influence of Cathode Voltage and Discharge Current on Neutron Production Rate of Inertial Electrostatic Confinement Fusion (IR-IECF)</td>
+	<td>2013/02/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  32( 1), pp. 62 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-012-9524-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="11090797" class="entry">
+	<td>Egle, B. &amp; Kulcinski, G.</td>
+	<td>Production of carbon-11 from D-3He fusion devices</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 518 - 22&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9901628" class="entry">
+	<td>Egle, B., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Comparison of spherical and cylindrical cathode geometries in inertial electrostatic confinement devices</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1110 - 13&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1959A08249" class="entry">
+	<td>Elmore, W., Tuck, J. &amp; Watson, K.</td>
+	<td>On the inertial-electrostatic confinement of a plasma</td>
+	<td>1959/05/</td>
+	<td>Physics of Fluids<br/>Vol. 2(3), pp. 239 - 246&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1705917">URL</a>&nbsp;</td>
+</tr>
+<tr id="11103609" class="entry">
+	<td>Emmert, G. &amp; Santarius, J.</td>
+	<td>Atomic and molecular effects on spherically convergent ion flow. I. Single atomic species</td>
+	<td>2010/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 1), pp. 013502 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3290800">URL</a>&nbsp;</td>
+</tr>
+<tr id="11103610" class="entry">
+	<td>Emmert, G. &amp; Santarius, J.</td>
+	<td>Atomic and molecular effects on spherically convergent ion flow. II. Multiple molecular species</td>
+	<td>2010/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 1), pp. 013503 (13 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3290801">URL</a>&nbsp;</td>
+</tr>
+<tr id="9466509" class="entry">
+	<td>Evstatiev, E., Nebel, R., Chacon, L., Park, J. &amp; Lapenta, G.</td>
+	<td>Space charge neutralization in inertial electrostatic confinement plasmas</td>
+	<td>2007/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  14( 4), pp. 42701 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2711173">URL</a>&nbsp;</td>
+</tr>
+<tr id="13124336" class="entry">
+	<td>Fitzgerald, M. &amp; Khachan, J.</td>
+	<td>A 2-D PIC/MC/Vlasov method for electrostatic fusion discharges</td>
+	<td>2012/04/</td>
+	<td>Computer Physics Communications<br/>Vol.  183( 4), pp. 971 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.cpc.2012.01.001">URL</a>&nbsp;</td>
+</tr>
+<tr id="8888003" class="entry">
+	<td>Friedman, A.</td>
+	<td>Simulation of intense beams for Heavy Ion Fusion</td>
+	<td>2005/05/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  544( 1-2), pp. 160 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2005.01.236">URL</a>&nbsp;</td>
+</tr>
+<tr id="9079083" class="entry">
+	<td>Garcia, O., Bian, N. &amp; Fundamenski, W.</td>
+	<td>Radial interchange motions of plasma filaments</td>
+	<td>2006/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 8), pp. 82309 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2336422">URL</a>&nbsp;</td>
+</tr>
+<tr id="14007761" class="entry">
+	<td>Ghasemi, M., Habibi, M. &amp; Amrollahi, R.</td>
+	<td>Prediction of potential well structure formed in spherical inertial electrostatic confinement fusion devices with various parameters</td>
+	<td>2013/06/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  79, pp. 295 - 303&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1017/S002237781200092X">URL</a>&nbsp;</td>
+</tr>
+<tr id="6892367" class="entry">
+	<td>Gienzer, S., Divol, L., Berger, R., Geddes, C., Kirkwood, R., Moody, J., Williams, E. &amp; Young, P.</td>
+	<td>Thomson scattering measurements of saturated ion waves in laser fusion plasmas</td>
+	<td>2001/03/19</td>
+	<td>Physical Review Letters<br/>Vol.  86( 12), pp. 2565 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.86.2565">URL</a>&nbsp;</td>
+</tr>
+<tr id="6607835" class="entry">
+	<td>Glenzer, S.</td>
+	<td>Thomson scattering in inertial confinement fusion research</td>
+	<td>2000//</td>
+	<td>Contributions to Plasma Physics<br/>Vol.  40( 1-2), pp. 36 - 45&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/(SICI)1521-3986(200004)40:1/2<36::AID-CTPP36>3.0.CO;2-O">URL</a>&nbsp;</td>
+</tr>
+<tr id="11090794" class="entry">
+	<td>Gough, W. &amp; Miley, G.</td>
+	<td>The IEC fusion-plasma torch a path for closing the materials cycle</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 501 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6601290" class="entry">
+	<td>Gu, Y. &amp; Miley, G.</td>
+	<td>Experimental study of potential structure in a spherical IEC fusion device</td>
+	<td>2000/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  28( 1), pp. 331 - 46&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/27.842929">URL</a>&nbsp;</td>
+</tr>
+<tr id="13865547" class="entry">
+	<td>Gummersall, D., Carr, M., Cornish, S. &amp; Kachan, J.</td>
+	<td>Scaling law of electron confinement in a zero beta polywell device</td>
+	<td>2013/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 10), pp. 102701 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4824005">URL</a>&nbsp;</td>
+</tr>
+<tr id="12336236" class="entry">
+	<td>Higaki, H., Ito, K., Takai, R., Nakayama, K., Saiki, W., Izawa, K. &amp; Okamoto, H.</td>
+	<td>Axial resonances of Ar+ ions observed in a linear Paul trap</td>
+	<td>2007//</td>
+	<td>Hyperfine Interactions<br/>Vol.  174( 1-3), pp. 77 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10751-007-9567-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="1968A01352" class="entry">
+	<td>Hirsch, R.</td>
+	<td>Inertial-electrostatic confinement of ionized fusion gases</td>
+	<td>1967/10/</td>
+	<td>Journal of Applied Physics<br/>Vol. 38(11), pp. 4522 - 4534&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1709162">URL</a>&nbsp;</td>
+</tr>
+<tr id="1968B02803" class="entry">
+	<td>Hirsch, R.</td>
+	<td>Inertial-electrostatic confinement of ionized fusion gases</td>
+	<td>1967/10/</td>
+	<td>Journal of Applied Physics<br/>Vol. 38(11), pp. 4522 - 4534&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1709162">URL</a>&nbsp;</td>
+</tr>
+<tr id="7948936" class="entry">
+	<td>Horton, W., Hoang, G., Bourdelle, C., Garbet, X., Ottaviani, M. &amp; Colas, L.</td>
+	<td>Electron transport and the critical temperature gradient</td>
+	<td>2004/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 5), pp. 2600 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1690761">URL</a>&nbsp;</td>
+</tr>
+<tr id="8076915" class="entry">
+	<td>Hull, A., Bonnell, J., Mozer, F. &amp; Scudder, J.</td>
+	<td>A statistical study of large-amplitude parallel electric fields in the upward current region of the auroral acceleration region</td>
+	<td>2003/01/01</td>
+	<td>Journal of Geophysical Research<br/>Vol.  108( A1), pp. 5 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2001JA007540">URL</a>&nbsp;</td>
+</tr>
+<tr id="13083761" class="entry">
+	<td>Ishida, A. &amp; Steinhauer, L.</td>
+	<td>Spherical torus equilibria reconstructed by a two-fluid, low-collisionality model</td>
+	<td>2012/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  19( 10), pp. 102512 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4762846">URL</a>&nbsp;</td>
+</tr>
+<tr id="2860429" class="entry">
+	<td>Jones, R.</td>
+	<td>Limitations on magnetoelectrostatic confinement</td>
+	<td>1986/12/</td>
+	<td>Indian Journal of Physics, Part B<br/>Vol.  60B( 6), pp. 549 - 54&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12698323" class="entry">
+	<td>ki Jung, B., wook Jung, S., ryung Lee, J., Chung, K.-J. &amp; Hwang, Y.</td>
+	<td>Study on discharge characteristics of a cylindrical inertial electrostatic confinement (IEC) device for high-yield fusion sources</td>
+	<td>2011/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  60( 1T), pp. 107 - 11&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6901452" class="entry">
+	<td>Khachan, J. &amp; Collis, S.</td>
+	<td>Measurements of ion energy distributions by Doppler shift spectroscopy in an inertial-electrostatic confinement device</td>
+	<td>2001/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 4), pp. 1299 - 304&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1349875">URL</a>&nbsp;</td>
+</tr>
+<tr id="7583589" class="entry">
+	<td>Khachan, J., Moore, D. &amp; Bosi, S.</td>
+	<td>Spatial distribution of ion energies in an inertial electrostatic confinement device</td>
+	<td>2003/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 3), pp. 596 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1544665">URL</a>&nbsp;</td>
+</tr>
+<tr id="9427986" class="entry">
+	<td>Khachan, J. &amp; Samarian, A.</td>
+	<td>Dust diagnostics on an inertial electrostatic confinement discharge</td>
+	<td>2007/04/02</td>
+	<td>Physics Letters A<br/>Vol.  363( 4), pp. 297 - 301&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.physleta.2006.11.015">URL</a>&nbsp;</td>
+</tr>
+<tr id="10694103" class="entry">
+	<td>Kipritidis, J. &amp; Khachan, J.</td>
+	<td>Application of Doppler spectroscopy in H2 to the prediction of experimental D(d,n)3He reaction rates in an inertial electrostatic confinement device</td>
+	<td>2009/02/</td>
+	<td>Physical Review E (Statistical, Nonlinear, and Soft Matter Physics)<br/>Vol.  79( 2), pp. 026403 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.79.026403">URL</a>&nbsp;</td>
+</tr>
+<tr id="10716810" class="entry">
+	<td>Kipritidis, J., Khachan, J., Fitzgerald, M. &amp; Shrier, O.</td>
+	<td>Absolute densities of energetic hydrogen ion species in an abnormal hollow cathode discharge</td>
+	<td>2008/06/</td>
+	<td>Physical Review E (Statistical, Nonlinear, and Soft Matter Physics)<br/>Vol.  77( 6), pp. 066405 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.77.066405">URL</a>&nbsp;</td>
+</tr>
+<tr id="11837285" class="entry">
+	<td>Kipritidis, J., Masuda, K., Kajiwara, T., Yamagaki, Y. &amp; Nagasaki, K.</td>
+	<td>Modeling the time variation of beam-grid fusion reaction rates in an Inertial Electrostatic Confinement device driven by a ring-shaped magnetron ion source</td>
+	<td>2011/04/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  53( 4), pp. 045006 (16 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/53/4/045006">URL</a>&nbsp;</td>
+</tr>
+<tr id="10130872" class="entry">
+	<td>Klimo, O. &amp; Limpouch, J.</td>
+	<td>High-current fast electron beam propagation in a gas</td>
+	<td>2008/05/01</td>
+	<td>Journal of Physics: Conference Series<br/>Vol.  112( 2), pp. 022096 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1742-6596/112/2/022096">URL</a>&nbsp;</td>
+</tr>
+<tr id="13523435" class="entry">
+	<td>Kozlovsky, K., Kuznetsov, A., Ponomarev, D., Hasaia, D., Tsybin, A. &amp; Shikanov, A.</td>
+	<td>Experimental study of a coaxial plasma diode with oscillating deuterons for neutron generation</td>
+	<td>2012/08/</td>
+	<td>Atomic Energy<br/>Vol.  112( 4), pp. 299 - 302&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10512-012-9560-3">URL</a>&nbsp;</td>
+</tr>
+<tr id="2228275" class="entry">
+	<td>Krafft, G., Mark, J.-K. &amp; Wang, T.</td>
+	<td>Plasmas in particle accelerators: a hydrodynamic model of three-dimensional electrostatic instabilities</td>
+	<td>1983/12/</td>
+	<td>SIAM Journal on Applied Mathematics<br/>Vol.  43( 6), pp. 1390 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11090793" class="entry">
+	<td>Kulcinski, G., Santarius, J., Emmert, G., Bonomo, R., Alderson, E., Becerra, G., Boris, D., Donovan, D., Egle, B., Sorebo, J. &amp; Zenobia, S.</td>
+	<td>Near term applications of inertial electrostatic confinement fusion research</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 493 - 500&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11725669" class="entry">
+	<td>Kurilenkov, Y. &amp; Skowronek, M.</td>
+	<td>Inertial electrostatic confinement and nuclear fusion in the interelectrode plasma of a nanosecond vacuum discharge. I: Experiment</td>
+	<td>2010/12/</td>
+	<td>Plasma Physics Reports<br/>Vol.  36( 13), pp. 1219 - 26&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S1063780X10130222">URL</a>&nbsp;</td>
+</tr>
+<tr id="10761119" class="entry">
+	<td>Kurilenkov, Y. &amp; Skowronek, M.</td>
+	<td>Inertial electrostatic confinement and nuclear synthesis in interelectrode media of nanosecond vacuum discharge. Part I. Experiment</td>
+	<td>2009//</td>
+	<td>Applied Physics( 3), pp. 40 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11725670" class="entry">
+	<td>Kurilenkov, Y., Tarakanov, V. &amp; Gus'kov, S.</td>
+	<td>Inertial electrostatic confinement and nuclear fusion in the interelectrode plasma of a nanosecond vacuum discharge. II: Particle-in-cell simulations</td>
+	<td>2010/12/</td>
+	<td>Plasma Physics Reports<br/>Vol.  36( 13), pp. 1227 - 34&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S1063780X10130234">URL</a>&nbsp;</td>
+</tr>
+<tr id="10925110" class="entry">
+	<td>Kurilenkov, Y., Tarakanov, V. &amp; Gus'kov, S.</td>
+	<td>Inertial electrostatic confinement and nuclear synthesis at interelectrode media of nanosecond vacuum discharge Part II. PIC-simulation</td>
+	<td>2009//</td>
+	<td>Applied Physics( 4), pp. 102 - 10&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12036975" class="entry">
+	<td>Kurilenkov, Y., Tarakanov, V., Guskov, S., Karpukhin, V. &amp; Valyano, V.</td>
+	<td>Warm Dense Matter Generation and DD Synthesis at Vacuum Discharge with Deuterium-Loaded Pd Anode</td>
+	<td>2011/06/</td>
+	<td>Contributions to Plasma Physics<br/>Vol.  51( 5), pp. 427 - 43&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/ctpp.201110014">URL</a>&nbsp;</td>
+</tr>
+<tr id="10647724" class="entry">
+	<td>Kurilenkov, Y., Tarakanov, V., Skowronek, M., Guskov, S. &amp; Dufty, J.</td>
+	<td>Inertial electrostatic confinement and DD fusion at interelectrode media of nanosecond vacuum discharge. PIC simulations and experiment</td>
+	<td>2009/05/29</td>
+	<td>Journal of Physics A: Mathematical and Theoretical<br/>Vol.  42( 21), pp. 214041 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1751-8113/42/21/214041">URL</a>&nbsp;</td>
+</tr>
+<tr id="12250846" class="entry">
+	<td>Kurt, E.</td>
+	<td>A stationary multi-component cathode modeling and ion trajectories for an inertial electrostatic confinement fusion device</td>
+	<td>2011/02/</td>
+	<td>International Journal of Energy Research<br/>Vol.  35( 2), pp. 89 - 95&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/er.1763">URL</a>&nbsp;</td>
+</tr>
+<tr id="13573472" class="entry">
+	<td>Kurt, E. &amp; Arslan, S.</td>
+	<td>An inertial electrostatic confinement (IEC) device modeling and the effects of different cathode structures to the fields</td>
+	<td>2012/11/</td>
+	<td>Energy Conversion and Management<br/>Vol.  63, pp. 55 - 62&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.enconman.2011.12.033">URL</a>&nbsp;</td>
+</tr>
+<tr id="12701389" class="entry">
+	<td>Kurt, E., Arslan, S. &amp; Guven, M.</td>
+	<td>Effects of Grid Structures and Dielectric Materials of the Holder in an Inertial Electrostatic Confinement (IEC) Fusion Device</td>
+	<td>2011/10/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  30( 5), pp. 404 - 12&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9393-4">URL</a>&nbsp;</td>
+</tr>
+<tr id="1043078" class="entry">
+	<td>Lavrent'ev, O., Sidorkin, V., Zaitsev, B. &amp; Azovskii, Y.</td>
+	<td>Distributed-parameter ion source</td>
+	<td>1976/06/</td>
+	<td>Soviet Physics - Technical Physics<br/>Vol.  21( 6), pp. 726 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="371912" class="entry">
+	<td>Lavrent'ev, O., Sidorkin, V., Zaitsev, B., Goncharenko, V. &amp; Ovcharenko, L.</td>
+	<td>Investigation of a gas discharge in a spherical diode</td>
+	<td>1972//</td>
+	<td>Ukrayins'kyi Fizychnyi Zhurnal<br/>Vol.  17( 1), pp. 143 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1918315" class="entry">
+	<td>Lemons, D. &amp; Cary, J.</td>
+	<td>The Pierce instability in neutralized inertial confinement fusion ion beams</td>
+	<td>1982/06/</td>
+	<td>Journal of Applied Physics<br/>Vol.  53( 6), pp. 4093 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.331275">URL</a>&nbsp;</td>
+</tr>
+<tr id="1733025" class="entry">
+	<td>Lemons, D. &amp; Thode, L.</td>
+	<td>Electron temperature requirements for ballistically focused neutralized ion beams</td>
+	<td>1981/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  21( 5), pp. 529 - 35&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9167216" class="entry">
+	<td>Marocchino, A., Lapenta, G., Evstatiev, E., Nebel, R. &amp; Park, J.</td>
+	<td>Two-dimensional electron-electron two-stream instability of an inertial electrostatic confinement device</td>
+	<td>2006/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 10), pp. 102106 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2356848">URL</a>&nbsp;</td>
+</tr>
+<tr id="11090799" class="entry">
+	<td>Masuda, K., Fujimoto, T., Nakagawa, T., Zen, H., Kajiwara, T., Nagasaki, K. &amp; Yoshikawa, K.</td>
+	<td>Diagnostic system development for D-D and D-3He reaction distributions in an inertial-electrostatic confinement device by collimated proton measurements</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 528 - 32&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11090798" class="entry">
+	<td>Masuda, K., Nakagawa, T., Kajiwara, T., Zen, H., Yoshikawa, K. &amp; Nagasaki, K.</td>
+	<td>Built-in ion source for inertial electrostatic confinement in low pressure regime</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 523 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11557390" class="entry">
+	<td>Masuda, K., Nakagawa, T., Kipritidis, J., Kajiwara, T., Yamagaki, Y., Zen, H., Yoshikawa, K. &amp; Nagasaki, K.</td>
+	<td>Cathode grid current dependence of D(d, n)3He reaction rates in an inertial electrostatic confinement device driven by a ring-shaped magnetron ion source</td>
+	<td>Sept. 2010</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  52( 9), pp. 095010 (15 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/52/9/095010">URL</a>&nbsp;</td>
+</tr>
+<tr id="6934848" class="entry">
+	<td>Masuda, K., Taruya, K., Koyama, T., Hashimoto, H., Yoshikawa, K., Toku, H., Yamamoto, Y., Ohnishi, M., Horiike, H. &amp; Inoue, N.</td>
+	<td>Performance characteristics of an inertial electrostatic confinement fusion device with a triple-grid system</td>
+	<td>2001/05/</td>
+	<td>Fusion Technology<br/>Vol.  39( 3), pp. 1202 - 10&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9802268" class="entry">
+	<td>Masuda, K. &amp; Yoshikawa, K.</td>
+	<td>Development of a time-independent particle-in-cell code for simulating dc discharges in inertial electrostatic confinement devices</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1119 - 23&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6844276" class="entry">
+	<td>Matsuura, H., Takaki, T., Funakoshi, I., Nakao, Y. &amp; Kudo, E.</td>
+	<td>Ion distribution function and radial profile of neutron production rate in spherical inertial electrostatic confinement plasmas</td>
+	<td>2000/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  40( 12), pp. 1951 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/40/12/101">URL</a>&nbsp;</td>
+</tr>
+<tr id="6934843" class="entry">
+	<td>Matsuura, H., Takaki, T., Nakao, Y. &amp; Kudo, K.</td>
+	<td>Radial profile of neutron production rate in spherical inertial electrostatic confinement plasmas</td>
+	<td>2001/05/</td>
+	<td>Fusion Technology<br/>Vol.  39( 3), pp. 1167 - 73&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8618838" class="entry">
+	<td>McGuire, T. &amp; Sedwick, R.</td>
+	<td>Improved confinement in inertial electrostatic confinement for fusion space power reactors</td>
+	<td>2005/07/</td>
+	<td>Journal of Propulsion and Power<br/>Vol.  21( 4), pp. 697 - 706&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="635259" class="entry">
+	<td>Meeker, D., Verdeyen, J. &amp; Cherrington, B.</td>
+	<td>Measurement of electron density in a cylindrical inertial electrostatic plasma confinement device</td>
+	<td>1973/12/</td>
+	<td>Journal of Applied Physics<br/>Vol.  44( 12), pp. 5347 - 55&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9412803" class="entry">
+	<td>Meyer, R., Loyalka, S. &amp; Prelas, M.</td>
+	<td>Double potential well regimes in collisionless spherical discharges</td>
+	<td>2007/04/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  35( 2), pp. 354 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2007.892734">URL</a>&nbsp;</td>
+</tr>
+<tr id="8535029" class="entry">
+	<td>Meyer, R., Loyalka, S. &amp; Prelas, M.</td>
+	<td>Potential well structures in spherical inertial electrostatic confinement devices</td>
+	<td>2005/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  33( 4), pp. 1377 - 94&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2005.852350">URL</a>&nbsp;</td>
+</tr>
+<tr id="10145730" class="entry">
+	<td>Meyer, R., Prelas, M. &amp; Loyalka, S.</td>
+	<td>Experimental observations of a spherical transparent cathode glow discharge</td>
+	<td>2008/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  36( 4), pp. 1881 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2008.928894">URL</a>&nbsp;</td>
+</tr>
+<tr id="9936472" class="entry">
+	<td>Meyer, R., Smith, Z., Prelas, M. &amp; Loyalka, S.</td>
+	<td>Ion flow convergence in spherical inertial electrostatic confinement devices</td>
+	<td>2008/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 2), pp. 022105 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2837517">URL</a>&nbsp;</td>
+</tr>
+<tr id="13098849" class="entry">
+	<td>Michel, P., Rozmus, W., Williams, E., Divol, L., Berger, R., Town, R., Glenzer, S. &amp; Callahan, D.</td>
+	<td>Stochastic ion heating from many overlapping laser beams in fusion plasmas</td>
+	<td>2012/11/09</td>
+	<td>Physical Review Letters<br/>Vol.  109( 19), pp. 195004 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.109.195004">URL</a>&nbsp;</td>
+</tr>
+<tr id="12198028" class="entry">
+	<td>Miley, G.</td>
+	<td>Driven subcritical assembly using a cylindrical Inertial Electrostatic Confinement (IEC) neutron source</td>
+	<td>2010//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  103, pp. 120 - 1&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13233607" class="entry">
+	<td>Miley, G. &amp; Boyer, B.</td>
+	<td>Fusion-fission hybrid using a D-D cylindrical inertial electrostatic confinement (IEC) driver</td>
+	<td>2012/01/</td>
+	<td>Fusion Science and Technology<br/>Vol.  61( 1T), pp. 200 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9269807" class="entry">
+	<td>Miley, G., Hora, H., Osman, F., Yang, Y., Wu, L., Momota, H. &amp; Li, X.Z.</td>
+	<td>Low cost long distance detector for explosives and chemical analysis by IEC application</td>
+	<td>2005//</td>
+	<td>American Journal of Applied Sciences<br/>Vol.  2( 11), pp. 1529 - 32&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11348120" class="entry">
+	<td>Miley, G., Leon, H. &amp; Amadio, G.</td>
+	<td>Cylindrical IEC Neutron Source for Broad Area NAA</td>
+	<td>2009//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  101, pp. 70 - 1&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12574147" class="entry">
+	<td>Miley, G., Momota, H., Leon, H., Ulmen, B., Amadio, G., Khan, A., Chen, G., Matisiak, W., Azeem, A. &amp; Keutelian, P.</td>
+	<td>Cylindrical IEC Fusion Neutron Source for Broad Area NAA</td>
+	<td>2011/12/</td>
+	<td>Journal of Engineering for Gas Turbines and Power<br/>Vol.  133( 12), pp. 124502 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1115/1.4002889">URL</a>&nbsp;</td>
+</tr>
+<tr id="9472995" class="entry">
+	<td>Miley, G., Momota, H., Shrestha, P. &amp; Santarius, J.</td>
+	<td>On use of D-3He in fusion space propulsion</td>
+	<td>2006//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  94, pp. 634 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8979212" class="entry">
+	<td>Miley, G., Momota, H., Shrestha, P., Thomas, R. &amp; Takeyama, Y.</td>
+	<td>Space propulsion based on dipole assisted IEC system</td>
+	<td>2006//</td>
+	<td>AIP Conference Proceedings( 813), pp. 1240 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10991739" class="entry">
+	<td>Miley, G., Momota, H. &amp; Wu, L.</td>
+	<td>Magnetically channeled IEC trap array fusion device for interplanetary missions</td>
+	<td>2009/06/</td>
+	<td>Nuclear Technology<br/>Vol.  166( 3), pp. 295 - 300&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11090800" class="entry">
+	<td>Miley, G., Momota, H., Wu, L., Reilly, M., Burton, R., Teofilo, V., Dell, D., Dell, R. &amp; Hargus, W.</td>
+	<td>Space probe application of IEC thrusters</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 533 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13041801" class="entry">
+	<td>Miley, G., Orcutt, J., Keutelian, P., Ulmen, B., Shresthra, J. &amp; Krishnamurthy, A.</td>
+	<td>Pulsed fusion rocket - An ultra high lsp variable thrust deep space vehicle powered by inertial electrostatic confinement fusion</td>
+	<td>2011//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  105, pp. 25 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8866561" class="entry">
+	<td>Miley, G. &amp; Shaban, Y.</td>
+	<td>Distributed power sources for Mars colonization</td>
+	<td>2003//</td>
+	<td>AIP Conference Proceedings( 654), pp. 1211 - 18&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1541421">URL</a>&nbsp;</td>
+</tr>
+<tr id="8697180" class="entry">
+	<td>Miley, G., Yang, Y., Webber, J., Shaban, Y. &amp; Momota, H.</td>
+	<td>RF ion source-driven IEC design and operation</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1233 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7771204" class="entry">
+	<td>Mirza, A., Sarwar, M. &amp; Qaisar, M.</td>
+	<td>Effect of grain-size distribution on the energy loss of a pair of charged projectiles in a dust-contaminated plasma</td>
+	<td>2003/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 11), pp. 4253 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1619380">URL</a>&nbsp;</td>
+</tr>
+<tr id="10986310" class="entry">
+	<td>Momota, H. &amp; Miley, G.</td>
+	<td>Neutron source based on a counter-deuterium beam linear IEC</td>
+	<td>2009/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  28( 2), pp. 191 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-008-9173-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="6988852" class="entry">
+	<td>Momota, H. &amp; Miley, G.</td>
+	<td>Virtual cathode in a stationary spherical inertial electrostatic confinement</td>
+	<td>2001/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  40( 1), pp. 56 - 65&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9028829" class="entry">
+	<td>Murali, S., Cipiti, B., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Study of fusion regimes in an inertial electrostatic confinement device using the new eclipse disk diagnostic</td>
+	<td>2006/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 5), pp. 53111 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2200289">URL</a>&nbsp;</td>
+</tr>
+<tr id="11769465" class="entry">
+	<td>Murali, S., Emmert, G., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Effects of chamber pressure variation on the grid temperature in an inertial electrostatic confinement device</td>
+	<td>2010/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 10), pp. 102701 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3484224">URL</a>&nbsp;</td>
+</tr>
+<tr id="10407135" class="entry">
+	<td>Murali, S., Kulcinski, G. &amp; Santarius, J.</td>
+	<td>Study of ion flow dynamics in an inertial electrostatic confinement device through sequential grid construction</td>
+	<td>2008/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 12), pp. 122702 (13 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2961079">URL</a>&nbsp;</td>
+</tr>
+<tr id="11793895" class="entry">
+	<td>Murali, S., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Effects of the Cathode Grid Wires on Fusion Proton Measurements in Inertial-Electrostatic Confinement Devices</td>
+	<td>2011/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  39( 2), pp. 749 - 55&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2010.2090542">URL</a>&nbsp;</td>
+</tr>
+<tr id="11630088" class="entry">
+	<td>Murali, S., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Proton Detector Calibration in a Gridded Inertial Electrostatic Confinement Device</td>
+	<td>2010/11/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  38( 11), pp. 3116 - 27&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2010.2065244">URL</a>&nbsp;</td>
+</tr>
+<tr id="11447065" class="entry">
+	<td>Murali, S., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Consolidated electron emission effects in an IEC device</td>
+	<td>2010/08/</td>
+	<td>Plasma Sources, Science and Technology<br/>Vol.  19( 4), pp. 045029 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0963-0252/19/4/045029">URL</a>&nbsp;</td>
+</tr>
+<tr id="11855305" class="entry">
+	<td>Murali, S., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Effects of Displaced Grids on the Fusion Reactivity of an Inertial Electrostatic Confinement Device</td>
+	<td>2010/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  29( 3), pp. 256 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-009-9266-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="12160166" class="entry">
+	<td>Murali, S., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Study of thermionic electrons in an inertial electrostatic confinement device using a novel "chordwire" diagnostic</td>
+	<td>2010/04/</td>
+	<td>Fusion Science and Technology<br/>Vol.  57( 3), pp. 281 - 91&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10966027" class="entry">
+	<td>Murali, S., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Ion flux mapping in an inertial-electrostatic confinement device using a chordwire diagnostic</td>
+	<td>2009/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 10), pp. 103301 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3243932">URL</a>&nbsp;</td>
+</tr>
+<tr id="10278430" class="entry">
+	<td>Murali, S., Santarius, J. &amp; Kulcinski, G.</td>
+	<td>Advanced fuels (D-D and D-3He) fusion proton energy distribution from an inertial electrostatic confinement device</td>
+	<td>2008/04/</td>
+	<td>Fusion Science and Technology<br/>Vol.  53( 3), pp. 841 - 53&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8432471" class="entry">
+	<td>Naranjo, B., Gimzewski, J. &amp; Putterman, S.</td>
+	<td>Observation of nuclear fusion driven by a pyroelectric crystal</td>
+	<td>2005/04/28</td>
+	<td>Nature<br/>Vol.  434( 7037), pp. 1115 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1038/nature03575">URL</a>&nbsp;</td>
+</tr>
+<tr id="6023474" class="entry">
+	<td>Nebel, R. &amp; Barnes, D.</td>
+	<td>The periodically oscillating plasma sphere</td>
+	<td>1998/08/</td>
+	<td>Fusion Technology<br/>Vol.  34( 1), pp. 28 - 45&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8317092" class="entry">
+	<td>Nebel, R., Stange, S., Park, J., Taccetti, J., Murali, S. &amp; Garcia, C.</td>
+	<td>Theoretical and experimental studies of kinetic equilibrium and stability of the virtual cathode in an electron injected inertial electrostatic confinement device</td>
+	<td>2005/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 1), pp. 12701 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1829296">URL</a>&nbsp;</td>
+</tr>
+<tr id="5108217" class="entry">
+	<td>Nevins, W.</td>
+	<td>Can inertial electrostatic confinement work beyond the ion-ion collisional time scale?</td>
+	<td>1995/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  2( 10), pp. 3804 - 19&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.871080">URL</a>&nbsp;</td>
+</tr>
+<tr id="13733217" class="entry">
+	<td>Ni, P., Lund, S., McGuffey, C., Alexander, N., Aurand, B., Barnard, J., Beg, F., Bellei, C., Bieniosek, F., Brabetz, C., Cohen, R., Kim, J., Neumayer, P., Roth, M. &amp; Logan, B.</td>
+	<td>Initial experimental evidence of self-collimation of target-normal-sheath-accelerated proton beam in a stack of conducting foils</td>
+	<td>2013/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 8), pp. 083111 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4818147">URL</a>&nbsp;</td>
+</tr>
+<tr id="10160846" class="entry">
+	<td>Nishi, T., Yoneda, K., Masuda, K. &amp; Yoshikawa, K.</td>
+	<td>Development of excited helium beam injector for electric field measurement by laser-induced fluorescence method</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1061 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5741617" class="entry">
+	<td>Niu, K.</td>
+	<td>Simulation of propagating a proton beam in a reactor</td>
+	<td>1997//</td>
+	<td>Laser and Particle Beams<br/>Vol.  15( 1), pp. 151 - 65&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4697637" class="entry">
+	<td>Niu, K.</td>
+	<td>Application of pulse power technology to inertial confinement fusion: focusing and propagation of proton beam</td>
+	<td>1994//</td>
+	<td>Laser and Particle Beams<br/>Vol.  12( 1), pp. 85 - 99&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9802266" class="entry">
+	<td>Noborio, K., Yamamoto, Y. &amp; Konishi, S.</td>
+	<td>Neutron production rate of inertial electrostatic confinement fusion device with fusion reaction on surface of electrodes</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1105 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697189" class="entry">
+	<td>Noborio, K., Yamamoto, Y. &amp; Konishi, S.</td>
+	<td>One dimensional simulation of an inertial electrostatic confinement fusion device at low gas pressure operation</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1280 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8877562" class="entry">
+	<td>Noborio, K., Yamamoto, Y., Ueno, Y. &amp; Konishi, S.</td>
+	<td>Confinement of ions in an inertial electrostatic confinement fusion (IECF) device and its influence on neutron production rate</td>
+	<td>2006/02/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  81( 8-14), pp. 1701 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.09.013">URL</a>&nbsp;</td>
+</tr>
+<tr id="8887992" class="entry">
+	<td>Oguri, Y., Hasegawa, J., Kaneko, J., Ogawa, M. &amp; Horioka, K.</td>
+	<td>Stopping of low-energy highly charged ions in dense plasmas</td>
+	<td>2005/05/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  544( 1-2), pp. 76 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2005.01.196">URL</a>&nbsp;</td>
+</tr>
+<tr id="12994507" class="entry">
+	<td>Ohgaki, H., Kii, T., Masuda, K., Omer, M., Misawa, T., Pyeon, C., Hajima, R., Hayakawa, T., Shizuma, T., Kando, M., Daito, I. &amp; Toyokawa, H.</td>
+	<td>Proposal of a Non-Destructive Detection System for Hidden Nuclear Materials Based on a Neutron/Gamma-ray Hybrid System</td>
+	<td>2011/11/</td>
+	<td>Journal of the Korean Physical Society<br/>Vol.  59( 5), pp. 3155 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.3938/jkps.59.3155">URL</a>&nbsp;</td>
+</tr>
+<tr id="9802265" class="entry">
+	<td>Ohnishi, M., Hodaka, O., Furukawa, T. &amp; Suma, T.</td>
+	<td>Development of convergent d-d fusion neutron generator with large pulse current</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1101 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8684639" class="entry">
+	<td>Ohnishi, M., Osawa, H., Tanaka, R. &amp; Wakizaka, N.</td>
+	<td>Shape of electrodes for high performance of inertial electrostatic confinement fusion</td>
+	<td>2005/04/</td>
+	<td>Journal of Nuclear Science and Technology<br/>Vol.  42( 4), pp. 398 - 405&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6934849" class="entry">
+	<td>Ohnishi, M., Osawa, H., Yoshikawa, K., Masuda, K. &amp; Yamamoto, Y.</td>
+	<td>Particle-in-cell simulation of inertial electrostatic confinement fusion plasma</td>
+	<td>2001/05/</td>
+	<td>Fusion Technology<br/>Vol.  39( 3), pp. 1211 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5612635" class="entry">
+	<td>Ohnishi, M., Sato, K., Yamamoto, Y. &amp; Yoshikawa, K.</td>
+	<td>Correlation between potential well structure and neutron production in inertial electrostatic confinement fusion</td>
+	<td>1997/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  37( 5), pp. 611 - 19&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/37/5/I04">URL</a>&nbsp;</td>
+</tr>
+<tr id="4697631" class="entry">
+	<td>Okada, T. &amp; Tazawa, H.</td>
+	<td>Two-stream instability for a light ion beam-plasma system with external magnetic field</td>
+	<td>1994//</td>
+	<td>Laser and Particle Beams<br/>Vol.  12( 1), pp. 13 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697187" class="entry">
+	<td>Osawa, H., Tabata, T. &amp; Ohnishi, M.</td>
+	<td>Numerical study on glow discharge of IEC fusion</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1270 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697186" class="entry">
+	<td>Osawa, K., Ishibashi, T., Ohnishi, M. &amp; Yoshikawa, K.</td>
+	<td>Optimal position of ion source for high performance of IEC</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1265 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13083759" class="entry">
+	<td>Pacheco, J., Ordonez, C. &amp; Weathers, D.</td>
+	<td>Space-charge-based electrostatic plasma confinement involving relaxed plasma species</td>
+	<td>2012/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  19( 10), pp. 102510 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4764076">URL</a>&nbsp;</td>
+</tr>
+<tr id="7756976" class="entry">
+	<td>Park, J., Nebel, R., Rellergert, W. &amp; Sekora, M.</td>
+	<td>Experimental studies of electrostatic confinement on the intense neutron source-electron device</td>
+	<td>2003/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 10), pp. 3841 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1605740">URL</a>&nbsp;</td>
+</tr>
+<tr id="8668344" class="entry">
+	<td>Park, J., Nebel, R., Stange, S. &amp; Murali, S.</td>
+	<td>Experimental observation of a periodically oscillating plasma sphere in a gridded inertial electrostatic confinement device</td>
+	<td>2005/07/01</td>
+	<td>Physical Review Letters<br/>Vol.  95( 1), pp. 015003 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.95.015003">URL</a>&nbsp;</td>
+</tr>
+<tr id="8428533" class="entry">
+	<td>Park, J., Nebel, R., Stange, S. &amp; Murali, S.</td>
+	<td>Periodically oscillating plasma sphere</td>
+	<td>2005/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 5), pp. 56315 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1888822">URL</a>&nbsp;</td>
+</tr>
+<tr id="9733333" class="entry">
+	<td>Petzoldt, R., Valmianski, E., Carlson, L. &amp; Huynh, P.</td>
+	<td>Target injection placement accuracy improvement with electrostatic steering</td>
+	<td>2007/10/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 3), pp. 459 - 63&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697184" class="entry">
+	<td>Piefer, G., Santarius, J., Ashley, R. &amp; Kulcinski, G.</td>
+	<td>Design of an ion source for 3He fusion in a low pressure IEC device</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1255 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8728055" class="entry">
+	<td>Pritchett, P.</td>
+	<td>Externally driven magnetic reconnection in the presence of a normal magnetic field</td>
+	<td>2005/05/01</td>
+	<td>Journal of Geophysical Research-Part A-Space Physics<br/>Vol.  110( A5), pp. 13 pp. - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1029/2004JA010948">URL</a>&nbsp;</td>
+</tr>
+<tr id="8888002" class="entry">
+	<td>Prost, L., Bieniosek, F., Celata, C., Faltens, A., Seidl, P., Waldron, W., Cohen, R., Friedman, A., Covo, M., Lund, S., Molvik, A. &amp; Haber, I.</td>
+	<td>Experimental study of the transport limits of intense heavy ion beams in the HCX</td>
+	<td>2005/05/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  544( 1-2), pp. 151 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2005.01.287">URL</a>&nbsp;</td>
+</tr>
+<tr id="8449051" class="entry">
+	<td>Prost, L., Seidl, P., Bieniosek, F., Celata, C., Faltens, A., Baca, D., Henestroza, E., Kwan, J., Leitner, M., Waldron, W., Cohen, R., Friedman, A., Grote, D., Lund, S., Molvik, A. &amp; Morse, E.</td>
+	<td>High current transport experiment for heavy ion inertial fusion</td>
+	<td>2005/02/</td>
+	<td>Physical Review Special Topics-Accelerators and Beams<br/>Vol.  8( 2)&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4915124" class="entry">
+	<td>Quande, Z.</td>
+	<td>Stochastic acceleration by very intense laser light</td>
+	<td>1995/02/27</td>
+	<td>Physics Letters A<br/>Vol.  198( 3), pp. 233 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0375-9601(95)00050-D">URL</a>&nbsp;</td>
+</tr>
+<tr id="9625092" class="entry">
+	<td>Radel, R. &amp; Kulcinski, G.</td>
+	<td>Implantation of He+ in candidate fusion first wall materials</td>
+	<td>2007/08/01</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  367-370( 1), pp. 434 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jnucmat.2007.03.119">URL</a>&nbsp;</td>
+</tr>
+<tr id="8697183" class="entry">
+	<td>Radel, R. &amp; Kulcinski, G.</td>
+	<td>Implantation of D and He in W-coated refractory carbides</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1250 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9802263" class="entry">
+	<td>Radel, R., Kulcinski, G., Ashley, R., Santarius, J., Emmert, G., Piefer, G., Sorebo, J., Boris, D., Egle, B., Zenobia, S., Alderson, E. &amp; Donovan, D.</td>
+	<td>Detection of highly enriched uranium using a pulsed D-D fusion source</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1087 - 91&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9295448" class="entry">
+	<td>Radel, R., Kulcinski, G., Ashley, R., Santarius, J., Piefer, G., Boris, D., Giar, R., Egle, B., Seyfert, C., Zenobia, S. &amp; Alderson, E.</td>
+	<td>Detection of HEU using a pulsed Inertial Electrostatic Confinement D-D fusion device</td>
+	<td>2006//</td>
+	<td>Transactions of the American Nuclear Society<br/>Vol.  95, pp. 12 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5028917" class="entry">
+	<td>Rider, T.</td>
+	<td>A general critique of inertial-electrostatic confinement fusion systems</td>
+	<td>1995/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  2( 6), pp. 1853 - 72&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.871273">URL</a>&nbsp;</td>
+</tr>
+<tr id="8974783" class="entry">
+	<td>Rodel, R.</td>
+	<td>Detection of highly enriched uranium using a pulsed inertial electrostatic confinement D-D fusion device</td>
+	<td>Fall 2005</td>
+	<td>JNMM<br/>Vol.  34( 1), pp. 32 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7724657" class="entry">
+	<td>Rokhlenko, A. &amp; Lebowitz, J.</td>
+	<td>Space-charge-limited 2D electron flow between two flat electrodes in a strong magnetic field</td>
+	<td>2003/08/22</td>
+	<td>Physical Review Letters<br/>Vol.  91( 8), pp. 085002 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.91.085002">URL</a>&nbsp;</td>
+</tr>
+<tr id="9312937" class="entry">
+	<td>Rousseaux, C., Casanova, M., Gremillet, L., Loiseau, P., Rabec Le Gloahec, M., Baton, S., Amiranoff, F., Audebert, P., Popescu, H., Adam, J., Heron, A., Huller, S., Mora, P. &amp; Pesme, D.</td>
+	<td>Transient development of SRS and SBS in ps-time scale by using sub-ps Thomson diagnostic</td>
+	<td>2006/06/</td>
+	<td>Journal de Physique IV (Proceedings)<br/>Vol.  133, pp. 259 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1051/jp4.2006133052">URL</a>&nbsp;</td>
+</tr>
+<tr id="4994506" class="entry">
+	<td>Salingaros, N.</td>
+	<td>A critical comparison between magnetic and inertial confinement schemes and their geometries</td>
+	<td>1995/05/</td>
+	<td>Fusion Technology<br/>Vol.  27( 3), pp. 230 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8655281" class="entry">
+	<td>Samarian, A. &amp; James, B.</td>
+	<td>Dust as fine electrostatic probes for plasma diagnostic</td>
+	<td>2005/12/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  47( 12B), pp. 629 - 39&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/47/12B/S46">URL</a>&nbsp;</td>
+</tr>
+<tr id="8697181" class="entry">
+	<td>Santarius, J., Kulcinski, G., Ashley, R., Boris, D., Cipiti, B., Krupakar Murali, S., Piefer, G., Radel, R., Radel, T. &amp; Wehmeyer, A.</td>
+	<td>Overview of University of Wisconsin inertial-electrostatic confinement fusion research</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1238 - 44&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5147866" class="entry">
+	<td>Sanwei, L., Lanying, Q., Rongqing, Y., Zhijian, Z. &amp; Daoyuan, T.</td>
+	<td>A unfolding of hard X-ray spectrum in laser fusion</td>
+	<td>1995/05/15</td>
+	<td>High Power Laser and Particle Beams<br/>Vol.  7( 2), pp. 205 - 10&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8211518" class="entry">
+	<td>Sarwar, M., Mirza, A., Salahuddin, M. &amp; Qaisar, M.</td>
+	<td>Effect of charge fluctuations on the Debye shielding and energy loss of NM projectiles in a dusty plasma</td>
+	<td>2003/10/</td>
+	<td>Physica Scripta<br/>Vol.  68( 4), pp. 285 - 92&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1238/Physica.Regular.068a00285">URL</a>&nbsp;</td>
+</tr>
+<tr id="12809388" class="entry">
+	<td>Semsari, S., Sadighzadeh, A., Zakeri, A., Khademzade, S., Torabi, M., Sedaghat, M. &amp; Damideh, V.</td>
+	<td>The effect of high temperature He+ implantation on polycrystalline tungsten in IR-IECF</td>
+	<td>2012/08/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  31( 4), pp. 389 - 95&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9481-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="13755829" class="entry">
+	<td>Semsari, S., Zakeri, A., Sadighzadeh, A., Khademzadeh, S., Sedaghat, M., Torabi, M. &amp; Damideh, V.</td>
+	<td>Comparison of high-energy He+ and D+ irradiation impact on tungsten surface in the IR-IECF device</td>
+	<td>2013/02/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  32( 1), pp. 142 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-012-9540-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="13190438" class="entry">
+	<td>Sharafkhani, N., Shabani, R., Tariverdilo, S. &amp; Rezazadeh, G.</td>
+	<td>Stability Analysis and Transient Response of Electrostatically Actuated Microbeam Interacting With Bounded Compressible Fluids</td>
+	<td>2013/01/</td>
+	<td>Journal of Applied Mechanics<br/>Vol.  80( 1), pp. 011024 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1115/1.4007141">URL</a>&nbsp;</td>
+</tr>
+<tr id="8765125" class="entry">
+	<td>Shrier, O., Khachan, J., Bosi, S., Fitzgerald, M. &amp; Evans, N.</td>
+	<td>Diverging ion motion in an inertial electrostatic confinement discharge</td>
+	<td>2006/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 1), pp. 12703 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2167584">URL</a>&nbsp;</td>
+</tr>
+<tr id="12225329" class="entry">
+	<td>Shukla, P. &amp; Eliasson, B.</td>
+	<td>Colloquium: Nonlinear collective interactions in quantum plasmas with degenerate electron fluids</td>
+	<td>2011/07/</td>
+	<td>Reviews of Modern Physics<br/>Vol.  83( 3), pp. 885 - 906&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/RevModPhys.83.885">URL</a>&nbsp;</td>
+</tr>
+<tr id="2726096" class="entry">
+	<td>Shukla, P., Rao, N., Yu, M. &amp; Tsintsadze, N.</td>
+	<td>Relativistic nonlinear effects in plasma</td>
+	<td>1986/05/</td>
+	<td>Physics Reports<br/>Vol.  138( 1-2), pp. 1 - 49&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0370-1573(86)90157-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="11937074" class="entry">
+	<td>Siria, A., Huant, S., Auvert, G., Comin, F. &amp; Chevrier, J.</td>
+	<td>A Scheme for Solving the Plane-plane Challenge in Force Measurements at the Nanoscale</td>
+	<td>2010/08/</td>
+	<td>Nano Scale Research Letters<br/>Vol.  5( 8), pp. 1360 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s11671-010-9633-y">URL</a>&nbsp;</td>
+</tr>
+<tr id="11090801" class="entry">
+	<td>Sorebo, J., Kulcinski, G., Radel, R. &amp; Santarius, J.</td>
+	<td>Special nuclear materials detection using IEC fusion pulsed neutron source</td>
+	<td>2009/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  56( 1), pp. 540 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11055022" class="entry">
+	<td>Su, J. &amp; Goddard, W.A., I.</td>
+	<td>The dynamics of highly excited electronic systems: applications of the electron force field</td>
+	<td>2009/12/28</td>
+	<td>Journal of Chemical Physics<br/>Vol.  131( 24), pp. 244501 (20 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3272671">URL</a>&nbsp;</td>
+</tr>
+<tr id="647085" class="entry">
+	<td>Swanson, D., Cherrington, B. &amp; Verdeyen, J.</td>
+	<td>Potential well structure in an inertial electrostatic plasma confinement device</td>
+	<td>1973/11/</td>
+	<td>Physics of Fluids<br/>Vol.  16( 11), pp. 1939 - 45&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9802267" class="entry">
+	<td>Takamatsu, T., Fujimoto, T., Masuda, K. &amp; Yoshikawa, K.</td>
+	<td>Spatial distribution of D-D neutrons from a compact water-cooled inertial electrostatic confinement device</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1114 - 18&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8713449" class="entry">
+	<td>Takamatsu, T., Masuda, K., Kyunai, T., Toku, H. &amp; Yoshikawa, K.</td>
+	<td>Inertial electrostatic confinement fusion device with an ion source using a magnetron discharge</td>
+	<td>2006/01/</td>
+	<td>Nuclear Fusion<br/>Vol.  46( 1), pp. 142 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/46/1/016">URL</a>&nbsp;</td>
+</tr>
+<tr id="8697191" class="entry">
+	<td>Takamatsu, T., Masuda, K., Yoshikawa, K., Toku, H., Nagasaki, K. &amp; Kyunai, T.</td>
+	<td>Magnetron-discharge-based ion source for improvement of an inertial electrostatic confinement fusion device</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1290 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4732215" class="entry">
+	<td>Tang, K. &amp; Gomez, A.</td>
+	<td>On the structure of an electrostatic spray of monodisperse droplets</td>
+	<td>1994/07/</td>
+	<td>Physics of Fluids<br/>Vol.  6( 7), pp. 2317 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.868182">URL</a>&nbsp;</td>
+</tr>
+<tr id="11478022" class="entry">
+	<td>Taniuchi, Y., Matsumura, Y., Taira, K., Utsumi, M., Chiba, M., Shirakawa, T. &amp; Fujii, M.</td>
+	<td>Effects of Grid Cathode Structure on a Low-input-power Inertial Electrostatic Confinement Fusion Device</td>
+	<td>2010/07/</td>
+	<td>Journal of Nuclear Science and Technology<br/>Vol.  47( 7), pp. 626 - 33&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.3327/jnst.47.626">URL</a>&nbsp;</td>
+</tr>
+<tr id="12514034" class="entry">
+	<td>Taniuchi, Y., Matsumura, Y. &amp; Utsumi, M.</td>
+	<td>Study of Neutron Production Mechanism for Inertial Electrostatic Confinement Fusion</td>
+	<td>2010//</td>
+	<td>Proceedings of the School of Engineering of Tokai University (English Edition)<br/>Vol.  50( 1), pp. 9 - 14&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11924142" class="entry">
+	<td>Tomiyasu, K., Yokoyama, K., Watanabe, M. &amp; Hotta, E.</td>
+	<td>Particle-in-cell simulation of magnetic-assisted electrostatic confinement device</td>
+	<td>2010/08/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  85( 5), pp. 728 - 33&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2010.04.036">URL</a>&nbsp;</td>
+</tr>
+<tr id="11685273" class="entry">
+	<td>Tuft, C. &amp; Khachan, J.</td>
+	<td>Spherical plasma oscillations in a reversed-polarity inertial-electrostatic confinement device</td>
+	<td>2010/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 11), pp. 112117 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3522776">URL</a>&nbsp;</td>
+</tr>
+<tr id="4371691" class="entry">
+	<td>Turner, L. &amp; Barnes, D.</td>
+	<td>Brillouin limit and beyond: a route to inertial-electrostatic confinement of a single-species plasma</td>
+	<td>1993/02/08</td>
+	<td>Physical Review Letters<br/>Vol.  70( 6), pp. 798 - 801&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.70.798">URL</a>&nbsp;</td>
+</tr>
+<tr id="4975426" class="entry">
+	<td>Turner, L. &amp; Finn, J.</td>
+	<td>Streaming instabilities of a non-neutral plasma with turning points</td>
+	<td>1995/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  2( 5), pp. 1378 - 92&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.871354">URL</a>&nbsp;</td>
+</tr>
+<tr id="7811228" class="entry">
+	<td>Tyrsa, V. &amp; Burtseva, L.</td>
+	<td>Generation of thermonuclear energy by fusing hydrogen and lithium atoms</td>
+	<td>2003/07/</td>
+	<td>Technical Physics<br/>Vol.  48( 7), pp. 807 - 12&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/1.1593184">URL</a>&nbsp;</td>
+</tr>
+<tr id="8697192" class="entry">
+	<td>Ueno, Y., Tomizawa, T. &amp; Yamamoto, Y.</td>
+	<td>Measurement of ion energy distribution in a cylindrical inertial electrostatic confinement fusion (C-IECF) device</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1295 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10257312" class="entry">
+	<td>Votyakov, E., Zienicke, E. &amp; Kolesnikov, Y.</td>
+	<td>Constrained flow around a magnetic obstacle</td>
+	<td>10 Sept. 2008</td>
+	<td>Journal of Fluid Mechanics<br/>Vol.  610, pp. 131 - 56&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697185" class="entry">
+	<td>Wehmeyer, A., Radel, R. &amp; Kulcinski, G.</td>
+	<td>Optimizing neutron production rates from D-D fusion in an inertial electrostatic confinement device</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1260 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2377576" class="entry">
+	<td>Winterberg, F.</td>
+	<td>Magnetically insulated gigavolt potential capacitor-a compact inertial fusion driver</td>
+	<td>1984/06/</td>
+	<td>Atomkernenergie Kerntechnik<br/>Vol.  44( 4), pp. 312 - 14&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8589639" class="entry">
+	<td>Woodruff, S.</td>
+	<td>An overview of tokamak alternatives in the US fusion program with the aim of fostering concept innovation</td>
+	<td>2004/03/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  23( 1), pp. 27 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-004-1869-z">URL</a>&nbsp;</td>
+</tr>
+<tr id="10160848" class="entry">
+	<td>Wu, L., Miley, G., Momota, H. &amp; Shrestha, P.</td>
+	<td>An integrated broad area coverage fusion neutron/X-ray interrogation unit</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1096 - 100&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13125318" class="entry">
+	<td>Xin, B., Hanben, N., Qinlao, Y., Ji, L., Hua, L. &amp; Lihong, N.</td>
+	<td>Large dynamic range femtosecond soft X-ray streak image tube</td>
+	<td>2011/10/</td>
+	<td>High Power Laser and Particle Beams<br/>Vol.  23( 10), pp. 2683 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.3788/HPLPB20112310.2683">URL</a>&nbsp;</td>
+</tr>
+<tr id="12341797" class="entry">
+	<td>Yabuuchi, T., Sawada, H., Bartal, T., Batani, D., Gizzi, L., Key, M., Mackinnon, A., McLean, H., Norreys, P., Patel, P., Stephens, R., Spindloe, C., Theobald, W., Wei, M. &amp; Beg, F.</td>
+	<td>Proton Radiography of Intense-laser-irradiated Wire-attached Cone Targets</td>
+	<td>2011/11/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  39( 11), pp. 2822 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2011.2160291">URL</a>&nbsp;</td>
+</tr>
+<tr id="6934846" class="entry">
+	<td>Yamamoto, Y., Kusaba, R., Shirouzu, T. &amp; Inoue, N.</td>
+	<td>Effects of electrode shape on performance characteristics of a cylindrical inertial electrostatic confinement fusion device</td>
+	<td>2001/05/</td>
+	<td>Fusion Technology<br/>Vol.  39( 3), pp. 1188 - 92&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697190" class="entry">
+	<td>Yamamoto, Y., Noborio, K. &amp; Konishi, S.</td>
+	<td>Influence of the electrode spacing on the performance characteristics of inertial electrostatic confinement fusion in low pressure operation</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1285 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697179" class="entry">
+	<td>Yamauchi, K., Watanabe, M., Okino, A., Kohno, T., Hotta, E. &amp; Yuura, M.</td>
+	<td>Pulsed operation of a compact fusion neutron source using a high-voltage pulse generator developed for landmine detection</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1229 - 32&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9802264" class="entry">
+	<td>Yoshikawa, K., Masuda, K., Takamatsu, T., Hotta, E., Yamauchi, K., Shiroya, S., Misawa, T., Takahashi, Y., Ohnishi, M. &amp; Osawa, H.</td>
+	<td>Research and development on humanitarian landmine detection system by use of a compact d-d fusion neutron source</td>
+	<td>2007/11/</td>
+	<td>Fusion Science and Technology<br/>Vol.  52( 4), pp. 1092 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9607005" class="entry">
+	<td>Yoshikawa, K., Masuda, K., Takamatsu, T., Shiroya, S., Misawa, T., Hotta, E., Ohnishi, M., Yamauchi, K., Osawa, H. &amp; Takahashi, Y.</td>
+	<td>Research and development of a compact discharge-driven D-D fusion neutron source for explosive detection</td>
+	<td>2007//</td>
+	<td>Nuclear Inst. and Methods in Physics Research, B<br/>Vol.  261( 1-2), pp. 299 - 302&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nimb.2007.04.026">URL</a>&nbsp;</td>
+</tr>
+<tr id="10756917" class="entry">
+	<td>Yoshikawa, K., Masuda, K., Takamatsu, T., Yamamoto, Y., Toku, H., Fujimoto, T., Hotta, E., Yamauchi, K., Ohnishi, M., Osawa, H., Shiroya, S., Misawa, T., Takahashi, Y., Kubo, Y. &amp; Doi, T.</td>
+	<td>Research and development of the humanitarian landmine detection system by a compact fusion neutron source</td>
+	<td>2009/06/</td>
+	<td>IEEE Transactions on Nuclear Science<br/>Vol.  56( 3), pp. 1193 - 202&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TNS.2008.2009118">URL</a>&nbsp;</td>
+</tr>
+<tr id="8697178" class="entry">
+	<td>Yoshikawa, K., Masuda, K., Toku, H., Nagasaki, K., Mizutani, T., Takamatsu, T., Imoto, M., Yamamoto, Y., Ohnishi, M., Osawa, H., Hotta, E., Kohno, T., Okino, A., Watanabe, M., Yamauchi, K., Yuura, M., Shiroya, S., Misawa, T. &amp; Mori, T.</td>
+	<td>Research and development of landmine detection system by a compact fusion neutron source</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1224 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6982527" class="entry">
+	<td>Yoshikawa, K., Takiyama, K., Koyama, T., Taruya, K., Masuda, K., Yamamoto, Y., Toku, T., Kii, T., Hashimoto, H., Inoue, N., Ohnishi, M. &amp; Horiike, H.</td>
+	<td>Measurements of strongly localized potential well profiles in an inertial electrostatic fusion neutron source</td>
+	<td>2001/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  41( 6), pp. 717 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/41/6/306">URL</a>&nbsp;</td>
+</tr>
+<tr id="6934847" class="entry">
+	<td>Yoshikawa, K., Takiyama, K., Masuda, K., Toku, H., Koyama, T., Taruya, K., Hashimoto, H., Yamamoto, Y., Ohnishi, M., Horiike, H. &amp; Inoue, N.</td>
+	<td>Strongly localized potential profile measurements through Stark effects in the central core region of an inertial electrostatic fusion device</td>
+	<td>2001/05/</td>
+	<td>Fusion Technology<br/>Vol.  39( 3), pp. 1193 - 201&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8697188" class="entry">
+	<td>Yoshinaga, S., Matsuura, H., Nakao, Y. &amp; Kudo, K.</td>
+	<td>Fast neutral generation by charge exchange reaction and its effect on neutron production rate in inertial electrostatic confinement fusion systems</td>
+	<td>2005/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  47( 4), pp. 1275 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1626332" class="entry">
+	<td>Young, T. &amp; Genuario, R.</td>
+	<td>Theoretical conversion efficiency of relativistic electron beams into ion beams in the vicinity of a target</td>
+	<td>Sept. 1980</td>
+	<td>Journal of Applied Physics<br/>Vol.  51( 9), pp. 4595 - 601&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.328353">URL</a>&nbsp;</td>
+</tr>
+<tr id="12341711" class="entry">
+	<td>Yousefi, M., Damideh, V. &amp; Ghomi, H.</td>
+	<td>Low-energy Electron Beam Extraction From Spherical Discharge</td>
+	<td>2011/11/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  39( 11), pp. 2554 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2011.2159130">URL</a>&nbsp;</td>
+</tr>
+<tr id="10910388" class="entry">
+	<td>Zenobia, S., Radel, R., Cipiti, B. &amp; Kulcinski, G.</td>
+	<td>High temperature surface effects of He+ implantation in ICF fusion first wall materials</td>
+	<td>2009/05/31</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  389( 2), pp. 213 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jnucmat.2009.02.004">URL</a>&nbsp;</td>
+</tr>
+<tr id="10693874" class="entry">
+	<td>Zhuo, H., Yu, W., Yu, M., Xu, H., Wang, X., Shen, B., Sheng, Z. &amp; Zhang, J.</td>
+	<td>Laser-driven inertial ion focusing</td>
+	<td>2009/01/</td>
+	<td>Physical Review E (Statistical, Nonlinear, and Soft Matter Physics)<br/>Vol.  79( 1), pp. 015401 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.79.015401">URL</a>&nbsp;</td>
+</tr>
+<tr id="12711305" class="entry">
+	<td>Zylstra, A., Li, C., Seguin, F., Rosenberg, M., Rinderknecht, H., Sinenian, N., Frenje, J., Petrasso, R., Izumi, N., Amendt, P., Landen, O. &amp; Koch, J.</td>
+	<td>Measurements of hohlraum-produced fast ions</td>
+	<td>2012/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  19( 4), pp. 042707 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4707410">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 28/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

@@ -1,0 +1,3464 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="2488553" class="entry">
+	<td>yi, W.G., zhong, W.S., zhi, C.H. &amp; chuang, L.J.</td>
+	<td>Experiments of a field-reversed configuration</td>
+	<td>1984/10/</td>
+	<td>Chinese Physics<br/>Vol.  4( 4), pp. 874 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8260085" class="entry">
+	<td>Antoni, V., Bergsaker, H., Cavazzana, R., Carbone, V., Drake, J., Martines, E., Regnoli, G., Serianni, G., Spada, E., Spolaore, M. &amp; Vianello, N.</td>
+	<td>Turbulence and anomalous transport in magnetized plasmas: hints from the reversed field pinch configuration</td>
+	<td>2004//</td>
+	<td>Contributions to Plasma Physics<br/>Vol.  44( 5-6), pp. 458 - 64&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/ctpp.200410064">URL</a>&nbsp;</td>
+</tr>
+<tr id="2863677" class="entry">
+	<td>Antoni, V., Merlin, D., Ortolani, S. &amp; Paccagnella, R.</td>
+	<td>MHD stability analysis of force-free reversed field pinch configurations</td>
+	<td>1986/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 12), pp. 1711 - 18&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1714483" class="entry">
+	<td>Armstrong, W., Cochrane, J., Commisso, R., Lipson, J. &amp; Tuszewski, M.</td>
+	<td>-pinch ionization for field-reversed configuration formation</td>
+	<td>1981/05/01</td>
+	<td>Applied Physics Letters<br/>Vol.  38( 9), pp. 680 - 2&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.92477">URL</a>&nbsp;</td>
+</tr>
+<tr id="1989965" class="entry">
+	<td>Armstrong, W., Harding, D., Crawford, E. &amp; Hoffman, A.</td>
+	<td>Flux-trapping during the formation of field-reversed configurations</td>
+	<td>1982/11/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 11), pp. 2121 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863671">URL</a>&nbsp;</td>
+</tr>
+<tr id="12912360" class="entry">
+	<td>Asai, T., Akagawa, S., Akimoto, K., Tada, N., Takahashi, T. &amp; Tazawa, H.</td>
+	<td>Time Evolution of the Magnetic Structure of a Field-Reversed Configuration in a Super-Alfvenic Translation Process</td>
+	<td>2011//</td>
+	<td>Plasma and Fusion Research<br/>Vol.  6, pp. 2402151 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.6.2402151">URL</a>&nbsp;</td>
+</tr>
+<tr id="7732484" class="entry">
+	<td>Asai, T., Inomoto, M., Iwasawa, N., Okada, S. &amp; Goto, S.</td>
+	<td>Stabilization of global movement on a field-reversed configuration due to fast neutral beam ions</td>
+	<td>Sept. 2003</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 9), pp. 3608 - 13&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1596393">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406716" class="entry">
+	<td>Asai, T., Kiguchi, T., Takahashi, T., Matsuzawa, Y. &amp; Nogi, Y.</td>
+	<td>Visible light tomography system for a high-beta field-reversed configuration plasma</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 10 - 507&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2221595">URL</a>&nbsp;</td>
+</tr>
+<tr id="9545783" class="entry">
+	<td>Asai, T., Matsuzawa, Y., Okano, T., Kiguchi, T., Sakuraba, K., Takahashi, T., Hirano, Y., Mizuguchi, N. &amp; Tomita, Y.</td>
+	<td>Heating and particle build-up of field-reversed configuration due to neutral particle injection in a translation process</td>
+	<td>2007/02/</td>
+	<td>Fusion Science and Technology<br/>Vol.  51( 2T), pp. 379 - 81&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9490094" class="entry">
+	<td>Asai, T., Nishida, T., Kiguchi, T., Takahashi, T., Matsuzawa, Y., Okano, T. &amp; Nogi, Y.</td>
+	<td>Application of a magnetized coaxial plasma gun for formation of a high-beta field-reversed configuration</td>
+	<td>2006/11/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  81( 23-24), pp. 2843 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2006.07.033">URL</a>&nbsp;</td>
+</tr>
+<tr id="6599418" class="entry">
+	<td>Asai, T., Suzuki, Y., Yoneda, T., Kodera, F., Okubo, M., Okada, S. &amp; Goto, S.</td>
+	<td>Experimental evidence of improved confinement in a high-beta field-reversed configuration plasma by neutral beam injection</td>
+	<td>2000/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 6), pp. 2294 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.874121">URL</a>&nbsp;</td>
+</tr>
+<tr id="9400260" class="entry">
+	<td>Asai, T., Takahashi, T., Kiguchi, T., Matsuzawa, Y. &amp; Nogi, Y.</td>
+	<td>Tomographic reconstruction of deformed internal structure of a field-reversed configuration</td>
+	<td>2006/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 7), pp. 72508 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2217932">URL</a>&nbsp;</td>
+</tr>
+<tr id="7598766" class="entry">
+	<td>Barnes, D.</td>
+	<td>Stability of a long field-reversed configuration: complete two-fluid theory</td>
+	<td>2003/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 5), pp. 1636 - 42&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1543173">URL</a>&nbsp;</td>
+</tr>
+<tr id="7155798" class="entry">
+	<td>Barnes, D.</td>
+	<td>Stability of long field-reversed configurations</td>
+	<td>2002/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 2), pp. 560 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1435425">URL</a>&nbsp;</td>
+</tr>
+<tr id="7099995" class="entry">
+	<td>Barnes, D.</td>
+	<td>Profile consistency of an elongated field-reversed configuration. I. Asymptotic theory</td>
+	<td>2001/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 11), pp. 4856 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1408289">URL</a>&nbsp;</td>
+</tr>
+<tr id="7099996" class="entry">
+	<td>Barnes, D.</td>
+	<td>Profile consistency of an elongated field-reversed configuration. II. Two-dimensional solutions</td>
+	<td>2001/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 11), pp. 4864 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1408290">URL</a>&nbsp;</td>
+</tr>
+<tr id="4019663" class="entry">
+	<td>Barnes, D. &amp; Milroy, R.</td>
+	<td>Stabilization of the field-reversed configuration (FRC) tilt instability with energetic ion beams</td>
+	<td>Sept. 1991</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 9), pp. 2609 - 16&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859973">URL</a>&nbsp;</td>
+</tr>
+<tr id="2757054" class="entry">
+	<td>Barnes, D., Schwarzmeier, J., Lewis, H. &amp; Seyler, C.</td>
+	<td>Kinetic tilting stability of field-reversed configurations</td>
+	<td>1986/08/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 8), pp. 2616 - 29&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865503">URL</a>&nbsp;</td>
+</tr>
+<tr id="14083679" class="entry">
+	<td>Barnes, D. &amp; Steinhauer, L.</td>
+	<td>Rotational stability of a long field-reversed configuration</td>
+	<td>2014/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  21( 2), pp. 022506 (11 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4865409">URL</a>&nbsp;</td>
+</tr>
+<tr id="9028871" class="entry">
+	<td>Belova, E., Davidson, R., Ji, H. &amp; Yamada, M.</td>
+	<td>Advances in the numerical modeling of field-reversed configurations</td>
+	<td>2006/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 5), pp. 56115 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2179426">URL</a>&nbsp;</td>
+</tr>
+<tr id="7948926" class="entry">
+	<td>Belova, E., Davidson, R., Ji, H. &amp; Yamada, M.</td>
+	<td>Kinetic effects on the stability properties of field-reversed configurations. II. Nonlinear evolution</td>
+	<td>2004/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 5), pp. 2523 - 31&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1666293">URL</a>&nbsp;</td>
+</tr>
+<tr id="7645836" class="entry">
+	<td>Belova, E., Davidson, R., Ji, H. &amp; Yamada, M.</td>
+	<td>Kinetic effects on the stability properties of field-reversed configurations. I. Linear stability</td>
+	<td>2003/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 6), pp. 2361 - 71&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1568118">URL</a>&nbsp;</td>
+</tr>
+<tr id="8713451" class="entry">
+	<td>Belova, E., Davidson, R., Ji, H., Yamada, M., Cothran, C., Brown, M. &amp; Schaffer, M.</td>
+	<td>Numerical study of the formation, ion spin-up and nonlinear stability properties of field-reversed configurations</td>
+	<td>2006/01/</td>
+	<td>Nuclear Fusion<br/>Vol.  46( 1), pp. 162 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/46/1/018">URL</a>&nbsp;</td>
+</tr>
+<tr id="6901486" class="entry">
+	<td>Belova, E., Jardin, S., Ji, H., Yamada, M. &amp; Kulsrud, R.</td>
+	<td>Numerical study of global stability of oblate field-reversed configurations</td>
+	<td>2001/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 4), pp. 1267 - 77&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1355027">URL</a>&nbsp;</td>
+</tr>
+<tr id="6772535" class="entry">
+	<td>Belova, E., Jardin, S., Ji, H., Yamada, M. &amp; Kulsrud, R.</td>
+	<td>Numerical study of tilt stability of prolate field-reversed configurations</td>
+	<td>2000/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 12), pp. 4996 - 5006&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1318929">URL</a>&nbsp;</td>
+</tr>
+<tr id="3075525" class="entry">
+	<td>Berk, H., Momota, H. &amp; Tajima, T.</td>
+	<td>Plasma current sustained by fusion charged particles in a field-reversed configuration</td>
+	<td>1987/11/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 11), pp. 3548 - 65&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866525">URL</a>&nbsp;</td>
+</tr>
+<tr id="7654505" class="entry">
+	<td>Bhattacharyya, R., Janaki, M. &amp; Dasgupta, B.</td>
+	<td>Relaxation phenomenon in the field reversed configuration</td>
+	<td>2003/01/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  45( 1), pp. 63 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/45/1/305">URL</a>&nbsp;</td>
+</tr>
+<tr id="7166520" class="entry">
+	<td>Bhattacharyya, R., Janaki, M. &amp; Dasgupta, B.</td>
+	<td>Field-reversed configuration (FRC) as a minimum-dissipative relaxed state</td>
+	<td>2001/12/10</td>
+	<td>Physics Letters A<br/>Vol.  291( 4-5), pp. 291 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0375-9601(01)00723-X">URL</a>&nbsp;</td>
+</tr>
+<tr id="11429356" class="entry">
+	<td>Binderbauer, M., Guo, H., Tuszewski, M., Putvinski, S., Sevier, L., Barnes, D., Rostoker, N., Anderson, M., Andow, R., Bonelli, L., Brandi, F., Brown, R., Bui, D., Bystritskii, V., Ceccherini, F., Clary, R., Cheung, A., Conroy, K., Deng, B., Dettrick, S., Douglass, J., Feng, P., Galeotti, L., Garate, E., Giammanco, F., Glass, F., Gornostaeva, O., Gota, H., Gupta, D., Gupta, S., Kinley, J., Knapp, K., Korepanov, S., Hollins, M., Isakov, I., Jose, V., Li, X., Luo, Y., Marsili, P., Mendoza, R., Meekins, M., Mok, Y., Necas, A., Paganini, E., Pegoraro, F., Pousa-Hijos, R., Primavera, S., Ruskov, E., Qerushi, A., Schmitz, L., Schroeder, J., Sibley, A., Smirnov, A., Song, Y., Sun, X., Thompson, M., Van Drie, A., Walters, J. &amp; Wyman, M.</td>
+	<td>Dynamic Formation of a Hot Field Reversed Configuration with Improved Confinement by Supersonic Merging of Two Colliding High- Compact Toroids</td>
+	<td>2010/07/23</td>
+	<td>Physical Review Letters<br/>Vol.  105( 4), pp. 045003 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.105.045003">URL</a>&nbsp;</td>
+</tr>
+<tr id="1174632" class="entry">
+	<td>Book, D., Hammer, D. &amp; Turchi, P.</td>
+	<td>Theoretical studies of the formation and adiabatic compression of reversed-field configurations in imploding liners</td>
+	<td>1978/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  18( 2), pp. 159 - 70&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3398042" class="entry">
+	<td>Bozhokin, S.</td>
+	<td>One-dimensional solutions of the nonlinear Grad-Shafranov equation for reversed-field configurations</td>
+	<td>1988/08/</td>
+	<td>Soviet Journal of Plasma Physics<br/>Vol.  14( 8), pp. 550 - 2&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11019986" class="entry">
+	<td>Brandi, F., Giammanco, F., Harris, W., Roche, T., Trask, E. &amp; Wessel, F.</td>
+	<td>Electron density measurements of a field-reversed configuration plasma using a novel compact ultrastable second-harmonic interferometer</td>
+	<td>2009/11/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  80( 11), pp. 113501 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3258199">URL</a>&nbsp;</td>
+</tr>
+<tr id="4380293" class="entry">
+	<td>Bud'ko, A., Karlson, E. &amp; Liberman, M.</td>
+	<td>Self-similar solutions for trapping and diffusion of magnetic flux during formation of field-reversed configuration</td>
+	<td>1993/02/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 2), pp. 457 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860531">URL</a>&nbsp;</td>
+</tr>
+<tr id="4219359" class="entry">
+	<td>Burtsev, V., Artyugina, I., Izotova, A., Kantan, V., Kozhevin, V., Krivosheev, M., Litunovsky, V. &amp; Slabikov, V.</td>
+	<td>D-3He-fueled fusion power plant based on the pulsatory field-reversed configuration</td>
+	<td>1992/07/</td>
+	<td>Fusion Technology<br/>Vol.  21( 4), pp. 2324 - 31&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4219360" class="entry">
+	<td>Burtsev, V., Kozhevin, V., Litunovsky, V., Drozdov, A., Viknyanshchuk, N., Ovchinnikov, I. &amp; Soldatov, A.</td>
+	<td>The PULSATOR concept as a possible technique for formation of a field-reversed configuration</td>
+	<td>1992/07/</td>
+	<td>Fusion Technology<br/>Vol.  21( 4), pp. 2332 - 45&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="14083572" class="entry">
+	<td>Bykov, I., Vignitchouk, L., Ratynskaia, S., Banon, J.-P., Tolias, P., Bergsaker, H., Frassinetti, L. &amp; Brunsell, P.</td>
+	<td>Transport asymmetry and release mechanisms of metal dust in the reversed-field pinch configuration</td>
+	<td>2014/03/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  56( 3), pp. 035014 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/56/3/035014">URL</a>&nbsp;</td>
+</tr>
+<tr id="2941728" class="entry">
+	<td>Carlson, A.</td>
+	<td>A search for lower-hybrid-drift fluctuations in a field-reversed configuration using CO2 heterodyne scattering</td>
+	<td>1987/05/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 5), pp. 1497 - 509&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866263">URL</a>&nbsp;</td>
+</tr>
+<tr id="3639987" class="entry">
+	<td>Chea, K.-H. &amp; Kim, D.-P.</td>
+	<td>The formation of reversed field configuration with bias field and radio-frequency rotating field</td>
+	<td>1989/10/</td>
+	<td>Transactions of the Korean Institute of Electrical Engineers<br/>Vol.  38( 10), pp. 840 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4295190" class="entry">
+	<td>Chiang, P.-R. &amp; Hsiao, M.-Y.</td>
+	<td>Electric field in the edge layer of field-reversed configurations</td>
+	<td>1992/10/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  4( 10), pp. 3226 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860378">URL</a>&nbsp;</td>
+</tr>
+<tr id="11103590" class="entry">
+	<td>Chirkov, A. &amp; Khvesyuk, V.</td>
+	<td>Electromagnetic drift instabilities in high- plasma under conditions of a field reversed configuration</td>
+	<td>2010/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 1), pp. 012105 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3283399">URL</a>&nbsp;</td>
+</tr>
+<tr id="4837245" class="entry">
+	<td>Chiyoda, K.</td>
+	<td>Equilibrium configuration and average beta values in a reversed field pinch</td>
+	<td>1994/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  63( 11), pp. 4011 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2524493" class="entry">
+	<td>Chiyoda, K.</td>
+	<td>A stability analysis against the interchange mode of the Hill vortex model in a field-reversed configuration</td>
+	<td>1985/06/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  54( 6), pp. 2160 - 2&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2334141" class="entry">
+	<td>Chiyoda, K.</td>
+	<td>Sufficient criterion for MHD stability of a field-reversed configuration</td>
+	<td>1984/08/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  53( 8), pp. 2536 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2437558" class="entry">
+	<td>Chiyoda, K. &amp; Hirota, I.</td>
+	<td>The specific volume of a field-reversed configuration and its application to stability analysis</td>
+	<td>1985//</td>
+	<td>Bulletin of the Electrotechnical Laboratory<br/>Vol.  49( 1), pp. 31 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2593515" class="entry">
+	<td>Chrien, R.</td>
+	<td>Field-reversed configuration translation into a compression coil</td>
+	<td>1985/11/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 11), pp. 3426 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865419">URL</a>&nbsp;</td>
+</tr>
+<tr id="3075527" class="entry">
+	<td>Chrien, R. &amp; Okada, S.</td>
+	<td>Field-reversed configuration profiles and resistivities inferred from the radial line-integral density profile</td>
+	<td>1987/11/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 11), pp. 3574 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866438">URL</a>&nbsp;</td>
+</tr>
+<tr id="6194106" class="entry">
+	<td>Chu, T.</td>
+	<td>Turbulent steady-state configuration of an inductively driven reversed field pinch plasma</td>
+	<td>1998/10/12</td>
+	<td>Physical Review Letters<br/>Vol.  81( 15), pp. 3148 - 50&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.81.3148">URL</a>&nbsp;</td>
+</tr>
+<tr id="4027047" class="entry">
+	<td>Clemente, R.</td>
+	<td>Rigid rotor model for field-reversed configurations, revisited</td>
+	<td>Sept. 1991</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  60( 9), pp. 2960 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6100085" class="entry">
+	<td>Clemente, R.</td>
+	<td>On current drive in field-reversed configurations</td>
+	<td>1998/10/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  67( 10), pp. 3450 - 3&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3249966" class="entry">
+	<td>Clemente, R.</td>
+	<td>Can plasma spin-up in field-reversed configurations be reduced?</td>
+	<td>1988//</td>
+	<td>Comments on Plasma Physics and Controlled Fusion<br/>Vol.  11( 6), pp. 269 - 73&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2114879" class="entry">
+	<td>Clemente, R.</td>
+	<td>A bifurcation problem in field-reversed configurations</td>
+	<td>1983/07/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 7), pp. 1877 - 80&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864366">URL</a>&nbsp;</td>
+</tr>
+<tr id="4893461" class="entry">
+	<td>Clemente, R. &amp; Cesar, R.</td>
+	<td>Anisotropic effects on classical particle confinement time in field-reversed configurations</td>
+	<td>1995/02/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  37( 2), pp. 137 - 43&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/37/2/006">URL</a>&nbsp;</td>
+</tr>
+<tr id="10309568" class="entry">
+	<td>Clemente, R., Gilli, M. &amp; Farengo, R.</td>
+	<td>Radial current density effects on rotating magnetic field current drive in field-reversed configurations</td>
+	<td>2008/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 10), pp. 102503 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2991398">URL</a>&nbsp;</td>
+</tr>
+<tr id="2249875" class="entry">
+	<td>Clemente, R. &amp; Grillo, C.</td>
+	<td>Internal tilting and classical transport for field-reversed configurations based on the Maschke-Hernegger solution</td>
+	<td>1984/03/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 3), pp. 658 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864673">URL</a>&nbsp;</td>
+</tr>
+<tr id="1811432" class="entry">
+	<td>Clemente, R. &amp; Milovich, J.</td>
+	<td>The tilting mode in field-reversed configurations</td>
+	<td>21 Sept. 1981</td>
+	<td>Physics Letters A<br/>Vol.  85A( 3), pp. 148 - 50&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2114878" class="entry">
+	<td>Clemente, R. &amp; Milovich, J.</td>
+	<td>The tilting mode in rigidly rotating field-reversed configurations</td>
+	<td>1983/07/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 7), pp. 1874 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864365">URL</a>&nbsp;</td>
+</tr>
+<tr id="3480840" class="entry">
+	<td>Clemente, R., Sakanaka, P. &amp; Mania, A.</td>
+	<td>Plasma decay in field reversed configurations</td>
+	<td>1989/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  29( 8), pp. 1339 - 46&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5140817" class="entry">
+	<td>Clemente, R., Sakanaka, P. &amp; Rincoski, C.</td>
+	<td>On the stability of anisotropic field-reversed configurations</td>
+	<td>1995/12/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  37( 12), pp. 1381 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/37/12/003">URL</a>&nbsp;</td>
+</tr>
+<tr id="4802897" class="entry">
+	<td>Clemente, R. &amp; Steinhauer, L.</td>
+	<td>Resistive anisotropic flow for edge-layer and jets in field-reversed configurations</td>
+	<td>1994/08/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  63( 8), pp. 3003 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4506741" class="entry">
+	<td>Cobb, J., Tajima, T. &amp; Barnes, D.</td>
+	<td>Profile stabilization of tilt mode in a field-reversed configuration</td>
+	<td>Sept. 1993</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 9), pp. 3227 - 38&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860658">URL</a>&nbsp;</td>
+</tr>
+<tr id="6817622" class="entry">
+	<td>Cohen, S. &amp; Glasser, A.</td>
+	<td>Ion heating in the field-reversed configuration by rotating magnetic fields near the ion-cyclotron resonance</td>
+	<td>2000/12/11</td>
+	<td>Physical Review Letters<br/>Vol.  85( 24), pp. 5114 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.85.5114">URL</a>&nbsp;</td>
+</tr>
+<tr id="9586738" class="entry">
+	<td>Cohen, S., Landsman, A. &amp; Glasser, A.</td>
+	<td>Stochastic ion heating in a field-reversed configuration geometry by rotating magnetic fields</td>
+	<td>2007/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  14( 7), pp. 72508 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2746813">URL</a>&nbsp;</td>
+</tr>
+<tr id="6599376" class="entry">
+	<td>Cohen, S. &amp; Milroy, R.</td>
+	<td>Maintaining the closed magnetic-field-line topology of a field-reversed configuration with the addition of static transverse magnetic fields</td>
+	<td>2000/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 6), pp. 2539 - 45&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.874094">URL</a>&nbsp;</td>
+</tr>
+<tr id="14110589" class="entry">
+	<td>Conti, F., Wessel, F., Binderbauer, M., Bolte, N., Giammanco, F., Morehouse, M., Qerushi, A., Rahman, H., Roche, T. &amp; Slepchenkov, M.</td>
+	<td>Rigid-rotor, field-reversed configuration</td>
+	<td>2014/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  21( 2), pp. 022511 (14 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4866144">URL</a>&nbsp;</td>
+</tr>
+<tr id="7598782" class="entry">
+	<td>Cothran, C., Falk, A., Fefferman, A., Landreman, M., Brown, M. &amp; Schaffer, M.</td>
+	<td>Spheromak merging and field reversed configuration formation at the Swarthmore Spheromak experiment</td>
+	<td>2003/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 5), pp. 1748 - 54&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1564084">URL</a>&nbsp;</td>
+</tr>
+<tr id="12546006" class="entry">
+	<td>Deards, C., Hoffman, A. &amp; Steinhauer, L.</td>
+	<td>Measurements accounting for the impediment of ion spin-up in rotating magnetic field driven field reversed configurations</td>
+	<td>2011/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  18( 11), pp. 112511 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3662091">URL</a>&nbsp;</td>
+</tr>
+<tr id="13694521" class="entry">
+	<td>Degnan, J., Amdahl, D., Domonkos, M., Lehr, F., Grabowski, C., Robinson, P., Ruden, E., White, W., Wurden, G., Intrator, T., Sears, J., Weber, T., Waganaar, W., Frese, M., Frese, S., Camacho, J., Coffey, S., Makhin, V., Roderick, N., Gale, D., Kostora, M., Lerma, A., McCullough, J., Sommars, W., Kiuttu, G., Bauer, B., Fuelling, S., Siemon, R., Lynn, A. &amp; Turchi, P.</td>
+	<td>Recent magneto-inertial fusion experiments on the field reversed configuration heating experiment</td>
+	<td>Sept. 2013</td>
+	<td>Nuclear Fusion<br/>Vol.  53( 9), pp. 093003 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/53/9/093003">URL</a>&nbsp;</td>
+</tr>
+<tr id="6896778" class="entry">
+	<td>Degnan, J., Taccetti, J., Cavazos, T., Clark, D., Coffey, S., Faehl, R., Frese, M., Fulton, D., Gueits, J., Gale, D., Hussey, T., Intrator, T., Kirkpatrick, R., Kiuttu, G., Lehr, F., Letterio, J., Lindemuth, I., McCullough, W., Moses, R., Peterkin, R.E., J., Reinovsky, R., Roderick, N., Ruden, E., Shlachter, J., Schoenberg, K., Siemon, R., Sommars, W., Turchi, P., Wurden, G. &amp; Wysocki, F.</td>
+	<td>Implosion of solid liner for compression of field reversed configuration</td>
+	<td>2001/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  29( 1), pp. 93 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/27.912947">URL</a>&nbsp;</td>
+</tr>
+<tr id="13084068" class="entry">
+	<td>Deng, B., Kinley, J. &amp; Schroeder, J.</td>
+	<td>Electron density and temperature profile diagnostics for C-2 field reversed configuration plasmas</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 339&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4740263">URL</a>&nbsp;</td>
+</tr>
+<tr id="13528763" class="entry">
+	<td>Domonkos, M., Amdahl, D., Camacho, J., Coffey, S., Degnan, J., Delaney, R., Frese, M., Gale, D., Grabowski, T., Gribble, R., Intrator, T., McCullough, J., Montano, N., Robinson, P. &amp; Wurden, G.</td>
+	<td>Applied magnetic field design for the field reversed configuration compression heating experiment</td>
+	<td>2013/04/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 4), pp. 043507 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4801952">URL</a>&nbsp;</td>
+</tr>
+<tr id="2993993" class="entry">
+	<td>Eggen, J., Weenink, M., Schuurman, W., Oshiyama, H. &amp; Goto, M.</td>
+	<td>Comments on `Axisymmetric reversed-field pinch configurations with global invariants' [J. Phys. Soc. Jpn. 55 (1986) 3701] [and reply]</td>
+	<td>1987/08/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  56( 8), pp. 2990 - 1&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13576037" class="entry">
+	<td>El-Bahi, R.</td>
+	<td>Adorable reversed field configuration with self-fields effect in a fel</td>
+	<td>Sept. 2012</td>
+	<td>European Physical Journal D - Atomic, Molecular, Optical and Plasma Physics<br/>Vol.  66( 9), pp. 240 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1140/epjd/e2012-30138-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="3295530" class="entry">
+	<td>Emets, Y., Zamidra, A. &amp; Kovbasenko, Y.</td>
+	<td>Force-free configurations in reversed-field pinches</td>
+	<td>1988/03/</td>
+	<td>Soviet Journal of Plasma Physics<br/>Vol.  14( 3), pp. 177 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4094877" class="entry">
+	<td>Farengo, R.</td>
+	<td>Internal tilting instability in annular field-reversed configurations</td>
+	<td>1992/01/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  4( 1), pp. 280 - 2&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860446">URL</a>&nbsp;</td>
+</tr>
+<tr id="3850650" class="entry">
+	<td>Farengo, R. &amp; Brooks, R.</td>
+	<td>Current limit in Ohmically heated high-beta plasmas: application to field reversed configurations</td>
+	<td>1991/01/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  3( 1), pp. 130 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859950">URL</a>&nbsp;</td>
+</tr>
+<tr id="3553689" class="entry">
+	<td>Farengo, R., Guzdar, P. &amp; Lee, Y.</td>
+	<td>Collisionless electron temperature gradient-driven instability in field-reversed configurations</td>
+	<td>1989/11/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 11), pp. 2181 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859031">URL</a>&nbsp;</td>
+</tr>
+<tr id="3468530" class="entry">
+	<td>Farengo, R., Guzdar, P. &amp; Lee, Y.</td>
+	<td>Stabilization of lower hybrid drift modes by finite parallel wavenumber and electron temperature gradients in field-reversed configurations</td>
+	<td>1989/08/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 8), pp. 1654 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.858943">URL</a>&nbsp;</td>
+</tr>
+<tr id="3313974" class="entry">
+	<td>Farengo, R., Guzdar, P. &amp; Lee, Y.</td>
+	<td>The effect of magnetized ions on the lower hybrid drift instability in field reversed configurations</td>
+	<td>1988/11/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 11), pp. 3299 - 304&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866943">URL</a>&nbsp;</td>
+</tr>
+<tr id="1253873" class="entry">
+	<td>Finn, J. &amp; Sudan, R.</td>
+	<td>Resonant effects on the low-frequency Vlasov stability of axisymmetric field-reversed configurations</td>
+	<td>4 Sept. 1978</td>
+	<td>Physical Review Letters<br/>Vol.  41( 10), pp. 695 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.41.695">URL</a>&nbsp;</td>
+</tr>
+<tr id="2005820" class="entry">
+	<td>Finn, J. &amp; Sudan, R.</td>
+	<td>Field-reversed configurations with a component of energetic particles</td>
+	<td>1982/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  22( 11), pp. 1443 - 518&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7130902" class="entry">
+	<td>Fujimoto, K., Hoshikawa, A., Ohmura, S., Takahashi, T., Nogi, Y. &amp; Ohkuma, Y.</td>
+	<td>Control of a global motion on field-reversed configuration</td>
+	<td>2002/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 1), pp. 171 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1416880">URL</a>&nbsp;</td>
+</tr>
+<tr id="8644804" class="entry">
+	<td>Fujimoto, K., Okada, M., Gota, H., Hasegawa, Y., Fujino, T., Asai, T., Takahashi, T., Nogi, Y. &amp; Ohkuma, Y.</td>
+	<td>Wobble motion on field-reversed configuration plasmas</td>
+	<td>2005/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 10), pp. 102513 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2089981">URL</a>&nbsp;</td>
+</tr>
+<tr id="8765119" class="entry">
+	<td>Fujino, T., Gota, H., Hasegawa, Y., Kanamaru, Y., Fujimoto, K., Asai, T., Takahashi, T. &amp; Nogi, Y.</td>
+	<td>Control of translating velocity using pulse field on field-reversed configuration plasmas</td>
+	<td>2006/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 1), pp. 12511 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2164998">URL</a>&nbsp;</td>
+</tr>
+<tr id="1705554" class="entry">
+	<td>Galvao, R. &amp; Santiago, M.</td>
+	<td>Resistive instabilities in reversed-field confinement configurations without shear</td>
+	<td>1981/04/</td>
+	<td>Physics of Fluids<br/>Vol.  24( 4), pp. 661 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863419">URL</a>&nbsp;</td>
+</tr>
+<tr id="9222002" class="entry">
+	<td>Gerhardt, S., Belova, E., Inomoto, M., Yamada, M., Ji, H., Ren, Y. &amp; Kuritsyn, A.</td>
+	<td>Equilibrium and stability studies of oblate field-reversed configurations in the magnetic reconnection experiment</td>
+	<td>2006/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 11), pp. 112508 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2360912">URL</a>&nbsp;</td>
+</tr>
+<tr id="9936487" class="entry">
+	<td>Gerhardt, S., Belova, E., Yamada, M., Ji, H., Inomoto, M., Jacobson, C., Maqueda, R., McGeehan, B. &amp; Ren, Y.</td>
+	<td>Inductive sustainment of oblate field-reversed configurations with the assistance of magnetic diffusion, shaping, and finite-Larmor radius stabilization</td>
+	<td>2008/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 2), pp. 022503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2837512">URL</a>&nbsp;</td>
+</tr>
+<tr id="9972239" class="entry">
+	<td>Gerhardt, S., Belova, E., Yamada, M., Ji, H., Inomoto, M., Ren, Y. &amp; McGeehan, B.</td>
+	<td>New method for inductively forming an oblate field reversed configuration from a spheromak</td>
+	<td>2008/03/</td>
+	<td>Nuclear Fusion<br/>Vol.  48( 3), pp. 032001 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/48/3/032001">URL</a>&nbsp;</td>
+</tr>
+<tr id="9950149" class="entry">
+	<td>Gerhardt, S., Belova, E., Yamada, M., Ji, H., Ren, Y., McGeehan, B. &amp; Inomoto, M.</td>
+	<td>Field-reversed configuration formation scheme utilizing a spheromak and solenoid induction</td>
+	<td>2008/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 3), pp. 032503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2889428">URL</a>&nbsp;</td>
+</tr>
+<tr id="2526196" class="entry">
+	<td>Gladd, N., Sgro, A. &amp; Hewett, D.</td>
+	<td>Microstability properties of the sheath region of a field-reversed configuration</td>
+	<td>1985/07/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 7), pp. 2222 - 34&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865275">URL</a>&nbsp;</td>
+</tr>
+<tr id="7248676" class="entry">
+	<td>Glasser, A. &amp; Cohen, S.</td>
+	<td>Ion and electron acceleration in the field-reversed configuration with an odd-parity rotating magnetic field</td>
+	<td>2002/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 5), pp. 2093 - 102&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1459456">URL</a>&nbsp;</td>
+</tr>
+<tr id="1160162" class="entry">
+	<td>Golubkov, V., Kolotov, O., Musaev, T., Petrov, V. &amp; Pogozhev, V.</td>
+	<td>Time required for obtaining stationary magnetic field configuration in apparatus for magnetic reversal</td>
+	<td>1977/01/</td>
+	<td>Instruments and Experimental Techniques<br/>Vol.  20( 1), pp. 296 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7590354" class="entry">
+	<td>Gota, H., Akiyama, T., Fujimoto, K., Ohkuma, Y., Takahashi, T. &amp; Nogi, Y.</td>
+	<td>Separatrix shape measurement on field-reversed configuration plasmas</td>
+	<td>2003/04/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 4), pp. 2318 - 23&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1561599">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406696" class="entry">
+	<td>Gota, H., Andreason, S., Votroubek, G., Pihl, C. &amp; Slough, J.</td>
+	<td>Visible bremsstrahlung tomographic diagnostic for the pulsed high density field-reversed configuration experiment</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 10 - 319&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2220018">URL</a>&nbsp;</td>
+</tr>
+<tr id="7793379" class="entry">
+	<td>Gota, H., Fujimoto, K., Ohkuma, Y., Takahashi, T. &amp; Nogi, Y.</td>
+	<td>Separatrix shapes and internal structures of a field-reversed configuration plasma</td>
+	<td>2003/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 12), pp. 4763 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1624835">URL</a>&nbsp;</td>
+</tr>
+<tr id="13083944" class="entry">
+	<td>Gota, H., Thompson, M., Knapp, K., Van Drie, A., Deng, B., Mendoza, R., Guo, H. &amp; Tuszewski, M.</td>
+	<td>Internal magnetic field measurement on C-2 field-reversed configuration plasmas</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 706&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4729497">URL</a>&nbsp;</td>
+</tr>
+<tr id="14053325" class="entry">
+	<td>Gota, H., Tuszewski, M., Smirnov, A., Korepanov, S., Akhmetov, T., Ivanov, A., Voskoboynikov, R., Binderbauer, M., Guo, H., Barnes, D., Aefsky, S., Brown, R., Bui, D., Clary, R., Conroy, K., Deng, B., Dettrick, S., Douglass, J., Garate, E., Glass, F., Gupta, D., Gupta, S., Kinley, J., Knapp, K., Hollins, M., Longman, A., Li, X., Luo, Y., Mendoza, R., Mok, Y., Necas, A., Primavera, S., Osin, D., Rostoker, N., Ruskov, E., Schmitz, L., Schroeder, J., Sevier, L., Sibley, A., Song, Y., Sun, X., Tajima, T., Thompson, M., Trask, E., Van Drie, A., Walters, J., Wyman, M. &amp; Zhai, K.</td>
+	<td>A high performance field-reversed configuration regime in the C-2 device</td>
+	<td>2013/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  63( 1T), pp. 139 - 42&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7672773" class="entry">
+	<td>Griskey, M., Stenzel, R., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Three-dimensional electron magnetohydrodynamic reconnection. II. Tilt and precession of a field-reversed configuration</td>
+	<td>2003/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 7), pp. 2794 - 800&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1578999">URL</a>&nbsp;</td>
+</tr>
+<tr id="2298219" class="entry">
+	<td>Guiji, W., Shizhong, W., Huaizhi, C. &amp; Jinchuan, L.</td>
+	<td>Experiments on a field-reversed configuration</td>
+	<td>1984/03/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  4( 1), pp. 36 - 40&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12462981" class="entry">
+	<td>Guo, H., Binderbauer, M., Barnes, D., Putvinski, S., Rostoker, N., Sevier, L., Tuszewski, M., Anderson, M., Andow, R., Bonelli, L., Brandi, F., Brown, R., Bui, D., Bystritskii, V., Ceccherini, F., Clary, R., Cheung, A., Conroy, K., Deng, B., Dettrick, S., Douglass, J., Feng, P., Galeotti, L., Garate, E., Giammanco, F., Glass, F., Gornostaeva, O., Gota, H., Gupta, D., Gupta, S., Kinley, J., Knapp, K., Korepanov, S., Hollins, M., Isakov, I., Jose, V., Li, X., Luo, Y., Marsili, P., Mendoza, R., Meekins, M., Mok, Y., Necas, A., Paganini, E., Pegoraro, F., Pousa-Hijos, R., Primavera, S., Ruskov, E., Qerushi, A., Schmitz, L., Schroeder, J., Sibley, A., Smirnov, A., Song, Y., Steinhauer, L., Sun, X., Thompson, M., Van Drie, A., Walters, J. &amp; Wyman, M.</td>
+	<td>Formation of a long-lived hot field reversed configuration by dynamically merging two colliding high- compact toroids</td>
+	<td>2011/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  18( 5), pp. 056110 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3574380">URL</a>&nbsp;</td>
+</tr>
+<tr id="7863197" class="entry">
+	<td>Guo, H. &amp; Hoffman, A.</td>
+	<td>Sustainment of elongated field reversed configurations with localized rotating magnetic field current drive</td>
+	<td>2004/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 3), pp. 1087 - 98&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1644581">URL</a>&nbsp;</td>
+</tr>
+<tr id="7130935" class="entry">
+	<td>Guo, H., Hoffman, A., Brooks, R., Peter, A., Pietrzyk, Z., Tobin, S. &amp; Votroubek, G.</td>
+	<td>Formation and steady-state maintenance of field reversed configuration using rotating magnetic field current drive</td>
+	<td>2002/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 1), pp. 185 - 200&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1426102">URL</a>&nbsp;</td>
+</tr>
+<tr id="10000534" class="entry">
+	<td>Guo, H., Hoffman, A., Milroy, R., Steinhauer, L., Brooks, R., Deards, C., Grossnickle, J., Melnik, P., Miller, K. &amp; Vlases, G.</td>
+	<td>Improved confinement and current drive of high temperature field reversed configurations in the new translation, confinement, and sustainment upgrade device</td>
+	<td>2008/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 5), pp. 056101 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2837056">URL</a>&nbsp;</td>
+</tr>
+<tr id="8506194" class="entry">
+	<td>Guo, H., Hoffman, A. &amp; Steinhauer, L.</td>
+	<td>Observations of improved confinement in field reversed configurations sustained by antisymmetric rotating magnetic fields</td>
+	<td>2005/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 6), pp. 62507 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1930807">URL</a>&nbsp;</td>
+</tr>
+<tr id="8631310" class="entry">
+	<td>Guo, H., Hoffman, A., Steinhauer, L. &amp; Miller, K.</td>
+	<td>Observations of improved stability and confinement in a high- self-organized spherical-torus-like field-reversed configuration</td>
+	<td>2005/10/21</td>
+	<td>Physical Review Letters<br/>Vol.  95( 17), pp. 175001 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.95.175001">URL</a>&nbsp;</td>
+</tr>
+<tr id="2298220" class="entry">
+	<td>Guobing, L.</td>
+	<td>The plasma in field-reversed configuration</td>
+	<td>1984/03/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  4( 1), pp. 53 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2740244" class="entry">
+	<td>Hamada, S.</td>
+	<td>A model of equilibrium transport and evolution of field reversed configurations</td>
+	<td>1986/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 6), pp. 729 - 49&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3162154" class="entry">
+	<td>Hamada, S. &amp; Azevedo, M.</td>
+	<td>Study of a model of field reversed configuration with the lower hybrid drift anomalous resistivity</td>
+	<td>1988/04/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  57( 4), pp. 1255 - 68&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1532071" class="entry">
+	<td>Hamasaki, S. &amp; Book, D.</td>
+	<td>Numerical simulation of the anomalous transport process in radially compressed reversed-field configurations</td>
+	<td>1980/03/</td>
+	<td>Nuclear Fusion<br/>Vol.  20( 3), pp. 289 - 304&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2864207" class="entry">
+	<td>Hamasaki, S., Gladd, N. &amp; Krall, N.</td>
+	<td>One-dimensional transport models with local and nonlocal lower-hybrid-drift waves in field-reversed configurations</td>
+	<td>1986/12/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 12), pp. 4131 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865757">URL</a>&nbsp;</td>
+</tr>
+<tr id="2249800" class="entry">
+	<td>Harned, D.</td>
+	<td>Suppression of the m=2 rotational instability in the field-reversed configuration by means of quadrupole fields</td>
+	<td>1984/03/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 3), pp. 554 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864667">URL</a>&nbsp;</td>
+</tr>
+<tr id="2083349" class="entry">
+	<td>Harned, D.</td>
+	<td>Rotational instabilities in the field-reversed configuration: results of hybrid simulations</td>
+	<td>1983/05/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 5), pp. 1320 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864254">URL</a>&nbsp;</td>
+</tr>
+<tr id="2232701" class="entry">
+	<td>Harned, D. &amp; Hewett, D.</td>
+	<td>The origin of rotation in field-reversed configurations</td>
+	<td>1984/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  24( 2), pp. 201 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11007432" class="entry">
+	<td>Harris, W., Trask, E., Roche, T., Garate, E., Heidbrink, W. &amp; McWilliams, R.</td>
+	<td>Ion flow measurements and plasma current analysis in the Irvine Field Reversed Configuration</td>
+	<td>2009/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 11), pp. 112509 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3265961">URL</a>&nbsp;</td>
+</tr>
+<tr id="2414637" class="entry">
+	<td>Hassam, A.</td>
+	<td>Collisional tearing in field-reversed configurations</td>
+	<td>1984/12/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 12), pp. 2877 - 80&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864601">URL</a>&nbsp;</td>
+</tr>
+<tr id="6420675" class="entry">
+	<td>Hassam, A., Kulsrud, R., Goldston, R., Ji, H. &amp; Yamada, M.</td>
+	<td>Steady state thermoelectric field-reversed configuration</td>
+	<td>1999/10/11</td>
+	<td>Physical Review Letters<br/>Vol.  83( 15), pp. 2969 - 72&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.83.2969">URL</a>&nbsp;</td>
+</tr>
+<tr id="2083347" class="entry">
+	<td>Hewett, D. &amp; Spencer, R.</td>
+	<td>Two-dimensional equilibria of field-reversed configurations in a perfectly conducting cylindrical shell</td>
+	<td>1983/05/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 5), pp. 1299 - 304&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864291">URL</a>&nbsp;</td>
+</tr>
+<tr id="6097965" class="entry">
+	<td>Himura, H., Ueoka, S., Hase, M., Yoshida, R., Okada, S. &amp; Goto, S.</td>
+	<td>Observation of collisionless thermalization of a plasmoid with a field-reversed configuration in a magnetic mirror</td>
+	<td>1998/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  5( 12), pp. 4262 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873162">URL</a>&nbsp;</td>
+</tr>
+<tr id="5532193" class="entry">
+	<td>Himura, H., Wada, H., Okada, S., Sugimoto, S. &amp; Goto, S.</td>
+	<td>Drift motion of field-reversed-configuration plasma across a curved magnetic field</td>
+	<td>1997/03/10</td>
+	<td>Physical Review Letters<br/>Vol.  78( 10), pp. 1916 - 19&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.78.1916">URL</a>&nbsp;</td>
+</tr>
+<tr id="4865794" class="entry">
+	<td>Himura, T., Okada, S., Sugimoto, S. &amp; Goto, S.</td>
+	<td>Rethermalization of a field-reversed configuration plasma in translation experiments</td>
+	<td>1995/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  2( 1), pp. 191 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.871090">URL</a>&nbsp;</td>
+</tr>
+<tr id="3468760" class="entry">
+	<td>Hirano, K.</td>
+	<td>Ignition and reactor application of deuterium based fuel cycles in field reversed configurations</td>
+	<td>1989/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  29( 6), pp. 955 - 81&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3163968" class="entry">
+	<td>Hirano, K.</td>
+	<td>Slow formation of field reversed configurations by colliding high beta counter flows</td>
+	<td>1988/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  28( 2), pp. 207 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6796926" class="entry">
+	<td>Hoffman, A.</td>
+	<td>Field-reversed configurations</td>
+	<td>Sept. 1998</td>
+	<td>Journal of Fusion Energy<br/>Vol.  17( 3), pp. 201 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/A:1021845926387">URL</a>&nbsp;</td>
+</tr>
+<tr id="5878396" class="entry">
+	<td>Hoffman, A.</td>
+	<td>Flux buildup in field reversed configurations using rotating magnetic fields</td>
+	<td>1998/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  5( 4), pp. 979 - 88&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872667">URL</a>&nbsp;</td>
+</tr>
+<tr id="4379275" class="entry">
+	<td>Hoffman, A., Carey, L., Crawford, E., Harding, D., DeHart, T., McDonald, K., McNeil, J., Milroy, R., Slough, J., Maqueda, R. &amp; Wurden, G.</td>
+	<td>The large-s field-reversed configuration experiment</td>
+	<td>1993/03/</td>
+	<td>Fusion Technology<br/>Vol.  23( 2), pp. 185 - 207&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8765115" class="entry">
+	<td>Hoffman, A., Guo, H., Miller, K. &amp; Milroy, R.</td>
+	<td>Principal physics of rotating magnetic-field current drive of field reversed configurations</td>
+	<td>2006/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 1), pp. 12507 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2162052">URL</a>&nbsp;</td>
+</tr>
+<tr id="6372892" class="entry">
+	<td>Hoffman, A., Gurevich, P., Grossnickle, J. &amp; Slough, J.</td>
+	<td>Inductive field-reversed configuration accelerator for tokamak fueling</td>
+	<td>Sept. 1999</td>
+	<td>Fusion Technology<br/>Vol.  36( 2), pp. 109 - 25&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2179682" class="entry">
+	<td>Hoffman, A. &amp; Milroy, R.</td>
+	<td>Particle lifetime scaling in field-reversed configurations based on lower-hybrid-drift resistivity</td>
+	<td>1983/11/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 11), pp. 3170 - 2&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864087">URL</a>&nbsp;</td>
+</tr>
+<tr id="2707274" class="entry">
+	<td>Hoffman, A., Milroy, R., Slough, J. &amp; Steinhauer, L.</td>
+	<td>Formation of field-reversed configurations using scalable, low-voltage technology</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 48 - 57&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4385160" class="entry">
+	<td>Hoffman, A. &amp; Slough, J.</td>
+	<td>Field reversed configuration lifetime scaling based on measurements from the Large s Experiment</td>
+	<td>1993/01/</td>
+	<td>Nuclear Fusion<br/>Vol.  33( 1), pp. 27 - 38&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/33/1/I03">URL</a>&nbsp;</td>
+</tr>
+<tr id="2863675" class="entry">
+	<td>Hoffman, A. &amp; Slough, J.</td>
+	<td>Flux, energy, and particle lifetime measurements for well formed field reversed configurations</td>
+	<td>1986/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 12), pp. 1693 - 702&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2098827" class="entry">
+	<td>Hoffman, A., Slough, J. &amp; Harding, D.</td>
+	<td>Suppression of the n=2 rotational instability in field-reversed configurations</td>
+	<td>1983/06/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 6), pp. 1626 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864298">URL</a>&nbsp;</td>
+</tr>
+<tr id="1228348" class="entry">
+	<td>Hoffman, K. &amp; Fuller, M.</td>
+	<td>Transitional field configurations and geomagnetic reversal</td>
+	<td>1978/06/29</td>
+	<td>Nature<br/>Vol.  273( 5665), pp. 715 - 18&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2449986" class="entry">
+	<td>Holmes, J., Carreras, B., Hender, T., Hicks, H., Lynch, V., An, Z. &amp; Diamond, P.</td>
+	<td>Nonlinear interaction of tearing modes: a comparison between the tokamak and the reversed field pinch configurations</td>
+	<td>1985/01/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 1), pp. 261 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865194">URL</a>&nbsp;</td>
+</tr>
+<tr id="3828480" class="entry">
+	<td>Horiuchi, R. &amp; Sato, T.</td>
+	<td>The meandering orbit effect on stabilization of the tilting instability in a field-reversed configuration</td>
+	<td>1990/11/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 11), pp. 2652 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859579">URL</a>&nbsp;</td>
+</tr>
+<tr id="3403719" class="entry">
+	<td>Horiuchi, R. &amp; Sato, T.</td>
+	<td>Full magnetohydrodynamic simulation of the tilting instability in a field reversed configuration</td>
+	<td>1989/03/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 3), pp. 581 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859118">URL</a>&nbsp;</td>
+</tr>
+<tr id="3509740" class="entry">
+	<td>Horowitz, E., Shumaker, D. &amp; Anderson, D.</td>
+	<td>QN3D: a three-dimensional quasi-neutral hybrid particle-in-cell code with applications to the tilt mode instability in field reversed configurations</td>
+	<td>1989/10/</td>
+	<td>Journal of Computational Physics<br/>Vol.  84( 2), pp. 279 - 310&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0021-9991(89)90234-9">URL</a>&nbsp;</td>
+</tr>
+<tr id="2799071" class="entry">
+	<td>Hotta, E., Hidaka, K., Ohta, Y., Ko, K.C., Fuse, T. &amp; Hayashi, I.</td>
+	<td>Plasma behavior in reversed-field pinch configuration</td>
+	<td>Sept. 1986</td>
+	<td>Japanese Journal of Applied Physics, Part 1 (Regular Papers &amp;amp; Short Notes)<br/>Vol.  25( 9), pp. 1405 - 10&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8625478" class="entry">
+	<td>Houyang, G.</td>
+	<td>Recent results on field reversed configurations from the translation, confinement and sustainment experiment</td>
+	<td>2005/02/</td>
+	<td>Plasma Science &amp;amp; Technology<br/>Vol.  7( 1), pp. 2605 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3597831" class="entry">
+	<td>Hsiao, M.-Y. &amp; Chiang, P.-R.</td>
+	<td>Effects of velocity-space particle loss in field-reversed configurations</td>
+	<td>1990/01/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 1), pp. 106 - 14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859521">URL</a>&nbsp;</td>
+</tr>
+<tr id="2488565" class="entry">
+	<td>Hsiao, M.-Y. &amp; Miley, G.</td>
+	<td>Velocity-space particle loss in field-reversed configurations</td>
+	<td>1985/05/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 5), pp. 1440 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864978">URL</a>&nbsp;</td>
+</tr>
+<tr id="2350868" class="entry">
+	<td>Hsiao, M.-Y. &amp; Miley, G.</td>
+	<td>Particle-confinement criteria for axisymmetric field-reversed magnetic configurations</td>
+	<td>1984/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  24( 8), pp. 1029 - 38&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3378609" class="entry">
+	<td>Hsiao, M.-Y., Staudenmeier, J. &amp; Chiang, P.-R.</td>
+	<td>Electric field due to velocity space particle loss in field-reversed configurations</td>
+	<td>1989/02/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 2), pp. 375 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859150">URL</a>&nbsp;</td>
+</tr>
+<tr id="3464945" class="entry">
+	<td>Hsiao, M.-Y., Werley, K. &amp; Ling, K.</td>
+	<td>CFRX, a one-and-a-quarter-dimensional transport code for field-reversed configuration studies</td>
+	<td>1989/06/</td>
+	<td>Computer Physics Communications<br/>Vol.  54( 2-3), pp. 329 - 52&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0010-4655(89)90095-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="13517334" class="entry">
+	<td>Ii, T., Inomoto, M., Gi, K., Umezawa, T., Ito, T., Kadowaki, K., Kaminou, Y. &amp; Ono, Y.</td>
+	<td>Stability and Confinement Improvement of an Oblate Field-reversed Configuration by Using Neutral beam Injection</td>
+	<td>2013/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  53( 7), pp. 073002 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/53/7/073002">URL</a>&nbsp;</td>
+</tr>
+<tr id="12921862" class="entry">
+	<td>Ikeda, T., Takahashi, T., Asai, T. &amp; Takahashi, T.</td>
+	<td>Toroidal Flow Velocity Profile of Impurity Ions in Field-Reversed Configuration Plasma</td>
+	<td>2010//</td>
+	<td>Plasma and Fusion Research<br/>Vol.  5, pp. S1044 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.5.S1044">URL</a>&nbsp;</td>
+</tr>
+<tr id="10712184" class="entry">
+	<td>Ikeyama, T., Hiroi, M., Nemoto, Y. &amp; Nogi, Y.</td>
+	<td>Analysis of magnetic probe signals including effect of cylindrical conducting wall for field-reversed configuration experiment</td>
+	<td>2008/06/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 6), pp. 063501 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2937205">URL</a>&nbsp;</td>
+</tr>
+<tr id="10629755" class="entry">
+	<td>Ikeyama, T., Hiroi, M., Nogi, Y. &amp; Ohkuma, Y.</td>
+	<td>Beta value at separatrix of field-reversed configuration</td>
+	<td>2009/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 4), pp. 042512 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3125304">URL</a>&nbsp;</td>
+</tr>
+<tr id="11103597" class="entry">
+	<td>Ikeyama, T., Hiroi, M., Ohkuma, Y. &amp; Nogi, Y.</td>
+	<td>Detection of electric field around field-reversed configuration plasma</td>
+	<td>2010/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 1), pp. 012501 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3280023">URL</a>&nbsp;</td>
+</tr>
+<tr id="1406693" class="entry">
+	<td>Ikuta, K.</td>
+	<td>A new possibility to generate a reversed field configuration without toroidal field</td>
+	<td>1979/07/</td>
+	<td>Japanese Journal of Applied Physics<br/>Vol.  18( 7), pp. 1419 - 20&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1284438" class="entry">
+	<td>Ikuta, K.</td>
+	<td>A new possibility to form reversed-field configuration for imploding liner</td>
+	<td>1978/10/</td>
+	<td>Japanese Journal of Applied Physics<br/>Vol.  17( 10), pp. 1831 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9972225" class="entry">
+	<td>Inomoto, M., Asai, T. &amp; Okada, S.</td>
+	<td>Neutral beam injection heating on field-reversed configuration plasma decompressed through axial translation</td>
+	<td>2008/03/</td>
+	<td>Nuclear Fusion<br/>Vol.  48( 3), pp. 035013 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/48/3/035013">URL</a>&nbsp;</td>
+</tr>
+<tr id="9844410" class="entry">
+	<td>Inomoto, M., Kitano, K. &amp; Okada, S.</td>
+	<td>Field-reversed configuration maintained by rotating magnetic field with high spatial harmonics</td>
+	<td>2007/10/26</td>
+	<td>Physical Review Letters<br/>Vol.  99( 17), pp. 175003 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.99.175003">URL</a>&nbsp;</td>
+</tr>
+<tr id="9685193" class="entry">
+	<td>Inomoto, M. &amp; Ono, Y.</td>
+	<td>Merging formation and current amplification of field-reversed configuration</td>
+	<td>2007/07/</td>
+	<td>IEEJ Transactions on Electrical and Electronic Engineering<br/>Vol.  2( 4), pp. 424 - 30&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/tee.20183">URL</a>&nbsp;</td>
+</tr>
+<tr id="9911602" class="entry">
+	<td>Inomoto, M., Yamamoto, S., Iwasawa, N., Kitano, K. &amp; Okada, S.</td>
+	<td>Propagation and damping characteristics of low-frequency waves in field-reversed configuration plasmas</td>
+	<td>2007/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  14( 10), pp. 102513 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2799176">URL</a>&nbsp;</td>
+</tr>
+<tr id="10628925" class="entry">
+	<td>Inomoto, M., Yambe, K., Kitano, K. &amp; Okada, S.</td>
+	<td>Azimuthally non-uniform equilibrium of field-reversed configuration sustained by rotating magnetic field with spatial high-harmonic components</td>
+	<td>2009/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  49( 5), pp. 055010 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/49/5/055010">URL</a>&nbsp;</td>
+</tr>
+<tr id="7957947" class="entry">
+	<td>Intrator, T., Park, J., Degnan, J., Furno, I., Grabowski, C., Hsu, S., Ruden, E., Sanchez, P., Taccetti, J., Tuszewski, M., Waganaar, W., Wurden, G., Zhang, S. &amp; Wang, Z.</td>
+	<td>A high-density field reversed configuration plasma for magnetized target fusion</td>
+	<td>2004/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  32( 1), pp. 152 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2004.823974">URL</a>&nbsp;</td>
+</tr>
+<tr id="9976556" class="entry">
+	<td>Intrator, T., Siemon, R. &amp; Sieck, P.</td>
+	<td>Adiabatic model and design of a translating field reversed configuration</td>
+	<td>2008/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 4), pp. 042505 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2907165">URL</a>&nbsp;</td>
+</tr>
+<tr id="7259274" class="entry">
+	<td>Intrator, T., Taccetti, M., Clark, D., Degnan, J., Gale, D., Coffey, S., Garcia, J., Rodriguez, P., Sommars, W., Marshall, B., Wysocki, F., Siemon, R., Faehl, R., Forman, K., Bartlett, R., Cavazos, T., Faehl, R., Forman, K., Frese, M., Fulton, D., Gueits, J., Hussey, T., Kirkpatrick, R., Kiuttu, G., Lehr, F., Letterio, J., Lindemuth, I., McCullough, W., Moses, R., Peterkin, R., Reinovsky, R., Roderick, N., Ruden, E., Schoenberg, K., Scudder, D., Shlachter, J. &amp; Wurden, G.</td>
+	<td>Experimental measurements of a converging flux conserver suitable for compressing a field reversed configuration for magnetized target fusion</td>
+	<td>2002/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  42( 2), pp. 211 - 22&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/42/2/313">URL</a>&nbsp;</td>
+</tr>
+<tr id="10986317" class="entry">
+	<td>Intrator, T., Wurden, G., Sieck, P., Waganaar, W., Dorf, L., Kostora, M., Cortez, R., Degnan, J., Ruden, E., Domonkos, M., Adamson, P., Grabowski, C., Gale, D., Kostora, M., Sommars, W., Frese, M., Frese, S., Camacho, J., Parks, P., Siemon, R., Awe, T., Lynn, A. &amp; Gribble, R.</td>
+	<td>Field reversed configuration translation and the magnetized target fusion collaboration</td>
+	<td>2009/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  28( 2), pp. 165 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-008-9180-z">URL</a>&nbsp;</td>
+</tr>
+<tr id="7948933" class="entry">
+	<td>Intrator, T., Zhang, S., Degnan, J., Furno, I., Grabowski, C., Hsu, S., Ruden, E., Sanchez, P., Taccetti, J., Tuszewski, M., Waganaar, W. &amp; Wurden, G.</td>
+	<td>A high density field reversed configuration (FRC) target for magnetized target fusion: first internal profile measurements of a high density FRC</td>
+	<td>2004/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 5), pp. 2580 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1689666">URL</a>&nbsp;</td>
+</tr>
+<tr id="4181799" class="entry">
+	<td>Ishida, A., Kanno, R. &amp; Steinhauer, L.</td>
+	<td>Tilt stability of a gyroviscous field-reversed configuration with realistic equilibria</td>
+	<td>1992/05/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  4( 5), pp. 1280 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860083">URL</a>&nbsp;</td>
+</tr>
+<tr id="3302864" class="entry">
+	<td>Ishida, A., Momota, H. &amp; Steinhauer, L.</td>
+	<td>Variational formulation for a multifluid flowing plasma with application to the internal tilt mode of a field-reversed configuration</td>
+	<td>1988/10/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 10), pp. 3024 - 34&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866959">URL</a>&nbsp;</td>
+</tr>
+<tr id="5426526" class="entry">
+	<td>Ishida, A., Shibata, N. &amp; Steinhauer, L.</td>
+	<td>Fast local mode properties in field-reversed configurations</td>
+	<td>1996/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  3( 11), pp. 4278 - 80&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.871558">URL</a>&nbsp;</td>
+</tr>
+<tr id="4853716" class="entry">
+	<td>Ishida, A., Shibata, N. &amp; Steinhauer, L.</td>
+	<td>Local modes of field-reversed configurations</td>
+	<td>1994/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  1( 12), pp. 4022 - 31&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.870872">URL</a>&nbsp;</td>
+</tr>
+<tr id="14142804" class="entry">
+	<td>Itagaki, H., Asai, T., Inomoto, M. &amp; Takahashi, T.</td>
+	<td>Mitigation of rotational instability of high-beta field-reversed configuration by double-sided magnetized plasmoid injection</td>
+	<td>2014/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  21( 3), pp. 030703 (3 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4868434">URL</a>&nbsp;</td>
+</tr>
+<tr id="3979216" class="entry">
+	<td>Ito, Y., Arai, N., Ueda, Y., Sugimoto, S., Okada, S., Goto, S. &amp; Ishimura, T.</td>
+	<td>Measurements of ion angular velocity of field reversed configuration with suppressed rotational instability</td>
+	<td>1991/07/</td>
+	<td>Japanese Journal of Applied Physics, Part 1 (Regular Papers &amp;amp; Short Notes)<br/>Vol.  30( 7), pp. 1475 - 81&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4340975" class="entry">
+	<td>Ito, Y., Takahashi, H., Ueda, Y., Sugimoto, S., Goto, S. &amp; Ishimura, T.</td>
+	<td>Ion temperature and rotational velocity of field reversed configuration plasmas measured by fast neutral emissions</td>
+	<td>1992/10/15</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  42( 2101-2123), pp. 215 - 24&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2850497" class="entry">
+	<td>Ito, Y., Tanjyo, M., Ohi, S., Goto, S. &amp; Ishimura, T.</td>
+	<td>Ion rotational velocity of a field-reversed configuration plasma measured by neutral beam probe spectroscopy</td>
+	<td>1987/01/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 1), pp. 168 - 74&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866165">URL</a>&nbsp;</td>
+</tr>
+<tr id="6901469" class="entry">
+	<td>Iwasawa, N., Ishida, A. &amp; Steinhauer, L.</td>
+	<td>Linear gyroviscous stability of field-reversed configurations with static equilibrium</td>
+	<td>2001/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 4), pp. 1240 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1354645">URL</a>&nbsp;</td>
+</tr>
+<tr id="6515700" class="entry">
+	<td>Iwasawa, N., Ishida, A. &amp; Steinhauer, L.</td>
+	<td>Tilt mode stability scaling in field-reversed configurations with finite Larmor radius effect</td>
+	<td>2000/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 3), pp. 931 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873890">URL</a>&nbsp;</td>
+</tr>
+<tr id="6570051" class="entry">
+	<td>Iwasawa, N., Ishida, A. &amp; Steinhauer, L.</td>
+	<td>Ideal magnetohydrodynamic stability of static field reversed configurations</td>
+	<td>2000/02/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  69( 2), pp. 451 - 63&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7840883" class="entry">
+	<td>Iwasawa, N., Okada, S. &amp; Goto, S.</td>
+	<td>Global eigenmodes of low frequency waves in field-reversed configuration plasmas</td>
+	<td>2004/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 2), pp. 615 - 24&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1638752">URL</a>&nbsp;</td>
+</tr>
+<tr id="2346543" class="entry">
+	<td>Jain, K. &amp; John, P.</td>
+	<td>Rotating relativistic electron beam-plasma interaction and formation of a field-reversed configuration</td>
+	<td>1984/07/</td>
+	<td>Pramana<br/>Vol.  23( 1), pp. 1 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6035784" class="entry">
+	<td>Ji, H., Yamada, M., Kulsrud, R., Pomphrey, N. &amp; Himura, H.</td>
+	<td>Studies of global stability of field-reversed configuration plasmas using a rigid body model</td>
+	<td>1998/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  5( 10), pp. 3685 - 93&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872978">URL</a>&nbsp;</td>
+</tr>
+<tr id="3710578" class="entry">
+	<td>Jianlin, M., Shidong, C. &amp; Zuyin, P.</td>
+	<td>Analytical solution of particle motion in reversed field configuration</td>
+	<td>1989/12/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  9( 4), pp. 193 - 200&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4047529" class="entry">
+	<td>Jianlin, M. &amp; Tsai, S.</td>
+	<td>Guiding center Hamiltonian in reversed field configuration</td>
+	<td>1991/03/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  11( 1), pp. 1 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4535688" class="entry">
+	<td>Kadomtsev, B.</td>
+	<td>On the reversed field pinch configuration</td>
+	<td>1993//</td>
+	<td>Comments on Plasma Physics and Controlled Fusion<br/>Vol.  15( 4), pp. 211 - 18&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2150799" class="entry">
+	<td>Kako, M., Ishimura, T. &amp; Amano, T.</td>
+	<td>Equilibria of field-reversed configuration with subsidiary coils</td>
+	<td>Sept. 1983</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  52( 9), pp. 3056 - 65&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7732487" class="entry">
+	<td>Kanki, T., Okada, S. &amp; Goto, S.</td>
+	<td>Magnetohydrodynamic simulation of dynamical behavior of a field-reversed configuration during magnetic mirror reflection</td>
+	<td>Sept. 2003</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 9), pp. 3635 - 43&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1600735">URL</a>&nbsp;</td>
+</tr>
+<tr id="6432691" class="entry">
+	<td>Kanki, T., Suzuki, Y., Okada, S. &amp; Goto, S.</td>
+	<td>Numerical simulation of magnetic compression on a field-reversed configuration plasma</td>
+	<td>1999/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 12), pp. 4672 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873753">URL</a>&nbsp;</td>
+</tr>
+<tr id="4900016" class="entry">
+	<td>Kanno, R., Ishida, A. &amp; Steinhauer, L.</td>
+	<td>Ideal-magnetohydrodynamic-stable tilting in field-reversed configurations</td>
+	<td>1995/02/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  64( 2), pp. 463 - 78&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9349955" class="entry">
+	<td>Kasilov, S., Heyn, M., Ivanov, I. &amp; Kernbichler, W.</td>
+	<td>Sustainment of the reversed shear magnetic field configuration with near-rational q-min value with the help of the rotating magnetic field</td>
+	<td>2006//</td>
+	<td>Contributions to Plasma Physics<br/>Vol.  46( 7-9), pp. 711 - 13&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/ctpp.200610068">URL</a>&nbsp;</td>
+</tr>
+<tr id="8546437" class="entry">
+	<td>Kawamori, E., Murata, Y., Umeda, K., Hirota, D., Ogawa, T., Sumikawa, T., Iwama, T., Ishii, K., Kado, T., Itagaki, T., Katsurai, M., Balandin, A. &amp; Ono, Y.</td>
+	<td>Ion kinetic effect on bifurcated relaxation to a field-reversed configuration in TS-4 CT experiment</td>
+	<td>2005/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  45( 8), pp. 843 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/45/8/010">URL</a>&nbsp;</td>
+</tr>
+<tr id="8562994" class="entry">
+	<td>Kawamori, E. &amp; Ono, Y.</td>
+	<td>Effect of ion skin depth on relaxation of merging Spheromaks to a field-reversed configuration</td>
+	<td>2005/08/19</td>
+	<td>Physical Review Letters<br/>Vol.  95( 8), pp. 085003 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.95.085003">URL</a>&nbsp;</td>
+</tr>
+<tr id="12668463" class="entry">
+	<td>Kayama, M.</td>
+	<td>Resistivity in the dynamic current sheath of a field reversed configuration</td>
+	<td>2012/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  19( 3), pp. 032511 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3698405">URL</a>&nbsp;</td>
+</tr>
+<tr id="4219357" class="entry">
+	<td>Kernbichler, W.</td>
+	<td>Operational parameters for D-3He in field-reversed configurations</td>
+	<td>1992/07/</td>
+	<td>Fusion Technology<br/>Vol.  21( 4), pp. 2297 - 306&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5788261" class="entry">
+	<td>Khvesyuk, V., Khvesyuk, A. &amp; Lyakhov, A.</td>
+	<td>Global stochastic particles in a field-reversed configuration</td>
+	<td>1997/11/</td>
+	<td>Technical Physics Letters<br/>Vol.  23( 11), pp. 833 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3003368" class="entry">
+	<td>Kim, D.-P. &amp; Lee, K.-H.</td>
+	<td>An experimental study on the formation of reversed field configuration</td>
+	<td>1986/12/</td>
+	<td>Transactions of the Korean Institute of Electrical Engineers<br/>Vol.  35( 12), pp. 579 - 85&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6603875" class="entry">
+	<td>Kitagaki, J., Ohnishi, M., Yamamoto, Y., Yoshikawa, K. &amp; Ishida, A.</td>
+	<td>Evolution of field reversed configuration plasma with rotating magnetic field</td>
+	<td>2000/03/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  120-A( 3), pp. 342 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7019262" class="entry">
+	<td>Kitano, K., Maeshima, S., Okada, S. &amp; Goto, S.</td>
+	<td>Dynamic process during axial magnetic compression of field-reversed configuration for equilibrium shape control</td>
+	<td>2001/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 8), pp. 3630 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1381015">URL</a>&nbsp;</td>
+</tr>
+<tr id="6337075" class="entry">
+	<td>Kitano, K., Matsumoto, H., Okada, S. &amp; Goto, S.</td>
+	<td>Development of magnetic compression device for axial shape control of field-reversed configuration plasma</td>
+	<td>1999/04/15</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  49( 2338-2347), pp. 9 - 17&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6553094" class="entry">
+	<td>Kitano, K., Yamanaka, K., Okada, S. &amp; Goto, S.</td>
+	<td>Axial length and separatrix radius behavior of field-reversed configuration plasma in dynamic compression of mirror distance</td>
+	<td>2000/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 4), pp. 1158 - 62&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873924">URL</a>&nbsp;</td>
+</tr>
+<tr id="3062629" class="entry">
+	<td>Knight, A., Cheng, W. &amp; Jones, I.</td>
+	<td>Generation and maintenance of a field reversed configuration by means of a rotating magnetic field</td>
+	<td>1987//</td>
+	<td>Chinese Physics Letters<br/>Vol.  4( 10), pp. 461 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3710285" class="entry">
+	<td>Knight, A. &amp; Jones, I.</td>
+	<td>A quantitative investigation of rotating magnetic field current drive in a field-reversed configuration</td>
+	<td>1990/08/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  32( 8), pp. 575 - 604&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/32/8/002">URL</a>&nbsp;</td>
+</tr>
+<tr id="14074534" class="entry">
+	<td>Koike, S., Watanabe, T., Mitsui, T., Takahashi, T. &amp; Asai, T.</td>
+	<td>Heating effects of background neutral particles on a translated field-reversed configuration</td>
+	<td>2013/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  63( 1T), pp. 377 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1838733" class="entry">
+	<td>Kondoh, Y.</td>
+	<td>Stable equilibrium configuration of reversed-field pinch with the partially-relaxed state condition jp=Bp/0</td>
+	<td>1981/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  21( 12), pp. 1607 - 13&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3075528" class="entry">
+	<td>Konig, R., Kolk, K.-H. &amp; Kunze, H.-J.</td>
+	<td>Influence of impurities on the plasma parameters and stability of a field-reversed configuration</td>
+	<td>1987/11/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 11), pp. 3579 - 86&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866439">URL</a>&nbsp;</td>
+</tr>
+<tr id="13083958" class="entry">
+	<td>Korepanov, S., Smirnov, A., Clary, R., Dettrick, S., Deichuli, P., Kondakov, A. &amp; Murakhtin, S.</td>
+	<td>Modulated active charge exchange fast ion diagnostic for the C-2 field-reversed configuration experiment</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 720&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4732853">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406564" class="entry">
+	<td>Kostora, M., Hsu, S. &amp; Wurden, G.</td>
+	<td>Twenty-channel bolometer array for studying impurity radiation and transport in the TCS field-reversed configuration</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 10 - 511&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2229190">URL</a>&nbsp;</td>
+</tr>
+<tr id="3492170" class="entry">
+	<td>Krall, N.</td>
+	<td>The effect of low-frequency turbulence on flux, particle, and energy confinement in a field-reversed configuration</td>
+	<td>Sept. 1989</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 9), pp. 1811 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.858912">URL</a>&nbsp;</td>
+</tr>
+<tr id="2930660" class="entry">
+	<td>Krall, N.</td>
+	<td>Low-frequency stability for field reversed configuration parameters</td>
+	<td>1987/03/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 3), pp. 878 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866340">URL</a>&nbsp;</td>
+</tr>
+<tr id="4448274" class="entry">
+	<td>Kumashiro, S., Takahashi, T., Ooi, M., Takahashi, T., Shimamura, S. &amp; Nogi, Y.</td>
+	<td>Sources of fluctuating field on field-reversed configuration plasma</td>
+	<td>1993/05/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  62( 5), pp. 1539 - 51&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3772168" class="entry">
+	<td>Kusano, K. &amp; Sato, T.</td>
+	<td>Simulation study of the self-sustainment mechanism in the reversed-field pinch configuration</td>
+	<td>1990/10/</td>
+	<td>Nuclear Fusion<br/>Vol.  30( 10), pp. 2075 - 98&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8536001" class="entry">
+	<td>Landsman, A., Cohen, S., Edelman, M. &amp; Zaslavsky, G.</td>
+	<td>Resonance and chaotic trajectories in magnetic field reversed configuration</td>
+	<td>Sept. 2005</td>
+	<td>Communications in Nonlinear Science and Numerical Simulation<br/>Vol.  10( 6), pp. 617 - 42&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.cnsns.2004.01.002">URL</a>&nbsp;</td>
+</tr>
+<tr id="8731307" class="entry">
+	<td>Landsman, A., Cohen, S. &amp; Glasser, A.</td>
+	<td>Onset and saturation of ion heating by odd-parity rotating magnetic fields in a field-reversed configuration</td>
+	<td>2006/01/13</td>
+	<td>Physical Review Letters<br/>Vol.  96( 1), pp. 015002 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.96.015002">URL</a>&nbsp;</td>
+</tr>
+<tr id="7863229" class="entry">
+	<td>Landsman, A., Cohen, S. &amp; Glasser, A.</td>
+	<td>Regular and stochastic orbits of ions in a highly prolate field-reversed configuration</td>
+	<td>2004/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 3), pp. 947 - 57&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1638751">URL</a>&nbsp;</td>
+</tr>
+<tr id="7401546" class="entry">
+	<td>Lifschitz, A., Farengo, R. &amp; Arista, N.</td>
+	<td>Monte Carlo simulation of neutral beam injection into a field reversed configuration</td>
+	<td>2002/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  42( 7), pp. 863 - 75&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/42/7/309">URL</a>&nbsp;</td>
+</tr>
+<tr id="10715507" class="entry">
+	<td>Lorenzini, R., Agostini, M., Alfier, A., Antoni, V., Apolloni, L., Auriemma, F., Barana, O., Baruzzo, M., Bettini, P., Bonfiglio, D., Bolzonella, T., Bonomo, F., Brombin, M., Buffa, A., Canton, A., Cappello, S., Carraro, L., Cavazzana, R., Chitarin, G., Dal Bello, S., De Lorenzi, A., De Masi, G., Escande, D., Fassina, A., Franz, P., Gaio, E., Gazza, E., Giudicotti, L., Gnesotto, F., Gobbin, M., Grando, L., Guo, S., Innocente, P., Luchetta, A., Manduchi, G., Marchiori, G., Marcuzzi, D., Marrelli, L., Martin, P., Martini, S., Martines, E., Milani, F., Moresco, M., Novello, L., Ortolani, S., Paccagnella, R., Pasqualotto, R., Peruzzo, S., Piovan, R., Piovesan, P., Piron, L., Pizzimenti, A., Pomaro, N., Predebon, I., Puiatti, M., Rostagni, G., Sattin, F., Scarin, P., Serianni, G., Sonato, P., Spada, E., Soppelsa, A., Spagnolo, S., Spizzo, G., Spolaore, M., Taliercio, C., Terranova, D., Toigo, V., Valisa, M., Veltri, P., Vianello, N., Zaccaria, P., Zaniol, B., Zanotto, L., Zilli, E. &amp; Zuin, M.</td>
+	<td>Improvement of the magnetic configuration in the reversed field pinch through successive bifurcations</td>
+	<td>2009/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 5), pp. 056109 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3082821">URL</a>&nbsp;</td>
+</tr>
+<tr id="9551502" class="entry">
+	<td>Macnab, A., Barnes, D., Milroy, R., Kim, C. &amp; Sovinec, C.</td>
+	<td>Simulations of the field-reversed configuration with the NIMROD code</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 113 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9070-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="9666790" class="entry">
+	<td>Macnab, A., Milroy, R., Kim, C. &amp; Sovinec, C.</td>
+	<td>Hall magnetohydrodynamics simulations of end-shorting induced rotation in field-reversed configurations</td>
+	<td>Sept. 2007</td>
+	<td>Physics of Plasmas<br/>Vol.  14( 9), pp. 1 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2768017">URL</a>&nbsp;</td>
+</tr>
+<tr id="10145601" class="entry">
+	<td>Macnab, A. &amp; Woodruff, S.</td>
+	<td>Simulations of the supersonic translation, collision, and merging of two field-reversed configurations for plasma heating</td>
+	<td>2008/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  36( 4), pp. 1208 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2008.924415">URL</a>&nbsp;</td>
+</tr>
+<tr id="5666424" class="entry">
+	<td>Martines, E. &amp; Vallone, F.</td>
+	<td>Ohm's law for plasmas in reversed field pinch configuration</td>
+	<td>1997/07/</td>
+	<td>Physical Review E (Statistical Physics, Plasmas, Fluids, and Related Interdisciplinary Topics)<br/>Vol.  56( 1), pp. 957 - 62&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevE.56.957">URL</a>&nbsp;</td>
+</tr>
+<tr id="6760023" class="entry">
+	<td>Matsuura, H., Nakao, Y., Nishio, H., Monzen, T., Kudo, K. &amp; Tomita, Y.</td>
+	<td>Triton distribution function and 14 MeV neutron generation rate in D-3He field reversed configuration plasmas</td>
+	<td>Sept. 2000</td>
+	<td>Nuclear Fusion<br/>Vol.  40( 9), pp. 1611 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/40/9/305">URL</a>&nbsp;</td>
+</tr>
+<tr id="10200989" class="entry">
+	<td>Matsuzawa, Y., Asai, T., Takahashi, T. &amp; Takahashi, T.</td>
+	<td>Effects of background neutral particles on a field-reversed configuration plasma in the translation process</td>
+	<td>2008/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 8), pp. 082504 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2967494">URL</a>&nbsp;</td>
+</tr>
+<tr id="2612265" class="entry">
+	<td>McKenna, K., Armstrong, W., Barnes, D., Bartsch, R., Chrien, R., Cochrane, J., Klingner, P., Hugrass, W., Linford, R., Rej, D., Schwarzmeier, J., Sherwood, E., Siemon, R., Spencer, R. &amp; Tuszewski, M.</td>
+	<td>Field-reversed configuration research at Los Alamos</td>
+	<td>Sept. 1985</td>
+	<td>Nuclear Fusion<br/>Vol.  25( 9), pp. 1317 - 19&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2087942" class="entry">
+	<td>McKenna, K., Armstrong, W., Bartsch, R., Chrien, R., Cochrane, J.C., J., Kewish, R.W., J., Klingner, P., Linford, R., Rej, D., Sherwood, E., Siemon, R. &amp; Tuszewski, M.</td>
+	<td>Particle confinement scaling in field-reversed configurations</td>
+	<td>1983/05/30</td>
+	<td>Physical Review Letters<br/>Vol.  50( 22), pp. 1787 - 90&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.50.1787">URL</a>&nbsp;</td>
+</tr>
+<tr id="2165570" class="entry">
+	<td>McKenna, K., Rej, D. &amp; Tuszewski, M.</td>
+	<td>Equilibrium and power balance constraints on a quasi-static ohmically heated Field-Reversed Configuration (FRC)</td>
+	<td>1983/10/</td>
+	<td>Nuclear Fusion<br/>Vol.  23( 10), pp. 1319 - 25&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3459977" class="entry">
+	<td>Merlin, D., Ortolani, S., Paccagnella, R. &amp; Scapin, M.</td>
+	<td>Linear resistive magnetohydrodynamic stability analysis of reversed field pinch configurations at finite beta</td>
+	<td>1989/07/</td>
+	<td>Nuclear Fusion<br/>Vol.  29( 7), pp. 1153 - 60&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6932931" class="entry">
+	<td>Milroy, R.</td>
+	<td>Effects of open field line plasma on rotating magnetic field current drive in a field-reversed configuration</td>
+	<td>2001/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 6), pp. 2804 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1368140">URL</a>&nbsp;</td>
+</tr>
+<tr id="6711186" class="entry">
+	<td>Milroy, R.</td>
+	<td>A magnetohydrodynamic model of rotating magnetic field current drive in a field-reversed configuration</td>
+	<td>2000/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 10), pp. 4135 - 42&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1290279">URL</a>&nbsp;</td>
+</tr>
+<tr id="6283502" class="entry">
+	<td>Milroy, R.</td>
+	<td>A numerical study of rotating magnetic fields as a current drive for field reversed configurations</td>
+	<td>1999/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 7), pp. 2771 - 80&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873234">URL</a>&nbsp;</td>
+</tr>
+<tr id="3480541" class="entry">
+	<td>Milroy, R., Barnes, D., Bishop, R. &amp; Webster, R.</td>
+	<td>Nonlinear magnetohydrodynamic studies of the tilt mode in field-reversed configurations</td>
+	<td>1989/06/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 6), pp. 1225 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.858998">URL</a>&nbsp;</td>
+</tr>
+<tr id="8575263" class="entry">
+	<td>Milroy, R. &amp; Guo, H.</td>
+	<td>Rotating magnetic quadrupole current drive for field-reversed configurations</td>
+	<td>2005/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 7), pp. 72503 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1940867">URL</a>&nbsp;</td>
+</tr>
+<tr id="11413740" class="entry">
+	<td>Milroy, R., Kim, C. &amp; Sovinec, C.</td>
+	<td>Extended magnetohydrodynamic simulations of field reversed configuration formation and sustainment with rotating magnetic field current drive</td>
+	<td>2010/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 6), pp. 062502 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3436630">URL</a>&nbsp;</td>
+</tr>
+<tr id="7840885" class="entry">
+	<td>Milroy, R. &amp; Miller, K.</td>
+	<td>Edge-driven rotating magnetic field current drive of field-reversed configurations</td>
+	<td>2004/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 2), pp. 633 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1641381">URL</a>&nbsp;</td>
+</tr>
+<tr id="3075526" class="entry">
+	<td>Milroy, R. &amp; Slough, J.</td>
+	<td>Poloidal flux loss and axial dynamics during the formation of a field-reversed configuration</td>
+	<td>1987/11/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 11), pp. 3566 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866437">URL</a>&nbsp;</td>
+</tr>
+<tr id="2298226" class="entry">
+	<td>Milroy, R., Slough, J. &amp; Hoffman, A.</td>
+	<td>Plasma wall sheath contributions to flux retention during the formation of field-reversed configurations</td>
+	<td>1984/06/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 6), pp. 1545 - 51&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864787">URL</a>&nbsp;</td>
+</tr>
+<tr id="9936492" class="entry">
+	<td>Milroy, R. &amp; Steinhauer, L.</td>
+	<td>Toroidal field stabilization of the rotational instability in field-reversed configurations</td>
+	<td>2008/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 2), pp. 022508 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2842361">URL</a>&nbsp;</td>
+</tr>
+<tr id="14074535" class="entry">
+	<td>Mitsui, T., Watanabe, T., Iizima, F. &amp; Takahashi, T.</td>
+	<td>Properties of electron motion in electron-fluid perturbation fields of a field-reversed configuration</td>
+	<td>2013/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  63( 1T), pp. 380 - 2&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1617747" class="entry">
+	<td>Mynick, H.</td>
+	<td>Guiding-center Hamiltonian for figure-8 particles in axisymmetric field-reversed configurations</td>
+	<td>Sept. 1980</td>
+	<td>Physics of Fluids<br/>Vol.  23( 9), pp. 1897 - 903&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863217">URL</a>&nbsp;</td>
+</tr>
+<tr id="2450075" class="entry">
+	<td>Nakata, S. &amp; Sekiguchi, T.</td>
+	<td>Formation of a nearly spherical field-reversed configuration</td>
+	<td>1985/02/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 2), pp. 445 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865107">URL</a>&nbsp;</td>
+</tr>
+<tr id="2675130" class="entry">
+	<td>Nakata, S., Sekiguchi, T., Seki, H. &amp; Yamamoto, K.</td>
+	<td>Plasma stability of a nearly spherical field-reversed configuration</td>
+	<td>1986/03/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 3), pp. 871 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865889">URL</a>&nbsp;</td>
+</tr>
+<tr id="2740247" class="entry">
+	<td>Newton, A.</td>
+	<td>Electron temperature in field-reversed configurations and theta pinches with closed magnetic field lines</td>
+	<td>1986/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  26( 6), pp. 779 - 83&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1857882" class="entry">
+	<td>Nguyen, K. &amp; Kammash, T.</td>
+	<td>Classical transport coefficients in a field-reversed configuration</td>
+	<td>1982/02/</td>
+	<td>Plasma Physics<br/>Vol.  24( 2), pp. 177 - 83&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0032-1028/24/2/005">URL</a>&nbsp;</td>
+</tr>
+<tr id="6332160" class="entry">
+	<td>Nishimura, K., Horiuchi, R. &amp; Sato, T.</td>
+	<td>Drift-kink instability induced by beam ions in field-reversed configurations</td>
+	<td>Sept. 1999</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 9), pp. 3459 - 65&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873606">URL</a>&nbsp;</td>
+</tr>
+<tr id="5747053" class="entry">
+	<td>Nishimura, K., Horiuchi, R. &amp; Sato, T.</td>
+	<td>Tilt stabilization by cycling ions crossing magnetic separatrix in a field-reversed configuration</td>
+	<td>1997/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  4( 11), pp. 4035 - 42&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872524">URL</a>&nbsp;</td>
+</tr>
+<tr id="2294880" class="entry">
+	<td>Ogi, S., Watanabe, Y., Yoshimura, H., Miyashita, T. &amp; Akazaki, M.</td>
+	<td>Application of anomalous magnetic field swelling phenomenon to formation of field-reversed configuration in linear theta pinch</td>
+	<td>1983/08/</td>
+	<td>Technology Reports of the Kyushu University<br/>Vol.  56( 4), pp. 461 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11388109" class="entry">
+	<td>Ohkuma, Y., Hiroi, M., Ikeyama, T. &amp; Nogi, Y.</td>
+	<td>Separatrix shape of field-reversed configuration</td>
+	<td>2010/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  17( 4), pp. 042502 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3374033">URL</a>&nbsp;</td>
+</tr>
+<tr id="4792622" class="entry">
+	<td>Ohkuma, Y., Takahashi, T., Suzuki, K. &amp; Nogi, Y.</td>
+	<td>Effect of multipole fields on field-reversed-configuration plasma</td>
+	<td>1994/08/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  63( 8), pp. 2845 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6116133" class="entry">
+	<td>Ohkuma, Y., Urano, M., Nakamura, M., Narushima, Y., Takahashi, T. &amp; Nogi, Y.</td>
+	<td>Production of a low density field reversed configuration plasma</td>
+	<td>1998/10/</td>
+	<td>Nuclear Fusion<br/>Vol.  38( 10), pp. 1501 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/38/10/307">URL</a>&nbsp;</td>
+</tr>
+<tr id="10309607" class="entry">
+	<td>Ohnishi, M., Hugrass, W., Fukuhara, M., Masaki, T., Osawa, H. &amp; Chikano, T.</td>
+	<td>Penetration and radial force balance in field-reversed configuration with large rotating magnetic field</td>
+	<td>2008/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 10), pp. 104504 (3 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2997341">URL</a>&nbsp;</td>
+</tr>
+<tr id="7380989" class="entry">
+	<td>Ohnishi, M. &amp; Ishida, A.</td>
+	<td>Stability of equilibrium in rotating magnetic field current drive for sustaining field-reversed configuration</td>
+	<td>2002/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 6), pp. 2633 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1472504">URL</a>&nbsp;</td>
+</tr>
+<tr id="5235536" class="entry">
+	<td>Ohnishi, M. &amp; Ishida, A.</td>
+	<td>Effects of radial flow on current drive in a field reversed configuration by a rotating magnetic field</td>
+	<td>1996/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  36( 2), pp. 232 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/36/2/I10">URL</a>&nbsp;</td>
+</tr>
+<tr id="4466117" class="entry">
+	<td>Ohnishi, M., Ishida, A. &amp; Akasaka, T.</td>
+	<td>Ion beam stabilization of rotational instability in a field-reversed configuration with rigid rotation</td>
+	<td>1993/06/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 6), pp. 1842 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860821">URL</a>&nbsp;</td>
+</tr>
+<tr id="3274002" class="entry">
+	<td>Ohnishi, M., Kuranaga, H. &amp; Okamoto, M.</td>
+	<td>Suppression, by ion beams, of the m=2 rotational instability in a field reversed configuration</td>
+	<td>1988/08/</td>
+	<td>Nuclear Fusion<br/>Vol.  28( 8), pp. 1427 - 38&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3122172" class="entry">
+	<td>Ohnishi, M., Ohi, S., Okamoto, M., Momota, H. &amp; Wakabayashi, J.</td>
+	<td>Self-ignition of an advanced fuel field-reversed configuration reactor by fusion product heating</td>
+	<td>Sept. 1987</td>
+	<td>Fusion Technology<br/>Vol.  12( 2), pp. 249 - 56&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7483028" class="entry">
+	<td>Ohtani, H., Horiuchi, R. &amp; Sato, T.</td>
+	<td>Self-generation of hollow current profile and tilt instability in field-reversed configuration</td>
+	<td>2003/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 1), pp. 145 - 56&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1526703">URL</a>&nbsp;</td>
+</tr>
+<tr id="6035781" class="entry">
+	<td>Ohtsuka, T., Okubo, M., Okada, S. &amp; Goto, S.</td>
+	<td>Particle end loss in the edge plasma of a field-reversed configuration</td>
+	<td>1998/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  5( 10), pp. 3649 - 55&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873083">URL</a>&nbsp;</td>
+</tr>
+<tr id="3597806" class="entry">
+	<td>Okada, S., Kiso, Y., Goto, S. &amp; Ishimura, T.</td>
+	<td>Estimation of the electrical resistivity in field-reversed configuration plasmas from detailed interferometric measurements</td>
+	<td>1989/12/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 12), pp. 2422 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859177">URL</a>&nbsp;</td>
+</tr>
+<tr id="3445119" class="entry">
+	<td>Okada, S., Kiso, Y., Goto, S. &amp; Ishimura, T.</td>
+	<td>Reduction of the density profile of a field-reversed configuration plasma from detailed interferometric measurements</td>
+	<td>1989/06/15</td>
+	<td>Journal of Applied Physics<br/>Vol.  65( 12), pp. 4625 - 31&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.343260">URL</a>&nbsp;</td>
+</tr>
+<tr id="8562283" class="entry">
+	<td>Okada, S., Kitano, K., Sumikura, H., Higashikozono, T., Inomoto, M., Yoshimura, S. &amp; Ohta, M.</td>
+	<td>Sustainment and additional heating of high-beta field-reversed configuration plasmas</td>
+	<td>Sept. 2005</td>
+	<td>Nuclear Fusion<br/>Vol.  45( 9), pp. 1094 - 100&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/45/9/009">URL</a>&nbsp;</td>
+</tr>
+<tr id="2984774" class="entry">
+	<td>Okamoto, M.</td>
+	<td>A steady state solution to a field reversed configuration</td>
+	<td>1987/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  27( 5), pp. 833 - 41&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3554050" class="entry">
+	<td>Okamoto, M., Berk, H. &amp; Hammer, J.</td>
+	<td>Relation between beam driven seed current and rotation in a steady state field reversed configuration</td>
+	<td>1989/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  29( 12), pp. 2063 - 77&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5417148" class="entry">
+	<td>Okubo, M., Sugimoto, S., Okada, S. &amp; Goto, S.</td>
+	<td>Measurements of end-loss ion energy and estimation of convective energy loss from field-reversed configuration</td>
+	<td>1996/04/15</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  46( 2233-2246), pp. 9 - 17&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6567953" class="entry">
+	<td>Omelchenko, Y.</td>
+	<td>Kinetic simulations of the formation and stability of the field-reversed configuration</td>
+	<td>2000/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 5), pp. 1443 - 51&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873963">URL</a>&nbsp;</td>
+</tr>
+<tr id="7099958" class="entry">
+	<td>Omelchenko, Y., Schaffer, M. &amp; Parks, P.</td>
+	<td>Nonlinear stability of field-reversed configurations with self-generated toroidal field</td>
+	<td>2001/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  8( 10), pp. 4463 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1401119">URL</a>&nbsp;</td>
+</tr>
+<tr id="13865542" class="entry">
+	<td>Onofri, M. &amp; Malara, F.</td>
+	<td>Effects of the resistivity profile on the formation of a reversed configuration and single helicity states in compressible simulations of the reversed-field pinch</td>
+	<td>2013/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 10), pp. 102514 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4826222">URL</a>&nbsp;</td>
+</tr>
+<tr id="1617798" class="entry">
+	<td>Oshiyama, H.</td>
+	<td>Studies on setting up the reversed field pinch configuration by using the Heliotron C magnetic field</td>
+	<td>Sept. 1980</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  49( 3), pp. 1199 - 200&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1617807" class="entry">
+	<td>Oshiyama, H.</td>
+	<td>New method of setting up the reversed field configuration</td>
+	<td>1980/03/</td>
+	<td>Technical Reports of the Institute of Atomic Energy, Kyoto University( 181), pp. 1 - 11&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2861167" class="entry">
+	<td>Oshiyama, H., Goto, M., Kho, S., Kho, S. &amp; Ichida, H.</td>
+	<td>Axisymmetric reversed-field pinch configuration with global invariants</td>
+	<td>1986/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  55( 11), pp. 3701 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2484387" class="entry">
+	<td>Oshiyama, H. &amp; Masamune, S.</td>
+	<td>Setting up reversed-field configuration with the aid of magnetic separatrix</td>
+	<td>1984//</td>
+	<td>Memoirs of the Faculty of Industrial Arts, Kyoto Technical University, Science and Technology<br/>Vol.  33, pp. 19 - 34&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2314040" class="entry">
+	<td>Oshiyama, H. &amp; Umeda, Y.</td>
+	<td>Reversed field configuration in force-free state</td>
+	<td>1984/07/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  53( 7), pp. 2274 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4053219" class="entry">
+	<td>Paccagnella, R., Bondeson, A. &amp; Lutjens, H.</td>
+	<td>Ideal toroidal stability beta limits and shaping effects for reversed field pinch configurations</td>
+	<td>1991/10/</td>
+	<td>Nuclear Fusion<br/>Vol.  31( 10), pp. 1899 - 907&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6329429" class="entry">
+	<td>Parks, P.</td>
+	<td>Self-similar adiabatic compression of highly elongated field reversed configurations</td>
+	<td>1999/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  39( 6), pp. 747 - 52&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/39/6/303">URL</a>&nbsp;</td>
+</tr>
+<tr id="7598735" class="entry">
+	<td>Parks, P. &amp; Schaffer, M.</td>
+	<td>Analytical equilibrium and interchange stability of single- and double-axis field-reversed configurations inside a cylindrical cavity</td>
+	<td>2003/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 5), pp. 1411 - 23&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1566025">URL</a>&nbsp;</td>
+</tr>
+<tr id="3309730" class="entry">
+	<td>Peng, Z.</td>
+	<td>Reversed field pinch configuration with minimum energy and finite beta</td>
+	<td>Sept. 1987</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  7( 3), pp. 147 - 50&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3453891" class="entry">
+	<td>Peng, Z.</td>
+	<td>Reversed-field pinch configuration with minimum energy and finite beta</td>
+	<td>1989/01/</td>
+	<td>Chinese Physics<br/>Vol.  9( 1), pp. 156 - 60&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4836663" class="entry">
+	<td>Peng, Z., Shuiquan, F., Jieping, L., Cuiwen, L., Qiang, L., Ping, Y. &amp; Ying, X.</td>
+	<td>Reversed field pinch configuration in SWIP-RFP device</td>
+	<td>1993/12/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  13( 4), pp. 30 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4918986" class="entry">
+	<td>Pierce, W., Jarboe, T. &amp; Brooks, R.</td>
+	<td>Stabilization and saturation of the ideal tilt mode in a driven annular field-reversed configuration</td>
+	<td>1995/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  2( 3), pp. 846 - 58&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.871436">URL</a>&nbsp;</td>
+</tr>
+<tr id="4385167" class="entry">
+	<td>Pierce, W., Maqueda, R., Brooks, R. &amp; Farengo, R.</td>
+	<td>Initial results from parallel coil operation of the Coaxial Slow Source field reversed configuration device</td>
+	<td>1993/01/</td>
+	<td>Nuclear Fusion<br/>Vol.  33( 1), pp. 117 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/33/1/I10">URL</a>&nbsp;</td>
+</tr>
+<tr id="5975199" class="entry">
+	<td>Prasad, R.</td>
+	<td>Temperature aspect of plasma jet flow in field reversal configuration</td>
+	<td>1998//</td>
+	<td>European Physical Journal, Applied Physics<br/>Vol.  2( 2), pp. 171 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1051/epjap:1998181">URL</a>&nbsp;</td>
+</tr>
+<tr id="7583607" class="entry">
+	<td>Qerushi, A. &amp; Rostoker, N.</td>
+	<td>Equilibrium of field reversed configurations with rotation. IV. Two space dimensions and many ion species</td>
+	<td>2003/03/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 3), pp. 737 - 52&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1539853">URL</a>&nbsp;</td>
+</tr>
+<tr id="7463014" class="entry">
+	<td>Qerushi, A. &amp; Rostoker, N.</td>
+	<td>Equilibrium of field reversed configurations with rotation. III. Two space dimensions and one type of ion</td>
+	<td>2002/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 12), pp. 5001 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1517294">URL</a>&nbsp;</td>
+</tr>
+<tr id="7330475" class="entry">
+	<td>Qerushi, A. &amp; Rostoker, N.</td>
+	<td>Equilibrium of field reversed configurations with rotation. II. One space dimension and many ion species</td>
+	<td>2002/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 7), pp. 3068 - 74&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1475684">URL</a>&nbsp;</td>
+</tr>
+<tr id="3309721" class="entry">
+	<td>Qiang, X. &amp; Huaiguo, Z.</td>
+	<td>The implosion of plasma in a field reversed configuration</td>
+	<td>1987/03/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  7( 1), pp. 37 - 41&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2232658" class="entry">
+	<td>Rej, D. &amp; Armstrong, W.</td>
+	<td>Electron temperature measurements in the field-reversed configuration experiment FRX-C</td>
+	<td>1984/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  24( 2), pp. 177 - 82&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2771532" class="entry">
+	<td>Rej, D., Armstrong, W., Barnes, G., Chrien, R., Hugrass, W., Klingner, P., McKenna, K., Siemon, R. &amp; Tuczewski, M.</td>
+	<td>Helical and straight quadrupole stabilization of the n=2 rotational instability in translated field-reversed configurations</td>
+	<td>1986/08/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 8), pp. 2648 - 56&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865506">URL</a>&nbsp;</td>
+</tr>
+<tr id="2675128" class="entry">
+	<td>Rej, D., Armstrong, W., Chrien, R., Klingner, P., Linford, R., McKenna, K., Sherwood, E., Siemon, R., Tuszewski, M. &amp; Milroy, R.</td>
+	<td>Experimental studies of field-reversed configuration translation</td>
+	<td>1986/03/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 3), pp. 852 - 62&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865887">URL</a>&nbsp;</td>
+</tr>
+<tr id="3749726" class="entry">
+	<td>Rej, D., Barnes, G., Baron, M., Chrien, R., Okada, S., Siemon, R., Taggart, D., Tuszewski, M., Webster, R. &amp; Wright, B.</td>
+	<td>Flux confinement measurements in large field-reversed configuration equilibria</td>
+	<td>1990/07/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 7), pp. 1706 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859443">URL</a>&nbsp;</td>
+</tr>
+<tr id="3692728" class="entry">
+	<td>Rej, D., Barnes, G., Baron, M., Chrien, R., Okada, S., Siemon, R., Taggart, D., Tuszewski, M., Webster, R. &amp; Wright, B.</td>
+	<td>Electron energy confinement in field reversed configuration plasmas</td>
+	<td>1990/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  30( 6), pp. 1087 - 94&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4228063" class="entry">
+	<td>Rej, D., Taggart, D., Baron, M., Chrien, R., Gribble, R., Tuszewski, M., Waganaar, W. &amp; Wright, B.</td>
+	<td>High-power magnetic-compression heating of field-reversed configurations</td>
+	<td>1992/07/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  4( 7), pp. 1909 - 19&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860043">URL</a>&nbsp;</td>
+</tr>
+<tr id="2298225" class="entry">
+	<td>Rej, D. &amp; Tuszewski, M.</td>
+	<td>A zero-dimensional transport model for field-reversed configurations</td>
+	<td>1984/06/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 6), pp. 1514 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864783">URL</a>&nbsp;</td>
+</tr>
+<tr id="10687150" class="entry">
+	<td>Renneke, R., Intrator, T., Hsu, S., Wurden, G., Waganaar, W., Ruden, E. &amp; Grabowski, T.</td>
+	<td>Power balance in a high-density field reversed configuration plasma</td>
+	<td>2008/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 6), pp. 062502 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2934588">URL</a>&nbsp;</td>
+</tr>
+<tr id="13084082" class="entry">
+	<td>Roche, T., Bolte, N., Garate, E., Heidbrink, W., McWilliams, R. &amp; Wessel, F.</td>
+	<td>Tomographic imaging system for measuring impurity line emission in a field-reversed configuration</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 503&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4729670">URL</a>&nbsp;</td>
+</tr>
+<tr id="7798904" class="entry">
+	<td>Rostoker, N. &amp; Qerushi, A.</td>
+	<td>Classical transport in a field reversed configuration</td>
+	<td>2003/07/</td>
+	<td>Plasma Physics Reports<br/>Vol.  29( 7), pp. 626 - 30&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/1.1592562">URL</a>&nbsp;</td>
+</tr>
+<tr id="7330474" class="entry">
+	<td>Rostoker, N. &amp; Qerushi, A.</td>
+	<td>Equilibrium of field reversed configurations with rotation. I. One space dimension and one type of ion</td>
+	<td>2002/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 7), pp. 3057 - 67&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1475683">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406492" class="entry">
+	<td>Ruden, E., Zhang, S., Wurden, G., Intrator, T., Renneke, R., Waganaar, W., Analla, F. &amp; Grabowski, T.</td>
+	<td>Multichord optical interferometry of FRX-L's field reversed configuration</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 103502 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2354568">URL</a>&nbsp;</td>
+</tr>
+<tr id="12494229" class="entry">
+	<td>Ryzhkov, S.</td>
+	<td>A field-reversed magnetic configuration and applications of high-temperature FRC plasma</td>
+	<td>2011/12/</td>
+	<td>Plasma Physics Reports<br/>Vol.  37( 13), pp. 1075 - 81&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S1063780X11030135">URL</a>&nbsp;</td>
+</tr>
+<tr id="11025634" class="entry">
+	<td>Ryzhkov, S.</td>
+	<td>Modelling of plasma physics in the fusion reactor based on a field-reversed configuration</td>
+	<td>2009/02/</td>
+	<td>Fusion Science and Technology<br/>Vol.  55( 2T), pp. 157 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3386843" class="entry">
+	<td>Sarff, J., Almagri, A., Assadi, S., Hartog, D., Dexter, R., Prager, S. &amp; Sprott, J.</td>
+	<td>Studies of a reversed field pinch in a poloidal divertor configuration</td>
+	<td>1989/01/</td>
+	<td>Nuclear Fusion<br/>Vol.  29( 1), pp. 104 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1617793" class="entry">
+	<td>Sato, K., Osanai, Y. &amp; Aizawa, T.</td>
+	<td>Production of a fat plasma in a reversed-field configuration of high efficiency</td>
+	<td>Sept. 1980</td>
+	<td>Nuclear Fusion<br/>Vol.  20( 9), pp. 1173 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3644787" class="entry">
+	<td>Schaffer, M.</td>
+	<td>Magnetohydrodynamic marginal stability study of force-free reversed field pinch configurations with a surrounding vacuum region</td>
+	<td>1990/04/</td>
+	<td>Nuclear Fusion<br/>Vol.  30( 4), pp. 635 - 44&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2083313" class="entry">
+	<td>Schwarzmeier, J., Barnes, D., Hewett, D., Seyler, C., Shestakov, A. &amp; Spencer, R.</td>
+	<td>Magnetohydrodynamic equilibrium and stability of field-reversed configurations</td>
+	<td>1983/05/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 5), pp. 1295 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864290">URL</a>&nbsp;</td>
+</tr>
+<tr id="2346526" class="entry">
+	<td>Schwarzmeier, J. &amp; Seyler, C.</td>
+	<td>Inadequacies of finite Larmor radius treatments of the internal tilting instability in field-reversed configurations</td>
+	<td>1984/08/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 8), pp. 2151 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864840">URL</a>&nbsp;</td>
+</tr>
+<tr id="1265632" class="entry">
+	<td>Sethian, J., Gerber, K., Spector, D. &amp; Robson, A.</td>
+	<td>Generation of a reversed-field configuration without an applied magnetic field</td>
+	<td>18 Sept. 1978</td>
+	<td>Physical Review Letters<br/>Vol.  41( 12), pp. 798 - 801&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.41.798">URL</a>&nbsp;</td>
+</tr>
+<tr id="1239110" class="entry">
+	<td>Sethian, J., Hammer, D., Gerber, K., Spector, D., Robson, A. &amp; Goldenbaum, G.</td>
+	<td>Reversed-field configuration generated by a rotating relativistic electron beam</td>
+	<td>1978/07/</td>
+	<td>Physics of Fluids<br/>Vol.  21( 7), pp. 1227 - 35&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.862361">URL</a>&nbsp;</td>
+</tr>
+<tr id="2584449" class="entry">
+	<td>Sevillano, E. &amp; Ribe, F.</td>
+	<td>Reconnection studies in field-reversed configurations</td>
+	<td>1985/10/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 10), pp. 3142 - 53&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865356">URL</a>&nbsp;</td>
+</tr>
+<tr id="2005826" class="entry">
+	<td>Sgro, A., Armstrong, W., Lipson, J., Tuszewski, M. &amp; Cochrane, J.</td>
+	<td>Flux loss and heating during the formation of a field-reversed configuration</td>
+	<td>1982/12/</td>
+	<td>Physical Review A (General Physics)<br/>Vol.  26( 6), pp. 3564 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevA.26.3564">URL</a>&nbsp;</td>
+</tr>
+<tr id="2707276" class="entry">
+	<td>Shimamura, S. &amp; Nogi, Y.</td>
+	<td>Helical quadrupole field stabilization of field-reversed configuration plasma</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 69 - 74&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4385095" class="entry">
+	<td>Shiokawa, A. &amp; Goto, S.</td>
+	<td>Dynamic property of spontaneous toroidal field in field-reversed configuration plasmas</td>
+	<td>1993/02/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 2), pp. 534 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860538">URL</a>&nbsp;</td>
+</tr>
+<tr id="3959523" class="entry">
+	<td>Shiokawa, A., Okada, S., Ito, Y. &amp; Goto, S.</td>
+	<td>Spontaneous appearance of toroidal field in field reversed configuration plasma</td>
+	<td>1991/06/15</td>
+	<td>Japanese Journal of Applied Physics, Part 2 (Letters)<br/>Vol.  30( 6B), pp. 1142 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3343543" class="entry">
+	<td>Shumaker, D.</td>
+	<td>Transport simulation of a field-reversed configuration plasma</td>
+	<td>1988/05/</td>
+	<td>Fusion Technology<br/>Vol.  13( 4), pp. 555 - 76&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2707277" class="entry">
+	<td>Shumaker, D.</td>
+	<td>Numerical calculation of equilibria for the field-reversed configuration</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 75 - 82&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6130254" class="entry">
+	<td>Slough, J. &amp; Hoffman, A.</td>
+	<td>Penetration of a transverse magnetic field by an accelerated field-reversed configuration</td>
+	<td>1999/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  6( 1), pp. 253 - 63&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.873277">URL</a>&nbsp;</td>
+</tr>
+<tr id="4571924" class="entry">
+	<td>Slough, J. &amp; Hoffman, A.</td>
+	<td>Stability of field-reversed configurations in the large s experiment (LSX)</td>
+	<td>1993/12/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  5( 12), pp. 4366 - 77&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860554">URL</a>&nbsp;</td>
+</tr>
+<tr id="3692564" class="entry">
+	<td>Slough, J. &amp; Hoffman, A.</td>
+	<td>Experimental study of the formation of field-reversed configurations employing high-order multipole fields</td>
+	<td>1990/04/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 4), pp. 797 - 808&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859316">URL</a>&nbsp;</td>
+</tr>
+<tr id="3235848" class="entry">
+	<td>Slough, J. &amp; Hoffman, A.</td>
+	<td>Observation of tilt stability of field reversed configurations at large s</td>
+	<td>1988/06/</td>
+	<td>Nuclear Fusion<br/>Vol.  28( 6), pp. 1121 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3403751" class="entry">
+	<td>Slough, J., Hoffman, A. &amp; Milroy, R.</td>
+	<td>Formation studies of field-reversed configurations in a slow field-reversed theta pinch</td>
+	<td>1989/04/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 4), pp. 840 - 50&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859009">URL</a>&nbsp;</td>
+</tr>
+<tr id="4285269" class="entry">
+	<td>Slough, J., Hoffman, A., Milroy, R., Crawford, E., Cecik, M., Maqueda, R., Wurden, G., Ito, Y. &amp; Shiokawa, A.</td>
+	<td>Confinement and stability of plasmas in a field-reversed configuration</td>
+	<td>1992/10/12</td>
+	<td>Physical Review Letters<br/>Vol.  69( 15), pp. 2212 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.69.2212">URL</a>&nbsp;</td>
+</tr>
+<tr id="2431826" class="entry">
+	<td>Slough, J., Hoffman, A., Milroy, R., Harding, D. &amp; Steinhauer, L.</td>
+	<td>Flux and particle life-time measurements in field-reversed configurations</td>
+	<td>1984/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  24( 12), pp. 1537 - 50&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6707655" class="entry">
+	<td>Slough, J. &amp; Miller, K.</td>
+	<td>Enhanced confinement and stability of a field-reversed configuration with rotating magnetic field current drive</td>
+	<td>2000/08/14</td>
+	<td>Physical Review Letters<br/>Vol.  85( 7), pp. 1444 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.85.1444">URL</a>&nbsp;</td>
+</tr>
+<tr id="11929284" class="entry">
+	<td>Slough, J., Votroubek, G. &amp; Pihl, C.</td>
+	<td>Creation of a high-temperature plasma through merging and compression of supersonic field reversed configuration plasmoids</td>
+	<td>2011/05/</td>
+	<td>Nuclear Fusion<br/>Vol.  51( 5), pp. 053008 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/51/5/053008">URL</a>&nbsp;</td>
+</tr>
+<tr id="3760938" class="entry">
+	<td>Sobehart, J.</td>
+	<td>Flux trapping efficiency during the early formation phase of a field reversed configuration</td>
+	<td>Sept. 1990</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 9), pp. 2268 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859409">URL</a>&nbsp;</td>
+</tr>
+<tr id="3378621" class="entry">
+	<td>Sobehart, J.</td>
+	<td>Analytic, two fluid, field reversed configuration equilibrium with sheared rotation</td>
+	<td>1989/02/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  1( 2), pp. 470 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859162">URL</a>&nbsp;</td>
+</tr>
+<tr id="3828518" class="entry">
+	<td>Sobehart, J. &amp; Farengo, R.</td>
+	<td>Low-frequency drift dissipative modes in field-reversed configurations</td>
+	<td>1990/12/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 12), pp. 3206 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859230">URL</a>&nbsp;</td>
+</tr>
+<tr id="6898336" class="entry">
+	<td>Spada, E., Carbone, V., Cavazzana, R., Fattorini, L., Regnoli, G., Vianello, N., Antoni, V., Martines, E., Serianni, G., Spolaore, M. &amp; Tramontin, L.</td>
+	<td>Search of self-organized criticality processes in magnetically confined plasmas: hints from the reversed field pinch configuration</td>
+	<td>2001/04/02</td>
+	<td>Physical Review Letters<br/>Vol.  86( 14), pp. 3032 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.86.3032">URL</a>&nbsp;</td>
+</tr>
+<tr id="1891533" class="entry">
+	<td>Sparks, L., Sudan, R. &amp; Finn, J.</td>
+	<td>Optimal plasma- in an MHD-stable field-reversed configuration with energetic, large-orbit ions</td>
+	<td>1982/05/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 5), pp. 908 - 11&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863822">URL</a>&nbsp;</td>
+</tr>
+<tr id="1944473" class="entry">
+	<td>Spencer, R. &amp; Hewett, D.</td>
+	<td>Free boundary field-reversed configuration (FRC) equilibria in a conducting cylinder</td>
+	<td>1982/08/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 8), pp. 1365 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863901">URL</a>&nbsp;</td>
+</tr>
+<tr id="2539173" class="entry">
+	<td>Spencer, R. &amp; Tuszewski, M.</td>
+	<td>Magnetohydrodynamic equilibrium and stability of rotating field-reversed configurations with excluded multipole fields</td>
+	<td>1985/08/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 8), pp. 2510 - 16&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865259">URL</a>&nbsp;</td>
+</tr>
+<tr id="2507918" class="entry">
+	<td>Spencer, R. &amp; Tuszewski, M.</td>
+	<td>Experimental and computational equilibria of field-reversed configurations</td>
+	<td>1985/06/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 6), pp. 1810 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864924">URL</a>&nbsp;</td>
+</tr>
+<tr id="2098825" class="entry">
+	<td>Spencer, R., Tuszewski, M. &amp; Linford, R.</td>
+	<td>Adiabatic compression of elongated field-reversed configurations</td>
+	<td>1983/06/</td>
+	<td>Physics of Fluids<br/>Vol.  26( 6), pp. 1564 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864334">URL</a>&nbsp;</td>
+</tr>
+<tr id="7380923" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>End-shorting and electric field in edge plasmas with application to field-reversed configurations</td>
+	<td>Sept. 2002</td>
+	<td>Physics of Plasmas<br/>Vol.  9( 9), pp. 3851 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1494823">URL</a>&nbsp;</td>
+</tr>
+<tr id="12546004" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Hybrid equilibria of field-reversed configurations</td>
+	<td>2011/11/</td>
+	<td>Physics of Plasmas<br/>Vol.  18( 11), pp. 112509 (10 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3660674">URL</a>&nbsp;</td>
+</tr>
+<tr id="12463083" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Review of field-reversed configurations</td>
+	<td>2011/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  18( 7), pp. 070501 (38 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3613680">URL</a>&nbsp;</td>
+</tr>
+<tr id="9933152" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Equilibrium rotation in field-reversed configurations</td>
+	<td>2008/01/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 1), pp. 012505 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2834271">URL</a>&nbsp;</td>
+</tr>
+<tr id="4334098" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Electron thermal confinement in the edge plasma of a field-reversed configuration</td>
+	<td>1992/12/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  4( 12), pp. 4012 - 18&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860306">URL</a>&nbsp;</td>
+</tr>
+<tr id="3828507" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Improved analytic equilibrium for a field-reversed configuration</td>
+	<td>1990/12/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 12), pp. 3081 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859219">URL</a>&nbsp;</td>
+</tr>
+<tr id="3828482" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>A nearly one-and-one-half-dimensional confinement model for field-reversed configurations</td>
+	<td>1990/11/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 11), pp. 2679 - 86&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859390">URL</a>&nbsp;</td>
+</tr>
+<tr id="2821245" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Electrostatic confinement in the edge layer of field-reversed configurations</td>
+	<td>1986/10/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 10), pp. 3379 - 89&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865853">URL</a>&nbsp;</td>
+</tr>
+<tr id="2593503" class="entry">
+	<td>Steinhauer, L.</td>
+	<td>Magnetic flux trapping during field reversal in the formation of a field-reversed configuration</td>
+	<td>1985/11/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 11), pp. 3333 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865332">URL</a>&nbsp;</td>
+</tr>
+<tr id="10908826" class="entry">
+	<td>Steinhauer, L. &amp; Barnes, D.</td>
+	<td>Tearing relaxation and the globalization of transport in field-reversed configurations</td>
+	<td>Sept. 2009</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 9), pp. 092505 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3223847">URL</a>&nbsp;</td>
+</tr>
+<tr id="9028875" class="entry">
+	<td>Steinhauer, L., Guo, H., Hoffman, A., Ishida, A. &amp; Ryutov, D.</td>
+	<td>Modeling of field-reversed configuration experiment with large safety factor</td>
+	<td>2006/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  13( 5), pp. 56119 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2177635">URL</a>&nbsp;</td>
+</tr>
+<tr id="10807041" class="entry">
+	<td>Steinhauer, L. &amp; Intrator, T.</td>
+	<td>Equilibrium paradigm for field-reversed configurations and application to experiments</td>
+	<td>2009/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  16( 7), pp. 072501 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3157253">URL</a>&nbsp;</td>
+</tr>
+<tr id="4141421" class="entry">
+	<td>Steinhauer, L. &amp; Ishida, A.</td>
+	<td>Profile consistency in equilibria of field-reversed configurations</td>
+	<td>1992/03/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  4( 3), pp. 645 - 50&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.860262">URL</a>&nbsp;</td>
+</tr>
+<tr id="3795858" class="entry">
+	<td>Steinhauer, L. &amp; Ishida, A.</td>
+	<td>Gyroviscous stability theory with application to the internal tilt mode of a field-reversed configuration</td>
+	<td>1990/10/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 10), pp. 2422 - 30&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859507">URL</a>&nbsp;</td>
+</tr>
+<tr id="2454671" class="entry">
+	<td>Steinhauer, L., Milroy, R. &amp; Slough, J.</td>
+	<td>A model for inferring transport rates from observed confinement times in field-reversed configurations</td>
+	<td>1985/03/</td>
+	<td>Physics of Fluids<br/>Vol.  28( 3), pp. 888 - 97&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865059">URL</a>&nbsp;</td>
+</tr>
+<tr id="7319745" class="entry">
+	<td>Stenzel, R., Griskey, M., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Precession of an electron-magnetohydrodynamic field-reversed configuration</td>
+	<td>2002/05/06</td>
+	<td>Physical Review Letters<br/>Vol.  88( 18), pp. 185004 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.88.185004">URL</a>&nbsp;</td>
+</tr>
+<tr id="10248178" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Field-reversed configurations in an unmagnetized plasma</td>
+	<td>26 Sept. 2008</td>
+	<td>Physical Review Letters<br/>Vol.  101( 13), pp. 135002 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.101.135002">URL</a>&nbsp;</td>
+</tr>
+<tr id="9976542" class="entry">
+	<td>Stenzel, R., Urrutia, J. &amp; Strohmaier, K.</td>
+	<td>Nonlinear electron magnetohydrodynamics physics. I. Whistler spheromaks, mirrors, and field reversed configurations</td>
+	<td>2008/04/</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 4), pp. 042307 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2903065">URL</a>&nbsp;</td>
+</tr>
+<tr id="3595030" class="entry">
+	<td>Sugimoto, S., Niina, T. &amp; Goto, S.</td>
+	<td>Spectroscopic plasma tomography on field-reversed configuration</td>
+	<td>1989/12/01</td>
+	<td>Journal of Applied Physics<br/>Vol.  66( 11), pp. 5228 - 31&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.343708">URL</a>&nbsp;</td>
+</tr>
+<tr id="4027072" class="entry">
+	<td>Suzuki, K.</td>
+	<td>Effect of the mirror field on the averaged value in field reversed configuration</td>
+	<td>Sept. 1991</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  60( 9), pp. 3186 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2861168" class="entry">
+	<td>Suzuki, K. &amp; Hamada, S.</td>
+	<td>Numerical confirmation of closed separatrix in experimental field reversed configurations</td>
+	<td>1986/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  55( 11), pp. 3705 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2232765" class="entry">
+	<td>Suzuki, K. &amp; Hamada, S.</td>
+	<td>Mirror effect on radius of separatrix in field reversed configuration</td>
+	<td>1984/01/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  53( 1), pp. 16 - 19&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6711171" class="entry">
+	<td>Suzuki, Y., Okada, S. &amp; Goto, S.</td>
+	<td>Two-dimensional numerical equilibria of field-reversed configuration in the strong mirror field</td>
+	<td>2000/10/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 10), pp. 4062 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1289513">URL</a>&nbsp;</td>
+</tr>
+<tr id="5539144" class="entry">
+	<td>Suzuki, Y., Sugimoto, S., Okada, S. &amp; Goto, S.</td>
+	<td>Computational equilibrium of field-reversed configurations surrounded by conductive cylinder with tapered ends</td>
+	<td>1996/10/15</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  46( 2247-2266), pp. 143 - 52&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7760403" class="entry">
+	<td>Taccetti, J., Intrator, T., Wurden, G., Zhang, S., Aragonez, R., Assmus, P., Bass, C., Carey, C., deVries, S., Fienup, W., Furno, I., Hsu, S., Kozar, M., Langner, M., Liang, J., Maqueda, R., Martinez, R., Sanchez, P., Schoenberg, K., Scott, K., Siemon, R., Tejero, E., Trask, E., Tuszewski, M., Waganaar, W., Grabowski, C., Ruden, E., Degnan, J., Cavazos, T., Gale, D. &amp; Sommars, W.</td>
+	<td>FRX-L: a field-reversed configuration plasma injector for magnetized target fusion</td>
+	<td>2003/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 10), pp. 4314 - 23&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1606534">URL</a>&nbsp;</td>
+</tr>
+<tr id="14053326" class="entry">
+	<td>Takahashi, T.</td>
+	<td>Mechanism of toroidal field generation by translation of a field-reversed configuration</td>
+	<td>2013/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  63( 1T), pp. 143 - 6&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8099156" class="entry">
+	<td>Takahashi, T., Gota, H. &amp; Nogi, Y.</td>
+	<td>Control of elongation for field-reversed configuration plasmas using axial field index of a mirror confinement field</td>
+	<td>Sept. 2004</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 9), pp. 4462 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1776563">URL</a>&nbsp;</td>
+</tr>
+<tr id="9545256" class="entry">
+	<td>Takahashi, T., Iizima, F., Yamaura, H. &amp; Kondoh, Y.</td>
+	<td>A self-consistent beam-plasma equilibrium of a field-reversed configuration</td>
+	<td>2007/02/</td>
+	<td>Fusion Science and Technology<br/>Vol.  51( 2T), pp. 382 - 4&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7964467" class="entry">
+	<td>Takahashi, T., Inoue, K., Iwasawa, N., Ishizuka, T. &amp; Kondoh, Y.</td>
+	<td>Losses of neutral beam injected fast ions due to adiabaticity breaking processes in a field-reversed configuration</td>
+	<td>2004/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 6), pp. 3131 - 40&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1724832">URL</a>&nbsp;</td>
+</tr>
+<tr id="8089443" class="entry">
+	<td>Takahashi, T., Kato, T., Kondoh, Y. &amp; Iwasawa, N.</td>
+	<td>Power deposition by neutral beam injected fast ions in field-reversed configurations</td>
+	<td>2004/08/</td>
+	<td>Physics of Plasmas<br/>Vol.  11( 8), pp. 3801 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1764828">URL</a>&nbsp;</td>
+</tr>
+<tr id="6488427" class="entry">
+	<td>Takahashi, T., Kondoh, Y. &amp; Momota, H.</td>
+	<td>Classical transport of plasma particles near the separatrix of a field-reversed configuration</td>
+	<td>1999/11/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  119-A( 11), pp. 1286 - 92&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5775785" class="entry">
+	<td>Takahashi, T., Tomita, Y., Momota, H. &amp; Shabrov, N.</td>
+	<td>Collisionless pitch angle scattering of plasma ions at the edge region of a field-reversed configuration</td>
+	<td>1997/12/</td>
+	<td>Physics of Plasmas<br/>Vol.  4( 12), pp. 4301 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.872592">URL</a>&nbsp;</td>
+</tr>
+<tr id="9383095" class="entry">
+	<td>Takahashi, T., Yamada, Y., Kondoh, Y., Goto, M., Okada, T., Hirano, Y., Asai, T., Takahashi, T. &amp; Tomita, Y.</td>
+	<td>Hybrid simulation of neutral beam injection into a field-reversed configuration</td>
+	<td>2006/12/</td>
+	<td>Journal of Plasma Physics<br/>Vol.  72( 6), pp. 891 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1017/S002237780600506X">URL</a>&nbsp;</td>
+</tr>
+<tr id="5409217" class="entry">
+	<td>Takaku, Y. &amp; Hamada, S.</td>
+	<td>Rebound coefficient of collisionless gas in a rigid vessel: a model of reflection of field-reversed configuration [plasma configurations]</td>
+	<td>Sept. 1996</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  65( 9), pp. 2852 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2401354" class="entry">
+	<td>Takeuchi, N., Kondoh, Y., Shimada, T. &amp; Sugita, K.</td>
+	<td>Equilibrium configurations of reverse field pinch plasma with a helical magnetic axis</td>
+	<td>1984/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  24( 11), pp. 1495 - 500&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2454728" class="entry">
+	<td>Tanjyo, M., Okada, S., Ito, Y., Kako, M., Ohi, S., Goto, S., Ishimura, T. &amp; Ito, H.</td>
+	<td>Translation experiment of a plasma with field reversed configuration</td>
+	<td>1984/10/</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  34( 1759-1781), pp. 201 - 10&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13083947" class="entry">
+	<td>Thompson, M., Douglass, J., Feng, P., Knapp, K., Luo, Y., Mendoza, R., Patel, V., Tuszewski, M. &amp; Van Drie, A.</td>
+	<td>Magnetic diagnostic suite of the C-2 field-reversed configuration experiment confinement vessel</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 709&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4731760">URL</a>&nbsp;</td>
+</tr>
+<tr id="7393820" class="entry">
+	<td>Toshiro, K. &amp; Yasushi, O.</td>
+	<td>A quantitative measurement of tilt and shift instabilities for Field-Reversed Configuration</td>
+	<td>2002/05/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  122-A( 5), pp. 515 - 16&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2752993" class="entry">
+	<td>Tukada, T., Kitamura, H. &amp; Itagaki, K.</td>
+	<td>Effect of high-frequency toroidal magnetic field on a reversed field pinch plasma configuration</td>
+	<td>1986/06/</td>
+	<td>Japanese Journal of Applied Physics, Part 2 (Letters)<br/>Vol.  25( 6), pp. 490 - 2&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3358584" class="entry">
+	<td>Tuszewski, M.</td>
+	<td>A semiempirical formation model for field-reversed configurations</td>
+	<td>1988/12/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 12), pp. 3754 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866894">URL</a>&nbsp;</td>
+</tr>
+<tr id="3347446" class="entry">
+	<td>Tuszewski, M.</td>
+	<td>Field reversed configurations</td>
+	<td>1988/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  28( 11), pp. 2033 - 92&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2334171" class="entry">
+	<td>Tuszewski, M.</td>
+	<td>Experimental study of the equilibrium of field-reversed configurations</td>
+	<td>1984/08/</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol.  26( 8), pp. 991 - 1005&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0741-3335/26/8/004">URL</a>&nbsp;</td>
+</tr>
+<tr id="2314037" class="entry">
+	<td>Tuszewski, M.</td>
+	<td>Coupling of energy and flux losses in field-reversed configurations</td>
+	<td>1984//</td>
+	<td>Comments on Plasma Physics and Controlled Fusion<br/>Vol.  8( 6), pp. 237 - 42&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1973572" class="entry">
+	<td>Tuszewski, M., Armstrong, W., Bartsch, R., Chrien, R., Cochrane, J.C., J., Kewish, R.W., J., Klingner, P., Linford, R., McKenna, K., Rej, D., Sherwood, E. &amp; Siemon, R.</td>
+	<td>Flux loss during the equilibrium phase of field-reversed configurations</td>
+	<td>1982/10/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 10), pp. 1696 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863645">URL</a>&nbsp;</td>
+</tr>
+<tr id="2675129" class="entry">
+	<td>Tuszewski, M., Armstrong, W., Chrien, R., Klingner, P., McKenna, K., Rej, D., Sherwood, E. &amp; Siemon, R.</td>
+	<td>Confinement of translated field-reversed configurations</td>
+	<td>1986/03/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 3), pp. 863 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865888">URL</a>&nbsp;</td>
+</tr>
+<tr id="3872999" class="entry">
+	<td>Tuszewski, M., Barnes, D., Chrien, R., Cobb, J., Rej, D., Siemon, R., Taggart, D. &amp; Wright, B.</td>
+	<td>Observations of tilt instabilities in field-reversed configurations of a confined plasma</td>
+	<td>1991/02/11</td>
+	<td>Physical Review Letters<br/>Vol.  66( 6), pp. 711 - 14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.66.711">URL</a>&nbsp;</td>
+</tr>
+<tr id="3828467" class="entry">
+	<td>Tuszewski, M., Barnes, G., Baron, M., Chrien, R., Hugrass, W., Klingner, P., Ng, C., Rej, D., Taggart, D., Siemon, R. &amp; Wright, B.</td>
+	<td>The n=1 rotational instability in field-reversed configurations</td>
+	<td>1990/11/</td>
+	<td>Physics of Fluids B (Plasma Physics)<br/>Vol.  2( 11), pp. 2541 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.859376">URL</a>&nbsp;</td>
+</tr>
+<tr id="3175597" class="entry">
+	<td>Tuszewski, M., Barnes, G., Chrien, R., Hugrass, W., Rej, D., Siemon, R. &amp; Wright, B.</td>
+	<td>The origin of the rotation in field-reversed configurations</td>
+	<td>1988/04/</td>
+	<td>Physics of Fluids<br/>Vol.  31( 4), pp. 946 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866780">URL</a>&nbsp;</td>
+</tr>
+<tr id="1891530" class="entry">
+	<td>Tuszewski, M. &amp; Linford, R.</td>
+	<td>Particle transport in field-reversed configurations</td>
+	<td>1982/05/</td>
+	<td>Physics of Fluids<br/>Vol.  25( 5), pp. 765 - 74&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.863831">URL</a>&nbsp;</td>
+</tr>
+<tr id="2278519" class="entry">
+	<td>Tuszewski, M. &amp; McKenna, K.</td>
+	<td>Interpretation of end-on interferometry in field-reversed configurations</td>
+	<td>1984/05/</td>
+	<td>Physics of Fluids<br/>Vol.  27( 5), pp. 1058 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.864734">URL</a>&nbsp;</td>
+</tr>
+<tr id="12768636" class="entry">
+	<td>Tuszewski, M., Smirnov, A., Thompson, M., Akhmetov, T., Ivanov, A., Voskoboynikov, R., Barnes, D., Binderbauer, M., Brown, R., Bui, D., Clary, R., Conroy, K., Deng, B., Dettrick, S., Douglass, J., Garate, E., Glass, F., Gota, H., Guo, H., Gupta, D., Gupta, S., Kinley, J., Knapp, K., Korepanov, S., Longman, A., Hollins, M., Li, X., Luo, Y., Mendoza, R., Mok, Y., Necas, A., Primavera, S., Ruskov, E., Schmitz, L., Schroeder, J., Sevier, L., Sibley, A., Song, Y., Sun, X., Trask, E., Van Drie, A., Walters, J. &amp; Wyman, M.</td>
+	<td>A new high performance field reversed configuration operating regime in the C-2 device</td>
+	<td>2012/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  19( 5), pp. 056108 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3694677">URL</a>&nbsp;</td>
+</tr>
+<tr id="12803264" class="entry">
+	<td>Tuszewski, M., Smirnov, A., Thompson, M., Korepanov, S., Akhmetov, T., Ivanov, A., Voskoboynikov, R., Schmitz, L., Barnes, D., Binderbauer, M., Brown, R., Bui, D., Clary, R., Conroy, K., Deng, B., Dettrick, S., Douglass, J., Garate, E., Glass, F., Gota, H., Guo, H., Gupta, D., Gupta, S., Kinley, J., Knapp, K., Longman, A., Hollins, M., Li, X., Luo, Y., Mendoza, R., Mok, Y., Necas, A., Primavera, S., Ruskov, E., Schroeder, J., Sevier, L., Sibley, A., Song, Y., Sun, X., Trask, E., Van Drie, A., Walters, J. &amp; Wyman, M.</td>
+	<td>Field Reversed Configuration Confinement Enhancement through Edge Biasing and Neutral Beam Injection</td>
+	<td>2012/06/22</td>
+	<td>Physical Review Letters<br/>Vol.  108( 25), pp. 255008 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.108.255008">URL</a>&nbsp;</td>
+</tr>
+<tr id="2839100" class="entry">
+	<td>Tuszewski, M. &amp; Spencer, R.</td>
+	<td>Equilibrium properties of short-field-reversed configurations</td>
+	<td>1986/11/</td>
+	<td>Physics of Fluids<br/>Vol.  29( 11), pp. 3711 - 14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.865803">URL</a>&nbsp;</td>
+</tr>
+<tr id="3586387" class="entry">
+	<td>Tuszewski, M. &amp; Wright, B.</td>
+	<td>Observation of field-reversed configurations with spheromak magnetic field profiles</td>
+	<td>1989/11/13</td>
+	<td>Physical Review Letters<br/>Vol.  63( 20), pp. 2236 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.63.2236">URL</a>&nbsp;</td>
+</tr>
+<tr id="13288037" class="entry">
+	<td>Twarog, D.</td>
+	<td>Field-Reversed Configuration Induced by a Paramagnetic Field</td>
+	<td>2013/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  41( 2), pp. 280 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2013.2240019">URL</a>&nbsp;</td>
+</tr>
+<tr id="5141420" class="entry">
+	<td>Urano, M., Ohkuma, Y., Takahashi, T., Suzuki, K. &amp; Nogi, Y.</td>
+	<td>Separatrix shape of field-reversed configurations</td>
+	<td>1995/11/</td>
+	<td>Journal of the Physical Society of Japan<br/>Vol.  64( 11), pp. 4077 - 80&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="14074536" class="entry">
+	<td>Urano, T., Watanabe, T., Mitsui, T. &amp; Takahashi, T.</td>
+	<td>Feasibility study of the poloidal current drive by axial neutral beam injection into a field-reversed configuration</td>
+	<td>2013/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  63( 1T), pp. 383 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5052645" class="entry">
+	<td>Vainshtein, D., Zelenyi, L. &amp; Neishtadt, A.</td>
+	<td>Quasi-adiabatic description of the motion of charged particles in configurations with a reversed magnetic field</td>
+	<td>1995/06/</td>
+	<td>Plasma Physics Reports<br/>Vol.  21( 6), pp. 457 - 64&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2364769" class="entry">
+	<td>Valet, J.-P. &amp; Laj, C.</td>
+	<td>Invariant and changing transitional field configurations in a sequence of geomagnetic reversals</td>
+	<td>1984/10/11</td>
+	<td>Nature<br/>Vol.  311( 5986), pp. 552 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2232769" class="entry">
+	<td>Vekshtein, G.</td>
+	<td>Loss of magnetic flux during the formation of a reversed-field plasma configuration</td>
+	<td>1983/07/</td>
+	<td>Soviet Physics - Doklady<br/>Vol.  28( 7), pp. 569 - 71&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2707281" class="entry">
+	<td>Vlases, G. &amp; Rowe, D.</td>
+	<td>Design of a translating field-reversed configuration reactor</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 116 - 35&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10128439" class="entry">
+	<td>Votroubek, G., Slough, J., Andreason, S. &amp; Pihl, C.</td>
+	<td>Formation of a stable field reversed configuration through merging</td>
+	<td>2008/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  27( 1), pp. 123 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-007-9103-4">URL</a>&nbsp;</td>
+</tr>
+<tr id="13596646" class="entry">
+	<td>Wang, H., Wang, Z., Wang, X. &amp; Wang, X.</td>
+	<td>Error-field penetration in reversed magnetic shear configurations</td>
+	<td>2013/06/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 6), pp. 062105 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4811391">URL</a>&nbsp;</td>
+</tr>
+<tr id="11387632" class="entry">
+	<td>Welch, D., Cohen, S., Genoni, T. &amp; Glasser, A.</td>
+	<td>Formation of Field-Reversed-Configuration Plasma with Punctuated-Betatron-Orbit Electrons</td>
+	<td>2010/07/02</td>
+	<td>Physical Review Letters<br/>Vol.  105( 1), pp. 015002 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.105.015002">URL</a>&nbsp;</td>
+</tr>
+<tr id="12129519" class="entry">
+	<td>Welch, D., Genoni, T., Cohen, S. &amp; Glasser, A.</td>
+	<td>Particle-in-Cell Modeling of Field Reversed Configuration Formation by Odd-parity Rotating Magnetic Fields</td>
+	<td>2010/12/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  29( 6), pp. 584 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-010-9315-x">URL</a>&nbsp;</td>
+</tr>
+<tr id="2985169" class="entry">
+	<td>Werley, K.</td>
+	<td>One-and-a-quarter-dimensional transport modeling of the field-reversed configuration</td>
+	<td>1987/07/</td>
+	<td>Physics of Fluids<br/>Vol.  30( 7), pp. 2129 - 38&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.866147">URL</a>&nbsp;</td>
+</tr>
+<tr id="6567633" class="entry">
+	<td>Willis, D., Holder, A. &amp; Davis, C.</td>
+	<td>Possible configurations of the magnetic field in the outer magnetosphere during geomagnetic polarity reversals</td>
+	<td>2000/01/</td>
+	<td>Annales Geophysicae<br/>Vol.  18( 1), pp. 11 - 27&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10128437" class="entry">
+	<td>Woodruff, S., Macnab, A. &amp; Mattor, N.</td>
+	<td>Adiabatic compression of a doublet field reversed configuration (FRC)</td>
+	<td>2008/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  27( 1), pp. 128 - 33&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-007-9101-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="9541393" class="entry">
+	<td>Woodruff, S., Votroubek, G., Slough, J. &amp; Ziemba, T.</td>
+	<td>Physics of formation, acceleration, reconnection and compression of two field reversed configurations</td>
+	<td>2007/06/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  26( 1-2), pp. 243 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-006-9069-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="3772153" class="entry">
+	<td>Wright, B.</td>
+	<td>Field reversed configurations and spheromaks</td>
+	<td>Sept. 1990</td>
+	<td>Nuclear Fusion<br/>Vol.  30( 9), pp. 1739 - 60&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1961A18876" class="entry">
+	<td>Wright, J., Medford, R. &amp; Chambers, B.</td>
+	<td>Equilibrium configuration of the plasma in theta discharges with reversed trapped magnetic fields</td>
+	<td>1961/10/</td>
+	<td>Journal of Nuclear Energy. C. Plasma Physics, Accelerators, Thermonuclear Research<br/>Vol. 3(4), pp. 242 - 245&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6526697" class="entry">
+	<td>Yagi, Y., Maejima, Y., Zollino, G., Senanni, G., Sakakita, H., Sekine, S., Hirano, Y. &amp; Shimada, T.</td>
+	<td>Effects of shell configuration on the performance of reversed field pinch plasmas</td>
+	<td>2000/02/</td>
+	<td>Nuclear Fusion<br/>Vol.  40( 2), pp. 223 - 44&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/40/2/307">URL</a>&nbsp;</td>
+</tr>
+<tr id="6630652" class="entry">
+	<td>Yamanaka, K., Yoshimura, S., Kitano, K., Okada, S. &amp; Goto, S.</td>
+	<td>Heating experiment of field-reversed configuration plasma by low-frequency magnetic pulse</td>
+	<td>2000/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  7( 7), pp. 2755 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.874173">URL</a>&nbsp;</td>
+</tr>
+<tr id="9545395" class="entry">
+	<td>Yamaura, H., Takahashi, T., Kondoh, Y. &amp; Asai, T.</td>
+	<td>Rotation of a field-reversed configuration due to resistive flux decay</td>
+	<td>2007/02/</td>
+	<td>Fusion Science and Technology<br/>Vol.  51( 2T), pp. 373 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="14053327" class="entry">
+	<td>Yambe, K., Inomoto, M. &amp; Okada, S.</td>
+	<td>Influence of bias magnetic field configuration on equilibrium of field-reversed configuration plasma sustained by rotating magnetic field</td>
+	<td>2013/05/</td>
+	<td>Fusion Science and Technology<br/>Vol.  63( 1T), pp. 147 - 51&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10687232" class="entry">
+	<td>Yambe, K., Inomoto, M., Okada, S., Kobayashi, Y. &amp; Asai, T.</td>
+	<td>Effects of internal structure on equilibrium of field-reversed configuration plasma sustained by rotating magnetic field</td>
+	<td>Sept. 2008</td>
+	<td>Physics of Plasmas<br/>Vol.  15( 9), pp. 092508 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2982493">URL</a>&nbsp;</td>
+</tr>
+<tr id="7304083" class="entry">
+	<td>Yoshimura, S., Shinagawa, K., Sugimoto, S., Kitano, K., Okada, S. &amp; Goto, S.</td>
+	<td>Computer tomography of axially compressed field reversed configuration plasma on the FIX device</td>
+	<td>2002/02/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  30( 1), pp. 60 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2002.1003923">URL</a>&nbsp;</td>
+</tr>
+<tr id="9556753" class="entry">
+	<td>Yoshimura, S., Sugimoto, S. &amp; Okada, S.</td>
+	<td>Investigation of translation of field reversed configuration plasma using computer tomography data at two different cross-sections</td>
+	<td>2007/02/</td>
+	<td>Fusion Science and Technology<br/>Vol.  51( 2T), pp. 376 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6721186" class="entry">
+	<td>Yoshimura, S., Yamanaka, K., Matsumoto, T., Okada, S. &amp; Goto, S.</td>
+	<td>Heating of field-reversed configuration plasma by applying fast rising magnetic pulse</td>
+	<td>2000/04/15</td>
+	<td>Technology Reports of the Osaka University<br/>Vol.  50( 2366-2377), pp. 1 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7452598" class="entry">
+	<td>Yumi, H., Toshiki, T. &amp; Yoshiomi, K.</td>
+	<td>Classification of particle orbits and related stochasticity of plasma ion motion in a field-reversed configuration with D-3He advanced fuel</td>
+	<td>Sept. 2002</td>
+	<td>Nuclear Fusion<br/>Vol.  42( 9), pp. 1075 - 84&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/42/9/305">URL</a>&nbsp;</td>
+</tr>
+<tr id="8428451" class="entry">
+	<td>Zhang, S., Intrator, T., Wurden, G., Waganaar, W., Taccetti, J., Renneke, R., Grabowski, C. &amp; Ruden, E.</td>
+	<td>Confinement analyses of the high-density field-reversed configuration plasma in the field-reversed configuration experiment with a liner</td>
+	<td>2005/05/</td>
+	<td>Physics of Plasmas<br/>Vol.  12( 5), pp. 52513 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1899648">URL</a>&nbsp;</td>
+</tr>
+<tr id="8982595" class="entry">
+	<td>Zhang, S., Wurden, G., Intrator, T., Ruden, E., Waganaar, W., Grabowski, C., Renneke, R. &amp; Degnan, J.</td>
+	<td>High-density field-reversed configuration plasma for magnetized target fusion</td>
+	<td>2006/04/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  34( 2), pp. 223 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2006.872164">URL</a>&nbsp;</td>
+</tr>
+<tr id="2707279" class="entry">
+	<td>Zubrin, R.</td>
+	<td>A deuterium-tritium ignition ramp for an advanced fuel field-reversed configuration reactor</td>
+	<td>1986/01/</td>
+	<td>Fusion Technology<br/>Vol.  9( 1), pp. 97 - 100&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 28/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->
