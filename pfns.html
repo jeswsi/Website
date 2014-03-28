@@ -1,0 +1,785 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Pulse Forming Network references for fusion, plasma energy, and physics labs.">
+<title>Pulse Forming Network JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="6202906" class="entry">
+	<td>cang, S.J., bo, Z.X., zhi, L.G., xing, S.X., ming, W.L., jie, D.Z. &amp; chang, P.J.</td>
+	<td>Long pulse electron beam generator based on Tesla transformer and pulse forming network</td>
+	<td>2008</td>
+	<td>High Power Particle Beams (BEAMS), 2008 17th International Conference on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="179813" class="entry">
+	<td>Alexeev, A., Baltakhanov, A. &amp; Bondaletov, V.</td>
+	<td>Pulse forming network for railgun launcher</td>
+	<td>1992</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 28(6), pp. 3372-3379&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.179813">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6635139" class="entry">
+	<td>Anzai, N., Tachinami, F., Takewaki, D., Sasaki, T., Kikuchi, T., Aso, T. &amp; Harada, N.</td>
+	<td>Study on pulse power supply by using pulse forming network modules toward intense X-ray source</td>
+	<td>2013</td>
+	<td>Plasma Science (ICOPS), 2013 Abstracts IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2013.6635139">DOI</a> &nbsp;</td>
+</tr>
+<tr id="767445" class="entry">
+	<td>Baker, M., Stanford, E., Nunnally, W., Barrett, B. &amp; Thompson, J.</td>
+	<td>The design and performance of a modular pulse forming network system for a railgun simulator experiment</td>
+	<td>1989</td>
+	<td>Pulsed Power Conference, 1989. 7th, pp. 147-150&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1989.767445">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5770915" class="entry">
+	<td>Balathandayuthapani, S., Edrington, C. &amp; Henry, S.</td>
+	<td>Study on converter topologies for capacitive pulse forming network and energy storage units in electric ship</td>
+	<td>2011</td>
+	<td>Electric Ship Technologies Symposium (ESTS), 2011 IEEE, pp. 459-462&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ESTS.2011.5770915">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1441940" class="entry">
+	<td>Barak, M.</td>
+	<td>Optimal design of pulse forming networks and flashlamps for thermal flash processes</td>
+	<td>2004</td>
+	<td>Advanced Thermal Processing of Semiconductors, 2004. RTP 2004. 12th IEEE International Conference on, pp. 79-88&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/RTP.2004.1441940">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4216184" class="entry">
+	<td>Barnes, M., Fowler, T., Metzmacher, K. &amp; Sermeus, L.</td>
+	<td>Pulse Forming Network Conceptual Design for the Proposed PS Multi-Turn Extraction System</td>
+	<td>2006</td>
+	<td>Power Modulator Symposium, 2006. Conference Record of the 2006 Twenty-Seventh International, pp. 260-263&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2006.365232">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4033022" class="entry">
+	<td>Barshaw, E.J., White, J., Danielson, G., Chait, M.J., Frazier, G., Dixon, B., Marinos, B. &amp; Milner, D.</td>
+	<td>Integration and Test of a Second Generation Dual Purpose Pulse Forming Network Into the P amp;E HWIL SIL</td>
+	<td>2007</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 43(1), pp. 226-229&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TMAG.2006.887679">DOI</a> &nbsp;</td>
+</tr>
+<tr id="733397" class="entry">
+	<td>Carey, W., Barrett, B., Milner, D., Nunnally, W. &amp; Dillon, W.</td>
+	<td>An Electrolytic Capacitor Based Pulse Forming Network For Maximizing Peak Current In A Railgun Simulator</td>
+	<td>1991</td>
+	<td>Pulsed Power Conference, 1991. Digest of Technical Papers. Eighth IEEE International, pp. 778-781&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1991.733397">DOI</a> &nbsp;</td>
+</tr>
+<tr id="195699" class="entry">
+	<td>Carey, W., Barrett, B., Nunnally, W., Dillon, W. &amp; Eubank, E.</td>
+	<td>A pulse forming network design for blocked-bore plasma armature experiments</td>
+	<td>1993</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 29(1), pp. 915-918&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.195699">DOI</a> &nbsp;</td>
+</tr>
+<tr id="195700" class="entry">
+	<td>Chang, D., Long, B., Chiu, D., King, R. &amp; Hershkowitz, J.</td>
+	<td>A pulse forming network and test fixture for screening electrothermal chemical candidate propellants</td>
+	<td>1993</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 29(1), pp. 919-922&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.195700">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4906541" class="entry">
+	<td>Ciezki, J. &amp; Salem, T.E.</td>
+	<td>Investigation of the turn-off characteristics of a GTO thyristor in an inductive-based pulse forming network</td>
+	<td>2009</td>
+	<td>Electric Ship Technologies Symposium, 2009. ESTS 2009. IEEE, pp. 388-392&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ESTS.2009.4906541">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6690137" class="entry">
+	<td>Clementson, J., Rahbarnia, K., Grulke, O. &amp; Klinger, T.</td>
+	<td>Design of A, B, and C Pulse Forming Networks using the VINPFN Application</td>
+	<td>2013</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. PP(99), pp. 1-1&nbsp;</td>
+	<td>other</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2013.2295245">DOI</a> &nbsp;</td>
+</tr>
+<tr id="767437" class="entry">
+	<td>Cravey, W.R., Burkes, T. &amp; Mcduff, G.</td>
+	<td>Design of repetitive very high voltage pulse forming networks of short duration</td>
+	<td>1989</td>
+	<td>Pulsed Power Conference, 1989. 7th, pp. 116-119&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1989.767437">DOI</a> &nbsp;</td>
+</tr>
+<tr id="596493" class="entry">
+	<td>Del Guercio, M., Stobie, I., Katulka, G. &amp; Oberle, W.</td>
+	<td>A pulse forming network design for electrothermal-chemical combustion characterization of solid propellants</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1995. Digest of Technical Papers., Tenth IEEE International, pp. 279-285 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1995.596493">DOI</a> &nbsp;</td>
+</tr>
+<tr id="364733" class="entry">
+	<td>Dick, W., Goldman, E. &amp; Johnson, R.</td>
+	<td>Analysis of components in advanced capacitive pulse forming networks for electric guns</td>
+	<td>1995</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 31(1), pp. 32-37&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.364733">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1556697" class="entry">
+	<td>Engel, T. &amp; Nunnally, W.</td>
+	<td>Design and operation of a sequentially-fired pulse forming network for non-linear loads</td>
+	<td>2005</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 33(6), pp. 2060-2065&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2005.860110">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1433528" class="entry">
+	<td>Engel, T. &amp; Nunnally, W.</td>
+	<td>Capacitor-based multiple-module sequentially-fired pulse forming network for nonlinear loads</td>
+	<td>2004</td>
+	<td>Power Modulator Symposium, 2004 and 2004 High-Voltage Workshop. Conference Record of the Twenty-Sixth International, pp. 145-148&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2004.1433528">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1399632" class="entry">
+	<td>Filanovsky, I. &amp; Dong, X.</td>
+	<td>Pulse-forming reactance network shapes a quasi-rectangular pulse from sinusoidal voltage</td>
+	<td>2004</td>
+	<td>Electronics, Circuits and Systems, 2004. ICECS 2004. Proceedings of the 2004 11th IEEE International Conference on, pp. 133-136&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICECS.2004.1399632">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1288424" class="entry">
+	<td>Filanovsky, I. &amp; Matkhanov, P.N.</td>
+	<td>Synthesis of a pulse-forming reactance network shaping a quasi-rectangular delayed output pulse</td>
+	<td>2004</td>
+	<td>Circuits and Systems II: Express Briefs, IEEE Transactions on<br/>Vol. 51(4), pp. 190-194&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCSII.2004.824052">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1205513" class="entry">
+	<td>Filanovsky, I. &amp; Matkhanov, P.N.</td>
+	<td>Synthesis of a pulse-forming reactance network to shape a delayed quasi-rectangular pulse</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Circuits and Systems, 2003. ISCAS '03. Proceedings of the 2003 International Symposium on, pp. I-113-I-116 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISCAS.2003.1205513">DOI</a> &nbsp;</td>
+</tr>
+<tr id="975461" class="entry">
+	<td>Fireman, J.</td>
+	<td>Computer simulation of a pulse-forming network</td>
+	<td>2001</td>
+	<td>Instrumentation Measurement Magazine, IEEE<br/>Vol. 4(4), pp. 20-22&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/5289.975461">DOI</a> &nbsp;</td>
+</tr>
+<tr id="513348" class="entry">
+	<td>Fish, S.</td>
+	<td>CAPACITOR THERMAL MANAGEMENT IN REP-RATED PULSE FORMING NETWORKS</td>
+	<td>1993</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1993. Digest of Technical Papers., Ninth IEEE International, pp. 352-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1993.513348">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1433590" class="entry">
+	<td>Gaetz, R.</td>
+	<td>Design and analysis of a pulse-width-modulated power supply for charging a customized pulse forming network</td>
+	<td>2004</td>
+	<td>Power Modulator Symposium, 2004 and 2004 High-Voltage Workshop. Conference Record of the Twenty-Sixth International, pp. 375-377&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2004.1433590">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1135904" class="entry">
+	<td>Graydon, A.</td>
+	<td>The Application of Pulse-Forming Networks</td>
+	<td>1957</td>
+	<td>Component Parts, IRE Transactions on<br/>Vol. 4(1), pp. 7-13&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCP.1957.1135904">DOI</a> &nbsp;</td>
+</tr>
+<tr id="195710" class="entry">
+	<td>Gully, J., Pratap, S., Headifen, R.N., Marinos, C., Dick, W. &amp; Goodel, B.</td>
+	<td>Investigation of an alternator charged pulse forming network with flywheel energy storage</td>
+	<td>1993</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 29(1), pp. 969-974&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.195710">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1083392" class="entry">
+	<td>Halpern, P.</td>
+	<td>Trigonometric Pulse-Forming Networks Revisited</td>
+	<td>1972</td>
+	<td>Circuit Theory, IEEE Transactions on<br/>Vol. 19(1), pp. 81-86&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCT.1972.1083392">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084196" class="entry">
+	<td>Huenefeldt, S., Engel, T. &amp; Nunnally, W.</td>
+	<td>A 750 KJ Computer Controlled Sequentially-Fired Pulse Forming Network for a Helical Coil Electromagnetic Launcher</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 237-240&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300569">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1082424" class="entry">
+	<td>Jess, J. &amp; Schussler, H.</td>
+	<td>A Class of Pulse-Forming Networks</td>
+	<td>1965</td>
+	<td>Circuit Theory, IEEE Transactions on<br/>Vol. 12(2), pp. 296-299&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCT.1965.1082424">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1082451" class="entry">
+	<td>Jess, J. &amp; Schussler, H.</td>
+	<td>On the Design of Pulse-Forming Networks</td>
+	<td>1965</td>
+	<td>Circuit Theory, IEEE Transactions on<br/>Vol. 12(3), pp. 393-400&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCT.1965.1082451">DOI</a> &nbsp;</td>
+</tr>
+<tr id="492644" class="entry">
+	<td>Kim, J.M.S.</td>
+	<td>CRITICAL ASSESSMENT OF PULSE-FORMING NETWORKS USED IN RESONANT-TYPE RING MAGNET POWER SUPPLIES</td>
+	<td>1992</td>
+	<td>Power Modulator Symposium, 1992. Conference Record of the 1992 Twentieth, pp. 360-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.1992.492644">DOI</a> &nbsp;</td>
+</tr>
+<tr id="896202" class="entry">
+	<td>Lazard, C., Bromborsky, A., Conrad, D. &amp; Shaheen, W.</td>
+	<td>Dual polarity pulse forming network testbed</td>
+	<td>2000</td>
+	<td>Power Modulator Symposium, 2000. Conference Record of the 2000 Twenty-Fourth International, pp. 203-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2000.896202">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4657671" class="entry">
+	<td>Lin, Z., Han, Y., Dai, L., Zou, L. &amp; Dong, M.</td>
+	<td>Setup of a 500kJ Compact Pulse Forming Network used for EMG Investigation</td>
+	<td>2008</td>
+	<td>Electromagnetic Launch Technology, 2008 14th Symposium on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ELT.2008.111">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4345554" class="entry">
+	<td>Ling, D., Fuchang, L., Yongxia, H., Bo, P. &amp; Liang, M.</td>
+	<td>Development of a 500kJ Pulsed Forming Network for EML System</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 248-248&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4345554">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1082714" class="entry">
+	<td>Mathis, H. &amp; Mathis, R.</td>
+	<td>Darlington Pulse-Forming Network</td>
+	<td>1967</td>
+	<td>Circuit Theory, IEEE Transactions on<br/>Vol. 14(3), pp. 332-335&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCT.1967.1082714">DOI</a> &nbsp;</td>
+</tr>
+<tr id="560059" class="entry">
+	<td>Musolino, A., Raugi, M. &amp; Tellini, B.</td>
+	<td>Pulse forming network optimal design for the power supply of EML launchers</td>
+	<td>1997</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 33(1), pp. 480-483&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.560059">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6191618" class="entry">
+	<td>Nunnally, C., Lara, M., Mayes, J., Nunnally, W. &amp; Kohlenberg, D.</td>
+	<td>A compact 700-kV erected pulse forming network for HPM applications</td>
+	<td>2011</td>
+	<td>Pulsed Power Conference (PPC), 2011 IEEE, pp. 1372-1376&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2011.6191618">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4154892" class="entry">
+	<td>Nunnally, W., Huenefeldt, S. &amp; Engel, T.</td>
+	<td>Performance and Scalability of MJ Sequentially Fired Pulse Forming Networks for Linear and Nonlinear Loads</td>
+	<td>2007</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 35(2), pp. 484-490&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2007.892577">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4216225" class="entry">
+	<td>Nunnally, W., Huenefeldt, S. &amp; Engel, T.</td>
+	<td>Results from a 750 kJ Computer Controlled Sequentially-Fired Pulse Forming Network</td>
+	<td>2006</td>
+	<td>Power Modulator Symposium, 2006. Conference Record of the 2006 Twenty-Seventh International, pp. 419-422&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2006.365273">DOI</a> &nbsp;</td>
+</tr>
+<tr id="825502" class="entry">
+	<td>O'Loughlin, J. &amp; Loree, D.</td>
+	<td>Synthesized pulse forming networks for long pulse high duty cycle magnetron or other type loads</td>
+	<td>1999</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1999. Digest of Technical Papers. 12th IEEE International, pp. 429-432 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1999.825502">DOI</a> &nbsp;</td>
+</tr>
+<tr id="733292" class="entry">
+	<td>Page, K.J. &amp; Zucker, O.S.F.</td>
+	<td>Inverse Saturable Pulse Forming Networks For Receiver Protection</td>
+	<td>1991</td>
+	<td>Pulsed Power Conference, 1991. Digest of Technical Papers. Eighth IEEE International, pp. 302-305&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1991.733292">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4159293" class="entry">
+	<td>Palaniappan, R., Abrol, R.K., Datta, S. &amp; Vithayathil, J.</td>
+	<td>Modified McMurray Inverter with Pulse Forming Network Commutation Circuits</td>
+	<td>1977</td>
+	<td>Industrial Electronics and Control Instrumentation, IEEE Transactions on<br/>Vol. IECI-24(1), pp. 66-73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TIECI.1977.351444">DOI</a> &nbsp;</td>
+</tr>
+<tr id="72980" class="entry">
+	<td>Petter, J.</td>
+	<td>Improved high voltage coax for antiproton source kicker pulse forming networks and pulse transmission</td>
+	<td>1989</td>
+	<td>Particle Accelerator Conference, 1989. Accelerator Science and Technology., Proceedings of the 1989 IEEE, pp. 1951-1953 vol.3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PAC.1989.72980">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5268772" class="entry">
+	<td>Rakovich, B., Krstich, D. &amp; Popovich, M.</td>
+	<td>Pulse-forming networks using generalized Laguerre polynomials</td>
+	<td>1979</td>
+	<td>Radio and Electronic Engineer<br/>Vol. 49(3), pp. 157-164&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ree.1979.0030">DOI</a> &nbsp;</td>
+</tr>
+<tr id="26236" class="entry">
+	<td>Ranon, P.M., Hall, D.J., O'Loughlin, J., Schlicher, R., Baker, W., Dietz, D. &amp; Scott, M.</td>
+	<td>Synthesis of droop compensated pulse forming networks for generating flat top, high energy pulses into variable loads from pulsed transformers</td>
+	<td>1988</td>
+	<td>Power Modulator Symposium, 1988. IEEE Conference Record of the 1988 Eighteenth, pp. 54-61&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.1988.26236">DOI</a> &nbsp;</td>
+</tr>
+<tr id="201033" class="entry">
+	<td>Ranon, P.M., O'Loughlin, J. &amp; Chen, Y.</td>
+	<td>Spatially transformed pulse forming networks</td>
+	<td>1990</td>
+	<td>Power Modulator Symposium, 1990., IEEE Conference Record of the 1990 Nineteenth, pp. 69-73&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.1990.201033">DOI</a> &nbsp;</td>
+</tr>
+<tr id="767436" class="entry">
+	<td>Ranon, P.M., Schlicher, R., O'Loughlin, J., Hall, D.J., Weyn, M.L., Pelletier, P., Sidler, J., Baker, W. &amp; Scott, M.</td>
+	<td>Droop compensated pulse forming network driven pulsed transformer design</td>
+	<td>1989</td>
+	<td>Pulsed Power Conference, 1989. 7th, pp. 113-115&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1989.767436">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1480224" class="entry">
+	<td>Roark, R., Parten, M., Masten, L. &amp; Burkes, T.</td>
+	<td>Pulse-forming networks with time-varying or nonlinear resistive loads</td>
+	<td>1979</td>
+	<td>Electron Devices, IEEE Transactions on<br/>Vol. 26(10), pp. 1541-1544&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/T-ED.1979.19646">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1008763" class="entry">
+	<td>da Rocha, P., de Andrade Martins, M. &amp; dos Santos, J.</td>
+	<td>Characterization and implementation of a pulse forming network for a surveillance radar</td>
+	<td>2001</td>
+	<td><br/>Vol. 1Microwave and Optoelectronics Conference, 2001. IMOC 2001.Proceedings of the 2001 SBMO/IEEE MTT-S International, pp. 269-272 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SBMOMO.2001.1008763">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1001897" class="entry">
+	<td>Rose, E.A., Dalmas, D.A., Downing, J.N. &amp; Temple, R.</td>
+	<td>Testing pulse forming networks with DARHT accelerator cells</td>
+	<td>2001</td>
+	<td><br/>Vol. 2Pulsed Power Plasma Science, 2001. PPPS-2001. Digest of Technical Papers, pp. 1700-1703 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.1001897">DOI</a> &nbsp;</td>
+</tr>
+<tr id="961337" class="entry">
+	<td>Rose, E., Dalmas, D., Downing, J. &amp; Temple, R.</td>
+	<td>Testing pulse forming networks with DARHT accelerator cells</td>
+	<td>2001</td>
+	<td>Pulsed Power Plasma Science, 2001. IEEE Conference Record - Abstracts, pp. 526-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.961337">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1126883" class="entry">
+	<td>Ross, G.</td>
+	<td>An Improved Pulse-Forming Network for the Generation of Phase-Coherent Microwave Signals (Correspondence)</td>
+	<td>1969</td>
+	<td>Microwave Theory and Techniques, IEEE Transactions on<br/>Vol. 17(1), pp. 52-54&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TMTT.1969.1126883">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5004275" class="entry">
+	<td>Scholfield, D.W., Butcher, M.D., Hilko, B. &amp; Dorr, G.</td>
+	<td>Vacuum switch performance in a 1.2 nbsp;MJ pulse forming network</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(2), pp. 024703-024703-5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2839916">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4233146" class="entry">
+	<td>SchÃ¿ssler, W.</td>
+	<td>Pulse-forming networks</td>
+	<td>1966</td>
+	<td>Electronics Letters<br/>Vol. 2(3), pp. 92-&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/el:19660074">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6325052" class="entry">
+	<td>Sheshadri, K., Manas, M., Raj, S., Ramesh, N. &amp; Sheshadri, T.S.</td>
+	<td>An analytical formulation of the copper load solid to plasma transition problem when driven by a pulse forming network</td>
+	<td>2012</td>
+	<td>Electromagnetic Launch Technology (EML), 2012 16th International Symposium on, pp. 1-6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/EML.2012.6325052">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1277719" class="entry">
+	<td>Smith, P. &amp; Ashbourn, J.</td>
+	<td>The natural frequencies of uniform LC ladder pulse-forming networks</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 319-322 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277719">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1002148" class="entry">
+	<td>Smith, P. &amp; Srivastava, M.P.</td>
+	<td>The transient behaviour of uniform LC pulse forming networks</td>
+	<td>2001</td>
+	<td><br/>Vol. 1Pulsed Power Plasma Science, 2001. PPPS-2001. Digest of Technical Papers, pp. 524-527 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.1002148">DOI</a> &nbsp;</td>
+</tr>
+<tr id="961258" class="entry">
+	<td>Smith, P. &amp; Srivastava, M.P.</td>
+	<td>The transient behaviour of uniform LC pulse forming networks</td>
+	<td>2001</td>
+	<td>Pulsed Power Plasma Science, 2001. IEEE Conference Record - Abstracts, pp. 478-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.961258">DOI</a> &nbsp;</td>
+</tr>
+<tr id="738435" class="entry">
+	<td>Spahn, E., Buderer, G. &amp; Wenning, W.</td>
+	<td>A compact pulse forming network, based on semiconducting switches, for electric gun applications</td>
+	<td>1999</td>
+	<td>Magnetics, IEEE Transactions on<br/>Vol. 35(1), pp. 378-382&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/20.738435">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5175289" class="entry">
+	<td>Su, J., Zhang, X., Liu, G., Song, X., Pan, Y., Wang, L., Peng, J. &amp; Ding, Z.</td>
+	<td>A Long-Pulse Generator Based on Tesla Transformer and Pulse-Forming Network</td>
+	<td>2009</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 37(10), pp. 1954-1958&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2009.2025278">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1603846" class="entry">
+	<td>Tan, A.E.C., Chia, M.Y.W. &amp; Leong, S.-W.</td>
+	<td>Sub-nanosecond pulse-forming network on SiGe BiCMOS for UWB communications</td>
+	<td>2006</td>
+	<td>Microwave Theory and Techniques, IEEE Transactions on<br/>Vol. 54(3), pp. 1019-1024&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TMTT.2006.869723">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4168234" class="entry">
+	<td>Tian, B., Zhang, Y.-S. &amp; Wang, C.Y.</td>
+	<td>Impulse Generator Using UWB Pulse Forming Network</td>
+	<td>2006</td>
+	<td>Antennas, Propagation EM Theory, 2006. ISAPE '06. 7th International Symposium on, pp. 1-3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISAPE.2006.353573">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1135750" class="entry">
+	<td>Trinkaus, J.</td>
+	<td>Pulse-Forming Networks</td>
+	<td>1956</td>
+	<td>Component Parts, IRE Transactions on<br/>Vol. 3(2), pp. 63-66&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCP.1956.1135750">DOI</a> &nbsp;</td>
+</tr>
+<tr id="821856" class="entry">
+	<td>Van Der Merwe, J.B. &amp; du T.Mouton, H.</td>
+	<td>Solid state opening switch requirements for standard inductive storage pulse forming networks</td>
+	<td>1999</td>
+	<td><br/>Vol. 2Africon, 1999 IEEE, pp. 725-730 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/AFRCON.1999.821856">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4346101" class="entry">
+	<td>White, J., Danielson, G., Paschen, J., Barshaw, E.J., Frazier, G. &amp; Dixon, B.</td>
+	<td>Integration and Test of a 2nd Generation Dual Purpose Pulse Forming Network into the P amp;E HWIL SIL</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 795-795&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4346101">DOI</a> &nbsp;</td>
+</tr>
+<tr id="733252" class="entry">
+	<td>Wofford, M., Baker, M. &amp; Day, M.</td>
+	<td>Design, Simulation, And Testing Of A Pulse Forming Network- Transformer Power Supply For The Texas Tech Railgun</td>
+	<td>1991</td>
+	<td>Pulsed Power Conference, 1991. Digest of Technical Papers. Eighth IEEE International, pp. 138-140&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1991.733252">DOI</a> &nbsp;</td>
+</tr>
+<tr id="514016" class="entry">
+	<td>Young, C.M.</td>
+	<td>PULSE FORMING NETWORKS WHICH PRODUCE MULTIPLE PULSES</td>
+	<td>1993</td>
+	<td><br/>Vol. 2Pulsed Power Conference, 1993. Digest of Technical Papers., Ninth IEEE International, pp. 695-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1993.514016">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6700873" class="entry">
+	<td>Zhang, H., Yang, J., Lin, J. &amp; Yang, X.</td>
+	<td>A compact bipolar pulse-forming network-Marx generator based on pulse transformers</td>
+	<td>2013</td>
+	<td>Review of Scientific Instruments<br/>Vol. 84(11), pp. 114705-114705-8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4828793">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5748884" class="entry">
+	<td>Zhang, L., Gu, C., Li, M., Li, J. &amp; Yang, L.</td>
+	<td>Robust Design of Pulse Forming Network with Nonlinear Resistive Loads</td>
+	<td>2011</td>
+	<td>Power and Energy Engineering Conference (APPEEC), 2011 Asia-Pacific, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APPEEC.2011.5748884">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

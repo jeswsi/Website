@@ -1,0 +1,521 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Marx Generator references for fusion, plasma energy, and physics labs.">
+<title>Marx Generator JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="1433558" class="entry">
+	<td>Casey, J., Arntz, F., Gaudreau, M. &amp; Kempkes, M.</td>
+	<td>Solid-state Marx bank modulator for the next linear collider</td>
+	<td>2004</td>
+	<td>Power Modulator Symposium, 2004 and 2004 High-Voltage Workshop. Conference Record of the Twenty-Sixth International, pp. 257-260&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2004.1433558">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1277791" class="entry">
+	<td>Casey, J., Arntz, F., Gaudreau, M. &amp; Kempkes, M.</td>
+	<td>Solid-state Marx bank modulator for the next linear collider</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 641-644 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277791">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4743595" class="entry">
+	<td>Casey, J., Ciprian, R., Roth, I., Kempkes, M., Gaudreau, M. &amp; Arntz, F.</td>
+	<td>Marx Bank Technology for Accelerators and Colliders</td>
+	<td>2008</td>
+	<td>IEEE International Power Modulators and High Voltage Conference, Proceedings of the 2008, pp. 124-127&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMC.2008.4743595">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4996022" class="entry">
+	<td>Chatterjee, A., Mallik, K. &amp; Oak, S.</td>
+	<td>The principle of operation of the avalanche transistor-based Marx bank circuit: A new perspective</td>
+	<td>1998</td>
+	<td>Review of Scientific Instruments<br/>Vol. 69(5), pp. 2166-2170&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1148917">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1277767" class="entry">
+	<td>Cooper, R., Ennis, J., Gratza, W.J., Miller, R., Lam, S.K. &amp; Sincerny, P.</td>
+	<td>100 kV capacitor development for fast Marx generators</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 530-533 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277767">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084444" class="entry">
+	<td>Cooper, R., Ennis, J. &amp; Smith, D.L.</td>
+	<td>ZR Marx Capacitor Life Test and Production Statistics</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1219-1222&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300574">DOI</a> &nbsp;</td>
+</tr>
+<tr id="825427" class="entry">
+	<td>Cooper, R., MacDougall, F., Ennis, J., Cochrane, J.C., Reass, W. &amp; Parsons, W.</td>
+	<td>High energy, low inductance, high current fiberglass energy storage capacitor for the Atlas Machine Marx modules</td>
+	<td>1999</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1999. Digest of Technical Papers. 12th IEEE International, pp. 122-125 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1999.825427">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084435" class="entry">
+	<td>Giesselmann, M. &amp; McHale, B.</td>
+	<td>Rapid Capacitor Charger for 10 HZ Operation of a Low-Inductance Compact Marx Generator</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1184-1187&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300549">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4216273" class="entry">
+	<td>Giesselmann, M., McHale, B. &amp; Neuber, A.</td>
+	<td>Rapid Capacitor Chargers for Rep-Rated Operation of Low-Inductance Compact Marx Generators</td>
+	<td>2006</td>
+	<td>Power Modulator Symposium, 2006. Conference Record of the 2006 Twenty-Seventh International, pp. 588-591&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2006.365321">DOI</a> &nbsp;</td>
+</tr>
+<tr id="18778" class="entry">
+	<td>Giri, D. &amp; Baum, C.</td>
+	<td>Theoretical considerations for optimal positioning of peaking capacitor arms about a Marx generator parallel to a ground plane</td>
+	<td>1989</td>
+	<td>Electromagnetic Compatibility, IEEE Transactions on<br/>Vol. 31(2), pp. 117-124&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/15.18778">DOI</a> &nbsp;</td>
+</tr>
+<tr id="492603" class="entry">
+	<td>Grimes, M. &amp; Owen, T.</td>
+	<td>A HIGH-REPETITION RATE, SOLID-STATE, MARX-BANK PULSE GENERATOR FOR GEOPHYSICAL INSTRUMENTATION</td>
+	<td>1992</td>
+	<td>Power Modulator Symposium, 1992. Conference Record of the 1992 Twentieth, pp. 181-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.1992.492603">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4983738" class="entry">
+	<td>Jacoby, B. &amp; York, T.</td>
+	<td>High voltage SCR trigger circuit utilizing disc capacitors in a Marx array</td>
+	<td>1980</td>
+	<td>Review of Scientific Instruments<br/>Vol. 51(7), pp. 885-886&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1136351">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5958442" class="entry">
+	<td>Kemp, M., Burkhart, C. &amp; Tang, T.</td>
+	<td>Lifetime tests on a high ohms/square metalized high crystalline polypropylene film capacitor with application to a Marx modulator</td>
+	<td>2010</td>
+	<td>Power Modulator and High Voltage Conference (IPMHVC), 2010 IEEE International, pp. 647-650&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMHVC.2010.5958442">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4440376" class="entry">
+	<td>Kempkes, M., Roth, I., Gaudreau, M., Arntz, F. &amp; Casey, J.</td>
+	<td>Marx Bank Technology for the International linear collider</td>
+	<td>2007</td>
+	<td>Particle Accelerator Conference, 2007. PAC. IEEE, pp. 2590-2592&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PAC.2007.4440376">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5011459" class="entry">
+	<td>LeChien, K. &amp; Gahl, J.</td>
+	<td>Investigation of a multichanneling, multigap Marx bank switch</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(1), pp. 174-178&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1630834">DOI</a> &nbsp;</td>
+</tr>
+<tr id="106262" class="entry">
+	<td>Liou, R., Figueroa, H., Hsu, Y., Kirkman, G. &amp; Gundersen, M.</td>
+	<td>An optically triggered, glow switch Marx bank</td>
+	<td>1990</td>
+	<td>Electron Devices, IEEE Transactions on<br/>Vol. 37(6), pp. 1591-1593&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/16.106262">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1069273" class="entry">
+	<td>Maeda, M., Uchino, O., Doi, E., Watanabe, K. &amp; Miyazoe, Y.</td>
+	<td>Efficient flashlamp-pumped UV dye laser driven by a Marx-bank generator</td>
+	<td>1977</td>
+	<td>Quantum Electronics, IEEE Journal of<br/>Vol. 13(2), pp. 65-67&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/JQE.1977.1069273">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4997743" class="entry">
+	<td>Mallik, K.</td>
+	<td>Nonuniform doping of the collector in avalanche transistors to improve the performance of Marx bank circuits</td>
+	<td>2000</td>
+	<td>Review of Scientific Instruments<br/>Vol. 71(4), pp. 1853-1861&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1150547">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4996872" class="entry">
+	<td>Mallik, K.</td>
+	<td>The theory of operation of transistorized Marx bank circuits</td>
+	<td>1999</td>
+	<td>Review of Scientific Instruments<br/>Vol. 70(4), pp. 2155-2160&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1149729">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4984003" class="entry">
+	<td>Ogura, T., Kannari, F., Obara, M., Fujioka, T., Toyoda, K. &amp; Nanba, S.</td>
+	<td>Output performance of the coaxial #x2010;type Marx generator consisting of BaTiO3 series ceramic capacitors</td>
+	<td>1981</td>
+	<td>Review of Scientific Instruments<br/>Vol. 52(2), pp. 273-275&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1136563">DOI</a> &nbsp;</td>
+</tr>
+<tr id="825528" class="entry">
+	<td>Peterkin, F., Stoudt, D., Hankla, B., Boulais, K.A. &amp; Bernardes, J.</td>
+	<td>Performance characteristics of a 1 MV miniature Marx bank</td>
+	<td>1999</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1999. Digest of Technical Papers. 12th IEEE International, pp. 536-539 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1999.825528">DOI</a> &nbsp;</td>
+</tr>
+<tr id="596527" class="entry">
+	<td>Reass, W., Bowman, D.W., Gribble, R., Griego, J., Thompson, C. &amp; Parsons, W.</td>
+	<td>Design of the individual Marx modules for the Atlas machine 36 megajoule, 25 megampere capacitor bank</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1995. Digest of Technical Papers., Tenth IEEE International, pp. 503-508 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1995.596527">DOI</a> &nbsp;</td>
+</tr>
+<tr id="596527" class="entry">
+	<td>Reass, W., Bowman, D.W., Gribble, R., Griego, J., Thompson, C. &amp; Parsons, W.</td>
+	<td>Design of the individual Marx modules for the Atlas machine 36 megajoule, 25 megampere capacitor bank</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1995. Digest of Technical Papers., Tenth IEEE International, pp. 503-508 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1995.596527">DOI</a> &nbsp;</td>
+</tr>
+<tr id="596660" class="entry">
+	<td>Reass, W., Bowman, D.W., Gribble, R., Griego, J., Thompson, C., Parsons, W., Cooper, R. &amp; Casper, D.</td>
+	<td>Capacitor and rail-gap development for the Atlas machine Marx modules</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1995. Digest of Technical Papers., Tenth IEEE International, pp. 522-527 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1995.596660">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1665491" class="entry">
+	<td>Redondo, L., Silva, J., Tavares, P. &amp; Margato, E.</td>
+	<td>High-voltage high-frequency Marx-bank type pulse generator using integrated power semiconductor half-bridges</td>
+	<td>2005</td>
+	<td>Power Electronics and Applications, 2005 European Conference on, pp. 8 pp.-P.8&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/EPE.2005.219301">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1581777" class="entry">
+	<td>Redono, L., Silva, J., Tavares, P. &amp; Margato, E.</td>
+	<td>All Silicon Marx-bank Topology for High-voltage, High-frequency Rectangular Pulses</td>
+	<td>2005</td>
+	<td>Power Electronics Specialists Conference, 2005. PESC '05. IEEE 36th, pp. 1170-1174&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2005.1581777">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6184322" class="entry">
+	<td>Sakamoto, T., Nami, A., Akiyama, M. &amp; Akiyama, H.</td>
+	<td>A Repetitive Solid State Marx-Type Pulsed Power Generator Using Multistage Switch-Capacitor Cells</td>
+	<td>2012</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 40(10), pp. 2316-2321&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2012.2184776">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6191611" class="entry">
+	<td>Sakamoto, T., Nami, A., Akiyama, M. &amp; Akiyama, H.</td>
+	<td>A repetitive solid state Marx-type pulsed power generator using multi-stage switch-capacitor cells</td>
+	<td>2011</td>
+	<td>Pulsed Power Conference (PPC), 2011 IEEE, pp. 1342-1346&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2011.6191611">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1277810" class="entry">
+	<td>Shkuratov, S., Talantsev, E., Dickens, J. &amp; Kristiansen, M.</td>
+	<td>Single shot overstressing of high voltage capacitors for compact Arkadiev-Marx generator</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 723-726 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277810">DOI</a> &nbsp;</td>
+</tr>
+<tr id="767476" class="entry">
+	<td>Sincerny, P., Drury, D., Goyer, J., James, G., Krishnan, M., Levine, J., McDonald, C. &amp; Roth, I.</td>
+	<td>A microsecond marx bank for driving high current electron beams</td>
+	<td>1989</td>
+	<td>Pulsed Power Conference, 1989. 7th, pp. 275-277&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1989.767476">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1278029" class="entry">
+	<td>Smith, D.L., Savage, M., Maenchen, J.E., McDaniel, D.H., Slattery, M., Weinbrecht, E.A., Kitterman, D.L. &amp; Starbird, R.</td>
+	<td>ZR Marx capacitor vendor evaluation results and procurement strategy</td>
+	<td>2003</td>
+	<td><br/>Vol. 2Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 1205-1208 Vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1278029">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1495569" class="entry">
+	<td>Smith, D.L., Savage, M., Ziska, G. &amp; Starbird, R.</td>
+	<td>ZR Marx Capacitor Vendor Evaluation and Lifetime Test Results</td>
+	<td>2005</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 33(4), pp. 1273-1281&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2005.852423">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1433631" class="entry">
+	<td>Smith, D.L., Savage, M., Ziska, G. &amp; Starbird, R.</td>
+	<td>ZR Marx capacitor lifetime test results</td>
+	<td>2004</td>
+	<td>Power Modulator Symposium, 2004 and 2004 High-Voltage Workshop. Conference Record of the Twenty-Sixth International, pp. 530-533&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2004.1433631">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6450315" class="entry">
+	<td>Toudeshki, A., Mariun, N., Hizam, H. &amp; Wahab, N.</td>
+	<td>The energy and cost calculation for a Marx pulse generator based on input DC voltage, capacitor values and number of stages</td>
+	<td>2012</td>
+	<td>Power and Energy (PECon), 2012 IEEE International Conference on, pp. 745-749&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PECon.2012.6450315">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6191660" class="entry">
+	<td>Weber, B., Jackson, S., Phipps, D.G. &amp; Stephanakis, S.</td>
+	<td>6 #x2013;7 MeV characteristic #x03B3;-ray source using a plasma opening switch and a Marx bank</td>
+	<td>2011</td>
+	<td>Pulsed Power Conference (PPC), 2011 IEEE, pp. 1442-1447&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2011.6191660">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4081225" class="entry">
+	<td>Zahn, M.</td>
+	<td>Charge Injection and Transport in a Lossy Capacitor Stressed by a Marx Generator</td>
+	<td>1984</td>
+	<td>Electrical Insulation, IEEE Transactions on<br/>Vol. EI-19(3), pp. 179-182&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TEI.1984.298742">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

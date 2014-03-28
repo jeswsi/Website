@@ -1,0 +1,633 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Blumlein references for fusion, plasma energy, and physics labs.">
+<title>Blumlein JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="1277972" class="entry">
+	<td>Bailly-Salins, R., LeMaire, J.L. &amp; JoIy, S.</td>
+	<td>A ceramic Blumlein transformer driver (CBTD) for a linear inductive voltage adder (LIVA)</td>
+	<td>2003</td>
+	<td><br/>Vol. 2Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 964-967 Vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277972">DOI</a> &nbsp;</td>
+</tr>
+<tr id="599812" class="entry">
+	<td>Borovina, D.L., Krause, R.K., Davanloo, F., Collins, C., Agee, F. &amp; Kingsley, L.</td>
+	<td>Switching the stacked Blumlein pulsers status and issues</td>
+	<td>1995</td>
+	<td><br/>Vol. 2Pulsed Power Conference, 1995. Digest of Technical Papers., Tenth IEEE International, pp. 1394-1399 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1995.599812">DOI</a> &nbsp;</td>
+</tr>
+<tr id="136456" class="entry">
+	<td>Burns, R.</td>
+	<td>A.D. Blumlein-engineer extraordinary</td>
+	<td>1992</td>
+	<td>Engineering Science and Education Journal<br/>Vol. 1(1), pp. 19-33&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="222753" class="entry">
+	<td>Burns, R., Lynch, A.C., Lodge, J.A., White, E.L.C., Thrower, K.R. &amp; Trim, R.M.</td>
+	<td>The life and work of A.D. Blumlein</td>
+	<td>1993</td>
+	<td>Engineering Science and Education Journal<br/>Vol. 2(3), pp. 114-136&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4018198" class="entry">
+	<td>Cheng, Y., Zhao, Y., Luan, B., Li, Y., Zhu, Q. &amp; Wang, Q.</td>
+	<td>Observations of Capillary Discharge Soft X-Ray Laser by using Blumlein Transmission Line</td>
+	<td>2006</td>
+	<td>Laser and Fiber-Optical Networks Modeling, 8-th International Conference on, pp. 62-65&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/LFNM.2006.251979">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5227443" class="entry">
+	<td>Clough, S.</td>
+	<td>Risetime characterisation of 3 #x2013;5 MV oil Blumlein pulse generators at AWE</td>
+	<td>2009</td>
+	<td>Plasma Science - Abstracts, 2009. ICOPS 2009. IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2009.5227443">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084300" class="entry">
+	<td>Clough, S., Thomas, K., Williamson, M., Jones, A., Smith, I., Bailey, V., Corcoran, P. &amp; Kishi, H.</td>
+	<td>Triggering of 1.5 MV SF6 Filled Blumlein Switches</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 655-658&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300744">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1277734" class="entry">
+	<td>Clough, S., Thomas, K., Williamson, M., Philips, M.J., Sinclair, M., Smith, I., Bailey, V., Corcoran, P., Kishi, H., Johnson, D. &amp; Maenchen, J.</td>
+	<td>PIM-a Blumlein driven IVA machine</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 387-390 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277734">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1480218" class="entry">
+	<td>Cook, E. &amp; Reginato, L.</td>
+	<td>Off-resonance transformer charging for 250-kV water blumlein</td>
+	<td>1979</td>
+	<td>Electron Devices, IEEE Transactions on<br/>Vol. 26(10), pp. 1512-1517&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/T-ED.1979.19640">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6219400" class="entry">
+	<td>Davanloo, F., Collins, C. &amp; Agee, F.</td>
+	<td>Development of photoconductive switches for stacked Blumlein pulsers</td>
+	<td>2002</td>
+	<td><br/>Vol. 1High-Power Particle Beams (BEAMS), 2002 14th International Conference on, pp. 91-94&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="736041" class="entry">
+	<td>Davanloo, F., Collins, C. &amp; Agee, F.</td>
+	<td>High-power, repetitive-stacked Blumlein pulsers commutated by a single switching element</td>
+	<td>1998</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 26(5), pp. 1463-1475&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/27.736041">DOI</a> &nbsp;</td>
+</tr>
+<tr id="825475" class="entry">
+	<td>Davanloo, F., Dussartt, R., Iosif, M.C., Collins, C. &amp; Agee, F.</td>
+	<td>Photoconductive switch enhancements and lifetime studies for use in stacked Blumlein pulsers</td>
+	<td>1999</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 1999. Digest of Technical Papers. 12th IEEE International, pp. 320-323 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1999.825475">DOI</a> &nbsp;</td>
+</tr>
+<tr id="564481" class="entry">
+	<td>Davanloo, F., Korioth, J., Borovina, D.L., Krause, R.K., Collins, C., Agee, F., Hull, J.H. &amp; Kingsley, L.</td>
+	<td>Stacked Blumlein pulse generators</td>
+	<td>1996</td>
+	<td>Power Modulator Symposium, 1996., Twenty-Second International, pp. 181-185&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.1996.564481">DOI</a> &nbsp;</td>
+</tr>
+<tr id="741213" class="entry">
+	<td>Davanloo, F., Park, H., Dussart, R., Iosif, M.C., Collins, C. &amp; Agee, F.</td>
+	<td>Progress in the development of stacked Blumlein pulsers commutated by photoconductive switches</td>
+	<td>1998</td>
+	<td>Power Modulator Symposium, 1998. Conference Record of the 1998 Twenty-Third International, pp. 144-149&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.1998.741213">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4345674" class="entry">
+	<td>Domonkos, M., O'Loughlin, J., Tran, T., Turchi, P., Brown, D., Gregg, C., Parker, J., Montoya, T. &amp; Slenes, K.</td>
+	<td>Stacked, Parallel-Plate Solid-Dielectric Blumlein Lines for Compact Pulsed Power</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 368-368&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4345674">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4651886" class="entry">
+	<td>Domonkos, M., O'Loughlin, J., Tran, T., Turchi, P., Brown, D., Gregg, C., Parker, J., Montoya, T. &amp; Slenes, K.</td>
+	<td>Stacked, parallel-plate solid-dielectric Blumlein lines for compact pulsed power</td>
+	<td>2007</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2007 16th IEEE International, pp. 481-485&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4651886">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084470" class="entry">
+	<td>Domonkos, M., Turchi, P., Parker, J., Grabowski, T., Gregg, C., Roth, C. &amp; Slenes, K.</td>
+	<td>A Ceramic Loaded Polymer Blumlein Pulser for Compact, Rep-Rated Pulsed Power Applications</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1322-1325&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300616">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6202907" class="entry">
+	<td>jun Fan, Y., zhi, L.G., Lei, S., Feng, L., shan Zhou, J., tao, Z.S., feng, Z.Y., long, Y.C. &amp; Liu, S.</td>
+	<td>Dual output pulses generator based on a new type of Blumlein pulse forming line</td>
+	<td>2008</td>
+	<td>High Power Particle Beams (BEAMS), 2008 17th International Conference on, pp. 1-2&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6405171" class="entry">
+	<td>Kasuya, K., Imai, Y., Kato, S., Abe, T. &amp; Niu, K.</td>
+	<td>Multi-stage operations of blumlein lines by shock waves</td>
+	<td>1979</td>
+	<td><br/>Vol. 1High-Power Electron and Ion Beam Research Technology, 1979 3rd International Topical Conference on, pp. 226-229&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="961016" class="entry">
+	<td>Katsuki, S., Takano, D., Akiyama, H. &amp; Majima, T.</td>
+	<td>Repetitive operation of water-filled Blumlein generator</td>
+	<td>2001</td>
+	<td>Pulsed Power Plasma Science, 2001. IEEE Conference Record - Abstracts, pp. 333-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.961016">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4998682" class="entry">
+	<td>Katsuki, S., Takano, D., Namihira, T., Akiyama, H. &amp; Majima, T.</td>
+	<td>Repetitive operation of water-filled Blumlein generator</td>
+	<td>2001</td>
+	<td>Review of Scientific Instruments<br/>Vol. 72(6), pp. 2759-2763&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1372174">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1001769" class="entry">
+	<td>Katsukit, S., Takano, D., Namihira, T. &amp; Akiyama, H.</td>
+	<td>Performance degradation of a water-filled coaxial Blumlein generator during its continuous operation</td>
+	<td>2001</td>
+	<td><br/>Vol. 2Pulsed Power Plasma Science, 2001. PPPS-2001. Digest of Technical Papers, pp. 1229-1232 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.1001769">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6633270" class="entry">
+	<td>Lim, S., Kim, J., Cho, C., Kim, Y., Jin, Y. &amp; Katsuki, S.</td>
+	<td>PPPS-2013: Nanosecond high-voltage pulse generator using a spiral blumlein for electromagnetic interference test</td>
+	<td>2013</td>
+	<td>Plasma Science (ICOPS), 2013 Abstracts IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2013.6633270">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6627432" class="entry">
+	<td>Lim, S., Kim, J., Cho, C., Kim, Y., Katsuki, S. &amp; Jin, Y.</td>
+	<td>Nanosecond high-voltage pulse generator using a spiral blumlein for electromagnetic interference test</td>
+	<td>2013</td>
+	<td>Pulsed Power Conference (PPC), 2013 19th IEEE, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2013.6627432">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5003157" class="entry">
+	<td>Liu, J., Yin, Y., Ge, B., Cheng, X., Feng, J., Zhang, J. &amp; Wang, X.</td>
+	<td>A compact high power pulsed modulator based on spiral Blumlein line</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(10), pp. 103302-103302-5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2800751">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5002493" class="entry">
+	<td>Liu, Z., Yan, K., Winands, G.J.J., Van Heesch, E. &amp; Pemen, A.J.M.</td>
+	<td>Novel multiple-switch Blumlein generator</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(3), pp. 033502-033502-5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2176080">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6215060" class="entry">
+	<td>Mendes, J.P.M., Redondo, L., Canacsinh, H. &amp; Rossi, J.</td>
+	<td>Modeling of a Solid-State Bipolar Blumlein Generator for n Stages</td>
+	<td>2012</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 40(10), pp. 2611-2617&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2012.2199138">DOI</a> &nbsp;</td>
+</tr>
+<tr id="308608" class="entry">
+	<td>Mizuno, H., Majima, T., Sakamoto, S. &amp; Kobayashi, Y.</td>
+	<td>A Blumlein type modulator for 100 MW-class X-band klystron</td>
+	<td>1993</td>
+	<td>Particle Accelerator Conference, 1993., Proceedings of the 1993, pp. 1321-1323 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PAC.1993.308608">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5063569" class="entry">
+	<td>Noggle, R.C., Adler, R. &amp; Hendricks, K.J.</td>
+	<td>A reliable dual Blumlein device</td>
+	<td>1989</td>
+	<td>Review of Scientific Instruments<br/>Vol. 60(11), pp. 3540-3548&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1140507">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6627664" class="entry">
+	<td>Novac, B., Smith, I., Wang, M. &amp; Senior, P.</td>
+	<td>Tesla-charged Blumlein high-power generator</td>
+	<td>2013</td>
+	<td>Pulsed Power Conference (PPC), 2013 19th IEEE, pp. 1-6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2013.6627664">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084484" class="entry">
+	<td>Nunnally, W., Allen, F.V., Hawkins, S., Holmes, C., Sampayan, S. &amp; Corporaso, G.J.</td>
+	<td>Experiments with UV Laser Triggered Spark Gaps in a Stacked Blumlein System</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1376-1376&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300643">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5003266" class="entry">
+	<td>Praveen Kumar, D., Mitra, S., Senthil, K., Sharma, A., Nagesh, K.V., Singh, S., Mondal, J., Roy, A. &amp; Chakravarthy, D.P.</td>
+	<td>Characterization and analysis of a pulse power system based on Marx generator and Blumlein</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(11), pp. 115107-115107-4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2813898">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5173581" class="entry">
+	<td>Rebersek, M., Kranjc, M., Pavliha, D., Batista-Napotnik, T., Vrtacnik, D., Amon, S. &amp; Miklavcic, D.</td>
+	<td>Blumlein Configuration for High-Repetition-Rate Pulse Generation of Variable Duration and Polarity Using Synchronized Switch Control</td>
+	<td>2009</td>
+	<td>Biomedical Engineering, IEEE Transactions on<br/>Vol. 56(11), pp. 2642-2648&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TBME.2009.2027422">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084299" class="entry">
+	<td>Rhodes, M.</td>
+	<td>UV Pre-Ionized Rail-Gap Switch for Stacked Blumlein Pulse Generators</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 651-654&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300743">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1710049" class="entry">
+	<td>Rossi, J., Barroso, J. &amp; Ueda, M.</td>
+	<td>Modeling of Wound Coaxial Blumlein Pulsers</td>
+	<td>2006</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 34(5), pp. 1846-1852&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2006.881306">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1710038" class="entry">
+	<td>Rossi, J. &amp; Ueda, M.</td>
+	<td>A 100 kV/200 A Blumlein Pulser for High-Energy Plasma Implantation</td>
+	<td>2006</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 34(5), pp. 1766-1770&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2006.881305">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1002151" class="entry">
+	<td>Rossi, J. &amp; Ueda, M.</td>
+	<td>Design of a 150 kV, 300 A,100 Hz Blumlein coaxial pulser for long pulse operation</td>
+	<td>2001</td>
+	<td><br/>Vol. 1Pulsed Power Plasma Science, 2001. PPPS-2001. Digest of Technical Papers, pp. 536-539 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.1002151">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1178185" class="entry">
+	<td>Rossi, J., Ueda, M. &amp; Barroso, J.</td>
+	<td>Design of a 150 kV 300 A 100 Hz Blumlein coaxial pulser for long-pulse operation</td>
+	<td>2002</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 30(5), pp. 1622-1626&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2002.805323">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4743632" class="entry">
+	<td>Rossi, J., Ueda, M. &amp; Oliveira, R.</td>
+	<td>Redesign of a HV Blumlein Pulser for Pulse Upgrade in The Microsecond Range</td>
+	<td>2008</td>
+	<td>IEEE International Power Modulators and High Voltage Conference, Proceedings of the 2008, pp. 264-267&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMC.2008.4743632">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1277795" class="entry">
+	<td>Sakugawa, T., Wang, D., Shinozaki, K., Namihira, T., Katsuki, S. &amp; Akiyama, H.</td>
+	<td>Repetitive short-pulsed generator using MPC and blumlein line</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 657-660 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277795">DOI</a> &nbsp;</td>
+</tr>
+<tr id="164528" class="entry">
+	<td>Shidara, T., Akemoto, M., Yoshida, M., Takeda, S., Takata, K., Ohshima, I. &amp; Teranishi, T.</td>
+	<td>Blumlein-type X-band klystron modulator for Japan Linear Collider</td>
+	<td>1991</td>
+	<td>Particle Accelerator Conference, 1991. Accelerator Science and Technology., Conference Record of the 1991 IEEE, pp. 1034-1036 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PAC.1991.164528">DOI</a> &nbsp;</td>
+</tr>
+<tr id="26263" class="entry">
+	<td>Stemprok, R. &amp; Gupta, R.</td>
+	<td>A Blumlein pulser design for driving a flash soft X-ray source</td>
+	<td>1988</td>
+	<td>Power Modulator Symposium, 1988. IEEE Conference Record of the 1988 Eighteenth, pp. 179-183&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.1988.26263">DOI</a> &nbsp;</td>
+</tr>
+<tr id="599813" class="entry">
+	<td>Sudarshan, T., Madangarli, V., Liu, S. &amp; Li, C.</td>
+	<td>A compact Blumlein PFN with optimized performance index</td>
+	<td>1995</td>
+	<td><br/>Vol. 2Pulsed Power Conference, 1995. Digest of Technical Papers., Tenth IEEE International, pp. 1400-1405 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1995.599813">DOI</a> &nbsp;</td>
+</tr>
+<tr id="733295" class="entry">
+	<td>Teranishi, T., Nojima, K., Motegi, S., Murase, H., Ohshima, I., Shidara, T., Akernoto, M., Takeda, S. &amp; Takata, K.</td>
+	<td>A 600kv Blumlein Modulator For An X-band Klystron</td>
+	<td>1991</td>
+	<td>Pulsed Power Conference, 1991. Digest of Technical Papers. Eighth IEEE International, pp. 315-318&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1991.733295">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1433630" class="entry">
+	<td>Verma, R., Shyam, A., Chaturvedi, S., Kumar, R., Lathi, D., Sarkar, P., Chaudhary, V., Shukla, R., Debnath, K., Sharma, S., Sonara, J., Shah, K., Adhikary, B., Jigna, T. &amp; Piyush, J.</td>
+	<td>A transmission line based compact repetitive and portable cascaded Blumlein pulser</td>
+	<td>2004</td>
+	<td>Power Modulator Symposium, 2004 and 2004 High-Voltage Workshop. Conference Record of the Twenty-Sixth International, pp. 526-529&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2004.1433630">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6461255" class="entry">
+	<td>Wang, S., Shu, T. &amp; Yang, H.</td>
+	<td>Note: A 3-stage stacked Blumlein using ceramic for energy storage</td>
+	<td>2013</td>
+	<td>Review of Scientific Instruments<br/>Vol. 84(2), pp. 026104-026104-3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4791797">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4345679" class="entry">
+	<td>Williams, T. &amp; Clough, S.</td>
+	<td>Dual-Waveform Ringing Gain Analysis and its Application to Pre-Pulse Reduction on Blumlein-Based X-ray Machines</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 373-373&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4345679">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4345680" class="entry">
+	<td>Williams, T. &amp; Clough, S.</td>
+	<td>Pre-Pulse Minimisation on Blumlein-Based X-ray Machines by Optimisation of Balance Circuit Parameters</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 374-374&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4345680">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4345510" class="entry">
+	<td>Yampolsky, J., Kirkman, G. &amp; Voevudko, L.</td>
+	<td>60 MA Multistage Blumlein Concept</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 204-204&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4345510">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084472" class="entry">
+	<td>Yampolsky, J., Kirkman, G. &amp; Voevudko, L.</td>
+	<td>Multistage Blumlein Generator</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1329-1332&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300618">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

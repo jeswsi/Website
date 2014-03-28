@@ -1,0 +1,633 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful DC Filter references for fusion, plasma energy, and physics labs.">
+<title>DC Filter JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="4112039" class="entry">
+	<td>Adamson, K.A., Lasseter, R.A., Melvold, D.J. &amp; Reavis, M.A.</td>
+	<td>DC Side Filtering Studies for the Pacific HVDC Intertie Voltage Upgrading</td>
+	<td>1983</td>
+	<td>Power Apparatus and Systems, IEEE Transactions on<br/>Vol. PAS-102(5), pp. 1061-1069&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPAS.1983.318046">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1619683" class="entry">
+	<td>Ahmed, N., Miyatake, M., Lee, H.W. &amp; Nakaoka, M.</td>
+	<td>Time-Sharing Sinewave Absolute Value Tracking Boost Chopper Controlled One Stage Power Conditioner with Non Electrolytic Capacitor DC Filter Link</td>
+	<td>2005</td>
+	<td><br/>Vol. 1Power Electronics and Drives Systems, 2005. PEDS 2005. International Conference on, pp. 185-191&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PEDS.2005.1619683">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6168842" class="entry">
+	<td>Algreer, M., Armstrong, M. &amp; Giaouris, D.</td>
+	<td>Active Online System Identification of Switch Mode DC #x2013;DC Power Converter Based on Efficient Recursive DCD-IIR Adaptive Filter</td>
+	<td>2012</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 27(11), pp. 4425-4435&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2012.2190754">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4487805" class="entry">
+	<td>Bina, M. &amp; Eskandari, B.</td>
+	<td>Combined DC-Filter and optimized Modulation to Absorb DC-Link Oscillations of Cascaded H-Bridge Converters</td>
+	<td>2007</td>
+	<td>Power Electronics and Drive Systems, 2007. PEDS '07. 7th International Conference on, pp. 860-864&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PEDS.2007.4487805">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1665544" class="entry">
+	<td>Carpita, M., Zueger, H., Pellerin, M. &amp; Stefanutti, P.</td>
+	<td>Transformer used as a DC link filter inductance in DC high power traction applications</td>
+	<td>2005</td>
+	<td>Power Electronics and Applications, 2005 European Conference on, pp. 9 pp.-P.9&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/EPE.2005.219354">DOI</a> &nbsp;</td>
+</tr>
+<tr id="38433" class="entry">
+	<td>Cesari, S. &amp; Colla, F.</td>
+	<td>Testing experiences on mixed dielectric capacitors for high voltage DC filter applications</td>
+	<td>1988</td>
+	<td>Properties and Applications of Dielectric Materials, 1988. Proceedings., Second International Conference on Properties and Applications of, pp. 459-462 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICPADM.1988.38433">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4487714" class="entry">
+	<td>Chen, J., Zhu, J. &amp; Guo, Y.</td>
+	<td>A General Method for Deciding the Input Filter Capacitance of Flyback Switching AC-DC Converter with Peak Current-Controlled Mode</td>
+	<td>2007</td>
+	<td>Power Electronics and Drive Systems, 2007. PEDS '07. 7th International Conference on, pp. 279-283&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PEDS.2007.4487714">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5490943" class="entry">
+	<td>Chen, Z.</td>
+	<td>Receiver macro modeling including DC, filter, and preamplifier nonlinear properties for packaging system transient simulations</td>
+	<td>2010</td>
+	<td>Electronic Components and Technology Conference (ECTC), 2010 Proceedings 60th, pp. 381-388&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ECTC.2010.5490943">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1350087" class="entry">
+	<td>Dongyuan, Z., Jianye, C., Zanji, W. &amp; Yi, W.</td>
+	<td>A novel composite control based active DC filter applied in HVDC system</td>
+	<td>2004</td>
+	<td><br/>Vol. 2Power Electronics, Machines and Drives, 2004. (PEMD 2004). Second International Conference on (Conf. Publ. No. 498), pp. 580-585 Vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1049/cp:20040352">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1355163" class="entry">
+	<td>Dongyuan, Z., Jianye, C., Zanji, W. &amp; Yi, W.</td>
+	<td>The active DC filter in HVDC resolved by the multiple PWM inverters</td>
+	<td>2004</td>
+	<td><br/>Vol. 5Power Electronics Specialists Conference, 2004. PESC 04. 2004 IEEE 35th Annual, pp. 3889-3893 Vol.5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2004.1355163">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1355845" class="entry">
+	<td>Dongyuan, Z., Jianye, C., Zanji, W. &amp; Yi, W.</td>
+	<td>An approximate inverse system control based active DC filter applied in HVDC</td>
+	<td>2004</td>
+	<td><br/>Vol. 1Power Electronics Specialists Conference, 2004. PESC 04. 2004 IEEE 35th Annual, pp. 765-770 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2004.1355845">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5946166" class="entry">
+	<td>Elbakush, E., Sharaf, A. &amp; Altas, I.</td>
+	<td>A novel Green Plug Filter Compensation scheme for electric vehicle DC drive</td>
+	<td>2011</td>
+	<td>Innovations in Intelligent Systems and Applications (INISTA), 2011 International Symposium on, pp. 599-605&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/INISTA.2011.5946166">DOI</a> &nbsp;</td>
+</tr>
+<tr id="19270" class="entry">
+	<td>Garrity, T., Hassan, I., Adamson, K.A. &amp; Donahue, J.A.</td>
+	<td>Measurement of harmonic currents and evaluation of the DC filter performance of the New England-Hydro-Quebec Phase I HVDC project</td>
+	<td>1989</td>
+	<td>Power Delivery, IEEE Transactions on<br/>Vol. 4(1), pp. 779-786&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/61.19270">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6471835" class="entry">
+	<td>Gautam, D., Musavi, F., Eberle, W. &amp; Dunford, W.</td>
+	<td>A Zero-Voltage Switching Full-Bridge DC--DC Converter With Capacitive Output Filter for Plug-In Hybrid Electric Vehicle Battery Charging</td>
+	<td>2013</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 28(12), pp. 5728-5735&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2013.2249671">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6342527" class="entry">
+	<td>Gautam, D., Musavi, F., Edington, M., Eberle, W. &amp; Dunford, W.</td>
+	<td>An interleaved ZVS full-bridge DC-DC converter with capacitive output filter for a PHEV charger</td>
+	<td>2012</td>
+	<td>Energy Conversion Congress and Exposition (ECCE), 2012 IEEE, pp. 2827-2832&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ECCE.2012.6342527">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4408687" class="entry">
+	<td>Hao, P., Zanji, W. &amp; Jianye, C.</td>
+	<td>Study on the Control of Shunt Active DC Filter for HVDC Systems</td>
+	<td>2008</td>
+	<td>Power Delivery, IEEE Transactions on<br/>Vol. 23(1), pp. 396-401&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPWRD.2007.905553">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6180973" class="entry">
+	<td>HiFeng, L., HuiHui, L., Gang, W. &amp; Min, H.</td>
+	<td>Detection approach for detuning fault component of three-tuned DC filter</td>
+	<td>2011</td>
+	<td><br/>Vol. 2Advanced Power System Automation and Protection (APAP), 2011 International Conference on, pp. 1121-1124&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APAP.2011.6180973">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4074106" class="entry">
+	<td>Hingorani, N. &amp; Annestrand, S.A.</td>
+	<td>Insulation Levels of DC Filter Reactors and Resistors for HVDC Power Transmission</td>
+	<td>1970</td>
+	<td>Power Apparatus and Systems, IEEE Transactions on<br/>Vol. PAS-89(4), pp. 610-618&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPAS.1970.292607">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4374623" class="entry">
+	<td>Iftikhar, M., Sadarnac, D. &amp; Karimi, C.</td>
+	<td>Input Filter Damping Design for Control Loop Stability of DC-DC Converters</td>
+	<td>2007</td>
+	<td>Industrial Electronics, 2007. ISIE 2007. IEEE International Symposium on, pp. 353-358&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISIE.2007.4374623">DOI</a> &nbsp;</td>
+</tr>
+<tr id="729006" class="entry">
+	<td>Jun, Y., Zehong, L. &amp; Yan, S.</td>
+	<td>Studies on design of DC filters of Three Gorges to Changzhou plusmn;500 kV HVDC link</td>
+	<td>1998</td>
+	<td><br/>Vol. 1Power System Technology, 1998. Proceedings. POWERCON '98. 1998 International Conference on, pp. 460-465 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICPST.1998.729006">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6587009" class="entry">
+	<td>Kumar, C. &amp; Mishra, M.</td>
+	<td>A modified DSTATCOM topology with reduced VSI rating, DC link voltage, and filter size</td>
+	<td>2013</td>
+	<td>Clean Electrical Power (ICCEP), 2013 International Conference on, pp. 325-331&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICCEP.2013.6587009">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4448834" class="entry">
+	<td>Kurokawa, F. &amp; Nakashima, T.</td>
+	<td>A new fast response digital filter control DC-DC converter</td>
+	<td>2007</td>
+	<td>Telecommunications Energy Conference, 2007. INTELEC 2007. 29th International, pp. 527-532&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/INTLEC.2007.4448834">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1601969" class="entry">
+	<td>Lasseter, R., Kelley, F.W., J. &amp; Lindh, C.B.</td>
+	<td>DC filter design methods for HVDC systems</td>
+	<td>1977</td>
+	<td>Power Apparatus and Systems, IEEE Transactions on<br/>Vol. 96(2), pp. 571-578&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/T-PAS.1977.32367">DOI</a> &nbsp;</td>
+</tr>
+<tr id="370276" class="entry">
+	<td>Leonardi, F., Rossetto, L., Scandellari, A., Speranza, R., Tomasin, P., Tenti, P. &amp; Divan, D.</td>
+	<td>Soft-switched PWM converter with inductive DC filter</td>
+	<td>1995</td>
+	<td>Industry Applications, IEEE Transactions on<br/>Vol. 31(2), pp. 293-298&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/28.370276">DOI</a> &nbsp;</td>
+</tr>
+<tr id="264236" class="entry">
+	<td>Leonardi, F., Rossetto, L., Scandellari, A., Speranza, R., Tomasin, P., Tenti, P. &amp; Divan, D.</td>
+	<td>Soft-switched PWM converter with inductive DC filter</td>
+	<td>1993</td>
+	<td>Power Conversion Conference, 1993. Yokohama 1993., Conference Record of the, pp. 123-128&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PCCON.1993.264236">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4308197" class="entry">
+	<td>Melvold, D.J., Endo, T. &amp; Lips, H.P.</td>
+	<td>Effects of Operating Configurations of Multi-Terminal HVDC Systems on DC Filter Performance</td>
+	<td>1987</td>
+	<td>Power Delivery, IEEE Transactions on<br/>Vol. 2(3), pp. 924-930&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPWRD.1987.4308197">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5527002" class="entry">
+	<td>Melvold, D.J., Endo, T. &amp; Lips, H.P.</td>
+	<td>Effects of Operating Configurations of Multiterminal HVDC Systems on DC Filter Performance</td>
+	<td>1987</td>
+	<td>Power Engineering Review, IEEE<br/>Vol. PER-7(7), pp. 72-72&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/MPER.1987.5527002">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5770914" class="entry">
+	<td>Mirzaee, H., Parkhideh, B. &amp; Bhattacharya, S.</td>
+	<td>Design and control of Series DC Active Filter (SDAF) for shipboard Medium-Voltage DC power system</td>
+	<td>2011</td>
+	<td>Electric Ship Technologies Symposium (ESTS), 2011 IEEE, pp. 452-458&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ESTS.2011.5770914">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1355680" class="entry">
+	<td>Moisseev, S., Ishigami, Y., Soshin, K. &amp; Nakaoka, M.</td>
+	<td>Tapped inductor filter-assisted soft-switching PWM DC-DC power converter with high frequency transformer link for automotive AC power supply</td>
+	<td>2004</td>
+	<td><br/>Vol. 2Power Electronics Specialists Conference, 2004. PESC 04. 2004 IEEE 35th Annual, pp. 1689-1694 Vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2004.1355680">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1413754" class="entry">
+	<td>Moisseev, S., Soshin, K. &amp; Nakaoka, M.</td>
+	<td>Tapped-inductor filter assisted soft-switching PWM DC-DC power converter</td>
+	<td>2005</td>
+	<td>Aerospace and Electronic Systems, IEEE Transactions on<br/>Vol. 41(1), pp. 174-180&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TAES.2005.1413754">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1280309" class="entry">
+	<td>Moisseev, S., Suzuoka, K., Ahmed, T. &amp; Nakaoka, M.</td>
+	<td>Feasibility study of high frequency step-up transformer linked soft-switching PWM DC-DC converter with tapped inductor filter</td>
+	<td>2003</td>
+	<td><br/>Vol. 2Industrial Electronics Society, 2003. IECON '03. The 29th Annual Conference of the IEEE, pp. 1673-1678 Vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IECON.2003.1280309">DOI</a> &nbsp;</td>
+</tr>
+<tr id="19233" class="entry">
+	<td>Ooi, H., Irokawa, H., Ejiri, H., Takahashi, K. &amp; Muraoka, T.</td>
+	<td>Development of compact 250 kV DC filter for HVDC converter station</td>
+	<td>1989</td>
+	<td>Power Delivery, IEEE Transactions on<br/>Vol. 4(1), pp. 428-436&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/61.19233">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5397682" class="entry">
+	<td>Praesomboon, S., Athaphaisal, S., Yimman, S., Boontawan, R. &amp; Dejhan, K.</td>
+	<td>Sensorless speed control of DC servo motor using Kalman filter</td>
+	<td>2009</td>
+	<td>Information, Communications and Signal Processing, 2009. ICICS 2009. 7th International Conference on, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICICS.2009.5397682">DOI</a> &nbsp;</td>
+</tr>
+<tr id="334779" class="entry">
+	<td>Sakui, M. &amp; Fujita, H.</td>
+	<td>An analytical method for calculating harmonic currents of a three-phase diode-bridge rectifier with DC filter</td>
+	<td>1994</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 9(6), pp. 631-637&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/63.334779">DOI</a> &nbsp;</td>
+</tr>
+<tr id="31507" class="entry">
+	<td>Sakui, M., Fujita, H. &amp; Shioya, M.</td>
+	<td>A method for calculating harmonic currents of a three-phase bridge uncontrolled rectifier with DC filter</td>
+	<td>1989</td>
+	<td>Industrial Electronics, IEEE Transactions on<br/>Vol. 36(3), pp. 434-440&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/41.31507">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1210338" class="entry">
+	<td>Salmon, J. &amp; Ciulei, M.</td>
+	<td>An asymmetrical half-bridge active DC filter for industrial drive systems using multipulse utility rectifiers with harmonic reducing input transformers</td>
+	<td>2003</td>
+	<td><br/>Vol. 2Electric Machines and Drives Conference, 2003. IEMDC'03. IEEE International, pp. 876-882 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IEMDC.2003.1210338">DOI</a> &nbsp;</td>
+</tr>
+<tr id="849649" class="entry">
+	<td>Salmon, J. &amp; Knight, A.</td>
+	<td>Control of an asymmetrical half-bridge DC filter used in 3-phase industrial rectifiers</td>
+	<td>2000</td>
+	<td><br/>Vol. 2Electrical and Computer Engineering, 2000 Canadian Conference on, pp. 1177-1181 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/CCECE.2000.849649">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1711975" class="entry">
+	<td>Salo, M. &amp; Pettersson, S.</td>
+	<td>Current-Source Active Power Filter with an Optimal DC Current Control</td>
+	<td>2006</td>
+	<td>Power Electronics Specialists Conference, 2006. PESC '06. 37th IEEE, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2006.1711975">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6128919" class="entry">
+	<td>Sousa, S., Pinto, S., Silva, F. &amp; Maia, J.</td>
+	<td>Power quality improvement of indirect matrix converter input currents using a small DC link filter</td>
+	<td>2011</td>
+	<td>Electrical Power Quality and Utilisation (EPQU), 2011 11th International Conference on, pp. 1-6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/EPQU.2011.6128919">DOI</a> &nbsp;</td>
+</tr>
+<tr id="894413" class="entry">
+	<td>Tooth, D., Finney, S. &amp; Williams, B.</td>
+	<td>Effects of using DC-side average current-mode control on a three-phase converter with an input filter and distorted supply</td>
+	<td>2000</td>
+	<td>Electric Power Applications, IEE Proceedings -<br/>Vol. 147(6), pp. 459-467&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ip-epa:20000625">DOI</a> &nbsp;</td>
+</tr>
+<tr id="279660" class="entry">
+	<td>Udayagiri, M.R. &amp; Sarma, V.S.S.</td>
+	<td>Single phase to three phase conversion without DC filter</td>
+	<td>1992</td>
+	<td>Industrial Electronics, 1992., Proceedings of the IEEE International Symposium on, pp. 547-550 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISIE.1992.279660">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5630560" class="entry">
+	<td>Wei, K., Ping, W., Lixia, Z. &amp; Rugang, W.</td>
+	<td>Research on the Matched DC Filter Design in the Power Accumulator Battery Testing System</td>
+	<td>2010</td>
+	<td>Electrical and Control Engineering (ICECE), 2010 International Conference on, pp. 4157-4160&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/iCECE.2010.1009">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1217674" class="entry">
+	<td>Xiao, G., Pei, Y., Li, K., Yang, X. &amp; Wang, Z.</td>
+	<td>A novel control approach to the DC active power filter used in a low ripple and large stable/pulse power supply</td>
+	<td>2003</td>
+	<td><br/>Vol. 4Power Electronics Specialist Conference, 2003. PESC '03. 2003 IEEE 34th Annual, pp. 1489-1493 vol.4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2003.1217674">DOI</a> &nbsp;</td>
+</tr>
+<tr id="848588" class="entry">
+	<td>Xiao, I. &amp; Zhang, L.</td>
+	<td>Harmonic cancellation for HVDC systems using a notch-filter controlled active DC filter</td>
+	<td>2000</td>
+	<td>Generation, Transmission and Distribution, IEE Proceedings-<br/>Vol. 147(3), pp. 176-181&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ip-gtd:20000305">DOI</a> &nbsp;</td>
+</tr>
+<tr id="732095" class="entry">
+	<td>Xiao, L. &amp; Zhang, L.</td>
+	<td>Simulation study of an active DC filter using frequency-domain control system</td>
+	<td>1998</td>
+	<td>Power Electronics and Variable Speed Drives, 1998. Seventh International Conference on (Conf. Publ. No. 456), pp. 483-488&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1049/cp:19980574">DOI</a> &nbsp;</td>
+</tr>
+<tr id="251312" class="entry">
+	<td>Zhang, W. &amp; Asplund, G.</td>
+	<td>Active DC filter for HVDC systems</td>
+	<td>1994</td>
+	<td>Computer Applications in Power, IEEE<br/>Vol. 7(1), pp. 40-44&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/67.251312">DOI</a> &nbsp;</td>
+</tr>
+<tr id="252686" class="entry">
+	<td>Zhang, W., Asplund, G., Aberg, A., Jonsson, U. &amp; Loof, O.</td>
+	<td>Active DC filter for HVDC system-a test installation in the Konti-Skan DC link at Lindome converter station</td>
+	<td>1993</td>
+	<td>Power Delivery, IEEE Transactions on<br/>Vol. 8(3), pp. 1599-1606&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/61.252686">DOI</a> &nbsp;</td>
+</tr>
+<tr id="667354" class="entry">
+	<td>Zhang, W., Isaksson, A. &amp; Ekstrom, A.</td>
+	<td>Analysis on the control principle of the active DC filter in the Lindome converter station of the Konti-Skan HVDC link</td>
+	<td>1998</td>
+	<td>Power Systems, IEEE Transactions on<br/>Vol. 13(2), pp. 374-381&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/59.667354">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6520271" class="entry">
+	<td>Zhang, X., Boroyevich, D., Mattavelli, P., Xue, J. &amp; Wang, F.</td>
+	<td>EMI filter design and optimization for both AC and DC side in a DC-fed motor drive system</td>
+	<td>2013</td>
+	<td>Applied Power Electronics Conference and Exposition (APEC), 2013 Twenty-Eighth Annual IEEE, pp. 597-603&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2013.6520271">DOI</a> &nbsp;</td>
+</tr>
+<tr id="729350" class="entry">
+	<td>Zhuoyao, T., Zhen, R., Yingjun, D. &amp; Dianqiang, L.</td>
+	<td>Active DC filter for harmonics suppression and regulating load of passive filters on the DC-side of Gezhouba converter station</td>
+	<td>1998</td>
+	<td><br/>Vol. 2Power System Technology, 1998. Proceedings. POWERCON '98. 1998 International Conference on, pp. 1560-1564 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICPST.1998.729350">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

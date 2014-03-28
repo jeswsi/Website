@@ -1,0 +1,633 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Invertor references for fusion, plasma energy, and physics labs.">
+<title>Invertor JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="5252100" class="entry">
+	<td>Allin, G., Creighton, G. &amp; Hall, J.</td>
+	<td>Operation and analysis of an invertor-fed-linear-motor system</td>
+	<td>1972</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 119(11), pp. 1587-1594&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1972.0314">DOI</a> &nbsp;</td>
+</tr>
+<tr id="749809" class="entry">
+	<td>Amatuni, A.T., Arutunian, S.G. &amp; Mailian, M.R.</td>
+	<td>Generator-invertor-damper system of electron (positron) bunches moving in cold plasma</td>
+	<td>1997</td>
+	<td><br/>Vol. 1Particle Accelerator Conference, 1997. Proceedings of the 1997, pp. 695-697 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PAC.1997.749809">DOI</a> &nbsp;</td>
+</tr>
+<tr id="345499" class="entry">
+	<td>Boglietti, A., Ferraris, P. &amp; Lazzari, M.</td>
+	<td>Power derating for invertor fed induction motors</td>
+	<td>1994</td>
+	<td>Industry Applications Society Annual Meeting, 1994., Conference Record of the 1994 IEEE, pp. 55-61 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IAS.1994.345499">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5252624" class="entry">
+	<td>Bowes, S.</td>
+	<td>New sinusoidal pulsewidth-modulated invertor</td>
+	<td>1975</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 122(11), pp. 1279-1285&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1975.0312">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5253949" class="entry">
+	<td>Chalmers, B., El Attar, M. &amp; Mohamadein, A.</td>
+	<td>2-phase invertor-fed synchronous motors with induced excitation</td>
+	<td>1976</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 123(7), pp. 708-709&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1976.0154">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5252131" class="entry">
+	<td>Chalmers, B., Magureanu, R. &amp; Hindmarsh, J.</td>
+	<td>General principle for brushless synchronous machines and its application in an invertor-fed drive</td>
+	<td>1972</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 119(11), pp. 1641-1642&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1972.0324">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5250755" class="entry">
+	<td>Chalmers, B., Mohamadein, A. &amp; Williamson, A.</td>
+	<td>Invertor-fed synchronous motors with induced excitation</td>
+	<td>1974</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 121(12), pp. 1505-1512&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1974.0314">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5252628" class="entry">
+	<td>Charlton, W.</td>
+	<td>Analytical methods for invertor-fed induction motors</td>
+	<td>1975</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 122(11), pp. 1273-1274&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1975.0310">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5250813" class="entry">
+	<td>Charlton, W.</td>
+	<td>Matrix method for the steady-state analysis of invertor-fed induction motors</td>
+	<td>1973</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 120(3), pp. 363-364&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1973.0077">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4234814" class="entry">
+	<td>Charlton, W.</td>
+	<td>Matrix approach to steady-state analysis of invertor-fed induction motors</td>
+	<td>1970</td>
+	<td>Electronics Letters<br/>Vol. 6(14), pp. 451-452&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/el:19700317">DOI</a> &nbsp;</td>
+</tr>
+<tr id="552043" class="entry">
+	<td>Chen, J., Hong, W. &amp; Liang, C.</td>
+	<td>A new model of generalized invertor and its applications</td>
+	<td>1997</td>
+	<td>Microwave Theory and Techniques, IEEE Transactions on<br/>Vol. 45(1), pp. 132-135&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/22.552043">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5252188" class="entry">
+	<td>Cornick, J.A.F. &amp; Ramsbottom, M.</td>
+	<td>Instantaneous temperature rise in thyristors under invertor and chopper operating conditions</td>
+	<td>1972</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 119(8), pp. 1141-1148&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1972.0218">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4643235" class="entry">
+	<td>Creighton, G.</td>
+	<td>Current-source invertor-fed induction motor torque pulsations</td>
+	<td>1980</td>
+	<td>Electric Power Applications, IEE Proceedings B<br/>Vol. 127(4), pp. 231-239&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ip-b:19800029">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5252741" class="entry">
+	<td>Edwards, J.</td>
+	<td>Three-phase digital p.w.m. invertor</td>
+	<td>1975</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 122(3), pp. 302-304&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1975.0081">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5247746" class="entry">
+	<td>Edwards, J.</td>
+	<td>Magnetic-film-controlled invertor and isolator</td>
+	<td>1964</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 111(6), pp. 1117-1118&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1964.0172">DOI</a> &nbsp;</td>
+</tr>
+<tr id="216441" class="entry">
+	<td>El-Genk, M., Kaibyshev, V., Murray, C., Wernsman, B. &amp; Djashiashvili, Y.</td>
+	<td>Preliminary performance results of the Cs-Ba tacitron invertor</td>
+	<td>1993</td>
+	<td>Electron Devices, IEEE Transactions on<br/>Vol. 40(7), pp. 1335-1339&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/16.216441">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5249717" class="entry">
+	<td>Fallside, F.</td>
+	<td>Ripple instability in closed-loop pulse-modulation systems including invertor drives</td>
+	<td>1968</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 115(1), pp. 218-228&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1968.0036">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5249626" class="entry">
+	<td>Fallside, F. &amp; Wortley, A.</td>
+	<td>Steady-state oscillation and stabilisation of variable-frequency invertor-fed induction-motor drives</td>
+	<td>1969</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 116(6), pp. 991-999&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1969.0184">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5251642" class="entry">
+	<td>Farrer, W. &amp; Miskin, J.</td>
+	<td>Quasi-sine-wave fully regenerative invertor</td>
+	<td>1973</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 120(9), pp. 969-976&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1973.0217">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5180806" class="entry">
+	<td>Finney, D.</td>
+	<td>Static-invertor systems tor emergency supplies</td>
+	<td>1973</td>
+	<td>Electronics and Power<br/>Vol. 19(2), pp. 32-34&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ep.1973.0045">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4236616" class="entry">
+	<td>Glover, J.</td>
+	<td>Ideal 2-port invertor networks using operational amplifiers</td>
+	<td>1975</td>
+	<td>Electronics Letters<br/>Vol. 11(7), pp. 137-138&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/el:19750104">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5248810" class="entry">
+	<td>Ho, H.</td>
+	<td>Generalised principle of operation of 3-phase thyristor invertor</td>
+	<td>1970</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 117(7), pp. 1333-1336&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1970.0256">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5247349" class="entry">
+	<td>Ho, H.</td>
+	<td>Sinewave thyristor parallel invertor with improved commutation</td>
+	<td>1966</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 113(12), pp. 2038-2046&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1966.0355">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1446941" class="entry">
+	<td>Holt, A.G.J. &amp; Horrocks, D.H.</td>
+	<td>A novel sinusoidal oscillator using a positive impedance invertor</td>
+	<td>1966</td>
+	<td>Proceedings of the IEEE<br/>Vol. 54(8), pp. 1086-1086&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/PROC.1966.5011">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6357485" class="entry">
+	<td>Il'yashenko, D.P. &amp; Chinakhov, D.A.</td>
+	<td>Influence of the invertor power supply of manual arc welding on sanitary-and-hygienic characteristics of a working zone</td>
+	<td>2012</td>
+	<td>Strategic Technology (IFOST), 2012 7th International Forum on, pp. 1-3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IFOST.2012.6357485">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6422697" class="entry">
+	<td>Jang, S.-M., Kim, J.-M., Park, Y.-S. &amp; You, D.-J.</td>
+	<td>Operating characteristics of linear induction motor driven by SVPWM invertor with reference scenario for speed control</td>
+	<td>2012</td>
+	<td>Vehicle Power and Propulsion Conference (VPPC), 2012 IEEE, pp. 569-572&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/VPPC.2012.6422697">DOI</a> &nbsp;</td>
+</tr>
+<tr id="740921" class="entry">
+	<td>Kirilenko, A., Rud, L. &amp; Tkachenko, V.</td>
+	<td>Dividing unit as K-invertor in some types of diplexers</td>
+	<td>1998</td>
+	<td><br/>Vol. 2Microwaves and Radar, 1998. MIKON '98., 12th International Conference on, pp. 562-565 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MIKON.1998.740921">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1050282" class="entry">
+	<td>Koomen, J. &amp; van den Akker, J.</td>
+	<td>A MOST invertor with improved switching speed</td>
+	<td>1972</td>
+	<td>Solid-State Circuits, IEEE Journal of<br/>Vol. 7(3), pp. 231-237&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/JSSC.1972.1050282">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4588590" class="entry">
+	<td>Kubicek, S., Schram, T., Rohr, E., Paraschiv, V., Vos, R., Demand, M., Adelmann, C., Witters, T., Nyns, L., Delabie, A., Ragnarsson, L.A., Chiarella, T., Kerner, C., Mercha, A., Parvais, B., Aoulaiche, M., Ortolland, C., Yu, H., Veloso, A., Witters, L., Singanamalla, R., Kauerauf, T., Brus, S., Vrancken, C., Chang, V., Chang, S.Z., Mitsuhashi, R., Okuno, Y., Akheyar, A., Cho, H.J., Hooker, J., O'Sullivan, B., Van Elshocht, S., De Meyer, K., Jurczak, M., Absil, P., Biesemans, S. &amp; Hoffmann, T.</td>
+	<td>Strain enhanced low-VT CMOS featuring La/Al-doped HfSiO/TaC and 10ps invertor delay</td>
+	<td>2008</td>
+	<td>VLSI Technology, 2008 Symposium on, pp. 130-131&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/VLSIT.2008.4588590">DOI</a> &nbsp;</td>
+</tr>
+<tr id="85885" class="entry">
+	<td>Lai, J.-S. &amp; Bose, B.</td>
+	<td>An induction motor drive using an improved high frequency resonant DC link invertor</td>
+	<td>1991</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 6(3), pp. 504-513&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/63.85885">DOI</a> &nbsp;</td>
+</tr>
+<tr id="25145" class="entry">
+	<td>Lai, J.-S. &amp; Bose, B.</td>
+	<td>An improved resonant DC link invertor for induction motor drives</td>
+	<td>1988</td>
+	<td>Industry Applications Society Annual Meeting, 1988., Conference Record of the 1988 IEEE, pp. 742-748 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IAS.1988.25145">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5249498" class="entry">
+	<td>Li, K.Y.G.</td>
+	<td>Analysis and operation of an invertor-fed variable-speed induction motor</td>
+	<td>1969</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 116(9), pp. 1571-1580&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1969.0283">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5248936" class="entry">
+	<td>Li, K.Y.G.</td>
+	<td>New 3-phase invertor circuit</td>
+	<td>1968</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 115(11), pp. 1677-1683&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1968.0292">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4207127" class="entry">
+	<td>Manuzio, G. &amp; Racca, L.</td>
+	<td>Tunnel-diode invertor</td>
+	<td>1967</td>
+	<td>Electronics Letters<br/>Vol. 3(2), pp. 83-84&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/el:19670065">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5182523" class="entry">
+	<td>Miller, D. &amp; Lawrence, R.</td>
+	<td>Variable-frequency invertor and its application to motor drives</td>
+	<td>1976</td>
+	<td>Electronics and Power<br/>Vol. 22(10), pp. 675-678&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ep.1976.0344">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4207349" class="entry">
+	<td>Mitra, S.</td>
+	<td>Nonreciprocal negative-impedance invertor</td>
+	<td>1967</td>
+	<td>Electronics Letters<br/>Vol. 3(8), pp. 388-&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/el:19670299">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1490777" class="entry">
+	<td>Mrabet, B., Chammam, A., Elloumi, H., Stambouli, M. &amp; Damelincourt, J.-J.</td>
+	<td>Influence of the current invertor on the emission radiation of the low pressure mercury tubular discharge used in waste water treatment by U.V irradiation</td>
+	<td>2004</td>
+	<td><br/>Vol. 3Industrial Technology, 2004. IEEE ICIT '04. 2004 IEEE International Conference on, pp. 1453-1456 Vol. 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICIT.2004.1490777">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4493170" class="entry">
+	<td>Murkin, M., Kozhemyak, O., Zeman, S. &amp; Yaroslavtsev, E.</td>
+	<td>Experimental Checking the Result of Simulation of Series Resonant Invertor</td>
+	<td>2005</td>
+	<td>Modern Technique and Technologies, 2005. MTT 2005. 11th International Scientific and Practical Conference of Students, Post-graduates and Young Scientists, pp. 38-39&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SPCMTT.2005.4493170">DOI</a> &nbsp;</td>
+</tr>
+<tr id="904689" class="entry">
+	<td>Oleschuk, V.</td>
+	<td>Computationally effective algebraizated method of feedforward synchronous PWM [invertor applications]</td>
+	<td>2000</td>
+	<td>Computers in Power Electronics, 2000. COMPEL 2000. The 7th Workshop on, pp. 40-45&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/CIPE.2000.904689">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5251651" class="entry">
+	<td>Ramamoory, M., Samek, M. &amp; Charlton, W.</td>
+	<td>Matrix method for the steady-state analysis of invertor-fed induction motors</td>
+	<td>1973</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 120(9), pp. 1015-1016&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1973.0226">DOI</a> &nbsp;</td>
+</tr>
+<tr id="500917" class="entry">
+	<td>Ramovic, R. &amp; Sasic, R.</td>
+	<td>Modelling of ultrafast invertor logical circuit in BiMOS technology</td>
+	<td>1995</td>
+	<td><br/>Vol. 2Microelectronics, 1995. Proceedings., 1995 20th International Conference on, pp. 505-508 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICMEL.1995.500917">DOI</a> &nbsp;</td>
+</tr>
+<tr id="90347" class="entry">
+	<td>Salmon, J., Olsen, S. &amp; Durdle, N.</td>
+	<td>A three-phase PWM strategy using a stepped reference waveform [invertor drives]</td>
+	<td>1991</td>
+	<td>Industry Applications, IEEE Transactions on<br/>Vol. 27(5), pp. 914-920&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/28.90347">DOI</a> &nbsp;</td>
+</tr>
+<tr id="264784" class="entry">
+	<td>Skinner, A.J.</td>
+	<td>Bidirectional continuous-mode flyback invertor</td>
+	<td>1993</td>
+	<td>Power Electronics and Applications, 1993., Fifth European Conference on, pp. 216-220 vol.3&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="553352" class="entry">
+	<td>Slonim, M. &amp; Rahovich, L.</td>
+	<td>Maximum power point regulator for 4 kW solar cell array connected through invertor to the AC grid</td>
+	<td>1996</td>
+	<td><br/>Vol. 3Energy Conversion Engineering Conference, 1996. IECEC 96., Proceedings of the 31st Intersociety, pp. 1669-1672 vol.3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IECEC.1996.553352">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5183330" class="entry">
+	<td>Tanzer, R.P.E.</td>
+	<td>Static-invertor power supplies</td>
+	<td>1975</td>
+	<td>Electronics and Power<br/>Vol. 21(15), pp. 861-862&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ep.1975.0903">DOI</a> &nbsp;</td>
+</tr>
+<tr id="198240" class="entry">
+	<td>Taufiq, J. &amp; Garcia-Cerrada, A.</td>
+	<td>State feedback control of invertor fed induction motor drives</td>
+	<td>1989</td>
+	<td>Control of Induction Motors, IEE Colloquium on, pp. 2/1-2/6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4205449" class="entry">
+	<td>Third, S.</td>
+	<td>Tunnel-diode invertor for Ripple I and II</td>
+	<td>1965</td>
+	<td>Electronics Letters<br/>Vol. 1(4), pp. 94-95&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/el:19650087">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5249624" class="entry">
+	<td>Ward, E. &amp; HÃ¿rer, H.</td>
+	<td>Preliminary investigation of an invertor-fed 5-phase induction motor</td>
+	<td>1969</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 116(6), pp. 980-984&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1969.0182">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5251498" class="entry">
+	<td>Yair, A. &amp; Ben-Uri, J.</td>
+	<td>New 3-phase invertor with three thyristors</td>
+	<td>1971</td>
+	<td>Electrical Engineers, Proceedings of the Institution of<br/>Vol. 118(7), pp. 901-905&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/piee.1971.0177">DOI</a> &nbsp;</td>
+</tr>
+<tr id="918448" class="entry">
+	<td>Zheng, Q., Wang, Q., Hao, R. &amp; Chang, L.</td>
+	<td>A novel three-phase pulse width modulation (PWM) technique based on co-related references [invertor applications]</td>
+	<td>2000</td>
+	<td>Telecommunications Energy Special Conference, 2000. TELESCON 2000. The Third International, pp. 255-258&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/TELESC.2000.918448">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

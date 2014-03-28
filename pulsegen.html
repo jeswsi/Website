@@ -1,0 +1,1033 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Pulse Generator references for fusion, plasma energy, and physics labs.">
+<title>Pulse Generator JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="6518825" class="entry">
+	<td>Abe, Y. &amp; Minamitani, Y.</td>
+	<td>Development of a RF burst pulse generator using a non-linear transmission line for cancer treatment</td>
+	<td>2012</td>
+	<td>Power Modulator and High Voltage Conference (IPMHVC), 2012 IEEE International, pp. 637-640&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMHVC.2012.6518825">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6397094" class="entry">
+	<td>Arafat, M. &amp; Harun-ur-Rashid, A.</td>
+	<td>A novel 7 Gbps low-power CMOS ultra-wideband pulse generator</td>
+	<td>2012</td>
+	<td>Circuits, Devices Systems, IET<br/>Vol. 6(6), pp. 406-412&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/iet-cds.2012.0057">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5700638" class="entry">
+	<td>Arafat, M., Rashid, S., Roy, A. &amp; Rashid, A.B.M.H.</td>
+	<td>A simple high data rate UWB OOK pulse generator with transmitted reference for on-chip wireless interconnects</td>
+	<td>2010</td>
+	<td>Electrical and Computer Engineering (ICECE), 2010 International Conference on, pp. 108-111&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICELCE.2010.5700638">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4346098" class="entry">
+	<td>Beveridge, J., MacGregor, S., Wilson, M. &amp; Timoshkin, I.</td>
+	<td>A RE-Configurable Bipolar and Monopolar Transmission-Line Based Pulse Generator</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 792-792&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4346098">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5342459" class="entry">
+	<td>Bourdel, S., Bachelet, Y., Gaubert, J., Vauche, R., Fourquin, O., Dehaese, N. &amp; Barthelemy, H.</td>
+	<td>A 9-pJ/Pulse 1.42-Vpp OOK CMOS UWB Pulse Generator for the 3.1 #x2013;10.6-GHz FCC Band</td>
+	<td>2010</td>
+	<td>Microwave Theory and Techniques, IEEE Transactions on<br/>Vol. 58(1), pp. 65-73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TMTT.2009.2035959">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6663843" class="entry">
+	<td>Bourdel, S., Vauche, R., Ramos, O., Muhr, E., Gaubert, J., Dehaese, N. &amp; Barthelemy, H.</td>
+	<td>An inductorless CMOS UWB pulse generator with active pulse shaping circuit</td>
+	<td>2013</td>
+	<td>Ultra-Wideband (ICUWB), 2013 IEEE International Conference on, pp. 175-179&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICUWB.2013.6663843">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6191410" class="entry">
+	<td>Chadwick, S.J.F., Seddon, N. &amp; Rukin, S.</td>
+	<td>A novel solid-state HPM source based on a gyromagnetic NLTL and SOS-based pulse generator</td>
+	<td>2011</td>
+	<td>Pulsed Power Conference (PPC), 2011 IEEE, pp. 178-181&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2011.6191410">DOI</a> &nbsp;</td>
+</tr>
+<tr id="961018" class="entry">
+	<td>Chung, Y., Kim, H. &amp; Yang, C.</td>
+	<td>MOSFET switched 20 kV, 500 A, 100 ns pulse generator with energy recovery circuit</td>
+	<td>2001</td>
+	<td>Pulsed Power Plasma Science, 2001. IEEE Conference Record - Abstracts, pp. 334-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.961018">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1001771" class="entry">
+	<td>Chung, Y.-H., Kim, H.-J. &amp; Yang, C.-S.</td>
+	<td>MOSFET switched 20 kV, 500 A, 100 ns pulse generator with series connected pulse transformers</td>
+	<td>2001</td>
+	<td><br/>Vol. 2Pulsed Power Plasma Science, 2001. PPPS-2001. Digest of Technical Papers, pp. 1237-1240 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.1001771">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6569509" class="entry">
+	<td>Ebrazeh, A. &amp; Mohseni, P.</td>
+	<td>An all-digital IR-UWB transmitter with a waveform-synthesis pulse generator in 90nm CMOS for high-density brain monitoring</td>
+	<td>2013</td>
+	<td>Radio Frequency Integrated Circuits Symposium (RFIC), 2013 IEEE, pp. 13-16&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/RFIC.2013.6569509">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5386428" class="entry">
+	<td>Focia, R. &amp; Frost, C.</td>
+	<td>A compact, low jitter, fast rise time, gas-switched pulse generator system with high pulse repetition rate capability</td>
+	<td>2009</td>
+	<td>Pulsed Power Conference, 2009. PPC '09. IEEE, pp. 1227-1232&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2009.5386428">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4345669" class="entry">
+	<td>Focia, R. &amp; Frost, C.</td>
+	<td>A Compact, Low Jitter, Fast Rise Time, Gas-Switched Pulse Generator System with High Pulse Repetition Rate Capability</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 363-363&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4345669">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084475" class="entry">
+	<td>Focia, R. &amp; Frost, C.</td>
+	<td>A Compact, Low Jitter, 1 kHz Pulse Repetition Rate Gas-Switched Pulse Generator System</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1341-1344&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300634">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084416" class="entry">
+	<td>Grabowski, C., Gregg, C., Trujillo, D., Sommars, W., Ramrus, A., Hendricks, K. &amp; Henry, J.</td>
+	<td>Refurbishment of the ETDL Rep-Rate Pulse Generator at AFRL</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1109-1112&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300514">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1495564" class="entry">
+	<td>Grekhov, I., Korotkov, S., Stepaniants, A., Khristyuk, D., Voronkov, V. &amp; Aristov, Y.</td>
+	<td>High-Power Semiconductor-Based Nano and Subnanosecond Pulse Generator With a Low Delay Time</td>
+	<td>2005</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 33(4), pp. 1240-1244&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2005.852349">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5561068" class="entry">
+	<td>Han, J., Huynh, C. &amp; Nguyen, C.</td>
+	<td>Tunable monocycle pulse generator using switch controlled delay line and tunable RC network for UWB systems</td>
+	<td>2010</td>
+	<td>Antennas and Propagation Society International Symposium (APSURSI), 2010 IEEE, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APS.2010.5561068">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1440691" class="entry">
+	<td>Han, J. &amp; Nguyen, C.</td>
+	<td>Coupled-slotline-hybrid sampling mixer integrated with step-recovery-diode pulse generator for UWB applications</td>
+	<td>2005</td>
+	<td>Microwave Theory and Techniques, IEEE Transactions on<br/>Vol. 53(6), pp. 1875-1882&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TMTT.2005.848091">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1009996" class="entry">
+	<td>Han, J. &amp; Nguyen, C.</td>
+	<td>A new ultra-wideband, ultra-short monocycle pulse generator with reduced ringing</td>
+	<td>2002</td>
+	<td>Microwave and Wireless Components Letters, IEEE<br/>Vol. 12(6), pp. 206-208&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/LMWC.2002.1009996">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5213118" class="entry">
+	<td>Hasanzadeh, A., Sadriyeh, S.M.R., Mohammadi, A., Maghsoudlou, B., Mokhtari, H., Alizadeh, H.R. &amp; Shams Mousavi, S.</td>
+	<td>A high power high voltage short pulse width pulse generator using direct drive method in application of modulating-cathode tubes drive</td>
+	<td>2009</td>
+	<td>Industrial Electronics, 2009. ISIE 2009. IEEE International Symposium on, pp. 2097-2102&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISIE.2009.5213118">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4084480" class="entry">
+	<td>Heeren, T., Ueno, T. &amp; Akiyama, H.</td>
+	<td>Miniature, Solid-State, Kilovolt, Nanosecond Pulse Generator with Variable Pulse-Width, Pulse-Polarity, and Pulse Frequency</td>
+	<td>2005</td>
+	<td>Pulsed Power Conference, 2005 IEEE, pp. 1360-1363&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2005.300639">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5348078" class="entry">
+	<td>Huang, H., Zhao, J. &amp; Ni, X.</td>
+	<td>Realization of pulse generator of cascaded high voltage inverters basing on FPGA</td>
+	<td>2009</td>
+	<td>Sustainable Power Generation and Supply, 2009. SUPERGEN '09. International Conference on, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SUPERGEN.2009.5348078">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6635000" class="entry">
+	<td>Huiskamp, T., Beckers, F., van Heesch, E. &amp; Pemen, A.</td>
+	<td>Evaluation of a solid state 120 kV microsecond pulse charger for a 1 #x2013;10 nanosecond pulse generator</td>
+	<td>2013</td>
+	<td>Plasma Science (ICOPS), 2013 Abstracts IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2013.6635000">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6633453" class="entry">
+	<td>Huiskamp, T., van Heesch, E. &amp; Pemen, A.</td>
+	<td>Evaluation of a 0 #x2013;60 kV oil-switched picosecond rise-time 5 nanosecond pulse generator</td>
+	<td>2013</td>
+	<td>Plasma Science (ICOPS), 2013 Abstracts IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2013.6633453">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5614710" class="entry">
+	<td>Jazairli, M., Mallat, A., Vandendorpe, L. &amp; Flandre, D.</td>
+	<td>An ultra-low-power frequency-tunable UWB pulse generator using 65nm CMOS technology</td>
+	<td>2010</td>
+	<td><br/>Vol. 1Ultra-Wideband (ICUWB), 2010 IEEE International Conference on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICUWB.2010.5614710">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5385437" class="entry">
+	<td>Jin, R., Halder, S., Hwang, J. &amp; Law, C.</td>
+	<td>Tunable pulse generator for ultra-wideband applications</td>
+	<td>2009</td>
+	<td>Microwave Conference, 2009. APMC 2009. Asia Pacific, pp. 2272-2275&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APMC.2009.5385437">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5236094" class="entry">
+	<td>Joo, Y., Kim, H. &amp; Jung, S.</td>
+	<td>A tunable pulse generator for Sub-GHz UWB systems</td>
+	<td>2009</td>
+	<td>Circuits and Systems, 2009. MWSCAS '09. 52nd IEEE International Midwest Symposium on, pp. 292-296&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MWSCAS.2009.5236094">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6421692" class="entry">
+	<td>Jung, C.-U., Yoo, H.-J. &amp; Eo, Y.-S.</td>
+	<td>Digital low-power high-band UWB pulse generator in 130nm CMOS process</td>
+	<td>2012</td>
+	<td>Microwave Conference Proceedings (APMC), 2012 Asia-Pacific, pp. 652-654&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APMC.2012.6421692">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1277721" class="entry">
+	<td>Keawboonchuay, C. &amp; Engel, T.</td>
+	<td>Factors affecting maximum power generation in a piezoelectric pulse generator</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Pulsed Power Conference, 2003. Digest of Technical Papers. PPC-2003. 14th IEEE International, pp. 327-330 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2003.1277721">DOI</a> &nbsp;</td>
+</tr>
+<tr id="674620" class="entry">
+	<td>Kekez, M.M.</td>
+	<td>A 480 joule, 650 kV, <3 ns risetime, 500 ns pulse width compact pulse generator</td>
+	<td>1997</td>
+	<td><br/>Vol. 2Pulsed Power Conference, 1997. Digest of Technical Papers. 1997 11th IEEE International, pp. 1524-1529 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1997.674620">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4059429" class="entry">
+	<td>Kim, H., Joo, Y. &amp; Jung, S.</td>
+	<td>A Tunable CMOS UWB Pulse Generator</td>
+	<td>2006</td>
+	<td>Ultra-Wideband, The 2006 IEEE 2006 International Conference on, pp. 109-112&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICU.2006.281524">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1433591" class="entry">
+	<td>Kim, J., Ryu, M., Shenderey, S., Kim, J.-S. &amp; Rim, G.</td>
+	<td>Semiconductor switches based pulse power generator for plasma source ion implantation</td>
+	<td>2004</td>
+	<td>Power Modulator Symposium, 2004 and 2004 High-Voltage Workshop. Conference Record of the Twenty-Sixth International, pp. 378-382&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2004.1433591">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1279963" class="entry">
+	<td>Kim, J.-H., Lee, S.-C., Lee, B.-K., Shenderey, S., Kim, J.-S. &amp; Rim, G.-H.</td>
+	<td>A high-voltage bi-polar pulse generator a using push-pull inverter</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Industrial Electronics Society, 2003. IECON '03. The 29th Annual Conference of the IEEE, pp. 102-106 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IECON.2003.1279963">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4743577" class="entry">
+	<td>Kolb, J., Scarlett, S., Cannone, J., Zhuang, J., Osgood, C., Schoenbach, K., De Angelis, A. &amp; Zeni, L.</td>
+	<td>Nanosecond Pulse Generator with Variable Pulse Duration for the Study of Pulse Induced Biological Effects</td>
+	<td>2008</td>
+	<td>IEEE International Power Modulators and High Voltage Conference, Proceedings of the 2008, pp. 61-64&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMC.2008.4743577">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1351302" class="entry">
+	<td>Larson, D., Paulter, N.G., J. &amp; Bergman, D.</td>
+	<td>Pulse parameter dependence on transition position and epoch duration [pulse generators and sampling oscilloscopes]</td>
+	<td>2004</td>
+	<td><br/>Vol. 2Instrumentation and Measurement Technology Conference, 2004. IMTC 04. Proceedings of the 21st IEEE, pp. 1291-1295 Vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IMTC.2004.1351302">DOI</a> &nbsp;</td>
+</tr>
+<tr id="925501" class="entry">
+	<td>Lee, J.-S., Nguyen, C. &amp; Scullion, T.</td>
+	<td>New uniplanar subnanosecond monocycle pulse generator and transformer for time-domain microwave applications</td>
+	<td>2001</td>
+	<td>Microwave Theory and Techniques, IEEE Transactions on<br/>Vol. 49(6), pp. 1126-1129&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/22.925501">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1717663" class="entry">
+	<td>Liang, C.-F., Liu, S.-T. &amp; Liu, S.-I.</td>
+	<td>A Calibrated Pulse Generator for Impulse-Radio UWB Applications</td>
+	<td>2006</td>
+	<td>Solid-State Circuits, IEEE Journal of<br/>Vol. 41(11), pp. 2401-2407&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/JSSC.2006.882889">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6633270" class="entry">
+	<td>Lim, S., Kim, J., Cho, C., Kim, Y., Jin, Y. &amp; Katsuki, S.</td>
+	<td>PPPS-2013: Nanosecond high-voltage pulse generator using a spiral blumlein for electromagnetic interference test</td>
+	<td>2013</td>
+	<td>Plasma Science (ICOPS), 2013 Abstracts IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2013.6633270">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1710048" class="entry">
+	<td>Lindblom, A., Bernhoff, H., Isberg, J. &amp; Leijon, M.</td>
+	<td>An Inductive 700-MW High-Voltage Pulse Generator</td>
+	<td>2006</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 34(5), pp. 1838-1845&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2006.881279">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5466060" class="entry">
+	<td>Liu, J., Zhang, Y., Chen, Z. &amp; Feng, J.</td>
+	<td>A Compact 100-PPS High-Voltage Trigger Pulse Generator</td>
+	<td>2010</td>
+	<td>Electron Devices, IEEE Transactions on<br/>Vol. 57(7), pp. 1680-1686&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TED.2010.2047905">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6627494" class="entry">
+	<td>Matsukubo, D. &amp; Minamitani, Y.</td>
+	<td>Development of a high frequency cluster burst pulse generator based on a SOS diode using transmission line resonant for bioelectrics applications</td>
+	<td>2013</td>
+	<td>Pulsed Power Conference (PPC), 2013 19th IEEE, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2013.6627494">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6271151" class="entry">
+	<td>Mohammed, A., Al-Khateeb, K. &amp; Islam, M.</td>
+	<td>5.5 #x2013;10.5 GHz IR-UWB pulse generator for narrowband interference mitigation</td>
+	<td>2012</td>
+	<td>Computer and Communication Engineering (ICCCE), 2012 International Conference on, pp. 55-58&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICCCE.2012.6271151">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6271234" class="entry">
+	<td>Mohammed, A., Al-Khateeb, K. &amp; Islam, M.</td>
+	<td>A novel design of 8-Gbps IR-UWB pulse generator</td>
+	<td>2012</td>
+	<td>Computer and Communication Engineering (ICCCE), 2012 International Conference on, pp. 486-489&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICCCE.2012.6271234">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5498330" class="entry">
+	<td>Moreira, L., Silveira, D., Van Noije, W.A.M. &amp; Kofuji, S.</td>
+	<td>A 5th derivative Gaussian pulse CMOS IR-UWB generator using a Phase Detector</td>
+	<td>2010</td>
+	<td>German Microwave Conference, 2010, pp. 154-157&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="259073" class="entry">
+	<td>Nesterov, V. &amp; Cassel, R.</td>
+	<td>High current transistor pulse generator</td>
+	<td>1991</td>
+	<td>Nuclear Science Symposium and Medical Imaging Conference, 1991., Conference Record of the 1991 IEEE, pp. 1009-1011 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/NSSMIC.1991.259073">DOI</a> &nbsp;</td>
+</tr>
+<tr id="505190" class="entry">
+	<td>Nesterov, V.V. &amp; Donaldson, A.R.</td>
+	<td>High current high accuracy IGBT pulse generator</td>
+	<td>1995</td>
+	<td><br/>Vol. 2Particle Accelerator Conference, 1995., Proceedings of the 1995, pp. 1251-1253 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PAC.1995.505190">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6180353" class="entry">
+	<td>Neto, J., Moreira, L. &amp; Van Noije, W.A.M.</td>
+	<td>Inductorless very small 4.6pJ/pulse 7th derivative pulse generator for IR-UWB</td>
+	<td>2012</td>
+	<td>Circuits and Systems (LASCAS), 2012 IEEE Third Latin American Symposium on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/LASCAS.2012.6180353">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6340494" class="entry">
+	<td>Nguyen, N., Duong, N., Dinh, A. &amp; Wang, T.</td>
+	<td>A 90 nm CMOS high order derivative Gaussian pulse generator using LC-Tank oscillator for 6 #x2013;10 GHz UWB transceiver</td>
+	<td>2012</td>
+	<td>Ultra-Wideband (ICUWB), 2012 IEEE International Conference on, pp. 379-382&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICUWB.2012.6340494">DOI</a> &nbsp;</td>
+</tr>
+<tr id="677809" class="entry">
+	<td>Okino, A., Ohmura, J., Ozawa, M. &amp; Hotta, E.</td>
+	<td>Bidirectional pulse generator with laser-triggered switch for linear induction accelerator</td>
+	<td>1998</td>
+	<td>Plasma Science, 1998. 25th Anniversary. IEEE Conference Record - Abstracts. 1998 IEEE International on, pp. 252-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.1998.677809">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4526201" class="entry">
+	<td>Phan, A.-T., Lee, J., Krizhanovskii, V., Le, Q., Han, S.-K. &amp; Lee, S.-G.</td>
+	<td>Energy-Efficient Low-Complexity CMOS Pulse Generator for Multiband UWB Impulse Radio</td>
+	<td>2008</td>
+	<td>Circuits and Systems I: Regular Papers, IEEE Transactions on<br/>Vol. 55(11), pp. 3552-3563&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCSI.2008.925821">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6609150" class="entry">
+	<td>Pinguet, S., Duperoux, J.-P., Delmote, P., Bieth, F. &amp; Bischoff, R.</td>
+	<td>Short-Pulse Marx Generator for High-Power Microwave Applications</td>
+	<td>2013</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 41(10), pp. 2754-2757&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2013.2277981">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6254325" class="entry">
+	<td>Pongsoon, P., Kaemarungsi, K. &amp; Bunnjaweht, D.</td>
+	<td>Edge-triggered driver circuit for ultra-wideband pulse generator with cascode impulse shaping</td>
+	<td>2012</td>
+	<td>Electrical Engineering/Electronics, Computer, Telecommunications and Information Technology (ECTI-CON), 2012 9th International Conference on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ECTICon.2012.6254325">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5295935" class="entry">
+	<td>Protiva, P., Mrkvica, J. &amp; Machac, J.</td>
+	<td>Sub-nanosecond pulse generator for through-the-wall radar application</td>
+	<td>2009</td>
+	<td>Microwave Conference, 2009. EuMC 2009. European, pp. 1904-1907&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5385448" class="entry">
+	<td>Protiva, P., Mrkvica, J. &amp; Machac, J.</td>
+	<td>High power monocycle pulse generator for through-the-wall radar transmitter</td>
+	<td>2009</td>
+	<td>Microwave Conference, 2009. APMC 2009. Asia Pacific, pp. 2324-2327&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APMC.2009.5385448">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4957397" class="entry">
+	<td>Qin, B., Wang, X., Wang, A., Chen, H. &amp; Zhao, B.</td>
+	<td>A programmable 1.8pJ/pulse Gaussian pulse generator for impulse UWB transceiver in 90nm CMOS</td>
+	<td>2009</td>
+	<td>Radio and Wireless Symposium, 2009. RWS '09. IEEE, pp. 498-501&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/RWS.2009.4957397">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6242811" class="entry">
+	<td>Qiu, W., Yu, Y., Tsang, F.K. &amp; Sun, L.</td>
+	<td>A multifunctional, reconfigurable pulse generator for high-frequency ultrasound imaging</td>
+	<td>2012</td>
+	<td>Ultrasonics, Ferroelectrics and Frequency Control, IEEE Transactions on<br/>Vol. 59(7), pp. 1558-1567&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TUFFC.2012.2355">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6601353" class="entry">
+	<td>Radic, J., Djugova, A., Nagy, L. &amp; Videnovic-Misic, M.</td>
+	<td>A tunable OOK IR-UWB pulse generator in 0.18 #x00B5;m technology</td>
+	<td>2013</td>
+	<td>Embedded Computing (MECO), 2013 2nd Mediterranean Conference on, pp. 188-191&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MECO.2013.6601353">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6034348" class="entry">
+	<td>Radic, J., Djugova, A. &amp; Videnovic-Misic, M.</td>
+	<td>A 3.1 #x2013;10.6 GHz impulse-radio UWB pulse generator in 0.18 #x00B5;m</td>
+	<td>2011</td>
+	<td>Intelligent Systems and Informatics (SISY), 2011 IEEE 9th International Symposium on, pp. 335-338&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SISY.2011.6034348">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6143222" class="entry">
+	<td>Radic, J., Djugova, A. &amp; Videnovic-Misic, M.</td>
+	<td>Low power IR-UWB pulse generator in 0.18 #x03BC;m CMOS technology</td>
+	<td>2011</td>
+	<td><br/>Vol. 2Telecommunication in Modern Satellite Cable and Broadcasting Services (TELSIKS), 2011 10th International Conference on, pp. 761-764&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/TELSKS.2011.6143222">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6633416" class="entry">
+	<td>Rajulapati, S., Husain, F., Ananthapadmanabha, S., Schoenbach, K. &amp; Xiao, S.</td>
+	<td>Nanosecond biphasic pulse generators for biomedical applications</td>
+	<td>2013</td>
+	<td>Plasma Science (ICOPS), 2013 Abstracts IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2013.6633416">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1611176" class="entry">
+	<td>Ramakrishnan, V. &amp; Balsara, P.</td>
+	<td>Very high precision Vernier delay line based CMOS pulse generator</td>
+	<td>2005</td>
+	<td>Architecture, Circuits and Implementtation of SOCs, 2005. DCAS '05. Proceedings of the 2005 IEEE Dallas/CAS Workshop:, pp. 225-228&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/DCAS.2005.1611176">DOI</a> &nbsp;</td>
+</tr>
+<tr id="542958" class="entry">
+	<td>Ridge, N., Jones, D., Lesurf, J.C.G. &amp; Parkes, D.</td>
+	<td>A solid state pulse generator (DHVG1) as a grid bias supply for the MITTON</td>
+	<td>1996</td>
+	<td>Pulsed Power '96, IEE Colloquium on, pp. 26/1-26/4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1049/ic:19960400">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4346252" class="entry">
+	<td>Robledo-Martinez, A., Vega, R., Cuellar, L.E., Ruiz-Meza, A., Guzman, E. &amp; Castillo, F.</td>
+	<td>High-Voltage, Square-Wave Trigger Pulse Generator</td>
+	<td>2007</td>
+	<td>Plasma Science, 2007. ICOPS 2007. IEEE 34th International Conference on, pp. 946-946&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2007.4346252">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1389147" class="entry">
+	<td>Rulikowski, P. &amp; Barrett, J.</td>
+	<td>Truly balanced step recovery diode pulse generator with single power supply</td>
+	<td>2004</td>
+	<td>Radio and Wireless Conference, 2004 IEEE, pp. 347-350&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/RAWCON.2004.1389147">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5537338" class="entry">
+	<td>Salehi-Abari, O. &amp; Plett, C.</td>
+	<td>A differential 5th derivative Gaussian pulse generator for UWB transceivers</td>
+	<td>2010</td>
+	<td>Circuits and Systems (ISCAS), Proceedings of 2010 IEEE International Symposium on, pp. 1089-1092&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISCAS.2010.5537338">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5211853" class="entry">
+	<td>Sanders, J., Kuthi, A., Wu, Y.-H., Vernier, P. &amp; Gundersen, M.</td>
+	<td>A linear, single-stage, nanosecond pulse generator for delivering intense electric fields to biological loads</td>
+	<td>2009</td>
+	<td>Dielectrics and Electrical Insulation, IEEE Transactions on<br/>Vol. 16(4), pp. 1048-1054&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TDEI.2009.5211853">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5288733" class="entry">
+	<td>Schwartz, J., Azana, J., Zicha, N. &amp; Plant, D.</td>
+	<td>Design and analysis of a compact UWB pulse generator with programmable pulse shape</td>
+	<td>2009</td>
+	<td>Ultra-Wideband, 2009. ICUWB 2009. IEEE International Conference on, pp. 38-42&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICUWB.2009.5288733">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4263591" class="entry">
+	<td>Serres, A., Duroc, Y., Vuong, T.-P., de Farias, J. &amp; Fontgalland, G.</td>
+	<td>A New Simple UWB Monocycle Pulse Generator</td>
+	<td>2006</td>
+	<td>Electronics, Circuits and Systems, 2006. ICECS '06. 13th IEEE International Conference on, pp. 1212-1215&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICECS.2006.379679">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4770128" class="entry">
+	<td>Sim, S., Kim, D.-W. &amp; Hong, S.</td>
+	<td>A CMOS UWB Pulse Generator for 6 #x2013;10 GHz Applications</td>
+	<td>2009</td>
+	<td>Microwave and Wireless Components Letters, IEEE<br/>Vol. 19(2), pp. 83-85&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/LMWC.2008.2011318">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1541612" class="entry">
+	<td>Smaini, L., Tinella, C., Helal, D., Stoecklin, C., Chabert, L., Devaucelle, C., Cattenoz, R. &amp; Belot, D.</td>
+	<td>Single-chip CMOS pulse generator for UWB systems</td>
+	<td>2005</td>
+	<td>Solid-State Circuits Conference, 2005. ESSCIRC 2005. Proceedings of the 31st European, pp. 271-274&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ESSCIR.2005.1541612">DOI</a> &nbsp;</td>
+</tr>
+<tr id="604900" class="entry">
+	<td>Spassov, V.A., Barroso, J., Ueda, M. &amp; Gueorguiev, L.</td>
+	<td>A compact high-voltage pulse generator for plasma applications</td>
+	<td>1997</td>
+	<td>Plasma Science, 1997. IEEE Conference Record - Abstracts., 1997 IEEE International Conference on, pp. 215-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.1997.604900">DOI</a> &nbsp;</td>
+</tr>
+<tr id="674621" class="entry">
+	<td>Spassov, V.A., Ueda, M., Barroso, J. &amp; Gueorguiev, L.</td>
+	<td>A high-voltage pulse generator for plasma ion immersion implantation applications</td>
+	<td>1997</td>
+	<td><br/>Vol. 2Pulsed Power Conference, 1997. Digest of Technical Papers. 1997 11th IEEE International, pp. 1530-1535 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.1997.674621">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6107749" class="entry">
+	<td>Stoopman, M. &amp; Serdijn, W.</td>
+	<td>A sub-GHz UWB pulse generator for wireless implantable medical devices</td>
+	<td>2011</td>
+	<td>Biomedical Circuits and Systems Conference (BioCAS), 2011 IEEE, pp. 149-152&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/BioCAS.2011.6107749">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6058915" class="entry">
+	<td>Stornelli, V., Minutolo, R., Leuzzi, G., Barcio, F. &amp; Montanari, M.</td>
+	<td>Notice of Violation of IEEE Publication Principles A low complexity tuneable pulse generator architecture for sub-GHz UWB applications</td>
+	<td>2011</td>
+	<td>Ultra-Wideband (ICUWB), 2011 IEEE International Conference on, pp. 58-62&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICUWB.2011.6058915">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6021712" class="entry">
+	<td>Syamsiana, I. &amp; Putri, R.</td>
+	<td>High voltage pulse generator design with voltage control for pulse electric field (PEF) pasteurization</td>
+	<td>2011</td>
+	<td>Electrical Engineering and Informatics (ICEEI), 2011 International Conference on, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICEEI.2011.6021712">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1189544" class="entry">
+	<td>Takaki, K., Sasaki, T., Kato, S., Mukaigawa, S. &amp; Fujiwara, T.</td>
+	<td>NOx removal from engine exhaust gas using multipoints DBD and pulse streamer discharges with SOS pulse generator</td>
+	<td>2002</td>
+	<td>Power Modulator Symposium, 2002 and 2002 High-Voltage Workshop. Conference Record of the Twenty-Fifth International, pp. 575-578&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MODSYM.2002.1189544">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4168234" class="entry">
+	<td>Tian, B., Zhang, Y.-S. &amp; Wang, C.Y.</td>
+	<td>Impulse Generator Using UWB Pulse Forming Network</td>
+	<td>2006</td>
+	<td>Antennas, Propagation EM Theory, 2006. ISAPE '06. 7th International Symposium on, pp. 1-3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISAPE.2006.353573">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4401194" class="entry">
+	<td>Tseng, S.-Y., Wu, T.-F. &amp; Chen, Y.-M.</td>
+	<td>Wide Pulse Combined With Narrow-Pulse Generator for Food Sterilization</td>
+	<td>2008</td>
+	<td>Industrial Electronics, IEEE Transactions on<br/>Vol. 55(2), pp. 741-748&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TIE.2007.910517">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5288788" class="entry">
+	<td>Vauché, R., Bourdel, S., Dehaese, N., Fourquin, O. &amp; Gaubert, J.</td>
+	<td>Fully tunable UWB pulse generator with zero DC power consumption</td>
+	<td>2009</td>
+	<td>Ultra-Wideband, 2009. ICUWB 2009. IEEE International Conference on, pp. 418-422&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICUWB.2009.5288788">DOI</a> &nbsp;</td>
+</tr>
+<tr id="960755" class="entry">
+	<td>Vizir, V.A., Zorin, V.B., Ivanov, S.V., Kovalchuk, B., Maksimenko, A.D., Manilov, V.I., Smorudov, G., Shubkin, N.G. &amp; Chervyakov, V.V.</td>
+	<td>High-voltage microsecond pulse generator for plasma immersion ion implantation</td>
+	<td>2001</td>
+	<td>Pulsed Power Plasma Science, 2001. IEEE Conference Record - Abstracts, pp. 179-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPPS.2001.960755">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4678172" class="entry">
+	<td>Wang, Q., Tian, X., Liu, Y., Li, B. &amp; Gao, B.</td>
+	<td>Design of an Ultra-Wideband Pulse Generator Based on Avalanche Transistor</td>
+	<td>2008</td>
+	<td>Wireless Communications, Networking and Mobile Computing, 2008. WiCOM '08. 4th International Conference on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/WiCom.2008.263">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4397135" class="entry">
+	<td>Wang, Q. &amp; Yao, J.</td>
+	<td>An Electrically Switchable Optical Ultrawideband Pulse Generator</td>
+	<td>2007</td>
+	<td>Lightwave Technology, Journal of<br/>Vol. 25(11), pp. 3626-3633&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/JLT.2007.907749">DOI</a> &nbsp;</td>
+</tr>
+<tr id="906940" class="entry">
+	<td>Wang, R., Yeh, P., Chang, H.-C. &amp; Yi, X.</td>
+	<td>All-optical pulse generator using nonlinear interference filters</td>
+	<td>2000</td>
+	<td>Lasers and Electro-Optics, 2000. (CLEO 2000). Conference on, pp. 223-224&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/CLEO.2000.906940">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1618592" class="entry">
+	<td>Wentzloff, D. &amp; Chandrakasan, A.</td>
+	<td>Gaussian pulse Generators for subbanded ultra-wideband transmitters</td>
+	<td>2006</td>
+	<td>Microwave Theory and Techniques, IEEE Transactions on<br/>Vol. 54(4), pp. 1647-1655&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TMTT.2006.872053">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6724890" class="entry">
+	<td>Wu, J.-X., Du, Y.-C., Lin, C.-H., Chen, P.-J. &amp; Chen, T.</td>
+	<td>A novel bipolar pulse generator for high-frequency ultrasound system</td>
+	<td>2013</td>
+	<td>Ultrasonics Symposium (IUS), 2013 IEEE International, pp. 1571-1574&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ULTSYM.2013.0400">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5959978" class="entry">
+	<td>Xia, T., Venkatachalam, A. &amp; Huston, D.</td>
+	<td>A High-Performance Low-Ringing Ultrawideband Monocycle Pulse Generator</td>
+	<td>2012</td>
+	<td>Instrumentation and Measurement, IEEE Transactions on<br/>Vol. 61(1), pp. 261-266&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TIM.2011.2161022">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6429081" class="entry">
+	<td>Xia, X., Liu, L., Chen, J., Guan, H., Zhang, Q. &amp; Fang, G.</td>
+	<td>A Novel Generator of Ultra-wideband Pulse</td>
+	<td>2012</td>
+	<td>Instrumentation, Measurement, Computer, Communication and Control (IMCCC), 2012 Second International Conference on, pp. 1037-1040&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IMCCC.2012.399">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6663994" class="entry">
+	<td>Xiao, Y., Wang, Z.-Y., Li, J. &amp; Yuan, Z.-L.</td>
+	<td>Design of a Second-Derivative Gaussian pulse generator</td>
+	<td>2013</td>
+	<td>Signal Processing, Communication and Computing (ICSPCC), 2013 IEEE International Conference on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICSPCC.2013.6663994">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4253258" class="entry">
+	<td>Xie, H., Wang, A., Wang, A., Qin, B., Chen, H., Zhou, Y. &amp; Zhao, B.</td>
+	<td>A Varying Pulse Width Second Order Derivative Gaussian Pulse Generator for UWB Transceivers in CMOS</td>
+	<td>2007</td>
+	<td>Circuits and Systems, 2007. ISCAS 2007. IEEE International Symposium on, pp. 2794-2797&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISCAS.2007.378633">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4463456" class="entry">
+	<td>Xie, H., Wang, X., Wang, A., Zhao, B., Zhou, Y., Qin, B., Chen, H. &amp; Wang, Z.</td>
+	<td>A varying pulse width 5th-derivative gaussian pulse generator for UWB transceivers in CMOS</td>
+	<td>2008</td>
+	<td>Radio and Wireless Symposium, 2008 IEEE, pp. 171-174&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/RWS.2008.4463456">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1570027" class="entry">
+	<td>Yilmaz, S. &amp; Tekin, I.</td>
+	<td>Ultra-wideband n-bit digitally tunable pulse generator</td>
+	<td>2005</td>
+	<td>Ultra-Wideband, 2005. ICU 2005. 2005 IEEE International Conference on, pp. 438-441&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICU.2005.1570027">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4098457" class="entry">
+	<td>Zeng, M., Huang, L., Su, J. &amp; Fang, F.</td>
+	<td>A CMOS TH-BPAM UWB Pulse Generator</td>
+	<td>2006</td>
+	<td>Solid-State and Integrated Circuit Technology, 2006. ICSICT '06. 8th International Conference on, pp. 1511-1513&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICSICT.2006.306274">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4014917" class="entry">
+	<td>Zhang, C. &amp; Fathy, A.</td>
+	<td>Reconfigurable Pico-Pulse Generator for UWB Applications</td>
+	<td>2006</td>
+	<td>Microwave Symposium Digest, 2006. IEEE MTT-S International, pp. 407-410&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MWSYM.2006.249557">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5976109" class="entry">
+	<td>Zhang, D., Zhou, Y., Wang, J. &amp; Yan, P.</td>
+	<td>A compact, high repetition-rate, nanosecond pulse generator based on magnetic pulse compression system</td>
+	<td>2011</td>
+	<td>Dielectrics and Electrical Insulation, IEEE Transactions on<br/>Vol. 18(4), pp. 1151-1157&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TDEI.2011.5976109">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5958375" class="entry">
+	<td>Zhang, D., Zhou, Y., Yan, P., Shao, T. &amp; Sun, Y.</td>
+	<td>A compact, high repetition-rate, nanosecond pulse generator based on magnetic pulse compression</td>
+	<td>2010</td>
+	<td>Power Modulator and High Voltage Conference (IPMHVC), 2010 IEEE International, pp. 388-390&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMHVC.2010.5958375">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6627620" class="entry">
+	<td>Zhang, W., Fischer, W., Hahn, H., Liaw, C., Sandberg, J. &amp; Tuozzolo, J.</td>
+	<td>Accelerator fast kicker R amp;D with ultra compact 50MVA nano-second FID pulse generator</td>
+	<td>2013</td>
+	<td>Pulsed Power Conference (PPC), 2013 19th IEEE, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PPC.2013.6627620">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6635003" class="entry">
+	<td>Zhang, W., Fischer, W., Hahn, H., Liaw, C., Sandberg, J. &amp; Tuozzolo, J.</td>
+	<td>Accelerator fast kicker R amp;D with ultra compact 50MVA nano-second FID pulse generator</td>
+	<td>2013</td>
+	<td>Plasma Science (ICOPS), 2013 Abstracts IEEE International Conference on, pp. 1-1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.2013.6635003">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1594375" class="entry">
+	<td>Zhang, X., Ghosh, S. &amp; Bayoumi, M.</td>
+	<td>A low power CMOS UWB pulse generator</td>
+	<td>2005</td>
+	<td>Circuits and Systems, 2005. 48th Midwest Symposium on, pp. 1410-1413 Vol. 2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MWSCAS.2005.1594375">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4534750" class="entry">
+	<td>Zhao, J., Maxey, C., Narayanan, A. &amp; Raman, S.</td>
+	<td>CMOS Wideband Pulse Generators for UWB Transmitter Applications</td>
+	<td>2006</td>
+	<td>Sarnoff Symposium, 2006 IEEE, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SARNOF.2006.4534750">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5614726" class="entry">
+	<td>Zhu, A., Sheng, F. &amp; Zhang, A.</td>
+	<td>An implementation of step recovery diode-based UWB pulse generator</td>
+	<td>2010</td>
+	<td><br/>Vol. 2Ultra-Wideband (ICUWB), 2010 IEEE International Conference on, pp. 1-4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICUWB.2010.5614726">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5467176" class="entry">
+	<td>Zito, F., Pepe, D. &amp; Zito, D.</td>
+	<td>UWB CMOS Monocycle Pulse Generator</td>
+	<td>2010</td>
+	<td>Circuits and Systems I: Regular Papers, IEEE Transactions on<br/>Vol. 57(10), pp. 2654-2664&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TCSI.2010.2047751">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

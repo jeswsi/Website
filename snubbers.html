@@ -1,0 +1,833 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful Snubber references for fusion, plasma energy, and physics labs.">
+<title>Snubbers JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="6423935" class="entry">
+	<td>Abramovitz, A., Liao, C.-S. &amp; Smedley, K.</td>
+	<td>State-Plane Analysis of Regenerative Snubber for Flyback Converters</td>
+	<td>2013</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 28(11), pp. 5323-5332&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2013.2243845">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4417284" class="entry">
+	<td>Al-Nasseir, J., Weindl, C. &amp; Herold, G.</td>
+	<td>Dual-inductive snubber circuit design for three-level inverter</td>
+	<td>2007</td>
+	<td>Power Electronics and Applications, 2007 European Conference on, pp. 1-10&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/EPE.2007.4417284">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4778480" class="entry">
+	<td>Al-Nasseir, J., Weindl, C., Herold, G. &amp; Flotthmesch, J.</td>
+	<td>A Dual-use Snubber Design for Multi-Level Inverter Systems</td>
+	<td>2006</td>
+	<td>Power Electronics and Motion Control Conference, 2006. EPE-PEMC 2006. 12th International, pp. 683-688&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/EPEPEMC.2006.4778480">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1665425" class="entry">
+	<td>Al-Nassier, J., Weindl, C. &amp; Herold, G.</td>
+	<td>An optimized snubber design for three level inverter systems</td>
+	<td>2005</td>
+	<td>Power Electronics and Applications, 2005 European Conference on, pp. 10 pp.-P.10&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/EPE.2005.219235">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5744792" class="entry">
+	<td>Cacciato, M. &amp; Consoli, A.</td>
+	<td>New regenerative active snubber circuit for ZVS phase shift Full Bridge converter</td>
+	<td>2011</td>
+	<td>Applied Power Electronics Conference and Exposition (APEC), 2011 Twenty-Sixth Annual IEEE, pp. 1507-1511&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2011.5744792">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5944806" class="entry">
+	<td>Cai, C., jun, P.X., Yu, C. &amp; Yong, K.</td>
+	<td>The loss calculation of RCD snubber with forward and reverse recovery effects considerations</td>
+	<td>2011</td>
+	<td>Power Electronics and ECCE Asia (ICPE ECCE), 2011 IEEE 8th International Conference on, pp. 3005-3012&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICPE.2011.5944806">DOI</a> &nbsp;</td>
+</tr>
+<tr id="803400" class="entry">
+	<td>Fujiwara, K. &amp; Nomura, H.</td>
+	<td>A novel lossless passive snubber for soft-switching boost-type converters</td>
+	<td>1999</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 14(6), pp. 1065-1069&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/63.803400">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5440754" class="entry">
+	<td>Garcia-Caraveo, A., Soto, A., Gonzalez, R. &amp; Banuelos-Sanchez, P.</td>
+	<td>Brief review on snubber circuits</td>
+	<td>2010</td>
+	<td>Electronics, Communications and Computer (CONIELECOMP), 2010 20th International Conference on, pp. 271-275&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/CONIELECOMP.2010.5440754">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4542615" class="entry">
+	<td>Guzman, V., Gimenez, M., Restrepo, J., Ceglia, G., Walter, J. &amp; Cabello, A.</td>
+	<td>Active energy recovering snubber for the asymmetric inverter</td>
+	<td>2008</td>
+	<td>Devices, Circuits and Systems, 2008. ICCDCS 2008. 7th International Caribbean Conference on, pp. 1-5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICCDCS.2008.4542615">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6450438" class="entry">
+	<td>Halder, T.</td>
+	<td>An improved and simple hybrid energy recovery snubber circuit for generic power converters and protection scheme</td>
+	<td>2012</td>
+	<td>Power Electronics (IICPE), 2012 IEEE 5th India International Conference on, pp. 1-6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IICPE.2012.6450438">DOI</a> &nbsp;</td>
+</tr>
+<tr id="131187" class="entry">
+	<td>Harada, K. &amp; Sakamoto, H.</td>
+	<td>Switched snubber for high frequency switching</td>
+	<td>1990</td>
+	<td>Power Electronics Specialists Conference, 1990. PESC '90 Record., 21st Annual IEEE, pp. 181-188&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.1990.131187">DOI</a> &nbsp;</td>
+</tr>
+<tr id="822581" class="entry">
+	<td>He, J.</td>
+	<td>An improved energy recovery soft-switching turn-on/turn-off passive boost snubber with peak voltage clamp</td>
+	<td>2000</td>
+	<td><br/>Vol. 2Applied Power Electronics Conference and Exposition, 2000. APEC 2000. Fifteenth Annual IEEE, pp. 699-706 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2000.822581">DOI</a> &nbsp;</td>
+</tr>
+<tr id="264931" class="entry">
+	<td>He, X., Williams, B., Finney, S. &amp; Green, T.</td>
+	<td>Analysis and comparison of a new passive lossless snubber for high frequency converter application</td>
+	<td>1993</td>
+	<td>Power Electronics and Applications, 1993., Fifth European Conference on, pp. 344-349 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="341688" class="entry">
+	<td>Hoban, P.T., Rahimo, M. &amp; Shammas, N.Y.A.</td>
+	<td>Improved snubber network performance by use of diode characterisation techniques</td>
+	<td>1994</td>
+	<td>Power Electronics and Variable-Speed Drives, 1994. Fifth International Conference on, pp. 436-440&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1049/cp:19941005">DOI</a> &nbsp;</td>
+</tr>
+<tr id="989291" class="entry">
+	<td>Irving, B. &amp; Jovanovic, M.</td>
+	<td>Analysis, design, and performance evaluation of flying-capacitor passive lossless snubber applied to PFC boost converter</td>
+	<td>2002</td>
+	<td><br/>Vol. 1Applied Power Electronics Conference and Exposition, 2002. APEC 2002. Seventeenth Annual IEEE, pp. 503-508 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2002.989291">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4768694" class="entry">
+	<td>Itoh, J.-I. &amp; Nagayoshi, K.-I.</td>
+	<td>A New Bidirectional Switch With Regenerative Snubber to Realize a Simple Series Connection for Matrix Converters</td>
+	<td>2009</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 24(3), pp. 822-829&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2008.2008021">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5073269" class="entry">
+	<td>Jinno, M., Chen, P.-Y. &amp; Lin, K.-C.</td>
+	<td>An Efficient Active LC Snubber for Forward Converters</td>
+	<td>2009</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 24(6), pp. 1522-1531&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2009.2014237">DOI</a> &nbsp;</td>
+</tr>
+<tr id="838100" class="entry">
+	<td>Jovanovic, M. &amp; Jang, Y.</td>
+	<td>A novel active snubber for high-power boost converters</td>
+	<td>2000</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 15(2), pp. 278-284&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/63.838100">DOI</a> &nbsp;</td>
+</tr>
+<tr id="749752" class="entry">
+	<td>Jovanovic, M. &amp; Jang, Y.</td>
+	<td>A novel active snubber for high-power boost converters</td>
+	<td>1999</td>
+	<td><br/>Vol. 1Applied Power Electronics Conference and Exposition, 1999. APEC '99. Fourteenth Annual, pp. 619-625 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.1999.749752">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1620520" class="entry">
+	<td>Kamath, G.</td>
+	<td>A passive reduced rating output rectifier snubber for plasma cutting power supply</td>
+	<td>2006</td>
+	<td>Applied Power Electronics Conference and Exposition, 2006. APEC '06. Twenty-First Annual IEEE, pp. 7 pp.-&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2006.1620520">DOI</a> &nbsp;</td>
+</tr>
+<tr id="535872" class="entry">
+	<td>Kamath, G., Mohan, N. &amp; Undeland, T.</td>
+	<td>Non-dissipative Undeland snubber for electric vehicle drive inverters using GaAs anti-parallel diodes</td>
+	<td>1996</td>
+	<td><br/>Vol. 2Power Electronics, Drives and Energy Systems for Industrial Growth, 1996., Proceedings of the 1996 International Conference on, pp. 748-752 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PEDES.1996.535872">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6165963" class="entry">
+	<td>Kim, H.-S., Baek, J.-W., Jung, J.-H., Kim, J.-H., Ryu, M.-H. &amp; Kim, H.-J.</td>
+	<td>A boost PFC rectifier with a passive lossless snubber circuit using coupled inductors methods</td>
+	<td>2012</td>
+	<td>Applied Power Electronics Conference and Exposition (APEC), 2012 Twenty-Seventh Annual IEEE, pp. 1148-1152&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2012.6165963">DOI</a> &nbsp;</td>
+</tr>
+<tr id="954312" class="entry">
+	<td>Kim, I.-D. &amp; Nho, E.-C.</td>
+	<td>A new snubber circuit for diode-clamped four-level inverter and converter</td>
+	<td>2001</td>
+	<td><br/>Vol. 3Power Electronics Specialists Conference, 2001. PESC. 2001 IEEE 32nd Annual, pp. 1375-1380 vol. 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2001.954312">DOI</a> &nbsp;</td>
+</tr>
+<tr id="730330" class="entry">
+	<td>Kim, I.-D., Nho, E.-C. &amp; Bose, B.</td>
+	<td>A new snubber circuit for multilevel inverter and converter</td>
+	<td>1998</td>
+	<td><br/>Vol. 2Industry Applications Conference, 1998. Thirty-Third IAS Annual Meeting. The 1998 IEEE, pp. 1432-1439 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IAS.1998.730330">DOI</a> &nbsp;</td>
+</tr>
+<tr id="975885" class="entry">
+	<td>Kim, I.-D., Nho, E.-C., Joe, C.-J. &amp; Lee, M.-S.</td>
+	<td>A generalized Undeland snubber for flying capacitor multilevel inverter and converter</td>
+	<td>2001</td>
+	<td><br/>Vol. 2Industrial Electronics Society, 2001. IECON '01. The 27th Annual Conference of the IEEE, pp. 903-908 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IECON.2001.975885">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1360068" class="entry">
+	<td>Kim, I.-D., Nho, E.-C., Kim, H.-G. &amp; Ko, J.-S.</td>
+	<td>A generalized Undeland snubber for flying capacitor multilevel inverter and converter</td>
+	<td>2004</td>
+	<td>Industrial Electronics, IEEE Transactions on<br/>Vol. 51(6), pp. 1290-1296&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TIE.2004.837917">DOI</a> &nbsp;</td>
+</tr>
+<tr id="968459" class="entry">
+	<td>Kim, I.-D., Nho, E.-C. &amp; Ko, J.-S.</td>
+	<td>Snubber circuit for diode-clamped four-level inverter and converter</td>
+	<td>2001</td>
+	<td>Electric Power Applications, IEE Proceedings -<br/>Vol. 148(6), pp. 481-486&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ip-cpa:20010667">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5976101" class="entry">
+	<td>Li, G., Wang, H. &amp; Cao, L.</td>
+	<td>The engineering design of NB snubber</td>
+	<td>2011</td>
+	<td>Dielectrics and Electrical Insulation, IEEE Transactions on<br/>Vol. 18(4), pp. 1097-1103&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TDEI.2011.5976101">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5958344" class="entry">
+	<td>Li, G., Wang, H. &amp; Cao, L.</td>
+	<td>Some considerations to the design of NB snubber</td>
+	<td>2010</td>
+	<td>Power Modulator and High Voltage Conference (IPMHVC), 2010 IEEE International, pp. 266-270&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMHVC.2010.5958344">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5958359" class="entry">
+	<td>Li, G., Zhou, Y., Fu, P., Zhang, X., Wang, H. &amp; Cao, L.</td>
+	<td>Compact power supplier for snubber</td>
+	<td>2010</td>
+	<td>Power Modulator and High Voltage Conference (IPMHVC), 2010 IEEE International, pp. 327-330&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPMHVC.2010.5958359">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5411784" class="entry">
+	<td>Li, R.-H. &amp; Chung, H.-H.</td>
+	<td>A Passive Lossless Snubber Cell With Minimum Stress and Wide Soft-Switching Range</td>
+	<td>2010</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 25(7), pp. 1725-1738&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2010.2042074">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5316180" class="entry">
+	<td>Li, R.-H. &amp; Chung, H.-H.</td>
+	<td>A passive lossless snubber cell with minimum stress and wide soft-switching range</td>
+	<td>2009</td>
+	<td>Energy Conversion Congress and Exposition, 2009. ECCE 2009. IEEE, pp. 685-692&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ECCE.2009.5316180">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5299121" class="entry">
+	<td>Li, R.-H., Chung, H.-H. &amp; Sung, A.</td>
+	<td>Passive Lossless Snubber for Boost PFC With Minimum Voltage and Current Stress</td>
+	<td>2010</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 25(3), pp. 602-613&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2009.2035123">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1267982" class="entry">
+	<td>Lima, F.K.A. &amp; Cruz, C.M.T.</td>
+	<td>Unit power factor single-phase rectifier with reduced conduction loss using a non-dissipative passive snubber</td>
+	<td>2003</td>
+	<td><br/>Vol. 2Industrial Electronics, 2003. ISIE '03. 2003 IEEE International Symposium on, pp. 1123-1128 vol. 2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISIE.2003.1267982">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5618260" class="entry">
+	<td>Lin, R.-L. &amp; Huang, Y.-H.</td>
+	<td>Forward-flyback converter with snubber-feedback network for contactless power supply applications</td>
+	<td>2010</td>
+	<td>Energy Conversion Congress and Exposition (ECCE), 2010 IEEE, pp. 1422-1427&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ECCE.2010.5618260">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1377795" class="entry">
+	<td>Lin, Z. &amp; Dong, K.</td>
+	<td>A novel of passive soft-switching with charge-pump snubber</td>
+	<td>2004</td>
+	<td><br/>Vol. 1Power Electronics and Motion Control Conference, 2004. IPEMC 2004. The 4th International, pp. 121-125 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="927541" class="entry">
+	<td>Mouton, H., Combrink, F., Enslin, J.H.R. &amp; Akagi, H.</td>
+	<td>Design optimisation of a resonant turn-off snubber for high-power converters</td>
+	<td>2001</td>
+	<td>Electric Power Applications, IEE Proceedings -<br/>Vol. 148(3), pp. 229-236&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ip-epa:20010370">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5725301" class="entry">
+	<td>Naayagi, R.T., Shuttleworth, R. &amp; Forsyth, A.</td>
+	<td>Investigating the effect of snubber capacitor on high power IGBT turn-off</td>
+	<td>2011</td>
+	<td>Electrical Energy Systems (ICEES), 2011 1st International Conference on, pp. 50-55&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICEES.2011.5725301">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1348918" class="entry">
+	<td>Nakamura, M., Ahmed, T., Hiraki, E. &amp; Nakaoka, M.</td>
+	<td>A novel soft switching PWM sinewave converter with regenerative pulse current edge-resonant snubber power modules for distributed power supplies</td>
+	<td>2004</td>
+	<td><br/>Vol. 1Power Electronics, Machines and Drives, 2004. (PEMD 2004). Second International Conference on (Conf. Publ. No. 498), pp. 203-208 Vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1049/cp:20040285">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1252184" class="entry">
+	<td>Nakamura, M., Ahmed, T. &amp; Nakaoka, M.</td>
+	<td>Voltage source-fed sinewave PWM inverter with novel pulse current regenerative resonant snubber cells for telecommunication energy</td>
+	<td>2003</td>
+	<td>Telecommunications Energy Conference, 2003. INTELEC '03. The 25th International, pp. 643-649&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1280075" class="entry">
+	<td>Nakamura, M., Fujii, Y., Shiraishi, K., Hiraki, E. &amp; Nakaoka, M.</td>
+	<td>A pulse current regenerative auxiliary resonant bridge leg link snubber-assisted three-phase soft switching PWM inverter</td>
+	<td>2003</td>
+	<td><br/>Vol. 1Industrial Electronics Society, 2003. IECON '03. The 29th Annual Conference of the IEEE, pp. 742-745 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IECON.2003.1280075">DOI</a> &nbsp;</td>
+</tr>
+<tr id="954259" class="entry">
+	<td>Nakamura, M., Shimada, M., Myoui, T., Sadakata, H., Moisseev, S. &amp; Nakaoka, M.</td>
+	<td>Performance evaluations on soft-switching boost power converter with a single auxiliary passive resonant snubber</td>
+	<td>2001</td>
+	<td><br/>Vol. 2Power Electronics Specialists Conference, 2001. PESC. 2001 IEEE 32nd Annual, pp. 1057-1062 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2001.954259">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1023097" class="entry">
+	<td>Nakamura, M., Yamazaki, T., Shimada, M., Rukonuzzaman, M., Iyomori, H., Hiraki, E. &amp; Nakaoka, M.</td>
+	<td>A novel pulse regenerative active auxiliary edge resonant bridge leg link soft commutation snubber and resonant snubber-assisted three phase soft switching sinewave PWM inverter</td>
+	<td>2002</td>
+	<td><br/>Vol. 4Power Electronics Specialists Conference, 2002. pesc 02. 2002 IEEE 33rd Annual, pp. 1935-1940&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PSEC.2002.1023097">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4344" class="entry">
+	<td>Ninomiya, T., Tanaka, T. &amp; Harada, K.</td>
+	<td>Analysis and optimization of a nondissipative LC turn-off snubber</td>
+	<td>1988</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 3(2), pp. 147-156&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/63.4344">DOI</a> &nbsp;</td>
+</tr>
+<tr id="638323" class="entry">
+	<td>Nomura, H. &amp; Fujiwara, K.</td>
+	<td>A loss-less passive snubber for soft-switching boost-type converters</td>
+	<td>1997</td>
+	<td><br/>Vol. 2Power Conversion Conference - Nagaoka 1997., Proceedings of the, pp. 793-796 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PCCON.1997.638323">DOI</a> &nbsp;</td>
+</tr>
+<tr id="264248" class="entry">
+	<td>Ofosu-Amaah, W., Tanaka, S. &amp; Miura, K.</td>
+	<td>A current source based snubber energy recovery circuit for GTO inverters</td>
+	<td>1993</td>
+	<td>Power Conversion Conference, 1993. Yokohama 1993., Conference Record of the, pp. 49-54&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PCCON.1993.264248">DOI</a> &nbsp;</td>
+</tr>
+<tr id="491481" class="entry">
+	<td>Okuma, Y., Igarashi, S. &amp; Kuroki, K.</td>
+	<td>Novel three-phase SMR converter with inherent snubber energy recovery capability</td>
+	<td>1996</td>
+	<td>Industry Applications, IEEE Transactions on<br/>Vol. 32(2), pp. 326-334&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/28.491481">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1271319" class="entry">
+	<td>Peng, F., Su, G.-J. &amp; Tolbert, L.</td>
+	<td>A passive soft-switching snubber for PWM inverters</td>
+	<td>2004</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 19(2), pp. 363-370&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2003.823204">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1023858" class="entry">
+	<td>Peng, F., Su, G.-J. &amp; Tolbert, L.</td>
+	<td>A passive soft-switching snubber for PWM inverters</td>
+	<td>2002</td>
+	<td><br/>Vol. 1Power Electronics Specialists Conference, 2002. pesc 02. 2002 IEEE 33rd Annual, pp. 129-134 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PSEC.2002.1023858">DOI</a> &nbsp;</td>
+</tr>
+<tr id="884624" class="entry">
+	<td>Qiang, S., Wenhua, L., Zhiyong, W., XiZheng, C. &amp; Peifeng, X.</td>
+	<td>Design of snubber circuit for the 4500 V/4000 A GTOs in a 20 MVA STATCOM</td>
+	<td>2000</td>
+	<td><br/>Vol. 2Power Electronics and Motion Control Conference, 2000. Proceedings. IPEMC 2000. The Third International, pp. 875-880 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IPEMC.2000.884624">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5191991" class="entry">
+	<td>Qiang, W., Huaguang, Z., Enhui, C. &amp; Limin, H.</td>
+	<td>A novel passive lossless soft-switching snubber for PWM inverters</td>
+	<td>2009</td>
+	<td>Control and Decision Conference, 2009. CCDC '09. Chinese, pp. 2020-2025&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/CCDC.2009.5191991">DOI</a> &nbsp;</td>
+</tr>
+<tr id="146157" class="entry">
+	<td>Sabate, J., Vlatkovic, V., Ridley, R. &amp; Lee, F.</td>
+	<td>High-voltage, high-power, ZVS, full-bridge PWM converter employing an active snubber</td>
+	<td>1991</td>
+	<td>Applied Power Electronics Conference and Exposition, 1991. APEC '91. Conference Proceedings, 1991., Sixth Annual, pp. 158-163&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.1991.146157">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6056569" class="entry">
+	<td>Safaee, A., Yazdani, D., Bakhshai, A. &amp; Jain, P.</td>
+	<td>Multiblock Soft-Switched Bidirectional AC #x2013;AC Converter Using a Single Loss-Less Active Snubber Block</td>
+	<td>2012</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 27(5), pp. 2260-2272&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2011.2172959">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4448797" class="entry">
+	<td>Sekine, M., Saito, A. &amp; Matsuo, H.</td>
+	<td>High efficiency DC/DC converter circuit using charge storage diode snubber</td>
+	<td>2007</td>
+	<td>Telecommunications Energy Conference, 2007. INTELEC 2007. 29th International, pp. 355-361&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/INTLEC.2007.4448797">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4648669" class="entry">
+	<td>Steyn, C.</td>
+	<td>Optimum size of dissipative nonlinear turn-off snubber</td>
+	<td>1988</td>
+	<td>Electric Power Applications, IEE Proceedings B<br/>Vol. 135(4), pp. 165-171&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ip-b.1988.0019">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6303" class="entry">
+	<td>Steyn, C.</td>
+	<td>Optimum size of dissipative nonlinear turn-off snubber</td>
+	<td>1988</td>
+	<td>Electric Power Applications, IEE Proceedings B<br/>Vol. 135(4), pp. 165-171&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="483410" class="entry">
+	<td>Suh, J.-H., Lee, Y.-H., Suh, B.-S. &amp; Hyun, D.-S.</td>
+	<td>A new snubber circuit for high efficiency and overvoltage limitation in three-level GTO inverters</td>
+	<td>1995</td>
+	<td><br/>Vol. 1Industrial Electronics, Control, and Instrumentation, 1995., Proceedings of the 1995 IEEE IECON 21st International Conference on, pp. 290-295 vol.1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IECON.1995.483410">DOI</a> &nbsp;</td>
+</tr>
+<tr id="564152" class="entry">
+	<td>Suh, J.-H., Suh, B.-S. &amp; Hyun, D.-S.</td>
+	<td>A new snubber circuit for high efficiency and overvoltage limitation in three-level GTO inverters</td>
+	<td>1997</td>
+	<td>Industrial Electronics, IEEE Transactions on<br/>Vol. 44(2), pp. 145-156&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/41.564152">DOI</a> &nbsp;</td>
+</tr>
+<tr id="629027" class="entry">
+	<td>Sung, J. &amp; Nam, K.</td>
+	<td>A snubber configuration suitable for energy recovery in three level GTO inverters</td>
+	<td>1997</td>
+	<td><br/>Vol. 2Industry Applications Conference, 1997. Thirty-Second IAS Annual Meeting, IAS '97., Conference Record of the 1997 IEEE, pp. 1309-1315 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IAS.1997.629027">DOI</a> &nbsp;</td>
+</tr>
+<tr id="750177" class="entry">
+	<td>Sung, J.-H. &amp; Nam, K.</td>
+	<td>A simple snubber configuration for three-level GTO inverters</td>
+	<td>1999</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 14(2), pp. 246-257&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/63.750177">DOI</a> &nbsp;</td>
+</tr>
+<tr id="711592" class="entry">
+	<td>du T.Mouton, H. &amp; Enslin, J.H.R.</td>
+	<td>A resonant turn-off snubber for high power IGBT converters</td>
+	<td>1998</td>
+	<td><br/>Vol. 2Industrial Electronics, 1998. Proceedings. ISIE '98. IEEE International Symposium on, pp. 519-523 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ISIE.1998.711592">DOI</a> &nbsp;</td>
+</tr>
+<tr id="968460" class="entry">
+	<td>Takano, H., Domoto, T., Takahashi, J. &amp; Nakaoka, M.</td>
+	<td>Auxiliary resonant snubber bridge-leg associated soft-switching PWM inverter type DC-DC converter family with bidirectional active switches and voltage clamping diodes</td>
+	<td>2001</td>
+	<td>Electric Power Applications, IEE Proceedings -<br/>Vol. 148(6), pp. 487-493&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1049/ip-epa:20010668">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4510110" class="entry">
+	<td>yuan Tan, T., ke Jiang, rong Jiang, Q., Li, G. &amp; xiang Lai, Y.</td>
+	<td>An improved McMurry snubber for Three-level NPC IGBT converter</td>
+	<td>2007</td>
+	<td>Power Engineering Conference, 2007. IPEC 2007. International, pp. 666-671&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="18209" class="entry">
+	<td>Tanaka, T., Ninomiya, T. &amp; Harada, K.</td>
+	<td>Design of a nondissipative turn-off snubber in a forward converter</td>
+	<td>1988</td>
+	<td>Power Electronics Specialists Conference, 1988. PESC '88 Record., 19th Annual IEEE, pp. 789-796 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.1988.18209">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4523002" class="entry">
+	<td>Tseng, S.Y., Hsieh, C.T. &amp; Yang, C.M.</td>
+	<td>Interleaved flyback converter with turn-on/off snubber for poultry stunning applications</td>
+	<td>2008</td>
+	<td>Applied Power Electronics Conference and Exposition, 2008. APEC 2008. Twenty-Third Annual IEEE, pp. 1999-2005&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2008.4523002">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4342376" class="entry">
+	<td>Tseng, S.Y., Shiang, J.-Z., Chang, H.-H., Jwo, W.-S. &amp; Hsieh, C.T.</td>
+	<td>A Novel Turn-On/Off Snubber for Interleaved Boost Converters</td>
+	<td>2007</td>
+	<td>Power Electronics Specialists Conference, 2007. PESC 2007. IEEE, pp. 2341-2347&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PESC.2007.4342376">DOI</a> &nbsp;</td>
+</tr>
+<tr id="1177495" class="entry">
+	<td>U-Yaisom, C., Khanngern, W. &amp; Nitta, S.</td>
+	<td>The study and analysis of the conducted EMI suppression on power MOSFET using passive snubber circuits</td>
+	<td>2002</td>
+	<td>Electromagnetic Compatibility, 2002 3rd International Symposium on, pp. 561-564&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ELMAGC.2002.1177495">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6135515" class="entry">
+	<td>Wang, H., Li, G., Tang, G. &amp; He, Z.</td>
+	<td>Equivalent Circuit Analysis for Core Snubber</td>
+	<td>2012</td>
+	<td>Plasma Science, IEEE Transactions on<br/>Vol. 40(3), pp. 635-640&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2011.2180402">DOI</a> &nbsp;</td>
+</tr>
+<tr id="824016" class="entry">
+	<td>Williams, B. &amp; Finney, S.</td>
+	<td>Passive snubber energy recovery for a GTO thyristor inverter bridge leg</td>
+	<td>2000</td>
+	<td>Industrial Electronics, IEEE Transactions on<br/>Vol. 47(1), pp. 2-8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/41.824016">DOI</a> &nbsp;</td>
+</tr>
+<tr id="989362" class="entry">
+	<td>Wu, H. &amp; He, X.</td>
+	<td>A novel single phase three-level power factor correction with passive lossless snubber</td>
+	<td>2002</td>
+	<td><br/>Vol. 2Applied Power Electronics Conference and Exposition, 2002. APEC 2002. Seventeenth Annual IEEE, pp. 968-974 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/APEC.2002.989362">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6571417" class="entry">
+	<td>Xie, F., Li, G. &amp; Cheng, D.</td>
+	<td>Analysis and development of a high performance core snubber based on deltamax</td>
+	<td>2013</td>
+	<td>Dielectrics and Electrical Insulation, IEEE Transactions on<br/>Vol. 20(4), pp. 1056-1061&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TDEI.2013.6571417">DOI</a> &nbsp;</td>
+</tr>
+<tr id="4581192" class="entry">
+	<td>Yufeng, Z., Shiyan, Y. &amp; Wei, Y.</td>
+	<td>Design of microarc oxidation supply and study of switching losses and positive snubber</td>
+	<td>2008</td>
+	<td>Power Electronics, Electrical Drives, Automation and Motion, 2008. SPEEDAM 2008. International Symposium on, pp. 935-938&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SPEEDHAM.2008.4581192">DOI</a> &nbsp;</td>
+</tr>
+<tr id="377595" class="entry">
+	<td>Yuvarajan, S., Nelson, R. &amp; Quek, D.</td>
+	<td>A study of the effects of snubber on switching loss and EMI in an MCT converter</td>
+	<td>1994</td>
+	<td>Industry Applications Society Annual Meeting, 1994., Conference Record of the 1994 IEEE, pp. 1344-1349 vol.2&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IAS.1994.377595">DOI</a> &nbsp;</td>
+</tr>
+<tr id="5497189" class="entry">
+	<td>Zhang, H., Wang, Q., Chu, E., Liu, X. &amp; Hou, L.</td>
+	<td>Analysis and Implementation of A Passive Lossless Soft-Switching Snubber for PWM Inverters</td>
+	<td>2011</td>
+	<td>Power Electronics, IEEE Transactions on<br/>Vol. 26(2), pp. 411-426&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPEL.2010.2054836">DOI</a> &nbsp;</td>
+</tr>
+<tr id="6073658" class="entry">
+	<td>Zhao, Q., Zhang, J. &amp; Zhao, C.</td>
+	<td>Passive lossless snubber for CCM PFC based on magnetic coupling</td>
+	<td>2011</td>
+	<td>Electrical Machines and Systems (ICEMS), 2011 International Conference on, pp. 1-6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ICEMS.2011.6073658">DOI</a> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 27/03/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->
