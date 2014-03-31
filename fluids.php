@@ -37,9 +37,17 @@ Dam Break: <a href="img/output.avi">DamBreak.avi</a>, <a href="img/output.wmv">D
 
 <h3>ElmerFEM</h3>
 <p>For more information visit <a href="http://www.csc.fi/english/pages/elmer">ElmerFEM's website</a></p>
-
-
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+
+<h3>References</h3>
+<blockquote><a href="files/ChiaraMistrangeloSlidesOFW5.pdf">Mistrangelo, Simulation of MHD flows: electric potential
+formulation
+</blockquote>
+<blockquote><a href="files/hcll2Report.pdf">Panchal, Study of liquid metal MHD flows using OpenFOAM
+</blockquote>
+<blockquote><a href="files/ElisabetMasDeLesValls.pdf">Mas de les Valls, OpenFOAM capabilities for MHD simulation under nuclear fusion technology conditions
+</blockquote>
+
 
 
     </div> <!-- /container -->
