@@ -27,6 +27,8 @@
 
 
 	<h1>Vacuum System Design</h1>
+		<p>WSI can design custom vacuum system designs, including chamber, gas handling, ports, and other vacuum subsystems. Browse our <a href="chambers">vacuum boundary products</a> for examples of chambers which we have designed in concert with manufacturers such as Atlas UHV, MDC Vacuum and Kurt J. Lesker.</p>
+
 	<div class="col-md-6">
 		<a href="img/0001-MC_full_updated.jpg"><img src="img/0001-MC_full_updated-300x231.jpg" alt="0001-MC_full_updated" width="300" height="231" /></a>
     </div>

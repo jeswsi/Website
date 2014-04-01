@@ -29,7 +29,7 @@
 
     
 <h1>Finite Element Analysis</h1>
-<p>WSI uses ANSYS, OpenFOAM, and ElmerFEM to perform thermal and structural analysis of various subsystems.</p>
+<p>WSI uses <a href="http://www.ansys.com/">ANSYS</a>, <a href="http://www.openfoam.com/">OpenFOAM</a>, and <a href="http://www.elmerfem.org/">ElmerFEM</a> to perform thermal and structural analysis of various subsystems. We can also handle files from other common CAD software such as <a href="http://www.3ds.com/products-services/catia/">CATIA</a>.</p>
 
 <a id="thermal"></a>
 	<h3>Thermal Analysis</h3>

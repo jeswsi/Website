@@ -24,6 +24,10 @@
   		<li class="active">Spheromaks</li>
 	</ol>
 	<h1>Spheromaks</h1>
+		<p class="center"><a href="img/1stplasma.jpg"><img src="img/1stplasma.jpg" alt="1st plasma" height="300" /></a><br />
+<span class="text-muted">1st plasma in device built for SBIR on compressional heating and current drive.</span></p>
+
+
 		<blockquote><a href="spheromaks.html">Spheromak References</a></blockquote>
 
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />

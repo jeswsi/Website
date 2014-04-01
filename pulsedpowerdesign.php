@@ -29,6 +29,8 @@
 <a id="pulsed"></a>
 	<h3>Pulsed Power Design</h3>
 
+	<p>WSI can design custom pulsed power circuits and capacitor banks for your coils or other loads. Browse our <a href="pulsedpower">pulsed power products</a> for example configurations.</p>
+
     <div class="col-md-6">
     	<p><a href="img/BL480.png"><img src="img/BL480.png" width="300" alt="Capacitor Bank Engineering Drawing"></a></p>
     </div>
