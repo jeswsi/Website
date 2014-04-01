@@ -127,6 +127,8 @@ for an incompressible fluid. The fluid electrical conductivity is
 presumed constant.</p>
 <p>For more information visit <a href="http://www.openfoam.org/">OpenFOAM's website</a></p>
 
+<p class="center"><a href="img/plot_vs_reference.png"><img src="img/plot_vs_reference.png" width="300"></a> <a href="img/shercliff.png"><img src="img/shercliff.png" width="300"></a><br />
+Velocity of conducting fluids in pipe under transverse magnetic field (Shercliff), OpenFoam solution and <a href="https://code.google.com/p/mhdflow/source/browse/shercliff.m">analytical solution</a></p>
 
 <blockquote><a href="files/ChiaraMistrangeloSlidesOFW5.pdf">Mistrangelo, Simulation of MHD flows: electric potential
 formulation</a>
