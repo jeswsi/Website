@@ -60,8 +60,8 @@ targets to Western Europe and Canada, but our system is vastly
 different, relying on a source of fusion neutrons.</p>
 	<blockquote><a href="ns.html">Neutron Source References</a></blockquote>
 
-	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />
-
+<p><strong>We are looking for collaborators on this technical development
+topic, for further information, please <a href="mailto:info@woodruffscientific.com">contact us</a></strong></p>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 
