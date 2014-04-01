@@ -27,6 +27,7 @@
             <li><a href="#nimrod">NIMROD</a></li>
             <li><a href="#hifi">HiFi</a></li>
             <li><a href="#bout">Bout++</a></li>
+            <li><a href="#openfoam">OpenFOAM</a></li>
           </ul>
 
 	<h1>MHD</h1>
@@ -117,9 +118,23 @@ also be changed at run-time.</li>
 </p>
 <p>For more information see <a href="http://www-users.york.ac.uk/~bd512/bout/">Ben Dudson's pages</a></p>
 
+<a id="openfoam"></a>
+<h3>OpenFOAM</h3>
+<p>The OpenFOAM®  (Open Field Operation and Manipulation) CFD Toolbox is a free, open source CFD software package which has a large user base across most areas of engineering and science, from both commercial and academic organisations. The package includes an MHD solver: mhdFoam</p>
+<p>The mhdFoam solver is currently an incompressible magnetohydrodynamic
+equation solver. It solves the coupled Maxwell-Navier-Stokes equations
+for an incompressible fluid. The fluid electrical conductivity is
+presumed constant.</p>
+<p>For more information visit <a href="http://www.openfoam.org/">OpenFOAM's website</a></p>
 
 
-
+<blockquote><a href="files/ChiaraMistrangeloSlidesOFW5.pdf">Mistrangelo, Simulation of MHD flows: electric potential
+formulation</a>
+</blockquote>
+<blockquote><a href="files/hcll2Report.pdf">Panchal, Study of liquid metal MHD flows using OpenFOAM</a>
+</blockquote>
+<blockquote><a href="files/ElisabetMasDeLesValls.pdf">Mas de les Valls, OpenFOAM capabilities for MHD simulation under nuclear fusion technology conditions</a>
+</blockquote>
 
 
 
