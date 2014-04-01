@@ -33,10 +33,13 @@ O'Halon.</p>
 <div class="col-md-6">
 	<p><a href="img/Chamber1-1.jpg"><img src="img/Chamber1-1-small.jpg"></a></p>
 	<p><a href="img/Chamber4-1.jpg"><img src="img/Chamber4-1-small.jpg"></a></p>
+	<p><a href="img/sbirchamber.jpg"><img src="img/sbirchamber-small.jpg"></a></p>
 </div>
 <div class="col-md-6">
 	<p><a href="img/Chamber2-1.jpg"><img src="img/Chamber2-1-small.jpg"></a></p>
 	<p><a href="img/Chamber4-4.jpg"><img src="img/Chamber4-4-small.jpg"></a></p>
+	<p><a href="img/STPX.jpg"><img src="img/STPX-300x199.jpg"></a></p>
+
 </div>
 <p>
 		Chambers we have designed in concert with manufacturers such as
