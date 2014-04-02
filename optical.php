@@ -76,17 +76,28 @@ here, and to our <a href="http://www.thingiverse.com/woodruffscientific/collecti
     <p>Download files ready for 3D-printing: <a href="files/opticalmount.stp">Optical Mount</a>, <a href="files/opticalmount-adjust.stp">Optical Mount Adjust</a>
 
 	<div class="col-md-6">
-      <p><a href="img/beamsplittermount.jpg"><img src="img/beamsplittermount-small.jpg" alt="3D printed beam splitter mount" /></a><br />
+      <p><a href="img/beamsplittermount2.jpg"><img src="img/beamsplittermount2-small.jpg" alt="3D printed beam splitter mount" /></a><br />
         </p>
     </div>    
     <div class="col-md-6">
-      <p><a href="img/lasermount.jpg"><img src="img/lasermount-small.jpg" alt="3D printed laser mount" /></a><br />
+      <p><a href="img/beamsplittermount3.jpg"><img src="img/beamsplittermount3-small.jpg" alt="3D printed beam splitter mount" /></a><br />
         </p>
     </div>
     <div class="clearfix"></div>
 
-    <p>Download files ready for 3D-printing: <a href="files/beamsplittermount.stp">Beam splitter Mount (for 40mm cube beam splitter)</a>, <a href="files/lasermount.stp">Laser Mount (uses 1/4 20 nuts and screws)</a>
+    <p>Download files ready for 3D-printing: <a href="files/beamsplittermount.stp">Beam splitter Mount (for 40mm cube beam splitter)</a></p>
 
+	<div class="col-md-6">
+      <p><a href="img/lasermount4.jpg"><img src="img/lasermount4-small.jpg" alt="3D printed laser mount" /></a><br />
+        </p>
+    </div>    
+    <div class="col-md-6">
+      <p><a href="img/lasermount5.jpg"><img src="img/lasermount5-small.jpg" alt="3D printed laser mount" /></a><br />
+        </p>
+    </div>
+
+    <div class="clearfix"></div>
+    <p>Download files ready for 3D-printing: <a href="files/lasermount.stp">Laser Mount (uses 1/4 20 nuts and screws)</a></p>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 
