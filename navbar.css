@@ -49,6 +49,10 @@ a.white {
   color:#fff;
 }
 
+pre {
+  white-space: normal;
+}
+
 /* Add in submenus for navbar */
 .dropdown-submenu{position:relative;}
 .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
