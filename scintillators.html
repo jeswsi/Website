@@ -1,0 +1,608 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="11890279" class="entry">
+	<td>Arikawa, Y., Yamanoi, K., Nakazato, T., Estacio, E., Shimizu, T., Sarukura, N., Nakai, M., Norimatsu, T., Hironaka, Y., Azechi, H., Murata, T., Fujino, S., Yoshida, H., Kamada, K., Usuki, Y., Suyama, T., Yoshikawa, A., Satoh, N. &amp; Kan, H.</td>
+	<td>Custom-designed scintillator for laser fusion diagnostics - Pr3+-doped fluoro-phosphate lithium glass scintillator</td>
+	<td>2010/08/</td>
+	<td>Optical Materials<br/>Vol.  32( 10), pp. 1393 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.optmat.2010.03.010">URL</a>&nbsp;</td>
+</tr>
+<tr id="20103413172213" class="entry">
+	<td>Arikawa, Y., Yamanoi, K., Nakazato, T., Estacio, E.S., Shimizu, T., Sarukura, N., Nakai, M., Norimatsu, T., Hironaka, Y., Azechi, H., Murata, T., Fujino, S., Yoshida, H., Kamada, K., Usuki, Y., Suyama, T., Yoshikawa, A., Satoh, N. &amp; Kan, H.</td>
+	<td>Custom-designed scintillator for laser fusion diagnostics - Pr 3+-doped fluoro-phosphate lithium glass scintillator</td>
+	<td>2010</td>
+	<td>Optical Materials<br/>Vol. 32(10), pp. 1393 - 1396&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.optmat.2010.03.010">URL</a>&nbsp;</td>
+</tr>
+<tr id="2004518727790" class="entry">
+	<td>Baeumel, S., Werner, A., Semler, R., Mukherjee, S., Darrow, D., Ellis, R., Cecil, F., Pedrick, L., Altmann, H., Kiptily, V. &amp; Gafert, J.</td>
+	<td>Scintillator probe for lost alpha measurements in JET</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10 II), pp. 3563 - 3565&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1787916">URL</a>&nbsp;</td>
+</tr>
+<tr id="8798619" class="entry">
+	<td>Bertalot, L., Esposito, B., Kaschuck, Y., Marocco, D., Riva, M., Rizzo, A. &amp; Skopintsev, D.</td>
+	<td>Fast digitizing techniques applied to scintillation detectors</td>
+	<td>2006/01/</td>
+	<td>Nuclear Physics B, Proceedings Supplements<br/>Vol.  150, pp. 78 - 81&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nuclphysbps.2004.07.003">URL</a>&nbsp;</td>
+</tr>
+<tr id="20135017070531" class="entry">
+	<td>Cazzaniga, C., Croci, G., Giacomelli, L., Grosso, G., Nocente, M., Tardocchi, M., Gorini, G. &amp; Weller, A.</td>
+	<td>LaBr3 scintillator response to admixed neutron and -ray fluxes</td>
+	<td>2013</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section A: Accelerators, Spectrometers, Detectors and Associated Equipment<br/>Vol. 732, pp. 384 - 387&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2013.05.055">URL</a>&nbsp;</td>
+</tr>
+<tr id="13993256" class="entry">
+	<td>Cazzaniga, C., Nocente, M., Tardocchi, M., Croci, G., Giacomelli, L., Angelone, M., Pillon, M., Villari, S., Weller, A., Petrizzi, L. &amp; Gorini, G.</td>
+	<td>Response of LaBr3(Ce) scintillators to 2.5 MeV fusion neutrons</td>
+	<td>2013/12/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 12), pp. 123505 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4847056">URL</a>&nbsp;</td>
+</tr>
+<tr id="20140217190942" class="entry">
+	<td>Cazzaniga, C., Nocente, M., Tardocchi, M., Croci, G., Giacomelli, L., Angelone, M., Pillon, M., Villari, S., Weller, A., Petrizzi, L. &amp; Gorini, G.</td>
+	<td>Response of LaBr3(Ce) scintillators to 2.5 MeV fusion neutrons</td>
+	<td>2013</td>
+	<td>Review of Scientific Instruments<br/>Vol. 84(12)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4847056">URL</a>&nbsp;</td>
+</tr>
+<tr id="13083945" class="entry">
+	<td>Chen, X., Fisher, R., Pace, D., Garcia-Munoz, M., Chavez, J., Heidbrink, W. &amp; Van Zeeland, M.</td>
+	<td>Near midplane scintillator-based fast ion loss detector on DIII-D</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 707&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4732063">URL</a>&nbsp;</td>
+</tr>
+<tr id="9686762" class="entry">
+	<td>Delgado-Aparicio, L., Stutman, D., Tritz, K., Vero, R., Finkenthal, M., Suliman, G., Kaita, R., Majeski, R., Stratton, B., Roquemore, L. &amp; Tarrio, C.</td>
+	<td>High-efficiency fast scintillators for "optical" soft X-ray arrays for laboratory plasma diagnostics</td>
+	<td>2007/08/</td>
+	<td>Applied Optics<br/>Vol.  46( 24), pp. 6069 - 75&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20075010971237" class="entry">
+	<td>Delgado-Aparicio, L., Stutman, D., Tritz, K., Vero, R., Finkenthal, M., Suliman, G., Kaita, R., Majeski, R., Stratton, B., Roquemore, L. &amp; Tarrio, C.</td>
+	<td>High-efficiency fast scintillators for "optical" soft x-ray arrays for laboratory plasma diagnostics</td>
+	<td>2007</td>
+	<td>Applied Optics<br/>Vol. 46(24), pp. 6069 - 6075&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1364/AO.46.006069">URL</a>&nbsp;</td>
+</tr>
+<tr id="10976248" class="entry">
+	<td>Garcia-Munoz, M., Fahrbach, H.-U. &amp; Zohm, H.</td>
+	<td>Scintillator based detector for fast-ion losses induced by magnetohydrodynamic instabilities in the ASDEX upgrade tokamak</td>
+	<td>2009/05/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  80( 5), pp. 053503 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3121543">URL</a>&nbsp;</td>
+</tr>
+<tr id="20092412129154" class="entry">
+	<td>Garcia-Muoz, M., Fahrbach, H.-U. &amp; Zohm, H.</td>
+	<td>Scintillator based detector for fast-ion losses induced by magnetohydrodynamic instabilities in the ASDEX upgrade tokamak</td>
+	<td>2009</td>
+	<td>Review of Scientific Instruments<br/>Vol. 80(5)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3121543">URL</a>&nbsp;</td>
+</tr>
+<tr id="14066846" class="entry">
+	<td>Giacomelli, L., Conroy, S., Gorini, G., Horton, L., Murari, A., Popovichev, S. &amp; Syme, D.</td>
+	<td>Tomographic analysis of neutron and gamma pulse shape distributions from liquid scintillation detectors at Joint European Torus</td>
+	<td>2014/02/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  85( 2), pp. 023505 (11 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4864122">URL</a>&nbsp;</td>
+</tr>
+<tr id="20140917379863" class="entry">
+	<td>Giacomelli, L., Conroy, S., Gorini, G., Horton, L., Murari, A., Popovichev, S. &amp; Syme, D.</td>
+	<td>Tomographic analysis of neutron and gamma pulse shape distributions from liquid scintillation detectors at Joint European Torus</td>
+	<td>2014</td>
+	<td>Review of Scientific Instruments<br/>Vol. 85(2)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4864122">URL</a>&nbsp;</td>
+</tr>
+<tr id="2003157436653" class="entry">
+	<td>Izumi, N., Lerche, R., Phillips, T., Schmid, G., Moran, M., Koch, J., Azechi, H. &amp; Sangster, T.</td>
+	<td>Development of a gated scintillation fiber neutron detector for areal density measurements of inertial confinement fusion capsules</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(3 II), pp. 1722 - 1725&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1534396">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387607" class="entry">
+	<td>James, A., Hollmann, E. &amp; Tynan, G.</td>
+	<td>Spatially distributed scintillator arrays for diagnosing runaway electron transport and energy behavior in tokamaks</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3475710">URL</a>&nbsp;</td>
+</tr>
+<tr id="IP53053328" class="entry">
+	<td>Jimenez-Ramos, M., Garcia Lopez, J., Garcia-Munoz, M., Rodriguez-Ramos, M., Carmona Gazquez, M. &amp; Zurro, B.</td>
+	<td>Characterization of scintillator materials for fast-ion loss detectors in nuclear fusion reactors</td>
+	<td>2014</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section B: Beam Interactions with Materials and Atoms&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nimb.2014.02.064">URL</a>&nbsp;</td>
+</tr>
+<tr id="7192704" class="entry">
+	<td>Kaschuck, Y., Esposito, B., Trykov, L. &amp; Semenov, V.</td>
+	<td>Fast neutron spectrometry with organic scintillators applied to magnetic fusion experiments</td>
+	<td>2002/01/01</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  476( 1-2), pp. 511 - 15&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0168-9002(01)01499-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="2001056815358" class="entry">
+	<td>Kaschuck, Y., Esposito, B., Trykov, L. &amp; Semenov, V.</td>
+	<td>Fast neutron spectrometry with organic scintillators applied to magnetic fusion experiments</td>
+	<td>2002</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section A: Accelerators, Spectrometers, Detectors and Associated Equipment<br/>Vol. 476(1-2), pp. 511 - 515&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0168-9002(01)01499-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="8154673" class="entry">
+	<td>Klimenkov, E., Kashchuk, Y., Krasil'nikov, A., Oleinikov, A., Sevast'yanov, V., Trykov, L. &amp; Semenova, N.</td>
+	<td>Radiation hardness of a fast neutron scintillation spectrometer with a stilbene crystal</td>
+	<td></td>
+	<td>Instruments and Experimental Techniques, pp. 166 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1023/B:INET.0000025195.61810.11">URL</a>&nbsp;</td>
+</tr>
+<tr id="2004268239993" class="entry">
+	<td>Klimenkov, E., Kashchuk, Y., Krasil'nikov, A., Olejnikov, A., Sevast'yanov, V., Trykov, L. &amp; Semenova, N.</td>
+	<td>Radiation hardness of a fast neutron scintillation spectrometer with a stilbene crystal</td>
+	<td>2004</td>
+	<td>Pribory i Tekhnika Eksperimenta(2), pp. 35 - 37&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2002447169964" class="entry">
+	<td>Kornilov, V. &amp; Maksimov, V.</td>
+	<td>A scintillation detector of protons and neutrons, products of a DD reaction</td>
+	<td>2001</td>
+	<td>Pribory i Tekhnika Eksperimenta(2), pp. 96 - 100&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20130716006489" class="entry">
+	<td>Kubo, N., Sasao, M., Shinto, K., Kitajima, S., Shikama, T., Sugawara, H., Tanaka, Y., Isobe, M. &amp; Nishiura, M.</td>
+	<td>Development of ceramic scintillators for lost alpha measurement on ITER</td>
+	<td>2005</td>
+	<td>32nd EPS Conference on Plasma Physics 2005, EPS 2005, Held with the 8th International Workshop on Fast Ignition of Fusion Targets - Europhysics Conference Abstracts<br/>Vol. 3, pp. 1686 - 1689&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8793138" class="entry">
+	<td>Mlynar, J., Adams, J., Bertalot, L. &amp; Conroy, S.</td>
+	<td>First results of Minimum Fisher Regularisation as unfolding method for JET NE213 liquid scintillator neutron spectrometry</td>
+	<td>2005/11/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  74( 1-4), pp. 781 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.06.126">URL</a>&nbsp;</td>
+</tr>
+<tr id="2005479502485" class="entry">
+	<td>Mlynar, J., Adams, J.M., Bertalot, L. &amp; Conroy, S.</td>
+	<td>First results of Minimum Fisher Regularisation as unfolding method for JET NE213 liquid scintillator neutron spectrometry</td>
+	<td>2005</td>
+	<td>Fusion Engineering and Design<br/>Vol. 74(1-4), pp. 781 - 786&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.06.126">URL</a>&nbsp;</td>
+</tr>
+<tr id="13233774" class="entry">
+	<td>Nesenevich, V., Afanasyev, V., Kozlovskii, S., Makar'in, D., Mel'nik, A., Mironov, M., Petrov, M., Petrov, S. &amp; Chernyshev, F.</td>
+	<td>A comparative analysis of the sensitivity of CsI (Tl), ZnO(Ga), and YAG(Ce) scintillators to the plasma background radiation under operating conditions of the ITER tokamak reactor</td>
+	<td>2012/03/</td>
+	<td>Instruments and Experimental Techniques<br/>Vol.  55( 2), pp. 255 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S0020441212020169">URL</a>&nbsp;</td>
+</tr>
+<tr id="5686712" class="entry">
+	<td>Nishitani, T., Isobe, M., Wurden, G., Chrien, R., Harano, H., Tobita, K. &amp; Kusama, Y.</td>
+	<td>Triton burnup measurements using scintillating fiber detectors on JT-60U</td>
+	<td>1997/03/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  34-35, pp. 563 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(96)00621-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="2004518727817" class="entry">
+	<td>Nishiura, M., Isobe, M., Saida, T., Sasao, M. &amp; Darrow, D.</td>
+	<td>Scintillator probe diagnostic for high energy particles escaped from Large Helical Device</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(10 II), pp. 3646 - 3648&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1779606">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406602" class="entry">
+	<td>Nishiura, M., Kubo, N., Hirouchi, T., Ido, T., Nagasaka, T., Mutoh, T., Matsuyama, S., Isobe, M., Okamoto, A., Shinto, K., Kitajima, S., Sasao, M., Nakatsuka, M. &amp; Fujioka, K.</td>
+	<td>Characterization of scintillators for lost alpha diagnostics on burning plasma experiments</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 10 - 720&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2228743">URL</a>&nbsp;</td>
+</tr>
+<tr id="20064510221366" class="entry">
+	<td>Nishiura, M., Kubo, N., Hirouchi, T., Ido, T., Nagasaka, T., Mutoh, T., Matsuyama, S., Isobe, M., Okamoto, A., Shinto, K., Kitajima, S., Sasao, M., Nakatsuka, M. &amp; Fujioka, K.</td>
+	<td>Characterization of scintillators for lost alpha diagnostics on burning plasma experiments</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2228743">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757511" class="entry">
+	<td>Nocente, M., Tardocchi, M., Chugunov, I., Pereira, R., Edlington, T., Fernandes, A., Gin, D., Grosso, G., Kiptily, V., Murari, A., Neto, A., Perelli Cippo, E., Pietropaolo, A., Proverbio, I., Shevelev, A., Sousa, J., Syme, B. &amp; Gorini, G.</td>
+	<td>Energy resolution of gamma-ray spectroscopy of JET plasmas with a LaBr3 scintillator detector and digital data acquisition</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 321&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3501386">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387426" class="entry">
+	<td>Nocente, M., Tardocchi, M., Chugunov, I., Pereira, R., Edlington, T., Fernandes, A., Gin, D., Grosso, G., Kiptily, V., Murari, A., Neto, A., Perelli Cippo, E., Pietropaolo, A., Proverbio, I., Shevelev, A., Sousa, J., Syme, B. &amp; Gorini, G.</td>
+	<td>Energy resolution of gamma-ray spectroscopy of JET plasmas with a LaBr 3 scintillator detector and digital data acquisition</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3501386">URL</a>&nbsp;</td>
+</tr>
+<tr id="12557145" class="entry">
+	<td>Nocente, M., Tardocchi, M., Olariu, A., Olariu, S., Chugunov, I., Fernandes, A., Gin, D., Grosso, G., Kiptily, V., Neto, A., Pereira, R., Shevelev, A., Silva, M., Sousa, J. &amp; Gorini, G.</td>
+	<td>High resolution gamma ray spectroscopy at MHz counting rates with LaBr3 scintillators</td>
+	<td>2011//</td>
+	<td>2011 IEEE Nuclear Science Symposium and Medical Imaging Conference (SS/MIC 2011), pp. 2010 - 13&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/NSSMIC.2011.6154409">URL</a>&nbsp;</td>
+</tr>
+<tr id="20121314890127" class="entry">
+	<td>Nocente, M., Tardocchi, M., Olariu, A., Olariu, S., Chugunov, I., Fernandes, A., Gin, D., Grosso, G., Kiptily, V., Neto, A., Pereira, R., Shevelev, A., Silva, M., Sousa, J. &amp; Gorini, G.</td>
+	<td>High resolution gamma ray spectroscopy at MHz counting rates with LaBr 3 scintillators</td>
+	<td>2012</td>
+	<td>IEEE Nuclear Science Symposium Conference Record, pp. 2010 - 2013&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/NSSMIC.2011.6154409">URL</a>&nbsp;</td>
+</tr>
+<tr id="13428928" class="entry">
+	<td>Nocente, M., Tardocchi, M., Olariu, A., Olariu, S., Pereira, R., Chugunov, I., Fernandes, A., Gin, D., Grosso, G., Kiptily, V., Neto, A., Shevelev, A., Silva, M., Sousa, J. &amp; Gorini, G.</td>
+	<td>High Resolution Gamma Ray Spectroscopy at MHz Counting Rates With LaBr3 Scintillators for Fusion Plasma Applications</td>
+	<td>2013/04/</td>
+	<td>IEEE Transactions on Nuclear Science<br/>Vol.  60( 2), pp. 1408 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TNS.2013.2252189">URL</a>&nbsp;</td>
+</tr>
+<tr id="20131716226740" class="entry">
+	<td>Nocente, M., Tardocchi, M., Olariu, A., Olariu, S., Pereira, R., Chugunov, I., Fernandes, A., Gin, D., Grosso, G., Kiptily, V., Neto, A., Shevelev, A., Silva, M., Sousa, J. &amp; Gorini, G.</td>
+	<td>High resolution gamma ray spectroscopy at MHz counting rates with LaBr 3 Scintillators for fusion plasma applications</td>
+	<td>2013</td>
+	<td>IEEE Transactions on Nuclear Science<br/>Vol. 60(2), pp. 1408 - 1415&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TNS.2013.2252189">URL</a>&nbsp;</td>
+</tr>
+<tr id="11240123" class="entry">
+	<td>Pappalardo, A., Cosentino, L. &amp; Finocchiaro, P.</td>
+	<td>An imaging technique for detection and absolute calibration of scintillation light</td>
+	<td>2010/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 3), pp. 033308 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3360931">URL</a>&nbsp;</td>
+</tr>
+<tr id="20101512839101" class="entry">
+	<td>Pappalardo, A., Cosentino, L. &amp; Finocchiaro, P.</td>
+	<td>An imaging technique for detection and absolute calibration of scintillation light</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(3)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3360931">URL</a>&nbsp;</td>
+</tr>
+<tr id="2006019622087" class="entry">
+	<td>Shikama, T., Toh, K., Nagata, S., Tsuchiya, B., Yamauchi, M., Nishitani, T., Suzuki, T., Okamoto, K. &amp; Kubo, N.</td>
+	<td>Radiation sensitive scintillator/optical fibre system for radiation dosimetry in burning plasma machine</td>
+	<td>2006</td>
+	<td>Nuclear Fusion<br/>Vol. 46(1), pp. 46 - 50&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/46/1/005">URL</a>&nbsp;</td>
+</tr>
+<tr id="7760405" class="entry">
+	<td>Soukhanovskii, V., Regan, S., May, M., Finkenthal, M. &amp; Moos, H.</td>
+	<td>Development of phosphor scintillator-based detectors for soft x-ray and vacuum ultraviolet spectroscopy of magnetically confined fusion plasmas</td>
+	<td>2003/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 10), pp. 4331 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1605493">URL</a>&nbsp;</td>
+</tr>
+<tr id="2003457712172" class="entry">
+	<td>Soukhanovskii, V., Regan, S., May, M., Finkenthal, M. &amp; Moos, H.</td>
+	<td>Development of phosphor scintillator-based detectors for soft x-ray and vacuum ultraviolet spectroscopy of magnetically confined fusion plasmas</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(10), pp. 4331 - 4335&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1605493">URL</a>&nbsp;</td>
+</tr>
+<tr id="5686718" class="entry">
+	<td>Takada, E., Iguchi, T., Takahashi, H., Nakazawa, M., Sasao, M., Osakabe, M. &amp; Ikeda, Y.</td>
+	<td>Distributed sensing of fusion neutrons by plastic scintillating fibers</td>
+	<td>1997/03/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  34-35, pp. 591 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(96)00618-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="1997403779816" class="entry">
+	<td>Takada, E., Iguchi, T., Takahashi, H., Nakazawa, M., Sasao, M., Osakabe, M. &amp; Ikeda, Y.</td>
+	<td>Distributed sensing of fusion neutrons by plastic scintillating fibers</td>
+	<td>1997</td>
+	<td>Fusion Engineering and Design<br/>Vol. 34-35, pp. 591 - 594&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(96)00618-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="10275828" class="entry">
+	<td>Tomaszewski, K.</td>
+	<td>Fast scintillation probes for investigation of pulsed neutron radiation from small fusion devices</td>
+	<td>2008//</td>
+	<td>AIP Conference Proceedings<br/>Vol.  996, pp. 89 - 97&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13661169" class="entry">
+	<td>Yuan, X., Zhang, X., Xie, X., Gorini, G., Chen, Z., Peng, X., Chen, J., Zhang, G., Fan, T., Zhong, G., Hu, L. &amp; Wan, B.</td>
+	<td>Neutron energy spectrum measurements with a compact liquid scintillation detector on EAST</td>
+	<td>2013/07/</td>
+	<td>Journal of Instrumentation<br/>Vol.  8( 7), pp. P07016 (15 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1748-0221/8/07/P07016">URL</a>&nbsp;</td>
+</tr>
+<tr id="20133316607393" class="entry">
+	<td>Yuan, X., Zhang, X., Xie, X., Gorini, G., Chen, Z., Peng, X., Chen, J., Zhang, G., Fan, T., Zhong, G., Hu, L. &amp; Wan, B.</td>
+	<td>Neutron energy spectrum measurements with a compact liquid scintillation detector on EAST</td>
+	<td>2013</td>
+	<td>Journal of Instrumentation<br/>Vol. 8(7)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1748-0221/8/07/P07016">URL</a>&nbsp;</td>
+</tr>
+<tr id="12680030" class="entry">
+	<td>Zhuo, S., Shen, R. &amp; Sheng, C.</td>
+	<td>Application of X-ray fluorescence spectrometry on quality control of scintillation crystals</td>
+	<td>Sept.-Oct. 2011</td>
+	<td>X-Ray Spectrometry<br/>Vol.  40( 5), pp. 385 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/xrs.1359">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

@@ -1,0 +1,408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="2516606" class="entry">
+	<td>Benjamin, R., Nudelfunden, A., Terry, J. &amp; Moos, H.</td>
+	<td>Evaluation of a photon-counting detector for Doppler ion temperature measurements</td>
+	<td>1985/05/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  56( 5), pp. 870 - &nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1322374" class="entry">
+	<td>Bitter, M., von Goeler, S., Horton, R., Goldman, M., Hill, K., Sauthoff, N. &amp; Stodiek, W.</td>
+	<td>Doppler-broadening measurements of X-ray lines for determination of the ion temperature in Tokamak plasmas</td>
+	<td>1979/01/29</td>
+	<td>Physical Review Letters<br/>Vol.  42( 5), pp. 304 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1103/PhysRevLett.42.304">URL</a>&nbsp;</td>
+</tr>
+<tr id="3411680" class="entry">
+	<td>Bombarda, F., Giannella, R., Kallne, E. &amp; Tallents, G.</td>
+	<td>Ion temperature measurement from Doppler broadening of He-like nickel lines</td>
+	<td>1989/04/</td>
+	<td>Journal of Quantitative Spectroscopy and Radiative Transfer<br/>Vol.  41( 4), pp. 323 - 33&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0022-4073(89)90127-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="5947414" class="entry">
+	<td>Carolan, P., Conway, N., Tournianski, M., Nightingale, M. &amp; Walsh, M.</td>
+	<td>A Doppler spectroscopy diagnostic to study the ion temperature, rotation and confinement in neutral-beam-heated START plasmas</td>
+	<td>1998/03/</td>
+	<td>Plasma Physics Reports<br/>Vol.  24( 3), pp. 206 - 13&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2298156" class="entry">
+	<td>Chengjie, Y., Jiefu, C., Shuxun, Z., Songyun, C. &amp; Jialin, C.</td>
+	<td>The measurements of ion temperatures of the plasma in mini-torus from the Doppler broadening of the spectral lines</td>
+	<td>1984/03/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  4( 1), pp. 18 - 23&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2004298264998" class="entry">
+	<td>Gu, P., Nagata, M., McCollam, K.J., Jarboe, T.R., Nelson, B.A. &amp; Redd, A.J.</td>
+	<td>Compact high-resolution ion Doppler spectrometer for quartz ultraviolet line emissions</td>
+	<td>2004</td>
+	<td>Review of Scientific Instruments<br/>Vol. 75(5 PART 1), pp. 1337 - 1340&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1711157">URL</a>&nbsp;</td>
+</tr>
+<tr id="1896294" class="entry">
+	<td>Henline, P. &amp; Lohr, J.</td>
+	<td>Software system for the Doppler ion diagnostic on Doublet III using a TRACOR Northern 1710-31 and an LSI-11/2</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 1044 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1449329" class="entry">
+	<td>Huldt, S., Curtis, L. &amp; Schectman, R.</td>
+	<td>A convenient Doppler shift method for determining the velocity of a fast ion beam</td>
+	<td>1979/02/</td>
+	<td>Journal de Physique Colloque<br/>Vol.  40( C-1), pp. 161 - 2&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1972050001579" class="entry">
+	<td>JO, S.J. &amp; JA, L.</td>
+	<td>Cancellation of slit- width and Doppler broadening effects in the spectroscopy of fast ion beams</td>
+	<td>1971</td>
+	<td>Applied Physics Letters<br/>Vol. 18(9), pp. 368 - 369&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10310389" class="entry">
+	<td>King, J., McLean, H., Wood, R., Romero-Talamas, C., Moller, J. &amp; Morse, E.</td>
+	<td>An ion Doppler spectrometer instrument for ion temperature and flow measurements on SSPX</td>
+	<td>2008/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 10), pp. 10 - 535&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2957842">URL</a>&nbsp;</td>
+</tr>
+<tr id="20084611695446" class="entry">
+	<td>King, J., McLean, H., Wood, R., Romero-Talamas, C., Moller, J. &amp; Morse, E.</td>
+	<td>An ion Doppler spectrometer instrument for ion temperature and flow measurements on SSPX</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2957842">URL</a>&nbsp;</td>
+</tr>
+<tr id="13084017" class="entry">
+	<td>Koch, J., Stewart, R., Beiersdorfer, P., Shepherd, R., Schneider, M., Miles, A., Scott, H., Smalyuk, V. &amp; Hsing, W.</td>
+	<td>High-resolution spectroscopy for Doppler-broadening ion temperature measurements of implosions at the National Ignition Facility</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 127&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4731747">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124515653341" class="entry">
+	<td>Koch, J., Stewart, R., Beiersdorfer, P., Shepherd, R., Schneider, M., Miles, A., Scott, H., Smalyuk, V. &amp; Hsing, W.</td>
+	<td>High-resolution spectroscopy for Doppler-broadening ion temperature measurements of implosions at the National Ignition Facility</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4731747">URL</a>&nbsp;</td>
+</tr>
+<tr id="3389344" class="entry">
+	<td>Lawson, K. &amp; Peacock, N.</td>
+	<td>Effect of the instrument function on Doppler ion temperature measurements of the JET plasma</td>
+	<td>1988//</td>
+	<td><br/>Vol. JET-R(88)12, pp. 29 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3284775" class="entry">
+	<td>Lawson, K. &amp; Peacock, N.</td>
+	<td>The effect of the instrument function on Doppler ion temperature measurements</td>
+	<td>15 Sept. 1988</td>
+	<td>Optics Communications<br/>Vol.  68( 2), pp. 121 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0030-4018(88)90136-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="1992090244777" class="entry">
+	<td>Lawson, K. &amp; Peacock, N.</td>
+	<td>Effect of the instrument function on doppler ion temperature measurements</td>
+	<td>1988</td>
+	<td>Optics Communications<br/>Vol. 68(2), pp. 121 - 127&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/0030-4018(88)90136-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="8167804" class="entry">
+	<td>Nagata, M. &amp; Uyama, T.</td>
+	<td>Ion Doppler spectroscopic measurement with a multi-channel PMT on spheromak plasmas</td>
+	<td>2004/02/</td>
+	<td>Transactions of the Institute of Electrical Engineers of Japan, Part A<br/>Vol.  124-A( 2), pp. 217 - 18&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5735407" class="entry">
+	<td>Ryzhov, I. &amp; Tutin, G.</td>
+	<td>Doppler-tuned X-ray spectrometer: outlook of application to experiments at the ion source beams</td>
+	<td>1997//</td>
+	<td>Physica Scripta Volume T<br/>Vol.  T71, pp. 161 - 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1997463834344" class="entry">
+	<td>Ryzhov, I. &amp; Tutin, G.</td>
+	<td>Doppler-tuned X-ray spectrometer: Outlook of application to experiments at the ion source beams</td>
+	<td>1997</td>
+	<td>Physica Scripta T<br/>Vol. T71, pp. 161 - 163&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6849027" class="entry">
+	<td>Seo, S.-H., Na, H., Kwon, M. &amp; Yoon, N.</td>
+	<td>The ion temperature distribution measurement by Abel-inverted Doppler broadening method</td>
+	<td>2001/01/</td>
+	<td>Fusion Technology<br/>Vol.  39( 1T), pp. 163 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2001195587162" class="entry">
+	<td>Seo, S.-H., Na, H., Kwon, M. &amp; Yoon, N.</td>
+	<td>Ion temperature distribution measurement by Abel-inverted Doppler broadening method</td>
+	<td>2001</td>
+	<td>Fusion Technology<br/>Vol. 39(1 T), pp. 163 - 166&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="269111" class="entry">
+	<td>Stoner, J.O., J. &amp; Leavitt, J.</td>
+	<td>Cancellation of split-width and Doppler broadening effects in the spectroscopy of fast ion beams</td>
+	<td>1971/05/01</td>
+	<td>Applied Physics Letters<br/>Vol.  18( 9), pp. 368 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

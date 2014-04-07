@@ -5,7 +5,7 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-	<meta name="description" content="Fast Ion (Scintillator type) diagnostics for fusion, plasma energy, and physics labs.">
+	<meta name="description" content="Fast Ion (Scintillator type) diagnostics for fusion, plasma energy, and physics labs. Useful Scintillator References">
   <title>Neutrons | Woodruff Scientific, Inc.</title>
   </head>
 
@@ -32,6 +32,8 @@
 	</a></p>
 
 	<h3>Scintillator Type</h3>
+					<blockquote><a href="scintillators.html">Scintillator References</a></blockquote>
+
 <!-- 	Figure of scintillator with PMT
  -->	
 	<p><a class="btn btn-lg btn-primary" href="mailto: sales@woodruffscientific.com?subject=Scintillator RFQ &#038;body=Short%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):" role="button">Get a Quote &raquo;</a></p>

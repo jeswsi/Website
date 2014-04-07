@@ -26,19 +26,19 @@
           <ul class="left">
             <li><a href="#nimrod">NIMROD</a></li>
             <li><a href="#hifi">HiFi</a></li>
-            <li><a href="#bout">Bout++</a></li>
+            <li><a href="#bout">BOUT++</a></li>
             <li><a href="#openfoam">OpenFOAM</a></li>
           </ul>
 
 	<h1>MHD</h1>
   <p>Our main tools for MHD simulations are NIMROD, HiFi and to a lesser
-extend BOUT++.  We have served several contracts with the NIMROD code,
-and we are exploring the use of HiFi for 3D geometries.  BOUT++ is
-running, although is on the backburner - there might be opportunities
-for running this code, but likely others have a greater handle on this
-own at this time.  The beauty of BOUT++ however is that it is written in
-a contemporary programming language, whereas NIMROD and HiFi are written
-in FORTRAN.</p>
+extent BOUT++. We have served several contracts with the NIMROD code,
+and we are exploring the use of HiFi for 3D geometries, particularly for
+the W7X stellarator. BOUT++ is running, and cross-code verification
+activities are planned.  We added OpenFOAM recently to the list of MHD
+code we run, primarily because of interest in incompressible MHD for
+fluid flows in blankets.  BOUT++ is written with C++, whereas NIMROD and
+HiFi are written in FORTRAN.</p>
 
 <a id="nimrod"></a>
   <h3>NIMROD</h3>
@@ -96,7 +96,7 @@ Phys. Comm., 164 (2004); V.S. Lukin, Ph.D. thesis, Princeton University
 
 <a id="bout"></a>
 <h3>BOUT++</h3>
-<p> BOUT++ is a 3D plasma fluid simulation code which has been developed at
+<p>BOUT++ is a 3D plasma fluid simulation code which has been developed at
 York in collaboration with the MFE group at LLNL and the MCS division at
 ANL. Key features are:
 <ul>

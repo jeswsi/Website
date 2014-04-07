@@ -5,7 +5,7 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-	<meta name="description" content="Neutral particle diagnostics for fusion, plasma energy, and physics labs.">
+	<meta name="description" content="Neutral particle diagnostics for fusion, plasma energy, and physics labs. Useful Neutral Particle references.">
   <title>Neutral Particles | Woodruff Scientific, Inc.</title>
   </head>
 
@@ -32,6 +32,8 @@
 	</a></p>
 
 	<h3>Neutral Particle Analyzer</h3>
+					<blockquote><a href="npa.html">Neutral Particle Analyzer References</a></blockquote>
+
 
 <!-- FIGURE of neutral particle analyzer
  -->

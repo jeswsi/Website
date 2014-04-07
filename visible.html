@@ -1,0 +1,408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="9976680" class="entry">
+	<td>Banerjee, S., Kumar, V., Chowdhuri, M., Ghosh, J., Manchanda, R., Patel, K. &amp; Vasu, P.</td>
+	<td>Space- and time-resolved visible-emission spectroscopy of Aditya-tokamak discharges using multi-track spectrometer</td>
+	<td>2008/04/</td>
+	<td>Measurement Science &amp;amp; Technology<br/>Vol.  19( 4), pp. 045603 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0957-0233/19/4/045603">URL</a>&nbsp;</td>
+</tr>
+<tr id="20081811234831" class="entry">
+	<td>Banerjee, S., Kumar, V., Chowdhuri, M., Ghosh, J., Manchanda, R., Patel, K.M. &amp; Vasu, P.</td>
+	<td>Space- and time-resolved visible-emission spectroscopy of Aditya-tokamak discharges using multi-track spectrometer</td>
+	<td>2008</td>
+	<td>Measurement Science and Technology<br/>Vol. 19(4)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0957-0233/19/4/045603">URL</a>&nbsp;</td>
+</tr>
+<tr id="7590279" class="entry">
+	<td>Barnsley, R., Coffey, I., Lucock, R. &amp; Stamp, M.</td>
+	<td>JET beamline with integrated x-ray, VUV, and visible spectrometers, for burning plasma experiments</td>
+	<td>2003/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 3), pp. 1969 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1538326">URL</a>&nbsp;</td>
+</tr>
+<tr id="2003157436712" class="entry">
+	<td>Barnsley, R., Coffey, I., Lucock, R. &amp; Stamp, M.</td>
+	<td>JET beamline with integrated x-ray, VUV, and visible spectrometers, for burning plasma experiments</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(3 II), pp. 1969 - 1973&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1538326">URL</a>&nbsp;</td>
+</tr>
+<tr id="10435368" class="entry">
+	<td>Brezinsek, S., Pospieszczyk, A., Sergienko, G., Mertens, P. &amp; Samm, U.</td>
+	<td>Use of a high resolution overview spectrometer for the visible range in the TEXTOR boundary plasma</td>
+	<td>2008/01/</td>
+	<td>Joint Conference of 17th International Toki Conference on Physics of Flows and Turbulence in Plasmas and 16th International Stellarator/Heliotron Workshop 2007, pp. 439 - 42&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12546100" class="entry">
+	<td>Dong, C., Morita, S., Goto, M. &amp; Wang, E.</td>
+	<td>Absolute intensity calibration of flat-field space-resolved extreme ultraviolet spectrometer using radial profiles of visible and extreme ultraviolet bremsstrahlung continuum emitted from high-density plasmas in Large Helical Device</td>
+	<td>2011/11/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  82( 11), pp. 113102 (11 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3658050">URL</a>&nbsp;</td>
+</tr>
+<tr id="20114914579536" class="entry">
+	<td>Dong, C., Morita, S., Goto, M. &amp; Wang, E.</td>
+	<td>Absolute intensity calibration of flat-field space-resolved extreme ultraviolet spectrometer using radial profiles of visible and extreme ultraviolet bremsstrahlung continuum emitted from high-density plasmas in Large Helical Device</td>
+	<td>2011</td>
+	<td>Review of Scientific Instruments<br/>Vol. 82(11)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3658050">URL</a>&nbsp;</td>
+</tr>
+<tr id="5092464" class="entry">
+	<td>Ejiri, A., Oikawa, T. &amp; Toyama, H.</td>
+	<td>Measurement of velocity fluctuations in plasmas by a conventional visible spectrometer</td>
+	<td>Sept. 1995</td>
+	<td>Review of Scientific Instruments<br/>Vol.  66( 9), pp. 4600 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1145296">URL</a>&nbsp;</td>
+</tr>
+<tr id="1995492896742" class="entry">
+	<td>Ejiri, A., Oikawa, T. &amp; Toyama, H.</td>
+	<td>Measurement of velocity fluctuations in plasmas by a conventional visible spectrometer</td>
+	<td>1995</td>
+	<td>Review of Scientific Instruments<br/>Vol. 66(9), pp. 4600 - 4606&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1145296">URL</a>&nbsp;</td>
+</tr>
+<tr id="5175522" class="entry">
+	<td>Field, A., Fink, J., Dux, R., Fussmann, G. &amp; Wenzel, U.</td>
+	<td>A spatially scanning vacuum ultraviolet and visible range spectrometer for spectroscopy of tokamak plasmas in ASDEX-Upgrade</td>
+	<td>1995/12/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  66( 12), pp. 5433 - 41&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1146065">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406670" class="entry">
+	<td>Graf, A., Howard, S., Horton, R., Hwang, D., May, M., Beiersdorfer, P. &amp; Terry, J.</td>
+	<td>Visible spectrometer at the compact toroid injection experiment and the alcator C-mod tokamak for Doppler width and shift measurements</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 10 - 125&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2349824">URL</a>&nbsp;</td>
+</tr>
+<tr id="20064510221434" class="entry">
+	<td>Graf, A., Howard, S., Horton, R., Hwang, D., May, M., Beiersdorfer, P. &amp; Terry, J.</td>
+	<td>Visible spectrometer at the Compact Toroid Injection Experiment and the Alcator C-Mod tokamak for Doppler width and shift measurements</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2349824">URL</a>&nbsp;</td>
+</tr>
+<tr id="9950769" class="entry">
+	<td>Kim, J. &amp; Kim, D.</td>
+	<td>Characterization of a polarization-resolved high spectral resolution UV-visible spectrometer</td>
+	<td>2008/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 3), pp. 033109 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2898704">URL</a>&nbsp;</td>
+</tr>
+<tr id="20081511191862" class="entry">
+	<td>Kim, J. &amp; Kim, D.</td>
+	<td>Characterization of a polarization-resolved high spectral resolution UV-visible spectrometer</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(3)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2898704">URL</a>&nbsp;</td>
+</tr>
+<tr id="9403498" class="entry">
+	<td>Kobayashi, T., Yoshikawa, M., Matama, K., Kubota, Y., Kohagura, J. &amp; Cho, T.</td>
+	<td>Study of impurity ion radiation and density profiles by using ultraviolet/visible spectrometer in the GAMMA 10 tandem mirror</td>
+	<td>2006/12/</td>
+	<td>Journal of the Korean Physical Society<br/>Vol.  49, pp. 105 - 8&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5680933" class="entry">
+	<td>Kubo, H., Sugie, T., Takenaga, H., Higashijima, S. &amp; Sakasai, A.</td>
+	<td>High resolution visible spectrometer for divertor study in JT-60U</td>
+	<td>1997/03/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  34-35, pp. 277 - 80&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(96)00538-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="1997403779749" class="entry">
+	<td>Kubo, H., Sugie, T., Takenaga, H., Higashijima, S. &amp; Sakasai, A.</td>
+	<td>High resolution visible spectrometer for divertor study in JT-60U</td>
+	<td>1997</td>
+	<td>Fusion Engineering and Design<br/>Vol. 34-35, pp. 277 - 280&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(96)00538-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757600" class="entry">
+	<td>Scotti, F. &amp; Bell, R.</td>
+	<td>High accuracy wavelength calibration for a scanning visible spectrometer</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 732&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3489975">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387515" class="entry">
+	<td>Scotti, F. &amp; Bell, R.E.</td>
+	<td>High accuracy wavelength calibration for a scanning visible spectrometer</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3489975">URL</a>&nbsp;</td>
+</tr>
+<tr id="3434416" class="entry">
+	<td>Stamp, M., Behringer, K., Forrest, M., Morgan, P. &amp; Summers, H.</td>
+	<td>Particle influx measurements in JET helium plasmas using a multichannel visible spectrometer</td>
+	<td>1989/04/</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  162-164, pp. 404 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/0022-3115(89)90302-4">URL</a>&nbsp;</td>
+</tr>
+<tr id="10310390" class="entry">
+	<td>Zhou, H., Morita, S., Goto, M. &amp; Chowdhuri, M.</td>
+	<td>Zeff profile measurement system with an optimized Czerny-Turner visible spectrometer in large helical device</td>
+	<td>2008/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 10), pp. 10 - 536&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2953489">URL</a>&nbsp;</td>
+</tr>
+<tr id="20084611695447" class="entry">
+	<td>Zhou, H., Morita, S., Goto, M. &amp; Chowdhuri, M.</td>
+	<td>Zeff profile measurement system with an optimized Czerny-Turner visible spectrometer in large helical device</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2953489">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

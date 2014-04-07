@@ -1,0 +1,576 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="20103413188191" class="entry">
+	<td>Artyukov, I., Feschenko, R., Vinogradov, A., Bugayev, Y., Devizenko, O., Kondratenko, V., Kasyanov, Y., Hatano, T., Yamamoto, M. &amp; Saveliev, S.</td>
+	<td>Soft X-ray imaging of thick carbon-based materials using the normal incidence multilayer optics</td>
+	<td>2010</td>
+	<td>Micron<br/>Vol. 41(7), pp. 722 - 728&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.micron.2010.06.011">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757749" class="entry">
+	<td>Battaglia, D., Shafer, M., Unterberg, E., Bell, R., Hillis, D., LeBlanc, B., Maingi, R., Sabbagh, S. &amp; Stratton, B.</td>
+	<td>Simulation of a tangential soft x-ray imaging system</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 533&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3478883">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387663" class="entry">
+	<td>Battaglia, D., Shafer, M., Unterberg, E., Bell, R., Hillis, D., Leblanc, B., Maingi, R., Sabbagh, S. &amp; Stratton, B.</td>
+	<td>Simulation of a tangential soft x-ray imaging system</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3478883">URL</a>&nbsp;</td>
+</tr>
+<tr id="10310283" class="entry">
+	<td>Bush, C., Stratton, B., Robinson, J., Zakharov, L., Fredrickson, E., Stutman, D. &amp; Tritz, K.</td>
+	<td>Fast soft X-ray images of magnetohydrodynamic phenomena in NSTX</td>
+	<td>2008/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 10), pp. 10 - 928&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2968219">URL</a>&nbsp;</td>
+</tr>
+<tr id="20084611695341" class="entry">
+	<td>Bush, C., Stratton, B., Robinson, J., Zakharov, L., Fredrickson, E., Stutman, D. &amp; Tritz, K.</td>
+	<td>Fast soft x-ray images of magnetohydrodynamic phenomena in NSTX</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2968219">URL</a>&nbsp;</td>
+</tr>
+<tr id="9902514" class="entry">
+	<td>Calegari, F., Valentini, G., Vozzi, C., Benedetti, E., Cabanillas-Gonzalez, J., Faenov, A., Gasilov, S., Pikuz, T., Poletto, L., Sansone, G., Villoresi, P., Nisoli, M., De Silvestri, S. &amp; Stagira, S.</td>
+	<td>Elemental sensitivity in soft X-ray imaging with a laser-plasma source and a color center detector</td>
+	<td>1 Sept. 2007</td>
+	<td>Optics Letters<br/>Vol.  32( 17), pp. 2593 - 5&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11077813" class="entry">
+	<td>Ding, Y., Zhuang, G., Zhang, X., Zhang, J., Ba, W., Wang, Z. &amp; Pan, Y.</td>
+	<td>Soft X-ray imaging diagnostic system on the J-TEXT tokamak</td>
+	<td>2009/07/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  606( 3), pp. 743 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2009.05.012">URL</a>&nbsp;</td>
+</tr>
+<tr id="20092712171673" class="entry">
+	<td>Ding, Y., Zhuang, G., Zhang, X., Zhang, J., Ba, W., Wang, Z. &amp; Pan, Y.</td>
+	<td>Soft X-ray imaging diagnostic system on the J-TEXT tokamak</td>
+	<td>2009</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section A: Accelerators, Spectrometers, Detectors and Associated Equipment<br/>Vol. 606(3), pp. 743 - 748&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2009.05.012">URL</a>&nbsp;</td>
+</tr>
+<tr id="11965571" class="entry">
+	<td>Faenov, A., Pikuz, T., Fukuda, Y., Kando, M., Kotaki, H., Homma, T., Kawase, K., Skobelev, I., Gasilov, S., Kawachi, T., Daido, H., Tajima, T., Kato, Y. &amp; Bulanov, S.</td>
+	<td>Metrology of Wide Field of View Nano-thickness Foils' Homogeneity by Conventional and Phase Contrast Soft X-ray Imaging</td>
+	<td>2010/06/</td>
+	<td>Japanese Journal of Applied Physics<br/>Vol.  49( 6), pp. 06GK03 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1143/JJAP.49.06GK03">URL</a>&nbsp;</td>
+</tr>
+<tr id="10979419" class="entry">
+	<td>Gasilov, S., Faenov, A., Pikuz, T., Fukuda, Y., Kando, M., Kawachi, T., Skobelev, I., Daido, H., Kato, Y. &amp; Bulanov, S.</td>
+	<td>Wide-field-of-view phase-contrast imaging of nanostructures with a comparatively large polychromatic soft x-ray plasma source</td>
+	<td>2009/11/01</td>
+	<td>Optics Letters<br/>Vol.  34( 21), pp. 3268 - 70&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1364/OL.34.003268">URL</a>&nbsp;</td>
+</tr>
+<tr id="20083611499586" class="entry">
+	<td>Jones, B., Coverdale, C.A. &amp; Mazarakis, M.G.</td>
+	<td>Multicolor soft X-ray imaging of Z-pinch radiation sources on the Z-machine pulsed-power driver</td>
+	<td>2008</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol. 36(4 PART 1), pp. 1276 - 1277&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2008.920316">URL</a>&nbsp;</td>
+</tr>
+<tr id="10145644" class="entry">
+	<td>Jones, B., Coverdale, C. &amp; Mazarakis, M.</td>
+	<td>Multicolor soft X-ray imaging of Z-pinch radiation sources on the Z-machine pulsed-power driver</td>
+	<td>2008/08/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  36( 4), pp. 1276 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2008.920316">URL</a>&nbsp;</td>
+</tr>
+<tr id="11102220" class="entry">
+	<td>Kado, M., Mori, M., Nishiuchi, M., Ishino, M. &amp; Kawachi, T.</td>
+	<td>Development of a soft x-ray plasma camera with a Fresnel zone plate to image laser produced plasmas</td>
+	<td>2009//</td>
+	<td>Journal of Physics: Conference Series<br/>Vol.  186( 1), pp. 012031 (3 pp.) - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1088/1742-6596/186/1/012031">URL</a>&nbsp;</td>
+</tr>
+<tr id="14107791" class="entry">
+	<td>Mazon, D., Vezinet, D., Malard, P., Pacella, D., Gabelieri, L., Romano, A., Piergotti, V., Benedetto, T., Murtas, F., Dagabov, S. &amp; Corradi, G.</td>
+	<td>Soft X-ray imaging techniques on Tore Supra: Present status and possible future developments</td>
+	<td>2013/08/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  720, pp. 78 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2012.12.030">URL</a>&nbsp;</td>
+</tr>
+<tr id="20132516428024" class="entry">
+	<td>Mazon, D., Vezinet, D., Malard, P., Pacella, D., Gabelieri, L., Romano, A., Piergotti, V., Benedetto, T., Murtas, F., Dagabov, S. &amp; Corradi, G.</td>
+	<td>Soft X-ray imaging techniques on Tore Supra: Present status and possible future developments</td>
+	<td>2013</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section A: Accelerators, Spectrometers, Detectors and Associated Equipment<br/>Vol. 720, pp. 78 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2012.12.030">URL</a>&nbsp;</td>
+</tr>
+<tr id="12052630" class="entry">
+	<td>Montereali, R., Almaviva, S., Bonfigli, F., Cricenti, A., Faenov, A., Flora, F., Gaudio, P., Lai, A., Martellucci, S., Nichelatti, E., Pikuz, T., Reale, L., Richetta, M. &amp; Vincenti, M.</td>
+	<td>Lithium fluoride thin-film detectors for soft X-ray imaging at high spatial resolution</td>
+	<td>2010/11/11</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  623( 2), pp. 758 - 62&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2010.02.089">URL</a>&nbsp;</td>
+</tr>
+<tr id="13038215" class="entry">
+	<td>Nakazato, T., Shimizu, T., Yamanoi, K., Sakai, K., Takeda, K., Nishi, R., Minami, Y., Cadatal-Raduban, M., Sarukura, N., Nishimura, H., Azechi, H., Ehrentraut, D., Fukuda, T., Tanaka, M., Nishikino, M. &amp; Kawachi, T.</td>
+	<td>Potential high-spatial resolution in-situ imaging of soft x-ray laser pulses with ZnO crystal</td>
+	<td>2012/10/</td>
+	<td>IEEE Transactions on Nuclear Science<br/>Vol.  59( 5), pp. 2294 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TNS.2012.2190095">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124315594744" class="entry">
+	<td>Nakazato, T., Shimizu, T., Yamanoi, K., Sakai, K., Takeda, K., Nishi, R., Minami, Y., Cadatal-Raduban, M., Sarukura, N., Nishimura, H., Azechi, H., Ehrentraut, D., Fukuda, T., Tanaka, M., Nishikino, M. &amp; Kawachi, T.</td>
+	<td>Potential high-spatial resolution in-situ imaging of soft X-ray laser pulses with ZnO crystal</td>
+	<td>2012</td>
+	<td>IEEE Transactions on Nuclear Science<br/>Vol. 59(5 PART 2), pp. 2294 - 2297&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TNS.2012.2190095">URL</a>&nbsp;</td>
+</tr>
+<tr id="13293865" class="entry">
+	<td>Nakazato, T., Shimizu, T., Yamanoi, K., Sakai, K., Takeda, K., Nishi, R., Minami, Y., Cadatal-Raduban, M., Sarukura, N., Nishimura, H., Azechi, H., Fukuda, T., Tanaka, M., Nishikino, M. &amp; Kawachi, T.</td>
+	<td>Evaluation of Soft X-ray Laser with In situ Imaging Device of High Spatial Resolution ZnO Scintillator</td>
+	<td>2011/12/</td>
+	<td>Japanese Journal of Applied Physics<br/>Vol.  50( 12), pp. 122202 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1143/JJAP.50.122202">URL</a>&nbsp;</td>
+</tr>
+<tr id="20115014594250" class="entry">
+	<td>Nakazato, T., Shimizu, T., Yamanoi, K., Sakai, K., Takeda, K., Nishi, R., Minami, Y., Cadatal-Raduban, M., Sarukura, N., Nishimura, H., Azechi, H., Fukuda, T., Tanaka, M., Nishikino, M. &amp; Kawachi, T.</td>
+	<td>Evaluation of soft X-ray laser with in situ imaging device of high spatial resolution ZnO scintillator</td>
+	<td>2011</td>
+	<td>Japanese Journal of Applied Physics<br/>Vol. 50(12)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1143/JJAP.50.122202">URL</a>&nbsp;</td>
+</tr>
+<tr id="12901724" class="entry">
+	<td>Pacella, D., Dabagov, S., Murtas, F., Romano, A., Hampai, D., Gabellier, L. &amp; Mazon, D.</td>
+	<td>Polycapillary optics for soft X-ray imaging and tomography</td>
+	<td>2011/07/</td>
+	<td>Nuovo Cimento C<br/>Vol.  34C( 4), pp. 513 - 20&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1393/ncc/i2011-10976-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="14107786" class="entry">
+	<td>Pacella, D., Romano, A., Gabellieri, L., Murtas, F. &amp; Mazon, D.</td>
+	<td>GEM gas detectors for soft X-ray imaging in fusion devices with neutron-gamma background</td>
+	<td>2013/08/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  720, pp. 53 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2012.12.036">URL</a>&nbsp;</td>
+</tr>
+<tr id="20132516428030" class="entry">
+	<td>Pacella, D., Romano, A., Gabellieri, L., Murtas, F. &amp; Mazon, D.</td>
+	<td>GEM gas detectors for soft X-ray imaging in fusion devices with neutron-gamma background</td>
+	<td>2013</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section A: Accelerators, Spectrometers, Detectors and Associated Equipment<br/>Vol. 720, pp. 53 - 57&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2012.12.036">URL</a>&nbsp;</td>
+</tr>
+<tr id="10282472" class="entry">
+	<td>Pacella, D., Romano, A., Pizzicaroli, G., Gabellieri, L., Bellazzini, R. &amp; Brez, A.</td>
+	<td>Development of a soft-X ray detector for energy resolved 2D imaging by means of a gas pixel detector with highly integrated microelectronics</td>
+	<td>2007//</td>
+	<td>AIP Conference Proceedings<br/>Vol.  988, pp. 197 - 200&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20125215839877" class="entry">
+	<td>Pikuz, T., Faenov, A., Pirozhkov, A., Astapov, A., Klushin, G., Pikuz, S., Nagorskiy, N., Magnitskiy, S., Esirkepov, T., Koga, J., Nakamura, T., Bulanov, S., Fukuda, Y., Hayashi, Y., Kotaki, H., Kato, Y. &amp; Kando, M.</td>
+	<td>High performance imaging of relativistic soft X-ray harmonics by sub-micron resolution LiF film detectors</td>
+	<td>2012</td>
+	<td>Physica Status Solidi (C) Current Topics in Solid State Physics<br/>Vol. 9(12), pp. 2331 - 2335&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/pssc.201200390">URL</a>&nbsp;</td>
+</tr>
+<tr id="13389700" class="entry">
+	<td>Pikuz, T., Faenov, A., Pirozhkov, A., Astapov, A., Klushin, G., Pikuz, S., J., Nagorskiy, N., Magnitskiy, S., Esirkepov, T., Koga, J., Nakamura, T., Bulanov, S., Fukuda, Y., Hayashi, Y., Kotaki, H., Kato, Y. &amp; Kando, M.</td>
+	<td>High performance imaging of relativistic soft X-ray harmonics by sub-micron resolution LiF film detectors</td>
+	<td>2012/12/</td>
+	<td>Physica Status Solidi C - Current Topics in Solid State Physics<br/>Vol.  9( 12), pp. 2331 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/pssc.201200390">URL</a>&nbsp;</td>
+</tr>
+<tr id="8589641" class="entry">
+	<td>Rawat, R., Zhang, T., Lim, G., Tan, W., Ng, S., Patran, A., Hassan, S., Springham, S., Tan, T., Zakaullah, M., Lee, P. &amp; Lee, S.</td>
+	<td>Soft X-ray imaging using a neon filled plasma focus X-ray source</td>
+	<td>2004/03/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  23( 1), pp. 49 - 53&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-004-1871-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="10064020" class="entry">
+	<td>Rocca, J., Marconi, M., Menoni, C., Wachulak, P., Luther, B., Brizuela, F., Brewer, C., Wang, Y., Alessi, D., Berrill, M., Martz, D., Heinbuch, S., Grisham, M., Chao, W., Anderson, E. &amp; Attwood, D.</td>
+	<td>Compact soft X-ray lasers for imaging, material processing, and characterization at the nanoscale</td>
+	<td>2008//</td>
+	<td>2007 32nd IEEE/CPMT International Electronic Manufacturing Technology Symposium, pp. 101 - 2&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20083111428583" class="entry">
+	<td>Rocca, J., Marconi, M., Menoni, C., Wachulak, P., Luther, B., Brizuela, F., Brewer, C., Wang, Y., Alessi, D., Berrill, M., Martz, D., Heinbuch, S., Grisham, M., Chao, W., Anderson, E. &amp; Attwood, D.</td>
+	<td>Compact soft X-ray lasers for imaging, material processing, and characterization at the nanoscale</td>
+	<td>2007</td>
+	<td>Proceedings of the IEEE/CPMT International Electronics Manufacturing Technology (IEMT) Symposium, pp. 101 - 102&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/IEMT.2007.4417060">URL</a>&nbsp;</td>
+</tr>
+<tr id="13354274" class="entry">
+	<td>Sakai, Y., Rosenzweig, J., Kumai, H., Nakanishi, Y., Ishizuka, Y., Takahashi, S., Komatsu, T., Xiao, Y., Bin, H., Quishi, Z., Hayashi, Y., Song, I., Kawamura, T., Watanabe, M. &amp; Hotta, E.</td>
+	<td>Observation of emission process in hydrogen-like nitrogen Z-pinch discharge with time integrated soft X-ray spectrum pinhole image</td>
+	<td>2013/02/</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 2), pp. 023108 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4789617">URL</a>&nbsp;</td>
+</tr>
+<tr id="20131116117936" class="entry">
+	<td>Sakai, Y., Rosenzweig, J., Kumai, H., Nakanishi, Y., Ishizuka, Y., Takahashi, S., Komatsu, T., Xiao, Y., Bin, H., Quishi, Z., Hayashi, Y., Song, I., Kawamura, T., Watanabe, M. &amp; Hotta, E.</td>
+	<td>Observation of emission process in hydrogen-like nitrogen Z-pinch discharge with time integrated soft X-ray spectrum pinhole image</td>
+	<td>2013</td>
+	<td>Physics of Plasmas<br/>Vol. 20(2)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4789617">URL</a>&nbsp;</td>
+</tr>
+<tr id="13952904" class="entry">
+	<td>Sakao, T., Narukage, N., Shimojo, M., Watanabe, K., Suematsu, Y., Imada, S. &amp; Ishikawa, S.</td>
+	<td>The soft X-ray photon-counting spectroscopic imager for the Sun</td>
+	<td>2013//</td>
+	<td>Proceedings of the SPIE - The International Society for Optical Engineering<br/>Vol.  8862, pp. 88620T (12 pp.) - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1117/12.2024753">URL</a>&nbsp;</td>
+</tr>
+<tr id="20134516958370" class="entry">
+	<td>Sakao, T., Narukage, N., Shimojo, M., Watanabe, K., Suematsu, Y., Imada, S. &amp; Ishikawa, S.-N.</td>
+	<td>The soft X-ray photon-counting spectroscopic imager for the Sun</td>
+	<td>2013</td>
+	<td>Proceedings of SPIE - The International Society for Optical Engineering<br/>Vol. 8862, pp. The Society of Photo-Optical Instrumentation Engineers (SPIE) - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1117/12.2024753">URL</a>&nbsp;</td>
+</tr>
+<tr id="20132616447210" class="entry">
+	<td>Sanpei, A., Oki, K., Fukahori, D., Deguchi, K., Nakaki, S., Nishimura, K., Himura, H., Masamune, S., Ohdachi, S., Nishino, N. &amp; Onchi, T.</td>
+	<td>Design and initial result of time-resolved vertical soft x-ray imaging system in low-A RFP</td>
+	<td>2012</td>
+	<td>Plasma and Fusion Research<br/>Vol. 7(SPL.ISS.1)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.7.2402052">URL</a>&nbsp;</td>
+</tr>
+<tr id="10083635" class="entry">
+	<td>Schafer, D., Nisius, T., Fruke, R., Rausch, S., Wieland, M., Vogt, U. &amp; Wilhein, T.</td>
+	<td>Compact X-ray microscopes for EUV- and soft X-radiation with spectral imaging capabilities</td>
+	<td>2006//</td>
+	<td>Proceedings of the SPIE - The International Society for Optical Engineering<br/>Vol.  6317, pp. 631704 - 1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1117/12.679819">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757750" class="entry">
+	<td>Shafer, M., Battaglia, D., Unterberg, E., Evans, T., Hillis, D. &amp; Maingi, R.</td>
+	<td>2D soft x-ray system on DIII-D for imaging the magnetic topology in the pedestal region</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 534&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3481166">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387664" class="entry">
+	<td>Shafer, M., Battaglia, D., Unterberg, E., Evans, T., Hillis, D. &amp; Maingi, R.</td>
+	<td>2D soft x-ray system on DIII-D for imaging the magnetic topology in the pedestal region</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3481166">URL</a>&nbsp;</td>
+</tr>
+<tr id="20122115048189" class="entry">
+	<td>Shafer, M.W., Battaglia, D.J., Unterberg, E.A., Canik, J.M., Evans, T.E., Harris, J.H. &amp; Meitner, S.J.</td>
+	<td>Soft X-ray imaging design and analysis methods on DIII-D</td>
+	<td>2011</td>
+	<td>Plasma and Fusion Research<br/>Vol. 6(1 SPECIAL ISSUE)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.6.2402041">URL</a>&nbsp;</td>
+</tr>
+<tr id="9851606" class="entry">
+	<td>Stagira, S., Calegari, F., Benedetti, E., Cabanillas, J., Nisoli, M., Sansone, G., Valentini, G., Vozzi, C., De Silvestri, S., Poletto, L., Villoresi, P., Faenov, A. &amp; Pikuz, T.</td>
+	<td>Soft X-ray contact imaging of thin films by a laser-plasma source</td>
+	<td>2007//</td>
+	<td>CLEO '07. 2007 Conference on Lasers and Electro-Optics, pp. 1526 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12341638" class="entry">
+	<td>Tanaka, H., Takeuchi, T., Uchida, M. &amp; Maekawa, T.</td>
+	<td>Soft X-Ray CT Imaging of a Low-Aspect-Ratio Toroidal Plasma Maintained Solely by Electron Cyclotron Heating</td>
+	<td>2011/11/</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol.  39( 11), pp. 2480 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2011.2158667">URL</a>&nbsp;</td>
+</tr>
+<tr id="20114714532613" class="entry">
+	<td>Tanaka, H., Takeuchi, T., Uchida, M. &amp; Maekawa, T.</td>
+	<td>Soft X-ray CT imaging of a low-aspect-ratio toroidal plasma maintained solely by electron cyclotron heating</td>
+	<td>2011</td>
+	<td>IEEE Transactions on Plasma Science<br/>Vol. 39(11 PART 1), pp. 2480 - 2481&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TPS.2011.2158667">URL</a>&nbsp;</td>
+</tr>
+<tr id="13084095" class="entry">
+	<td>Wurden, G. &amp; Coffey, S.</td>
+	<td>A multi-frame soft x-ray pinhole imaging diagnostic for single-shot applications</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 516&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4733536">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124515653419" class="entry">
+	<td>Wurden, G. &amp; Coffey, S.</td>
+	<td>A multi-frame soft x-ray pinhole imaging diagnostic for single-shot applications</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4733536">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

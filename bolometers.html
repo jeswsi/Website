@@ -1,0 +1,616 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="13083951" class="entry">
+	<td>Clary, R., Smirnov, A., Dettrick, S., Knapp, K., Korepanov, S., Ruskov, E., Heidbrink, W. &amp; Zhu, Y.</td>
+	<td>A photodiode-based neutral particle bolometer for characterizing charge-exchanged fast-ion behavior</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 713&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4732860">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124515653275" class="entry">
+	<td>Clary, R., Smirnov, A., Dettrick, S., Knapp, K., Korepanov, S., Ruskov, E., Heidbrink, W. &amp; Zhu, Y.</td>
+	<td>A photodiode-based neutral particle bolometer for characterizing charge-exchanged fast-ion behavior</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4732860">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757664" class="entry">
+	<td>Drapiko, E., Peterson, B., Alekseev, A. &amp; Seo, D.</td>
+	<td>Improved calibration technique of the infrared imaging bolometer using ultraviolet light-emitting diodes</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 116&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3496988">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387579" class="entry">
+	<td>Drapiko, E., Peterson, B., Alekseev, A. &amp; Seo, D.</td>
+	<td>Improved calibration technique of the infrared imaging bolometer using ultraviolet light-emitting diodes</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3496988">URL</a>&nbsp;</td>
+</tr>
+<tr id="11177006" class="entry">
+	<td>Drapiko, E., Peterson, B. &amp; Kodaira, J.</td>
+	<td>Improvements of imaging bolometers at LHD</td>
+	<td>2009/10/</td>
+	<td><br/>Vol. Unnumbered, pp. 153 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13028772" class="entry">
+	<td>Duan, Y., Hu, L., Mao, S., Chen, K. &amp; Lin, S.</td>
+	<td>The resistive bolometer for radiated power measurement on EAST</td>
+	<td>Sept. 2012</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 9), pp. 093501 (8 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4748859">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124115540721" class="entry">
+	<td>Duan, Y., Hu, L., Mao, S., Chen, K. &amp; Lin, S.</td>
+	<td>The resistive bolometer for radiated power measurement on EAST</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(9)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4748859">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124315601653" class="entry">
+	<td>Duan, Y., Hu, L., Mao, S., Chen, K. &amp; Lin, S.</td>
+	<td>Preliminary results of the Pt foil resistive bolometer on EAST</td>
+	<td>2011</td>
+	<td>38th EPS Conference on Plasma Physics 2011, EPS 2011 - Europhysics Conference Abstracts<br/>Vol. 35 1, pp. 321 - 324&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20124315601759" class="entry">
+	<td>Gao, J., Li, W., Zang, L., Lu, J., Pan, Y., Xia, Z., Yi, P., Liu, Y. &amp; Yang, Q.</td>
+	<td>Infrared imaging bolometer on the HL-2A Tokamak</td>
+	<td>2011</td>
+	<td>38th EPS Conference on Plasma Physics 2011, EPS 2011 - Europhysics Conference Abstracts<br/>Vol. 35 1, pp. 745 - 748&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13781702" class="entry">
+	<td>Gao, J., Liu, Y., Li, W., Lu, J., Dong, Y., Xia, Z., Yi, P. &amp; Yang, Q.</td>
+	<td>Minimum Fisher regularization of image reconstruction for infrared imaging bolometer on HL-2A</td>
+	<td>Sept. 2013</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 9), pp. 093503 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4820920">URL</a>&nbsp;</td>
+</tr>
+<tr id="20134216846291" class="entry">
+	<td>Gao, J., Liu, Y., Li, W., Lu, J., Dong, Y., Xia, Z., Yi, P. &amp; Yang, Q.</td>
+	<td>Minimum Fisher regularization of image reconstruction for infrared imaging bolometer on HL-2A</td>
+	<td>2013</td>
+	<td>Review of Scientific Instruments<br/>Vol. 84(9)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4820920">URL</a>&nbsp;</td>
+</tr>
+<tr id="12830969" class="entry">
+	<td>Giannone, L., Eich, T., Fuchs, J., Ravindran, M., Ruan, Q., Wenzel, L., Cerna, M. &amp; Concezzi, S.</td>
+	<td>Data acquisition and real-time bolometer tomography using LabVIEW RT</td>
+	<td>2011/10/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  86( 6-8), pp. 1129 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2011.03.119">URL</a>&nbsp;</td>
+</tr>
+<tr id="20114214441270" class="entry">
+	<td>Giannone, L., Eich, T., Fuchs, J., Ravindran, M., Ruan, Q., Wenzel, L., Cerna, M. &amp; Concezzi, S.</td>
+	<td>Data acquisition and real-time bolometer tomography using LabVIEW RT</td>
+	<td>2011</td>
+	<td>Fusion Engineering and Design<br/>Vol. 86(6-8), pp. 1129 - 1132&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2011.03.119">URL</a>&nbsp;</td>
+</tr>
+<tr id="12650468" class="entry">
+	<td>Gusarov, A., Huysmans, S., Meister, H. &amp; Hodgson, E.</td>
+	<td>Design of irradiation rig for reactor testing of prototype bolometers for ITER</td>
+	<td>2011//</td>
+	<td>Proceedings of the 2nd International Conference on Advancements in Nuclear Instrumentation, Measurement Methods and their Applications (ANIMMA 2011), pp. 3 pp. - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ANIMMA.2011.6172893">URL</a>&nbsp;</td>
+</tr>
+<tr id="20122015022491" class="entry">
+	<td>Gusarov, A., Huysmans, S., Meister, H. &amp; Hodgson, E.</td>
+	<td>Design of irradiation rig for reactor testing of prototype bolometers for ITER</td>
+	<td>2011</td>
+	<td>ANIMMA 2011 - Proceedings: 2nd International Conference on Advancements in Nuclear Instrumentation, Measurement Methods and their Applications, pp. IEEE NPSS - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/ANIMMA.2011.6172893">URL</a>&nbsp;</td>
+</tr>
+<tr id="11177009" class="entry">
+	<td>Iwama, N., Hosoda, Y., Teranishi, M., Tamura, N., Peterson, B., Liu, Y. &amp; Kostryukov, A.</td>
+	<td>Fast and stable image reconstruction test with Hopfield neural network in bolometer tomography of LHD plasma</td>
+	<td>2009/10/</td>
+	<td><br/>Vol. Unnumbered, pp. 156 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20101712876893" class="entry">
+	<td>Kosarev, A., Cosme, I. &amp; Torres, A.</td>
+	<td>Noise spectra of Six Gey B2:H films for micro-bolometers</td>
+	<td>2009</td>
+	<td>Materials Research Society Symposium Proceedings<br/>Vol. 1153, pp. 403 - 408&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12201283" class="entry">
+	<td>Liu, H., Wang, S., Cai, C. &amp; Zhou, S.</td>
+	<td>Uncooled infrared bolometer arrays with -Si and metal films</td>
+	<td>2010//</td>
+	<td>Materials Science Forum<br/>Vol.  663, pp. 421 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.4028/www.scientific.net/MSF.663-665.421">URL</a>&nbsp;</td>
+</tr>
+<tr id="20105013481096" class="entry">
+	<td>Liu, H., Wang, S., Cai, C. &amp; Zhou, S.</td>
+	<td>Uncooled infrared bolometer arrays with -Si and metal films</td>
+	<td>2011</td>
+	<td>Materials Science Forum<br/>Vol. 663-665, pp. 421 - 424&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.4028/www.scientific.net/MSF.663-665.421">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757680" class="entry">
+	<td>Meister, H., Eich, T., Endstrasser, N., Giannone, L., Kannamuller, M., Kling, A., Koll, J., Trautmann, T., Detemple, P. &amp; Schmitt, S.</td>
+	<td>Optimization of a bolometer detector for ITER based on Pt absorber on SiN membrane</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 132&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3499637">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387595" class="entry">
+	<td>Meister, H., Eich, T., Endstrasser, N., Giannone, L., Kannamuller, M., Kling, A., Koll, J., Trautmann, T., Detemple, P. &amp; Schmitt, S.</td>
+	<td>Optimization of a bolometer detector for ITER based on Pt absorber on SiN membrane</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3499637">URL</a>&nbsp;</td>
+</tr>
+<tr id="12873761" class="entry">
+	<td>Meister, H., Penzel, F., Giannone, L., Kannamuller, M., Kling, A., Koll, J. &amp; Trautmann, T.</td>
+	<td>Development of an automated method for in situ measurement of the geometrical properties of the ITER bolometer diagnostic</td>
+	<td>2011/10/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  86( 6-8), pp. 1170 - 3&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2010.12.020">URL</a>&nbsp;</td>
+</tr>
+<tr id="20114214441075" class="entry">
+	<td>Meister, H., Penzel, F., Giannone, L., Kannamuller, M., Kling, A., Koll, J. &amp; Trautmann, T.</td>
+	<td>Development of an automated method for in situ measurement of the geometrical properties of the ITER bolometer diagnostic</td>
+	<td>2011</td>
+	<td>Fusion Engineering and Design<br/>Vol. 86(6-8), pp. 1170 - 1173&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2010.12.020">URL</a>&nbsp;</td>
+</tr>
+<tr id="13993252" class="entry">
+	<td>Meister, H., Willmeroth, M., Zhang, D., Gottwald, A., Krumrey, M. &amp; Scholze, F.</td>
+	<td>Broad-band efficiency calibration of ITER bolometer prototypes using Pt absorbers on SiN membranes</td>
+	<td>2013/12/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 12), pp. 123501 (7 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4834755">URL</a>&nbsp;</td>
+</tr>
+<tr id="20140217190938" class="entry">
+	<td>Meister, H., Willmeroth, M., Zhang, D., Gottwald, A., Krumrey, M. &amp; Scholze, F.</td>
+	<td>Broad-band efficiency calibration of ITER bolometer prototypes using Pt absorbers on SiN membranes</td>
+	<td>2013</td>
+	<td>Review of Scientific Instruments<br/>Vol. 84(12)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4834755">URL</a>&nbsp;</td>
+</tr>
+<tr id="11766283" class="entry">
+	<td>Moreno, M., Ambrosio, R., Torres, A., Kosarev, A., Garcia, M. &amp; Mireles, J.</td>
+	<td>Measurements of thermal characteristics in silicon germanium un-cooled micro-bolometers</td>
+	<td>2010/04/</td>
+	<td>Physica Status Solidi C<br/>Vol.  7( 3-4), pp. 1172 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/pssc.200982739">URL</a>&nbsp;</td>
+</tr>
+<tr id="20102112951711" class="entry">
+	<td>Moreno, M., Ambrosio, R., Torres, A., Kosarev, A., Garcia, M. &amp; Mireles, J.</td>
+	<td>Measurements of thermal characteristics in silicon germanium un-cooled micro-bolometers</td>
+	<td>2010</td>
+	<td>Physica Status Solidi (C) Current Topics in Solid State Physics<br/>Vol. 7(3-4), pp. 1172 - 1175&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1002/pssc.200982739">URL</a>&nbsp;</td>
+</tr>
+<tr id="20132616447251" class="entry">
+	<td>Pandya, S.N. &amp; Peterson, B.J.</td>
+	<td>Design considerations for an infrared imaging video bolometer for observation of 3D radiation structures of detached LHD plasmas</td>
+	<td>2012</td>
+	<td>Plasma and Fusion Research<br/>Vol. 7(SPL.ISS.1)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.7.2402095">URL</a>&nbsp;</td>
+</tr>
+<tr id="20132616447244" class="entry">
+	<td>Pandya, S.P., Pandya, S.N., Shaikh, Z., Shaikh, S. &amp; Govindarajan, J.</td>
+	<td>Development of infrared imaging video bolometer for the ADITYA tokamak</td>
+	<td>2012</td>
+	<td>Plasma and Fusion Research<br/>Vol. 7(SPL.ISS.1)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.7.2402089">URL</a>&nbsp;</td>
+</tr>
+<tr id="12912155" class="entry">
+	<td>Peterson, B., Drapiko, E., Seo, D. &amp; Ashikawa, N.</td>
+	<td>Comparison of Au and Pt Foils for an Imaging Bolometer</td>
+	<td>2010//</td>
+	<td>Plasma and Fusion Research<br/>Vol.  5, pp. 035 (5 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.5.035">URL</a>&nbsp;</td>
+</tr>
+<tr id="12912270" class="entry">
+	<td>Peterson, B., Drapiko, E., Seo, D. &amp; Ashikawa, N.</td>
+	<td>Upgrade of Imaging Bolometers on LHD</td>
+	<td>2010//</td>
+	<td>Plasma and Fusion Research<br/>Vol.  5, pp. S2095 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.5.S2095">URL</a>&nbsp;</td>
+</tr>
+<tr id="12160139" class="entry">
+	<td>Peterson, B., Yoshimura, S., Drapiko, E., Seo, D., Ashikawa, N. &amp; Miyazawa, J.</td>
+	<td>Bolometer diagnostics on LHD</td>
+	<td>2010/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  58( 1), pp. 412 - 17&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20103813245244" class="entry">
+	<td>Peterson, B., Yoshimura, S., Drapiko, E., Seo, D., Ashikawa, N. &amp; Miyazawa, J.</td>
+	<td>Bolometer diagnostics on LHD</td>
+	<td>2010</td>
+	<td>Fusion Science and Technology<br/>Vol. 58(1), pp. 412 - 417&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20132616447135" class="entry">
+	<td>Peterson, B.J., Drapiko, E.A., Mukai, K., Kobayashi, M., Pandya, S.N. &amp; Sano, R.</td>
+	<td>Imaging bolometers for visualization of plasma radiation and cross-validation of three dimensional impurity transport models for the large helical device</td>
+	<td>2013</td>
+	<td>Plasma and Fusion Research<br/>Vol. 8(SPL.ISS.1)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.8.2402037">URL</a>&nbsp;</td>
+</tr>
+<tr id="20134216856147" class="entry">
+	<td>Pollastrone, F., Neri, C., Florean, M. &amp; Ciccone, G.</td>
+	<td>FTU bolometer electronic system upgrade</td>
+	<td>2013</td>
+	<td>Fusion Engineering and Design<br/>Vol. 88(6-8), pp. 1441 - 1444&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2013.02.068">URL</a>&nbsp;</td>
+</tr>
+<tr id="13369852" class="entry">
+	<td>Purkl, F., English, T., Yama, G., Provine, J., Samarao, A., Feyh, A., O'Brien, G., Ambacher, O., Howe, R. &amp; Kenny, T.</td>
+	<td>Sub-10 nanometer uncooled platinum bolometers via plasma enhanced atomic layer deposition</td>
+	<td>2013//</td>
+	<td>2013 IEEE 26th International Conference on Micro Electro Mechanical Systems (MEMS), pp. 185 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MEMSYS.2013.6474208">URL</a>&nbsp;</td>
+</tr>
+<tr id="20131416160369" class="entry">
+	<td>Purkl, F., English, T., Yama, G., Provine, J., Samarao, A.K., Feyh, A., O'Brien, G., Ambacher, O., Howe, R.T. &amp; Kenny, T.W.</td>
+	<td>Sub-10 nanometer uncooled platinum bolometers via plasma enhanced atomic layer deposition</td>
+	<td>2013</td>
+	<td>Proceedings of the IEEE International Conference on Micro Electro Mechanical Systems (MEMS), pp. 185 - 188&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/MEMSYS.2013.6474208">URL</a>&nbsp;</td>
+</tr>
+<tr id="12912396" class="entry">
+	<td>Sano, R., Peterson, B., Drapiko, E., Watanabe, Y., Yamauchi, Y. &amp; Hino, T.</td>
+	<td>Thermal Characteristics of Foils for an Imaging Bolometer</td>
+	<td>2011//</td>
+	<td>Plasma and Fusion Research<br/>Vol.  6, pp. 2406076 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.6.2406076">URL</a>&nbsp;</td>
+</tr>
+<tr id="20132616447199" class="entry">
+	<td>Sano, R., Peterson, B.J., Drapiko, E.A., Seo, D., Yamauchi, Y. &amp; Hino, T.</td>
+	<td>Foil calibration for IR imaging bolometer by laser irradiation</td>
+	<td>2012</td>
+	<td>Plasma and Fusion Research<br/>Vol. 7(SPL.ISS.1)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.7.2405039">URL</a>&nbsp;</td>
+</tr>
+<tr id="20122115048219" class="entry">
+	<td>Sano, R., Peterson, B.J., Drapiko, E.A., Watanabe, Y., Yamauchi, Y. &amp; Hino, T.</td>
+	<td>Thermal characteristics of foils for an imaging bolometer</td>
+	<td>2011</td>
+	<td>Plasma and Fusion Research<br/>Vol. 6(1 SPECIAL ISSUE)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.6.2402076">URL</a>&nbsp;</td>
+</tr>
+<tr id="11757676" class="entry">
+	<td>Seo, D., Peterson, B. &amp; Lee, S.</td>
+	<td>First results of the resistive bolometers on KSTAR</td>
+	<td>2010/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  81( 10), pp. 10 - 128&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3496992">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613387591" class="entry">
+	<td>Seo, D., Peterson, B. &amp; Lee, S.H.</td>
+	<td>First results of the resistive bolometers on KSTAR</td>
+	<td>2010</td>
+	<td>Review of Scientific Instruments<br/>Vol. 81(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.3496992">URL</a>&nbsp;</td>
+</tr>
+<tr id="20134216856202" class="entry">
+	<td>Suarez, A., Reichle, R., Loughlin, M., Polunovskiy, E. &amp; Walsh, M.</td>
+	<td>Neutronic analysis for bolometers in ITER</td>
+	<td>2013</td>
+	<td>Fusion Engineering and Design<br/>Vol. 88(6-8), pp. 1395 - 1399&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2013.01.063">URL</a>&nbsp;</td>
+</tr>
+<tr id="12147782" class="entry">
+	<td>Volkov, G., Lakhtyushko, N. &amp; Terent'ev, O.</td>
+	<td>A radiation foil bolometer for measuring the energy losses of fast Z-pinches</td>
+	<td>Sept. 2010</td>
+	<td>Instruments and Experimental Techniques<br/>Vol.  53( 5), pp. 728 - 33&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S0020441210050209">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104413340484" class="entry">
+	<td>Volkov, G., Lakhtyushko, N. &amp; Terent'Ev, O.</td>
+	<td>A radiation foil bolometer for measuring the energy losses of fast Z-pinches</td>
+	<td>2010</td>
+	<td>Instruments and Experimental Techniques<br/>Vol. 53(5), pp. 728 - 733&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S0020441210050209">URL</a>&nbsp;</td>
+</tr>
+<tr id="13631126" class="entry">
+	<td>Xu, R., Li, W., He, J., Sun, Y. &amp; Jiang, Y.-D.</td>
+	<td>Boron-doped nanocrystalline silicon germanium thin films for uncooled infrared bolometer applications</td>
+	<td>2013/05/</td>
+	<td>Infrared Physics &amp;amp; Technology<br/>Vol.  58, pp. 32 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.infrared.2013.01.005">URL</a>&nbsp;</td>
+</tr>
+<tr id="20131116104196" class="entry">
+	<td>Xu, R., Li, W., He, J., Sun, Y. &amp; Jiang, Y.-D.</td>
+	<td>Boron-doped nanocrystalline silicon germanium thin films for uncooled infrared bolometer applications</td>
+	<td>2013</td>
+	<td>Infrared Physics and Technology<br/>Vol. 58, pp. 32 - 35&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.infrared.2013.01.005">URL</a>&nbsp;</td>
+</tr>
+<tr id="20104613383531" class="entry">
+	<td>Zhou, D., Xu, X., Wang, Z., Wang, X. &amp; Jiang, Y.</td>
+	<td>Study on characteristics and structures of amorphous silicon nitride thin films applied in micro-bolometer</td>
+	<td>2010</td>
+	<td>Guangxue Xuebao/Acta Optica Sinica<br/>Vol. 30(10), pp. 2782 - 2787&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.3788/AOS20103010.2782">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

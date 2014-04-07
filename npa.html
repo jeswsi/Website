@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="20103413184394" class="entry">
+	<td>Afanasyev, V., Kozlovskii, S., Likhtenshtein, V., Lyublin, B., Melnik, A., Mironov, M., Nesenevich, V., Petrov, M., Petrov, S.Y. &amp; Chernyshev, F.</td>
+	<td>A method for monitoring the parameters of a stripping target in neutral particle analyzers for the ITER</td>
+	<td>2010</td>
+	<td>Instruments and Experimental Techniques<br/>Vol. 53(2), pp. 262 - 266&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1134/S0020441210020193">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406664" class="entry">
+	<td>Goncharov, P., Ozaki, T., Sudo, S., Tamura, N., Group, T., Group, L., Veshchev, E., Sergeev, V. &amp; Krasilnikov, A.</td>
+	<td>Local pellet based and line-integrated nonperturbing charge exchange measurements with a compact neutral particle analyzer on large helical device</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 10 - 119&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2336472">URL</a>&nbsp;</td>
+</tr>
+<tr id="9034031" class="entry">
+	<td>Karpushov, A., Duval, B., Schlatter, C., Afanasyev, V. &amp; Chernyshev, F.</td>
+	<td>Neutral particle analyzer diagnostics on the TCV tokamak</td>
+	<td>2006/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 3), pp. 33504 - 1&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2185151">URL</a>&nbsp;</td>
+</tr>
+<tr id="2006179836749" class="entry">
+	<td>Karpushov, A.N., Duval, B.P., Schlatter, C., Afanasyev, V.I. &amp; Chernyshev, F.V.</td>
+	<td>Neutral particle analyzer diagnostics on the TCV tokamak</td>
+	<td>2006</td>
+	<td>Review of Scientific Instruments<br/>Vol. 77(3)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2185151">URL</a>&nbsp;</td>
+</tr>
+<tr id="12844434" class="entry">
+	<td>Kim, S., Kwak, J., Hwang, C., Wang, S. &amp; Lee, H.</td>
+	<td>Design and calibration of a neutral particle analyzer for the KSTAR</td>
+	<td>2011/10/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  86( 6-8), pp. 1236 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2011.01.106">URL</a>&nbsp;</td>
+</tr>
+<tr id="20114214441146" class="entry">
+	<td>Kim, S., Kwak, J., Hwang, C., Wang, S. &amp; Lee, H.</td>
+	<td>Design and calibration of a neutral particle analyzer for the KSTAR</td>
+	<td>2011</td>
+	<td>Fusion Engineering and Design<br/>Vol. 86(6-8), pp. 1236 - 1238&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2011.01.106">URL</a>&nbsp;</td>
+</tr>
+<tr id="9406658" class="entry">
+	<td>Liu, D., Heidbrink, W., Darrow, D., Roquemore, A., Medley, S. &amp; Shinohara, K.</td>
+	<td>Performance of the solid state neutral particle analyzer array on the national spherical torus experiment</td>
+	<td>2006/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 10), pp. 10 - 113&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2227440">URL</a>&nbsp;</td>
+</tr>
+<tr id="20072410649651" class="entry">
+	<td>Mezonlin, E., Roberson, S., Raynor, C., Appartaim, R., Johnson III, J., Afanasyev, V., Kozlovsky, S., Moller, J., Hill, D., Hooper, E., McLean, H. &amp; Wood, R.</td>
+	<td>Neutral particle analyzer measurements on the SSPX spheromak</td>
+	<td>2007</td>
+	<td>Review of Scientific Instruments<br/>Vol. 78(5)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2737756">URL</a>&nbsp;</td>
+</tr>
+<tr id="9595618" class="entry">
+	<td>Mezonlin, E., Roberson, S., Raynor, C., Appartaim, R., Johnson, J., Afanasyev, V., Kozlovsky, S., Moller, J., Hill, D., Hooper, E., McLean, H. &amp; Wood, R.</td>
+	<td>Neutral particle analyzer measurements on the SSPX spheromak</td>
+	<td>2007/05/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  78( 5), pp. 53504 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2737756">URL</a>&nbsp;</td>
+</tr>
+<tr id="8932523" class="entry">
+	<td>Ozaki, T., Goncharov, P., Tamura, N., Kalinina, D., Sudo, S., Matsubara, A. &amp; Sato, K.</td>
+	<td>High energy particle measurement using compact neutral particle energy analyzer in Large Helical Device</td>
+	<td>2006//</td>
+	<td>AIP Conference Proceedings( 812), pp. 399 - 402&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10310197" class="entry">
+	<td>Ozaki, T., Goncharov, P., Veshchev, E., Tamura, N., Sudo, S., Seki, T., Kasahara, H., Takase, Y. &amp; Ohsako, T.</td>
+	<td>Pellet charge exchange helium measurement using neutral particle analyzer in large helical device</td>
+	<td>2008/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  79( 10), pp. 10 - 518&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2978191">URL</a>&nbsp;</td>
+</tr>
+<tr id="20084611695256" class="entry">
+	<td>Ozaki, T., Goncharov, P., Veshchev, E., Tamura, N., Sudo, S., Seki, T., Kasahara, H., Takase, Y. &amp; Ohsako, T.</td>
+	<td>Pellet charge exchange helium measurement using neutral particle analyzer in large helical device</td>
+	<td>2008</td>
+	<td>Review of Scientific Instruments<br/>Vol. 79(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2978191">URL</a>&nbsp;</td>
+</tr>
+<tr id="13083990" class="entry">
+	<td>Ozaki, T., Veshchev, E., Ido, T., Shimizu, A., Goncharov, P. &amp; Sudo, S.</td>
+	<td>Perpendicular and tangential angularly resolved multi-sight neutral particle analyzer system in LHD</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 920&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4742925">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124515653314" class="entry">
+	<td>Ozaki, T., Veshchev, E., Ido, T., Shimizu, A., Goncharov, P. &amp; Sudo, S.</td>
+	<td>Perpendicular and tangential angularly resolved multi-sight neutral particle analyzer system in LHD</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4742925">URL</a>&nbsp;</td>
+</tr>
+<tr id="13353595" class="entry">
+	<td>Pandya, S., Ajay, K., Mishra, P., Dhingra, R. &amp; Govindarajan, J.</td>
+	<td>Core-ion temperature measurement of the ADITYA tokamak using passive charge exchange neutral particle energy analyzer</td>
+	<td>2013/02/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  84( 2), pp. 023503 (9 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4791998">URL</a>&nbsp;</td>
+</tr>
+<tr id="20131116121646" class="entry">
+	<td>Pandya, S.P., Kumar, A., Mishra, P., Dhingra, R.D. &amp; Govindarajan, J.</td>
+	<td>Core-ion temperature measurement of the ADITYA tokamak using passive charge exchange neutral particle energy analyzer</td>
+	<td>2013</td>
+	<td>Review of Scientific Instruments<br/>Vol. 84(2)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4791998">URL</a>&nbsp;</td>
+</tr>
+<tr id="14107783" class="entry">
+	<td>Polosatkin, S., Belykh, V., Davydenko, V., Clary, R., Fiksel, G., Ivanov, A., Kapitonov, V., Liu, D., Mishagin, V., Tiunov, M. &amp; Voskoboynikov, R.</td>
+	<td>Neutral particle analyzer for studies of fast ion population in plasma</td>
+	<td>2013/08/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  720, pp. 42 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2012.12.039">URL</a>&nbsp;</td>
+</tr>
+<tr id="20132516428033" class="entry">
+	<td>Polosatkin, S., Belykh, V., Davydenko, V., Clary, R., Fiksel, G., Ivanov, A., Kapitonov, V., Liu, D., Mishagin, V., Tiunov, M. &amp; Voskoboynikov, R.</td>
+	<td>Neutral particle analyzer for studies of fast ion population in plasma</td>
+	<td>2013</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section A: Accelerators, Spectrometers, Detectors and Associated Equipment<br/>Vol. 720, pp. 42 - 44&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2012.12.039">URL</a>&nbsp;</td>
+</tr>
+<tr id="12464816" class="entry">
+	<td>Polosatkin, S., Belykh, V., Davydenko, V., Fiksel, G., Ivanov, A., Kapitonov, V., Khilchenko, A., Khilchenko, V., Mishagin, V. &amp; Tiunov, M.</td>
+	<td>Advanced neutral particle analyzer for fusion plasma diagnostics</td>
+	<td>2010/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  59( 1T), pp. 259 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20111213850086" class="entry">
+	<td>Polosatkin, S., Belykh, V., Davydenko, V., Fiksel, G., Ivanov, A., Kapitonov, V., Khilchenko, A., Khilchenko, V., Mishagin, V. &amp; Tiunov, M.</td>
+	<td>Advanced neutral particle analyzer for fusion plasma diagnostics</td>
+	<td>2011</td>
+	<td>Fusion Science and Technology<br/>Vol. 59(1 T), pp. 259 - 261&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13083942" class="entry">
+	<td>Reusch, J., Anderson, J., Belykh, V., Eilerman, S., Liu, D., Fiksel, G. &amp; Polosatkin, S.</td>
+	<td>Calibration of an advanced neutral particle analyzer for the Madison Symmetric Torus reversed-field pinch</td>
+	<td>2012/10/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  83( 10), pp. 10 - 704&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4729493">URL</a>&nbsp;</td>
+</tr>
+<tr id="20124515653266" class="entry">
+	<td>Reusch, J., Anderson, J., Belykh, V., Eilerman, S., Liu, D., Fiksel, G. &amp; Polosatkin, S.</td>
+	<td>Calibration of an advanced neutral particle analyzer for the Madison Symmetric Torus reversed-field pinch</td>
+	<td>2012</td>
+	<td>Review of Scientific Instruments<br/>Vol. 83(10)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4729493">URL</a>&nbsp;</td>
+</tr>
+<tr id="20072110609482" class="entry">
+	<td>Shoji, M., Iwamae, A., Goto, M., Sakaue, A., Atake, M., Masuzaki, S., Miyazawa, J., Ohyabu, N. &amp; Komori, A.</td>
+	<td>Three-dimensional neutral particle transport simulation for analyzing polarization resolved H-alpha spectra in the large helical device</td>
+	<td>2007</td>
+	<td>Journal of Nuclear Materials<br/>Vol. 363-365(1-3), pp. 827 - 832&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jnucmat.2007.01.228">URL</a>&nbsp;</td>
+</tr>
+<tr id="9568085" class="entry">
+	<td>Shoji, M., Iwamae, A., Goto, M., Sakaue, A., Atake, M., Masuzaki, S., Miyazawa, J., Ohyabu, N., Komori, A. &amp; Groups, L.</td>
+	<td>Three-dimensional neutral particle transport simulation for analyzing polarization resolved H-alpha spectra in the large helical device</td>
+	<td>2007/06/15</td>
+	<td>Journal of Nuclear Materials<br/>Vol.  363-365, pp. 827 - 32&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.jnucmat.2007.01.228">URL</a>&nbsp;</td>
+</tr>
+<tr id="9083994" class="entry">
+	<td>Tang, V., Liptac, J., Parker, R., Bonoli, P., Fiore, C., Granetz, R., Irby, J., Lin, Y., Wukitch, S., Team, T.-M., Frenje, J., Leiter, R., Mcduffee, S. &amp; Petrasso, R.</td>
+	<td>Compact multichannel neutral particle analyzer for measurement of energetic charge-exchanged neutrals in alcator C-mod</td>
+	<td>2006/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  77( 8), pp. 83501 - 1&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.2238519">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

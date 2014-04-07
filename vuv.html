@@ -1,0 +1,552 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="7590279" class="entry">
+	<td>Barnsley, R., Coffey, I., Lucock, R. &amp; Stamp, M.</td>
+	<td>JET beamline with integrated x-ray, VUV, and visible spectrometers, for burning plasma experiments</td>
+	<td>2003/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 3), pp. 1969 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1538326">URL</a>&nbsp;</td>
+</tr>
+<tr id="2003157436712" class="entry">
+	<td>Barnsley, R., Coffey, I., Lucock, R. &amp; Stamp, M.</td>
+	<td>JET beamline with integrated x-ray, VUV, and visible spectrometers, for burning plasma experiments</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(3 II), pp. 1969 - 1973&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1538326">URL</a>&nbsp;</td>
+</tr>
+<tr id="2939886" class="entry">
+	<td>Breton, C., De Michelis, C., Hecq, W., Mattioli, M., Ramette, J. &amp; Saoutic, B.</td>
+	<td>In situ absolute intensity calibration of VUV spectrometers</td>
+	<td>1987/05/</td>
+	<td>Journal of Physics E (Scientific Instruments)<br/>Vol.  20( 5), pp. 554 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3735/20/5/017">URL</a>&nbsp;</td>
+</tr>
+<tr id="1987080119334" class="entry">
+	<td>Breton, C., De Michelis, C., Hecq, W., Mattioli, M., Ramette, J. &amp; Saoutic, B.</td>
+	<td>IN SITU ABSOLUTE INTENSITY CALIBRATION OF VUV SPECTROMETERS.</td>
+	<td>1987</td>
+	<td>Journal of Physics E: Scientific Instruments<br/>Vol. 20(5), pp. 554 - 555&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0022-3735/20/5/017">URL</a>&nbsp;</td>
+</tr>
+<tr id="6808775" class="entry">
+	<td>Burdakov, A., Zabolotskii, A., Knyazev, B., Koidan, V., Polosatkin, S., Postupaev, V. &amp; Rovenskikh, A.</td>
+	<td>A VUV spectrometer with digital readout</td>
+	<td>2000/11/</td>
+	<td>Instruments and Experimental Techniques<br/>Vol.  43( 6), pp. 798 - 802&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4368325" class="entry">
+	<td>Coulon, J.-P., Jackel, H., Janeschitz, G. &amp; Giannella, R.</td>
+	<td>Measurements of the distribution of impurity line radiation in JET with scanning VUV spectrometers</td>
+	<td>1991//</td>
+	<td>International School of Plasma Physics `Piero Caldirola' Diagnostics for Contemporary Fusion Experiments. Proceedings of the Workshop, pp. 917 - 24&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2377126" class="entry">
+	<td>Cromer, C., Bridges, J., Lucatorto, T. &amp; Roberts, J.</td>
+	<td>A high-resolution VUV spectrometer with electronic parallel spectral detector</td>
+	<td>1984//</td>
+	<td>AIP Conference Proceedings( 119), pp. 180 - 92&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2556909" class="entry">
+	<td>Cromer, C., Bridges, J., Roberts, J. &amp; Lucatorto, T.</td>
+	<td>High-resolution VUV spectrometer with multichannel detector for absorption studies of transient species</td>
+	<td>15 Sept. 1985</td>
+	<td>Applied Optics<br/>Vol.  24( 18), pp. 2996 - 3001&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="20083111411375" class="entry">
+	<td>Cui, Z., Sun, P., Dong, J., Huang, Y., Wang, Q., Fu, B., Lu, J., Chen, W., Duan, X., Ding, X., Yang, Q. &amp; Morita, S.</td>
+	<td>First measurement of VUV spectroscopy using 1 m normal incidence spectrometer on HL-2A</td>
+	<td>2008</td>
+	<td>Plasma Science and Technology<br/>Vol. 10(3), pp. 298 - 301&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1009-0630/10/3/06">URL</a>&nbsp;</td>
+</tr>
+<tr id="20131016076930" class="entry">
+	<td>Cui, Z., Zhou, H., Morita, S., Fu, B., Sun, P., Gao, Y., Goto, M., Xu, Y., Dong, C. &amp; Yang, Q.</td>
+	<td>Space-resolved VUV and EUV spectrometers in HL-2A</td>
+	<td>2013</td>
+	<td>Plasma Science and Technology<br/>Vol. 15(2), pp. 110 - 114&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1009-0630/15/2/06">URL</a>&nbsp;</td>
+</tr>
+<tr id="20063110035809" class="entry">
+	<td>Gui, Z., Wang, Q., Dong, J., Sun, P., Lu, J., Li, W. &amp; Wang, E.</td>
+	<td>Impurity measured by VUV spectrometer and OMA on HL-2A tokamak</td>
+	<td>2004</td>
+	<td>Plasma Science and Technology<br/>Vol. 6(4), pp. 2359 - 2363&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1009-0630/6/4/002">URL</a>&nbsp;</td>
+</tr>
+<tr id="4096560" class="entry">
+	<td>Hawkes, N., Peacock, N. &amp; Lawson, K.</td>
+	<td>Intensity calibration of the broadband VUV impurity survey spectrometer-KT2</td>
+	<td>1991/08/</td>
+	<td><br/>Vol. JET-R(91)07, pp. 24 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="14092221" class="entry">
+	<td>Khater, M.</td>
+	<td>Characteristics and performance of a VUV spectrometer</td>
+	<td>2013/06/21</td>
+	<td>Nuclear Instruments &amp;amp; Methods in Physics Research, Section A (Accelerators, Spectrometers, Detectors and Associated Equipment)<br/>Vol.  714, pp. 1 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2013.02.041">URL</a>&nbsp;</td>
+</tr>
+<tr id="20131416167024" class="entry">
+	<td>Khater, M.A.</td>
+	<td>Characteristics and performance of a VUV spectrometer</td>
+	<td>2013</td>
+	<td>Nuclear Instruments and Methods in Physics Research, Section A: Accelerators, Spectrometers, Detectors and Associated Equipment<br/>Vol. 714, pp. 1 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.nima.2013.02.041">URL</a>&nbsp;</td>
+</tr>
+<tr id="4623020" class="entry">
+	<td>Kubo, H., Sugie, T., Shimada, M., Hosogane, N., Sakasai, A., Tsuji, S., Itami, K., Asakura, N. &amp; Shimizu, K.</td>
+	<td>Study of impurity and radiative losses in divertor plasmas with absolutely calibrated VUV spectrometers in JT-60U</td>
+	<td>1993/10/</td>
+	<td>Nuclear Fusion<br/>Vol.  33( 10), pp. 1427 - 33&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/33/10/I02">URL</a>&nbsp;</td>
+</tr>
+<tr id="1994051252989" class="entry">
+	<td>Kubo, H., Sugie, T., Shimada, M., Hosogane, N., Sakasai, A., Tsuji, S., Itami, K., Asakura, N. &amp; Shimizu, K.</td>
+	<td>Study of impurity and radiative losses in divertor plasmas with absolutely calibrated VUV spectrometers in JT-60U</td>
+	<td>1993</td>
+	<td>Nuclear Fusion<br/>Vol. 33(10), pp. 1427 - 1433&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/33/10/I02">URL</a>&nbsp;</td>
+</tr>
+<tr id="13842787" class="entry">
+	<td>Kumar, D., Parman, M., Stutman, D. &amp; Finkenthal, M.</td>
+	<td>Transmission Grating Based Imaging Spectrometers in the xuv and vuv for Various Plasmas</td>
+	<td>2013/10/</td>
+	<td>Journal of Instrumentation<br/>Vol.  8( 10), pp. T10002 (16 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1748-0221/8/10/T10002">URL</a>&nbsp;</td>
+</tr>
+<tr id="20134616964308" class="entry">
+	<td>Kumar, D., Parman, M., Stutman, D. &amp; Finkenthal, M.</td>
+	<td>Transmission grating based imaging spectrometers in the XUV and VUV for various plasmas</td>
+	<td>2013</td>
+	<td>Journal of Instrumentation<br/>Vol. 8(10)&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1748-0221/8/10/T10002">URL</a>&nbsp;</td>
+</tr>
+<tr id="10996365" class="entry">
+	<td>Lawson, K., Coffey, I., Zacks, J. &amp; Stamp, M.</td>
+	<td>An absolute sensitivity calibration of the JET VUV SPRED spectrometer</td>
+	<td>2009/04/</td>
+	<td>Journal of Instrumentation<br/>Vol.  4( 4), pp. P04013 (19 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1748-0221/4/04/P04013">URL</a>&nbsp;</td>
+</tr>
+<tr id="7590294" class="entry">
+	<td>Morita, S. &amp; Goto, M.</td>
+	<td>Space-resolved VUV spectroscopy using the 3 m normal incidence spectrometer with back-illuminated CCD detector in the LHD</td>
+	<td>2003/03/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  74( 3), pp. 2036 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1535252">URL</a>&nbsp;</td>
+</tr>
+<tr id="2003157436726" class="entry">
+	<td>Morita, S. &amp; Goto, M.</td>
+	<td>Space-resolved VUV spectroscopy using the 3 m normal incidence spectrometer with back-illuminated CCD detector in the LHD</td>
+	<td>2003</td>
+	<td>Review of Scientific Instruments<br/>Vol. 74(3 II), pp. 2036 - 2039&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1535252">URL</a>&nbsp;</td>
+</tr>
+<tr id="8585171" class="entry">
+	<td>Nicolosi, P., Poletto, L., Pelizzo, M.-G., Epulandi, L., Zambolin, P., Feldhaus, J., Jastrow, U., Hahn, U., Ploenjes, E. &amp; Tiedtke, K.</td>
+	<td>Grazing-incidence spectrometer for the monitoring of the VUV FEL beam at DESY</td>
+	<td>2005/06/</td>
+	<td>Journal of Electron Spectroscopy and Related Phenomena<br/>Vol.  144-147, pp. 1055 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.elspec.2005.01.070">URL</a>&nbsp;</td>
+</tr>
+<tr id="2005189074355" class="entry">
+	<td>Nicolosi, P., Poletto, L., Pelizzo, M.-G., Epulandi, L., Zambolin, P., Feldhaus, J., Jastrow, U., Hahn, U., Ploenjes, E. &amp; Tiedtke, K.</td>
+	<td>Grazing-incidence spectrometer for the monitoring of the VUV FEL beam at DESY</td>
+	<td>2005</td>
+	<td>Journal of Electron Spectroscopy and Related Phenomena<br/>Vol. 144-147, pp. 1055 - 1058&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/j.elspec.2005.01.070">URL</a>&nbsp;</td>
+</tr>
+<tr id="2362759" class="entry">
+	<td>Oshio, T., Ishiguro, E. &amp; Iwanaga, R.</td>
+	<td>Theory of a high resolution VUV spectrometer for ultra-high temperature plasma diagnosis</td>
+	<td>1984/03/</td>
+	<td>Research Bulletin of the Hiroshima Institute of Technology<br/>Vol.  18( 22), pp. 101 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7430575" class="entry">
+	<td>Piffl, V., Weinzettl, V., Burdakov, A. &amp; Polosatkin, S.</td>
+	<td>VUV imaging Seya-Namioka spectrometer</td>
+	<td>2002//</td>
+	<td>Czechoslovak Journal of Physics<br/>Vol.  52, pp. 70 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8971523" class="entry">
+	<td>Poletto, L., Epulandi, L., Nicolosi, P., Pelizzo, M., Zambolin, P., Feldhaus, J., Jastrow, U., Hahn, U., Ploenjes, E. &amp; Tiedtke, K.</td>
+	<td>Grazing-incidence spectrometer for the monitoring of the VUV FEL beam at DESY</td>
+	<td>2004//</td>
+	<td>Proceedings of the SPIE - The International Society for Optical Engineering<br/>Vol.  5534( 1), pp. 37 - 46&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1117/12.556351">URL</a>&nbsp;</td>
+</tr>
+<tr id="2005149028818" class="entry">
+	<td>Poletto, L., Epulandi, L., Nicolosi, P., Pelizzo, M., Zambolin, P., Feldhaus, J., Jastrow, U., Hahn, U., Ploenjes, E. &amp; Tiedtke, K.</td>
+	<td>Grazing-incidence spectrometer for the monitoring of the VUV FEL beam at DESY</td>
+	<td>2004</td>
+	<td>Proceedings of SPIE - The International Society for Optical Engineering<br/>Vol. 5534, pp. 37 - 46&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1117/12.556351">URL</a>&nbsp;</td>
+</tr>
+<tr id="2516602" class="entry">
+	<td>Roberts, J., Cromer, C., Bridges, J. &amp; Lucatorto, T.</td>
+	<td>High-resolution VUV spectrometer detector investigations of rare-earth pulsed plasma source</td>
+	<td>1985/05/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  56( 5), pp. 868 - &nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="14092454" class="entry">
+	<td>Schacht, J., Pingel, S., Herbst, U., Hennig, C., Burhenn, R., Hollfeld, K.-P. &amp; Jordan, F.</td>
+	<td>The implementation of the Wendelstein 7-X control a data acquisition concepts at VUV/XUV overview spectrometers HEXOS</td>
+	<td>2013/06/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  88( 5), pp. 259 - 64&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2012.05.015">URL</a>&nbsp;</td>
+</tr>
+<tr id="3303482" class="entry">
+	<td>Stutzin, G., Young, A., Schlachter, A., Stearns, J., Leung, K. &amp; Kunkel, W.</td>
+	<td>Atomic hydrogen density measurements in an ion source plasma using a VUV absorption spectrometer</td>
+	<td>1988/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  59( 8), pp. 1479 - 81&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1139693">URL</a>&nbsp;</td>
+</tr>
+<tr id="3285493" class="entry">
+	<td>Stutzin, G., Young, A., Schlachter, A., Stearns, J., Leung, K., Kunkel, W., Worth, G. &amp; Stevens, R.</td>
+	<td>VUV laser absorption spectrometer system for measurement of H0 density and temperature in a plasma</td>
+	<td>1988/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  59( 8), pp. 1363 - 8&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1139723">URL</a>&nbsp;</td>
+</tr>
+<tr id="5680923" class="entry">
+	<td>Wenzel, U., Dux, R., Field, A. &amp; Napiontek, B.</td>
+	<td>Study of impurity radiation in ASDEX Upgrade with a spatially scanning spectrometer for the VUV and visible ranges</td>
+	<td>1997/03/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  34-35, pp. 225 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(96)00627-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="1997403779739" class="entry">
+	<td>Wenzel, U., Dux, R., Field, A. &amp; Napiontek, B.</td>
+	<td>Study of impurity radiation in ASDEX Upgrade with a spatially scanning spectrometer for the VUV and visible ranges</td>
+	<td>1997</td>
+	<td>Fusion Engineering and Design<br/>Vol. 34-35, pp. 225 - 229&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(96)00627-8">URL</a>&nbsp;</td>
+</tr>
+<tr id="6454420" class="entry">
+	<td>Xiaodong, L. &amp; Lehan, W.</td>
+	<td>Design of the cylindrical grating VUV time-space resolved spectrometer</td>
+	<td>1999/11/</td>
+	<td>Acta Photonica Sinica<br/>Vol.  28( 11), pp. 1011 - 14&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13411643" class="entry">
+	<td>Zhengying, C., Hangyu, Z., Morita, S., Bingzhong, F., Ping, S., Yadong, G., Goto, M., Yuan, X., Chunfeng, D. &amp; Qingwei, Y.</td>
+	<td>Space-resolved VUV and EUV Spectrometers in HL-2A</td>
+	<td>2013/02/</td>
+	<td>Plasma Science and Technology<br/>Vol.  15( 2), pp. 110 - 14&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1009-0630/15/2/06">URL</a>&nbsp;</td>
+</tr>
+<tr id="10275009" class="entry">
+	<td>Zhengying, C., Ping, S., Jiafu, D., Yuan, H., Quanming, W., Bingzhong, F., Jie, L., Wei, C., Xuru, D., Xuantong, D., Qingwei, Y. &amp; orita, S.</td>
+	<td>First measurement of VUV spectroscopy using 1 m normal incidence spectrometer on HL-2A</td>
+	<td>2008/06/</td>
+	<td>Plasma Science and Technology<br/>Vol.  10( 3), pp. 298 - 301&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1009-0630/10/3/06">URL</a>&nbsp;</td>
+</tr>
+<tr id="8232810" class="entry">
+	<td>Zhengying, C., Quanming, W., Jiafu, D., Ping, S., Jie, L., Wei, L. &amp; Enyao, W.</td>
+	<td>Impurity measured by VUV spectrometer and OMA on HL-2A tokamak</td>
+	<td>2004/08/</td>
+	<td>Plasma Science &amp;amp; Technology<br/>Vol.  6( 4), pp. 2359 - 63&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4368324" class="entry">
+	<td>Zurro, B.</td>
+	<td>A VUV filter spectrometer with spatial resolution for plasma emission spectrometry</td>
+	<td>1991//</td>
+	<td>International School of Plasma Physics `Piero Caldirola' Diagnostics for Contemporary Fusion Experiments. Proceedings of the Workshop, pp. 909 - 16&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4789031" class="entry">
+	<td>Zurro, B. &amp; Garcia-Castaner, B.</td>
+	<td>A VUV filter spectrometer with spatial resolution and its plasma diagnostic capabilities</td>
+	<td>1994/08/</td>
+	<td>Review of Scientific Instruments<br/>Vol.  65( 8), pp. 2580 - 4&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1144654">URL</a>&nbsp;</td>
+</tr>
+<tr id="1995012535392" class="entry">
+	<td>Zurro, B. &amp; Garcia-Castaner, B.</td>
+	<td>VUV filter spectrometer with spatial resolution and its plasma diagnostic capabilities</td>
+	<td>1994</td>
+	<td>Review of Scientific Instruments<br/>Vol. 65(8), pp. 2580 - 2580&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1144654">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

@@ -5,7 +5,7 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-	<meta name="description" content="Magnetic probes and diagnostics for fusion, plasma energy, and physics labs. Custom sizing, materials, and configurations available.">
+	<meta name="description" content="Magnetic probes and diagnostics for fusion, plasma energy, and physics labs. Custom sizing, materials, and configurations available. Useful magnetics references.">
   <title>Magnetic Field | Woodruff Scientific, Inc.</title>
   </head>
 
@@ -24,6 +24,16 @@
   		<li class="active">Magnetic Field</li>
 	</ol>
 
+	<ul class="left">
+		<li><a href="#bdot">Magnetic Field Coils</a></li>
+		<li><a href="#rogowski">Rogowski Coils</a></li>
+		<li><a href="#array">Linear Array of Magnetic Coils</a></li>
+		<li><a href="#calibration">Calibration Jigs</a></li>
+		<li><a href="#references">References</a></li>
+	</ul>
+
+
+
 
 	<h1>Magnetic Probes</h1>
 	<p class="center"><a href="img/coil.JPG"><img src="img/coil-small.JPG" alt="magnetic field coil" width="300"  /></a><br />
@@ -38,7 +48,7 @@
 		Helmholtz Coil array.  Best references for coils include <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Hutchinson</a>
 		</p>
 
-
+<a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
 		<div class="col-md-6">
 			<p class="center"><a href="img/1magneticfieldcoil3.jpg"><img src="img/1magneticfieldcoil3-small.jpg"></a><br />
@@ -56,7 +66,7 @@
 
 <!-- 	--download for CNC milling V1 V2 V3
  -->	<div class="clearfix"></div>
-
+<a id="rogowski"></a>
 	<h3>Rogowski Coils</h3>
 
 <!-- 
@@ -89,6 +99,8 @@
 --download coil case for CNC milling -->
 
 	<div class="clearfix"></div>
+
+	<a id="array"></a>
 	<h3>Linear Array of Magnetic Coils</h3>
 	<div class="col-md-6">
 		<p class="center"><a href="img/LinearArrays1.jpg"><img src="img/LinearArrays1-small.jpg"></a><br />
@@ -105,6 +117,7 @@
 printing -->
 	<div class="clearfix"></div>
 
+	<a id="calibration"></a>
 	<h3>Calibration Jigs</h3>
 
 	 <div class="col-md-6">
@@ -125,6 +138,10 @@ printing -->
   </div>
   <div class="clearfix"></div>
   		<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Magnetic field coil RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>
+
+	<a id="references"></a>
+  <h3>References</h3>
+  				<blockquote><a href="magnetics.html">Magnetics References</a></blockquote>
 
 <!-- FIGURES OF CALIBRATION JIGS
 
