@@ -1,0 +1,816 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>JabRef References output</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="EIA2013" class="entry">
+	<td>Administration, U.S.E.I.</td>
+	<td>Annual Energy Outlook 2013</td>
+	<td>2013</td>
+	<td>&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Koonin2012" class="entry">
+	<td>Administration, U.S.E.I.</td>
+	<td>Quadrennial Technology Review</td>
+	<td>2013</td>
+	<td>&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Arg90" class="entry">
+	<td>Argote, L. &amp; Epple, D.</td>
+	<td>Learning Curves in Manufacturing</td>
+	<td>1990</td>
+	<td>Science<br/>Vol. 247, pp. 920&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Bak80" class="entry">
+	<td>Baker, C., Abdou, M., Arons, R., Bolon, A., Boley, C. &amp; Brooks, J.</td>
+	<td>STARFIRE -- A Commercial Tokamak Fusion Power Plant Study</td>
+	<td>1980</td>
+	<td>Argonne National Laboratory report ANL/FPP-80-1&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Bromberg2003" class="entry">
+	<td>Bromberg, L., Pourrahimi, S., Schultz, J., Titus, P., Jardin, S., Kessel, C. &amp; Reiersen, W.</td>
+	<td>Superconducting poloidal field magnet engineering for the ARIES-ST</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 323 - 338&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00309-5">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003095">URL</a>&nbsp;</td>
+</tr>
+<tr id="CanikJNM2009" class="entry">
+	<td>Canik, J., Maingi, R., Owen, L., Menard, J., Goldston, R., Kotschenreuther, M., Valanju, P. &amp; Mahajan, S.</td>
+	<td>2D divertor design calculations for the national high-power advanced torus experiment</td>
+	<td>2009</td>
+	<td>Journal of Nuclear Materials<br/>Vol. 390-391, pp. 315-318&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="I.Cook2002" class="entry">
+	<td>Cook, I., Miller, R.L. &amp; Ward, D.J.</td>
+	<td>Prospects for Economic Fusion Electricity</td>
+	<td>2002</td>
+	<td>Proc. 6th International Symposium on Fusion Nuclear Technology, Fusion Engineering and Design<br/>Vol. 25, pp. 63-64&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Coo89b" class="entry">
+	<td>Cooke, P.</td>
+	<td></td>
+	<td>1989</td>
+	<td>UKAEA Culham Laboratory, private communication.&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Dahlgren2006" class="entry">
+	<td>Dahlgren, F., Brown, T., Heitzenroeder, P. &amp; Bromberg, L.</td>
+	<td>ARIES-AT magnet systems</td>
+	<td>2006</td>
+	<td>Fusion Engineering and Design<br/>Vol. 80(1-4), pp. 139 - 160&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.06.357">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379605004205">URL</a>&nbsp;</td>
+</tr>
+<tr id="Del93" class="entry">
+	<td>Delene, J.G. &amp; Hudson II, C.R.</td>
+	<td>Cost Estimate Guidelines for Advanced Nuclear Power Technologies</td>
+	<td>1993</td>
+	<td>Oak Ridge National Laboratory report ORNL/TM-10071/R3&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="El-Guebaly2003" class="entry">
+	<td>El-Guebaly, L.</td>
+	<td>ARIES-ST nuclear analysis and shield design</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 263 - 284&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00306-X">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S092037960200306X">URL</a>&nbsp;</td>
+</tr>
+<tr id="El-Guebaly2000" class="entry">
+	<td>El-Guebaly, L.</td>
+	<td>Nuclear issues and analysis for ARIES spherical and advanced tokamaks</td>
+	<td>2000</td>
+	<td>Fusion Engineering and Design<br/>Vol. 51-52(0), pp. 325 - 330&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(00)00338-0">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379600003380">URL</a>&nbsp;</td>
+</tr>
+<tr id="El-Guebaly2009" class="entry">
+	<td>El-Guebaly, L.A. &amp; Malang, S.</td>
+	<td>Toward the ultimate goal of tritium self-sufficiency: Technical issues and requirements imposed on ARIES advanced power plants</td>
+	<td>2009</td>
+	<td>Fusion Engineering and Design<br/>Vol. 84(12), pp. 2072 - 2083&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2008.12.098">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379608005565">URL</a>&nbsp;</td>
+</tr>
+<tr id="gen42007" class="entry">
+	<td>of the Generation IV International Forum, T.E.M.W.G.</td>
+	<td>Cost Estimating Guidelines for Generation IV Nuclear Energy Systems</td>
+	<td>2007</td>
+	<td>available at http://www.gen-4.org/Technology/horizontal/EMWG_Guidelines.pdf&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="GoldstonIAEA2009" class="entry">
+	<td>Goldston, R., Menard, J., Allain, J., Brooks, J., Canik, J., Doerner, R., Fu, G.-Y., Gates, D., Gentile, C., Harris, J., Hassanein, A., Gorelenkov, N., Kaita, R., Kaye, S., Kotschenreuther, M., Kramer, G., Kugel, H., Maingi, R., Mahajan, S., Majeski, R., Neumeyer, C., Nygren, R., Ono, M., Owen, L., Ramakrishnan, S., Rognlien, T., Ruzic, D., Ryutov, D., Sabbagh, S., Skinner, C., Soukhanovskii, V., Stevenson, T., Ulrickson, M., Valanju, P. &amp; Woolley, R.</td>
+	<td>An Experiment to Tame the Plasma Material Interface</td>
+	<td>2009</td>
+	<td>22nd IAEA FEC, Geneva, Switzerland, Oct 13 - Oct 19, 2008&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="W.E.Han2011" class="entry">
+	<td>Han, W.E., Ward, D.J. &amp; Kemp, R.</td>
+	<td>Quantify the effect of the commodity price volatility in the decade 2000-2009 on the expected future economics of fusion power</td>
+	<td>2011</td>
+	<td>Milestone C1.M12&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="HenderFED2000" class="entry">
+	<td>Hender, T., Bond, A., Edwards, J., Karditsas, P., McClements, K., Mustoe, J., Sherwood, D., Voss, G. &amp; Wilson, H.</td>
+	<td>Spherical tokamak power plant design issues</td>
+	<td>2000</td>
+	<td>Fusion Engineering and Design<br/>Vol. 48, pp. 255-263&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="HenderFED1999" class="entry">
+	<td>Hender, T., Voss, G. &amp; Taylor, N.</td>
+	<td>Spherical tokamak volume neutron source</td>
+	<td>1999</td>
+	<td>Fusion Engineering and Design<br/>Vol. 45, pp. 217-231&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Hir64" class="entry">
+	<td>Hirschmann, W.B.</td>
+	<td>Profit from the Learning Curve</td>
+	<td>1964</td>
+	<td>Harvard Bus. Rev.<br/>Vol. 42, pp. 125&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="B.G.Hong2011" class="entry">
+	<td>Hong, B.G., Hwang, Y.S., Kang, J.S., Lee, D.W., Joo, H. &amp; Ono, M.</td>
+	<td>Conceptual design study of a superconducting spherical tokamak reactor with a self-consistent system analysis code</td>
+	<td>2011</td>
+	<td>Nuclear Fusion<br/>Vol. 51, pp. 113013&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Jardin2003" class="entry">
+	<td>Jardin, S., Kessel, C., Menard, J., Mau, T., Miller, R., Najmabadi, F., Chan, V., Lao, L., Linliu, Y., Miller, R., Petrie, T., Politzer, P. &amp; Turnbull, A.</td>
+	<td>Physics basis for a spherical torus power plant</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 165 - 197&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00303-4">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003034">URL</a>&nbsp;</td>
+</tr>
+<tr id="Khater2003" class="entry">
+	<td>Khater, H., Mogahed, E., Sze, D., Tillack, M. &amp; Wang, X.</td>
+	<td>ARIES-ST safety design and analysis</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 285 - 301&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00307-1">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003071">URL</a>&nbsp;</td>
+</tr>
+<tr id="P.J.Knight1995" class="entry">
+	<td>Knight, P.J., Hender, T.C. &amp; Robinson, D.C.</td>
+	<td>TIght Aspect Ratio Tokamak Reactor Studies</td>
+	<td>1995</td>
+	<td>Proc. of Japan-US Workshop on Fusion Power Reactors<br/>Vol. 07, pp. 100&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="KotschenreutherNF2000" class="entry">
+	<td>Kotschenreuther, M., Dorland, W., Liu, Q., Zarnstorff, M., Miller, R. &amp; Lin-Liu, Y.</td>
+	<td>Attaining neoclassical transport in ignited tokama</td>
+	<td>2000</td>
+	<td>Nuclear Fusion<br/>Vol. 40, pp. 677&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="KotschenreutherFED2009" class="entry">
+	<td>Kotschenreuther, M., Valanju, P., Mahajan, S. &amp; Schneider, E.</td>
+	<td>Fusion-Fission Transmutation Scheme - Efficient destruction of nuclear waste</td>
+	<td>2009</td>
+	<td>Fusion Engineering and Design<br/>Vol. 84, pp. 83-88&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="KotschenreutherNF2010" class="entry">
+	<td>Kotschenreuther, M., Valanju, P., Mahajan, S., Zheng, L., Pearlstein, L., Bulmer, R., Canik, J. &amp; Maingi, R.</td>
+	<td>The super X divertor (SXD) and a compact fusion neutron source (CFNS)</td>
+	<td>2010</td>
+	<td>Nuclear Fusion<br/>Vol. 50, pp. 035003&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="KotschenreutherPOP2007" class="entry">
+	<td>Kotschenreuther, M., Valanju, P.M., Mahajan, S.M. &amp; Wiley, J.C.</td>
+	<td>On heat loading, novel divertors, and fusion reactors</td>
+	<td>2007</td>
+	<td>Physics of Plasmas<br/>Vol. 14, pp. 072502&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="KuteevNF2011" class="entry">
+	<td>Kuteev, B., Azizov, E., Bykov, A., Dnestrovsky, A., Dokuka, V., Gladush, G., Golikov, A., Goncharov, P., Gryaznevich, M., Gurevich, M., Ivanov, A., Khairutdinov, R., Khripunov, V., Kingham, D., Klishchenko, A., Kurnaev, V., Lukash, V., Medvedev, S., Savrukhin, P., Sergeev, V., Shpansky, Y., Sykes, A., Voss, G. &amp; Zhirkin, A.</td>
+	<td>Steady-state operation in compact tokamaks with copper coils</td>
+	<td>2011</td>
+	<td>Nuclear Fusion<br/>Vol. 51, pp. 073013&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="MenardNF2011" class="entry">
+	<td>Menard, J., Bromberg, L., Brown, T., Burgess, T., Dix, D., El-Guebaly, L., Gerrity, T., Goldston, R., Hawryluk, R., Kastner, R., Kessel, C., Malang, S., Minervini, J., Neilson, G., Neumeyer, C., Prager, S., Sawan, M., Sheffield, J., Sternlieb, A., Waganer, L., Whyte, D. &amp; Zarnstorff, M.</td>
+	<td>Prospects for pilot plants based on the tokamak, spherical tokamak and stellarator</td>
+	<td>2011</td>
+	<td>Nuclear Fusion<br/>Vol. 53, pp. 103014&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="MenardEPS2007" class="entry">
+	<td>Menard, J., Goldston, R., Fu, G.-Y., Gorelenkov, N., Kaye, S., Kramer, G., Maingi, R., Neumeyer, C., Sabbagh, S., Soukhanovskii, V. &amp; Woolley, R.</td>
+	<td>Physics Design of the National High-power Advanced Torus eXperiment</td>
+	<td>2007</td>
+	<td>34th EPS Conference on Plasma Phys. Warsaw,<br/>Vol. 31F, pp. P-1.162&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Miller2003" class="entry">
+	<td>Miller, R.</td>
+	<td>ARIES-ST design point selection</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 199 - 213&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00304-6">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003046">URL</a>&nbsp;</td>
+</tr>
+<tr id="Miller2000" class="entry">
+	<td>Miller, R.L. &amp; the ARIES Team</td>
+	<td>Systems Context of the ARIES-AT Conceptual Fusion Power Plant</td>
+	<td>2000</td>
+	<td>Fusion Engineering and Design&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Miller1999" class="entry">
+	<td>Miller, R.L. &amp; the Aries Team</td>
+	<td>Design point finalization for the ARIES-ST power plant</td>
+	<td>1999</td>
+	<td>Proc. Symposium on Fusion Engineering&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Najmabadi2003" class="entry">
+	<td>Najmabadi, F.</td>
+	<td>Spherical torus concept as power plants - the ARIES-ST study</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 143 - 164&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00302-2">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003022">URL</a>&nbsp;</td>
+</tr>
+<tr id="Najmabadi1997a" class="entry">
+	<td>Najmabadi, F. &amp; the ARIES Team</td>
+	<td>The Starlite Study: Assessment of Options for Tokamak Power Plants</td>
+	<td>1997</td>
+	<td>University of California San Diego report UCSD-ENG-005&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://aries.ucsd.edu/LIB/REPORT/STARLITE/final.shtml">URL</a>&nbsp;</td>
+</tr>
+<tr id="Najmabadi1997" class="entry">
+	<td>Najmabadi, F., Bathke, C.G., Billone, M.C., Blanchard, J.P., Bromberg, L., Chin, E., Cole, F.R., Crowell, J.A., Ehst, D.A., El-Guebaly, L.A., Herring, J., Hua, T.Q., Jardin, S.C., Kessel, C.E., Khater, H., Lee, V., Malang, S., Mau, T.-K., Miller, R.L., Mogahed, E.A., Petrie, T.W., Reis, E.E., Schultz, J., Sidorov, M., Steiner, D., Sviatoslavsky, I.N., Sze, D.-K., Thayer, R., Tillack, M.S., Titus, P., Wagner, L.M., Wang, X. &amp; Wong, C.P.</td>
+	<td>Overview of the ARIES-RS reversed-shear tokamak power plant study</td>
+	<td>1997</td>
+	<td>Fusion Engineering and Design<br/>Vol. 38(1-2), pp. 3 - 25&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(97)00110-5">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379697001105">URL</a>&nbsp;</td>
+</tr>
+<tr id="OnoNF2000" class="entry">
+	<td>Ono, M., Kaye, S., Peng, Y.-K., Barnes, G., Blanchard, W., Cartera, M., Chrzanowski, J., Dudek, L., Ewigb, R., Gates, D., Hatcher, R., Jarboeb, T., Jardin, S., Johnson, D., Kaita, R., Kalish, M., Kessel, C., Kugel, H., Maingia, R., Majeski, R., Manickam, J., McCormack, B., Menard, J., Mueller, D., Nelson, B., Nelson, B., Neumeyer, C., Oliaro, G., Paoletti, F., Parsells, R., Perry, E., Pomphrey, N., Ramakrishnan, S., Raman, R., Rewoldt, G., Robinson, J., Roquemore, A., Ryana, P., Sabbagh, S., Swaina, D., Synakowski, E., Viola, M., Williams, M., Wilson, J. &amp; Team, N.</td>
+	<td>Exploration of spherical torus physics in the NSTX device</td>
+	<td>2000</td>
+	<td>Nuclear Fusion<br/>Vol. 40, pp. 557&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="OnoNF2004" class="entry">
+	<td>Ono, M., Peng, M., Kessel, C., Neumeyer, C., Schmidt, J., Chrzanowski, J., Darrow, D., Grisham, L., Heitzenroeder, P., Jarboe, T., Jun, C., Kaye, S., Menard, J., Raman, R., Stevenson, T., Viola, M., Wilson, J., Woolley, R. &amp; Zatz, I.</td>
+	<td>Next-step spherical torus experiment and spherical torus strategy in the course of development of fusion energy</td>
+	<td>2004</td>
+	<td>Nuclear Fusion<br/>Vol. 44, pp. 452-463&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="M.Peng" class="entry">
+	<td>Peng, M., Colchin, R., Hedrick, C., Glambos, J.D., Sheffield, J., Stricker, D.J., Blanken, R.A., Sykes, A., Robinson, D.C., Morris, A.W., Hugill, J., Hender, T.C., Erents, S.K. &amp; Wilson, H.R.</td>
+	<td>Physics progress towards compact tokamak reactors with normal conducting toroidal field coils</td>
+	<td></td>
+	<td>Nuclear Fusion<br/>Vol. IAEA-CN-60/F-4, pp. 643&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="PengFST2009" class="entry">
+	<td>Peng, Y., Burgess, T., Carroll, A., Neumeyer, C., Canik, J., Cole, M., Dorland, W., Fogarty, P., Grisham, L., Hillis, D., Katoh, Y., Korsah, K., Kotschenreuther, M., LaHaye, R., Mahajan, S., Majeski, R., Nelson, B., Patton, B., Rasmussen, D., Sabbagh, S., Sontag, A., Stoller, R., Tsai, C.-C., Valanju, P., Wagner, J. &amp; Yoder, G.</td>
+	<td>REMOTE HANDLING AND PLASMA CONDITIONS TO ENABLE FUSION NUCLEAR SCIENCE R&amp;D USING A COMPONENT TESTING FACILITY</td>
+	<td>2009</td>
+	<td>Fusion Science and Technology<br/>Vol. 56, pp. 957&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="PengNF2000" class="entry">
+	<td>Peng, Y.-K., Reiersen, W., Kaye, S., Jardin, S., Menard, J., Gates, D., Robinson, J., Dahlgren, F., Grisham, L., Majeski, R., Mikkelsen, D., Ono, M., Schmidt, J., Wilson, J. &amp; Woolley, R.</td>
+	<td>Science and technology of the 10 MA spherical tori</td>
+	<td>2000</td>
+	<td>Nuclear Fusion<br/>Vol. 40, pp. 583&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="PengNF1986" class="entry">
+	<td>Peng, Y.-K. &amp; Strickler, D.</td>
+	<td>FEATURES OF SPHERICAL TORUS PLASMAS</td>
+	<td>1986</td>
+	<td>Nuclear Fusion<br/>Vol. 26, pp. 769&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Peng" class="entry">
+	<td>Peng, Y.-K.M., Cheng, E.T., Galambos, J.D. &amp; Cerbone, R.J.</td>
+	<td>Spherical Tokamak (ST) Transmutation of Nuclear Wastes</td>
+	<td>1995</td>
+	<td>Fusion Engineering and Design<br/>Vol. 2, pp. 1423-1429&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="PengPPCF2005" class="entry">
+	<td>Peng, Y.-K.M., Fogarty, P.J., Burgess, T.W., Strickler, D.J., Nelson, B.E., Tsai, J., Neumeyer, C.A., Bell, R., Kessel, C., Menard, J., Gates, D., LeBlanc, B., Mikkelsen, D., Fredrickson, E., Grisham, L., Schmidt, J., Rutherford, P., Sabbagh, S., Field, A., Sykes, A., Cook, I., Mitarai, O. &amp; Takase, Y.</td>
+	<td>A component test facility based on the spherical tokamak</td>
+	<td>2005</td>
+	<td>Plasma Phys. Control. Fusion<br/>Vol. 47, pp. B263-B283&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Raffray2006" class="entry">
+	<td>Raffray, A., Malang, S., El-Guebaly, L., Ihli, T., Najmabadi, F. &amp; Wang, X.</td>
+	<td>Major integration issues in evolving the configuration design space for the ARIES-CS compact stellarator power plant</td>
+	<td>2006</td>
+	<td>Fusion Engineering and Design<br/>Vol. 81(8-14), pp. 1159 - 1168&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.08.089">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379605006423">URL</a>&nbsp;</td>
+</tr>
+<tr id="Rebut1995" class="entry">
+	<td>Rebut, P.</td>
+	<td>Issues in the development of a commercial fusion reactor</td>
+	<td>1995</td>
+	<td>Transactions of Fusion Technology<br/>Vol. 27, pp. 3&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Reiersen2003" class="entry">
+	<td>Reiersen, W., Dahlgren, F., Fan, H.-M., Neumeyer, C. &amp; Zatz, I.</td>
+	<td>The toroidal field coil design for ARIES-ST</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 303 - 322&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00308-3">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003083">URL</a>&nbsp;</td>
+</tr>
+<tr id="D.C.Robinson1996" class="entry">
+	<td>Robinson, D., Buttery, R., Cook, I., Cox, M. &amp; Gryaznevich, M.</td>
+	<td>The way forward for the spherical tokamak</td>
+	<td>1996</td>
+	<td>Fusion Technology<br/>Vol. 30, pp. 1360&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Robinson" class="entry">
+	<td>Robinson, D.C.</td>
+	<td>A Spherical Tokamak (ST) Ignition Experiment</td>
+	<td></td>
+	<td>&nbsp;</td>
+	<td>unpublished</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Rosner2011" class="entry">
+	<td>Rosner, R. &amp; Goldberg, S.</td>
+	<td>Small Modular Reactors - Key to Future Nuclear Power Generation in the U.S.</td>
+	<td>2011</td>
+	<td>Online: http://epic.uchicago.edu/page/publications-and-presentations&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Sheffield1994a" class="entry">
+	<td>Sheffield, J.</td>
+	<td>The physics of magnetic fusion reactors</td>
+	<td>1994</td>
+	<td>Rev. Mod. Phys.<br/>Vol. 66, pp. 1015&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Sheffield1986" class="entry">
+	<td>Sheffield, J., Dory, R.A., Cohn, S.M., Delene, J.G., Parsly, L.F., Ashby, D.E.T.F. &amp; Reierson, W.T.</td>
+	<td>Cost Assessment of a Generic Magnetic Fusion Reactor</td>
+	<td>1986</td>
+	<td>Oak Ridge National Laboratory report ORNL/TM-9311&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Stambaugh1998" class="entry">
+	<td>Stambaugh, R., Chan, V., Miller, R., Anderson, P., Chiu, H., Chiu, S., Forest, C., Greenfield, C., Jensen, T., Haye, R.L., Lao, L., Lin-Liu, Y., Nerem, A., Prater, R., Politzer, P., John, H.S., Schaffer, M., Staebler, G., Taylor, T., Turnbull, A. &amp; Wong, C.</td>
+	<td>Development path of low aspect ratio tokamak power plants</td>
+	<td>1998</td>
+	<td>Fusion Engineering and Design<br/>Vol. 41(1-4), pp. 385 - 391&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(97)00146-4">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379697001464">URL</a>&nbsp;</td>
+</tr>
+<tr id="A.Sykes2011" class="entry">
+	<td>Sykes, A., Gryaznevich, M., Voss, G., Kingham, D. &amp; Kuteev, B.</td>
+	<td>Fusion for Neutrons: a realisable Fusion Neutron Source</td>
+	<td>2011</td>
+	<td>Proc. 24th Symposium on Fusion Engineering, Fusion Engineering and Design<br/>Vol. S02B-1&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="A.Sykes1977" class="entry">
+	<td>Sykes, A., Wesson, J. &amp; Cox, S.J.</td>
+	<td>High-Beta Tokamaks</td>
+	<td>1977</td>
+	<td>Phys. Rev. Lett.<br/>Vol. 39, pp. 757&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Sze2000" class="entry">
+	<td>Sze, D.-K., Tillack, M. &amp; El-Guebaly, L.</td>
+	<td>Blanket system selection for the ARIES-ST</td>
+	<td>2000</td>
+	<td>Fusion Engineering and Design<br/>Vol. 48(3-4), pp. 371 - 378&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(00)00146-0">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379600001460">URL</a>&nbsp;</td>
+</tr>
+<tr id="Tho88" class="entry">
+	<td>Thomson, S.L.</td>
+	<td>Cost Algorithms for <br>Superconducting Magnets</td>
+	<td>1988</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Tillack2000" class="entry">
+	<td>Tillack, M., Wang, X., Pulsifer, J., Malang, S. &amp; Sze, D.</td>
+	<td>ARIES-ST breeding blanket design and analysis</td>
+	<td>2000</td>
+	<td>Fusion Engineering and Design<br/>Vol. 49-50(0), pp. 689 - 695&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(00)00366-5">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379600003665">URL</a>&nbsp;</td>
+</tr>
+<tr id="Tillack2003" class="entry">
+	<td>Tillack, M., Wang, X., Pulsifer, J., Malang, S., Sze, D., Billone, M. &amp; Sviatoslavsky, I.</td>
+	<td>Fusion power core engineering for the ARIES-ST power plant</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 215 - 261&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00305-8">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003058">URL</a>&nbsp;</td>
+</tr>
+<tr id="Tillack2000a" class="entry">
+	<td>Tillack, M., Wang, X., Pulsifer, J. &amp; Sviatoslavsky, I.</td>
+	<td>ARIES-ST plasma-facing component design and analysis</td>
+	<td>2000</td>
+	<td>Fusion Engineering and Design<br/>Vol. 49-50(0), pp. 363 - 369&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(00)00397-5">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379600003975">URL</a>&nbsp;</td>
+</tr>
+<tr id="ValanjuPOP2009" class="entry">
+	<td>Valanju, P.M., Kotschenreuther, M., Mahajan, S.M. &amp; Canik, J.</td>
+	<td>Super-X divertors and high power density fusion devices</td>
+	<td>2009</td>
+	<td>Physics of Plasmas<br/>Vol. 16, pp. 056110&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="VossFED2002" class="entry">
+	<td>Voss, G., Bond, A., Hicks, J. &amp; Wilson, H.</td>
+	<td>Development of the spherical tokamak power plant</td>
+	<td>2002</td>
+	<td>Fusion Engineering and Design<br/>Vol. 63-64, pp. 65-71&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="VossFED2008" class="entry">
+	<td>Voss, G., Davis, S., Dnestrovskij, A., Kirk, A., Knight, P., Loughlin, M., O'Brien, M., Sychugov, D., Tabasso, A. &amp; Wilson, H.</td>
+	<td>Conceptual design of a component test facility based on the spherical tokamak</td>
+	<td>2008</td>
+	<td>Fusion Engineering and Design<br/>Vol. 83, pp. 1648-1653&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Waganer2006" class="entry">
+	<td>Waganer, L.</td>
+	<td>ARIES-AT maintenance system definition and analysis</td>
+	<td>2006</td>
+	<td>Fusion Engineering and Design<br/>Vol. 80(1-4), pp. 161 - 180&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.06.354">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379605004187">URL</a>&nbsp;</td>
+</tr>
+<tr id="Waganer2003" class="entry">
+	<td>Waganer, L., Deuser, D., Slattery, K., Wille, G., Arcella, F. &amp; Cleveland, B.</td>
+	<td>Ultra-low cost coil fabrication approach for ARIES-ST</td>
+	<td>2003</td>
+	<td>Fusion Engineering and Design<br/>Vol. 65(2), pp. 339 - 352&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00310-1">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379602003101">URL</a>&nbsp;</td>
+</tr>
+<tr id="Waganer2006a" class="entry">
+	<td>Waganer, L.M., Najmabadi, F., Tillack, M., Wang, X. &amp; El-Guebaly, L.</td>
+	<td>Design approach of the ARIES-AT power core and vacuum vessel cost assessment</td>
+	<td>2006</td>
+	<td>Fusion Engineering and Design<br/>Vol. 80(1-4), pp. 181 - 200&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.06.353">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379605004151">URL</a>&nbsp;</td>
+</tr>
+<tr id="WilliamRasin2007" class="entry">
+	<td>Rasin, W., Ono, K., Bertel, E., Berbey, P., Duffey, R., Khalil, H., Kinoshita, I., Kuran, S., Lee, M., Onopko, E., Rothwell, G. &amp; Williams, K.</td>
+	<td>COST ESTIMATING GUIDELINES FOR GENERATION IV NUCLEAR ENERGY SYSTEMS Revision 4.2</td>
+	<td>2007</td>
+	<td>&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="WilsonNF2004" class="entry">
+	<td>Wilson, H., Ahn, J.-W., Akers, R., Applegate, D., Cairns, R., Christiansen, J., Connor, J., Counsell, G., Dnestrovskij, A., Dorland, W., Hole, M., Joiner, N., Kirk, A., Knight, P., Lashmore-Davies, C., amd D.E. McGregor, K.M., O'Brien, M., Roach, C., Tsaun, S. &amp; Voss, G.</td>
+	<td>Integrated plasma physics modelling for the Culham steady state spherical tokamak fusion power plant</td>
+	<td>2004</td>
+	<td>Nuclear Fusion<br/>Vol. 44, pp. 917-929&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Wong2000" class="entry">
+	<td>Wong, C. &amp; Stambaugh, R.</td>
+	<td>Tokamak reactor designs as a function of aspect ratio</td>
+	<td>2000</td>
+	<td>Fusion Engineering and Design<br/>Vol. 51-52(0), pp. 387 - 393&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(00)00300-8">DOI</a> <a href="http://www.sciencedirect.com/science/article/pii/S0920379600003008">URL</a>&nbsp;</td>
+</tr>
+<tr id="Woodruff2011a" class="entry">
+	<td>Woodruff, S., Baerny, J.K., Mattor, N., Stoulil, D., Miller, R. &amp; Marston, T.</td>
+	<td>Path to Market for Compact Modular Fusion Power Cores</td>
+	<td>2011</td>
+	<td>Journal of Fusion Energy, pp. 1 - 12&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-011-9472-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="Woodruff2010" class="entry">
+	<td>Woodruff, S., Brown, M., Hooper, E., Milroy, R. &amp; Schaffer, M.</td>
+	<td>Why Compact Tori for Fusion?</td>
+	<td>2010</td>
+	<td>Journal of Fusion Energy, pp. 1 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-010-9303-1">URL</a>&nbsp;</td>
+</tr>
+<tr id="" class="entry">
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Ite89" class="entry">
+	<td></td>
+	<td>ITER Conceptual Design Interim Report</td>
+	<td>1989</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 08/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

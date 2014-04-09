@@ -5,7 +5,7 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-  <meta name="description" content="">
+  <meta name="description" content="Systems analysis and costing for fusion systems.">
   <title>Systems Analysis | Woodruff Scientific, Inc.</title>
   </head>
 
@@ -25,6 +25,8 @@
 	</ol>
 	<h1>Systems Analysis</h1>
 	<p>Primary tools for systems analysis are Matlab and ARIES.</p>
+		<blockquote><a href="costing.html">Costing References</a></blockquote>
+
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
