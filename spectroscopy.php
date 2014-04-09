@@ -57,6 +57,7 @@
 
 <a id="ids"></a>
 	<h3>Ion Doppler Spectrometer</h3>
+				<blockquote><a href="doppler.html">Ion Doppler Spectrometer References</a></blockquote>
 
 
 
