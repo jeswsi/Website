@@ -35,6 +35,8 @@
 		<p class="center"><a href="img/BankBL2.jpg"><img src="img/BankBL2-small.jpg"></a><br />
 		Module BL960</p>
 	</div>
+	<div class="clearfix"></div>
+	<blockquote><a href="files/BankModule-BL-C-3.pdf">Module B Technical Specifications (pdf)</a></blockquote>
 
 
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
