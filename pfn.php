@@ -29,12 +29,12 @@
 	
 <h3>References</h3>
 	<blockquote><a href="pfns.html">Pulse Forming Network References</a></blockquote>
-	<blockquote><a href="dcfilters.html">DC Filter References</a></blockquote>
-	<blockquote><a href="invertors.html">Invertor Refernces</a></blockquote>
+	<!--<blockquote><a href="dcfilters.html">DC Filter References</a></blockquote>
+	<blockquote><a href="invertors.html">Invertor References</a></blockquote>
 	<blockquote><a href="snubbers.html">Snubber References</a></blockquote>
 	<blockquote><a href="marx.html">Marx Generator References</a></blockquote>
 	<blockquote><a href="pulsegen.html">Pulse Generator References</a></blockquote>
-	<blockquote><a href="blumlein.html">Blumlein References</a></blockquote>
+	<blockquote><a href="blumlein.html">Blumlein References</a></blockquote>-->
 
 	<div class="col-md-6">
 		
