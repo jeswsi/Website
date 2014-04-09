@@ -27,16 +27,15 @@
 	
 
 	<h4>Module C <small>(based on 2mF, 5kV, 25kJ caps)</small></h4>
-	<p>Module C can be wall mounted or shelf mounted (plans available on request).</p>
-	<div class="col-md-6">
+	<!--<div class="col-md-6">
 		<p class="center"><a href="img/BankCL3.jpg"><img src="img/BankCL3-small.jpg"></a><br />
 		Module CL4000</p>
-	</div>
+	</div>-->
 	<div class="col-md-6">
-		<p class="center"><a href="img/BankCL1.jpg"><img src="img/BankCL1-small.jpg"></a><br />
+		<p class="center"><a href="img/CL10000.jpg"><img src="img/CL10000-small.jpg"></a><br />
 		Module CL10000</p><br />
 	</div>
-
+	<div class="clearfix"></div>
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
 <h3>Safety</h3>

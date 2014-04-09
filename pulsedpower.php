@@ -27,7 +27,7 @@
 						<ul>
 							<li><a href="moduleA">Module A</a></li>
 							<li><a href="moduleB">Module B</a></li>
-							<!--<li><a href="moduleC">Module C</a></li>-->
+							<li><a href="moduleC">Module C</a></li>
 						</ul>
         			<li><a href="pfn">Pulse Forming Networks</a></li>
        			</ul>
