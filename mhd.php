@@ -90,9 +90,10 @@ highly parallelizable implicit time advance, and general flux-source
 form of the partial differential equations and boundary conditions that
 can be implemented in its framework. Early algorithm development and
 extensive verification studies of the two-dimensional version of the
-code have been previously described [A.H. Glasser & X.Z. Tang, Comp.
+code have been previously described [A.H. Glasser &amp; X.Z. Tang, Comp.
 Phys. Comm., 164 (2004); V.S. Lukin, Ph.D. thesis, Princeton University
 (2008)]. </p>
+<p>For more information see <a href="http://faculty.washington.edu/vlukin/HiFi_Framework.html">HiFi's website</a></p>
 
 <a id="bout"></a>
 <h3>BOUT++</h3>
