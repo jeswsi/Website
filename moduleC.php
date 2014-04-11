@@ -36,6 +36,8 @@
 		Module CL10000</p><br />
 	</div>
 	<div class="clearfix"></div>
+		<blockquote><a href="files/BankModule-CL-C.pdf">Module C Technical Specifications (pdf)</a></blockquote>
+
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
 <h3>Safety</h3>
