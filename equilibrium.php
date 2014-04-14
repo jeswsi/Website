@@ -85,7 +85,7 @@ available transport models.
     </div>
   <div class="clearfix"></div>
 
-<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CORSICA Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="fiesta"></a>
 <h3>Fiesta</h3>
@@ -102,7 +102,7 @@ structure, and a full time domain plasma model is under development. It
 is also fairly simple to link up with the vector3/magint package to
 calculate error fields and such like.</p>
 <p><a href="img/fiesta.png"><img src="img/fiesta.png"></a></p>
-<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiesta Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="nimeq"></a>
 <h3>NIMEQ</h3>
@@ -114,7 +114,7 @@ Psi/R^2 in simply connected domains. The resulting equation is solved in
 the weak form using a finite element representation. A Picard scheme is
 used to advance the nonlinear iteration.</p>
 <blockquote><a href="files/ech_aps08_poster.pdf">Download Eric Howell's APS Presentation on NIMEQ (pdf)</a></blockquote>
-<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=NIMEQ Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="eqlfe"></a>
 <h3>EQLFE</h3>
@@ -128,7 +128,7 @@ iteration. Pressure and poloidal current (B_toroidal) profiles can be
 specified with some degree of flexibility. FRCs, spheromaks, mixtures,
 doublets and other CT configurations can be made at present. The user
 can write and use custom profile routines.</p>
-<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=EQLFE Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
  
     </div> <!-- /container -->

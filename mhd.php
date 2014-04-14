@@ -79,7 +79,7 @@ STPX</p>
     </div>
   <div class="clearfix"></div>
 
-<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Nimrod Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="hifi"></a>
 <h3>HiFi</h3>
@@ -94,6 +94,7 @@ code have been previously described [A.H. Glasser &amp; X.Z. Tang, Comp.
 Phys. Comm., 164 (2004); V.S. Lukin, Ph.D. thesis, Princeton University
 (2008)]. </p>
 <p>For more information see <a href="http://faculty.washington.edu/vlukin/HiFi_Framework.html">HiFi's website</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HiFi Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="bout"></a>
 <h3>BOUT++</h3>
@@ -118,6 +119,7 @@ also be changed at run-time.</li>
 </ul>
 </p>
 <p>For more information see <a href="http://www-users.york.ac.uk/~bd512/bout/">Ben Dudson's pages</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=BOUT Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="openfoam"></a>
 <h3>OpenFOAM</h3>
@@ -130,6 +132,7 @@ presumed constant.</p>
 
 <p class="center"><a href="img/plot_vs_reference.png"><img src="img/plot_vs_reference.png" width="300"></a> <a href="img/shercliff.png"><img src="img/shercliff.png" width="300"></a><br />
 Velocity of conducting fluids in pipe under transverse magnetic field (Shercliff), OpenFoam solution and <a href="https://code.google.com/p/mhdflow/source/browse/shercliff.m">analytical solution</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=OpenFOAM Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <blockquote><a href="files/ChiaraMistrangeloSlidesOFW5.pdf">Mistrangelo, Simulation of MHD flows: electric potential
 formulation</a>
