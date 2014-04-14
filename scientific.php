@@ -32,6 +32,34 @@
 <p>James Stuber graduated with a bachelor&#8217;s degree in Aeronautics and Astronautics from the University of Washington in 2011. Interests in astronautics include orbital mechanics, propulsion, and satellite design. Other interests are computer science and plasma physics. For his senior class capstone James designed hardware and controls for rendezvous with and capture of non-cooperative orbital debris. At Woodruff Scientific James has assisted in the design and construction of lab devices, developed experiment control code, and managed plasma simulations. James is a member of the American Institue of Aeronautics and Astronautics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/James_Stuber/">ResearchGate</a></p>
 
+<h3><strong>Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
+<p>After a career at LLNL, Casper left the Physical
+and Life Sciences Directorate after he was selected for a senior
+position with the International Thermonuclear Experimental Reactor
+(ITER) in Cadarache, France. As a scientific officer, Casper did
+simulations and computations to explore the capabilities of the ITER
+device and studied equilibria needed for ITER to meet its performance
+specifications. He developed control and plasma scenarios that met the
+plasma control and operational requirements. These have implications on
+the performance of superconducting magnets, power supplies and the
+plasma control system. He integrated R&amp;D and analysis results from
+member nations and defining a program of experimental and modeling
+activities to further the development of ITER plasma scenarios and
+control capabilities.
+</p>
+
+<h3><strong>Kara A. Olson</strong> <span class="text-muted">Research Assistant</span></h3>
+<p>Kara is nearing completion of her
+doctorate in Computer Science at Old Dominion University in Norfolk,
+Virginia.  Her research interests include analysis of simulation models
+in order to enhance understanding.  She has presented her work by
+invitation in Germany as well as in England, Canada, the Netherlands,
+and nationally.  She was a GAANN Fellow in High Performance Computing &amp;
+Communications and holds a Master of Science, Computer Science, Bachelor
+of Computer Science and Bachelor of Science, Mathematics from Old
+Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
+</p>
+
 
 <h1>Associates</h1>
 <p>WSI has a large collaborator base and a Scientific Advisory Board of experts in fusion energy sciences at private and public institutions around the U.S., and abroad.</p>
