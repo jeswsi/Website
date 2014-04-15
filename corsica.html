@@ -1,0 +1,769 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	  <meta name="description" content="CORSICA References for equilibrium in plasmas and fusion systems">
+<title>CORSICA JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="Baelmans:EPS95" class="entry">
+	<td>Baelmans, M. &amp; others</td>
+	<td></td>
+	<td></td>
+	<td>&nbsp;</td>
+	<td>unpublished</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Baelmans:PET95" class="entry">
+	<td>Baelmans, M., Reiter, D., Tokar, M. &amp; B&ouml;rner, P.</td>
+	<td>Consistent core-edge plasma modelling for TEXTOR plasmas with carbon impurities</td>
+	<td></td>
+	<td>&nbsp;</td>
+	<td>unpublished</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Balescu:88a" class="entry">
+	<td>Balescu, R.</td>
+	<td>Transport Processes in Plasmas: 1. Classical Transport Theory</td>
+	<td>1988</td>
+	<td><br/>Vol. 1&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Balescu:88b" class="entry">
+	<td>Balescu, R.</td>
+	<td>Transport Processes in Plasmas: 2. Neoclassical Transport Theory</td>
+	<td>1988</td>
+	<td><br/>Vol. 2&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="BasTut" class="entry">
+	<td>Barrett, K.A., Chiu, Y.-H., Dubois, P.F., Painter, J.F. &amp; Motteler, Z.C.</td>
+	<td>Running a Basis Program; A Tutorial for Beginners</td>
+	<td>1995</td>
+	<td>(UCRL-MA-118543 Part I)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Beazley:97" class="entry">
+	<td>Beazley, D.M. &amp; Lomdahl, P.S.</td>
+	<td>Controlling the Data Glut in Large-Scale Molecular-Dynamics Simulations</td>
+	<td>1997</td>
+	<td>Comput. in Phys.<br/>Vol. 11(3), pp. 230-238&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Beer:95" class="entry">
+	<td>Beer, M.A.</td>
+	<td>Gyrofluid models of turbulent transport in tokamaks</td>
+	<td>1995</td>
+	<td><i>School</i>: Princeton University&nbsp;</td>
+	<td>phdthesis</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Berk:01" class="entry">
+	<td>Berk, H.L., Fowler, T.K., LoDestro, L.L. &amp; Pearlstein, L.D.</td>
+	<td>Hyper-resistivity Theory in a Cylindrical Plasma</td>
+	<td></td>
+	<td>&nbsp;</td>
+	<td>unpublished</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Boozer:86" class="entry">
+	<td>Boozer, A.H.</td>
+	<td>Ohm's Law for Mean Magnetic Fields</td>
+	<td>1986</td>
+	<td>J. Plasma Phys.<br/>Vol. 35(1), pp. 133-139&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Braginskii" class="entry">
+	<td>Braginskii, S.I.</td>
+	<td>Transport Processes in a Plasma</td>
+	<td>1965</td>
+	<td><br/>Vol. 1Reviews of Plasma Physics, pp. 205-311&nbsp;</td>
+	<td>incollection</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Braginskii" class="entry">
+	<td>Braginskii, S.I.</td>
+	<td>Transport Processes in a Plasma</td>
+	<td>1965</td>
+	<td><br/>Vol. 1Reviews of Plasma Physics, pp. 205-311&nbsp;</td>
+	<td>incollection</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="SABrown:95a" class="entry">
+	<td>Brown, S.A. &amp; others</td>
+	<td>Software for Portable Scientific Data Management</td>
+	<td>1995</td>
+	<td>Comput. in Phys.<br/>Vol. 7(3), pp. 304&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="SABrown:95b" class="entry">
+	<td>Brown, S.A. &amp; others</td>
+	<td>Creating and Using PDB Files</td>
+	<td>1995</td>
+	<td>Comput. in Phys.<br/>Vol. 9(2), pp. 173&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Casper:UCRL95" class="entry">
+	<td>Casper, T.A., Crotinger, J., Haney, S., Moller, J.M., Pearlstein, L.D., Rice, B.W. &amp; Stallard, B.W.</td>
+	<td>Milestone Report: Status Report on Time-dependent Modeling for Current Profile Feedback Control</td>
+	<td>1995</td>
+	<td>(UCRL-ID-122226)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Casper:EPS96" class="entry">
+	<td>Casper, T.A., Crotinger, J., Moller, J., Pearlstein, L.D., Rice, B., Stallard, B., Lao, L. &amp; Taylor, T.</td>
+	<td>Modeling of Current Profile Evolution and Equilibria in Negative Central Shear Discharges in the DIII-D Experiment</td>
+	<td>1996</td>
+	<td><br/>Vol. 20C, part I23rd European Conference on Controlled Fusion and Plasma Physics; Kiev, Ukraine, June 24-28, 1996, pp. 295&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Casper:BAPS96" class="entry">
+	<td>Casper, T.A., Spang, M.C., Crotinger, J., Pearlstein, L.D., Stallard, B.W. &amp; Taylor, T.</td>
+	<td>Corsica Time-dependent Modeling of DIII-D Discharges</td>
+	<td>1996</td>
+	<td><br/>Vol. 41Bull. Am. Phys. Soc., pp. 1571&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="ChangHinton:86" class="entry">
+	<td>Chang, C.S. &amp; Hinton, F.L.</td>
+	<td>Effect of impurity particles on the finite-aspect ratio neoclassical ion thermal conductivity in a tokamak</td>
+	<td>1986</td>
+	<td>Phys. Fluids<br/>Vol. 29(10), pp. 3314-3316&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="ChangHinton:82" class="entry">
+	<td>Chang, C.S. &amp; Hinton, F.L.</td>
+	<td>Effect of finite aspect ratio on the neoclassical ion thermal conductivity in the banana regime</td>
+	<td>1982</td>
+	<td>Phys. Fluids<br/>Vol. 25(9), pp. 1493-1494&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="EZDDoc" class="entry">
+	<td>Chin, Y.-H. &amp; Dubois, P.F.</td>
+	<td>EZD User Manual</td>
+	<td>1994</td>
+	<td>(UCRL-MA-118543 Part IV)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="EZNDoc" class="entry">
+	<td>Chin, Y.-H. &amp; Dubois, P.F.</td>
+	<td>EZN User Manual</td>
+	<td>1994</td>
+	<td>(UCRL-MA-118543 Part III)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="NumTok:95" class="entry">
+	<td>Cohen, B.I., Barnes, D.C., Dawson, J.M., Hammett, G.W., Lee, W.W., Kerbel, G.D., Leboeuf, J.-N., Liewer, P.C., Tajima, T. &amp; Waltz, R.E.</td>
+	<td>The Numerical Tokamak Project: Simulation of turbulent transport</td>
+	<td>1995</td>
+	<td>Comp. Phys. Commun.<br/>Vol. 87(1), pp. 1-15&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Cohen:95" class="entry">
+	<td>Cohen, R.H. &amp; Xu, X.</td>
+	<td>A model for scrape-off-layer low-high (L-H) mode transition</td>
+	<td>1995</td>
+	<td>Phys. Plasmas<br/>Vol. 2(9), pp. 3374-3383&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Connor:87" class="entry">
+	<td>Connor, J.W., Cowley, S.C., Hastie, R.J. &amp; Pan, L.R.</td>
+	<td>Toroidal Rotation and Momentum Transport</td>
+	<td>1987</td>
+	<td>Plasma Physics and Controlled Fusion<br/>Vol. 29(7), pp. 919-931&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="CorsicaUsersManual" class="entry">
+	<td>Crotinger, J.A.</td>
+	<td>sc Corsica Users' Manual</td>
+	<td>1997</td>
+	<td>(UCRL-MA-126273 Dr)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Crotinger:BAPS93" class="entry">
+	<td>Crotinger, J.A., Cohen, R.H., Haney, S.W., LoDestro, L.L., Shestakov, A.I., Smith, G.R., Pearlstein, L.D., Rognlien, T.D. &amp; Tarditi, A.G.</td>
+	<td>sc Corsica: A Comprehensive Tokamak Simulation Code</td>
+	<td>1993</td>
+	<td><br/>Vol. 38Bull. Am. Phys. Soc., pp. 2016&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="CorsicaFinalReport" class="entry">
+	<td>Crotinger, J.A., LoDestro, L., Pearlstein, L.D., Tarditi, A., Casper, T.A. &amp; Hooper, E.B.</td>
+	<td>sc Corsica: A Comprehensive Simulation of Toroidal Magnetic-Fusion Devices; Final Report to the LDRD Program</td>
+	<td>1997</td>
+	<td>(UCRL-ID-126284)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="D:FluxCoords" class="entry">
+	<td>D'Haeseleer, W.D., Hitchon, W.N.G., Callen, J.D. &amp; Shohet, J.L.</td>
+	<td>Flux Coordinates and Magnetic Field Structure</td>
+	<td>1991</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Imake" class="entry">
+	<td>DuBois, P.</td>
+	<td>Software portability with imake</td>
+	<td>1996</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="BasLibDoc" class="entry">
+	<td>Dubois, P.F.</td>
+	<td>The Basis Package Library; A Manual for Program Authors</td>
+	<td>1994</td>
+	<td>(UCRL-MA-118543 Part VI)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Dubois:94" class="entry">
+	<td>Dubois, P.F.</td>
+	<td>Making Applications Programmable</td>
+	<td>1994</td>
+	<td>Comput. in Phys.<br/>Vol. 8(1), pp. 70&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="BasDevDoc" class="entry">
+	<td>Dubois, P.F. &amp; Motteler, Z.C.</td>
+	<td>Writing Basis Programs; A Manual for Program Authors</td>
+	<td>1994</td>
+	<td>(UCRL-MA-118543 Part V)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="BasUserDoc" class="entry">
+	<td>Dubois, P.F. &amp; Motteler, Z.C.</td>
+	<td>Basis Language Reference Manual</td>
+	<td>1994</td>
+	<td>(UCRL-MA-118543 Part II)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Freidberg:MHD" class="entry">
+	<td>Freidberg, J.P.</td>
+	<td>Ideal Magnetohydrodynamics</td>
+	<td>1987</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="GradHogan:70" class="entry">
+	<td>Grad, H. &amp; Hogan, J.</td>
+	<td>Classical Diffusion in a Tokamak</td>
+	<td>1970</td>
+	<td>Phys. Rev. Lett.<br/>Vol. 24(24), pp. 1337-1340&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Grad:75" class="entry">
+	<td>Grad, H., Hu, P.N. &amp; Stevens, D.C.</td>
+	<td>Adiabatic evolution of plasma equilibrium</td>
+	<td>1975</td>
+	<td>Proc. Nat. Acad. Sci. USA<br/>Vol. 72(10), pp. 3789-3793&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Grad:58" class="entry">
+	<td>Grad, H. &amp; Rubin, H.</td>
+	<td></td>
+	<td>1958</td>
+	<td><br/>Vol. 31Proc. of the Second United Nations Conference on the Peaceful Uses of Atomic Energy, pp. 190&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Haney:92" class="entry">
+	<td>Haney, S.W., Barr, W.L., Crotinger, J.A., Perkins, L.J., Solomon, C.J., Chaniotakis, E.A., Freidberg, J.P., Wei, J., Galambos, J.D. &amp; Mandrekas, J.</td>
+	<td>A ``sc SuperCode'' for Systems Analysis of Tokamak Experiments and Reactors</td>
+	<td>1992</td>
+	<td>Fus. Technol.<br/>Vol. 21(3), pp. 1749-1758&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Hinton:76" class="entry">
+	<td>Hinton, F.L. &amp; Hazeltine, R.D.</td>
+	<td>Theory of plasma transport in toroidal confinement systems</td>
+	<td>1976</td>
+	<td>Rev. Mod. Phys.<br/>Vol. 48(2), pp. 239-308&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Hirshman:79" class="entry">
+	<td>Hirshman, S.P. &amp; Jardin, S.C.</td>
+	<td>Two-dimensional transport of tokamak plasmas</td>
+	<td>1979</td>
+	<td>Phys. Fluids<br/>Vol. 22(4), pp. 731-742&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Hooper:96a" class="entry">
+	<td>Hooper, E.B.</td>
+	<td>Sustained spheromak physics experiment---Part I: Context and overview</td>
+	<td>1996</td>
+	<td>(UCRL-PROP-124353-PART-1)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Hooper:96b" class="entry">
+	<td>Hooper, E.B.</td>
+	<td>Sustained spheromak physics experiment---Part II</td>
+	<td>1996</td>
+	<td>(UCRL-PROP-124353-PART-2)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Hooper:96c" class="entry">
+	<td>Hooper, E.B., Pearlstein, L.D. &amp; Bulmer, R.H.</td>
+	<td>Modeling of MHD Equilibria and Current Profile Evolution during the ERS Mode in TFTR</td>
+	<td>1996</td>
+	<td>(UCRL-ID-124818)&nbsp;</td>
+	<td>techreport</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Humphreys:94" class="entry">
+	<td>Humphreys, D.A., Leuer, J.A., Kellman, A.G., Haney, S.W., Bulmer, R.H., Pearlstein, L.D. &amp; Portone, A.</td>
+	<td>Toward a design for the ITER plasma shape and stability control system</td>
+	<td>1994</td>
+	<td>Fus. Technol.<br/>Vol. 26(3), pp. 331-339&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Jardin:86" class="entry">
+	<td>Jardin, S.C., Pomphrey, N. &amp; DeLucia, J.</td>
+	<td>Dynamic Modeling of Transport and Position Control of Tokamaks</td>
+	<td>1986</td>
+	<td>J. Comput. Phys.<br/>Vol. 66(2), pp. 481-507&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Kaye:84" class="entry">
+	<td>Kaye, S.M., Goldston, R.J., Bell, M., Bol, K. &amp; others</td>
+	<td>Thermal energy confinement scaling in PDX limiter discharges</td>
+	<td>1984</td>
+	<td>Nucl. Fusion<br/>Vol. 24(10), pp. 1303-1334&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Khayrutdinov:93" class="entry">
+	<td>Khayrutdinov, R.R. &amp; Lukash, V.E.</td>
+	<td>Studies of plasma equilibrium and transport in a tokamak fusion device with the inverse-variable technique</td>
+	<td>1993</td>
+	<td>J. Comput. Phys.<br/>Vol. 109(2), pp. 193-201&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Koniges:92" class="entry">
+	<td>Koniges, A.E., Crotinger, J.A. &amp; Diamond, P.H.</td>
+	<td>Structure formation and transport in dissipative drift-wave turbulence</td>
+	<td>1992</td>
+	<td>Phys. Fluids B<br/>Vol. 4(9), pp. 2785-2793&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="KDBH:95" class="entry">
+	<td>Kotschenreuther, M., Dorland, W., Beer, M.A. &amp; Hammett, G.W.</td>
+	<td>Quantitative predictions of tokamak energy confinement from first-principles simulations with kinetic effects</td>
+	<td>1995</td>
+	<td>Phys. Plasmas<br/>Vol. 2(6), pp. 2381-2389&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Liewer:85" class="entry">
+	<td>Liewer, P.C.</td>
+	<td>Measurements of microturbulence in tokamaks and comparison with theories of turbulence and anomalous transport</td>
+	<td>1985</td>
+	<td>Nucl. Fusion<br/>Vol. 25(5), pp. 543-621&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="LoDestro:94" class="entry">
+	<td>LoDestro, L.L. &amp; Pearlstein, L.D.</td>
+	<td>On the Grad-Shafranov equation as an eigenvalue problem, with applications to $q$ solvers</td>
+	<td>1994</td>
+	<td>Phys. Plasmas<br/>Vol. 1(1), pp. 90-95&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Maschke:80" class="entry">
+	<td>Maschke, E.K. &amp; Perrin, H.</td>
+	<td>Exact solutions of the stationary MHD equations for a rotating toroidal plasma</td>
+	<td>1980</td>
+	<td>Plasma Physics<br/>Vol. 22(6), pp. 579-594&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Pfeiffer:85" class="entry">
+	<td>Pfeiffer, W., Marcus, F.B., Armentrout, C.J., Jahns, G.L., Petrie, T.W. &amp; Stockdale, R.E.</td>
+	<td>Giant sawtooth oscillations in the Doublet III tokamak</td>
+	<td>1985</td>
+	<td>Nucl. Fusion<br/>Vol. 25(6), pp. 655-671&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Portone:95" class="entry">
+	<td>Portone, A., Gribov, Y., Huguet, M., Mondins, P.L., Albanese, R., Ciscato, D., Humphreys, D.A., Kessel, C.E., Pearlstein, L.D. &amp; Ward, D.J.</td>
+	<td>Plasma Position and Shape Control for ITER</td>
+	<td>1995</td>
+	<td><br/>Vol. 116th IEEE/NPSS Symposium on Fusion Engineering, pp. 345-348&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Rebut:88" class="entry">
+	<td>Rebut, P.H., Lallia, P.P. &amp; Watkins, M.L.</td>
+	<td>The critical temperature gradient model of plasma transport: applications to JET and future tokamaks</td>
+	<td>1988</td>
+	<td><br/>Vol. 2Plasma Physics and Controlled Nuclear Fusion Research 1988 (Proc. 12th Int. Conf., Nice, France), pp. 191-200&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Rognlien:94" class="entry">
+	<td>Rognlien, T.D., Brown, P.N., Cambell, R.B., Kaiser, T.B. &amp; others</td>
+	<td>2-D fluid transport simulations of gaseous/radiative divertors</td>
+	<td>1994</td>
+	<td>Contrib. Plasma Phys.<br/>Vol. 34, pp. 362-367&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Rognlien:92" class="entry">
+	<td>Rognlien, T.D., Milovich, J.L., Rensink, M.E. &amp; Porter, G.D.</td>
+	<td>A fully implicit, time dependent 2-D fluid code for modeling tokamak edge plasmas</td>
+	<td>1992</td>
+	<td>J. Nucl. Mater.<br/>Vol. 196-198, pp. 347-51&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Rosenbluth:IAEA94" class="entry">
+	<td>Rosenbluth, M.N., Hogan, J., Boucher, D. &amp; others</td>
+	<td>ITER plasma modelling and MHD stability limits</td>
+	<td>1994</td>
+	<td><br/>Vol. 2Plasma Physics and Controlled Nuclear Fusion Research 1994 (Proc. 15th Int. Conf., Seville, Spain), pp. 517-524&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Shestakov:97" class="entry">
+	<td>Shestakov, A.I., Cohen, R.H., Crotinger, J.A., LoDestro, L.L., Tarditi, A. &amp; Xu, X.-Q.</td>
+	<td>Self-Consistent Modeling of Turbulence and Transport</td>
+	<td>1997</td>
+	<td>rm Submitted to J. Comp. Phys.&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Surko:83" class="entry">
+	<td>Surko, C.M. &amp; Slusher, R.E.</td>
+	<td>Waves and Turbulence in a Tokamak Fusion Plasma</td>
+	<td>1983</td>
+	<td>Science<br/>Vol. 221, pp. 817-822&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Tang:86" class="entry">
+	<td>Tang, W.M.</td>
+	<td>Microinstability-based model for anomalous thermal confinement in tokamaks</td>
+	<td>1986</td>
+	<td>Nucl. Fusion<br/>Vol. 26(12), pp. 1605-1618&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Tarditi:96" class="entry">
+	<td>Tarditi, A., Cohen, R.H., Crotinger, J.A., Porter, G.D., Rognlien, T.D., Shestakov, A.I. &amp; Smith, G.R.</td>
+	<td>Self-consistent Core-Edge Nonlinear Transport Simulation with CORSICA 2</td>
+	<td>1996</td>
+	<td>Contrib. Plasma Phys.<br/>Vol. 36, pp. 132&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Tarditi:BAPS93" class="entry">
+	<td>Tarditi, A., Cohen, R.H., Rognlien, T.D. &amp; Smith, G.R.</td>
+	<td>Coupling Core and Edge Non-Linear Transport Fluid Codes</td>
+	<td>1993</td>
+	<td><br/>Vol. 38Bull. Am. Phys. Soc., pp. 2103&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Taroni:PET95" class="entry">
+	<td>Taroni, A.</td>
+	<td>Global Codes for Edge Plasmas</td>
+	<td></td>
+	<td>&nbsp;</td>
+	<td>unpublished</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Wakatani:84" class="entry">
+	<td>Wakatani, M. &amp; Hasegawa, A.</td>
+	<td>A collisional drift wave description of plasma edge turbulence</td>
+	<td>1984</td>
+	<td>Phys. Fluids<br/>Vol. 27(3), pp. 611-618&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Ward:89" class="entry">
+	<td>Ward, D.J. &amp; Jardin, S.C.</td>
+	<td>Modelling The Effects of the Sawtooth Instability in Tokamaks Using a Current Viscosity Term</td>
+	<td>1989</td>
+	<td>Nucl. Fusion<br/>Vol. 29(6), pp. 905-914&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Xu:96" class="entry">
+	<td>Xu, X.-Q. &amp; Cohen, R.H.</td>
+	<td>3D Fluid simulations of turbulence in detached scrape-off-layer plasmas</td>
+	<td>1996</td>
+	<td>Contrib. Plasma Phys.<br/>Vol. 36(2/3), pp. 202-206&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="Xu:95" class="entry">
+	<td>Xu, X.-Q., Cohen, R.H., Crotinger, J.A. &amp; Shestakov, A.I.</td>
+	<td>Fluid simulations of nonlocal dissipative drift-wave turbulence</td>
+	<td>1995</td>
+	<td>Phys. Plasmas<br/>Vol. 2(3), pp. 686-701&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 15/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->
