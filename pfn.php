@@ -26,7 +26,16 @@
 	</ol>
 
     <h1>Pulsed Forming Networks</h1>
-	
+	<p class="center"><a href="files/TypeBPFN.pdf"><img src="img/typeB-small.png"></a><br />
+		<span class="text-muted">Type B Pulse Forming Network</span></p>
+	<p>Woodruff Scientific can design and build pulse forming networks for your specific application.</p>
+	<h3>Example Schematics</h3>
+	<p>
+		<a href="files/TypeAPFN.pdf">Type A Pulse Forming Network</a><br />
+		<a href="files/TypeBPFN.pdf">Type B Pulse Forming Network</a><br />
+		<a href="files/TypeCPFN.pdf">Type C Pulse Forming Network</a><br />
+		<a href="files/TypeEPFN.pdf">Type E Pulse Forming Network</a><br />
+	</p>
 <h3>References</h3>
 	<blockquote><a href="pfns.html">Pulse Forming Network References</a></blockquote>
 	<!--<blockquote><a href="dcfilters.html">DC Filter References</a></blockquote>
