@@ -38,7 +38,7 @@ Dam Break: <a href="img/output.avi">DamBreak.avi</a>, <a href="img/output.wmv">D
 
 <h3>ElmerFEM</h3>
 <p>Elmer is an open source multiphysical simulation software. Elmer includes physical models of fluid dynamics, structural mechanics, electromagnetics, heat transfer and acoustics, for example. These are described by partial differential equations which Elmer solves by the Finite Element Method (FEM). For more information visit <a href="http://www.csc.fi/english/pages/elmer">ElmerFEM's website</a></p>
-<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CFD Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 
 
