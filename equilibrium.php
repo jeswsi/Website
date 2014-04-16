@@ -84,6 +84,7 @@ available transport models.
       <p><a href="img/stpx.jpg"><img src="img/stpx-300x222.jpg" alt="stpx" width="300" height="222" /></a><br />STPX</p>
     </div>
   <div class="clearfix"></div>
+   <blockquote><a href="wiki">CORSICA Wiki</a></blockquote>
   <blockquote><a href="corsica.html">CORSICA References</a>
 </blockquote>
 
