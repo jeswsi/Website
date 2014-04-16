@@ -32,22 +32,6 @@
 <p>James Stuber graduated with a bachelor&#8217;s degree in Aeronautics and Astronautics from the University of Washington in 2011. Interests in astronautics include orbital mechanics, propulsion, and satellite design. Other interests are computer science and plasma physics. For his senior class capstone James designed hardware and controls for rendezvous with and capture of non-cooperative orbital debris. At Woodruff Scientific James has assisted in the design and construction of lab devices, developed experiment control code, and managed plasma simulations. James is a member of the American Institue of Aeronautics and Astronautics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/James_Stuber/">ResearchGate</a></p>
 
-<h3><strong>Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
-<p>After a career at LLNL, Casper left the Physical
-and Life Sciences Directorate after he was selected for a senior
-position with the International Thermonuclear Experimental Reactor
-(ITER) in Cadarache, France. As a scientific officer, Casper did
-simulations and computations to explore the capabilities of the ITER
-device and studied equilibria needed for ITER to meet its performance
-specifications. He developed control and plasma scenarios that met the
-plasma control and operational requirements. These have implications on
-the performance of superconducting magnets, power supplies and the
-plasma control system. He integrated R&amp;D and analysis results from
-member nations and defining a program of experimental and modeling
-activities to further the development of ITER plasma scenarios and
-control capabilities.
-</p>
-
 <h3><strong>Kara A. Olson</strong> <span class="text-muted">Research Assistant</span></h3>
 <p>Kara is nearing completion of her
 doctorate in Computer Science at Old Dominion University in Norfolk,
@@ -67,6 +51,22 @@ Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
 <h3><strong><a href="https://www.researchgate.net/profile/Nathaniel_Hicks/">Dr. Nathaniel K. Hicks</a></strong><span class="text-muted"> Physicist, University of Anchorage, Alaska</span></h3>
 <p>Dr. Nathaniel Hicks has fourteen years of experience conducting research on innovations in fusion energy science.  In his doctoral work at UCLA, Hicks performed novel experiments on a new type of ion beam with magnetic fusion applications and gained broad competence with experimental plasma, beam, and accelerator physics.  In particular, Hicks has expertise in volume production ion sources, electrostatic beam extraction and transport, and radio frequency quadrupole (RFQ) accelerators.  Hicks also performed the first computational modeling of this type of ion beam in the RFQ and propagation across a transverse magnetic field using particle-in-cell (PIC) codes.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Nathaniel_Hicks/">ResearchGate</a></p>
+
+<h3><strong>Dr. Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
+<p>After a career at LLNL, Casper left the Physical
+and Life Sciences Directorate after he was selected for a senior
+position with the International Thermonuclear Experimental Reactor
+(ITER) in Cadarache, France. As a scientific officer, Casper did
+simulations and computations to explore the capabilities of the ITER
+device and studied equilibria needed for ITER to meet its performance
+specifications. He developed control and plasma scenarios that met the
+plasma control and operational requirements. These have implications on
+the performance of superconducting magnets, power supplies and the
+plasma control system. He integrated R&amp;D and analysis results from
+member nations and defining a program of experimental and modeling
+activities to further the development of ITER plasma scenarios and
+control capabilities.
+</p>
 
 <h3><strong>Chris Raastad</strong><span class="text-muted"> Computational scientist, <a href="http://fits.me">Fits.me</a></span></h3>
 <p>Chris graduated with Bachelors in Mathematics and Computer Science from the University of Washington and in the process changed focus from physics, to pure math, to computational physics, to applied math, to finally computer science.  He unexpectedly ended up in Estonia on a Fulbright scholarship to study a Masters in Cybersecurity only to accidentally fall into his true passion of hot tech startups.  Now he spends his days running, singing, and helping make clean code and quality software at Fits.me, a startup using shapeshifting robots to take on the online fitting room world.</p>
