@@ -26,14 +26,13 @@
 
     <h1>Module A <small>(based on 4uF, 12kV, 300J caps)</small></h1>
 	
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankAC1.jpg"><img src="img/BankAC1-small.jpg"></a><br />
-		Module AC32</p>
-	</div>
-	<div class="col-md-6">
-		<p class="center"><a href="img/BankAC2.jpg"><img src="img/BankAC2-small.jpg"></a><br />
+
+		<p class="center"><a href="img/AC64-4.jpg"><img src="img/AC64-4-small.jpg"></a><br />
 		Module AC64</p>
-	</div>
+
+	<div class="clearfix"></div>
+	<blockquote><a href="files/BankModule-AC-1.pdf">Module A Technical Specifications (pdf)</a></blockquote>
+
 
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
