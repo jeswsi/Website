@@ -32,7 +32,7 @@
 		Module CL4000</p>
 	</div>-->
 	<div class="col-md-6">
-		<p class="center"><a href="img/CL10000.jpg"><img src="img/CL10000-small.jpg"></a><br />
+		<p class="center"><a href="img/CL4000.jpg"><img src="img/CL4000-small.jpg"></a><br />
 		Module CL10000</p><br />
 	</div>
 	<div class="clearfix"></div>

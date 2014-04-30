@@ -1,0 +1,1706 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta name="description" content="Useful PF coil references for fusion, plasma energy, and physics labs.">
+
+<title>PF Coil JabRef References output | Woodruff Scientific, Inc.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 2.0
+//
+// Copyright (c) 2006-2008, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+
+// Some features:
+// + allows RegExp searches
+//   e.g. to search for entries between 1980 and 1989, type:  198[0-9]
+//   e.g. for any entry ending with 'symmetry', type:  symmetry$
+//   e.g. for all reftypes that are books: ^book$, or ^article$
+//   e.g. for entries by either John or Doe, type john|doe
+
+// Speed optimisation introduced some esoteric problems with certain RegExp searches
+// e.g. if the previous search is 200[-7] and the next search is 200[4-7] then the search doesn't work properly until the next 'keyup'
+// hence the searchOpt can be turned off for RegExp adepts
+var searchOpt = true;
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// basic object detection
+	if(!document.getElementById || !document.getElementsByTagName) { return; }
+	if (!document.getElementById('qstable')||!document.getElementById('qs')) { return; }
+
+	// find QS table and appropriate rows
+	searchTable = document.getElementById('qstable');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array();
+	infoRows = new Array();
+
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.indexOf('entry') != -1) {
+			entryRows[j++] = allRows[i];
+		} else {
+			infoRows[k++] = allRows[i];		
+		}
+	}
+
+	//number of entries and rows
+	numRows = allRows.length;
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+
+	//find the query field
+	qsfield = document.getElementById('qsfield');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+
+	// shows the searchfield
+	document.getElementById('qs').style.display = 'block';
+	document.getElementById('qsfield').onkeyup = testEvent;
+}
+
+function quickSearch(tInput){
+
+	 if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		// only search for valid RegExp
+		try {
+			var searchText = new RegExp(tInput.value,"i")
+			closeAllInfo();
+			qsfield.className = '';
+		}
+		catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		// some further optimisation is possible: if the search string is getting shorter, and the row is already visible, skip it. Future work.
+		if(!searchOpt || cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			var inCells = cRow.getElementsByTagName('td');
+			var numCols = inCells.length;
+				
+			for (var j=0; j<numCols; j++) {
+				cCell = inCells[j];
+				var t = cCell.innerText?cCell.innerText:getTextContent(cCell);
+				if (t.search(searchText) != -1){ 
+					found=true; 
+					break;
+				} 
+			}
+			
+			if(found) {
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1) { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	// first close all abstracts, reviews, etc.
+	closeAllInfo();
+
+	for (var i = 0; i < numEntries; i++){
+		entryRows[i].className = 'entry show'; 
+	}
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function testEvent(e){
+	if (!e) var e = window.event;
+	quickSearch(this);
+}
+
+function clearQS() {
+	qsfield.value = '';
+	quickSearch(qsfield);
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }
+
+#qs { width: auto; border-style: solid; border-color: gray; border-width: 1px 1px 0px 1px; padding: 0.5em 0.5em; display:none;  }
+#qs form { padding: 0px; margin: 0px; }
+#qs form p { padding: 0px; margin: 0px; }
+
+.invalidsearch { background-color: red; }
+
+table { border: 1px gray solid; width: 100%; empty-cells: show; }
+th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top;  }
+td { text-align: left; vertical-align: top; }
+th { background-color: #EFEFEF; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+
+@media print {
+	p.infolinks, #qssettings, #qs { display: none !important; }
+	table { border-width: 0px; }
+	tr { page-break-inside: avoid; }
+	tr > * + * + * + * + * {display: none; }
+	thead tr::before { content: "Reference"; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-weight: bold; text-align: center; display: table-cell; background-color: #EFEFEF; }
+	tr[id]::before { content: attr(id); display: table-cell; border: 1px gray solid; padding: 0.5em; vertical-align: top; font-style: italic; }
+}
+</style>
+</head>
+<body>
+
+<div id="qs"><form action=""><p>QuickSearch: <input type="text" name="qsfield" id="qsfield" autocomplete="off" title="Allows plain text as well as RegExp searches" /><input type="button" onclick="clearQS()" value="clear" />&nbsp; Number of matching entries: <span id="stat">0</span>.</p></form></div>
+<table id="qstable" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="2056844" class="entry">
+	<td>d'Alencon, M., Bareyt, B., Cortial, H., Leloup, C., Rey, G., Rijnoudt, E., Schenk, G. &amp; Taquet, B.</td>
+	<td>The TORE SUPRA poloidal field system</td>
+	<td>1983//</td>
+	<td>Fusion Technology 1982. Proceedings of the Twelfth Symposium, pp. 1165 - 71&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5214887" class="entry">
+	<td>Abe, M. &amp; Takeuchi, K.</td>
+	<td>Low loop voltage startup and equilibrium control using multivariable poloidal field coils in the Hitachi tokamak HT-2</td>
+	<td>1996/03/</td>
+	<td>Fusion Technology<br/>Vol.  29( 2), pp. 277 - 93&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2487800" class="entry">
+	<td>Albanese, R., Coccorese, E., Mitchell, N., Martone, R. &amp; Salpietro, E.</td>
+	<td>Poloidal field coil design for NET</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 1585 - 90&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2695333" class="entry">
+	<td>Ando, T., Ohkubo, M., Nishio, S., Shimizu, M., Takatsu, H., Yamamoto, M., Isaka, M., Ohta, M., Kitazawa, H., Takizawa, T. &amp; Watanabe, T.</td>
+	<td>Construction of toroidal and poloidal field coils of JT-60</td>
+	<td>1985//</td>
+	<td>Proceedings of the 9th International Conference on Magnet Technology. MT-9 1985, pp. 11 - 16&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2487792" class="entry">
+	<td>Andreani, R., Gasparotto, M., Lovisetto, L. &amp; Pizzuto, A.</td>
+	<td>Stress analysis of the poloidal field coils for FTU device in normal and fault conditions</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 1493 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3019975" class="entry">
+	<td>Ane, J., Bassot, J., Calmels, C., Catrain, A., Charriere, B., Chassain, P., Giachetto, A., Hellegouarc'H, J., Leloup, C. &amp; Vlemincx, M.</td>
+	<td>Manufacture and transport of the Tore Supra large poloidal magnetic field coils</td>
+	<td>1986//</td>
+	<td>Fusion Technology 1986. Proceedings of the Fourteenth Symposium (EUR 10936 EN), pp. 1691 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2695341" class="entry">
+	<td>Ane, J., Calmels, C., Leloup, C., Rauch, J., Rijnoudt, E. &amp; Roman, T.</td>
+	<td>Inner poloidal field coils of the Tore Supra tokamak</td>
+	<td>1985//</td>
+	<td>Proceedings of the 9th International Conference on Magnet Technology. MT-9 1985, pp. 42 - 5&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2495572" class="entry">
+	<td>Ane, J. &amp; Perin, J.</td>
+	<td>Mechanical stress analysis for the poloidal field coils of TORE SUPRA</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 1519 - 24&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2165446" class="entry">
+	<td>Bagdasarov, A., Denisov, V., Ivanov, D., Ivanov, N., Kakurin, A., Kislov, A., Kovrov, P., Kochin, V., Khvostenko, P., Khilil', V., Chudnovskij, A., Gvozdkov, Y. &amp; Cherkashin, M.</td>
+	<td>Investigation of transport and disruptions in the T-7 Tokamak by poloidal-field perturbation</td>
+	<td>1983//</td>
+	<td>Nuclear Fusion Supplement<br/>Vol.  3, pp. 281 - 92&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9642184" class="entry">
+	<td>Baker, W., Keefe, C., Rajainm, H. &amp; Salpietro, E.</td>
+	<td>Manufacture of the poloidal field conductor insert coil (PFCI)</td>
+	<td>2007/10/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  82( 5-14), pp. 1567 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2007.05.070">URL</a>&nbsp;</td>
+</tr>
+<tr id="3309732" class="entry">
+	<td>Baoshan, Y., Qiang, S., Xiaodong, L., Yanping, Y. &amp; Jiamei, Q.</td>
+	<td>Influence of the iron core transformer on poloidal field</td>
+	<td>Sept. 1987</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  7( 3), pp. 155 - 9&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2999817" class="entry">
+	<td>Bareyt, B., Beuzit, H., Boin, M., Bottereau, J., Charmasson, B., Frouin, M., Leloup, C., Moustier, M., Patris, R. &amp; Vignier, M.</td>
+	<td>The Tore Supra poloidal field system power supplies</td>
+	<td>1986//</td>
+	<td>Fusion Technology 1986. Proceedings of the Fourteenth Symposium (EUR 10936 EN), pp. 875 - 82&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1874384" class="entry">
+	<td>Bateman, G.</td>
+	<td>Ripple Reduction Poloidal Field Coils for Tokamak fusion reactors</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 87 - 90&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5801758" class="entry">
+	<td>Baturo, I., Berkhov, N., Bohn, H., Bondarchuk, E., Filatov, V., Giesen, B., Doinikov, N., Korol'kov, M., Kitaev, B., Kozhukhovskaja, N., Maximenkova, N., Mingalev, B., Neubauer, O., Obidenko, T., Panin, A. &amp; Simakov, A.</td>
+	<td>Mathematical model and results of calculations for poloidal magnetic field system and stress analysis for toroidal field system of the TEXTOR 94</td>
+	<td>1997//</td>
+	<td>Fusion Technology 1996. Proceedings of the 19th Symposium on Fusion Technology<br/>Vol. vol.1, pp. 209 - 14&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2804326" class="entry">
+	<td>Baumgartner, J. &amp; O'Toole, J.</td>
+	<td>Finite element modeling of TFTR poloidal field coils</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 433 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5016703" class="entry">
+	<td>Bayer, H., Darweschsad, M., Forster, S., Friesinger, G., Gotz, A., Gruber, P.-H., Heller, R., Herz, W., Heep, W., Irmisch, M., Kathol, H., Kaufmann, R., Kleiber, K.-H., Komarek, P., Maurer, W., Nother, G., Padligur, U., Rietzschel, K., Schittenhelm, H.-P., Schleinkofer, G., Schmidt, C., Siewerdt, L., Ratajczak, W., Sihler, C., Specht, E., Spiegel, H., Suss, F., Susser, M., Uhlich, D., Ulbricht, A., Wuchner, F., Wurz, G. &amp; Zahn, G.</td>
+	<td>Test of the POLO model coil-a superconducting poloidal field coil according to the specifications of the tokamak operation-in the KfK TOSKA facility</td>
+	<td>1995//</td>
+	<td>Fusion Technology 1994. Proceedings of the 18th Symposium on Fusion Technology<br/>Vol. vol.2, pp. 917 - 20&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5065394" class="entry">
+	<td>Beck, W.</td>
+	<td>Repair of poloidal field magnets on Alcator C-Mod</td>
+	<td>1994//</td>
+	<td>15th IEEE/NPSS Symposium. Fusion Engineering (Cat. No.93CH3348-0)<br/>Vol. vol.2, pp. 1121 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1993.518520">URL</a>&nbsp;</td>
+</tr>
+<tr id="9646986" class="entry">
+	<td>Bellina, F.</td>
+	<td>The THELMA electromagnetic model of the poloidal field conductor insert joint</td>
+	<td>2007/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  17( 2), pp. 2381 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2007.898422">URL</a>&nbsp;</td>
+</tr>
+<tr id="5808969" class="entry">
+	<td>Bellina, F., Chitarin, G., Fiorentin, P., Gaio, E., Marchiori, G., Sonato, P., Toigo, V., Zaccaria, P. &amp; Zollino, G.</td>
+	<td>Feasibility analysis of an active local field control at the poloidal gap of RFX</td>
+	<td>1997//</td>
+	<td>Fusion Technology 1996. Proceedings of the 19th Symposium on Fusion Technology<br/>Vol. vol.1, pp. 771 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2057815" class="entry">
+	<td>Belyakov, V., Ivkin, V., Kuznetsov, A., Litunovsky, R., Mozin, I., Smirnov, V., Stolov, A. &amp; Teplov, P.</td>
+	<td>T-15 poloidal field control system</td>
+	<td>1983//</td>
+	<td>Fusion Technology 1982. Proceedings of the Twelfth Symposium, pp. 1209 - 13&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1575350" class="entry">
+	<td>Benesch, J. &amp; Cardwell, G.</td>
+	<td>Experimental verification of a poloidal field coil code</td>
+	<td>1980//</td>
+	<td>Proceedings of the 8th Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 163 - 5&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8090191" class="entry">
+	<td>Bessette, D. &amp; Decool, P.</td>
+	<td>Mechanical attachment of the conductor ends in the ITER poloidal field coils</td>
+	<td>Sept. 2003</td>
+	<td>Fusion Engineering and Design<br/>Vol.  66-68, pp. 1171 - 5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(03)00315-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="5999629" class="entry">
+	<td>Bettini, P., De Lorenzi, A., Frello, G., Maschio, A. &amp; Mondino, P.</td>
+	<td>Effects of the fast discharge system on the ITER poloidal and toroidal field circuits</td>
+	<td>1998//</td>
+	<td>17th IEEE/NPSS Symposium Fusion Engineering (Cat. No.97CH36131)<br/>Vol. vol.2, pp. 709 - 12&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1997.687725">URL</a>&nbsp;</td>
+</tr>
+<tr id="1329886" class="entry">
+	<td>Bond, A. &amp; Last, J.</td>
+	<td>Mechanical design of the inner poloidal field coils of the JET Tokamak</td>
+	<td>1978//</td>
+	<td>6th International Conference on Magnet Technology<br/>Vol. I, pp. 128 - 33&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1207820" class="entry">
+	<td>Bond, A. &amp; Last, J.</td>
+	<td>Mechanical design of the inner poloidal field coils of the JET Tokamak</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 822 - 5&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5828975" class="entry">
+	<td>Bonicelli, T., Huart, M., Doyle, P., Rouleau, M. &amp; Zollo, G.</td>
+	<td>The harmonic power filters of the JET poloidal divertor field amplifiers</td>
+	<td>1997//</td>
+	<td>Fusion Technology 1996. Proceedings of the 19th Symposium on Fusion Technology<br/>Vol. vol.2, pp. 1087 - 90&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3237801" class="entry">
+	<td>Bonicelli, T., Marchese, V. &amp; Mondino, P.</td>
+	<td>The Additional Switching Network: a new part of the poloidal field system of JET. Design and early operation</td>
+	<td>1987//</td>
+	<td>Fusion Engineering Proceedings. 12th Symposium on Fusion Engineering (Cat. No.87CH2507-2), pp. 398 - 404&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1453380" class="entry">
+	<td>Braunsberger, U. &amp; Meixner, G.</td>
+	<td>A poloidal field coil system for a segmented compack Tokamak fusion reactor</td>
+	<td>1979//</td>
+	<td>Fusion Technology 1978, pp. 169 - 74&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4842566" class="entry">
+	<td>Bromberg, L., Bathke, C., Kessel, C. &amp; Titus, P.</td>
+	<td>Design of poloidal field systems for TF coil shear minimization</td>
+	<td>1994/11/</td>
+	<td>Fusion Technology<br/>Vol.  26( 3), pp. 473 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7599718" class="entry">
+	<td>Bromberg, L., Pourrahimi, S., Schultz, J., Titus, P., Jardin, S., Kessel, C. &amp; Reiersen, W.</td>
+	<td>Superconducting poloidal field magnet engineering for the ARIES-ST</td>
+	<td>2003/02/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  65( 2), pp. 323 - 38&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(02)00309-5">URL</a>&nbsp;</td>
+</tr>
+<tr id="1202944" class="entry">
+	<td>Broser, E., Gernhardt, J., Hartz, F., Keilhacker, M., Klement, G., Kruger, P., Larcher, T., Niedermeyer, H., Pillsticker, M., Wedler, H., Werner, F. &amp; Wesner, F.</td>
+	<td>Manufacture, assembly and test of the toroidal and poloidal magnetic field coils of ASDEX</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 39 - 43&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1586773" class="entry">
+	<td>Brown, T., Wiseman, G. &amp; Peng, Y.-K.</td>
+	<td>Tokamak reactor poloidal field system study</td>
+	<td>1980//</td>
+	<td>Proceedings of the 8th Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 399 - 410&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5065289" class="entry">
+	<td>Bulmer, R.</td>
+	<td>Tokamak Physics Experiment poloidal field design</td>
+	<td>1994//</td>
+	<td>15th IEEE/NPSS Symposium. Fusion Engineering (Cat. No.93CH3348-0)<br/>Vol. vol.2, pp. 661 - 5&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1993.518416">URL</a>&nbsp;</td>
+</tr>
+<tr id="5999623" class="entry">
+	<td>Bulmer, R. &amp; Neilson, G.</td>
+	<td>Alternative poloidal field configurations for ITER</td>
+	<td>1998//</td>
+	<td>17th IEEE/NPSS Symposium Fusion Engineering (Cat. No.97CH36131)<br/>Vol. vol.2, pp. 685 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1997.687719">URL</a>&nbsp;</td>
+</tr>
+<tr id="2804330" class="entry">
+	<td>Campostrini, P., Chitarin, G. &amp; Stella, A.</td>
+	<td>Fault analysis and protection concepts for RFX poloidal magnetic field system</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 454 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1226113" class="entry">
+	<td>Cardwell, G.</td>
+	<td>Analysis of the TEXT poloidal field coils</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. II, pp. 1343 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5380012" class="entry">
+	<td>Chiron, D., Dolgetta, N., Garribba, M., Huart, M., Lieshout, L., Noll, P., Sjouw, B. &amp; Zannelli, F.</td>
+	<td>The poloidal divertor field amplifiers for the JET pump divertor</td>
+	<td>1995//</td>
+	<td>16th IEEE/NPSS Symposium Fusion Engineering, SOFE '95. Seeking a New Energy Era (Cat. No.95CH35852)<br/>Vol. vol.1, pp. 774 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1995.535949">URL</a>&nbsp;</td>
+</tr>
+<tr id="8964726" class="entry">
+	<td>Choe, W., Kim, J. &amp; Ono, M.</td>
+	<td>Solenoid-free toroidal plasma start-up concepts utilizing only the outer poloidal field coils and a conducting centre-post</td>
+	<td>2005/12/</td>
+	<td>Nuclear Fusion<br/>Vol.  45( 12), pp. 1463 - 73&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/45/12/001">URL</a>&nbsp;</td>
+</tr>
+<tr id="2487786" class="entry">
+	<td>Coletti, A. &amp; Coletti, R.</td>
+	<td>Thyristor convertors for the FTU tokamak poloidal field coils</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 877 - 82&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2841581" class="entry">
+	<td>Coletti, A., Coletti, R. &amp; Carbillo, G.</td>
+	<td>Thyristor converters for the FTU tokamak poloidal field coils</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 671 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2498140" class="entry">
+	<td>Coletti, A., Reggio, U., Silei, M., Tartaglione, V. &amp; Valente, F.</td>
+	<td>Flywheel-generator set for the FTU poloidal fields power supply</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 871 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5747932" class="entry">
+	<td>Darweschsad, M., Friesinger, G., Heller, R., Irmisch, M., Kathol, H., Komarek, P., Maurer, W., Noether, G., Schleinkofer, G., Schmidt, C., Sihler, C., Suesser, M., Ulbricht, A. &amp; Wuechner, F.</td>
+	<td>Development and test of the poloidal field prototype coil POLO at the Forschungszentrum Karlsruhe</td>
+	<td>1997/05/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  36( 2-3), pp. 227 - 50&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(97)00005-7">URL</a>&nbsp;</td>
+</tr>
+<tr id="8090190" class="entry">
+	<td>Decool, P., Ciazynski, D., Libeyre, P., della Corte, A., Spadoni, M., Rossi, S., Laurenti, A., Beaudet, F., Bourquard, A. &amp; Bresson, D.</td>
+	<td>Design and manufacture of a prototype NbTi full-size joint sample for the ITER poloidal field coils</td>
+	<td>Sept. 2003</td>
+	<td>Fusion Engineering and Design<br/>Vol.  66-68, pp. 1165 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(03)00313-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="2063792" class="entry">
+	<td>Dittrich, H. &amp; Jeske, U.</td>
+	<td>Poloidal field coils for the international Tokamak reactor study `INTOR'</td>
+	<td>1983//</td>
+	<td>Fusion Technology 1982. Proceedings of the Twelfth Symposium, pp. 1011 - 13&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2357627" class="entry">
+	<td>Dittrich, H.-G., Forster, S., Hofmann, A., Jeske, U., Katheder, H., Khalil, A., Krauth, H., Lehmann, W., Nick, W., Nyilas, Z. &amp; Ulbricht, A.</td>
+	<td>Development of superconducting poloidal field coils for medium and large size tokamaks</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 1350 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3227553" class="entry">
+	<td>Doinikov, N., Sychevskij, S. &amp; Filatov, O.</td>
+	<td>On tokamak poloidal field system computation</td>
+	<td>1987//</td>
+	<td>Fusion Engineering Proceedings. 12th Symposium on Fusion Engineering (Cat. No.87CH2507-2), pp. 373 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11720631" class="entry">
+	<td>Elahi, A. &amp; Ghoranneviss, M.</td>
+	<td>Investigation of Effects of Toroidal Field Ripple on Plasma Poloidal Beta in IR-T1 Tokamak</td>
+	<td>2010/02/</td>
+	<td>Journal of Fusion Energy<br/>Vol.  29( 1), pp. 22 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1007/s10894-009-9221-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="2812814" class="entry">
+	<td>Fixler, S., Warren, A. &amp; Brooks, A.</td>
+	<td>Thermal analysis of the Tokamak Fusion Test Reactor (TFTR) poloidal field coil system</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 275 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2495570" class="entry">
+	<td>Forster, S., Hofmann, A., Jeske, U., Katheder, H., Krauth, H., Nyilas, A., Lehmann, W., Schmidt, C. &amp; Ulbricht, A.</td>
+	<td>Superconducting poloidal field coil development</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 1475 - 80&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7377842" class="entry">
+	<td>Fu, P., Liu, Z., Xu, J., Gao, G., Wen, J., Cao, Y., Song, Z., Tang, L., Wang, L. &amp; Liang, X.</td>
+	<td>Poloidal field power supply systems for the HT-7U steady state superconducting tokamak</td>
+	<td>2002/07/</td>
+	<td>Fusion Science and Technology<br/>Vol.  42( 1), pp. 155 - 61&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8871420" class="entry">
+	<td>Fu, P., Song, Z., Gao, G., Tang, L., Wu, Y., Wang, L. &amp; Liang, X.</td>
+	<td>Quench protection of the poloidal field superconducting coil system for the EAST tokamak</td>
+	<td>2006/03/</td>
+	<td>Nuclear Fusion<br/>Vol.  46( 3), pp. 85 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/46/3/S11">URL</a>&nbsp;</td>
+</tr>
+<tr id="6709697" class="entry">
+	<td>Gaio, E., Luchetta, A., Manduchi, G., Marchiori, G., Peruzzo, S. &amp; Toigo, V.</td>
+	<td>Upgrade for full control of radial magnetic field errors in RFX poloidal gaps</td>
+	<td>1999//</td>
+	<td>18th IEEE/NPSS Symposium on Fusion Engineering. Symposium Proceedings (Cat. No.99CH37050), pp. 579 - 82&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1999.849906">URL</a>&nbsp;</td>
+</tr>
+<tr id="12340442" class="entry">
+	<td>Gao, G., Huang, L., Tang, L., Wang, L., He, S. &amp; Fu, P.</td>
+	<td>Upgrade of converter unit of EAST poloidal field power supply</td>
+	<td>2011//</td>
+	<td>2011 IEEE 24th Symposium on Fusion Engineering, pp. 5 pp. - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SOFE.2011.6052228">URL</a>&nbsp;</td>
+</tr>
+<tr id="3227564" class="entry">
+	<td>Girrens, S. &amp; Bennett, J.</td>
+	<td>Analysis of poloidal field coils for the ZTH machine</td>
+	<td>1987//</td>
+	<td>Fusion Engineering Proceedings. 12th Symposium on Fusion Engineering (Cat. No.87CH2507-2), pp. 513 - 16&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1461220" class="entry">
+	<td>Harjes, B., Braunsberger, U., Giesen, B. &amp; Lochter, M.</td>
+	<td>Investigations on the transient behaviour of the poloidal field system of TEXTOR</td>
+	<td>1979//</td>
+	<td>Fusion Technology 1978<br/>Vol. II, pp. 957 - 62&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2823050" class="entry">
+	<td>Heiberger, M., Bott, R., Gallix, R. &amp; Street, R.</td>
+	<td>Fabrication of the new poloidal field coils for DIII-D</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 279 - 82&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7346982" class="entry">
+	<td>Hertout, P., Bessette, D., Bleyer, A., Duchateau, J. &amp; Nicollet, S.</td>
+	<td>Heat deposition in the ITER FEAT poloidal field coils during a plasma scenario</td>
+	<td>2002/03/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  12( 1), pp. 562 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2002.1018466">URL</a>&nbsp;</td>
+</tr>
+<tr id="4123661" class="entry">
+	<td>Hicks, J. &amp; Laughton, M.</td>
+	<td>Tokamak poloidal field power supplies</td>
+	<td>1992/03/</td>
+	<td>IEE Proceedings C (Generation, Transmission and Distribution)<br/>Vol.  139( 2), pp. 166 - 74&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3019937" class="entry">
+	<td>Hicks, J., Mitchell, N. &amp; Salpietro, E.</td>
+	<td>NET plasma engineering and poloidal field coil power supplies</td>
+	<td>1986//</td>
+	<td>Fusion Technology 1986. Proceedings of the Fourteenth Symposium (EUR 10936 EN), pp. 707 - 13&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2178697" class="entry">
+	<td>Hooper, R. &amp; Hunter, B.</td>
+	<td>Poloidal field superconducting ring coil case and support structure design</td>
+	<td>Sept. 1983</td>
+	<td>Nuclear Technology/Fusion<br/>Vol.  4( 2), pp. 936 - 41&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10501901" class="entry">
+	<td>Horton, R., Hwang, D., Howard, S., Brockington, S. &amp; Evans, R.</td>
+	<td>Poloidal field amplification in a coaxial compact toroid accelerator</td>
+	<td>Sept. 2008</td>
+	<td>Nuclear Fusion<br/>Vol.  48( 9), pp. 095002 (12 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/48/9/095002">URL</a>&nbsp;</td>
+</tr>
+<tr id="1238341" class="entry">
+	<td>Howland, H., Kelly, J. &amp; Chi, J.</td>
+	<td>Poloidal field coil design for a fusion-fission breeder reactor</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. II, pp. 1156 - 60&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8476037" class="entry">
+	<td>Hurd, F., Sborchia, C., Salpietro, E., Duglue, D., Keefe, C., Bates, S., Pesenti, P., Della Corte, A., Bruzzone, P. &amp; Polak, M.</td>
+	<td>Design and manufacture of a full size joint sample (FSJS) for the qualification of the poloidal field (PF) insert coil</td>
+	<td>2005/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  15( 2), pp. 1379 - 82&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2005.849095">URL</a>&nbsp;</td>
+</tr>
+<tr id="2812783" class="entry">
+	<td>Ikeda, K., Yasuno, T., Takeda, M., Asaeda, T. &amp; Murakami, S.</td>
+	<td>New development for JFT-2M tokamak. I Power supply and control system for poloidal field coils</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 99 - 102&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11323266" class="entry">
+	<td>Ilyin, Y., Bessette, D., Zapretilina, E., Luongo, C., Simon, F., Lim, B.S. &amp; Mitchell, N.</td>
+	<td>Performance Analysis of the ITER Poloidal Field Coil Conductors</td>
+	<td>2010/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  20( 3), pp. 415 - 18&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2010.2041216">URL</a>&nbsp;</td>
+</tr>
+<tr id="12657517" class="entry">
+	<td>Imazawa, R., Kamio, S., Hihara, R., Abe, K., Sakamura, M., Cao, Q., Yamada, T., Inomoto, M., Takase, Y. &amp; Ono, Y.</td>
+	<td>Spherical tokamak generation and merging on UTST using ex-vessel poloidal field coils only</td>
+	<td>2012/06/</td>
+	<td>Electrical Engineering in Japan<br/>Vol.  179( 4), pp. 18 - 24&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1002/eej.21254">URL</a>&nbsp;</td>
+</tr>
+<tr id="5932122" class="entry">
+	<td>Jeong, S., Vysotsky, V., Takayasu, M., Schultz, J., Michael, P., Shen, S. &amp; Warnes, W.</td>
+	<td>Voltage spikes in ramped field experiments [on TPX poloidal field coils]</td>
+	<td>1997//</td>
+	<td>Proceedings of the Sixteenth International Cryogenic Engineering Conference/International Cryogenic Materials Conference<br/>Vol. vol.2, pp. 1231 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2696276" class="entry">
+	<td>Jeske, U. &amp; Komarek, P.</td>
+	<td>Development of superconducting poloidal magnetic field coils</td>
+	<td>1985/05/</td>
+	<td>Jahrestagung Kerntechnik '85 Tagungsbericht (Annual Meeting on Nuclear Technology '85), pp. 753 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1616994" class="entry">
+	<td>Johnson, H., Bialek, J., Heilbrunn, W. &amp; Cargulia, G.</td>
+	<td>The mechanical and electrical design of the TFTR poloidal field coils</td>
+	<td>1980//</td>
+	<td>Proceedings of the 8th Symposium on Engineering Problems of Fusion Research<br/>Vol. IV, pp. 2078 - 84&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1207816" class="entry">
+	<td>Johnson, H. &amp; Smith, G.</td>
+	<td>TFTR poloidal field coils design</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 813 - &nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3444204" class="entry">
+	<td>Kelleher, W. &amp; Steiner, D.</td>
+	<td>A PC-based package for interactive assessment of MHD equilibrium and poloidal field coil design in axisymmetric toroidal geometry</td>
+	<td>1989/03/</td>
+	<td>Fusion Technology<br/>Vol.  15( 2), pp. 528 - 33&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="6709606" class="entry">
+	<td>Kessel, C. &amp; Bulmer, R.</td>
+	<td>Poloidal field design and plasma scenarios for FIRE</td>
+	<td>1999//</td>
+	<td>18th IEEE/NPSS Symposium on Fusion Engineering. Symposium Proceedings (Cat. No.99CH37050), pp. 176 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1999.849815">URL</a>&nbsp;</td>
+</tr>
+<tr id="5459927" class="entry">
+	<td>Kessel, C., Jardin, S., Bulmer, R., Pillsbury, R., Wang, P.-W., Neilson, G. &amp; Strickler, D.</td>
+	<td>Poloidal field control for the Tokamak Physics Experiment</td>
+	<td>1996/11/</td>
+	<td>Fusion Technology<br/>Vol.  30( 2), pp. 184 - 200&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1901799" class="entry">
+	<td>Kim, S.</td>
+	<td>The development of superconducting poloidal field coils for Tokamak reactors</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 635 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2715821" class="entry">
+	<td>Kinoshita, S., Yoshioka, K. &amp; Kobayashi, T.</td>
+	<td>Equilibrium plasma control for a large tokamak with many poloidal coils to produce the ohmic and equilibrium field</td>
+	<td>1986/04/</td>
+	<td>Japanese Journal of Applied Physics, Part 1 (Regular Papers &amp;amp; Short Notes)<br/>Vol.  25( 4), pp. 608 - 14&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2056834" class="entry">
+	<td>Kojima, H., Kimoto, H., Hioki, S., Takizawa, T. &amp; Furuyama, M.</td>
+	<td>Strength analysis of cooling pipe joints for poloidal field coil for nuclear fusion equipment</td>
+	<td>1983//</td>
+	<td>Fusion Technology 1982. Proceedings of the Twelfth Symposium, pp. 1059 - 66&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2400280" class="entry">
+	<td>Kojima, H., Miyata, H., Kimoto, H., Hioki, S., Takizawa, T. &amp; Furuyama, M.</td>
+	<td>Strength analysis of the poloidal field coil for nuclear fusion equipment</td>
+	<td>Sept. 1984</td>
+	<td>Fusion Technology<br/>Vol.  6( 2), pp. 253 - 64&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2056835" class="entry">
+	<td>Kolotzek, H., Pillsticker, M. &amp; Werner, F.</td>
+	<td>The technical concept of the ASDEX UG poloidal field coils</td>
+	<td>1983//</td>
+	<td>Fusion Technology 1982. Proceedings of the Twelfth Symposium, pp. 1067 - 71&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2689515" class="entry">
+	<td>Koppendorfer, W., Blaumoser, M., Ennen, K., Gruber, J., Gruber, O., Jandl, O., Kaufmann, M., Kollotzek, H., Kotzlowski, H., Lackner, E., Lackner, K., Von Larcher, T., Noterdaeme, J., Pillsticker, M., Pholchen, R., Preis, H., Schneider, H., Seidel, U., Sombach, B., Speth, E., Streibl, B., Vernickel, H., Werner, F., Wesner, F. &amp; Wieczorek, A.</td>
+	<td>The ASDEX upgrade toroidal field magnet and poloidal divertor field coil system adapted to reactor requirements</td>
+	<td>1986/04/</td>
+	<td>Nuclear Engineering and Design/Fusion<br/>Vol.  3( 3), pp. 265 - 72&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10072317" class="entry">
+	<td>Lacroix, B., Ciazynski, D., Duchateau, J., Nicollet, S. &amp; Pauty, N.</td>
+	<td>Predictive study of the poloidal field coil insert behaviour under pulsed current tests</td>
+	<td>2008//</td>
+	<td>Journal of Physics: Conference Series<br/>Vol.  97, pp. 012201 (6 pp.) - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1088/1742-6596/97/1/012201">URL</a>&nbsp;</td>
+</tr>
+<tr id="10756055" class="entry">
+	<td>van Lanen, E. &amp; Nijhuis, A.</td>
+	<td>Simulation of the ITER poloidal field coil insert DC performance with a new model</td>
+	<td>2009/06/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  84( 7-11), pp. 1912 - 15&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2009.01.094">URL</a>&nbsp;</td>
+</tr>
+<tr id="2876112" class="entry">
+	<td>Lazzaro, E. &amp; Keegan, B.</td>
+	<td>Reference data for plasma shaping and magnetic separatrix formation in the JET poloidal field system</td>
+	<td>1986//</td>
+	<td><br/>Vol. JET-R(86)08, pp. 28 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5999612" class="entry">
+	<td>Lee, B., Pomphrey, N., Chang, C., Cho, S., Jardin, S., Lee, G., Neilson, G., Park, H. &amp; Reierson, W.</td>
+	<td>KSTAR poloidal and toroidal field design</td>
+	<td>1998//</td>
+	<td>17th IEEE/NPSS Symposium Fusion Engineering (Cat. No.97CH36131)<br/>Vol. vol.2, pp. 641 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1997.687708">URL</a>&nbsp;</td>
+</tr>
+<tr id="6435144" class="entry">
+	<td>Lee, B., Pomphrey, N. &amp; Lao, L.</td>
+	<td>Physics design of poloidal field, toroidal field, and external magnetic diagnostics in KSTAR</td>
+	<td>1999/11/</td>
+	<td>Fusion Technology<br/>Vol.  36( 3), pp. 278 - 88&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2639937" class="entry">
+	<td>Leuer, J., Ejima, S., Helton, F. &amp; Wesley, J.</td>
+	<td>A poloidal field coil system for a high beta ignited tokamak experiment</td>
+	<td>1985/07/</td>
+	<td>Fusion Technology<br/>Vol.  8( 1), pp. 1676 - 81&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2812815" class="entry">
+	<td>Leuer, J. &amp; Politzer, P.</td>
+	<td>A poloidal field coil system for an elongated tokamak</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 283 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3624664" class="entry">
+	<td>Li, G., Zhu, W., Edmonds, P. &amp; Solano, E.</td>
+	<td>Poloidal field electromagnetic engineering design for the TEXT upgrade</td>
+	<td>1989//</td>
+	<td>IEEE Conference Record - Abstracts. 1989 IEEE International Conference on Plasma Science (Cat. No.89CH2760-7), pp. 163 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.1989.166288">URL</a>&nbsp;</td>
+</tr>
+<tr id="1883668" class="entry">
+	<td>Lisser, J., Bouwknegt, K., Giesen, B. &amp; Petree, F.</td>
+	<td>Poloidal-field thyristor amplifier with improved power factor, for TEXTOR</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 390 - 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5470092" class="entry">
+	<td>Lister, J., Martin, Y. &amp; Moret, J.-M.</td>
+	<td>On locating the poloidal field coils for tokamak vertical position control</td>
+	<td>1996/11/</td>
+	<td>Nuclear Fusion<br/>Vol.  36( 11), pp. 1547 - 60&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0029-5515/36/11/I08">URL</a>&nbsp;</td>
+</tr>
+<tr id="12340523" class="entry">
+	<td>Liu, S., Song, Y., Lu, K. &amp; Wang, Z.</td>
+	<td>The simulation and numerical analysis for ITER first PF(poloidal field coil) feeder</td>
+	<td>2011//</td>
+	<td>2011 IEEE 24th Symposium on Fusion Engineering, pp. 5 pp. - &nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/SOFE.2011.6052309">URL</a>&nbsp;</td>
+</tr>
+<tr id="1461218" class="entry">
+	<td>Lochter, M., Richter, F. &amp; Schongen, F.</td>
+	<td>Design and test of a splittable coil for the poloidal field system of TEXTOR</td>
+	<td>1979//</td>
+	<td>Fusion Technology 1978<br/>Vol. II, pp. 945 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5065345" class="entry">
+	<td>Lu, E., Bronner, G. &amp; Neumayer, C.</td>
+	<td>TPX poloidal field (PF) power systems simulation</td>
+	<td>1994//</td>
+	<td>15th IEEE/NPSS Symposium. Fusion Engineering (Cat. No.93CH3348-0)<br/>Vol. vol.2, pp. 909 - 12&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1993.518472">URL</a>&nbsp;</td>
+</tr>
+<tr id="5729150" class="entry">
+	<td>Ludwig, G.</td>
+	<td>Theoretical methods in the design of the poloidal field coils for the ETE spherical tokamak</td>
+	<td>Sept. 1997</td>
+	<td>Brazilian Journal of Physics<br/>Vol.  27( 3), pp. 392 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3847324" class="entry">
+	<td>Manqiu, T., Xiaodong, L., Xlufen, X., Boliang, J., Guangsheng, L., Xiaowei, L., Yanong, S., Tianxiong, T. &amp; Zhiliang, Y.</td>
+	<td>New poloidal field coil and improvement in volt-second characteristics of the HL-1 device</td>
+	<td>1990/03/</td>
+	<td>Nuclear Fusion and Plasma Physics<br/>Vol.  10( 1), pp. 21 - 7&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4496106" class="entry">
+	<td>Matsukawa, M., Horie, T., Horiike, H., Ninomiya, H., Neyatani, Y., Ando, T. &amp; Kushima, T.</td>
+	<td>Stress analysis of poloidal field coil support in JT-60U</td>
+	<td>1993//</td>
+	<td>Journal of the Atomic Energy Society of Japan<br/>Vol.  35( 6), pp. 561 - 73&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="9069814" class="entry">
+	<td>Matsukawa, M., Tamai, H., Fujita, T., Kizu, K., Sakurai, S., Tsuchiya, K., Kurita, G., Morioka, A., Ando, T. &amp; Miura, Y.</td>
+	<td>Poloidal field coil configuration and plasma shaping capability in NCT</td>
+	<td>2006/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  16( 2), pp. 914 - 17&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2006.873273">URL</a>&nbsp;</td>
+</tr>
+<tr id="5999582" class="entry">
+	<td>Matsukawa, M., Terakado, T., Okano, J., Nobusaka, H., Miura, Y., Neyatani, Y. &amp; Kimura, T.</td>
+	<td>Modification of the JT-60 poloidal field power supply for high triangularity divertor operation</td>
+	<td>1998//</td>
+	<td>17th IEEE/NPSS Symposium Fusion Engineering (Cat. No.97CH36131)<br/>Vol. vol.1, pp. 548 - 51&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1997.687099">URL</a>&nbsp;</td>
+</tr>
+<tr id="1604746" class="entry">
+	<td>Mayhall, D., Rylander, H., Weldon, W. &amp; Woodson, H.</td>
+	<td>Poloidal field power supply ignition requirements for INESCO PHIBEX tokamaks by computer based circuit analysis</td>
+	<td>1980//</td>
+	<td>Proceedings of the 8th symposium on engineering problems of fusion research<br/>Vol. III, pp. 1252 - 5&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1883654" class="entry">
+	<td>McDade, J. &amp; Dudek, L.</td>
+	<td>A description of the molding system for the epoxy impregnation of the TFTR poloidal field coils</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 335 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2357616" class="entry">
+	<td>Meighan, T. &amp; Alton, R.</td>
+	<td>Electrical test and test result evaluations of TFTR toroidal field (TF) and poloidal field (PF) coils</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 886 - 91&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12379385" class="entry">
+	<td>Mingzhun, L., Yuntao, S., Sumei, L., Kun, L. &amp; Zhongwei, W.</td>
+	<td>Primary Design and Analysis of Feeder for ITER Poloidal Field</td>
+	<td>2011/10/</td>
+	<td>Plasma Science and Technology<br/>Vol.  13( 5), pp. 623 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/1009-0630/13/5/22">URL</a>&nbsp;</td>
+</tr>
+<tr id="7346993" class="entry">
+	<td>Miura, Y., Kizu, K., Tsuchiya, K., Isono, T., Matsui, K., Sakasai, A., Ishida, S., Matsukawa, M. &amp; Ando, T.</td>
+	<td>Development of Nb3Sn and NbTi CIC conductors for superconducting poloidal field coils of JT-60</td>
+	<td>2002/03/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  12( 1), pp. 611 - 14&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2002.1018477">URL</a>&nbsp;</td>
+</tr>
+<tr id="1869870" class="entry">
+	<td>Miyata, H., Kimoto, H., Kojima, H., Takizawa, T., Furuyama, M., Ohkubo, M., Ando, T., Masuda, M. &amp; Ohta, M.</td>
+	<td>Fatigue design of the poloidal field coil for JT-60 Tokamak machine</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 174 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1869869" class="entry">
+	<td>Miyata, H., Kojima, H., Kimoto, H., Takizawa, T., Furuyama, M., Ando, T., Masuda, M., Ohkubo, M. &amp; Ohta, M.</td>
+	<td>Nonlinear stress analysis of the poloidal field coil for JT-60 Tokamak machine</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 170 - 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12912389" class="entry">
+	<td>Miyoshi, Y., Nakamura, M. &amp; Ogawa, Y.</td>
+	<td>Optimization of the poloidal field coil system by using an integrated design code for tokamak fusion reactors</td>
+	<td>2011//</td>
+	<td>Plasma and Fusion Research<br/>Vol.  6, pp. 2405110 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1585/pfr.6.2405110">URL</a>&nbsp;</td>
+</tr>
+<tr id="5016691" class="entry">
+	<td>Mondino, P., Benfatto, I., Gribov, Y., Matsukawa, M., Odajima, K., Portone, A., Roshal, A., Bareyt, B., Bertolini, E., Bottereau, J., Huart, M., Maschio, A., Bulgakov, S. &amp; Kuchinski, V.</td>
+	<td>The ITER poloidal field system: control and power supplies</td>
+	<td>1995//</td>
+	<td>Fusion Technology 1994. Proceedings of the 18th Symposium on Fusion Technology<br/>Vol. vol.2, pp. 869 - 72&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3944248" class="entry">
+	<td>Montalvo, E., Carrera, R., Dong, J., Driga, M., Hsieh, K., Khayrutdinov, R., Walls, A. &amp; Weldon, W.</td>
+	<td>Stray field perturbations induced by the poloidal field magnet leads in IGNITEX</td>
+	<td>1990//</td>
+	<td>Conference Record - Abstracts. 1990 IEEE International Conference on Plasma Science (Cat. No.90CH2857-1), pp. 89 - 90&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/PLASMA.1990.110523">URL</a>&nbsp;</td>
+</tr>
+<tr id="3787719" class="entry">
+	<td>Montalvo, E., Carrera, R., Dong, J., Driga, M., Hsieh, K., Walls, A. &amp; Weldon, W.</td>
+	<td>Analysis of the poloidal field system leads in the IGNITEX experiment</td>
+	<td>1990//</td>
+	<td>Proceedings, IEEE Thirteenth Symposium on Fusion Engineering (Cat. No.89CH2820-9), pp. 858 - 61&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1989.102353">URL</a>&nbsp;</td>
+</tr>
+<tr id="2358030" class="entry">
+	<td>Moss, B., Rocco, R., Ross, T. &amp; Pien, C.</td>
+	<td>TFTR poloidal field coils and umbrella structure, preassembly and installation</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 724 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1375764" class="entry">
+	<td>Murphy, J., Janocko, M. &amp; Eckels, P.</td>
+	<td>Superconductor design considerations for poloidal field coils in Tokamak fusion reactors</td>
+	<td>1979//</td>
+	<td>Proceedings of the Seventh International Cryogenic Engineering Conference, pp. 712 - 13&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="13268624" class="entry">
+	<td>Nicollet, S., Bessette, D., Ciazynski, D., Coatanea-Gouachet, M., Duchateau, J.-L., Lacroix, B. &amp; Rodriguez-Mateos, F.</td>
+	<td>Quench of ITER Poloidal Field Coils: Influence of some initiation parameters on thermo-hydraulic detection signals and main impact on cryogenic system</td>
+	<td>2013/01/</td>
+	<td>Cryogenics<br/>Vol.  53, pp. 86 - 93&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.cryogenics.2012.05.005">URL</a>&nbsp;</td>
+</tr>
+<tr id="11174306" class="entry">
+	<td>Nicollet, S., Bessette, D., Ciazynski, D., Duchateau, J., Lacroix, B. &amp; Rajainmaki, H.</td>
+	<td>Stability analysis of ITER poloidal field coils conductors</td>
+	<td>2009/12/</td>
+	<td>Cryogenics<br/>Vol.  49( 12), pp. 687 - 93&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.cryogenics.2009.04.003">URL</a>&nbsp;</td>
+</tr>
+<tr id="7361676" class="entry">
+	<td>Nicollet, S., Hertout, P., Duchateau, J., Bleyer, A. &amp; Bessette, D.</td>
+	<td>Conductor analysis of the ITER FEAT Poloidal Field coils during a plasma scenario</td>
+	<td>2002//</td>
+	<td>AIP Conference Proceedings( 613A), pp. 431 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1472051">URL</a>&nbsp;</td>
+</tr>
+<tr id="4970431" class="entry">
+	<td>Nikbin, K., Webster, G. &amp; Mitchell, N.</td>
+	<td>Fatigue assessment of the conductor jacket for the Next European Torus toroidal field and poloidal field coils</td>
+	<td>1995//</td>
+	<td>Fusion Engineering and Design<br/>Vol.  29, pp. 421 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/0920-3796(95)80048-3">URL</a>&nbsp;</td>
+</tr>
+<tr id="3931055" class="entry">
+	<td>Nishio, S. &amp; Shinya, K.</td>
+	<td>A method for mapping plasma operational space within the engineering constraints of the poloidal field coil system in a tokamak reactor</td>
+	<td>1991/01/</td>
+	<td>Fusion Technology<br/>Vol.  19( 1), pp. 86 - 94&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="10782007" class="entry">
+	<td>Nunoya, Y., Takahashi, Y., Hamada, K., Isono, T., Matsui, K., Oshikiri, M., Nabara, Y., Hemmi, T., Nakajima, H., Kawano, K., Tsutsumi, F., Takano, K., Uno, Y., Koizumi, N., Okuno, K., Baker, W., Salpietro, E., Rajainmaki, H., Sborchia, C. &amp; Mitchell, N.</td>
+	<td>Installation and test programme of the ITER poloidal field conductor insert (PFCI) in the ITER test facility at JAEA Naka</td>
+	<td>2009/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  19( 3), pp. 1492 - 5&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2009.2019551">URL</a>&nbsp;</td>
+</tr>
+<tr id="5065299" class="entry">
+	<td>O'Connor, T. &amp; Zbasnik, J.</td>
+	<td>Structural design of the superconducting poloidal field coils for the Tokamak Physics Experiment</td>
+	<td>1994//</td>
+	<td>15th IEEE/NPSS Symposium. Fusion Engineering (Cat. No.93CH3348-0)<br/>Vol. vol.2, pp. 707 - 10&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1993.518426">URL</a>&nbsp;</td>
+</tr>
+<tr id="2804328" class="entry">
+	<td>O'Toole, J.</td>
+	<td>MSC/NASTRAN `expert' techniques developed and applied to the TFTR poloidal field coils</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 446 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2358024" class="entry">
+	<td>Ohkubo, M., Ando, T., Masuda, M., Watanabe, T., Kamiya, H., Kohda, T., Kaneko, M. &amp; Morita, T.</td>
+	<td>Fabrication of JT-60 poloidal field coil</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 664 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1331936" class="entry">
+	<td>Ohkubo, M., Ando, T., Miki, N., Kawasaki, K., Nishio, S., Ohta, M., Ishimura, M. &amp; Takano, H.</td>
+	<td>The poloidal field coils for JT-60</td>
+	<td>1978//</td>
+	<td>6th International Conference on Magnet Technology<br/>Vol. I, pp. 86 - 90&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2804299" class="entry">
+	<td>Paulson, C., Todd, A. &amp; Reusch, M.</td>
+	<td>Poloidal field coil design for known plasma equilibrium states</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 73 - 80&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3227653" class="entry">
+	<td>Pillsbury, R.D., J., Jardin, S., Pomphrey, D. &amp; Thome, R.</td>
+	<td>Design process for the CIT (Compact Ignition Tokamak) poloidal field coil system</td>
+	<td>1987//</td>
+	<td>Fusion Engineering Proceedings. 12th Symposium on Fusion Engineering (Cat. No.87CH2507-2), pp. 1025 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3787702" class="entry">
+	<td>Pillsbury, R.D., J. &amp; Thome, R.</td>
+	<td>Poloidal field coil system optimization for the Compact Ignition Tokamak (CIT)</td>
+	<td>1990//</td>
+	<td>Proceedings, IEEE Thirteenth Symposium on Fusion Engineering (Cat. No.89CH2820-9), pp. 784 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1989.102335">URL</a>&nbsp;</td>
+</tr>
+<tr id="2804353" class="entry">
+	<td>Pillsbury, R.D., J. &amp; Thome, R.</td>
+	<td>Compact ignition device poloidal field system trade-studies using an equilibrium field expansion technique</td>
+	<td>1986//</td>
+	<td>11th Symposium on Fusion Engineering. Proceedings (Cat. No.CH2251-7), pp. 1021 - 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2712719" class="entry">
+	<td>Pillsbury, R.D., J., Thome, R., Tarrh, J. &amp; Mann, W.</td>
+	<td>Poloidal field coil system design using a field expansion technique</td>
+	<td>1985//</td>
+	<td>Proceedings of the 9th International Conference on Magnet Technology. MT-9 1985, pp. 750 - 2&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1792655" class="entry">
+	<td>Pillsticker, M., Kollotzek, H., Seidel, U. &amp; Werner, F.</td>
+	<td>The ZEPHYR poloidal field coils</td>
+	<td>Sept. 1981</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  MAG-17( 5), pp. 1915 - 18&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2240049" class="entry">
+	<td>Pillsticker, M. &amp; Werner, F.</td>
+	<td>The ASDEX upgrade poloidal field coils</td>
+	<td>1984/01/</td>
+	<td>Journal de Physique Colloque<br/>Vol.  45( C-1), pp. 171 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2987470" class="entry">
+	<td>Pillsticker, M., Werner, F., Brandl, H. &amp; Jeckle, A.</td>
+	<td>ASDEX Upgrade poloidal field coils: concept, manufacturing, preliminary tests</td>
+	<td>1986//</td>
+	<td>Fusion Technology 1986. Proceedings of the Fourteenth Symposium (EUR 10936 EN), pp. 1765 - 71&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5999618" class="entry">
+	<td>Pradhan, S., Biswas, B., Das, S., Saxena, Y., Deshpande, S., Srinivasan, R., Bandopadhyay, I., Bandopadhyay, R., Thomas, K., Jain, V. &amp; Bedakihale, V.</td>
+	<td>SST-1 poloidal field magnets</td>
+	<td>1998//</td>
+	<td>17th IEEE/NPSS Symposium Fusion Engineering (Cat. No.97CH36131)<br/>Vol. vol.2, pp. 665 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1997.687714">URL</a>&nbsp;</td>
+</tr>
+<tr id="13812172" class="entry">
+	<td>Ryutov, D. &amp; Umansky, M.</td>
+	<td>Divertor with a third-order null of the poloidal field</td>
+	<td>Sept. 2013</td>
+	<td>Physics of Plasmas<br/>Vol.  20( 9), pp. 092509 (6 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.4821603">URL</a>&nbsp;</td>
+</tr>
+<tr id="8084391" class="entry">
+	<td>Sborchia, C., Duglue, D., Hurd, F., Maix, R., Salpietro, E., Testoni, P., Bessette, D., Mitchell, N., Okuno, K., Sugimoto, M., Alekseev, A. &amp; Sytnikov, V.</td>
+	<td>Design and manufacture of the poloidal field conductor insert coil</td>
+	<td>Sept. 2003</td>
+	<td>Fusion Engineering and Design<br/>Vol.  66-68, pp. 1081 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(03)00286-2">URL</a>&nbsp;</td>
+</tr>
+<tr id="5016690" class="entry">
+	<td>Sborchia, C., Mitchell, N. &amp; Yoshida, K.</td>
+	<td>Design of the outer poloidal field coils for ITER</td>
+	<td>1995//</td>
+	<td>Fusion Technology 1994. Proceedings of the 18th Symposium on Fusion Technology<br/>Vol. vol.2, pp. 865 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2999829" class="entry">
+	<td>Schmidt, C., Jeske, U. &amp; Specht, E.</td>
+	<td>A low loss superconducting cable for poloidal field coils (design, development, measurements)</td>
+	<td>1986//</td>
+	<td>Fusion Technology 1986. Proceedings of the Fourteenth Symposium (EUR 10936 EN), pp. 1787 - 93&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2727978" class="entry">
+	<td>Schmidt, C., Schweikert, K. &amp; Specht, E.</td>
+	<td>Test of a low loss superconductor for use in a poloidal field coil</td>
+	<td>1985//</td>
+	<td>Proceedings of the 9th International Conference on Magnet Technology. MT-9 1985, pp. 493 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3232865" class="entry">
+	<td>Schmidt, C. &amp; Yi, C.</td>
+	<td>Stability of superconductors for poloidal field coil application</td>
+	<td>1988/03/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  24( 2), pp. 1159 - 62&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/20.11438">URL</a>&nbsp;</td>
+</tr>
+<tr id="2358027" class="entry">
+	<td>Schoenberg, K., Gribble, R., Linton, T. &amp; Reass, W.</td>
+	<td>Poloidal field system design for the ZT-40U reversed field pinch experiment</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 699 - 704&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3432590" class="entry">
+	<td>Schultz, J., Bulmer, R. &amp; Miller, J.</td>
+	<td>Poloidal field system analysis and scenario development for ITER</td>
+	<td>1989/03/</td>
+	<td>Fusion Technology<br/>Vol.  15( 2), pp. 922 - 7&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2537187" class="entry">
+	<td>Schultz, J., Montgomery, D., Thome, R., Bobrov, E. &amp; Fleming, R.</td>
+	<td>Poloidal field coil and cryogenic systems for the TFCX tokamak</td>
+	<td>1985/03/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  MAG-21( 2), pp. 1064 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/TMAG.1985.1063778">URL</a>&nbsp;</td>
+</tr>
+<tr id="4390889" class="entry">
+	<td>Schultz, J., Pillsbury, R., Bulmer, R., Heim, J., Miller, J. &amp; Shen, S.</td>
+	<td>Poloidal field system for the ITER HARD design option</td>
+	<td>1992//</td>
+	<td>14th IEEE/NPSS Symposium. Fusion Engineering. Proceedings (Cat. No.91CH30355-3), pp. 1012 - 15&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1991.218775">URL</a>&nbsp;</td>
+</tr>
+<tr id="5362148" class="entry">
+	<td>Senda, I., Shoji, T., Nishino, T., Fujieda, H. &amp; Tsunematsu, T.</td>
+	<td>Optimizing voltage wave forms of poloidal field coils at the plasma breakdown</td>
+	<td>1996/03/</td>
+	<td><br/>Vol. JAERI-Tech 96-016, pp. iii+24 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2361503" class="entry">
+	<td>Shimada, R., Aoyagi, T., Matsukawa, M., Ikeda, H., Yamagishi, T., Ujiie, K. &amp; Nakagawa, S.</td>
+	<td>Control and protection of thyristor convertors for JT-60 poloidal field coils</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 1764 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2518777" class="entry">
+	<td>Shimada, R., Aoyagi, T., Matsukawa, M., Miya, N., Arakawa, K., Ieta, Y., Igarashi, J., Sinozawa, K., Taoka, H., Kawasumi, K., Ishigaki, Y. &amp; Murai, K.</td>
+	<td>Test of JT-60 poloidal field coil power supply using dummy coil</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 945 - 50&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2498147" class="entry">
+	<td>Shimada, R., Shirahama, H., Sakurai, Y., Yabuno, K., Ishigaki, Y. &amp; Murai, K.</td>
+	<td>Control method for coil currents of hybrid poloidal field coil system in a tokamak reactor</td>
+	<td>1984//</td>
+	<td>Fusion Technology 1984. Proceedings of the Thirteenth Symposium (EUR 9183 EN), pp. 935 - 44&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1207819" class="entry">
+	<td>Shimada, R., Tamura, S., Ohta, M., Ohsaki, O. &amp; Sawada, Y.</td>
+	<td>Voltage oscillations in the poloidal field coils of JT-60</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 818 - 21&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3522880" class="entry">
+	<td>Shinya, K., Sugihara, M. &amp; Nishio, S.</td>
+	<td>Study on poloidal field coil optimization and equilibrium control of ITER</td>
+	<td>1989/03/</td>
+	<td><br/>Vol. JAERI-M 89-028, pp. 62 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11323414" class="entry">
+	<td>Simon, F., Ilyin, Y., Lim, B.S., Cau, F., Herzog, R. &amp; Stepanov, B.</td>
+	<td>Reliability Considerations for the ITER Poloidal Field Coils</td>
+	<td>2010/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  20( 3), pp. 423 - 6&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2010.2040262">URL</a>&nbsp;</td>
+</tr>
+<tr id="1874395" class="entry">
+	<td>Spears, W.</td>
+	<td>Optimisation of the poloidal field coil system in pulsed Tokamaks</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 146 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8224452" class="entry">
+	<td>Srinivasan, R., Chaturvedi, S. &amp; Deshpande, S.</td>
+	<td>Rapid optimization scheme for Poloidal Field design of tokamak with divertor configuration</td>
+	<td>2004/07/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  70( 3), pp. 269 - 78&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2004.03.001">URL</a>&nbsp;</td>
+</tr>
+<tr id="2168713" class="entry">
+	<td>Srivastava, V. &amp; Kalsi, S.</td>
+	<td>A unified study for determining poloidal field coil locations for a Tokamak</td>
+	<td>Sept. 1983</td>
+	<td>Nuclear Technology/Fusion<br/>Vol.  4( 2), pp. 1357 - 62&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2345317" class="entry">
+	<td>Srivastava, V., Miller, J. &amp; Strickler, D.</td>
+	<td>Poloidal field coil and current distribution study for the Toroidal Fusion Core Experiment (TFCX)</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 106 - 10&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2467951" class="entry">
+	<td>Steiner, D., Block, R. &amp; Malaviya, B.</td>
+	<td>The integrated-blanket-coil concept applied to the poloidal field and blanket systems of a tokamak reactor</td>
+	<td>1985/01/</td>
+	<td>Fusion Technology<br/>Vol.  7( 1), pp. 66 - 77&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="12773460" class="entry">
+	<td>Stepanov, B., Bruzzone, P., Wesche, R., Turtu, S., Corato, V., Decool, P., Devred, A., Bessette, D., Vostner, A., Boutboul, T., Lelekhov, S. &amp; Yu, W.</td>
+	<td>Test Results of Three Poloidal Field Superconducting Samples in SULTAN</td>
+	<td>2012/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  22( 3), pp. 4803504 (4 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2011.2176704">URL</a>&nbsp;</td>
+</tr>
+<tr id="1883693" class="entry">
+	<td>Strickler, D. &amp; Peng, Y.-K.</td>
+	<td>The poloidal field coil system of the Fusion Engineering Device</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 515 - 18&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2784377" class="entry">
+	<td>Tado, S., Narikawa, T., Tomita, H., Yamaguchi, S., Tsukamoto, T., Ueda, K., Yamada, T., Fukunaga, T., Satow, T., Ichihara, T., Asai, O., Hattori, Y., Sakabe, S. &amp; Ikeda, B.</td>
+	<td>The development of a program system for the design of superconducting poloidal field coils</td>
+	<td>1986/10/</td>
+	<td>Nuclear Engineering and Design/Fusion<br/>Vol.  4( 1), pp. 11 - 19&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4466498" class="entry">
+	<td>Takahashi, Y., Koizumi, N., Wadayama, Y., Okuno, K., Nishi, M., Isono, T., Yoshida, K., Sugimoto, M., Kato, T., Sasaki, T., Hosono, F., Ando, T. &amp; Tsuji, H.</td>
+	<td>Experimental results of stability and current sharing of NbTi cable-in-conduit conductors for the poloidal field coils</td>
+	<td>1993/03/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  3( 1), pp. 610 - 13&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/77.233779">URL</a>&nbsp;</td>
+</tr>
+<tr id="4767330" class="entry">
+	<td>Takahata, K., Mito, T., Satow, T., Yanagi, N., Sakamoto, M., Yamada, S., Nishimura, A., Yamamoto, Y., Motojima, O., Ogata, H., Yoshida, T., Ono, M., Takano, H., Ioka, S., Aoki, N., Lue, J. &amp; Kasao, D.</td>
+	<td>Stability tests of the Nb-Ti cable-in-conduit superconductor with bare strands for demonstration of the Large Helical Device poloidal field coils</td>
+	<td>1994/07/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  30( 4), pp. 1705 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/20.305584">URL</a>&nbsp;</td>
+</tr>
+<tr id="3936375" class="entry">
+	<td>Tateishi, H. &amp; Schmidt, C.</td>
+	<td>Stability experiment on the KFK poloidal field coil cable</td>
+	<td>1990//</td>
+	<td>11th International Conference on Magnet Technology (MT-11), pp. 868 - 73&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5842286" class="entry">
+	<td>Tesini, A., Dilling, D., Bourque, R., Nakashima, Y., Piec, Z., Wykes, M., Yoshida, K., Maisonnier, D., Pascual, C., Ibarreche, I., Icaran, J., Mousdell, A., Barrett, E., Gilroy, J., Tada, E., Kimball, F. &amp; Vivaldi, F.</td>
+	<td>Remote operations for the repair and replacement of a poloidal field coil in ITER</td>
+	<td>1997//</td>
+	<td>Fusion Technology 1996. Proceedings of the 19th Symposium on Fusion Technology<br/>Vol. vol.2, pp. 1661 - 4&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="3232886" class="entry">
+	<td>Thome, R., Pillsbury, R.D., J., Bobrov, E., Williams, J., Vieira, R., Feng, J. &amp; Mann, W.</td>
+	<td>Design and RD for the liquid nitrogen cooled poloidal field coil system for the Compact Ignition Tokamak (CIT)</td>
+	<td>1988/03/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  24( 2), pp. 1241 - 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/20.11460">URL</a>&nbsp;</td>
+</tr>
+<tr id="4382205" class="entry">
+	<td>Thome, R., Smith, B., Pillsbury, R.D., J., Titus, P. &amp; Myatt, R.</td>
+	<td>Poloidal field (PF) coil system design and RD for the Burning Plasma Experiment (BPX)</td>
+	<td>1992//</td>
+	<td>14th IEEE/NPSS Symposium. Fusion Engineering. Proceedings (Cat. No.91CH30355-3), pp. 469 - 73&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1991.218879">URL</a>&nbsp;</td>
+</tr>
+<tr id="1213350" class="entry">
+	<td>Turitzin, N. &amp; Oliaro, G.</td>
+	<td>Poloidal field power supplies and their performance on the PDX machine</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 464 - 8&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1914530" class="entry">
+	<td>Turner, L., Kim, S., Smith, R., Hunter, B. &amp; Alcorn, J.</td>
+	<td>Superconducting poloidal field coil studies for INTOR</td>
+	<td>1981//</td>
+	<td>9th Symposium on Engineering Problems of Fusion Research, pp. 756 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2010403" class="entry">
+	<td>Vabishchevich, P., Degtyarev, L., Drozdov, V., Bespoludennov, S., Zakharov, L. &amp; Pistunovich, V.</td>
+	<td>INTOR poloidal field configuration</td>
+	<td>1981//</td>
+	<td>10th European Conference on Controlled Fusion and Plasma Physics, pp. 4 - 27&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="2358031" class="entry">
+	<td>Viola, M.</td>
+	<td>TFTR poloidal field coil lead splice program</td>
+	<td>1983//</td>
+	<td>10th Symposium on Fusion Engineering Proceedings (Cat. No. 83CH1916-6 NPS), pp. 729 - 32&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="4983428" class="entry">
+	<td>Wang, J., Yamamoto, T., Amano, T., Ogawa, Y., Okano, K. &amp; Inoue, N.</td>
+	<td>Conceptual design of a poloidal field coil system and operation scenario for an inductively operated day-long pulsed tokamak reactor</td>
+	<td>1995//</td>
+	<td>Fusion Engineering and Design<br/>Vol.  29, pp. 69 - 77&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/0920-3796(95)80008-L">URL</a>&nbsp;</td>
+</tr>
+<tr id="2056842" class="entry">
+	<td>Watanabe, T., Kamiya, H., Aki, F., Nagai, M., Kadotani, K., Ohkubo, M., Ando, T. &amp; Masuda, M.</td>
+	<td>Electrical insulation system fit for cyclic high strain (development of insulation of JT-60 poloidal field coil)</td>
+	<td>1983//</td>
+	<td>Fusion Technology 1982. Proceedings of the Twelfth Symposium, pp. 1151 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="7171009" class="entry">
+	<td>Weiyue, W. &amp; Baozeng, L.</td>
+	<td>Design of the poloidal field system and plasma equilibrium of HT-7U tokamak</td>
+	<td>2001//</td>
+	<td>Fusion Engineering and Design<br/>Vol.  58-59, pp. 277 - 80&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(01)00461-6">URL</a>&nbsp;</td>
+</tr>
+<tr id="4767316" class="entry">
+	<td>Wesley, J. &amp; Mondino, P.-L.</td>
+	<td>Status of the poloidal field system design for the International Thermonuclear Experimental Reactor</td>
+	<td>1994/07/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  30( 4), pp. 1613 - 20&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/20.305569">URL</a>&nbsp;</td>
+</tr>
+<tr id="1202946" class="entry">
+	<td>Wildi, P., Cardwell, G. &amp; Brower, D.</td>
+	<td>Design of the TEXT toroidal and poloidal field coils</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. I, pp. 48 - 53&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="1246787" class="entry">
+	<td>Wildi, P. &amp; Woods, E.</td>
+	<td>High current switches in the doublet III poloidal field circuit</td>
+	<td>1977//</td>
+	<td>Proceedings of the Seventh Symposium on Engineering Problems of Fusion Research<br/>Vol. II, pp. 1753 - 6&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="11323507" class="entry">
+	<td>Winkler, A., Fietz, W., Fink, S. &amp; Noe, M.</td>
+	<td>Calculation of Transient Voltages of ITER Poloidal Field Coils</td>
+	<td>2010/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  20( 3), pp. 419 - 22&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2010.2041913">URL</a>&nbsp;</td>
+</tr>
+<tr id="7672787" class="entry">
+	<td>Yagi, Y., Koguchi, H., Hirano, Y., Shimada, T., Sakakita, H., Sekine, S., Chapman, B. &amp; Sarff, J.</td>
+	<td>Increased confinement improvement in a reversed-field pinch using double-pulsed poloidal current drive</td>
+	<td>2003/07/</td>
+	<td>Physics of Plasmas<br/>Vol.  10( 7), pp. 2925 - 31&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1063/1.1581883">URL</a>&nbsp;</td>
+</tr>
+<tr id="6098622" class="entry">
+	<td>Yamamoto, T., Ogawa, Y. &amp; Inoue, N.</td>
+	<td>Effect of the poloidal field coil system on the ramp-up scenario with L/H transition</td>
+	<td>Sept. 1998</td>
+	<td>Fusion Engineering and Design<br/>Vol.  39-40, pp. 143 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1016/S0920-3796(97)00192-0">URL</a>&nbsp;</td>
+</tr>
+<tr id="1055472" class="entry">
+	<td>Yeh, H. &amp; Lue, J.</td>
+	<td>The interaction and protection of superconducting poloidal field coils and toroidal field coils in a Tokamak experimental power reactor</td>
+	<td>1977/04/</td>
+	<td>Nuclear Technology<br/>Vol.  33( 2), pp. 150 - 60&nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5392248" class="entry">
+	<td>Yokota, K., Kondoh, J. &amp; Shimada, R.</td>
+	<td>Power and capacity reduction scheme for tokamak poloidal field power supply using superconducting coils</td>
+	<td>1995//</td>
+	<td>16th IEEE/NPSS Symposium Fusion Engineering, SOFE '95. Seeking a New Energy Era (Cat. No.95CH35852)<br/>Vol. vol.2, pp. 1526 - 9&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/FUSION.1995.534516">URL</a>&nbsp;</td>
+</tr>
+<tr id="1909140" class="entry">
+	<td>Yoshida, H., Kishimoto, H., Yamamoto, S., Sengoku, S., Azumi, M., Takizuka, T., Ninomiya, H. &amp; Tamura, S.</td>
+	<td>Magnetic structure of poloidal divertor configuration with non-axisymmetric perturbed field in JT-60</td>
+	<td>1981/11/</td>
+	<td><br/>Vol. JAERI-M 9789, pp. iii+28 - &nbsp;</td>
+	<td>article</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="5349539" class="entry">
+	<td>Yoshida, K., Shimada, M., Matsukawa, M., Sborchia, C., Stepanov, B., Stoner, J. &amp; Nozawa, M.</td>
+	<td>Design of the outer poloidal field coil system for ITER</td>
+	<td>1996/07/</td>
+	<td>IEEE Transactions on Magnetics<br/>Vol.  32( 4), pp. 2240 - 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/20.508611">URL</a>&nbsp;</td>
+</tr>
+<tr id="7711206" class="entry">
+	<td>Zani, L., Decool, P., Cloez, H., Serries, J. &amp; Bej, Z.</td>
+	<td>Manufacture and test of NbTi subsize joint samples for the ITER poloidal field coils</td>
+	<td>2003/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  13( 2), pp. 1460 - 3&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2003.812740">URL</a>&nbsp;</td>
+</tr>
+<tr id="9619962" class="entry">
+	<td>Zanino, R., Astrov, M., Bagnasco, M., Baker, W., Bellina, F., Ciazynski, D., Egorov, S., Kim, K., Kvitkovic, J., Lacroix, B., Martovetsky, N., Mitchell, N., Muzzi, L., Nunoya, Y., Okuno, K., Polak, M., Ribani, P., Salpietro, E., Savoldi Richard, L., Sborchia, C., Takahashi, Y., Weng, P., Wesche, R., Zani, L. &amp; Zapretilina, E.</td>
+	<td>Predictive analysis of the ITER poloidal field conductor insert (PFCI) test program</td>
+	<td>2007/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  17( 2), pp. 1353 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2007.899046">URL</a>&nbsp;</td>
+</tr>
+<tr id="9083193" class="entry">
+	<td>Zanino, R., Bagnasco, M., Baker, W., Bellina, F., Bruzzone, P., della Corte, A., Ilyin, Y., Martovetsky, N., Mitchell, N., Muzzi, L., Nijhuis, A., Nunoya, Y., Okuno, K., Rajainmaki, H., Ribani, P., Ricci, M., Salpietro, E., Richard, L., Shikov, A., Sytnikov, V., Takahashi, Y., Taran, A., Vedernikov, G. &amp; Zapretilina, E.</td>
+	<td>Implications of NbTi short-sample test results and analysis for the ITER poloidal field conductor insert (PFCI)</td>
+	<td>2006/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  16( 2), pp. 886 - 9&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2006.873318">URL</a>&nbsp;</td>
+</tr>
+<tr id="8792859" class="entry">
+	<td>Zanino, R., Bagnasco, M., Bellina, F., Gislon, P., Ribani, P. &amp; Richard, L.</td>
+	<td>Modeling AC losses in the ITER NbTi poloidal field full size joint sample (PF-FSJS) using the THELMA code</td>
+	<td>2005/11/</td>
+	<td>Fusion Engineering and Design<br/>Vol.  75-79, pp. 23 - 7&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.fusengdes.2005.06.197">URL</a>&nbsp;</td>
+</tr>
+<tr id="10856657" class="entry">
+	<td>Zanino, R., Bagnasco, M., Ciazynski, D., Lacroix, B., van Lanen, E., Nicollet, S., Nijhuis, A., Richard, L., Sborchia, C., Torre, A., Vostner, A. &amp; Zani, L.</td>
+	<td>EU contribution to the test and analysis of the ITER poloidal field conductor insert and the central solenoid model coil</td>
+	<td>2009/08/</td>
+	<td>Superconductor Science &amp;amp; Technology<br/>Vol.  22( 8), pp. 085006 (11 pp.) - &nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1088/0953-2048/22/8/085006">URL</a>&nbsp;</td>
+</tr>
+<tr id="8438002" class="entry">
+	<td>Zanino, R., Bruzzone, P., Ciazynski, D., Ciotti, M., Gislon, P., Nicollet, S. &amp; Richard, L.</td>
+	<td>Analysis of thermal-hydraulic gravity/buoyancy effects in the testing of the ITER poloidal field full size joint sample (PF-FSJS)</td>
+	<td>2004//</td>
+	<td>AIP Conference Proceedings( 710), pp. 544 - 51&nbsp;</td>
+	<td>inproceedings</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="8476029" class="entry">
+	<td>Zanino, R., Egorov, S., Kim, K., Martovetsky, N., Nunoya, Y., Okuno, K., Salpietro, E., Sborchia, C., Takahashi, Y., Weng, P., Bagnasco, M., Richard, L., Polak, M., Formisano, A., Zapretilina, E., Shikov, A., Vedernikov, G., Ciazynski, D., Zani, L., Muzzi, L., Ricci, M., della Corte, A., Sugimoto, M., Hamada, K., Portone, A., Hurd, F., Mitchell, N., Nijhuis, A. &amp; Ilyin, Y.</td>
+	<td>Preparation of the ITER poloidal field conductor insert (PFCI) test</td>
+	<td>2005/06/</td>
+	<td>IEEE Transactions on Applied Superconductivity<br/>Vol.  15( 2), pp. 1346 - 50&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1109/TASC.2005.849083">URL</a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 29/04/2014.</small>
+</p>
+
+</body>
+</html>
+
+<!-- File generated by JabRef; Export Filter written by Mark Schenk -->

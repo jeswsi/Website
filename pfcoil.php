@@ -40,6 +40,10 @@ Circuits (schematics (<a href="pdf/Coilset3PF1andPF6.pdf">PF1&#038;6</a>, <a hre
 
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=PF Coil RFQ &amp;body=L:%0D%0A%0D%0APeak%20current%20:%0D%0A%0D%0AOD:%0D%0A%0D%0AID:%0D%0A%0D%0AVacuum-compatible?(yes/no):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0ANeeded%20by(Date):%0D%0A%0D%0AContact(Name/email/phone/fax/etc):" role="button">Get a Quote &raquo;</a></p>
 
+<h3>References</h3>
+	<blockquote><a href="PFcoils.html">PF Coil References</a></blockquote>
+
+
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 
