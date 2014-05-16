@@ -25,7 +25,7 @@
 
 	</ol>
 
-    <h1>Pulsed Forming Networks</h1>
+    <h1>Pulse Forming Networks</h1>
 	<p class="center"><a href="files/TypeBPFN.pdf"><img src="img/typeB-small.png"></a><br />
 		<span class="text-muted">Type B Pulse Forming Network</span></p>
 	<p>Woodruff Scientific can design and build pulse forming networks for your specific application.</p>
