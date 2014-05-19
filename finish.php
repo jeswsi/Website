@@ -40,7 +40,7 @@ $anythingelse = $_POST['anythingelse'];
 $message = "<p>Thanks for applying ". $name . ". We've sent a confirmation email to " . $email . ".<br /><a href='shortcourse'>Back to course information</a>";
 $emailto = $email;
 $toname = $name;
-$emailfrom = 'info@woodruffscientific.com';
+$emailfrom = 'bootcamp@woodruffscientific.com';
 $fromname = 'Woodruff Scientific Inc.';
 $subject = 'Thanks for Applying to the Scientific Computing Bootcamp';
 $messagebody = 'Dear ' . $name . ",\n\n Thank you for applying to the Scientific Computing Bootcamp at WSI. If you have any questions, feel free to reply to this email.\n\n\n Best regards,\n Woodruff Scientific";
@@ -54,18 +54,18 @@ $headers =
 	'Content-Transfer-Encoding: 8bit' . "\r\n" . 
 	'Content-Type: text/plain; charset=UTF-8' . "\r\n";
 $params = '-f ' . $emailfrom;
-if ( $test = mail($emailto, $subject, $messagebody, $headers, $params) ){
-	$m = "yay";
-} else {
-	$m ="dang";
-}
+//if ( $test = mail($emailto, $subject, $messagebody, $headers, $params) ){
+//	$m = "yay";
+//} else {
+//	$m ="dang";
+//}
 
 echo $message;
 //echo $m;
 
-$emailto = 'info@woodruffscientific.com';
+$emailto = 'bootcamp@woodruffscientific.com';
 $toname = 'WSI';
-$emailfrom = 'info@woodruffscientific.com';
+$emailfrom = 'bootcamp@woodruffscientific.com';
 $fromname = 'WSI';
 $subject = $name . "'s Application to the Scientific Computing Bootcamp";
 $messagebody = 
