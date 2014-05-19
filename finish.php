@@ -28,13 +28,16 @@ $name = $_POST['name'];
 $email = $_POST['email'];
 $school = $_POST['school'];
 $degree = $_POST['degree'];
+$major = $_POST['major'];
+$minor = $_POST['minor'];
+$credits = $_POST['credits'];
 $languages = $_POST['languages'];
 $math = $_POST['math'];
 $how = $_POST['how'];
 $why = $_POST['why'];
 $anythingelse = $_POST['anythingelse'];
 
-$message = "<p>Thanks for applying ". $name . ". We've sent a confirmation email to " . $email . ".<br /><a href='course'>Back to course information</a>";
+$message = "<p>Thanks for applying ". $name . ". We've sent a confirmation email to " . $email . ".<br /><a href='shortcourse'>Back to course information</a>";
 $emailto = $email;
 $toname = $name;
 $emailfrom = 'info@woodruffscientific.com';
@@ -70,6 +73,9 @@ $messagebody =
 	'Email: ' . $email . "\n" .
 	'School/Employer: ' . $school . "\n" .
 	'Degree: ' . $degree . "\n" .
+	'Major: ' . $major . "\n" .
+	'Minor: ' . $minor . "\n" .
+	'Credits completed in major:' . $credits . "\n" .
 	'Computer Familiarity: ' . $languages . "\n\n" .
 	'Math Familiarity: ' . $math . "\n\n" .
 	'How they heard about course: ' . $how . "\n\n" .

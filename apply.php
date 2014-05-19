@@ -28,7 +28,7 @@
 		<small>September 8-12, 2014 Session</small></h1>
 
 		<div class="col-md-8">
-		<p><a href="course">Back to Course information</a></p>
+		<p><a href="shortcourse">Back to Course information</a></p>
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<form name="apply" action="finish" onsubmit="return validate_form ( );" method="post">
@@ -40,22 +40,38 @@
     				<label for="email">Email address</label>
     				<input type="email" class="form-control" name="email" placeholder="Enter email">
   				</div>
+        <div class="form-group">
+            <label for="addemail">[Optional] Additional Email address</label>
+            <input type="email" class="form-control" name="addemail" placeholder="Enter additional email">
+          </div>
   				<div class="form-group">
-    				<label for="name">School or Employer</label>
-    				<input type="text" class="form-control" name="school" placeholder="Enter School / Employer">
+    				<label for="school">School</label>
+    				<input type="text" class="form-control" name="school" placeholder="Enter School">
   				</div>
           <div class="form-group">
-            <label for="name">Anticipated Degree</label>
-            <input type="text" class="form-control" name="degree" placeholder="Enter expected degree, major(s), minor(s)">
+            <label for="degree">Anticipated Degree</label>
+            <input type="text" class="form-control" name="degree" placeholder="Enter anticipated degree">
+          </div>
+          <div class="form-group">
+            <label for="major">Major(s)</label>
+            <input type="text" class="form-control" name="major" placeholder="Enter major(s)">
+          </div>
+          <div class="form-group">
+            <label for="minor">Minor(s)</label>
+            <input type="text" class="form-control" name="minor" placeholder="Enter minor(s)">
+          </div>
+          <div class="form-group">
+            <label for="credits">Credits in major completed</label>
+            <input type="text" class="form-control" name="credits" placeholder="Enter credits">
           </div>
 				<div class="form-group">
     				<label for="languages">Computer Familiarity</label>
-    				<textarea rows="3" class="form-control" name="languages" placeholder="Briefly describe familiarity with Operating Systems, programming languages, familiarity with command line, etc."></textarea>
+    				<textarea rows="3" class="form-control" name="languages" placeholder="Briefly describe familiarity with operating systems, programming languages, familiarity with command line, etc."></textarea>
     				<p class="help-block">Extensive programming experience is <strong>not</strong> necessary!</p>
   				</div>
   				<div class="form-group">
     				<label for="languages">Mathematics Familiarity</label>
-    				<textarea rows="3" class="form-control" name="math" placeholder="Briefly describe familiarity with mathematics: PDEs, FEM, etc"></textarea>
+    				<textarea rows="3" class="form-control" name="math" placeholder="Briefly describe familiarity with mathematics: PDEs, FEM, etc."></textarea>
     				<p class="help-block">Extensive mathematics experience is <strong>not</strong> necessary!</p>
   				</div>
   				<div class="form-group">

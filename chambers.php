@@ -24,10 +24,11 @@
 	</ol>
 
 	<ul class="left">
-		            <li><a href="vacuumboundary">Vacuum Boundary</a></li>
                     <li><a href="firstwall">First Wall</a></li>
                     <li><a href="blankets">Blankets</a></li>     
                     <li><a href="stabilization">Stabilization</a></li>
+                    <!--<li><a href="shielding">Shielding</a></li>-->
+		            <li><a href="vacuumboundary">Vacuum Boundary</a></li>
                     <li><a href="integration">Integration</a></li>
     </ul>
 

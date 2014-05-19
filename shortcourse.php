@@ -28,7 +28,7 @@
 		Seattle, WA 98103</blockquote>
 
 	<p>Be introduced to the tools that plasma physics simulationists use regularly in addressing contemporary 
-issues in scientific computing and some of today's most pressing challenges. Books, resources, light 
+issues in scientific computing and some of today's most pressing challenges. Relevant materials, light 
 breakfast and lunch provided.</p>
 
 	<p><em>Intended audience:</em> undergraduate students with at least some computing familiarity, energy, and an
@@ -36,18 +36,19 @@ interest in pursuing high performance computing in their careers.</p>
 
 	<p><em>Anticipated topics:</em>
 		<ul>
-			<li>Parallelism, scalability</li>
+			<li>Grand challenges in computational plasma physics</li>
+			<li>Overall process of computational simulation</li>
 			<li>Historical context</li>
-			<li>UNIX compilation using Make</li>
-			<li>C++, FORTRAN</li>
-			<li>Schedulers, jobs, batch mentality</li>
-			<li>Post-processing, including Octave and Python</li>
-			<li>Good programming practices</li>
+			<li>Introduction to plasma physics research &amp; development codes</li>
+			<li>Compiling and debugging, including Make, C++, and FORTRAN</li>
+			<li>High performance computing and best practices</li>
+			<li>Visualization and post-processing tools, including Octave and Python</li>
+			<li>Partial differential equations, the finite element method</li>
 			<li>Verification and validation in scientific computing</li>
-			<li>Partial differential equations, the finite element method, multigrid/adaptive mesh refinement</li>
+			<li>Contemporary issues</li>
+			<li>Exascale computing</li>
 		</ul>
 	</p>
-	<p>......with a relevant visit to the Living Computing Museum and networking opportunities</p>
 
 <p class="center"><a class="btn btn-lg btn-primary" href="apply" role="button">Apply Now &raquo;</a></p><br />
 <p class="center"><big>Applications accepted through <strong>Friday, June 20</strong></big></p>
