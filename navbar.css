@@ -24,7 +24,7 @@ img.left {
 
 ul.right {
   float: right;
-
+  margin-right: 18px;
 }
 
 ul.left {

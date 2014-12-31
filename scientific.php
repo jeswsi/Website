@@ -32,6 +32,26 @@
 <p>James Stuber graduated with a bachelor&#8217;s degree in Aeronautics and Astronautics from the University of Washington in 2011. Interests in astronautics include orbital mechanics, propulsion, and satellite design. Other interests are computer science and plasma physics. For his senior class capstone James designed hardware and controls for rendezvous with and capture of non-cooperative orbital debris. At Woodruff Scientific James has assisted in the design and construction of lab devices, developed experiment control code, and managed plasma simulations. James is a member of the American Institue of Aeronautics and Astronautics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/James_Stuber/">ResearchGate</a></p>
 
+<h3><strong>Dr. Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
+<p>After a career at LLNL, Casper left the Physical
+and Life Sciences Directorate after he was selected for a senior
+position with the International Thermonuclear Experimental Reactor
+(ITER) in Cadarache, France. As a scientific officer, Casper did
+simulations and computations to explore the capabilities of the ITER
+device and studied equilibria needed for ITER to meet its performance
+specifications. He developed control and plasma scenarios that met the
+plasma control and operational requirements. These have implications on
+the performance of superconducting magnets, power supplies and the
+plasma control system. He integrated R&amp;D and analysis results from
+member nations and defining a program of experimental and modeling
+activities to further the development of ITER plasma scenarios and
+control capabilities.
+</p>
+
+<h3><strong><a href="https://www.researchgate.net/profile/Steven_Diesburg/">Steven Diesburg</a></strong><span class="text-muted"> Design Engineer</span></h3>
+<p>After obtaining an MSE in Mechanical Engineering from the University of Washington in 2013, Steven began working on a DOE funded project working on research and development of improved cookstoves for developing countries.  Simultaneously, Steven has been supporting work part-time at WSI developing engineering drawings, simulations, and helping to build out the company’s potential offerings.  Previously Steven had completed his BS in Physics, Environmental Studies, and German at Iowa State University in 2007, and worked on environmental cleanup and investigation support for four years as a consultant to the EPA for Booz Allen Hamilton.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Steven_Diesburg/">ResearchGate</a></p>
+
 <h3><strong>Kara A. Olson</strong> <span class="text-muted">Research Assistant</span></h3>
 <p>Kara is nearing completion of her
 doctorate in Computer Science at Old Dominion University in Norfolk,
@@ -52,21 +72,18 @@ Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
 <p>Dr. Nathaniel Hicks has fourteen years of experience conducting research on innovations in fusion energy science.  In his doctoral work at UCLA, Hicks performed novel experiments on a new type of ion beam with magnetic fusion applications and gained broad competence with experimental plasma, beam, and accelerator physics.  In particular, Hicks has expertise in volume production ion sources, electrostatic beam extraction and transport, and radio frequency quadrupole (RFQ) accelerators.  Hicks also performed the first computational modeling of this type of ion beam in the RFQ and propagation across a transverse magnetic field using particle-in-cell (PIC) codes.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Nathaniel_Hicks/">ResearchGate</a></p>
 
-<h3><strong>Dr. Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
-<p>After a career at LLNL, Casper left the Physical
-and Life Sciences Directorate after he was selected for a senior
-position with the International Thermonuclear Experimental Reactor
-(ITER) in Cadarache, France. As a scientific officer, Casper did
-simulations and computations to explore the capabilities of the ITER
-device and studied equilibria needed for ITER to meet its performance
-specifications. He developed control and plasma scenarios that met the
-plasma control and operational requirements. These have implications on
-the performance of superconducting magnets, power supplies and the
-plasma control system. He integrated R&amp;D and analysis results from
-member nations and defining a program of experimental and modeling
-activities to further the development of ITER plasma scenarios and
-control capabilities.
-</p>
+
+
+<h3><strong><a href="http://www.researchgate.net/profile/Raymond_Golingo">Dr. Raymond P. Golingo</a></strong> <span class="text-muted">Research Scientist, University of Washington</span></h3>
+	<p>Dr Raymond Golingo has over 15 years of conducting research on
+innovative plasma confinement devices. Prior to that he has experience
+with wind tunnel testing.  Dr. Golingo is an expert in diagnostics
+including spectroscopy, interferometry, magnetic field probes, and
+Thomson scattering. He has built and run Thomson scattering systems on
+the ZaP and TCSU experiments, and designed the Thomson scattering system
+for the HIT-SI experiment.  He is also investigating using ZaP as a high
+power space thruster.</p>
+<p>For publications, please visit <a href="http://www.researchgate.net/profile/Raymond_Golingo">ResearchGate</a></p>
 
 <h3><strong>Chris Raastad</strong><span class="text-muted"> Computational scientist, <a href="http://fits.me">Fits.me</a></span></h3>
 <p>Chris graduated with Bachelors in Mathematics and Computer Science from the University of Washington and in the process changed focus from physics, to pure math, to computational physics, to applied math, to finally computer science.  He unexpectedly ended up in Estonia on a Fulbright scholarship to study a Masters in Cybersecurity only to accidentally fall into his true passion of hot tech startups.  Now he spends his days running, singing, and helping make clean code and quality software at Fits.me, a startup using shapeshifting robots to take on the online fitting room world.</p>
@@ -79,6 +96,23 @@ control capabilities.
 <h3><strong><a href="http://me.umbc.edu/dr-carlos-a-romero-talamas/">Dr. Carlos Romero-Talamas</a></strong><span class="text-muted"> Assistant Professor, University of Maryland Baltimore County</span></h3>
 <p>Research in Carlos&#8217;s group is focused on understanding basic interactions between materials, charged particles, and electromagnetic radiation. Dusty plasmas, which consist of large collections of electrons, ions, molecules, and charged dust grains, are of great interest to us. Relevance and applications of dusty plasmas range from astrophysics to materials processing. Research is carried out in both theory and experiments.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Carlos_Romero-Talamas/">ResearchGate</a></p>
+
+<h3><strong><a href="#">Dr. Roger J. Smith</a></strong><span class="text-muted"> Physicist, University of Washington
+</span></h3>
+<p>Dr Roger Smith has over 25 years of experience in diagnostic development
+in plasma physics.  From graduate work on field reversed configurations
+(FRCs) under Prof. G. Vlases to working at the largest tokamak, the
+Joint European Torus (JET), facility,  Dr Smith has originated new and
+novel diagnostics: the Transient Internal Probe diagnostic (TIP, 1989),
+the JET Divertor Electron Cyclotron Absorption diagnostic (1995) and the
+Pulsed Polarimetry diagnostic (2008).  Pulsed polarimetry completes
+Lidar Thomson scattering, making possible, for the first time, a
+non-perturbative  measurement of internal magnetic field distributions
+along the laser sightline for plasmas achieving reactor relevant
+parameters.  Dr Smith is currently pursuing spatially resolved field
+measurements either by pulsed polarimetry internal to magnetized plasmas
+or by means of optical fibers adjacent to the plasma.</p>
+
 
 <h3><strong><a href="https://www.researchgate.net/profile/Paul_Sieck">Dr. Paul Sieck</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
 <p>Dr. Sieck has 16 years experience in laboratory plasma physics and
@@ -104,9 +138,7 @@ reconnection, and plasma dynamos.</p>
 <h3><strong>DR. Myunghee Choi</a></strong><span class="text-muted"> Physicist, IMSOL-X, San Diego, CA</span></h3>
 <p>After 17 years of modeling and computational research on present nuclear fusion devices (DIII-D, Tore Supra, KSTAR, Alcator C-Mod, NSTX) and future burning plasma devices (ITER and FDF) at Columbia University in New York, General Atomics in San Diego, CEA in Cararache and NFRI in Korea, she founded IMSOL-X in San Diego on 2013 May to share her knowledge and research experiences with international fusion communities. Dr. Choi is a member of the American Physical Society.</p>
 
-<h3><strong><a href="https://www.researchgate.net/profile/Steven_Diesburg/">Steven Diesburg</a></strong><span class="text-muted"> Design Engineer</span></h3>
-<p>After obtaining an MSE in Mechanical Engineering from the University of Washington in 2013, Steven began working on a DOE funded project working on research and development of improved cookstoves for developing countries.  Simultaneously, Steven has been supporting work part-time at WSI developing engineering drawings, simulations, and helping to build out the company’s potential offerings.  Previously Steven had completed his BS in Physics, Environmental Studies, and German at Iowa State University in 2007, and worked on environmental cleanup and investigation support for four years as a consultant to the EPA for Booz Allen Hamilton.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Steven_Diesburg/">ResearchGate</a></p>
+
 
 
 

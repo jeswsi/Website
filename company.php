@@ -28,6 +28,7 @@
                   <li><a href="scientific">Scientific Team</a></li>
                   <li><a href="business">Business Team</a></li>
                   <li><a href="careers">Careers</a></li>
+                  <li><a href="computeruse">Computer Use Policy</a></li>
                   <li><a href="terms">Terms and Conditions</a></li>
 		</ul>
 <p>Nuclear fusion powers our sun and all the stars in the night sky; if harnessed on earth, it could be the ultimate energy source: safe, clean, and with plentiful fuel. Commercial fusion energy will ultimately provide energy independence, national security, and new jobs in the emerging clean-tech market sector.</p>
