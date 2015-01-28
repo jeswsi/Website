@@ -28,17 +28,10 @@
 <p>Since 2005, Woodruff has lead the company through initial start-up phases.  He has established advisory boards consisting of  energy industry and scientific leaders, building the company from the ground up and opening the laboratory in Ballard, managing contracts from DOE, national laboratories and universities.  In the last year, under his direction, WSI beat 40 other companies for the opportunity to present to investors for the first time at the Northwest Entrepreneur Network&#8217;s <a href="http://www.nwen.org/index?option=com_events&amp;Itemid=15&amp;id=526">&#8216;First Look Forum&#8217;</a>, and subsequently was able to meet with leading venture capitalists.  He developed the strategy for the business over several years taking in advice at annual strategic planning meetings, inviting local experts and business leaders, following leadership during his employment in the Lawrence Livermore National Laboratory Fusion Energy Program.  Woodruff has ensure that the company maintains strategic partnerships with many organizations locally, nationally and internationally, and aims to continue to grow the business.</p>
 
 
-<h3><strong>Christine Kakos</strong>
-<span class="text-muted">Accountant</span></h3>
-<p>Chris has served in various accounting roles in the Seattle area for almost a decade. Currently she is full time at Path.org, and helps at WSI on a part-time basis for monthlies, quarterlies and annual financial matters.</p>
-
-<h3><strong><a href="http://www.linkedin.com/pub/sara-krizan/20/181/607">Sara M. Krizan</a></strong>
-<span class="text-muted">Business Intern</span></h3>
-<p>Sara has worked in various small enterprises during the last several years since completing a BS in Biology at the University of Wisconsin-Madison in 2008. At WSI she is primarily involved with legal and marketing aspects of the small businesses under the WS banner.</p>
-
-<h3><strong><a href="http://www.greenwoodcpa.com/">Jerry Foote</a></strong>
+<h3><strong><a href="http://www.greenwoodcpa.com/AmandaORourke.php">Amanda O'Rourke</a></strong>
 <span class="text-muted">CPA, Greenwood Ohlund and Co. LLP</span></h3>
-<p>Jerry has worked in Public Accounting for over 25 years, including a tax position at KPMG Peat Marwick in Seattle. Prior to joining Greenwood Ohlund, he operated his own public accounting firm for over nine years. Jerry&#8217;s concentration has been in the Federal and State tax area for small- to medium-sized businesses and individual taxation.</p>
+<p>Amanda is a licensed CPA who specializes in nonprofit services including attestation engagements, tax preparation and financial management. She has been with Greenwood, Ohlund & Co., LLP since 2009 and brings a diverse background in public accounting, as well as financial management in the nonprofit sector and the construction industry. </p>
+
 
 <h1>Legal</h1>
 <h3><a href="http://www.dwt.com/People/JosephWhitford"><strong>Joseph Whitford</strong></a>
