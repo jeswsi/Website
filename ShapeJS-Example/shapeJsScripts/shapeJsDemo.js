@@ -1,19 +1,5 @@
 var voxelSize = 0.1*MM;
 
-// controls the level of decimation.  The higher this is, the more decimation is used.
-meshErrorFactor=1;
-
-// function makePart(height, radius){
-
-//     var img = new ImageBitmap(path, height, radius);
-//     img.setBaseThickness(0.0);
-//     img.setVoxelSize(voxelSize);
-//     img.setBlurWidth(2*voxelSize);
-//     img.setImagePlace(ImageBitmap.IMAGE_PLACE_TOP);
-
-//     return img;
-// }
-
 function main(args) {
     var rad = args[0]*IN;
     var height = args[1]*IN;
@@ -22,7 +8,6 @@ function main(args) {
     var yGrid = 1.25*IN;
     dest = createGrid(-xGrid,xGrid,-yGrid,yGrid,0,height,voxelSize);
 
-   // var img = makePart(image, width, height, rad);
     var v0 = new Vector3d(0,0,0);
     var v1 = new Vector3d(0,0,0.19*IN);
     var v2 = new Vector3d(0,0,1*IN);
@@ -48,8 +33,6 @@ function main(args) {
     maker.setSource(diff);
 
     maker.makeGrid(dest);
-    return dest;
-
     
-
+    return dest; 
 }

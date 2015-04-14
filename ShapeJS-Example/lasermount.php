@@ -8,7 +8,6 @@ require_once 'demoSettings.php';
 
 // grab the shapejs script
 $shapeJsDemoScriptPath = 'shapeJsScripts/shapeJsDemo.js';
-//$shapeJsDemoScriptPath = 'shapeJsScripts/mirrormount.js';
 ob_start();
 readfile($shapeJsDemoScriptPath);
 $shapeJsDemoScript = json_encode(ob_get_clean());

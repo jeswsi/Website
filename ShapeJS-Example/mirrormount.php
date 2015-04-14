@@ -7,8 +7,7 @@
 require_once 'demoSettings.php';
 
 // grab the shapejs script
-$shapeJsDemoScriptPath = 'shapeJsScripts/shapeJsDemo.js';
-//$shapeJsDemoScriptPath = 'shapeJsScripts/mirrormount.js';
+$shapeJsDemoScriptPath = 'shapeJsScripts/mirrormount.js';
 ob_start();
 readfile($shapeJsDemoScriptPath);
 $shapeJsDemoScript = json_encode(ob_get_clean());
@@ -36,14 +35,14 @@ $scriptTag = time();
             coname = $(this).val();
         });
 
-        $("#radius").on("change", function() {
+        $("#diam").on("change", function() {
             var val = Math.abs(parseInt(this.value*100) || 1)/100;
-            this.value = (val < 0.25) || (val > 1) ? 0.25 : val;
+            this.value = (val < 0.25) || (val > 3) ? 1 : val;
         });
 
-        $("#height").on("change", function() {
+        $("#depth").on("change", function() {
             var val = Math.abs(parseInt(this.value*100) || 1)/100;
-            this.value = (val < 2) || (val > 10) ? 4 : val;
+            this.value = (val < 0.1) || (val > 0.5) ? 0.4 : val;
         });
 
         $('#load').on('click', function() {
@@ -116,19 +115,21 @@ $scriptTag = time();
     <textarea cols="50" rows="5" name='comment'></textarea>
   </form>
   <form id="shapejs-demo-form">
-    Radius: 
-    <input type="text" name='param1' id='radius' value="0.25">
+    Mirror Shape:
+    <select name="param1">
+      <option value="circular">circlular</option>
+      <option value="square">square</option>
+    </select>
+    Diameter/Width of mirror: 
+    <input type="text" name='param2' id='diam' value="1">
     <br/>
-    Height: 
-    <input type="text" name='param2' id='height' value="4">
+    Depth of mirror: 
+    <input type="text" name='param3' id='depth' value="0.4">
     <br/>
-    Magnets for table attachment?: 
-    <input type="checkbox" name='param3' id='magnets'>
-    <br/>
-    Screw size:
+    Mount size:
     <select name='param4'>
-      <option value="8-32">#8-32</option>
-      <option value="M4">M4</option>
+      <option value="2">2x2"</option>
+      <option value="3">3x3"</option>
     </select>
   </form>
 
