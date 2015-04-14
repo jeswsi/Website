@@ -28,7 +28,13 @@
     <h1>Pulse Forming Networks</h1>
 	<p class="center"><a href="files/TypeBPFN.pdf"><img src="img/typeB-small.png"></a><br />
 		<span class="text-muted">Type B Pulse Forming Network</span></p>
-	<p>Woodruff Scientific can design and build pulse forming networks for your specific application.</p>
+	<p>Woodruff Scientific can design and build pulse forming networks for your specific application. Various PFN configurations are appropriate for different situations:</p>
+	<ul>
+		<li>Type A - Used for very high voltage pulses</li>
+		<li>Type B - Uncoupled inductors, Capacitances vary</li>
+		<li>Type C - Often used, Capacitances vary</li>
+		<li>Type E - Similar configuration to Type B with mutual inductance and Fixed Capcitances</li>
+	</ul>
 	<h3>Example Schematics</h3>
 	<p>
 		<a href="files/TypeAPFN.pdf">Type A Pulse Forming Network</a><br />
