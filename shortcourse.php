@@ -24,12 +24,11 @@
 	</ol>
 	<h1>Scientific Computing Bootcamp<br/>
 		<small>with emphasis on application to plasma physics and nuclear fusion</small></h1>
-	<blockquote>September 8-12, 2014<br/>4000 Aurora Ave N. Suites 5 &amp; 6<br />
+	<blockquote>September 14-18, 2015<br/>4000 Aurora Ave N. Suites 5 &amp; 6<br />
 		Seattle, WA 98103</blockquote>
 
 	<p>Be introduced to the tools that plasma physics simulationists use regularly in addressing contemporary 
-issues in scientific computing and some of today's most pressing challenges. Relevant materials, light 
-breakfast and lunch provided.</p>
+issues in scientific computing and some of today's most pressing challenges. Relevant materials will be provided.</p>
 
 	<p><em>Intended audience:</em> undergraduate students with at least some computing familiarity, energy, and an
 interest in pursuing high performance computing in their careers.</p>
