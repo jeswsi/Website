@@ -50,7 +50,7 @@ interest in pursuing high performance computing in their careers.</p>
 	</p>
 
 <p class="center"><a class="btn btn-lg btn-primary" href="apply" role="button">Apply Now &raquo;</a></p><br />
-<p class="center"><big>Applications accepted through <strong>Friday, June 20</strong></big></p>
+<p class="center"><big>Applications accepted through <strong>Friday, June 19</strong></big></p>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 
