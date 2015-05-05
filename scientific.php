@@ -52,6 +52,11 @@ control capabilities.
 <p>After obtaining an MSE in Mechanical Engineering from the University of Washington in 2013, Steven began working on a DOE funded project working on research and development of improved cookstoves for developing countries.  Simultaneously, Steven has been supporting work part-time at WSI developing engineering drawings, simulations, and helping to build out the company’s potential offerings.  Previously Steven had completed his BS in Physics, Environmental Studies, and German at Iowa State University in 2007, and worked on environmental cleanup and investigation support for four years as a consultant to the EPA for Booz Allen Hamilton.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Steven_Diesburg/">ResearchGate</a></p>
 
+<h3><strong>Dr. Edwin Hooper</strong> <span class="text-muted">Physicist</span></h3>
+<p>
+Edwin B. "Bick" Hooper received his BS and PhD from MIT and has taught, conducted research and managed research at MIT, Yale, and the University of California.  He spent most of his career at LLNL where he was Deputy Associate for Magnetic Fusion Energy (MFE), among other management and administrative positions.  His experimental and theoretical research has focused on MFE confinement geometries including mirrors, tokamaks and the spheromak; in addition he has published work on plasma turbulence, the production of intense negative ion beams, and a novel electric propulsion concept for interplanetary travel.  Since retirement he has undertaken resistive MHD simulations for helicity injection into spherical tokamaks and consulted on fusion research.  He is the author of over 100 refereed publications and a Fellow of the American Physical Society.</p>
+
+
 <h3><strong>Kara A. Olson</strong> <span class="text-muted">Research Assistant</span></h3>
 <p>Kara is nearing completion of her
 doctorate in Computer Science at Old Dominion University in Norfolk,
