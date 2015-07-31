@@ -73,11 +73,12 @@ Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
 <h1>Associates</h1>
 <p>WSI has a large collaborator base and a Scientific Advisory Board of experts in fusion energy sciences at private and public institutions around the U.S., and abroad.</p>
 
-<h3><strong><a href="https://www.researchgate.net/profile/Nathaniel_Hicks/">Dr. Nathaniel K. Hicks</a></strong><span class="text-muted"> Physicist, University of Anchorage, Alaska</span></h3>
-<p>Dr. Nathaniel Hicks has fourteen years of experience conducting research on innovations in fusion energy science.  In his doctoral work at UCLA, Hicks performed novel experiments on a new type of ion beam with magnetic fusion applications and gained broad competence with experimental plasma, beam, and accelerator physics.  In particular, Hicks has expertise in volume production ion sources, electrostatic beam extraction and transport, and radio frequency quadrupole (RFQ) accelerators.  Hicks also performed the first computational modeling of this type of ion beam in the RFQ and propagation across a transverse magnetic field using particle-in-cell (PIC) codes.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Nathaniel_Hicks/">ResearchGate</a></p>
+<h3><strong>Dr. Myunghee Choi</a></strong><span class="text-muted"> Physicist, IMSOL-X, San Diego, CA</span></h3>
+<p>After 17 years of modeling and computational research on present nuclear fusion devices (DIII-D, Tore Supra, KSTAR, Alcator C-Mod, NSTX) and future burning plasma devices (ITER and FDF) at Columbia University in New York, General Atomics in San Diego, CEA in Cararache and NFRI in Korea, she founded IMSOL-X in San Diego on 2013 May to share her knowledge and research experiences with international fusion communities. Dr. Choi is a member of the American Physical Society.</p>
 
-
+<h3><strong><a href="https://www.researchgate.net/profile/James_Garry/">Dr. James R. C. Garry</a></strong> <span class="text-muted"> Physicist, Redcore Consulting, Vancouver B. C.</span></h3>
+<p>James is a chartered physicist, and has spent 20 years or so working on applied physics projects of one sort and another. For about 15 years James was a spacecraft engineer, and had involvement with three planetary missions. Now comfortably settled in Vancouver he has switched track and am looking at engineering solutions to energy/resource problems.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/James_Garry/">ResearchGate</a></p>
 
 <h3><strong><a href="http://www.researchgate.net/profile/Raymond_Golingo">Dr. Raymond P. Golingo</a></strong> <span class="text-muted">Research Scientist, University of Washington</span></h3>
 	<p>Dr Raymond Golingo has over 15 years of conducting research on
@@ -90,19 +91,48 @@ for the HIT-SI experiment.  He is also investigating using ZaP as a high
 power space thruster.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/Raymond_Golingo">ResearchGate</a></p>
 
+<h3><strong><a href="https://www.researchgate.net/profile/Tim_Gray4/">Dr. Tim Gray</a></strong><span class="text-muted"> Physicist</span></h3>
+<p>Dr. Gray has a more than a decade of experience studying fusion plasmas at Princeton Plasma Physics Laboratory and Swarthmore College.  His research interests include turbulence, plasma relaxation, self organization, magnetic reconnection, and plasma-surface interactions, specifically using liquid lithium as a first wall.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Tim_Gray4/">ResearchGate</a></p>
+
+<h3><strong><a href="https://www.researchgate.net/profile/Nathaniel_Hicks/">Dr. Nathaniel K. Hicks</a></strong><span class="text-muted"> Physicist, University of Anchorage, Alaska</span></h3>
+<p>Dr. Nathaniel Hicks has fourteen years of experience conducting research on innovations in fusion energy science.  In his doctoral work at UCLA, Hicks performed novel experiments on a new type of ion beam with magnetic fusion applications and gained broad competence with experimental plasma, beam, and accelerator physics.  In particular, Hicks has expertise in volume production ion sources, electrostatic beam extraction and transport, and radio frequency quadrupole (RFQ) accelerators.  Hicks also performed the first computational modeling of this type of ion beam in the RFQ and propagation across a transverse magnetic field using particle-in-cell (PIC) codes.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Nathaniel_Hicks/">ResearchGate</a></p>
+
+
+<h3><strong><a href="http://www.researchgate.net/profile/Eric_Meier">Dr. Eric Meier</a></strong><span class="text-muted"> Research Scientist, College of William and Mary</span></h3>
+<p>After receiving a mechanical engineering degree from the University of Utah, Eric spent five years in aerospace engineering and rocket development in Washington State.  Spurred by enthusiasm for plasma propulsion,
+Eric earned a PhD at the University of Washington in computational plasma physics.  Since graduating in 2011, he has worked as a postdoc at Lawrence Livermore National Laboratory, and as a research scientist at William and Mary, concentrating on modeling tokamak scrape-off layer and divertor physics.</p>
+<p>For publications, please visit <a href="http://www.researchgate.net/profile/Eric_Meier">ResearchGate</a></p>
+
+<h3><strong><a href="http://www-old.physics.wisc.edu/people/staff/kmccollam/">Dr. Karsten McCollam</a></strong><span class="text-muted"> Associate Scientist, University of Wisconsin, Madison</span></h3>
+<p>Dr. McCollam&#8217;s research focuses mainly on innovative means for producing current drive in toroidal plasmas, and in particular in the Madison Symmetric Torus (MST), at the University of Wisconsin Madison.</p>
+
+
 <h3><strong>Chris Raastad</strong><span class="text-muted"> Computational scientist, <a href="http://fits.me">Fits.me</a></span></h3>
 <p>Chris graduated with Bachelors in Mathematics and Computer Science from the University of Washington and in the process changed focus from physics, to pure math, to computational physics, to applied math, to finally computer science.  He unexpectedly ended up in Estonia on a Fulbright scholarship to study a Masters in Cybersecurity only to accidentally fall into his true passion of hot tech startups.  Now he spends his days running, singing, and helping make clean code and quality software at Fits.me, a startup using shapeshifting robots to take on the online fitting room world.</p>
 <p>Fore more information, please visit <a href="http://fits.me">Fits.me</a>.</p>
 
-<h3><strong><a href="https://www.researchgate.net/profile/James_Garry/">Dr. James R. C. Garry</a></strong> <span class="text-muted"> Physicist, Redcore Consulting, Vancouver B. C.</span></h3>
-<p>James is a chartered physicist, and has spent 20 years or so working on applied physics projects of one sort and another. For about 15 years James was a spacecraft engineer, and had involvement with three planetary missions. Now comfortably settled in Vancouver he has switched track and am looking at engineering solutions to energy/resource problems.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/James_Garry/">ResearchGate</a></p>
+
 
 <h3><strong><a href="http://me.umbc.edu/dr-carlos-a-romero-talamas/">Dr. Carlos Romero-Talamas</a></strong><span class="text-muted"> Assistant Professor, University of Maryland Baltimore County</span></h3>
 <p>Research in Carlos&#8217;s group is focused on understanding basic interactions between materials, charged particles, and electromagnetic radiation. Dusty plasmas, which consist of large collections of electrons, ions, molecules, and charged dust grains, are of great interest to us. Relevance and applications of dusty plasmas range from astrophysics to materials processing. Research is carried out in both theory and experiments.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Carlos_Romero-Talamas/">ResearchGate</a></p>
 
-<h3><strong><a href="#">Dr. Roger J. Smith</a></strong><span class="text-muted"> Physicist, University of Washington
+<h3><strong><a href="https://www.researchgate.net/profile/Paul_Sieck">Dr. Paul Sieck</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
+<p>Dr. Sieck has 16 years experience in laboratory plasma physics and
+nuclear fusion research.  He has worked in a diverse range of
+experimental programs, from his doctoral work on the HIT-SI spheromak
+experiment at the University of Washington, to the DIII-D tokamak at
+General Atomics, and most recently the Polywell program at Energy Matter
+Conversion Corporation.  He has broad experience in magnetic
+measurements, signal conditioning, data acquisition, laboratory
+automation, and feedback control of plasmas.  His research interests
+include high-beta MHD, accelerated plasma flows, driven magnetic
+reconnection, and plasma dynamos.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Paul_Sieck">ResearchGate</a></p>
+
+<h3><strong>Dr. Roger J. Smith</strong><span class="text-muted"> Physicist, University of Washington
 </span></h3>
 <p>Dr Roger Smith has over 25 years of experience in diagnostic development
 in plasma physics.  From graduate work on field reversed configurations
@@ -118,30 +148,15 @@ parameters.  Dr Smith is currently pursuing spatially resolved field
 measurements either by pulsed polarimetry internal to magnetized plasmas
 or by means of optical fibers adjacent to the plasma.</p>
 
-
-<h3><strong><a href="https://www.researchgate.net/profile/Paul_Sieck">Dr. Paul Sieck</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
-<p>Dr. Sieck has 16 years experience in laboratory plasma physics and
-nuclear fusion research.  He has worked in a diverse range of
-experimental programs, from his doctoral work on the HIT-SI spheromak
-experiment at the University of Washington, to the DIII-D tokamak at
-General Atomics, and most recently the Polywell program at Energy Matter
-Conversion Corporation.  He has broad experience in magnetic
-measurements, signal conditioning, data acquisition, laboratory
-automation, and feedback control of plasmas.  His research interests
-include high-beta MHD, accelerated plasma flows, driven magnetic
-reconnection, and plasma dynamos.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Paul_Sieck">ResearchGate</a></p>
+<h3><strong>Dr. Tim Ziemba</strong><span class="text-muted"> President, Eagle Harbor Technologies
+</span></h3>
+<p>Dr. Ziemba founded EHT in 2006 and continued to grow the company rapidly in North Downtown Seattle. His core philosophy is to deliver innovative, high quality results that exceed our customer/grantor expectations in the areas of pulsed power, plasma physics and plasma diagnostics.</p>
+<p><a href="http://www.eagleharbortech.com">Eagle Harbor Technologies</a></p>
 
 
-<h3><strong><a href="http://www-old.physics.wisc.edu/people/staff/kmccollam/">Dr. Karsten McCollam</a></strong><span class="text-muted"> Associate Scientist, University of Wisconsin, Madison</span></h3>
-<p>Dr. McCollam&#8217;s research focuses mainly on innovative means for producing current drive in toroidal plasmas, and in particular in the Madison Symmetric Torus (MST), at the University of Wisconsin Madison.</p>
 
-<h3><strong><a href="https://www.researchgate.net/profile/Tim_Gray4/">Dr. Tim Gray</a></strong><span class="text-muted"> Physicist</span></h3>
-<p>Dr. Gray has a more than a decade of experience studying fusion plasmas at Princeton Plasma Physics Laboratory and Swarthmore College.  His research interests include turbulence, plasma relaxation, self organization, magnetic reconnection, and plasma-surface interactions, specifically using liquid lithium as a first wall.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Tim_Gray4/">ResearchGate</a></p>
 
-<h3><strong>DR. Myunghee Choi</a></strong><span class="text-muted"> Physicist, IMSOL-X, San Diego, CA</span></h3>
-<p>After 17 years of modeling and computational research on present nuclear fusion devices (DIII-D, Tore Supra, KSTAR, Alcator C-Mod, NSTX) and future burning plasma devices (ITER and FDF) at Columbia University in New York, General Atomics in San Diego, CEA in Cararache and NFRI in Korea, she founded IMSOL-X in San Diego on 2013 May to share her knowledge and research experiences with international fusion communities. Dr. Choi is a member of the American Physical Society.</p>
+
 
 
 

@@ -37,6 +37,7 @@ $how = $_POST['how'];
 $why = $_POST['why'];
 $anythingelse = $_POST['anythingelse'];
 
+
 $message = "<p>Thanks for applying ". $name . ". We've sent a confirmation email to " . $email . ".<br /><a href='shortcourse'>Back to course information</a>";
 $emailto = $email;
 $toname = $name;
