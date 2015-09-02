@@ -5,7 +5,7 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-  <meta name="description" content="Careers, internship and job opportunities at Woodruff Scientific">
+  <meta name="description" content="Careers, internship, and job opportunities at Woodruff Scientific">
   <title>Careers | Woodruff Scientific, Inc.</title>
   </head>
 
