@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
 	<?php
@@ -70,6 +70,19 @@ Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
 </p>
 
 
+<h3><strong><a href="https://www.researchgate.net/profile/Paul_Sieck">Dr. Paul Sieck</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
+<p>Dr. Sieck has 16 years experience in laboratory plasma physics and
+nuclear fusion research.  He has worked in a diverse range of
+experimental programs, from his doctoral work on the HIT-SI spheromak
+experiment at the University of Washington, to the DIII-D tokamak at
+General Atomics, and most recently the Polywell program at Energy Matter
+Conversion Corporation.  He has broad experience in magnetic
+measurements, signal conditioning, data acquisition, laboratory
+automation, and feedback control of plasmas.  His research interests
+include high-beta MHD, accelerated plasma flows, driven magnetic
+reconnection, and plasma dynamos.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Paul_Sieck">ResearchGate</a></p>
+
 <h1>Associates</h1>
 <p>WSI has a large collaborator base and a Scientific Advisory Board of experts in fusion energy sciences at private and public institutions around the U.S., and abroad.</p>
 
@@ -119,18 +132,7 @@ Eric earned a PhD at the University of Washington in computational plasma physic
 <p>Research in Carlos&#8217;s group is focused on understanding basic interactions between materials, charged particles, and electromagnetic radiation. Dusty plasmas, which consist of large collections of electrons, ions, molecules, and charged dust grains, are of great interest to us. Relevance and applications of dusty plasmas range from astrophysics to materials processing. Research is carried out in both theory and experiments.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Carlos_Romero-Talamas/">ResearchGate</a></p>
 
-<h3><strong><a href="https://www.researchgate.net/profile/Paul_Sieck">Dr. Paul Sieck</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
-<p>Dr. Sieck has 16 years experience in laboratory plasma physics and
-nuclear fusion research.  He has worked in a diverse range of
-experimental programs, from his doctoral work on the HIT-SI spheromak
-experiment at the University of Washington, to the DIII-D tokamak at
-General Atomics, and most recently the Polywell program at Energy Matter
-Conversion Corporation.  He has broad experience in magnetic
-measurements, signal conditioning, data acquisition, laboratory
-automation, and feedback control of plasmas.  His research interests
-include high-beta MHD, accelerated plasma flows, driven magnetic
-reconnection, and plasma dynamos.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Paul_Sieck">ResearchGate</a></p>
+
 
 <h3><strong>Dr. Roger J. Smith</strong><span class="text-muted"> Physicist, University of Washington
 </span></h3>
