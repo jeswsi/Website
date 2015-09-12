@@ -156,7 +156,9 @@ or by means of optical fibers adjacent to the plasma.</p>
 <p><a href="http://www.eagleharbortech.com">Eagle Harbor Technologies</a></p>
 
 
-
+<h3><strong>Dr. Paul A. Melnik</strong><span class="text-muted"> Physicist, University of Washington</span></h3>
+<p>Dr. Melnik received his MS and Ph.D. degrees from University of Washington while pursuing experimental research in laboratory plasma physics. He has expertise in the theory, design, and application of internal probes and plasma sources. His interests include circuit design, accelerated plasma flow and space propulsion.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/P_Melnik">ResearchGate</a></p>
 
 
 
