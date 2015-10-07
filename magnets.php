@@ -44,6 +44,10 @@
 	<p class="text-muted">
 		Fig 1. Example: vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.
 	</p>
+
+	<p>Need high-field magnetic coils for your lab? WSI can provide a cost-effective solution.</p>
+	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+
       </div>
 
 

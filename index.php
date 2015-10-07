@@ -76,7 +76,7 @@
     </div><!-- /.carousel -->
 
       <div class="jumbotron col-md-8">
-        <h2>Outsource your R&amp;D quickly and inexpensively to Woodruff Scientific's experienced team</h2>
+        <h2>Outsource your plasma R&amp;D quickly and inexpensively to Woodruff Scientific's experienced team</h2>
         <p>Woodruff Scientific offers assistance with all stages of innovation: concept design,
 engineering design, procurement, fabrication, installation, testing, and
 operations. We can offer support packages to suit your application and
@@ -89,11 +89,12 @@ budget.</p>
 		<ul>
 		<li><a href="pulsedpower">Pulsed power</a></li>
 		<li><a href="magnets">Magnets</a></li>
-		<li><a href="chambers">Confinement chambers</a></li>
+		<li><a href="sources">Plasma Sources</a></li>
+    <li><a href="chambers">Plasma-Material Interface</a></li>
 		<li><a href="codac">CODAC</a></li>
 		<li><a href="diagnostics">Diagnostics</a></li>
 		<li><a href="devices">Devices</a></li>
-		<li><a href="computers">Computers</a></li>
+		<li><a href="computers">High Performance Computing</a></li>
 		</ul>
 	</div>
 	<div class="col-md-6">
