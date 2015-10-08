@@ -26,7 +26,16 @@
 	<p>Get news updates via email: <a href="mailto:info@woodruffscientific.com">info@woodruffscientific.com</a></p>
 
 	<div class="col-md-10">
+
+	<h3>2015</h3>
+	<p><span class="text-muted">September</span><br />Work starts on SBIR Phase II: Additive manufacture (3D Printing) of plasma diagnostic components and assemblies for fusion experiments</p>
+	<p><span class="text-muted">September</span><br />WSI establishes a second office in San Diego</p>
+	<p><span class="text-muted">September</span><br />The 2nd annual Scientific Computing Bootcamp is held at WSI; students were receptive and appreciative and came away with a good grounding in the subject. Guest speakers including Dr. Alan Glasser, Dr. Erika Harnett, Prof. Philippa Browning, Dr. David Keyes, Dr. John Mandrekas and others made appearances.<br>
+		<a href="files/2015-Bootcamp-Summary.pdf">2015 Bootcamp Summary (pdf)</a></p>
+
+
 	<h3>2014</h3>
+	<p><span class="text-muted">September</span><br />The first annual Scientific Computing Bootcamp is held at WSI; students learned a lot and interesting discussions were held by all.</p>
 	<p><span class="text-muted">January</span><br />Associates newsletter sent out, planning for scientific computing ‘bootcamp’ begins (likely in June – announcement to follow).</p>
 
 

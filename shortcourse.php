@@ -48,9 +48,13 @@ interest in pursuing high performance computing in their careers.</p>
 			<li>Exascale computing</li>
 		</ul>
 	</p>
+	<br>
 
+	<h4>This year's course was a great success, thanks to all the students, guest speakers, and instructors. Look to this page for future bootcamps.</h4>
+	<h4><a href="files/2015-Bootcamp-Summary.pdf">2015 Bootcamp Summary (pdf)</a></h4>
+<!-- 
 <p class="center"><a class="btn btn-lg btn-primary" href="apply" role="button">Apply Now &raquo;</a></p><br />
-<p class="center"><big>Applications accepted through <strong>Friday, May 29</strong></big></p>
+<p class="center"><big>Applications accepted through <strong>Friday, May 29</strong></big></p> -->
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 

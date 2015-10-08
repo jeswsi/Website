@@ -37,27 +37,27 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 	<ul class="left">
 						<li>Langmuir Probes</li>
 						<ul>
-							<li><a href="langmuir_single">Single Tip</a></li>
-							<li><a href="langmuir_double">Double Tip</a></li>
-							<li><a href="langmuir_quad">Quad Tip</a></li>
-							<li><a href="langmuir_flat">Flat</a></li>
+							<li>Single Tip</li>
+							<li>Double Tip</li>
+							<li>Quad Tip</li>
+							<li>Flat</li>
 						</ul>
 	</ul>
 
 		<div class="col-md-6">
-		<p class="center"><a href="img/single_tip.jpg"><img src="img/single_tip-small.jpg"></a><br />Single-tip Langmuir Probe</p>
+		<p class="center"><a href="img/diagnostics/double-langmuir.jpg"><img src="img/diagnostics/double-langmuir-small.jpg"></a><br />Double-tip Langmuir Probe</p>
 	</div>
 		<div class="clearfix"></div>
 
 	<blockquote><a href="langmuirrefs.html">Langmuir Probes References</a></blockquote>
-	<p>Available in Single, Double, Triple, or Quad tip configurations. Flat probes also available.</p>
+	<p>Available in Single, Double, Triple, or Quad tip configurations. Built for UHV environments. Probe size customizable depending on plasma parameters. Reciprocating probes available. Flat probes also available.</p>
 
-	<div class="col-md-6">
+	<!-- <div class="col-md-6">
 		<p class="center"><a href="img/Langmuir2.jpg"><img src="img/Langmuir2-small.jpg"></a><br />Langmuir Probe</p>
 	</div>
 	<div class="col-md-6">
 		<p class="center"><a href="img/Langmuir.jpg"><img src="img/Langmuir-small.jpg"></a><br />Langmuir Probe</p>
-	</div>
+	</div> -->
 		<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Langmuir Probes RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>
 
 
@@ -66,9 +66,11 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
  		<blockquote><a href="ionenergy.html">Ion Energy References</a></blockquote>
 
 	<div class="col-md-6">
-		<p class="center"><a href="img/RGFA2.jpg"><img src="img/RGFA2-small.jpg"></a><br />Retarding Field Analyzer</p>
+		<p class="center"><a href="img/diagnostics/RFA_Cylinder.jpg"><img src="img/diagnostics/RFA_Cylinder-small.jpg"></a><br />Retarding Field Analyzer</p>
 	</div>
 	<div class="col-md-6">
+		<p class="center"><a href="img/diagnostics/RFA.jpg"><img src="img/diagnostics/RFA-small.jpg"></a><br />Retarding Field Analyzer</p>
+
 	</div>
 	<div class="clearfix"></div>
 		<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Gridded Ion Energy Analyzers RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>
