@@ -36,8 +36,6 @@
 
 
 	<h1>Magnetic Probes</h1>
-	<p class="center"><a href="img/coil.JPG"><img src="img/coil-small.JPG" alt="magnetic field coil" width="300"  /></a><br />
-	<span class="text-muted">Magnetic Field Coil</span></p>
 
 
 		<p>For magnetic fusion energy systems, magnetics are the primary diagnostic

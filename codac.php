@@ -64,6 +64,8 @@ rail-, electrothermal- or coil-guns, high power microwave generators
 applications include lightning simulators, linear accelerators, plasma
 switches.</p>
 	 <p>WSI can help you design and install your CODAC system.</p>
+	 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+
 
 		<div class="col-md-12">
 			<blockquote>“Woodruff Scientific have made an excellent complete control and data acquisition system for our Laboratory Astrophysical Jet experiment. The system was expertly tailored to our needs with COTS National Instruments and proprietary custom hardware, operated by a full set of LabView interfaces coded to best practise design patterns. The hardware and services provided by Woodruff Scientific are among the most cost-effective in the industry. Highly recommended.”

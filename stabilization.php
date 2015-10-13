@@ -34,7 +34,7 @@ Active feedback stabilization is needed for example for resistive wall
 modes, to move plasma strike point around.  Controls and power systems,
 and coils are all offered for this subject area, so please see:
 	<ul>
-		<li><a href="controls">Controls</a></li>
+		<li>Controls</li>
 		<li><a href="noncircular">Non-circular magnetic field coils</a> (e.g. for RWMs)</li>
 		<li><a href="magnets">Circular field coils</a> (e.g. for vertical stability)</li>
 	</ul>
