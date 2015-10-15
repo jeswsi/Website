@@ -24,7 +24,7 @@
   		<li class="active">Inertial Electrostatic Confinement</li>
 	</ol>
 	<h1>Inertial Electrostatic Confinement</h1>
-		<blockquote><a href="iec.html">Inertial Electrostatic Confinement References</a></blockquote>
+		<blockquote><a href="iec_refs.html">Inertial Electrostatic Confinement References</a></blockquote>
 
 	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />
 
