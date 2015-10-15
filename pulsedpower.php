@@ -64,7 +64,7 @@ sterilization (medical, food, water, surfaces) and materials processing
 
 
 <h3>Safety</h3>
-Safety must be the number one priority in all labs. The high-voltage used in our banks is inherently dangerous; WSI takes all measures to ensure operator safety. A proper safety protocol needs to be followed. Banks should always be kept in an isolated room equipped with <a href="safety">safety interlocks</a>. Our bank dumps are double or triple redundant, default to a safe position in case of power outage or other failure, and are controled via door interlocks and from the control room. WSI can work with your lab to setup a safe testing environment.
+Safety must be the number one priority in all labs. WSI takes all measures to ensure operator safety. A proper safety protocol needs to be followed. Banks should always be kept in an isolated room equipped with <a href="safety">safety interlocks</a>. Our bank dumps are double or triple redundant, default to a safe position in case of power outage or other failure, and are controled via door interlocks and from the control room. WSI can work with your lab to setup a safe testing environment.
 
 <h3>References</h3>
 	<blockquote><a href="pfns.html">Pulse Forming Network References</a></blockquote>
