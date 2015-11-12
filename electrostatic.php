@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
   <meta name="description" content="Electrostatic probes and diagnostics for fusion, plasma energy, and physics labs. Custom sizing, materials, and configurations available.">
 
@@ -16,8 +16,8 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="products">Products</a></li>
@@ -49,7 +49,10 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 	</div>
 		<div class="clearfix"></div>
 
-	<blockquote><a href="langmuirrefs.html">Langmuir Probes References</a></blockquote>
+	<blockquote>
+    <p><a href="langmuirrefs.html">Langmuir Probes References</a></p>
+    <p><a href="files\diagnostics\DL-ES Final 2.pdf">Langmuir Probe spec sheet</a></p>
+  </blockquote>
 	<p>Available in Single, Double, Triple, or Quad tip configurations. Built for UHV environments. Probe size customizable depending on plasma parameters. Reciprocating probes available. Flat probes also available.</p>
 
 	<!-- <div class="col-md-6">
@@ -62,7 +65,7 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 
 
 	<h3>Gridded Ion Energy Analyzers</h3>
- 
+
  		<blockquote><a href="ionenergy.html">Ion Energy References</a></blockquote>
 
 	<div class="col-md-6">
@@ -80,7 +83,7 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>
