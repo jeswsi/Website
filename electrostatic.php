@@ -51,7 +51,7 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 
 	<blockquote>
     <p><a href="langmuirrefs.html">Langmuir Probes References</a></p>
-    <p><a href="files\diagnostics\DL-ES Final 2.pdf">Langmuir Probe spec sheet</a></p>
+    <p><a href="files\diagnostics\DL-ES Final 2.pdf">Langmuir Probe Spec Sheet</a></p>
   </blockquote>
 	<p>Available in Single, Double, Triple, or Quad tip configurations. Built for UHV environments. Probe size customizable depending on plasma parameters. Reciprocating probes available. Flat probes also available.</p>
 
@@ -66,7 +66,10 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 
 	<h3>Gridded Ion Energy Analyzers</h3>
 
- 		<blockquote><a href="ionenergy.html">Ion Energy References</a></blockquote>
+ 		<blockquote>
+      <p><a href="ionenergy.html">Ion Energy References</a></p>
+      <p><a href="files\diagnostics\E1-RFA information.pdf">Retarding Field Analyzer Spec Sheet</a></p>
+    </blockquote>
 
 	<div class="col-md-6">
 		<p class="center"><a href="img/diagnostics/RFA_Cylinder.jpg"><img src="img/diagnostics/RFA_Cylinder-small.jpg"></a><br />Retarding Field Analyzer</p>
