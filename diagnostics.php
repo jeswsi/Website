@@ -23,13 +23,13 @@
   		<li class="active">Diagnostics</li>
 	</ol>
 				<ul class="left">
-					<li><a href="magnetic.php">Magnetic Field</a></li>
-					<li><a href="electrostatic.php">Plasma Particle Flux</a></li>
-        			<li><a href="optical.php">Refractive-Index Measurements</a></li>
-        			<li><a href="spectroscopy.php">Spectroscopic</a></li>
-        			<li><a href="thomson.php">Scattering</a></li>
-        			<li><a href="neutralpart.php">Neutral Particles</a></li>
-        			<li><a href="neutrons.php">Neutrons</a></li>
+					<li><a href="magnetic">Magnetic Field</a></li>
+					<li><a href="electrostatic">Plasma Particle Flux</a></li>
+        			<li><a href="optical">Refractive-Index Measurements</a></li>
+        			<li><a href="spectroscopy">Spectroscopic</a></li>
+        			<li><a href="thomson">Scattering</a></li>
+        			<li><a href="neutralpart">Neutral Particles</a></li>
+        			<li><a href="neutrons">Neutrons</a></li>
        			</ul>
     				<h1>Diagnostics</h1>
 
