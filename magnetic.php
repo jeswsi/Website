@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
 	<?php
-	$head = file_get_contents('header.html');
-	echo $head;
+    $head = file_get_contents('header.html');
+    echo $head;
 	?>
 	<meta name="description" content="Magnetic probes and diagnostics for fusion, plasma energy, and physics labs. Custom sizing, materials, and configurations available. Useful magnetics references.">
   <title>Magnetic Field | Woodruff Scientific, Inc.</title>
@@ -49,7 +49,7 @@
 <a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
 		<div class="col-md-6">
-			<p class="center"><a href="img/1magneticfieldcoil3.jpg"><img src="img/1magneticfieldcoil3-small.jpg"></a><br />
+			<p class="center"><a href="files\diagnostics\SingleCoilRender.bmp"><img src="files\diagnostics\SingleCoilRender.bmp"></a><br />
 			<a href="files/1MagneticFieldCoil.rar">Download this coil</a> for 3D-Printing (.stp file)</p>
 		</div>
 		<div class="col-md-6">
@@ -73,20 +73,14 @@
  -->
 
 	<div class="col-md-6">
-		<p class="center"><a href="img/Rogowski1.jpg"><img src="img/Rogowski1-small.jpg"></a><br />
+		<p class="center"><a href="files\diagnostics\M1-R-C render of coil behind tile SS case.jpg"><img src="files\diagnostics\M1-R-C render of coil behind tile SS case.jpg"></a><br />
 		</p>
 	</div>
 	<div class="col-md-6">
-		<p class="center"><a href="img/Rogowski2.jpg"><img src="img/Rogowski2-small.jpg"></a><br />
-		</p>
-	</div>
-
-	<div class="col-md-6">
-		<p class="center"><a href="img/Rogowski-formandcase1.jpg"><img src="img/Rogowski-formandcase1-small.jpg"></a><br />
+		<p class="center"><a href="files\diagnostics\M1-R-P full render.jpg"><img src="files\diagnostics\M1-R-P full render.jpg"></a><br />
 		</p>
 	</div>
 	<div class="col-md-6">
-		<p class="center"><a href="img/Rogowski-formandcase2.jpg"><img src="img/Rogowski-formandcase2-small.jpg"></a><br />
 		<br />Download Coil Form for CNC Milling: <a href="files/rogowskiform.stp">Coil Form</a>
 		<br />Download Coil Case for CNC Milling: <a href="files/rogowskilower.stp">Case (lower)</a>, <a href="files/Rogowskiupper.stp">Case (upper)</a></p>
 	</div>

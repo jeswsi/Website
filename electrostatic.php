@@ -45,7 +45,7 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
 	</ul>
 
 		<div class="col-md-6">
-		<p class="center"><a href="img/diagnostics/double-langmuir.jpg"><img src="img/diagnostics/double-langmuir-small.jpg"></a><br />Double-tip Langmuir Probe</p>
+		<p class="center"><a href="files\diagnostics\ES-DL1 render.jpg"><img src="files\diagnostics\ES-DL1 render.jpg"></a><br />Double-tip Langmuir Probe</p>
 	</div>
 		<div class="clearfix"></div>
 
@@ -72,11 +72,7 @@ also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Di
     </blockquote>
 
 	<div class="col-md-6">
-		<p class="center"><a href="img/diagnostics/RFA_Cylinder.jpg"><img src="img/diagnostics/RFA_Cylinder-small.jpg"></a><br />Retarding Field Analyzer</p>
-	</div>
-	<div class="col-md-6">
-		<p class="center"><a href="img/diagnostics/RFA.jpg"><img src="img/diagnostics/RFA-small.jpg"></a><br />Retarding Field Analyzer</p>
-
+		<p class="center"><a href="files\diagnostics\E1-RFA-U render with text.jpg"><img src="files\diagnostics\E1-RFA-U render with text.jpg"></a><br />Retarding Field Analyzer</p>
 	</div>
 	<div class="clearfix"></div>
 		<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Gridded Ion Energy Analyzers RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>

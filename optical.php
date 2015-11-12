@@ -34,6 +34,11 @@
 	</p>
 
 	<h3>HeNe Interferometer</h3>
+
+  <div class="col-md-6">
+    <p class="center"><a href="files\diagnostics\R1-HeNe render.jpg"><img src="files\diagnostics\R1-HeNe render.jpg"></a><br /></p>
+  </div>
+
   <blockquote>
     <p><a href="files\diagnostics\Diagnostics-Refractive-HeNe.pdf">HeNe Interferometer Spec Sheet</a></p>
   </blockquote>
@@ -43,6 +48,11 @@
 --Other HeNe interferometers -->
 
   <h3>Microwave Interferometer</h3>
+
+  <div class="col-md-6">
+    <p class="center"><a href="files\diagnostics\R1-M render.jpg"><img src="files\diagnostics\R1-M render.jpg"></a><br /></p>
+  </div>
+
   <blockquote>
     <p><a href="files\diagnostics\Diagnostics-Refractive-Microwave.pdf">Microwave Interferometer Spec Sheet</a></p>
   </blockquote>

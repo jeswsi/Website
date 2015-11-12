@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
 	<meta name="description" content="Custom diagnostics for fusion, plasma energy, and physics labs. WSI has nearly a decade of experience designing and manufacturing diagnostics for plasma experiments.">
   <title>Diagnostics | Woodruff Scientific, Inc.</title>
@@ -15,21 +15,21 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="products">Products</a></li>
   		<li class="active">Diagnostics</li>
 	</ol>
 				<ul class="left">
-					<li><a href="magnetic">Magnetic Field</a></li>
-					<li><a href="electrostatic">Plasma Particle Flux</a></li>
-        			<li><a href="optical">Refractive-Index Measurements</a></li>
-        			<li><a href="spectroscopy">Spectroscopic</a></li>
-        			<li><a href="thomson">Scattering</a></li>
-        			<li><a href="neutralpart">Neutral Particles</a></li>
-        			<li><a href="neutrons">Neutrons</a></li>
+					<li><a href="magnetic.php">Magnetic Field</a></li>
+					<li><a href="electrostatic.php">Plasma Particle Flux</a></li>
+        			<li><a href="optical.php">Refractive-Index Measurements</a></li>
+        			<li><a href="spectroscopy.php">Spectroscopic</a></li>
+        			<li><a href="thomson.php">Scattering</a></li>
+        			<li><a href="neutralpart.php">Neutral Particles</a></li>
+        			<li><a href="neutrons.php">Neutrons</a></li>
        			</ul>
     				<h1>Diagnostics</h1>
 
@@ -50,7 +50,7 @@
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>
