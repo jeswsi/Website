@@ -91,7 +91,7 @@
 <a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
 		<div class="col-md-6">
-			<p class="center"><a href="img/diagnostics/SingleCoilRender.bmp"><img src="img/diagnostics/SingleCoilRender.bmp"></a><br />
+			<p class="center"><a href="img/diagnostics/SingleCoilRender.bmp"><img width='450px' src="img/diagnostics/SingleCoilRender.bmp"></a><br />
 			<a href="files/1MagneticFieldCoil.rar">Download this coil</a> for 3D-Printing (.stp file)</p>
 		</div>
 		<div class="col-md-6">
