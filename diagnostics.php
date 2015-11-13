@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
 	<meta name="description" content="Custom diagnostics for fusion, plasma energy, and physics labs. WSI has nearly a decade of experience designing and manufacturing diagnostics for plasma experiments.">
   <title>Diagnostics | Woodruff Scientific, Inc.</title>
@@ -15,8 +15,8 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="products">Products</a></li>
@@ -50,7 +50,7 @@
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>
