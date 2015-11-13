@@ -36,7 +36,7 @@
 	<h3>HeNe Interferometer</h3>
 
   <div class="col-md-6">
-    <p class="center"><a href="files/diagnostics/R1-HeNe render.jpg"><img src="files/diagnostics/R1-HeNe render.jpg"></a><br /></p>
+    <p class="center"><a href="img/diagnostics/R1-HeNe render.jpg"><img src="img/diagnostics/R1-HeNe render.jpg"></a><br /></p>
   </div>
 
   <div class="clearfix"></div>
@@ -52,7 +52,7 @@
   <h3>Microwave Interferometer</h3>
 
   <div class="col-md-6">
-    <p class="center"><a href="files/diagnostics/R1-M render.jpg"><img src="files/diagnostics/R1-M render.jpg"></a><br /></p>
+    <p class="center"><a href="img/diagnostics/R1-M render.jpg"><img src="img/diagnostics/R1-M render.jpg"></a><br /></p>
   </div>
 
   <div class="clearfix"></div>

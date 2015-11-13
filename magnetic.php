@@ -91,7 +91,7 @@
 <a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
 		<div class="col-md-6">
-			<p class="center"><a href="files/diagnostics/SingleCoilRender.bmp"><img src="files/diagnostics/SingleCoilRender.bmp"></a><br />
+			<p class="center"><a href="img/diagnostics/SingleCoilRender.bmp"><img src="img/diagnostics/SingleCoilRender.bmp"></a><br />
 			<a href="files/1MagneticFieldCoil.rar">Download this coil</a> for 3D-Printing (.stp file)</p>
 		</div>
 		<div class="col-md-6">
@@ -115,11 +115,11 @@
  -->
 
 	<div class="col-md-6">
-		<p class="center"><a href="files/diagnostics/M1-R-C render of coil behind tile SS case.jpg"><img src="files/diagnostics/M1-R-C render of coil behind tile SS case.jpg"></a><br />
+		<p class="center"><a href="img/diagnostics/M1-R-C render of coil behind tile SS case.jpg"><img src="img/diagnostics/M1-R-C render of coil behind tile SS case.jpg"></a><br />
 		</p>
 	</div>
 	<div class="col-md-6">
-		<p class="center"><a href="files/diagnostics/M1-R-P full render.jpg"><img src="files/diagnostics/M1-R-P full render.jpg"></a><br />
+		<p class="center"><a href="img/diagnostics/M1-R-P full render.jpg"><img src="img/diagnostics/M1-R-P full render.jpg"></a><br />
 		</p>
 	</div>
 	<div class="col-md-6">
