@@ -24,14 +24,59 @@
 		<li><a href="diagnostics">Diagnostics</a></li>
   		<li class="active">Plasma Particle Flux</li>
 	</ol>
-	<h1>Plasma Particle Flux</h1>
-	<p>Electrostatic probes allow local measurement of plasma density and
-temperature, as well as plasma potential.  Retarding grid energy
-analyzers can be built for a variety of applications, depending on the
-energy of the incident ions.  An excellent reference for electrostatic
-probes is <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Hutchinson</a>
-also, see Noah Hershkowitz's chapter in <a href="http://www.amazon.com/Plasma-Diagnostics-Discharge-Parameters-Chemistry/dp/148320281X/ref=sr_1_1?s=books&ie=UTF8&qid=1395429516&sr=1-1&keywords=noah+hershkowitz
-">Plasma Diagnostics: Discharge Parameters and Chemistry</a></p>
+
+  <h1>Plasma Particle Flux</h1>
+
+    <p>
+    A Fundamental technique for measuring the properties of plasmas is the use
+    of electrostatic probes, most notably the Langmuir probe, Mach probe, and
+    retarding field analyzer (RFA). These probes are inserted into the plasma
+    and thus allow local measurement of several plasma properties. The Langmuir
+    probe measures the electron energy, temperature, and density and comes in
+    single, double, and triple tip configurations, which have various effects on
+    the plasma. Some of these configurations are able to measure the floating
+    potential and/or plasma potential. A Mach probe is used to measure the ion
+    flow velocity. Retarding field analyzers can measure the ion or electron
+    energy and temperature in specific directions. Each electrostatic probe
+    configuration has its advantages and disadvantages and the scientists at WSI
+    can help you decide which probe is right for you. Two excellent references
+    for electrostatic probes are Hutchinson's <a href="http://www.amazon.com/Pri
+    nciples-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Principles of Plasma
+    Diagnostics</a> and Noah Hershkowitz's chapter in <a href="http://www.amazon
+    .com/Plasma-Diagnostics-Discharge-Parameters-Chemistry/dp/148320281X/ref=sr_
+    1_1?s=books&ie=UTF8&qid=1395429516&sr=1-1&keywords=noah+hershkowitz">Plasma
+    Diagnostics: Discharge Parameters and Chemistry</a>. References for specific
+    applications of each type of probe are provided in the sections below.
+    </p>
+
+    When requesting a quote for an electrostatic diagnostic, please consider the
+    following:
+    <ul>
+      <li>Quantity to be measured and its expected magnitude. Electron or ion
+          measurements? Is electron density of interest? Ion flow velocity or
+          energy and temperature? Are floating and/or plasma potential of
+          interest?</li>
+      <li>Frequency response. What is the frequency (or range of frequencies)
+          that need to be measured? What is the timescale of evolution of
+          the measured quantitiy?</li>
+      <li>Digitizer dynamic range. What is the peak-to-peak signal amplitude
+          that your data acquisition system can handle?</li>
+      <li>Vacuum environment. Is the probe intended to be used in air or vacuum?
+          High vacuum (HV, 10<sup>-3</sup> - 10<sup>-9</sup> torr) or ultra-high
+          vacuum (UHV, 10<sup>-9</sup> - 10<sup>-12</sup> torr)? This helps us
+          determine the materials that can be used for your application.</li>
+      <li>Thermal environment. Will the probe experience high heat loads (for
+          example, behind first wall tiles) or low heat loads? Will it
+          experience thermal cycling? Will it be used at a high or low ambient
+          temperature (will the chamber be baked)? This information also places
+          restrictions on the materials that can be used.</li>
+      <li>Mounting interface. Will the probe be mounted to a vacuum flange, a
+          custom mounting structure on the chamber wall, a reciprocating drive,
+          or something else?</li>
+      <li>Size constraints. Diameter of port through which the probe must be
+          inserted, distance from the mount to the measurement location within
+          the plasma, perturbation to the plasma, et cetera.</li>
+    </ul>
 
 	<h3>Langmuir Probes</h3>
 	<ul class="left">
