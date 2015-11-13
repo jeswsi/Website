@@ -36,7 +36,8 @@
 
 	<h1>Magnetic Probes</h1>
 
-		<p>For magnetic fusion energy (MFE) systems, measurements of the magnetic
+		<p>
+    For magnetic fusion energy (MFE) systems, measurements of the magnetic
     field and associated current are the primary diagnostic interest. Faraday's
     law states that a time-varying magnetic field, <b>B(t)</b>, will induce an
     electric field, <b>E(t)</b>, in a loop of wire: &nabla;&times;<b>E</b> =
@@ -61,6 +62,31 @@
     References for specific applications can be found in
     <a href="magnetics.html">Magnetics References</a>.
     </p>
+
+    When requesting a quote for a magnetic diagnostic, please consider the
+    following:
+    <ul>
+      <li>Expected magnitude of the measured quantity and digitizer dynamic
+          range. These determine the minimum and maximum <i>nA</i> of the coil.
+          </li>
+      <li>Frequency response. What is the frequency (or range of frequencies)
+          that need to be measured? This determines the required inductance,
+          <i>L</i>, and resistance, <i>R</i>, of the coil.</li>
+      <li>Vacuum environment. Is the probe intended to be used in air or vacuum?
+          High vacuum (HV, 10<sup>-3</sup> - 10<sup>-9</sup> torr) or ultra-high
+          vacuum (UHV, 10<sup>-9</sup> - 10<sup>-12</sup> torr)? This helps us
+          determine the materials that can be used for your application.</li>
+      <li>Thermal environment. Will the probe experience high heat loads (for
+          example, behind first wall tiles) or low heat loads? Will it
+          experience thermal cycling? Will it be used at a high or low ambient
+          temperature (will the chamber be baked)? This information also places
+          restrictions on the materials that can be used.</li>
+      <li>Mounting interface. Will the probe be mounted to a vacuum flange, a
+          custom mounting structure on the chamber wall, or something else?</li>
+      <li>Size constraints. Width of gap behind wall tiles, diameter of
+          port through which the coil must be inserted, perturbation to the
+          plasma, et cetera.</li>
+    </ul>
 
 <a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
