@@ -29,7 +29,6 @@
 		<li><a href="#rogowski">Rogowski Coils</a></li>
 		<li><a href="#array">Linear Array of Magnetic Coils</a></li>
 		<li><a href="#calibration">Calibration Jigs</a></li>
-		<li><a href="#references">References</a></li>
 	</ul>
 
 
@@ -37,14 +36,31 @@
 
 	<h1>Magnetic Probes</h1>
 
-
-		<p>For magnetic fusion energy systems, magnetics are the primary diagnostic
-		system.  Typically sensors comprise windings of magnet wire on a plastic
-		form.  We have engineered various coils for various purposes - including
-		UH vacuum compatible forms and windings, either as single coils or as
-		arrays.  Coils are either calibrated in-situ or on a bench with a
-		Helmholtz Coil array.  Best references for coils include <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Hutchinson</a>
-		</p>
+		<p>For magnetic fusion energy (MFE) systems, measurements of the magnetic
+    field and associated current are the primary diagnostic interest. Faraday's
+    law states that a time-varying magnetic field, <b>B(t)</b>, will induce an
+    electric field, <b>E(t)</b>, in a loop of wire: &nabla;&times;<b>E</b> =
+    -d<b>B</b>/dt. For <i>n</i> loops of wire with cross-sectional area,
+    <i>A</i>, the resulting electric potential is <i>&phi;(t) = nAdB/dt</i>
+    (where <i>B</i> is the component of <b>B</b> along the axis of the loops).
+    Measuring the voltage produced by such a coil will therefore give the time-
+    variation of <i>B</i>, which after integration (numerical or passive) will
+    yield <i>B(t)</i>. Magnetic probes typically comprise many loops of magnet
+    wire wound around a plastic form. These coils are commonly mounted around
+    the perimeter of an experiment and designed either to measure either the
+    slow or fast variations in <i>B</i> (so-called equilibrium coils or
+    fluctuation coils). Coils can also be wound to be sensitive to multiple
+    orthogonal components of <b>B</b>, measuring all at the same time. A similar
+    type of probe called a Rogowski coil measures the time-variation of the
+    current passing through it, which is integrated to find <i>I(t)</i>. We have
+    engineered various ultra-high vacuum (UHV) compatible magnetic probes for
+    various purposes, including single coils and arrays. We have also developed
+    Helmholtz coil arrays used to calibrate these coils either in-situ or on a
+    bench. A good reference for magnetic probes and other diagnostics is
+    <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Hutchinson</a>.
+    References for specific applications can be found in
+    <a href="magnetics.html">Magnetics References</a>.
+    </p>
 
 <a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
@@ -133,10 +149,6 @@ printing -->
   </div>
   <div class="clearfix"></div>
   		<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Magnetic field coil RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>
-
-	<a id="references"></a>
-  <h3>References</h3>
-  				<blockquote><a href="magnetics.html">Magnetics References</a></blockquote>
 
 <!-- FIGURES OF CALIBRATION JIGS
 
