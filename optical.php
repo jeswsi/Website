@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
 	<meta name="description" content="Optical Diagnostics for fusion, plasma energy, and physics labs. HeNe Interferometers, CO2 Interferometers, Polarimeters, and more.">
   <title>Refractive-Index Measurements | Woodruff Scientific, Inc.</title>
@@ -15,8 +15,8 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="products">Products</a></li>
@@ -34,10 +34,28 @@
 	</p>
 
 	<h3>HeNe Interferometer</h3>
-<!-- 
+
+  <div class="col-md-6">
+    <p class="center"><a href="files\diagnostics\R1-HeNe render.jpg"><img src="files\diagnostics\R1-HeNe render.jpg"></a><br /></p>
+  </div>
+
+  <blockquote>
+    <p><a href="files\diagnostics\Diagnostics-Refractive-HeNe.pdf">HeNe Interferometer Spec Sheet</a></p>
+  </blockquote>
+<!--
 --ZEMAX image
 --Components for download: mirror mount, beamsplitter mount,
 --Other HeNe interferometers -->
+
+  <h3>Microwave Interferometer</h3>
+
+  <div class="col-md-6">
+    <p class="center"><a href="files\diagnostics\R1-M render.jpg"><img src="files\diagnostics\R1-M render.jpg"></a><br /></p>
+  </div>
+
+  <blockquote>
+    <p><a href="files\diagnostics\Diagnostics-Refractive-Microwave.pdf">Microwave Interferometer Spec Sheet</a></p>
+  </blockquote>
 
 	<h3>CO2 Interferometer</h3>
 			<blockquote><a href="CO2.html">CO2 Interferometer References</a></blockquote>
@@ -66,7 +84,7 @@ here, and to our <a href="http://www.thingiverse.com/woodruffscientific/collecti
 	<div class="col-md-6">
       <p><a href="img/mirrormount2.jpg"><img src="img/mirrormount2-small.jpg" alt="3D printed mirror mount" /></a><br />
         </p>
-    </div>    
+    </div>
     <div class="col-md-6">
       <p><a href="img/mirrormount1.jpg"><img src="img/mirrormount1-small.jpg" alt="3D printed mirror mount" /></a><br />
         </p>
@@ -78,7 +96,7 @@ here, and to our <a href="http://www.thingiverse.com/woodruffscientific/collecti
 	<div class="col-md-6">
       <p><a href="img/beamsplittermount2.jpg"><img src="img/beamsplittermount2-small.jpg" alt="3D printed beam splitter mount" /></a><br />
         </p>
-    </div>    
+    </div>
     <div class="col-md-6">
       <p><a href="img/beamsplittermount3.jpg"><img src="img/beamsplittermount3-small.jpg" alt="3D printed beam splitter mount" /></a><br />
         </p>
@@ -90,7 +108,7 @@ here, and to our <a href="http://www.thingiverse.com/woodruffscientific/collecti
 	<div class="col-md-6">
       <p><a href="img/lasermount4.jpg"><img src="img/lasermount4-small.jpg" alt="3D printed laser mount" /></a><br />
         </p>
-    </div>    
+    </div>
     <div class="col-md-6">
       <p><a href="img/lasermount5.jpg"><img src="img/lasermount5-small.jpg" alt="3D printed laser mount" /></a><br />
         </p>
@@ -103,7 +121,7 @@ here, and to our <a href="http://www.thingiverse.com/woodruffscientific/collecti
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>
