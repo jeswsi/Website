@@ -91,14 +91,14 @@
 <a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
 		<div class="col-md-6">
-			<p class="center"><a href="files\diagnostics\SingleCoilRender.bmp"><img src="files\diagnostics\SingleCoilRender.bmp"></a><br />
+			<p class="center"><a href="files/diagnostics/SingleCoilRender.bmp"><img src="files/diagnostics/SingleCoilRender.bmp"></a><br />
 			<a href="files/1MagneticFieldCoil.rar">Download this coil</a> for 3D-Printing (.stp file)</p>
 		</div>
 		<div class="col-md-6">
 			<p class="center"><a href="img/1magneticfieldcoil2.jpg"><img src="img/1magneticfieldcoil2-small.jpg"></a><br /><br />
 			</p>
 		</div>
-    <p><a href="files\diagnostics\Diagnostics-Magnetics-Single.pdf">Magnetic Field Coil Spec Sheet</a></p>
+    <p><a href="files/diagnostics/Diagnostics-Magnetics-Single.pdf">Magnetic Field Coil Spec Sheet</a></p>
 		<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Magnetic field coil RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>
 
 
@@ -115,19 +115,19 @@
  -->
 
 	<div class="col-md-6">
-		<p class="center"><a href="files\diagnostics\M1-R-C render of coil behind tile SS case.jpg"><img src="files\diagnostics\M1-R-C render of coil behind tile SS case.jpg"></a><br />
+		<p class="center"><a href="files/diagnostics/M1-R-C render of coil behind tile SS case.jpg"><img src="files/diagnostics/M1-R-C render of coil behind tile SS case.jpg"></a><br />
 		</p>
 	</div>
 	<div class="col-md-6">
-		<p class="center"><a href="files\diagnostics\M1-R-P full render.jpg"><img src="files\diagnostics\M1-R-P full render.jpg"></a><br />
+		<p class="center"><a href="files/diagnostics/M1-R-P full render.jpg"><img src="files/diagnostics/M1-R-P full render.jpg"></a><br />
 		</p>
 	</div>
 	<div class="col-md-6">
 		<br />Download Coil Form for CNC Milling: <a href="files/rogowskiform.stp">Coil Form</a>
 		<br />Download Coil Case for CNC Milling: <a href="files/rogowskilower.stp">Case (lower)</a>, <a href="files/Rogowskiupper.stp">Case (upper)</a></p>
 	</div>
-      <p><a href="files\diagnostics\M1-R-C spec sheet.pdf">Rogowski Coil Spec Sheet</a></p>
-      <p><a href="files\diagnostics\M1-R-P spec sheet.pdf">Rogowski Coil Probe Spec Sheet</a></p>
+      <p><a href="files/diagnostics/M1-R-C spec sheet.pdf">Rogowski Coil Spec Sheet</a></p>
+      <p><a href="files/diagnostics/M1-R-P spec sheet.pdf">Rogowski Coil Probe Spec Sheet</a></p>
       <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Magnetic field coil RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>
 
 <!--
@@ -146,7 +146,7 @@
 		<p class="center"><a href="img/LinearArrays3.jpg"><img src="img/LinearArrays3-small.jpg"></a><br />
 		</p>
 	</div>
-      <p><a href="files\diagnostics\Diagnostics-Magnetics-Arrays.pdf">Magnetic Coil Array Spec Sheet</a></p>
+      <p><a href="files/diagnostics/Diagnostics-Magnetics-Arrays.pdf">Magnetic Coil Array Spec Sheet</a></p>
       <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Magnetic field coil RFQ &#038;body=How%20many:%0D%0A%0D%0AFrequency%20response:%0D%0A%0D%0AOD:%0D%0A%0D%0AVacuum%20rating%20(e.g.%20UHV,%20air):%0D%0A%0D%0AHarnessing%20length:%0D%0A%0D%0ACladding%20(e.g.%20BN,%20ss):%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):">Get a Quote &raquo;</a></p>
 
 

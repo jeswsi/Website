@@ -36,11 +36,11 @@
 	<h3>HeNe Interferometer</h3>
 
   <div class="col-md-6">
-    <p class="center"><a href="files\diagnostics\R1-HeNe render.jpg"><img src="files\diagnostics\R1-HeNe render.jpg"></a><br /></p>
+    <p class="center"><a href="files/diagnostics/R1-HeNe render.jpg"><img src="files/diagnostics/R1-HeNe render.jpg"></a><br /></p>
   </div>
 
   <blockquote>
-    <p><a href="files\diagnostics\Diagnostics-Refractive-HeNe.pdf">HeNe Interferometer Spec Sheet</a></p>
+    <p><a href="files/diagnostics/Diagnostics-Refractive-HeNe.pdf">HeNe Interferometer Spec Sheet</a></p>
   </blockquote>
 <!--
 --ZEMAX image
@@ -50,11 +50,11 @@
   <h3>Microwave Interferometer</h3>
 
   <div class="col-md-6">
-    <p class="center"><a href="files\diagnostics\R1-M render.jpg"><img src="files\diagnostics\R1-M render.jpg"></a><br /></p>
+    <p class="center"><a href="files/diagnostics/R1-M render.jpg"><img src="files/diagnostics/R1-M render.jpg"></a><br /></p>
   </div>
 
   <blockquote>
-    <p><a href="files\diagnostics\Diagnostics-Refractive-Microwave.pdf">Microwave Interferometer Spec Sheet</a></p>
+    <p><a href="files/diagnostics/Diagnostics-Refractive-Microwave.pdf">Microwave Interferometer Spec Sheet</a></p>
   </blockquote>
 
 	<h3>CO2 Interferometer</h3>
