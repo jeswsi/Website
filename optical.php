@@ -45,8 +45,8 @@
     circularly polarized waves in a polarimeter to achieve a chord-averaged
     measurement of the magnetic field component parallel to the beam. An
     excellent reference for refractive index diagnostics is Hutchinson's
-    <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp
-    /052167574X">Principles of Plasma Diagnostics 2nd Edition</a>.
+    <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X"
+      > Principles of Plasma Diagnostics 2nd Edition</a>.
     </p>
 
 	<h3>HeNe Interferometer</h3>
