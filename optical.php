@@ -23,15 +23,31 @@
 		<li><a href="diagnostics">Diagnostics</a></li>
   		<li class="active">Refractive-Index Measurements</li>
 	</ol>
-	<h1>Refractive-Index Measurements</h1>
-<!-- 	PICTURE OF HENE INTERFEROMETER
- -->	<p>Laser-based diagnostics that are sensitive to either path length
-	changes, polarization angle changes or refractive index of the plasma
-	comprise interferometers, polarimeters, and reflectometers.  We have
-	experience with HeNe interferometers and also CO2 interferometers. An
-	excellent reference refractive index diagnostics is Hutchinson's
-	<a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Principles of Plasma Diagnostics 2nd Edition</a>
-	</p>
+
+
+ <h1>Refractive-Index Measurements</h1>
+
+    <p>
+    The refractive index of a plasma is a robust indicator of the electron
+    density. Interferometers are commonly used to take a chord-averaged
+    measurement of the refractive index, thereby measuring the density along the
+    beam line. An interferometer is favored for its non-perturbing measurement,
+    at the expense of point resolution. Interferometers are often deployed in
+    sets, sampling several chords to build up profile information for the target
+    plasma. Woodruff Scientific provides interferometers in microwave, infrared
+    (CO2), and visible (HeNe) wavelengths to meet your specifications for
+    sensitivity range and vibration tolerance. Density profile information can
+    also be recovered through additional refractive-index diagnostics such as
+    reflectometry (in which the beam is reflected by a surface at the cutoff
+    density) and refractometry (in which the deflection or spread of the
+    transmitted beam is used to infer the density profile). Finally, one can
+    also use the difference in refractive index between left and right
+    circularly polarized waves in a polarimeter to achieve a chord-averaged
+    measurement of the magnetic field component parallel to the beam. An
+    excellent reference for refractive index diagnostics is Hutchinson's
+    <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp
+    /052167574X">Principles of Plasma Diagnostics 2nd Edition</a>.
+    </p>
 
 	<h3>HeNe Interferometer</h3>
 
