@@ -77,7 +77,19 @@
     <p><a href="files/diagnostics/Diagnostics-Refractive-Microwave.pdf">Microwave Interferometer Spec Sheet</a></p>
   </blockquote>
 
-	<h3>CO2 Interferometer</h3>
+  <h3>Fiber-Coupled Interferometer</h3>
+
+  <div class="col-md-6">
+    <p class="center"><a href="img/diagnostics/R1-F render.jpg"><img src="img/diagnostics/R1-F render.jpg"></a><br /></p>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <blockquote>
+    <p><a href="files/diagnostics/R1-F_spec_sheet.pdf">Fiber-Coupled Interferometer Spec Sheet</a></p>
+  </blockquote>
+
+  <h3>CO2 Interferometer</h3>
 			<blockquote><a href="CO2.html">CO2 Interferometer References</a></blockquote>
 
 <!-- 	--ZEMAX image
