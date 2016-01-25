@@ -79,6 +79,10 @@
 
   <h3>Fiber-Coupled Interferometer</h3>
 
+    <p>
+      Fiber-coupled interferometers are very flexible and robust systems, often allowing for lines of sight to be quickly changed without the need for optical realignment.
+    </p>
+
   <div class="col-md-6">
     <p class="center"><a href="img/diagnostics/R1-F render.jpg"><img src="img/diagnostics/R1-F render.jpg"></a><br /></p>
   </div>
@@ -90,6 +94,10 @@
   </blockquote>
 
   <h3>Fiber-Coupled, Two-Color Interferometer</h3>
+
+    <p>
+      This two-color system provides vibration compensation in addition to the flexibility and robustness of fiber-coupled systems.
+    </p>
 
   <div class="col-md-6">
     <p class="center"><a href="img/diagnostics/R1-F-2C render.png"><img src="img/diagnostics/R1-F-2C render.png"></a><br /></p>
