@@ -40,13 +40,12 @@
     energy and temperature in specific directions. Each electrostatic probe
     configuration has its advantages and disadvantages and the scientists at WSI
     can help you decide which probe is right for you. Two excellent references
-    for electrostatic probes are Hutchinson's <a href="http://www.amazon.com/Pri
-    nciples-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Principles of Plasma
-    Diagnostics</a> and Noah Hershkowitz's chapter in <a href="http://www.amazon
-    .com/Plasma-Diagnostics-Discharge-Parameters-Chemistry/dp/148320281X/ref=sr_
-    1_1?s=books&ie=UTF8&qid=1395429516&sr=1-1&keywords=noah+hershkowitz">Plasma
-    Diagnostics: Discharge Parameters and Chemistry</a>. References for specific
-    applications of each type of probe are provided in the sections below.
+    for electrostatic probes are Hutchinson's <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X"
+      > Principles of Plasma Diagnostics</a> and Noah Hershkowitz's chapter in
+    <a href="http://www.amazon.com/Plasma-Diagnostics-Discharge-Parameters-Chemistry/dp/148320281X/ref=sr_1_1?s=books&ie=UTF8&qid=1395429516&sr=1-1&keywords=noah+hershkowitz"
+      > Plasma Diagnostics: Discharge Parameters and Chemistry</a>. References
+    for specific applications of each type of probe are provided in the sections
+    below.
     </p>
 
     When requesting a quote for an electrostatic diagnostic, please consider the

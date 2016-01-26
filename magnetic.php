@@ -57,10 +57,11 @@
     engineered various ultra-high vacuum (UHV) compatible magnetic probes for
     various purposes, including single coils and arrays. We have also developed
     Helmholtz coil arrays used to calibrate these coils either in-situ or on a
-    bench. A good reference for magnetic probes is Hutchinson's <a href="http://
-    www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">
-    Principles of Plasma Diagnostics</a>. References for specific applications
-    can be found in <a href="magnetics.html">Magnetics References</a>.
+    bench. A good reference for magnetic probes is Hutchinson's
+    <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X"
+      > Principles of Plasma Diagnostics</a>. References for specific
+    applications can be found in <a href="magnetics.html"> Magnetics
+    References</a>.
     </p>
 
     When requesting a quote for a magnetic diagnostic, please consider the

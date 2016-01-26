@@ -45,8 +45,8 @@
     circularly polarized waves in a polarimeter to achieve a chord-averaged
     measurement of the magnetic field component parallel to the beam. An
     excellent reference for refractive index diagnostics is Hutchinson's
-    <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp
-    /052167574X">Principles of Plasma Diagnostics 2nd Edition</a>.
+    <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X"
+      > Principles of Plasma Diagnostics 2nd Edition</a>.
     </p>
 
 	<h3>HeNe Interferometer</h3>
@@ -77,7 +77,39 @@
     <p><a href="files/diagnostics/Diagnostics-Refractive-Microwave.pdf">Microwave Interferometer Spec Sheet</a></p>
   </blockquote>
 
-	<h3>CO2 Interferometer</h3>
+  <h3>Fiber-Coupled Interferometer</h3>
+
+    <p>
+      Fiber-coupled interferometers are very flexible and robust systems, often allowing for lines of sight to be quickly changed without the need for optical realignment.
+    </p>
+
+  <div class="col-md-6">
+    <p class="center"><a href="img/diagnostics/R1-F render.jpg"><img src="img/diagnostics/R1-F render.jpg"></a><br /></p>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <blockquote>
+    <p><a href="files/diagnostics/R1-F_Fiber-based_interferometer.pdf">Fiber-Coupled Interferometer Spec Sheet</a></p>
+  </blockquote>
+
+  <h3>Fiber-Coupled, Two-Color Interferometer</h3>
+
+    <p>
+      This two-color system provides vibration compensation in addition to the flexibility and robustness of fiber-coupled systems.
+    </p>
+
+  <div class="col-md-6">
+    <p class="center"><a href="img/diagnostics/R1-F-2C render.png"><img src="img/diagnostics/R1-F-2C render.png"></a><br /></p>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <blockquote>
+    <p><a href="files/diagnostics/R1-F-2C_Fiber-based_2-color_interferometer.pdf">Fiber-Coupled, Two-color Interferometer Spec Sheet</a></p>
+  </blockquote>
+
+  <h3>CO2 Interferometer</h3>
 			<blockquote><a href="CO2.html">CO2 Interferometer References</a></blockquote>
 
 <!-- 	--ZEMAX image
