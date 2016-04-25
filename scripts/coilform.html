@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Coil Form</title>
+    <script type="text/javascript" src="js/formcalculations.js"></script>
+    <link href="styles/cakeform.css" rel="stylesheet" type="text/css" />
+</head>
+<body onload='hideTotal()'>
+    <div id="wrap">
+        <form action="" id="coilform" onsubmit="return false;">
+        <div>
+            <div class="cont_order">
+               <fieldset>
+                <legend>Make your coil!</legend>
+                <br/>
+                <label >Wire Gauge</label>
+         
+                <select id="gauge" name='gauge' onchange="calculateTotal()">
+                <option value="None">Select Gauge</option>
+                <option value="OOOO">OOOO</option>
+                <option value="OOO">OOO</option>
+                <option value="OO">OO</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+               </select>
+                <br/>
+
+                <p>
+                <label class="inlinelabel" for='coilradius'>Coil Radius[m]</label>
+                <input type="text"  id="coilradius" name="coilradius" onchange="calculateTotal()" value="Coil Radius"  />
+                </p>
+               
+                <p>
+                <label class="inlinelabel" for='pulsetime'>Pulse Time [s]</label>
+                <input type="text"  id="pulsetime" name="pulsetime" onchange="calculateTotal()" value="Pulse Time"  />
+                </p>
+
+                <p>
+                <label class="inlinelabel" for='Im'>Current in Coil [A]</label>
+                <input type="text"  id="Im" name="Im" onchange="calculateTotal()" value="Current"  />
+                </p>
+
+                <p>
+                <label class="inlinelabel" for='n'>Number of Turns</label>
+                <input type="text"  id="n" name="n" onchange="calculateTotal()" value="Number of Turns"  />
+                </p>
+                <div id="totalPrice"></div>
+                
+                </fieldset>
+            </div>
+            
+        	<div class="cont_details">
+            	<fieldset>
+                <legend>Contact Details</legend>
+                <label for='name'>Name</label>
+                <input type="text" id="name" name='name' />
+                <br/>
+                <label for='address'>Address</label>
+                <input type="text" id="address" name='address' />
+                <br/>
+                <label for='phonenumber'>Phone Number</label>
+                <input type="text"  id="phonenumber" name='phonenumber'/>
+                <br/>
+                </fieldset>
+            </div>
+            <input type='submit' id='submit' value='Submit' onclick="calculateTotal()" />
+        </div>  
+       </form>
+	</div><!--End of wrap-->
+
+</body>
+</html>
