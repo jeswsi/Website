@@ -29,7 +29,7 @@
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/Simon_Woodruff/">ResearchGate</a></p>
 
 <h3><strong><a href="http://www.researchgate.net/profile/James_Stuber/">James Stuber</a></strong><span class="text-muted"> Design Engineer</span></h3>
-<p>James Stuber graduated with a bachelor&#8217;s degree in Aeronautics and Astronautics from the University of Washington in 2011. Interests in astronautics include orbital mechanics, propulsion, and satellite design. Other interests are computer science and plasma physics. For his senior class capstone James designed hardware and controls for rendezvous with and capture of non-cooperative orbital debris. At Woodruff Scientific James has assisted in the design and construction of lab devices, developed experiment control code, and managed plasma simulations. James is a member of the American Institue of Aeronautics and Astronautics.</p>
+<p>James Stuber graduated with a bachelor&#8217;s degree in Aeronautics and Astronautics from the University of Washington in 2011. Interests in astronautics include orbital mechanics, propulsion, and satellite design. Other interests are computer science and plasma physics. For his senior class capstone James designed hardware and controls for rendezvous with and capture of non-cooperative orbital debris. At Woodruff Scientific James has assisted in the design and construction of lab devices, developed experiment control code, and managed plasma simulations. James is a member of the American Institute of Aeronautics and Astronautics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/James_Stuber/">ResearchGate</a></p>
 
 <h3><strong>Dr. Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
