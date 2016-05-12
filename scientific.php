@@ -28,9 +28,32 @@
 <p>After a decade of research into innovative fusion concepts at the University of Manchester (PhD), Lawrence Livermore National Lab (Postdoc), UC Berkeley Department of Nuclear Engineering (Visiting Scholar), and the University of Washington (Research Scientist), Dr. Woodruff founded WSI to help accelerate the development of economic fusion energy.   Woodruff has performed work under contract to DOE, universities, national labs and to the private sector, building research devices, performing modeling and simulations primarily directed at simply-connected (hence more compact and simpler-to-engineer) fusion systems.  Dr. Woodruff is a member of the American Physical Society and the Institute of Physics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/Simon_Woodruff/">ResearchGate</a></p>
 
-<h3><strong><a href="http://www.researchgate.net/profile/James_Stuber/">James Stuber</a></strong><span class="text-muted"> Design Engineer</span></h3>
+<h3><strong><a href="https://www.researchgate.net/profile/P_Melnik">Dr. Paul A. Melnik</a></strong><span class="text-muted"> Physicist, University of Washington</span></h3>
+<p>Dr. Melnik received his MS and Ph.D. degrees from University of Washington while pursuing experimental research in laboratory plasma physics. He has expertise in the theory, design, and application of internal probes and plasma sources. His interests include circuit design, accelerated plasma flow and space propulsion.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/P_Melnik">ResearchGate</a></p>
+
+<h3><strong><a href="https://www.researchgate.net/profile/Paul_Sieck">Dr. Paul Sieck</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
+<p>Dr. Sieck has 16 years experience in laboratory plasma physics and
+nuclear fusion research.  He has worked in a diverse range of
+experimental programs, from his doctoral work on the HIT-SI spheromak
+experiment at the University of Washington, to the DIII-D tokamak at
+General Atomics, and most recently the Polywell program at Energy Matter
+Conversion Corporation.  He has broad experience in magnetic
+measurements, signal conditioning, data acquisition, laboratory
+automation, and feedback control of plasmas.  His research interests
+include high-beta MHD, accelerated plasma flows, driven magnetic
+reconnection, and plasma dynamos.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Paul_Sieck">ResearchGate</a></p>
+
+<h3><strong><a href="https://www.researchgate.net/profile/Morgan_Quinley/">Morgan Quinley</a></strong><span class="text-muted"> Diagnostics Engineer</span></h3>
+<p>Morgan earned a bachelor's degree in aerospace engineering from Saint Louis University, and during that time held internships at NASA and Andrews Space. He then worked for a few years as an R&D engineer in the field of nuclear medicine before starting graduate school in plasma science at the University of Washington. While at UW, Morgan helped to build an astrophysical jet experiment, ultimately writing his master's thesis on the design and implementation of a retarding field analyzer.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Morgan_Quinley/">ResearchGate</a></p>
+
+<h3><strong><a href="https://www.researchgate.net/profile/James_Stuber/">James Stuber</a></strong><span class="text-muted"> Design Engineer</span></h3>
 <p>James Stuber graduated with a bachelor&#8217;s degree in Aeronautics and Astronautics from the University of Washington in 2011. Interests in astronautics include orbital mechanics, propulsion, and satellite design. Other interests are computer science and plasma physics. For his senior class capstone James designed hardware and controls for rendezvous with and capture of non-cooperative orbital debris. At Woodruff Scientific James has assisted in the design and construction of lab devices, developed experiment control code, and managed plasma simulations. James is a member of the American Institute of Aeronautics and Astronautics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/James_Stuber/">ResearchGate</a></p>
+
+
 
 <h3><strong>Dr. Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
 <p>After a career at LLNL, Casper left the Physical
@@ -70,18 +93,7 @@ Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
 </p>
 
 
-<h3><strong><a href="https://www.researchgate.net/profile/Paul_Sieck">Dr. Paul Sieck</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
-<p>Dr. Sieck has 16 years experience in laboratory plasma physics and
-nuclear fusion research.  He has worked in a diverse range of
-experimental programs, from his doctoral work on the HIT-SI spheromak
-experiment at the University of Washington, to the DIII-D tokamak at
-General Atomics, and most recently the Polywell program at Energy Matter
-Conversion Corporation.  He has broad experience in magnetic
-measurements, signal conditioning, data acquisition, laboratory
-automation, and feedback control of plasmas.  His research interests
-include high-beta MHD, accelerated plasma flows, driven magnetic
-reconnection, and plasma dynamos.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Paul_Sieck">ResearchGate</a></p>
+
 
 <h1>Associates</h1>
 <p>WSI has a large collaborator base and a Scientific Advisory Board of experts in fusion energy sciences at private and public institutions around the U.S., and abroad.</p>
@@ -156,9 +168,7 @@ or by means of optical fibers adjacent to the plasma.</p>
 <p><a href="http://www.eagleharbortech.com">Eagle Harbor Technologies</a></p>
 
 
-<h3><strong>Dr. Paul A. Melnik</strong><span class="text-muted"> Physicist, University of Washington</span></h3>
-<p>Dr. Melnik received his MS and Ph.D. degrees from University of Washington while pursuing experimental research in laboratory plasma physics. He has expertise in the theory, design, and application of internal probes and plasma sources. His interests include circuit design, accelerated plasma flow and space propulsion.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/P_Melnik">ResearchGate</a></p>
+
 
 
 
