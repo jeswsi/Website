@@ -1,5 +1,5 @@
 
-#wrap{
+#hhwrap{
 	width:400px;
 	margin:0 auto;
 	text-align:left;
@@ -10,7 +10,7 @@
 	font-size:13px;    
     line-height:16px;
 }
-#wrap .cont_details fieldset,.cont_order fieldset{
+#hhwrap .cont_details fieldset,.cont_order fieldset{
 	margin:10px;
 	padding:20px;
     -moz-border-radius: 10px;
@@ -18,50 +18,50 @@
     -khtml-border-radius: 10px;
     border-radius: 10px;
 }
-#wrap legend{
+#hhwrap legend{
 	font-size:16px;
-	font-family:Georgia, "Times New Roman", Times, serif;
+	/*font-family:Georgia, "Times New Roman", Times, serif;*/
 	color:#000;
 	font-weight:bold;
 	font-style:italic;
     padding-bottom:10px;
 }
-#wrap .cont_details input{
+#hhwrap .cont_details input{
 	margin-bottom:10px;
 	color:#000;
 }
-#wrap .input1:hover,.input1:active{
+#hhwrap .input1:hover,.input1:active{
 	
 }
-#wrap label{
+#hhwrap label{
 	display:block;
 	font-size:12px;
 	color:#000;
     font-weight:bold;
 }
-#wrap label.inlinelabel
+#hhwrap label.inlinelabel
 {
     display:inline;
 }
-#wrap .cont_order input{
+#hhwrap .cont_order input{
 	margin-bottom:5px;
 }
-#wrap .cont_order p{
+#hhwrap .cont_order p{
 	padding-top:5px;
 }
 
-#wrap input[type="radio"]
+#hhwrap input[type="radio"]
 {
 margin-top:8px;
 margin-bottom:8px;
 }
 
-#wrap input[type="text"]:hover,
-#wrap input[type="text"]:active {
+#hhwrap input[type="text"]:hover,
+#hhwrap input[type="text"]:active {
 background-color: #FAF398;
 }
 
-#wrap input#submit
+#hhwrap input#submit
 {
 margin:10px;
 padding-left:20px;
@@ -70,14 +70,14 @@ padding-top:10px;
 padding-bottom:10px;
 }
 
-#wrap div#totalPrice
+#hhwrap div#totalPrice
 {
     padding:10px;
     font-weight:bold;
-    background-color:#ff0;
+    /*background-color:#ff0;*/
 }
 
-#wrap label.radiolabel
+#hhwrap label.radiolabel
 {
 font-weight:normal;
  display:inline;

@@ -144,13 +144,14 @@ function calculateTotal()
     //display the result
     var divobj = document.getElementById('totalPrice');
     divobj.style.display='block';
-    divobj.innerHTML = "max B [T] "+Bmax + 
-        "<br>Wire Radius [cm] "+r_wire +
-        "<br>Wire Length [m] "+l_w +
-        "<br>Wire Mass [g] "+m_wire +
-        "<br>Wire Resistance [ohms] "+R_Cu1 +
-        "<br>Ohmic Heating [J] "+E_Cu1 +
-        "<br>Temp change [C] "+ dT_wire
+    divobj.innerHTML = 
+        "Max B [T]:             "+twoDecimals(Bmax) + 
+        "<br>Wire Radius [cm]:  "+twoDecimals(r_wire) +
+        "<br>Wire Length [m]:   "+twoDecimals(l_w) +
+        "<br>Wire Mass [g]:     "+twoDecimals(m_wire) +
+        "<br>Wire Resistance [ohms]: "+twoDecimals(R_Cu1) +
+        "<br>Ohmic Heating [J]: "+twoDecimals(E_Cu1) +
+        "<br>Temp change [C]:   "+ twoDecimals(dT_wire)
         ;
 }
 
@@ -158,4 +159,8 @@ function hideTotal()
 {
     var divobj = document.getElementById('totalPrice');
     divobj.style.display='none';
+}
+
+function twoDecimals(num){    
+    return +(Math.round(num + "e+2")  + "e-2");
 }

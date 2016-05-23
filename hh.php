@@ -29,10 +29,14 @@
     <a href="img/LANLcoils.jpg"><img src="img/LANLcoils.jpg" width="224" height="300"></a><br />
     <span class="text-muted">Fig 1. Example: vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.</span></p>
 
+    <p>WSI has experience designing and building custom Helmholtz coils for various applications. Helmholtz coils produce a uniform magnetic field
+      in between the coils.</p>
+
+    <blockquote><a href="coilform">Try our Helmholtz Coil Calculator</a></blockquote>
  
   <h2>Configurations</h2>
       <p>
-      Copper wire and Stainless Steel wire-forms. Custom sizing and materials available.
+      Copper wire and Stainless Steel or Aluminum wire-forms. Custom sizing, wire insulation and materials available. We also offer cooling for high power configurations.
     </p>
   <div class="col-md-6">
     
