@@ -31,7 +31,7 @@
 		<ul class="left">
 		<li><a href="solenoids">Solenoids</a></li>
 		<li><a href="hh">Helmholtz Coils</a></li>
-		<!-- <li><a href="hh">Maxwell Coils</a></li> -->
+		<li><a href="maxwell">Maxwell Coils</a></li>
 		<li><a href="pfcoil">PF Coil Sets</a></li>
 		<li><a href="noncircular">Non-Circular Coils</a></li>
 		<li><a href="lowlhighc">Low L High Current</a></li>
