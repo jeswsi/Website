@@ -71,9 +71,6 @@ activities to further the development of ITER plasma scenarios and
 control capabilities.
 </p>
 
-<h3><strong><a href="https://www.researchgate.net/profile/Steven_Diesburg/">Steven Diesburg</a></strong><span class="text-muted"> Design Engineer</span></h3>
-<p>After obtaining an MSE in Mechanical Engineering from the University of Washington in 2013, Steven began working on a DOE funded project working on research and development of improved cookstoves for developing countries.  Simultaneously, Steven has been supporting work part-time at WSI developing engineering drawings, simulations, and helping to build out the company’s potential offerings.  Previously Steven had completed his BS in Physics, Environmental Studies, and German at Iowa State University in 2007, and worked on environmental cleanup and investigation support for four years as a consultant to the EPA for Booz Allen Hamilton.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Steven_Diesburg/">ResearchGate</a></p>
 
 <h3><strong>Dr. Edwin Hooper</strong> <span class="text-muted">Physicist</span></h3>
 <p>
@@ -100,6 +97,11 @@ Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
 
 <h3><strong>Dr. Myunghee Choi</a></strong><span class="text-muted"> Physicist, IMSOL-X, San Diego, CA</span></h3>
 <p>After 17 years of modeling and computational research on present nuclear fusion devices (DIII-D, Tore Supra, KSTAR, Alcator C-Mod, NSTX) and future burning plasma devices (ITER and FDF) at Columbia University in New York, General Atomics in San Diego, CEA in Cararache and NFRI in Korea, she founded IMSOL-X in San Diego on 2013 May to share her knowledge and research experiences with international fusion communities. Dr. Choi is a member of the American Physical Society.</p>
+
+<h3><strong><a href="https://www.researchgate.net/profile/Steven_Diesburg/">Steven Diesburg</a></strong><span class="text-muted"> Design Engineer</span></h3>
+<p>After obtaining an MSE in Mechanical Engineering from the University of Washington in 2013, Steven began working on a DOE funded project working on research and development of improved cookstoves for developing countries.  Simultaneously, Steven has been supporting work part-time at WSI developing engineering drawings, simulations, and helping to build out the company’s potential offerings.  Previously Steven had completed his BS in Physics, Environmental Studies, and German at Iowa State University in 2007, and worked on environmental cleanup and investigation support for four years as a consultant to the EPA for Booz Allen Hamilton.</p>
+<p>For publications, please visit <a href="https://www.researchgate.net/profile/Steven_Diesburg/">ResearchGate</a></p>
+
 
 <h3><strong><a href="https://www.researchgate.net/profile/James_Garry/">Dr. James R. C. Garry</a></strong> <span class="text-muted"> Physicist, Redcore Consulting, Vancouver B. C.</span></h3>
 <p>James is a chartered physicist, and has spent 20 years or so working on applied physics projects of one sort and another. For about 15 years James was a spacecraft engineer, and had involvement with three planetary missions. Now comfortably settled in Vancouver he has switched track and am looking at engineering solutions to energy/resource problems.</p>
