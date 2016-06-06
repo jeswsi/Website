@@ -65,7 +65,11 @@
 		San Diego, CA 92121<br />
 		USA<br />
 		</blockquote>
+<<<<<<< HEAD
 		<p>(858) 348 4483</p>
+=======
+		<p>(206) 905 9477</p>
+>>>>>>> b47e5891332cbc781615f42fdf8345891c7b997c
 	</div>
 
 	<div class="col-md-7">
