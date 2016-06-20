@@ -28,6 +28,7 @@
         <li data-target="#myCarousel" data-slide-to="2"></li>
         <li data-target="#myCarousel" data-slide-to="3"></li>
         <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
       </ol>
       <div class="carousel-inner">
         <div class="item active">
@@ -39,7 +40,15 @@
           </div>
         </div>
         <div class="item">
-          <img src="img/stpx_banks_carousel.jpg" alt="Second slide">
+          <img src="img/work_coil-carousel.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <p><a class="white" href="magnets">Helmholtz Coil for Aerospace</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/stpx_banks_carousel.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
       			<p><a class="white" href="pulsedpower">STPX Capacitor Banks</a></p>
@@ -47,7 +56,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="img/LANLcoils-carousel.jpg" alt="Third slide">
+          <img src="img/LANLcoils-carousel.jpg" alt="Fourth slide">
           <div class="container">
             <div class="carousel-caption">
             	<p><a class="white" href="magnets">Helmholtz Coils for LANL's PLX</a></p>
@@ -55,7 +64,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="img/LTX-carousel.png" alt="Fourth slide">
+          <img src="img/LTX-carousel.png" alt="Fifth slide">
           <div class="container">
             <div class="carousel-caption">
               <p><a class="" href="physics">LTX Equilibrium</a></p>
@@ -63,7 +72,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="img/iter-carousel.png" alt="Fifth slide">
+          <img src="img/iter-carousel.png" alt="Sixth slide">
           <div class="container">
             <div class="carousel-caption">
               <p><a class="white" href="physics">ITER MHD</a></p>

@@ -28,8 +28,13 @@
 	
 	<h1>Helmholtz Coils</h1>
 	  <p class="center">
-    <a href="img/LANLcoils.jpg"><img src="img/LANLcoils.jpg" width="224" height="300"></a><br />
-    <span class="text-muted">Fig 1. Example: vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.</span></p>
+      <a href="img/LANLcoils.jpg"><img src="img/LANLcoils.jpg" width="224" height="300"></a>
+      
+    
+      <a href="img/HH_coil.jpg"><img src="img/HH_coil.jpg" width="224" height="300"></a><br />
+      <span class="text-muted">Fig 1. Vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.
+      <br />Fig 2. Vacuum-compatible  HH coils designed for The Aerospace Corporation.</span>
+    </p>
 
     <p>WSI has experience designing and building custom Helmholtz coils for various applications. Helmholtz coils produce a uniform magnetic field
       in between the coils.</p>
@@ -40,7 +45,7 @@
     </p>
   <div class="col-md-6">
     
-    <p><a href="img/HHcoil2.jpg"><img alt="Coil1" src="img/HHcoil2.jpg" width="300" height="129" /></a>
+    <p><a href="img/HH_coil_render.png"><img alt="Coil1" src="img/HH_coil_render.png" width="375" /></a>
     </p>
   </div>
 

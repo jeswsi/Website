@@ -31,7 +31,7 @@
 		<ul class="left">
 		<li><a href="solenoids">Solenoids</a></li>
 		<li><a href="hh">Helmholtz Coils</a></li>
-		<li><a href="maxwell">Maxwell Coils</a></li>
+		<li><a href="Maxwell">maxwell Coils</a></li>
 		<li><a href="pfcoil">PF Coil Sets</a></li>
 		<li><a href="noncircular">Non-Circular Coils</a></li>
 		<li><a href="lowlhighc">Low L High Current</a></li>
@@ -42,9 +42,11 @@
 
 	<h1>Magnets</h1>
 	<img class="left" src="img/LANLcoils.jpg" width="224" height="300">
+	<img class="left" src="img/HH_coil.jpg" width="224" height="300">
 	<p>We produce custom magnetic field coils engineered for pulsed power applications, requiring high field strengths, high currents, high voltages, often UH vacuum compatibility (see e.g. Fig 1) and to withstand large forces. Typical coil sets have been designed and built for Helmholtz, Maxwell and other configurations (e.g. Poloidal field).  We have designed and built cooled coil systems (through to 10kW). Our standard offerings below can be tailored to specific applications.</p>
 	<p class="text-muted">
-		Fig 1. Example: vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.
+		Fig 1. Vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.<br>
+		Fig 2. Vacuum-compatible  HH coils designed for The Aerospace Corporation.
 	</p>
 
 	<div class="clearfix">
