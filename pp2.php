@@ -8,6 +8,7 @@
 
   <body>
 <?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 

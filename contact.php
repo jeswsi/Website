@@ -28,6 +28,7 @@
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -40,6 +41,28 @@
  	 	<li><a href="company">Company</a></li>
   		<li class="active">Contact</li>
 	</ol>
+	<div class="col-md-12">	
+		<script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
+
+<div id="SkypeButton_Call_si_woodruff_1">
+
+<script type="text/javascript">
+
+Skype.ui({
+
+"name": "dropdown",
+
+"element": "SkypeButton_Call_si_woodruff_1",
+
+"participants": ["si_woodruff"],
+
+"imageSize": 32
+
+});
+
+</script>
+</div>
+	</div>
 	<div class="col-md-5">
 		<h1>Seattle Office</h1>
 		<blockquote>4000 Aurora Ave (Suite 6)<br />
