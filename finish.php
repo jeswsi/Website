@@ -27,6 +27,7 @@
 <?php
 $name = $_POST['name'];
 $email = $_POST['email'];
+$addemail = $_POST['addemail']
 $school = $_POST['school'];
 $degree = $_POST['degree'];
 $major = $_POST['major'];
@@ -73,6 +74,7 @@ $subject = $name . "'s Application to the Scientific Computing Bootcamp";
 $messagebody = 
 	'Name: ' . $name . "\n" .
 	'Email: ' . $email . "\n" .
+	'Additional Email: ' . $addemail . "\n" .
 	'School/Employer: ' . $school . "\n" .
 	'Degree: ' . $degree . "\n" .
 	'Major: ' . $major . "\n" .
