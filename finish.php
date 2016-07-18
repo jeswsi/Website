@@ -56,11 +56,11 @@ $headers =
 	'Content-Transfer-Encoding: 8bit' . "\r\n" . 
 	'Content-Type: text/plain; charset=UTF-8' . "\r\n";
 $params = '-f ' . $emailfrom;
-//if ( $test = mail($emailto, $subject, $messagebody, $headers, $params) ){
-//	$m = "yay";
-//} else {
-//	$m ="dang";
-//}
+if ( $test = mail($emailto, $subject, $messagebody, $headers, $params) ){
+	$m = "yay";
+} else {
+	$m ="dang";
+}
 
 echo $message;
 //echo $m;
