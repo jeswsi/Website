@@ -28,8 +28,6 @@
             <li><a href="equilibrium">Equilibrium</a></li>
             <li><a href="mhd">MHD</a></li>
             <li><a href="cfd">CFD</a></li>
-            <li><a href="electrostatics">Electrostatics</a></li>
-            <li><a href="rf">RF</a></li>
             <li><a href="systems">Systems</a></li>
           </ul>
 
