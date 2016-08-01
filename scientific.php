@@ -25,6 +25,9 @@
 	</ol>
 	<h1>Scientific Team</h1>
 			<h3><strong><a href="http://www.researchgate.net/profile/Simon_Woodruff/">Dr. Simon Woodruff</a>
+
+<img src="simon.jpg" alt="Image of Simon" style="width:128px;height:128px;">
+
 </strong><span class="text-muted">Physicist</span></h3>
 <p>After a decade of research into innovative fusion concepts at the University of Manchester (PhD), Lawrence Livermore National Lab (Postdoc), UC Berkeley Department of Nuclear Engineering (Visiting Scholar), and the University of Washington (Research Scientist), Dr. Woodruff founded WSI to help accelerate the development of economic fusion energy.   Woodruff has performed work under contract to DOE, universities, national labs and to the private sector, building research devices, performing modeling and simulations primarily directed at simply-connected (hence more compact and simpler-to-engineer) fusion systems.  Dr. Woodruff is a member of the American Physical Society and the Institute of Physics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/Simon_Woodruff/">ResearchGate</a></p>
