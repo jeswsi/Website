@@ -35,23 +35,15 @@
 <br></br>
 
 
-
-
 <img src="img/Headshots/morgan.jpg" alt="Image of Morgan Quinley" style="width:128px;" align="left" Hspace="10">
 
 <h3><strong><a href="https://www.researchgate.net/profile/Morgan_Quinley/">Morgan Quinley</a></strong><span class="text-muted"> COO</span></h3>
 
-<p>Morgan brings many years of experience gained working in industrial settings to his role as Chief Operations Officer.  Morgan earned a bachelor's degree in aerospace engineering from Saint Louis University. He then worked for a few years in the field of nuclear medicine at a medium sized business before starting graduate school in plasma science at the University of Washington, where he obtained his MSc.  Morgan currently splits his time between business strategy, management and planning and scientific duties as Diagnostic Engineer.</p>
+<p>Morgan brings many years of experience gained working in industrial settings to his role as Chief Operations Officer.  Morgan earned a bachelor's degree in aerospace engineering from Saint Louis University. He then worked for a few years in the field of nuclear medicine at a large business before starting graduate school in plasma science at the University of Washington, where he obtained his MSc.  Morgan currently splits his time between business strategy, management and planning and scientific duties as Diagnostic Engineer.</p>
 
 <br></br>
-
-
-
-<h3><strong><a href="http://www.greenwoodcpa.com/AmandaORourke.php">Amanda O'Rourke</a></strong>
-<span class="text-muted">CPA, Greenwood Ohlund and Co. LLP</span></h3>
-<p>Amanda is a licensed CPA who specializes in nonprofit services including attestation engagements, tax preparation and financial management. She has been with Greenwood, Ohlund & Co., LLP since 2009 and brings a diverse background in public accounting, as well as financial management in the nonprofit sector and the construction industry. </p>
-
 <br></br>
+
 
 <img src="img/Headshots/felicia.jpg" alt="Image of Felicia Edwards" style="width:128px;" align="left" Hspace="10">
 
@@ -60,6 +52,22 @@
 
 <br></br>
 <br></br>
+
+
+
+
+
+<h1>Accounting</h1>
+
+<h3><strong><a href="http://www.greenwoodcpa.com/AmandaORourke.php">Amanda O'Rourke</a></strong>
+<span class="text-muted">CPA, Greenwood Ohlund and Co. LLP</span></h3>
+<p>Amanda is a licensed CPA who specializes in nonprofit services including attestation engagements, tax preparation and financial management. She has been with Greenwood, Ohlund & Co., LLP since 2009 and brings a diverse background in public accounting, as well as financial management in the nonprofit sector and the construction industry. </p>
+
+<br></br>
+
+
+
+
 
 
 <h1>Legal</h1>
