@@ -146,6 +146,15 @@ control capabilities.
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Steven_Diesburg/">ResearchGate</a></p>
 
 
+
+
+<h3><strong><a href="http://decysive.com/index.htm">Dr. Ronald Miller</a></strong><span class="text-muted"> Consultant</span></h3>
+
+<p>Dr. Ronald Miller consults in the areas of new energy technologies (emphasizing fusion energy), systems engineering, decision analysis, risk/value management and energy economics, doing business as Decysive Systems since 2005.  Dr. Miller holds a Ph.D. degree in Nuclear Engineering from the University of Illinois, Urbana-Champaign.</p>
+
+
+
+
 <h3><strong><a href="https://www.researchgate.net/profile/James_Garry/">Dr. James R. C. Garry</a></strong> <span class="text-muted"> Physicist, Redcore Consulting, Vancouver B. C.</span></h3>
 <p>James is a chartered physicist, and has spent 20 years or so working on applied physics projects of one sort and another. For about 15 years James was a spacecraft engineer, and had involvement with three planetary missions. Now comfortably settled in Vancouver he has switched track and am looking at engineering solutions to energy/resource problems.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/James_Garry/">ResearchGate</a></p>
@@ -179,7 +188,7 @@ Eric earned a PhD at the University of Washington in computational plasma physic
 <p>Dr. McCollam&#8217;s research focuses mainly on innovative means for producing current drive in toroidal plasmas, and in particular in the Madison Symmetric Torus (MST), at the University of Wisconsin Madison.</p>
 
 
-<h3><strong>Chris Raastad</strong><span class="text-muted"> Computational scientist, <a href="http://fits.me">Fits.me</a></span></h3>
+<h3><strong>Chris Raastad</strong><span class="text-muted"> Computational Scientist, <a href="http://fits.me">Fits.me</a></span></h3>
 <p>Chris graduated with Bachelors in Mathematics and Computer Science from the University of Washington and in the process changed focus from physics, to pure math, to computational physics, to applied math, to finally computer science.  He unexpectedly ended up in Estonia on a Fulbright scholarship to study a Masters in Cybersecurity only to accidentally fall into his true passion of hot tech startups.  Now he spends his days running, singing, and helping make clean code and quality software at Fits.me, a startup using shapeshifting robots to take on the online fitting room world.</p>
 <p>Fore more information, please visit <a href="http://fits.me">Fits.me</a>.</p>
 
@@ -211,6 +220,7 @@ or by means of optical fibers adjacent to the plasma.</p>
 </span></h3>
 <p>Dr. Ziemba founded EHT in 2006 and continued to grow the company rapidly in North Downtown Seattle. His core philosophy is to deliver innovative, high quality results that exceed our customer/grantor expectations in the areas of pulsed power, plasma physics and plasma diagnostics.</p>
 <p><a href="http://www.eagleharbortech.com">Eagle Harbor Technologies</a></p>
+
 
 
 
