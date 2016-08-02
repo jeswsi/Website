@@ -31,7 +31,7 @@
                   <li><a href="codac">CODAC</a></li>
                   <li><a href="diagnostics">Diagnostics</a></li>
                   <li><a href="devices">Devices</a></li>
-                  <li><a href="computers">Computers</a></li>
+                 
 		</ul>
 	<h1>Products</h1>
 	<p>Woodruff Scientific offers products that can be tailored to suit specific pulsed power and plasma physics applications, with the philosophy of providing all subsystems necessary for fusion energy development and research. </p>
