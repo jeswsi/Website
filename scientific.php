@@ -133,6 +133,10 @@ control capabilities.
 </p>
 
 
+<h3><strong>Trevor Smith</strong> <span class="text-muted">Space Grant Summer Intern</span></h3>
+<p>Studying mechanical engineering at the University of California, San Diego, Trevor's interests include design for practicality, manufacturing optimization and support for sustainable energy sources.</p>
+
+
 
 
 <h1>Associates</h1>
@@ -151,6 +155,11 @@ control capabilities.
 <h3><strong><a href="http://decysive.com/index.htm">Dr. Ronald Miller</a></strong><span class="text-muted"> Consultant</span></h3>
 
 <p>Dr. Ronald Miller consults in the areas of new energy technologies (emphasizing fusion energy), systems engineering, decision analysis, risk/value management and energy economics, doing business as Decysive Systems since 2005.  Dr. Miller holds a Ph.D. degree in Nuclear Engineering from the University of Illinois, Urbana-Champaign.</p>
+
+
+
+<h3><strong><a href="ttps://www.linkedin.com/in/srinathvadlamani">Dr. Srinath Vadlamani</a></strong> <span class="text-muted"> Computational Scientist</span></h3>
+<p>Dr. Vadlamani received his Ph.D. degree in Applied Mathematics from Univ. of Colorado-Boulder in  2005 which focused on merging particle-in-cell and continuum algorithms for fusion scaled plasma simulations. Dr. Vadlamani has developed algorithms and parallel implementations for both plasma and climate scientific applications.  Both at Tech-X and NCAR, Dr. Vadlamani implemented and evaluated efficacy of new algorithms on emergent architectures such as GPUS and the Intel Xeon Phi.  As a Computational Scientist at ParaTools, Inc, Dr. Vadlamani has extensive experience using, supporting, and deploying high performance engineering techniques to enhance parallel simulation codes.</p>
 
 
 
