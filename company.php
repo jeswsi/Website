@@ -32,23 +32,28 @@
                   <li><a href="computeruse">Computer Use Policy</a></li>
                   <li><a href="terms">Terms and Conditions</a></li>
 		</ul>
+
+
+<p><img src="img/CompanyPhotos/Team.JPG" alt="Image of WSI Team" style="width:500px;" align="left" Hspace="10"></p>
+
+
 <p>Nuclear fusion powers our sun and all the stars in the night sky; if harnessed on earth, it could be the ultimate energy source: safe, clean, and with plentiful fuel. Commercial fusion energy will ultimately provide energy independence, national security, and new jobs in the emerging clean-tech market sector.</p>
+
 <p>For the last decade, Woodruff Scientific has sought to accelerate the development of commercial fusion by tackling critical scientific problems in the <a href="http://science.energy.gov/fes/">US DOE Fusion Energy Sciences program</a>.  What we&#8217;ve built, we can now offer as <a href="products">products.</a> What we&#8217;ve learned to do, we offer as <a href="services">services</a>.</p>
+
 <p>Woodruff Scientific Incorporated (WSInc) is a C-Corp established in 2005 in Seattle, Washington, USA.  WSInc performs research under contract to private and public institutions, as well as through awards from the U.S. Department of Energy.   Offices and electronics workshop are located in Wallingford. In 2015, WSI established a second office in San Diego.</p>
+
 <p>Woodruff Scientific Limited (WSLtd) is a fully-owned subsidiary of WSInc established in 2006 in Guildford, UK. WSLtd exists to serve EU-based customers.  Office is located at the Culham Innovation Centre in Abingdon, UK.</p>
 
 <blockquote>
 	4000 Aurora Ave N. Ste. 6<br>
-	Seattle, WA 98103<br>
-	USA
+	Seattle, WA 98103	USA
 	</p><p>
   7950 Silverton Ave, Suite 207<br>
-  San Diego, CA 92121<br>
-  USA
+  San Diego, CA 92121 USA
   </p><p>
   D5 Culham Science Centre<br>
-  Abingdon, OX14 3DB<br>
-  UK
+  Abingdon, OX14 3DB UK
   </blockquote>
 
     </div> <!-- /container -->
