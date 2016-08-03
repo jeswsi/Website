@@ -24,14 +24,6 @@
 	</ol>
 
 	<h1>Woodruff Scientific, Inc.</h1>
-		<ul class="right">
-		  <li><a href="contact">Contact</a></li>
-                  <li><a href="scientific">Scientific Team</a></li>
-                  <li><a href="business">Business Team</a></li>
-                  <li><a href="careers">Careers</a></li>
-                  <li><a href="computeruse">Computer Use Policy</a></li>
-                  <li><a href="terms">Terms and Conditions</a></li>
-		</ul>
 
 
 <p><img src="img/CompanyPhotos/Team.JPG" alt="Image of WSI Team" style="width:500px;" align="left" Hspace="10"></p>
@@ -44,6 +36,8 @@
 <p>Woodruff Scientific Incorporated (WSInc) is a C-Corp established in 2005 in Seattle, Washington, USA.  WSInc performs research under contract to private and public institutions, as well as through awards from the U.S. Department of Energy.   Offices and electronics workshop are located in Wallingford. In 2015, WSI established a second office in San Diego.</p>
 
 <p>Woodruff Scientific Limited (WSLtd) is a fully-owned subsidiary of WSInc established in 2006 in Guildford, UK. WSLtd exists to serve EU-based customers.  Office is located at the Culham Innovation Centre in Abingdon, UK.</p>
+
+<br></br>
 
 <blockquote>
 	4000 Aurora Ave N. Ste. 6<br>
