@@ -94,8 +94,9 @@ budget.</p>
     </div>
     <div class="clearfix"></div>
 
-	<div class="col-md-6">
-		<a class="black" href="products"><h2>Products</h2></a>
+	<!--<div class="col-md-6">
+		
+    <a class="black" href="products"><h2>Products</h2></a>
 		<ul>
 		<li><a href="pulsedpower">Pulsed power</a></li>
 		<li><a href="magnets">Magnets</a></li>
@@ -106,7 +107,9 @@ budget.</p>
 		<li><a href="devices">Devices</a></li>
 		<li><a href="computers">High Performance Computing</a></li>
 		</ul>
-	</div>
+	</div> -->
+
+
 	<div class="col-md-6">
 		<a class="black" href="services"><h2>Services</h2></a>
 		<ul>
