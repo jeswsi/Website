@@ -26,11 +26,14 @@
 
           <ul class="left">
             <li><a href="vacuumdesign">Vacuum System Design</a></li>
-            <li><a href="pulsedpowerdesign">Pulsed Power Design</a></li>
-            <li><a href="magnetdesign">High Field Magnet Design</a></li>
-            <li><a href="straylight">Stray Light Analysis</a></li>
-            <li><a href="fem">Thermal Analysis</a></li>
             <li><a href="fem">Structural Analysis</a></li>
+            <li><a href="pulsedpower">Pulsed Power</a></li>
+            <li><a href="magnets">Magnets</a></li>
+            <li><a href="sources">Plasma Sources</a></li>
+            <li><a href="chambers">Plasma-Material Interface</a></li>
+            <li><a href="codac">CODAC</a></li>
+            <li><a href="diagnostics">Diagnostics</a></li>
+            <li><a href="devices">Devices</a></li>
           </ul>
 
 	<h1>Engineering</h1>
