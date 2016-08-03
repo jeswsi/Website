@@ -29,6 +29,9 @@
             <li><a href="mhd">MHD</a></li>
             <li><a href="cfd">CFD</a></li>
             <li><a href="systems">Systems</a></li>
+            <li><a href="magnetdesign">High Field Magnet Design</a></li>
+            <li><a href="straylight">Stray Light Analysis</a></li>
+            <li><a href="fem">Thermal Analysis</a></li>
           </ul>
 
 	<h1>Physics</h1>
