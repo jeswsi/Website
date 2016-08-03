@@ -97,6 +97,11 @@ reconnection, and plasma dynamos.</p>
 <br></br>
 
 
+<img src="img/Headshots/bick.jpg" alt="Image of Edwin Bick Hooper" style="width:128px;" align="left" Hspace="10">
+
+<h3><strong>Dr. Edwin "Bick" Hooper</strong> <span class="text-muted">Physicist</span></h3>
+
+<p>Edwin B. "Bick" Hooper received his BS and PhD from MIT and has taught, conducted research and managed research at MIT, Yale, and the University of California.  He spent most of his career at LLNL where he was Deputy Associate for Magnetic Fusion Energy (MFE), among other management and administrative positions.  His experimental and theoretical research has focused on MFE confinement geometries including mirrors, tokamaks and the spheromak; in addition he has published work on plasma turbulence, the production of intense negative ion beams, and a novel electric propulsion concept for interplanetary travel.  Since retirement he has undertaken resistive MHD simulations for helicity injection into spherical tokamaks and consulted on fusion research.  He is the author of over 100 refereed publications and a Fellow of the American Physical Society.</p>
 
 
 <h3><strong>Dr. Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
@@ -115,17 +120,6 @@ member nations and defining a program of experimental and modeling
 activities to further the development of ITER plasma scenarios and
 control capabilities.
 </p>
-
-<br></br>
-
-
-<img src="img/Headshots/bick.jpg" alt="Image of Edwin Bick Hooper" style="width:128px;" align="left" Hspace="10">
-
-<h3><strong>Dr. Edwin "Bick" Hooper</strong> <span class="text-muted">Physicist</span></h3>
-
-<p>Edwin B. "Bick" Hooper received his BS and PhD from MIT and has taught, conducted research and managed research at MIT, Yale, and the University of California.  He spent most of his career at LLNL where he was Deputy Associate for Magnetic Fusion Energy (MFE), among other management and administrative positions.  His experimental and theoretical research has focused on MFE confinement geometries including mirrors, tokamaks and the spheromak; in addition he has published work on plasma turbulence, the production of intense negative ion beams, and a novel electric propulsion concept for interplanetary travel.  Since retirement he has undertaken resistive MHD simulations for helicity injection into spherical tokamaks and consulted on fusion research.  He is the author of over 100 refereed publications and a Fellow of the American Physical Society.</p>
-
-<br></br>
 
 
 <h3><strong>Dr. Kara A. Olson</strong> <span class="text-muted">Computational Scientist</span></h3>

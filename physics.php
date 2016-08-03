@@ -27,8 +27,8 @@
           <ul class="left">
             <li><a href="equilibrium">Euilibrium, Stability & Transport</a></li>
             <li><a href="mhd">3D Resistive MHD</a></li>
-            <li><a href="cfd">Fusion Systems Code</a></li>
-            <li><a href="systems">Systems</a></li>
+            <li><a href="cfd">Computational Fluid Dynamics</a></li>
+            <li><a href="systems">Fusion Systems Code</a></li>
             <li><a href="magnetdesign">High Field Magnet Design</a></li>
             <li><a href="straylight">Stray Light Analysis</a></li>
             <li><a href="fem">Thermal/Structural Analysis</a></li>

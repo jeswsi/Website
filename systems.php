@@ -22,9 +22,9 @@
        	  <li><a href="index">Home</a></li>
       	  <li><a href="services">Services</a></li>
       	  <li><a href="physics">Physics</a></li>
-	  <li class="active">Systems</li>
+	  <li class="active">Fusion Systems Code</li>
 	</ol>
-	<h1>Systems Analysis</h1>
+	<h1>Fusion Systems Code</h1>
 	<p>Primary tools for systems analysis are Matlab and ARIES.</p>
 		<blockquote><a href="costing.html">Costing References</a></blockquote>
 
