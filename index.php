@@ -30,6 +30,9 @@
         <li data-target="#myCarousel" data-slide-to="3"></li>
         <li data-target="#myCarousel" data-slide-to="4"></li>
         <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
+        <li data-target="#myCarousel" data-slide-to="7"></li>
+        <li data-target="#myCarousel" data-slide-to="8"></li>
       </ol>
       <div class="carousel-inner">
         <div class="item active">
@@ -77,6 +80,30 @@
           <div class="container">
             <div class="carousel-caption">
               <p><a class="white" href="physics">ITER MHD</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/CompanyPhotos/Team.JPG" alt="Seventh slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <p><a class="white" href="physics">Group Offsite Photo</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/CompanyPhotos/CompanyFinancials.JPG" alt="Eighth slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <p><a class="white" href="physics">Company Finances</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/CompanyPhotos/MtRainier.JPG" alt="Nineth slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <p><a class="white" href="physics">Mt Rainier</a></p>
             </div>
           </div>
         </div>
