@@ -103,6 +103,9 @@ reconnection, and plasma dynamos.</p>
 
 <p>Edwin B. "Bick" Hooper received his BS and PhD from MIT and has taught, conducted research and managed research at MIT, Yale, and the University of California.  He spent most of his career at LLNL where he was Deputy Associate for Magnetic Fusion Energy (MFE), among other management and administrative positions.  His experimental and theoretical research has focused on MFE confinement geometries including mirrors, tokamaks and the spheromak; in addition he has published work on plasma turbulence, the production of intense negative ion beams, and a novel electric propulsion concept for interplanetary travel.  Since retirement he has undertaken resistive MHD simulations for helicity injection into spherical tokamaks and consulted on fusion research.  He is the author of over 100 refereed publications and a Fellow of the American Physical Society.</p>
 
+<br></br>
+
+<img src="img/Headshots/tom.jpg" alt="Image of Tom Casper" style="width:128px;" align="left" Hspace="10">
 
 <h3><strong>Dr. Tom Casper</strong> <span class="text-muted">Physicist</span></h3>
 
@@ -113,7 +116,6 @@ specifications. He developed control and plasma scenarios that met the plasma co
 the performance of superconducting magnets, power supplies and the plasma control system. He integrated R&amp;D and analysis results from
 member nations and defining a program of experimental and modeling activities to further the development of ITER plasma scenarios and control capabilities.
 </p>
-
 
 <h3><strong>Dr. Kara A. Olson</strong> <span class="text-muted">Computational Scientist</span></h3>
 <p>Kara has recently completed her doctorate in Computer Science at Old Dominion University in Norfolk, Virginia.  Her research interests include analysis of simulation models in order to enhance understanding.  She has presented her work by invitation in Germany as well as in England, Canada, the Netherlands, and nationally.  She was a GAANN Fellow in High Performance Computing &amp; Communications and holds a Master of Science, Computer Science, Bachelor of Computer Science and Bachelor of Science, Mathematics from Old Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
