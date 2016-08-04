@@ -24,15 +24,6 @@
   		<li class="active">Devices</li>
 	</ol>
 
-	<ul class="left">
-		<li><a href="spheromaks">Spheromaks</a></li>
-		<li><a href="frc">FRCs</a></li>
-		<li><a href="denseplasmafoci">Dense Plasma Foci</a></li>
-		<li><a href="iec">IEC</a></li>
-		<li><a href="neutronsource">Neutron Sources</a></li>
-
-	</ul>
-
 	<h1>Devices</h1>
 	<p class="center"><a href="img/STPX.jpg"><img src="img/STPX-300x199.jpg" alt="STPX" width="300" height="199"  /></a><br />
 <span class="text-muted">Fig. 1: FAMU Spheromak (STPX). L to R: Baysha Bernales (Physics undergrad) and Brandon Alexander (lead technician).</span></p>
