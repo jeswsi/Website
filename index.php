@@ -31,11 +31,11 @@ budget.</p></div>
 
     <div class="col-md-4"><a class="black" href="services"><h2>Services</h2></a>
     <ul>
-    <li><a href="physics">Physics</a></li>
+    <font size="4.5"><li><a href="physics">Physics</a></li>
     <li><a href="engineering">Engineering</a></li>
     <li><a href="purchase">Purchase</a></li>
     <li><a href="fabrication">Fabrication / Integration</a></li>
-    <li><a href="installation">Installation / Testing</a></li>
+    <li><a href="installation">Installation / Testing</a></li></font>
     </ul></div>
   
 
