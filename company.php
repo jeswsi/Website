@@ -35,10 +35,10 @@
 
 		<p>Woodruff Scientific Limited (WSLtd) is a fully-owned subsidiary of WSInc established in 2006 in Guildford, UK. WSLtd exists to serve EU-based customers.  Office is located at the Culham Innovation Centre in Abingdon, UK.</p>
 
-		<p><a href="http://compactfusionsystems.com/">Compact Fusion Systems, Inc</a> (CFSI) and <a href="http://uhv3d.com/">Ultra High Vacuum 3D, Inc</a> (UHV3D) are fully-owned subsidiaries of WSInc that have recently been established.</p>
+		<p><a href="http://compactfusionsystems.com/">Compact Fusion Systems, Inc</a> (CFSI) and <a href="http://uhv3d.com/">Ultra High Vacuum 3D, Inc</a> (UHV3D) are separate companies that have recently been established.</p>
 
     </div> <!-- /container -->
-    </div> <!-- /wrap -->
+    </div> <!-- /wrap --> 
 
 	<?php
 	$footer = file_get_contents('footer.html');
