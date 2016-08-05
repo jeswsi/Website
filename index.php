@@ -102,7 +102,7 @@ budget.</p></div>
           </div>
         </div>
         <div class="item">
-          <img src="img/CompanyPhotos/Team.JPG" alt="Seventh slide">
+          <img style="height: 300px" src="img/CompanyPhotos/Team.JPG" alt="Seventh slide">
           <div class="container">
             <div class="carousel-caption">
               <p><a class="white" href="physics">Group Offsite Photo</a></p>
@@ -110,7 +110,7 @@ budget.</p></div>
           </div>
         </div>
          <div class="item">
-          <img src="img/CompanyPhotos/MtRainier.JPG" alt="Eighth slide">
+          <img style="height: 300px" src="img/CompanyPhotos/MtRainier.JPG" alt="Eighth slide">
           <div class="container">
             <div class="carousel-caption">
               <p><a class="white" href="physics">Mt Rainier</a></p>
@@ -124,13 +124,13 @@ budget.</p></div>
 
 
 
-      <h2>Our Mission</h2>
+  <h2>Our Mission</h2>
   <p> Nuclear fusion powers our sun and all the stars in the night sky; if harnessed on earth, it could be the ultimate energy source: safe, clean, and with plentiful fuel. Commercial fusion energy will ultimately provide energy independence, national security, and new jobs in the emerging clean-tech market sector.  For the last decade, Woodruff Scientific has sought to accelerate the development of commercial fusion by tackling critical scientific problems in the <a href="http://science.energy.gov/fes/">US DOE Fusion Energy Sciences program</a>.  What we&#8217;ve learned to do, we can now offer as <a href="services">services</a> or custom <a href="enginerring">products</a>.</p>
 
     
     </div>  
 
-    <div class="col-md-3"><a class="twitter-timeline" height="900" href="https://twitter.com/WS_Inc">Tweets by WS_Inc</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+    <div class="col-md-3"><a class="twitter-timeline" height="800" href="https://twitter.com/WS_Inc">Tweets by WS_Inc</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
     <div class="col-md-12 center"></div>
 
