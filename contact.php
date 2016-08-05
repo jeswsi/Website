@@ -71,7 +71,7 @@ Skype.ui({
 		</blockquote>
 		<p>(206) 905 9477</p>
 		<p>Company Information: <a href="mailto:info@woodruffscientific.com">info@woodruffscientific.com</a> </p>
-		<p>Accounting and Payment inquiries: <a href="mailto:accounting@woodruffscientific.com">accounting@woodruffscientific.com</a></p>
+		<p>Accounting inquiries: <a href="mailto:accounting@woodruffscientific.com">accounting@woodruffscientific.com</a></p>
 		<p>Job inquiries: <a href="mailto:hr@woodruffscientific.com">hr@woodruffscientific.com</a></p>
 		<p>Sales inquiries: <a href="mailto:sales@woodruffscientific.com">sales@woodruffscientific.com</a></p>
 	</div>
