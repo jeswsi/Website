@@ -126,6 +126,12 @@ member nations and defining a program of experimental and modeling activities to
 <p>Studying mechanical engineering at the University of California, San Diego, Trevor's interests include design for practicality, manufacturing optimization and support for sustainable energy sources.</p>
 
 
+<h3><strong>Chris Bowman</strong> <span class="text-muted">WSI Bootcamp Attendee</span></h3>
+<p>An attendee of the WSI Scientific Computing Bootcamp, Chris Bowman graduated from the University of Washington with a bachelor’s degree in physics in 2016. Before he began work at Eagle Harbor Technologies as a research technician he interned at Woodruff Scientific working on post-processing and analysis of plasma simulations.</p>
+
+
+
+
 
 
 <h1>Associates</h1>
