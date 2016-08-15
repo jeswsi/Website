@@ -21,7 +21,7 @@
   ?>  
 
 
-      <div class="col-md-9"><div class="jumbotron">
+      <div class="col-md-10"><div class="jumbotron">
         <h2>Outsource your plasma R&amp;D quickly and affordably to Woodruff Scientific's experienced team</h2>
         <p>Woodruff Scientific offers assistance with all stages of innovation: concept design,
 engineering design, procurement, fabrication, installation, testing, and
@@ -102,18 +102,18 @@ budget.</p></div>
           </div>
         </div>
         <div class="item">
-          <img style="height: 300px" src="img/CompanyPhotos/Team.JPG" alt="Seventh slide">
+          <img style="height: 300px" src="img/CompanyPhotos/intern.jpg" alt="Seventh slide">
           <div class="container">
             <div class="carousel-caption">
-              <p><a class="white" href="physics">Group Offsite Photo</a></p>
+              <p><a class="white" href="physics">Intern Katherine Chun</a></p>
             </div>
           </div>
         </div>
-         <div class="item">
-          <img style="height: 300px" src="img/CompanyPhotos/MtRainier.JPG" alt="Eighth slide">
+        <div class="item">
+          <img style="height: 300px" src="img/CompanyPhotos/Team.JPG" alt="Eighth slide">
           <div class="container">
             <div class="carousel-caption">
-              <p><a class="white" href="physics">Mt Rainier</a></p>
+              <p><a class="white" href="physics">Group Offsite</a></p>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ budget.</p></div>
     
     </div>  
 
-    <div class="col-md-3"><a class="twitter-timeline" height="800" href="https://twitter.com/WS_Inc">Tweets by WS_Inc</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+    <div class="col-md-2"><a class="twitter-timeline" height="775" href="https://twitter.com/WS_Inc">Tweets by WS_Inc</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
     <div class="col-md-12 center"></div>
 
