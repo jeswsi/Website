@@ -122,6 +122,14 @@ member nations and defining a program of experimental and modeling activities to
 </p>
 
 
+<img src="img/Headshots/katherine.jpg" alt="Image of Katherine Chun" style="width:128px;" align="left" Hspace="10">
+<h3><strong>Katherine Chun</strong> <span class="text-muted">Space Grant Summer Intern</span></h3>
+<p>Katherine Chun is pursuing an undergraduate degree in mechanical engineering at the University of Washington. Her interests include renewable energy and design for manufacturability.</p>
+
+<br></br>
+<br></br>
+
+
 <h3><strong>Trevor Smith</strong> <span class="text-muted">Space Grant Summer Intern</span></h3>
 <p>Studying mechanical engineering at the University of California, San Diego, Trevor's interests include design for practicality, manufacturing optimization and support for sustainable energy sources.</p>
 
