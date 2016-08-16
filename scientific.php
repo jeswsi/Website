@@ -123,7 +123,9 @@ member nations and defining a program of experimental and modeling activities to
 
 
 <img src="img/Headshots/katherine.jpg" alt="Image of Katherine Chun" style="width:128px;" align="left" Hspace="10">
-<h3><strong>Katherine Chun</strong> <span class="text-muted">Space Grant Summer Intern</span></h3>
+
+<h3><strong><a href="https://www.linkedin.com/in/chunkatherine">Katherine Chun</a></strong> <span class="text-muted">Space Grant Summer Intern</span></h3>
+
 <p>Katherine Chun is pursuing an undergraduate degree in mechanical engineering at the University of Washington. Her interests include renewable energy and design for manufacturability.</p>
 
 <br></br>
@@ -132,13 +134,6 @@ member nations and defining a program of experimental and modeling activities to
 
 <h3><strong>Trevor Smith</strong> <span class="text-muted">Space Grant Summer Intern</span></h3>
 <p>Studying mechanical engineering at the University of California, San Diego, Trevor's interests include design for practicality, manufacturing optimization and support for sustainable energy sources.</p>
-
-
-<h3><strong>Chris Bowman</strong> <span class="text-muted">WSI Bootcamp Attendee</span></h3>
-<p>An attendee of the WSI Scientific Computing Bootcamp, Chris Bowman graduated from the University of Washington with a bachelor’s degree in physics in 2016. Before he began work at Eagle Harbor Technologies as a research technician he interned at Woodruff Scientific working on post-processing and analysis of plasma simulations.</p>
-
-
-
 
 
 
@@ -210,6 +205,8 @@ Eric earned a PhD at the University of Washington in computational plasma physic
 <p>Research in Carlos&#8217;s group is focused on understanding basic interactions between materials, charged particles, and electromagnetic radiation. Dusty plasmas, which consist of large collections of electrons, ions, molecules, and charged dust grains, are of great interest to us. Relevance and applications of dusty plasmas range from astrophysics to materials processing. Research is carried out in both theory and experiments.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Carlos_Romero-Talamas/">ResearchGate</a></p>
 
+<h3><strong>Chris Bowman</strong> <span class="text-muted">WSI Bootcamp Attendee</span></h3>
+<p>An attendee of the WSI Scientific Computing Bootcamp, Chris Bowman graduated from the University of Washington with a bachelor’s degree in physics in 2016. Before he began work at Eagle Harbor Technologies as a research technician he interned at Woodruff Scientific working on post-processing and analysis of plasma simulations.</p>
 
 <h3><strong>Chris Raastad</strong><span class="text-muted"> Computational Scientist</h3>
 <p>Chris graduated with Bachelors in Mathematics and Computer Science from the University of Washington and in the process changed focus from physics, to pure math, to computational physics, to applied math, to finally computer science.  He unexpectedly ended up in Estonia on a Fulbright scholarship to study a Masters in Cybersecurity only to accidentally fall into his true passion of hot tech startups.  Now he spends his days running, singing, and helping make clean code and quality software at Fits.me, a startup using shapeshifting robots to take on the online fitting room world.</p>
