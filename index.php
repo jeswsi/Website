@@ -28,7 +28,8 @@
         <p>Woodruff Scientific offers assistance with all stages of innovation: concept design,
 engineering design, procurement, fabrication, installation, testing, and
 operations. We can offer support packages to suit your application and
-budget.</p></div>
+budget.</p>
+      </div>
     
 
     <div class="col-md-4"><a class="black" href="services"><h2>Services</h2></a>
