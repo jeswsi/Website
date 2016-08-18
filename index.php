@@ -19,6 +19,8 @@
   $navbar = file_get_contents('navbar.html');
   echo $navbar; 
   ?>  
+      
+        
 
 
       <div class="col-md-10"><div class="jumbotron">
