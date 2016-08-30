@@ -52,6 +52,9 @@
 
 	<div class="clearfix">
   </div>
+
+  <p></p>
+
 	<p>Useful Coil References at Wikipedia:</p>
 	<ul>
 		<li><a href="https://en.wikipedia.org/wiki/Helmholtz_coil">Helmholtz Coils</a></li>
