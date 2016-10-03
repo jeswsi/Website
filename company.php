@@ -33,7 +33,7 @@
 
 		<p>Woodruff Scientific Incorporated (WSInc) is a C-Corp established in 2005 in Seattle, Washington, USA.  WSInc performs research under contract to private and public institutions, as well as through awards from the U.S. Department of Energy.   Offices and electronics workshop are located in Wallingford. In 2015, WSI established a second office in San Diego.</p>
 
-		<p>Woodruff Scientific Limited (WSLtd) is a seperate company established in 2006 in Guildford, UK. WSLtd exists to serve EU-based customers.  Office is located at the Culham Innovation Centre in Abingdon, UK.</p>
+		<p>Woodruff Scientific Limited (WSLtd) is a separate company established in 2006 in Guildford, UK. WSLtd exists to serve EU-based customers.  Office is located at the Culham Innovation Centre in Abingdon, UK.</p>
 
 		<p><a href="http://compactfusionsystems.com/">Compact Fusion Systems, Inc</a> (CFSI) and <a href="http://uhv3d.com/">Ultra High Vacuum 3D, Inc</a> (UHV3D) are separate companies that have recently been established.</p>
 
