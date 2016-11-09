@@ -20,7 +20,7 @@
 	?>	
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="products">Products</a></li>
+ 	 	<li><a href="services">Services</a></li>
   		<li><a href="pulsedpower">Pulsed Power</a></li>
   		<li class="active">Module A</li>
 	</ol>

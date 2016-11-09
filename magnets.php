@@ -22,7 +22,7 @@
 
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="products">Products</a></li>
+ 	 	<li><a href="services">Services</a></li>
   		<li class="active">Magnets</li>
 	</ol>
 
@@ -52,6 +52,9 @@
 
 	<div class="clearfix">
   </div>
+
+  <p></p>
+
 	<p>Useful Coil References at Wikipedia:</p>
 	<ul>
 		<li><a href="https://en.wikipedia.org/wiki/Helmholtz_coil">Helmholtz Coils</a></li>

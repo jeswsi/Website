@@ -21,7 +21,7 @@
 	?>	
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="products">Products</a></li>
+ 	 	<li><a href="services">Services</a></li>
  	 	<li><a href="codac">CODAC</a></li>
   		<li class="active">LabVIEW Experiment Management System</li>
 	</ol>

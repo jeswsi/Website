@@ -25,8 +25,6 @@
 	</ol>
 
           <ul class="left">
-            <li><a href="vacuumdesign">Vacuum System Design</a></li>
-            <li><a href="fem">Structural Analysis</a></li>
             <li><a href="pulsedpower">Pulsed Power</a></li>
             <li><a href="magnets">Magnets</a></li>
             <li><a href="sources">Plasma Sources</a></li>

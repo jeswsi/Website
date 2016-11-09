@@ -30,20 +30,34 @@
 
     
 <h1>Finite Element Analysis</h1>
-<p>WSI uses <a href="http://www.ansys.com/">ANSYS</a>, <a href="http://www.openfoam.com/">OpenFOAM</a>, and <a href="http://www.elmerfem.org/">ElmerFEM</a> to perform thermal and structural analysis of various subsystems. We can also handle files from other common CAD software such as <a href="http://www.3ds.com/products-services/catia/">CATIA</a>.</p>
+<p>WSI uses COMSOL Multiphysics® to perform finite element simulation of heat transfer, structural mechanics, and other difficult physical problems. We are able to analyze complex 3D geometries under steady-state or transient loading and perform parametric scans for material selection (see plot below) and design parameter optimization.</p>
+
+<!--<p>WSI uses <a href="http://www.ansys.com/">ANSYS</a>, <a href="http://www.openfoam.com/">OpenFOAM</a>, and <a href="http://www.elmerfem.org/">ElmerFEM</a> to perform thermal and structural analysis of various subsystems. We can also handle files from other common CAD software such as <a href="http://www.3ds.com/products-services/catia/">CATIA</a>.</p> -->
 
 <a id="thermal"></a>
 	<h3>Thermal Analysis</h3>
 	<!--<div class="col-md-6">
 		<p><a href="img/Divertormesh.png"><img src="img/Divertormesh-300x228.png" alt="Divertormesh" width="300" height="228" /></a></p>
 	</div>-->
-    <div class="col-md-6">
+
+	<div class="col-md-6">
 		<p><a href="img/divertorcad.png"><img src="img/divertorcad-300x228.png" alt="divertorcad" width="300" height="228" /></a><br/>
 		<span class="text-muted">ITER divertor heat loads</span></p>
     </div>
+
     <div class="col-md-6">
 		<p><a href="img/WDivertor.png"><img src="img/WDivertor-300x205.png" alt="WDivertor" width="300" height="205" /></a></p>
     </div>
+
+  <div class="clearfix"></div>
+
+    <div class="col-md-6">
+		<p><a href="img/Probeheadtemperature.png"><img src="img/Probeheadtemperature.png" alt="Probeheadtemperature" width="300" height="228" /></a><br/> <!--<span class="text-muted">Probe head with heat sink at peak temperature</span></p> -->
+    </div>
+
+    <div class="col-md-6">
+		<p><a href="img/heatsinkmaterials.png"><img src="img/heatsinkmaterials.png" alt="heatsinkmaterials" width="300" height="205" /></a></p>
+    </div> <!--<span class="text-muted">Comparison of performance with various heat sink materials</span></p>-->
 
   <div class="clearfix"></div>
 
