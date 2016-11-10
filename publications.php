@@ -5,9 +5,7 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-  <meta name="description" content="">
-  <title>TITLE | Woodruff Scientific, Inc.</title>
-
+  <meta name="description" content="Articles and presentations created by WSI employees">
   <title>Publications | Woodruff Scientific, Inc.</title>
   </head>
 
@@ -25,9 +23,6 @@
  	 	<li><a href="#">Subsection</a></li>
   		<li class="active">Current Page</li>
 	</ol>
-
-	<h1>Title</h1>
-	<p>Paragraph</p>
 
 
 	<h1>Publications</h1>
