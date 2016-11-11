@@ -20,8 +20,8 @@
 	?>	
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="#">Subsection</a></li>
-  		<li class="active">Current Page</li>
+ 	 	<li><a href="#">Company</a></li>
+  		<li class="active">Publications</li>
 	</ol>
 	<h1>Articles</h1>
 	<p>Come checkout some of our research and discoveries! Please view list of articles below:</p>
