@@ -5,8 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-  <meta name="description" content="Articles and presentations created by WSI employees">
-  <title>Publications | Woodruff Scientific, Inc.</title>
+  <meta name="description" content="">
+  <title>TITLE | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
@@ -20,10 +20,9 @@
 	?>	
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="#">Company</a></li>
-  		<li class="active">Publications Page</li>
+ 	 	<li><a href="#">Subsection</a></li>
+  		<li class="active">Current Page</li>
 	</ol>
-
 	<h1>Articles</h1>
 	<p>Come checkout some of our research and discoveries! Please view list of articles below:</p>
 	<ul>
@@ -100,7 +99,6 @@
 		<li><a href="http://woodruffscientific.com/pdf/bankdesignpoints/TF_spec_day1_Rev1A.pdf">Specification for the Toroidal Field Bank Modules Capacitor Charge/Discharge Power Supply (CCDPS) for FLARE - Day 1, March 11, 2016</a></li>
 		
 	</ul>
-
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
