@@ -134,7 +134,7 @@ member nations and defining a program of experimental and modeling activities to
 
 <h3><strong><a href="https://www.linkedin.com/in/thomas-meyer-a8b706b9">Thomas Meyer</a></strong> <span class="text-muted">Research Assistant</span></h3>
 
-<p>Thomas Meyer is pursuing a B.SC. in Physics: Comprehensive at the University of Washington. He has experience conducting research on searching for dark matter using machine learning techniques at ATLAS. His interest include data analysis, simulation and high-performance computing, specifically in its application in contemporary physics issues.</p>
+<p>Thomas Meyer is pursuing a B.SC. in Physics: Comprehensive at the University of Washington. He has experience conducting research on searching for dark matter using machine learning techniques on ATLAS data. His interest include data analysis, simulation and high-performance computing, specifically in its application in contemporary physics issues.</p>
 
 
 
