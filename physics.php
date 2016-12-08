@@ -10,6 +10,7 @@
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -24,12 +25,13 @@
 	</ol>
 
           <ul class="left">
-            <li><a href="equilibrium">Equilibrium</a></li>
-            <li><a href="mhd">MHD</a></li>
-            <li><a href="cfd">CFD</a></li>
-            <li><a href="electrostatics">Electrostatics</a></li>
-            <li><a href="rf">RF</a></li>
-            <li><a href="systems">Systems</a></li>
+            <li><a href="equilibrium">Equilibrium, Stability &amp; Transport</a></li>
+            <li><a href="mhd">3D Resistive MHD</a></li>
+            <li><a href="cfd">Computational Fluid Dynamics</a></li>
+            <li><a href="systems">Fusion Systems Code</a></li>
+            <li><a href="magnetdesign">High Field Magnet Design</a></li>
+            <li><a href="straylight">Stray Light Analysis</a></li>
+            <li><a href="fem">Thermal/Structural Analysis</a></li>
           </ul>
 
 	<h1>Physics</h1>
