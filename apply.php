@@ -12,6 +12,7 @@
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -25,7 +26,7 @@
   		<li class="active">Apply to Scientific Computing Bootcamp</li>
 	</ol>
 	<h1>Apply to Scientific Computing Bootcamp<br/>
-		<small>September 14-18, 2015 Session</small></h1>
+		<small>September 19-23, 2016 Session</small></h1>
 
 		<div class="col-md-8">
 		<p><a href="shortcourse">Back to Course information</a></p>

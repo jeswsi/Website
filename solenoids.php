@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+pul<!DOCTYPE html>
 <html lang="en">
   <head>
 	<?php
@@ -10,6 +10,7 @@
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -19,7 +20,7 @@
 	?>	
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
-		<li><a href="products">Products</a></li>
+		<li><a href="services">Services</a></li>
  	 	<li><a href="magnets">Magnets</a></li>
   		<li class="active">Solenoids</li>
 	</ol>
