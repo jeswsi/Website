@@ -1,0 +1,160 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>three.js webgl - trackball controls</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <style>
+        body {
+                color: #000;
+                font-size:13px;
+                text-align:center;
+                background-color: #fff;
+                margin: 0px;
+                overflow: hidden;
+            }
+            #info {
+                color:#000;
+                position: absolute;
+                top: 0px; width: 100%;
+                padding: 0px;
+            }
+            a {
+                color: red;
+            }
+        </style>
+    </head>
+
+<body>
+
+ <div id="container"></div>
+ <div id="info">
+            <p>Click &amp; Drag: Rotate
+                <br>Scroll: Zoom
+                <br>Right Click &amp; Drag: Pan</p>
+ </div>
+        <script src="http://threejs.org/build/three.min.js"></script>
+        <script src="http://threejs.org/examples/js/loaders/STLLoader.js"></script>
+        <script src="http://threejs.org/examples/js/controls/TrackballControls.js"></script>
+        <script src="http://threejs.org/examples/js/Detector.js"></script>
+
+
+        <script>
+            if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+            var container, stats;
+            var camera, cameraTarget, controls, scene, renderer;
+            var cross;
+            init();
+            //load();
+            animate();
+            
+            function init() {
+                camera = new THREE.PerspectiveCamera( 35, 1, 1, 100 );
+                //camera.position.set( 3, 0.15, 3 );
+                cameraTarget = new THREE.Vector3( 0, 0, 0 );
+                controls = new THREE.TrackballControls( camera );
+                controls.rotateSpeed = 5;
+                controls.zoomSpeed = 1.2;
+                controls.panSpeed = 0.8;
+                controls.noZoom = false;
+                controls.noPan = false;
+                controls.staticMoving = true;
+                controls.dynamicDampingFactor = 0.1;
+                controls.keys = [ 65, 83, 68 ];
+                controls.addEventListener( 'change', render );
+                // world
+                scene = new THREE.Scene();
+                scene.fog = new THREE.FogExp2( 0xaaaaaa, 0.0002 );
+                //scene.fog = new THREE.Fog( 0x72645b, 2, 15 );
+
+                // // Ground
+                // var plane = new THREE.Mesh(
+                //     new THREE.PlaneBufferGeometry( 40, 40 ),
+                //     new THREE.MeshPhongMaterial( { color: 0x999999, specular: 0x101010 } )
+                // );
+                // plane.rotation.x = -Math.PI/2;
+                // plane.position.y = -0.5;
+                // scene.add( plane );
+                // plane.receiveShadow = true;
+                
+                var loader = new THREE.STLLoader();
+                loader.load( 'testbox.stl', function ( geometry ) {
+                    //var material = new THREE.MeshPhongMaterial( { color: 0x2670cf } );
+                    var material = new THREE.MeshLambertMaterial({color: 0xffffff, transparent: true, opacity: 0.5});
+                    var mesh = new THREE.Mesh( geometry, material );
+                    mesh.position.set( 0, 0, 0 );
+                    mesh.rotation.set( - Math.PI / 2, 0, 0 );
+                    //mesh.scale.set( 0.5, 0.5, 0.5 );
+                    //mesh.castShadow = true;
+                    //mesh.receiveShadow = true;
+                    camera.lookAt(mesh.position)
+                    scene.add( mesh );
+                
+                    // Convert camera fov degrees to radians
+                    var fov = camera.fov * ( Math.PI / 180 ); 
+                    var box = new THREE.Box3().setFromObject( mesh );
+                    objectSize = Math.max(box.size().x, box.size().y, box.size().z);
+                    //var cameraPosition = new THREE.Vector3(
+                    //    0,
+                    //    mesh.position.y + Math.abs( objectSize / Math.sin( fov / 2 ) ),
+                    //    0
+                    //);
+                    camera.position.set(mesh.position.y + Math.abs( objectSize / Math.sin( fov / 2 ) ), objectSize/2 ,0);
+                    cameraTarget = new THREE.Vector3( 0, objectSize/2, 0);
+
+                } );
+                
+                // lights
+                light = new THREE.DirectionalLight( 0x77afd7 );
+                light.position.set( 1, 0, 0 );
+                scene.add( light );
+                light = new THREE.DirectionalLight( 0x0c2939 );
+                light.position.set( 0, 1, 0 );
+                scene.add( light );
+                light = new THREE.DirectionalLight( 0x77dbe9 );
+                light.position.set( 0, 0, 1 );
+                scene.add( light );
+                light = new THREE.DirectionalLight( 0x4b6694 );
+                light.position.set( -1, 0, 0 );
+                scene.add( light );
+                light = new THREE.DirectionalLight( 0x0c2939 );
+                light.position.set( 0, -1, 0 );
+                scene.add( light );
+                light = new THREE.DirectionalLight( 0x77dbe9 );
+                light.position.set( 0, 0, -1 );
+                scene.add( light );
+                light = new THREE.AmbientLight( 0x222222 );
+                scene.add( light );
+                // renderer
+                renderer = new THREE.WebGLRenderer( { antialias: false } );
+                renderer.setClearColor( scene.fog.color );
+                renderer.setPixelRatio( window.devicePixelRatio );
+                //renderer.setSize( window.innerWidth, window.innerHeight );
+                renderer.setSize( 500, 500 );
+                container = document.getElementById( 'container' );
+                container.appendChild( renderer.domElement );
+
+                //
+                window.addEventListener( 'resize', onWindowResize, false );
+                //
+                render();
+            }
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize( window.window, innerWidth.innerHeight );
+                controls.handleResize();
+                render();
+            }
+            function animate() {
+                requestAnimationFrame( animate );
+                controls.update();
+            }
+            function render() {
+                camera.lookAt( cameraTarget );
+                renderer.render( scene, camera );
+            }
+
+        </script>
+        </body>
+</html>
