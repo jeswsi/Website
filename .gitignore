@@ -1,2 +1,6 @@
 #ignore temp files from text editors
 *~
+#ignore social media logo template folders
+img/social/brand guideline logos/
+img/social/linkedin_logo_package/
+img/social/logos-and-badges_f-logo_online/

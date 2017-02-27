@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<?php
-	$head = file_get_contents('header.html');
-	echo $head;	
-	?>
+	<?php $head = file_get_contents('header.html'); echo $head;	?>
 	<meta name="description" content="Pulsed Power capacitor banks and pulse forming networks for fusion, pulsed power, plasma energy, and physics labs. We can design and construct custom capacitor banks.">
   <title>Pulsed Power | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -19,7 +17,7 @@
 	?>	
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="products">Products</a></li>
+ 	 	<li><a href="services">Services</a></li>
   		<li class="active">Pulsed Power</li>
 	</ol>
 				<ul class="left">
@@ -30,6 +28,7 @@
 							<li><a href="moduleC">Module C</a></li>
 						</ul>
         			<li><a href="pfn">Pulse Forming Networks</a></li>
+        			<li><a href="bankdesign">Bank Design Points</a></li>
        			</ul>
     <h1>Pulsed Power</h1>
 	<p>We have built, installed and tested pulsed power capacitor banks for a variety of applications. Fig. 1 shows an example arrangement for the banks we have built for an R&amp;D environment, for which the room served as the enclosure. Banks are custom built for specific applications, although small modules have a fast turn around time. Spec sheets available on request. For design only, please see our <a href="services">Services</a></p>
@@ -55,13 +54,34 @@ in the industrial sector, which for manufacturing (spot welding,
 magnetizing, metal forming, induction heating, compaction),
 sterilization (medical, food, water, surfaces) and materials processing
 (ion implantation, deposition, laser shock, etc).</p>
-	<p class="center">
-	<a href="img/stpx_banks.jpg"><img src="img/stpx_banks_small.jpg"></a><br />
-	<span class="text-muted">Fig. 1. Pulsed banks, dumps and ancil hardware for FAMU STPX.</span></p>
+	
+	<!--<p class="center"> -->
+	
+	<div class="col-md-3">
+	<a href="img/stpx_banks.jpg"><img style="padding:20px; height: 300px" src="img/stpx_banks_small.jpg"></a><br />
+	<!--<span class="text-muted">Fig. 1. Pulsed banks, dumps and ancil hardware for FAMU STPX.</span></p>-->
+	</div>
 
-	<p>Need help with your pulsed power design? WSI can get your lab up and running.</p>
-	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
+	<div class="col-md-5">
+	<a href="img/pulsedpower/TF030416A.png"><img style="padding:20px; height: 300px" src="img/pulsedpower/TF030416A.png"><img ></a><br />
+	</div>
 
+	<div class="col-md-4">
+	<a href="img/pulsedpower/TFbusdetail030616A.png"><img style="padding:20px; height: 300px" 300px" src="img/pulsedpower/TFbusdetail030616A.png"></a><br />
+	</div>
+
+	<div class="col-md-4">
+	<a href="img/pulsedpower/TFswitchdetail022616A.png"><img style="padding:20px; height: 300px" src="img/pulsedpower/TFswitchdetail022616A.png"></a><br />
+	</div>
+
+	<div class="col-md-7">
+	<p class="right"><a href="img/pulsedpower/TF_Cad_Schem.png"><img style="padding:20px; height: 300px" src="img/pulsedpower/TF_Cad_Schem.png"></a><br /></p>
+	</div>
+
+
+<div class="col-md-12">
+<p>Need help with your pulsed power design? WSI can get your lab up and running.</p>
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p>
 
 <h3>Safety</h3>
 Safety must be the number one priority in all labs. WSI takes all measures to ensure operator safety. A proper safety protocol needs to be followed. Banks should always be kept in an isolated room equipped with <a href="safety">safety interlocks</a>. Our bank dumps are double or triple redundant, default to a safe position in case of power outage or other failure, and are controled via door interlocks and from the control room. WSI can work with your lab to setup a safe testing environment.
@@ -74,7 +94,7 @@ Safety must be the number one priority in all labs. WSI takes all measures to en
 	<blockquote><a href="marx.html">Marx Generator References</a></blockquote>
 	<blockquote><a href="pulsegen.html">Pulse Generator References</a></blockquote>
 	<blockquote><a href="blumlein.html">Blumlein References</a></blockquote>
-
+</div>
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
