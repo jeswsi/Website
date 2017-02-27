@@ -10,6 +10,7 @@
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -20,6 +21,12 @@
 
 	<h1>Testimonials</h1>
 	<p>Woodruff Scientific has provided products and services to universities, national labs, and private companies. See what our customers are saying:</p>
+	
+	<h3>Pulsed Power Capacitor Bank Design</h3>
+	<blockquote>“Princeton University contracted WSI to design the capacitor banks for the FLARE experiment that is being built at PPPL. In my role of power electronics control engineer I was the main technical point of contact at PPPL.The contract included circuit simulations, dimensioning of components, design of the control system, as well as the creation of the electrical and mechanical design for all capacitor banks.  Throughout the contract the collaboration with WSI was extremely fruitful. Throughout the work WSI provided creative and useful solutions for design challenges clearly showing that they had a deep understanding of the problem space and experience in providing solutions. Everybody at WSI was very committed to keep the project moving forward and on schedule, even though that meant a number a long days (and nights). I will definitely keep WSI in mind for other projects that require prototype/first article design and development.”
+<footer>Frank Hoffmann, Princeton University Plasma Physics Laboratory</footer></blockquote>
+
+
 	<h3>Vacuum compatible Helmholtz Coil</h3>
 	<blockquote>“Woodruff Scientific designed and manufactured an in-vacuum Helmholtz coil and mounting structure to our specifications. We will be using the coils to generate an applied magnetic field for basic plasma physics and fusion-energy-science related experiments. Simon and his team were highly responsive to our needs and remained engaged and helpful even after the coils were delivered. Thank you very much!”
 <footer>Dr. Scott Hsu, P 24 Plasma Physics Group, Los Alamos National Laboratory</footer></blockquote>

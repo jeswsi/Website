@@ -6,10 +6,15 @@
 	echo $head;	
 	?>
 		<meta name="description" content="Custom devices for fusion, plasma energy, and physics labs. WSI has built complete devices for clients such as Florida A&M (STPX)">
+ 
+
+
+
   <title>Devices | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -19,18 +24,9 @@
 	?>	
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="products">Products</a></li>
+ 	 	<li><a href="services">Services</a></li>
   		<li class="active">Devices</li>
 	</ol>
-
-	<ul class="left">
-		<li><a href="spheromaks">Spheromaks</a></li>
-		<li><a href="frc">FRCs</a></li>
-		<li><a href="denseplasmafoci">Dense Plasma Foci</a></li>
-		<li><a href="iec">IEC</a></li>
-		<li><a href="neutronsource">Neutron Sources</a></li>
-
-	</ul>
 
 	<h1>Devices</h1>
 	<p class="center"><a href="img/STPX.jpg"><img src="img/STPX-300x199.jpg" alt="STPX" width="300" height="199"  /></a><br />
@@ -51,6 +47,7 @@
 
     </div> <!-- /container -->
     </div> <!-- /wrap -->
+
 
 	<?php
 	$footer = file_get_contents('footer.html');

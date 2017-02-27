@@ -43,11 +43,13 @@
 	<div class="col-md-10">
 
 	<h1>Magnets</h1>
+
 	
 	<img class="left" src="img/BM_Coil_1.jpg" height="300">
 	<p>We produce custom magnetic field coils engineered for pulsed power applications, requiring high field strengths, high currents, high voltages, often UH vacuum compatibility (see e.g. Fig 2&amp;3) and to withstand large forces. Typical coil sets have been designed and built for Helmholtz, Maxwell and other configurations (e.g. Poloidal field).  We have designed and built cooled coil systems (through to 10kW). Our standard offerings below can be tailored to specific applications.</p>
 	<p class="text-muted">
 		Fig 1. Coil for Bryn Mawr College.
+
 	</p>
 	</div>
 	<div class="clearfix">
@@ -61,6 +63,21 @@
 		Fig 2. Vacuum-compatible 23″OD HH coils designed for LANL’s PLX experiment.<br>
 		Fig 3. Vacuum-compatible  HH coils designed for The Aerospace Corporation.
 	</p>
+
+	<div class="clearfix">
+  </div>
+
+  <p></p>
+
+	<p>Useful Coil References at Wikipedia:</p>
+	<ul>
+		<li><a href="https://en.wikipedia.org/wiki/Helmholtz_coil">Helmholtz Coils</a></li>
+		<li><a href="https://en.wikipedia.org/wiki/Maxwell_coil">Maxwell Coils</a></li>
+		<li><a href="https://en.wikipedia.org/wiki/Field_coil">Field Coils</a></li>
+		<li><a href="https://en.wikipedia.org/wiki/Electromagnet">Electromagnets</a></li>
+		<li><a href="https://en.wikipedia.org/wiki/Pulsed_power">Pulsed Power</a></li>
+	</ul>
+
 
 	<div class="clearfix">
   </div>

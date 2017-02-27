@@ -10,6 +10,7 @@
   </head>
 
   <body>
+<?php $googleTagManager = file_get_contents('googleTagManager.html'); echo $googleTagManager; ?>
     <div id="wrap">
     <div class="container">
 
@@ -26,6 +27,7 @@
 <?php
 $name = $_POST['name'];
 $email = $_POST['email'];
+$addemail = $_POST['addemail']
 $school = $_POST['school'];
 $degree = $_POST['degree'];
 $major = $_POST['major'];
@@ -55,11 +57,11 @@ $headers =
 	'Content-Transfer-Encoding: 8bit' . "\r\n" . 
 	'Content-Type: text/plain; charset=UTF-8' . "\r\n";
 $params = '-f ' . $emailfrom;
-//if ( $test = mail($emailto, $subject, $messagebody, $headers, $params) ){
-//	$m = "yay";
-//} else {
-//	$m ="dang";
-//}
+if ( $test = mail($emailto, $subject, $messagebody, $headers, $params) ){
+	$m = "yay";
+} else {
+	$m ="dang";
+}
 
 echo $message;
 //echo $m;
@@ -72,6 +74,7 @@ $subject = $name . "'s Application to the Scientific Computing Bootcamp";
 $messagebody = 
 	'Name: ' . $name . "\n" .
 	'Email: ' . $email . "\n" .
+	'Additional Email: ' . $addemail . "\n" .
 	'School/Employer: ' . $school . "\n" .
 	'Degree: ' . $degree . "\n" .
 	'Major: ' . $major . "\n" .
