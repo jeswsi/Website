@@ -120,7 +120,7 @@ member nations and defining a program of experimental and modeling activities to
 <h3><strong>Dr. Kara A. Olson</strong> <span class="text-muted">Computational Scientist</span></h3>
 <p>Kara has recently completed her doctorate in Computer Science at Old Dominion University in Norfolk, Virginia.  Her research interests include analysis of simulation models in order to enhance understanding.  She has presented her work by invitation in Germany as well as in England, Canada, the Netherlands, and nationally.  She was a GAANN Fellow in High Performance Computing &amp; Communications and holds a Master of Science, Computer Science, Bachelor of Computer Science and Bachelor of Science, Mathematics from Old Dominion.  She is a member of ACM, ACM SIGSIM, IEEE/CS, and SIAM.
 </p>
-
+<br></br>
 
 <img src="img/Headshots/katherine.jpg" alt="Image of Katherine Chun" style="width:128px;" align="left" Hspace="10">
 
@@ -130,6 +130,12 @@ member nations and defining a program of experimental and modeling activities to
 
 <br></br>
 <br></br>
+<br></br>
+
+<h3><strong><a href="https://www.linkedin.com/in/thomas-meyer-a8b706b9">Thomas Meyer</a></strong> <span class="text-muted">Research Assistant</span></h3>
+
+<p>Thomas Meyer is pursuing a B.SC. in Physics: Comprehensive at the University of Washington. He has experience conducting research on searching for dark matter using machine learning techniques on ATLAS data. His interest include data analysis, simulation and high-performance computing, specifically in its application in contemporary physics issues.</p>
+
 
 
 <h3><strong>Trevor Smith</strong> <span class="text-muted">Space Grant Summer Intern</span></h3>

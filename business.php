@@ -47,8 +47,8 @@
 
 <img src="img/Headshots/felicia.jpg" alt="Image of Felicia Edwards" style="width:128px;" align="left" Hspace="10">
 
-<h3><strong><a href="https://www.linkedin.compub/felicia-edwards/16/447/13a">Felicia Edwards </a></strong><span class="text-muted">Administrative Assistant</span></h3>
-<p>Felicia graduated with a bachelor's degree in Mathematics from the University of Washington. She has held various positions ranging from teaching to finances. She loves traveling along with meeting other people and learning about other cultures. Her pastimes include reading, soccer/football, and eating.</p>
+<h3><strong><a href="https://www.linkedin.compub/felicia-edwards/16/447/13a">Felicia Edwards </a></strong><span class="text-muted">Office Manager</span></h3>
+<p>Felicia graduated with a bachelor's degree in Mathematics from the University of Washington. She has held various positions ranging from teaching to finances. She loves traveling along with meeting other people and learning about other cultures. Her pastimes include reading, soccer/football and eating.</p>
 
 <br></br>
 <br></br>

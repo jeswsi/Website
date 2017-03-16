@@ -32,7 +32,7 @@
 		<li><a href="http://www.woodruffscientific.com/temp/APS2016/Woodruff-APS-2016.pdf">Physics Design Point for a 1MW Fusion Neutron Source</a></li>	
 		<li><a href="http://www.woodruffscientific.com/temp/APS2016/Stuber-APS-2016.pdf">Optimized and Automated Design of Plasma Diagnostics for Additive Manufacture</a></li>
 		<li><a href="http://www.woodruffscientific.com/temp/APS2016/OBryan-APS-2016.pdf">Numerical Investigation of Design and Operating Parameters on CHI Spheromak Performance</a></li>
-		<li><a href="http://www.woodruffscientific.com/temp/APS2016/Quinley-APS-2016.pdf">Additive Manufacture (3D Printing) of Plasma Diagnotic Components and Assemblies for Fusion Experiments</a></li>
+		<li><a href="http://www.woodruffscientific.com/temp/APS2016/Quinley-APS-2016.pdf">Additive Manufacture (3D Printing) of Plasma Diagnotics Components and Assemblies for Fusion Experiments</a></li>
 	</ul>
 
     </div> <!-- /container -->
