@@ -44,7 +44,10 @@
 	<br />
 	<div id="terms">
 		<pre>By downloading this software, you agree to the following terms:
-		The software is provided 'as is', without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.</pre>
+		The software is provided 'as is', without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
+
+		Distribution of this software is not allowed except with the express written consent of Woodruff Scientific Inc. ©2017.
+		</pre>
 	</div>
 	<input type="submit" class="btn btn-lg btn-primary" value="Download Basic Experiment Management System &raquo;" />
 <br />
