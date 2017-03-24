@@ -32,6 +32,7 @@
             <li><a href="codac">CODAC</a></li>
             <li><a href="diagnostics">Diagnostics</a></li>
             <li><a href="devices">Devices</a></li>
+            <li><a href="fem">Thermal/Structural Analysis</a></li>
           </ul>
 
 	<h1>Engineering</h1>

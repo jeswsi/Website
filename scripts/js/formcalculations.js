@@ -122,12 +122,20 @@ function getTau()
     return tau;
 }
 
+function getr()
+{
+    var r = 0;
+    var theForm = document.forms["coilform"];
+    r = theForm.elements["coilradius"].value;
+    return r;
+}
+
         
 function calculateTotal()
 {    
     var muo=1.2e-6;
     var Im= getI(); //[A] current in the coil
-    var r = 4*2.54*0.01; //[m]  coil radius
+    var r = getr(); //[m]  coil radius
     var n = getn();  //# number of turns in each coil
     var Bmax = Math.pow((4/5),1.5) * muo * n * Im / r; //[T] field in the coil
     var rho_Cu = 8.6; //[g/cm^3]
@@ -145,7 +153,7 @@ function calculateTotal()
     var divobj = document.getElementById('totalPrice');
     divobj.style.display='block';
     divobj.innerHTML = 
-        "Max B [T]:             "+twoDecimals(Bmax) + 
+        "Max B [T]:             "+twoDecimals(Bmax) +
         "<br>Wire Radius [cm]:  "+twoDecimals(r_wire) +
         "<br>Wire Length [m]:   "+twoDecimals(l_w) +
         "<br>Wire Mass [g]:     "+twoDecimals(m_wire) +

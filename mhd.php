@@ -80,6 +80,23 @@ STPX</p>
     </div>
   <div class="clearfix"></div>
 
+
+<ul>
+  <li>Movies of <a href="http://www.woodruffscientific.com/temp/APS2015/APSMovies/">spheromaks compressing</a></li>
+  <li>Movies of <a href="http://www.woodruffscientific.com/temp/APS2016/Movies/">spheromaks accelerating and compressing</a></li>
+  <li>Movies of <a href="http://www.woodruffscientific.com/temp/frcs/">field reversed configurations</a></li>
+  <li>Movies of <a href="http://www.woodruffscientific.com/temp/ITER/">ITER undergoing violent VDE event</a></li>
+</ul>
+
+
+<p> 3D resistive MHD code NIMROD provides insight into the ARPA-E supported plasma compression experiment at Swarthmore college.  Shown are contour plots of B_toroidal and density at 5 time points for a compact torus that is peristaltically accelerated by a compression coil.  </p>
+
+<div class="col-md-12">
+      <p><a href="img/Simulations/3DMHDsimulations.png"><img src="img/Simulations/3DMHDsimulations.png" alt="stpx" width="600" height="158" /></a><br/></p>
+    </div>
+
+<p></p>
+
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Nimrod Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="hifi"></a>

@@ -24,10 +24,13 @@
       	  <li><a href="physics">Physics</a></li>
 	  <li class="active">Fusion Systems Code</li>
 	</ol>
+	
 	<h1>Fusion Systems Code</h1>
-	<p>Primary tools for systems analysis are Matlab and ARIES.</p>
-		<blockquote><a href="costing.html">Costing References</a></blockquote>
+	<p><a href="img/Simulations/Costing.JPG"><img src="img/Simulations/Costing.JPG" alt="cost" width="350" height="425" ALIGN="Left" Hspace="10"></a></p>
+	<p>During the last 5 years, WSI has developed a costing model in collaboration with Decysive Systems and most recently with Bechtel for the costing of most of the major fusion subsystems.  We have worked under contract with ARPA-E to produce the cost analysis for 4 of the ALPHA program fusion concepts.  Report will be released June 1 2017, and otherwise please contact us for more information</p>
 
+
+ 
 
 		<h3>Systems Analysis Papers by Woodruff Scientific</h3>
 
@@ -42,6 +45,8 @@
 
 		<p><a href="http://fire.pppl.gov/FESAC_WP_CT_market_Woodruff.pdf">FESAC: The Path to Market for Compact Modular Fusion Power Cores</a></p>
 
+
+		<blockquote><a href="costing.html">Costing References</a></blockquote>
 
 
     </div> <!-- /container -->

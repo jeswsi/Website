@@ -27,6 +27,7 @@
 
           <ul class="left">
             <li><a href="#corsica">CORSICA</a></li>
+            <li><a href="#dcon">DCON</a></li>
             <li><a href="#fiesta">Fiesta</a></li>
             <li><a href="#nimeq">NIMEQ</a></li>
             <li><a href="#eqlfe">EQLFE</a></li>
@@ -90,6 +91,20 @@ available transport models.
 </blockquote>
 
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CORSICA Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
+
+
+<a id="dcon"></a>
+<h3>DCON</h3>
+<p> We examine the stability of plasmas with the DCON code (A. H. Glasser Physics of Plasmas 23, 072505 (2016) ).  Shown are: left) Geometry variation for the tilt stability study and right) energies computed by DCON, showing a transition to stable at 14cm. DCON finds all modes stable for nn = 1 up to a stabilizing plate height of 14cm.</p>
+
+
+ <div class="col-md-12">
+      <p><a href="img/Simulations/DCONfig1.png"><img src="img/Simulations/DCONfig1.png" alt="itersob" width="300" height="228" /></a><br />
+        DCON</p>
+    </div>
+
+<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CORSICA Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
+
 
 <a id="fiesta"></a>
 <h3>Fiesta</h3>
