@@ -29,6 +29,7 @@
             <li><a href="#hifi">HiFi</a></li>
             <li><a href="#bout">BOUT++</a></li>
             <li><a href="#openfoam">OpenFOAM</a></li>
+            <li><a href="http://woodruffscientific.com/equilibrium#dcon">DCON</a></li>
           </ul>
 
 	<h1>MHD</h1>

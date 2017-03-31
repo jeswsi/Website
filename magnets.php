@@ -35,7 +35,6 @@
 		<li><a href="hh">Helmholtz Coils</a></li>
 		<li><a href="maxwell">Maxwell Coils</a></li>
 		<li><a href="pfcoil">PF Coil Sets</a></li>
-		<li><a href="noncircular">Non-Circular Coils</a></li>
 		<li><a href="lowlhighc">Low L High Current</a></li>
 <!-- 		<li><a href="pancake">Flat/Pancake Coils</a></li> -->
 		</ul>
@@ -84,14 +83,6 @@
 
   <p></p>
 
-	<p>Useful Coil References at Wikipedia:</p>
-	<ul>
-		<li><a href="https://en.wikipedia.org/wiki/Helmholtz_coil">Helmholtz Coils</a></li>
-		<li><a href="https://en.wikipedia.org/wiki/Maxwell_coil">Maxwell Coils</a></li>
-		<li><a href="https://en.wikipedia.org/wiki/Field_coil">Field Coils</a></li>
-		<li><a href="https://en.wikipedia.org/wiki/Electromagnet">Electromagnets</a></li>
-		<li><a href="https://en.wikipedia.org/wiki/Pulsed_power">Pulsed Power</a></li>
-	</ul>
 
 
 	<p>Need high-field magnetic coils for your lab? WSI can provide a cost-effective solution.</p>

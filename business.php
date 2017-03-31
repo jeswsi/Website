@@ -35,15 +35,6 @@
 <br></br>
 
 
-<img src="img/Headshots/morgan.jpg" alt="Image of Morgan Quinley" style="width:128px;" align="left" Hspace="10">
-
-<h3><strong><a href="https://www.linkedin.com/in/morgan-quinley-b06a9013">Morgan Quinley</a></strong><span class="text-muted"> COO</span></h3>
-
-<p>Morgan brings many years of experience gained working in industrial settings to his role as Chief Operations Officer.  Morgan earned a bachelor's degree in aerospace engineering from Saint Louis University. He then worked for a few years in the field of nuclear medicine at a large business before starting graduate school in plasma science at the University of Washington, where he obtained his MSc.  Morgan currently splits his time between business strategy, management and planning and scientific duties as Diagnostic Engineer.</p>
-
-<br></br>
-<br></br>
-
 
 <img src="img/Headshots/felicia.jpg" alt="Image of Felicia Edwards" style="width:128px;" align="left" Hspace="10">
 

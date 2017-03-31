@@ -50,7 +50,9 @@ function getStl()
 
     var divobj = document.getElementById('volume');
     divobj.style.display='block';
-    divobj.innerHTML = code
+    // divobj.innerHTML = code
+    divobj.innerHTML = "loading..."
+
 
         $.ajax({
             type: "POST",
@@ -63,8 +65,9 @@ function getStl()
                 },
             crossDomain: true,
             success: function(responseText, status){
-                alert(responseText + "\nStatus: " + status);
+                //alert(responseText + "\nStatus: " + status);
                 document.getElementById('viewer').contentDocument.location.reload(true);
+                document.getElementById('volume').innerHTML = ""
                 //document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'load', url:'testbox.stl'}, '*');
             },
         });

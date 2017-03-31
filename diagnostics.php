@@ -26,12 +26,14 @@
 				<ul class="left">
 					<li><a href="#magnetic">Magnetic Field</a></li>
 					<li><a href="#electrostatic">Plasma Particle Flux</a></li>
-        			<li><a href="#optical">Refractive-Index Measurements</a></li>
-        			<li><a href="#spectroscopy">Spectroscopic</a></li>
-        			<li><a href="#thomson">Scattering</a></li>
-        			<li><a href="#neutralpart">Neutral Particles</a></li>
-        			<li><a href="#neutrons">Neutrons</a></li>
-       			</ul>
+        	<li><a href="#optical">Refractive-Index Measurements</a></li>
+          <li><a href="#thomson">Scattering</a></li>
+        	<li><a href="#spectroscopy">Radiation</a></li>
+       	</ul>
+
+
+
+
     				<h1>Diagnostics</h1>
     				
 
@@ -47,294 +49,467 @@
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Magnetics</td>
-    <td class="tg-yw4l">Model Number</td>
-    <td class="tg-yw4l">Spec Sheet</td>
-    <td class="tg-yw4l">CDR Reference</td>
+    <td class="tg-yw4l"><strong>Magnetics</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
+    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">B-dot probes</td>
     <td class="tg-yw4l">M1-B-Single</td>
-    <td class="tg-yw4l">Diagnostics-Magnetics-Single</td>
-    <td class="tg-yw4l">Strait, E.</td>
+    <td class="tg-yw4l"><a href="files/diagnostics/Diagnostics-Magnetics-Single.pdf">Diagnostics-Magnetics-Single</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=B-dot Probes Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Linear arrays</td>
     <td class="tg-yw4l">M1-B-Array</td>
-    <td class="tg-yw4l">Diagnostics-Magnetics-Array</td>
-    <td class="tg-yw4l">Talamas</td>
+    <td class="tg-yw4l"><a href="files/diagnostics/Diagnostics-Magnetics-Arrays.pdf">Diagnostics-Magnetics-Array</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Linear Arrays Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Rogowskis</td>
     <td class="tg-yw4l">M1-R</td>
-    <td class="tg-yw4l">Diagnostics-Magnetics-Rogowski</td>
-    <td class="tg-yw4l">Hutchinson</td>
+    <td class="tg-yw4l"><a href="files/diagnostics/M1-R-C spec sheet.pdf">Diagnostics-Magnetics-Rogowski</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Rogowskis Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Rogowskis for banks</td>
     <td class="tg-yw4l">M1-R-Air</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Rogowskis for banks">Request spec sheet</a></td>
-    <td class="tg-yw4l">Pearson</td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Rogowskis for Banks Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Insitu calibration jig</td>
     <td class="tg-yw4l">M1-C-IS</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Insitu calibration jig">Request spec sheet</a></td>
-    <td class="tg-yw4l">Woodruff</td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Insitu Calibration Jig Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Calibration jigs</td>
     <td class="tg-yw4l">M1-C </td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Calibration jigs">Request spec sheet</a></td>
-    <td class="tg-yw4l">Woodruff</td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Calibration Jigs Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Insertable rogowskis</td>
     <td class="tg-yw4l">M1-R-Vac</td>
-    <td class="tg-yw4l">Diagnostics-Magnetics-Rogowski</td>
-    <td class="tg-yw4l">Martin</td>
+    <td class="tg-yw4l"><a href="files/diagnostics/M1-R-P spec sheet.pdf">Diagnostics-Magnetics-Rogowski</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Insertable Rogowskis Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Flux loops</td>
     <td class="tg-yw4l">M1-FL-Air</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Flux loops M1-FL-Air">Request spec sheet</a></td>
-    <td class="tg-yw4l">Hutchinson</td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Flux Loops M1-FL-Air Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Flux loops</td>
     <td class="tg-yw4l">M1-FL-Vac</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=RFlux loops M1-FL-Vac">Request spec sheet</a></td>
-    <td class="tg-yw4l">Hutchinson</td>
+    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Flux Loops M1-FL-Vac Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
+Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, or something else?
+Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Electrostatic</td>
-    <td class="tg-yw4l">Model Number</td>
-    <td class="tg-yw4l">Spec sheet</td>
-    <td class="tg-yw4l">CDR Reference</td>
+    <td class="tg-yw4l"><strong>Electrostatic</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec sheet</strong></td>
+    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Voltage monitors (HV, voltage dividers)</td>
     <td class="tg-yw4l">E1-Vdiv</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Voltage monitors">Request spec sheet</a></td>
-    <td class="tg-yw4l">Pearson</td>
+    <td class="tg-yw4l"><a href="magnetics.html">Electrostatic References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Volage Monitors Quote&body=When requesting a quote for an electrostatic diagnostic, please consider the following:
+Quantity to be measured and its expected magnitude. Electron or ion measurements? Is electron density of interest? Ion flow velocity or energy and temperature? Are floating and/or plasma potential of interest?
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? What is the timescale of evolution of the measured quantitiy?
+Digitizer dynamic range. What is the peak-to-peak signal amplitude that your data acquisition system can handle?
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, a reciprocating drive, or something else?
+Size constraints. Diameter of port through which the probe must be inserted, distance from the mount to the measurement location within the plasma, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Langmuir probe – static</td>
     <td class="tg-yw4l">E1-L-[# of tips]</td>
-    <td class="tg-yw4l">Diagnostics-Electrostatic-Langmuir</td>
-    <td class="tg-yw4l">Boedo</td>
+    <td class="tg-yw4l"><a href="files/diagnostics/DL-ES Final 2.pdf">Diagnostics-Electrostatic-Langmuir</a></td>
+    <td class="tg-yw4l"><a href="langmuirrefs.html">Electrostatic References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Langmuir Probe - Static Quote&body=When requesting a quote for an electrostatic diagnostic, please consider the following:
+Quantity to be measured and its expected magnitude. Electron or ion measurements? Is electron density of interest? Ion flow velocity or energy and temperature? Are floating and/or plasma potential of interest?
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? What is the timescale of evolution of the measured quantitiy?
+Digitizer dynamic range. What is the peak-to-peak signal amplitude that your data acquisition system can handle?
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, a reciprocating drive, or something else?
+Size constraints. Diameter of port through which the probe must be inserted, distance from the mount to the measurement location within the plasma, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Langmuir probe – reciprocating</td>
     <td class="tg-yw4l">E1-L-R</td>
-    <td class="tg-yw4l">Diagnostics-Electrostatic-Langmuir</td>
-    <td class="tg-yw4l">J. G. Bak</td>
+    <td class="tg-yw4l"><a href="files/diagnostics/DL-ES Final 2.pdf">Diagnostics-Electrostatic-Langmuir</a></td>
+    <td class="tg-yw4l"><a href="langmuirrefs.html">Electrostatic References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Langmuir Probe - Reciprocating Quote&body=When requesting a quote for an electrostatic diagnostic, please consider the following:
+Quantity to be measured and its expected magnitude. Electron or ion measurements? Is electron density of interest? Ion flow velocity or energy and temperature? Are floating and/or plasma potential of interest?
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? What is the timescale of evolution of the measured quantitiy?
+Digitizer dynamic range. What is the peak-to-peak signal amplitude that your data acquisition system can handle?
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, a reciprocating drive, or something else?
+Size constraints. Diameter of port through which the probe must be inserted, distance from the mount to the measurement location within the plasma, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Retarding Grid Energy Analyzers</td>
     <td class="tg-yw4l">E1-RFA</td>
-    <td class="tg-yw4l">Diagnostics-Electrostatic-RFEA</td>
-    <td class="tg-yw4l">Pitts</td>
+    <td class="tg-yw4l"><a href="files/diagnostics/E1-RFA information.pdf">Diagnostics-Electrostatic-RFEA</a></td>
+    <td class="tg-yw4l"><a href="ionenergy.html">Electrostatic References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Retarding Grid Energy Analyzers Quote&body=When requesting a quote for an electrostatic diagnostic, please consider the following:
+Quantity to be measured and its expected magnitude. Electron or ion measurements? Is electron density of interest? Ion flow velocity or energy and temperature? Are floating and/or plasma potential of interest?
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? What is the timescale of evolution of the measured quantitiy?
+Digitizer dynamic range. What is the peak-to-peak signal amplitude that your data acquisition system can handle?
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, a reciprocating drive, or something else?
+Size constraints. Diameter of port through which the probe must be inserted, distance from the mount to the measurement location within the plasma, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Ball pen probe</td>
     <td class="tg-yw4l">E1-Bpp</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Ball pen probe">Request spec sheet</a></td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="ionenergy.html">Electrostatic References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Ball Pen Probe Quote&body=When requesting a quote for an electrostatic diagnostic, please consider the following:
+Quantity to be measured and its expected magnitude. Electron or ion measurements? Is electron density of interest? Ion flow velocity or energy and temperature? Are floating and/or plasma potential of interest?
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? What is the timescale of evolution of the measured quantitiy?
+Digitizer dynamic range. What is the peak-to-peak signal amplitude that your data acquisition system can handle?
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, a reciprocating drive, or something else?
+Size constraints. Diameter of port through which the probe must be inserted, distance from the mount to the measurement location within the plasma, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Faraday cup</td>
     <td class="tg-yw4l">E1-FC</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Faraday cup">Request spec sheet</a></td>
-    <td class="tg-yw4l">Brown</td>
+    <td class="tg-yw4l"><a href="langmuirrefs.html">BElectrostatic References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Faraday Cup Quote&body=When requesting a quote for an electrostatic diagnostic, please consider the following:
+Quantity to be measured and its expected magnitude. Electron or ion measurements? Is electron density of interest? Ion flow velocity or energy and temperature? Are floating and/or plasma potential of interest?
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? What is the timescale of evolution of the measured quantitiy?
+Digitizer dynamic range. What is the peak-to-peak signal amplitude that your data acquisition system can handle?
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, a reciprocating drive, or something else?
+Size constraints. Diameter of port through which the probe must be inserted, distance from the mount to the measurement location within the plasma, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Mach probes</td>
     <td class="tg-yw4l">E1-M</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Mach probes">Request spec sheet</td>
-    <td class="tg-yw4l">Zhang</td>
+    <td class="tg-yw4l"><a href="langmuirrefs.html">Electrostatic References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Mach Probes Quote&body=When requesting a quote for an electrostatic diagnostic, please consider the following:
+Quantity to be measured and its expected magnitude. Electron or ion measurements? Is electron density of interest? Ion flow velocity or energy and temperature? Are floating and/or plasma potential of interest?
+Frequency response. What is the frequency (or range of frequencies) that need to be measured? What is the timescale of evolution of the measured quantitiy?
+Digitizer dynamic range. What is the peak-to-peak signal amplitude that your data acquisition system can handle?
+Vacuum environment. Is the probe intended to be used in air or vacuum? High vacuum (HV, 10-3 - 10-9 torr) or ultra-high vacuum (UHV, 10-9 - 10-12 torr)? This helps us determine the materials that can be used for your application.
+Thermal environment. Will the probe experience high heat loads (for example, behind first wall tiles) or low heat loads? Will it experience thermal cycling? Will it be used at a high or low ambient temperature (will the chamber be baked)? This information also places restrictions on the materials that can be used.
+Mounting interface. Will the probe be mounted to a vacuum flange, a custom mounting structure on the chamber wall, a reciprocating drive, or something else?
+Size constraints. Diameter of port through which the probe must be inserted, distance from the mount to the measurement location within the plasma, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Refractive index</td>
-    <td class="tg-yw4l">Model Number</td>
-    <td class="tg-yw4l">Spec sheet</td>
-    <td class="tg-yw4l">CDR Reference</td>
+    <td class="tg-yw4l"><strong>Refractive index</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec sheet</strong></td>
+    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">CO2 Interferometer</td>
     <td class="tg-yw4l">R1-CO2</td>
     <td class="tg-yw4l">Diagnostics-Refractive-CO2</td>
-    <td class="tg-yw4l">Carlstrom</td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CO2 Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">HeNe interferometer</td>
     <td class="tg-yw4l">R1-HeNe</td>
-    <td class="tg-yw4l">Diagnostics-Refractive-HeNe</td>
-    <td class="tg-yw4l">Kumar</td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/Diagnostics-Refractive-HeNe.pdf">Diagnostics-Refractive-HeNe</a></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HeNe Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Microwave interferometer</td>
     <td class="tg-yw4l">R1-M</td>
-    <td class="tg-yw4l">Diagnostics-Refractive-Microwave</td>
-    <td class="tg-yw4l">Willis</td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/Diagnostics-Refractive-Microwave.pdf">Diagnostics-Refractive-Microwave</a></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Microwave Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Polarimetry</td>
     <td class="tg-yw4l">R1-P</td>
     <td class="tg-yw4l">Diagnostics-Refractive-Polarimeter</td>
-    <td class="tg-yw4l">Akiyama</td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/polarimeters.html">Refractive Index References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Polarimetry Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">mmWave Reflectometer</td>
     <td class="tg-yw4l">R1-R</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=mmWave Reflectometer">Request spec sheet</a></td>
-    <td class="tg-yw4l">Domier/Cohen</td>
+    <td class="tg-yw4l">Refractive Index References</td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=mmWave Reflectometer Quote" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Fiber-Coupled Interferometer</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/R1-F_Fiber-based_interferometer.pdf">Spec sheet</a></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiber-Coupled Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
+   </tr>
+   <tr>
+    <td class="tg-yw4l">Fiber-Coupled, Two-Color Interferometer</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/R1-F-2C_Fiber-based_2-color_interferometer.pdf">Spec sheet</a></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiber-Coupled, Two-Color Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Scattering</td>
-    <td class="tg-yw4l">Model Number</td>
-    <td class="tg-yw4l">Spec sheet</td>
-    <td class="tg-yw4l">CDR Reference</td>
+    <td class="tg-yw4l"><strong>Scattering</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec sheet</strong></td>
+    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Profile Thomson Scattering</td>
     <td class="tg-yw4l">S1-T</td>
     <td class="tg-yw4l">Diagnostics-Scattering-Thomson</td>
-    <td class="tg-yw4l">McLean</td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Profile Thomson Scattering Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Profile Thomson Scattering</td>
     <td class="tg-yw4l">S1-T</td>
     <td class="tg-yw4l">Diagnostics-Scattering-Thomson</td>
-    <td class="tg-yw4l">Golingo</td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Profile Thomson Scattering Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Rayleigh</td>
     <td class="tg-yw4l">S1-R</td>
     <td class="tg-yw4l">Diagnostics-Scattering-Rayleigh</td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Rayleigh Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Inverse Compton</td>
     <td class="tg-yw4l">S1-IC</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Inverse Compton">Request spec sheet</a></td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Inverse Compton Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Radiation</td>
-    <td class="tg-yw4l">Model Number</td>
-    <td class="tg-yw4l">Spec sheet</td>
-    <td class="tg-yw4l">Reference</td>
+    <td class="tg-yw4l"><strong>Radiation</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec sheet</strong></td>
+    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Photodiode bolometer</td>
     <td class="tg-yw4l">SP1-B</td>
     <td class="tg-yw4l">Diagnostics-Spectroscopic-Bolometer</td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Photodiode Bolometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">3 channel filtered bolometer array</td>
     <td class="tg-yw4l">SP1-B-3</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=3 channel filtred bolometer array">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=3 Channel Filtered Bolometer Array Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">1 channel thermistor</td>
     <td class="tg-yw4l">SP1-B-T</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=1 channel thermistor">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=1 Channel Thermistor Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Charge exchange particle neutral analyzer</td>
     <td class="tg-yw4l">SP1-NPA</td>
     <td class="tg-yw4l">Diagnostics-Spectroscopic-NPA</td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Charge Exchange Particle Neutral Analyzer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Visible spectrometer</td>
     <td class="tg-yw4l">SP1-SP-VIS</td>
     <td class="tg-yw4l">Diagnostics-Spectroscopic-Spectrometer-visible</td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Visible Spectrometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Hard X-ray</td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Hard X-ray">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Hard X-ray Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">VUV monochrometers</td>
     <td class="tg-yw4l">SP1-SP-VUV</td>
     <td class="tg-yw4l">Diagnostics-Spectroscopic-Spectrometer-vuv</td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=VUV Monochrometers Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">H-alpha array</td>
     <td class="tg-yw4l">SP1-SP-Ha</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=H-alpha array">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=H-Alpha Array Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">TV cameras</td>
     <td class="tg-yw4l">SP1-SP-TV</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=TV Cameras">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=TV Cameras Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Microwave Imaging Reflectometer</td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Microwave Imaging Reflectometer">Request spec sheet</a></td>
     <td class="tg-yw4l"></t>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Microwave Imaging Reflectometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Scintillator</td>
     <td class="tg-yw4l">SP1-S</td>
     <td class="tg-yw4l">Diagnostics-Spectroscopic-Scintillator</td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/scintillators.html">References</td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Scintillator Quote" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Neutral Particle Analyzer</td>
     <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/npa.html">References</td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Neutral Particle Analyzer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Gas</td>
-    <td class="tg-yw4l">Model Number</td>
-    <td class="tg-yw4l">Spec sheet</td>
-    <td class="tg-yw4l">Reference</td>
+    <td class="tg-yw4l"><strong>Gas</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec sheet</strong></td>
+    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Residual gas analyzer</td>
     <td class="tg-yw4l">RGA-1</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Residual gas analyzer">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Gas Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
 </table>
 
@@ -673,45 +848,114 @@ printing -->
   <blockquote>
     <p><a href="files/diagnostics/Diagnostics-Refractive-HeNe.pdf">HeNe Interferometer Spec Sheet</a></p>
   </blockquote>
+<!--
+--ZEMAX image
+--Components for download: mirror mount, beamsplitter mount,
+--Other HeNe interferometers -->
 
+  <h3>Microwave Interferometer</h3>
 
+  <div class="col-md-6">
+    <p class="center"><a href="img/diagnostics/R1-M render.jpg"><img src="img/diagnostics/R1-M render.jpg"></a><br /></p>
+  </div>
 
+  <div class="clearfix"></div>
 
+  <blockquote>
+    <p><a href="files/diagnostics/Diagnostics-Refractive-Microwave.pdf">Microwave Interferometer Spec Sheet</a></p>
+  </blockquote>
 
+  <h3>Fiber-Coupled Interferometer</h3>
 
+    <p>
+      Fiber-coupled interferometers are very flexible and robust systems, often allowing for lines of sight to be quickly changed without the need for optical realignment.
+    </p>
 
-<a id="spectroscopy"></a>
-<h1>Spectroscopic</h1>
-	<p>Line radiation from the plasma due to bound state transitions of the
-	electrons can yield information about the power losses and impurity
-	concentrations, and also about the velocities of impurities.  An
-	excellent secondary reference summarizing the physics is Hutchinson's
-	<a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Principles of Plasma Diagnostics 2nd Edition</a>
-	</p>
+  <div class="col-md-6">
+    <p class="center"><a href="img/diagnostics/R1-F render.jpg"><img src="img/diagnostics/R1-F render.jpg"></a><br /></p>
+  </div>
 
-<a id="soft"></a>
-	<h3>Soft X-Ray Diode Imaging</h3>
-				<blockquote><a href="softxray.html">Soft X-Ray References</a></blockquote>
+  <div class="clearfix"></div>
 
-<a id="bol"></a>
-	<h3>Bolometer</h3>
-				<blockquote><a href="bolometers.html">Bolometer References</a></blockquote>
+  <blockquote>
+    <p><a href="files/diagnostics/R1-F_Fiber-based_interferometer.pdf">Fiber-Coupled Interferometer Spec Sheet</a></p>
+  </blockquote>
 
-<a id="vuv"></a>
-	<h3>VUV Spectrometer</h3>
-				<blockquote><a href="vuv.html">VUV Spectrometer References</a></blockquote>
+  <h3>Fiber-Coupled, Two-Color Interferometer</h3>
 
-<a id="vis"></a>
-	<h3>Visible Spectrometer</h3>
-				<blockquote><a href="visible.html">Visible Spectrometer References</a></blockquote>
+    <p>
+      This two-color system provides vibration compensation in addition to the flexibility and robustness of fiber-coupled systems.
+    </p>
 
-<a id="ids"></a>
-	<h3>Ion Doppler Spectrometer</h3>
-				<blockquote><a href="doppler.html">Ion Doppler Spectrometer References</a></blockquote>
+  <div class="col-md-6">
+    <p class="center"><a href="img/diagnostics/R1-F-2C render.png"><img src="img/diagnostics/R1-F-2C render.png"></a><br /></p>
+  </div>
 
+  <div class="clearfix"></div>
 
+  <blockquote>
+    <p><a href="files/diagnostics/R1-F-2C_Fiber-based_2-color_interferometer.pdf">Fiber-Coupled, Two-color Interferometer Spec Sheet</a></p>
+  </blockquote>
 
-	<p><a class="btn btn-lg btn-primary" href="mailto: sales@woodruffscientific.com?subject=Spectrometer RFQ&#038;body=How%20many:%0D%0A%0D%0ANumber%20of%20chords:%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):" role="button">Get a Quote &raquo;</a></p>
+  <h3>CO2 Interferometer</h3>
+			<blockquote><a href="CO2.html">CO2 Interferometer References</a></blockquote>
+
+<!-- 	--ZEMAX image
+--components for download
+--other CO2 interferometers
+ -->
+	<h3>Polarimeter</h3>
+			<blockquote><a href="polarimeters.html">Polarimeter References</a></blockquote>
+
+<!-- 	--ZEMAX image
+--components for download
+--other polarimeters in the world -->
+
+	<p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Optical Diagnostics RFQ &#038;body=How%20many:%0D%0A%0D%0ANumber%20of%20chords:%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):" role="button">Get a Quote &raquo;</a></p>
+
+	<h3>Optical Mount Components for 3D Printing</h3>
+	<p>Over time, we plan to develop a whole range of mechanical components for
+use in our diagnostics, passing on cost savings to customers in the
+diagnostics.  It is also possible that we can design the entire optical
+system as a single monolithic structure to be printed with alignment
+built-in.  Check back in the coming months as we add more information
+here, and to our <a href="http://www.thingiverse.com/woodruffscientific/collections">thingiverse pages</a>.
+
+	<div class="col-md-6">
+      <p><a href="img/mirrormount2.jpg"><img src="img/mirrormount2-small.jpg" alt="3D printed mirror mount" /></a><br />
+        </p>
+    </div>
+    <div class="col-md-6">
+      <p><a href="img/mirrormount1.jpg"><img src="img/mirrormount1-small.jpg" alt="3D printed mirror mount" /></a><br />
+        </p>
+    </div>
+    <div class="clearfix"></div>
+
+    <p>Download files ready for 3D-printing: <a href="files/opticalmount.stp">Optical Mount</a>, <a href="files/opticalmount-adjust.stp">Optical Mount Adjust</a>
+
+	<div class="col-md-6">
+      <p><a href="img/beamsplittermount2.jpg"><img src="img/beamsplittermount2-small.jpg" alt="3D printed beam splitter mount" /></a><br />
+        </p>
+    </div>
+    <div class="col-md-6">
+      <p><a href="img/beamsplittermount3.jpg"><img src="img/beamsplittermount3-small.jpg" alt="3D printed beam splitter mount" /></a><br />
+        </p>
+    </div>
+    <div class="clearfix"></div>
+
+    <p>Download files ready for 3D-printing: <a href="files/beamsplittermount.stp">Beam splitter Mount (for 40mm cube beam splitter)</a></p>
+
+	<div class="col-md-6">
+      <p><a href="img/lasermount4.jpg"><img src="img/lasermount4-small.jpg" alt="3D printed laser mount" /></a><br />
+        </p>
+    </div>
+    <div class="col-md-6">
+      <p><a href="img/lasermount5.jpg"><img src="img/lasermount5-small.jpg" alt="3D printed laser mount" /></a><br />
+        </p>
+    </div>
+
+    <div class="clearfix"></div>
+    <p>Download files ready for 3D-printing: <a href="files/lasermount.stp">Laser Mount (uses 1/4 20 nuts and screws)</a></p>
 
 
 
@@ -750,6 +994,45 @@ printing -->
 
 
 
+
+
+
+
+
+
+
+<a id="spectroscopy"></a>
+<h1>Spectroscopic</h1>
+  <p>Line radiation from the plasma due to bound state transitions of the
+  electrons can yield information about the power losses and impurity
+  concentrations, and also about the velocities of impurities.  An
+  excellent secondary reference summarizing the physics is Hutchinson's
+  <a href="http://www.amazon.com/Principles-Plasma-Diagnostics-I-Hutchinson/dp/052167574X">Principles of Plasma Diagnostics 2nd Edition</a>
+  </p>
+
+<a id="soft"></a>
+  <h3>Soft X-Ray Diode Imaging</h3>
+        <blockquote><a href="softxray.html">Soft X-Ray References</a></blockquote>
+
+<a id="bol"></a>
+  <h3>Bolometer</h3>
+        <blockquote><a href="bolometers.html">Bolometer References</a></blockquote>
+
+<a id="vuv"></a>
+  <h3>VUV Spectrometer</h3>
+        <blockquote><a href="vuv.html">VUV Spectrometer References</a></blockquote>
+
+<a id="vis"></a>
+  <h3>Visible Spectrometer</h3>
+        <blockquote><a href="visible.html">Visible Spectrometer References</a></blockquote>
+
+<a id="ids"></a>
+  <h3>Ion Doppler Spectrometer</h3>
+        <blockquote><a href="doppler.html">Ion Doppler Spectrometer References</a></blockquote>
+
+
+
+  <p><a class="btn btn-lg btn-primary" href="mailto: sales@woodruffscientific.com?subject=Spectrometer RFQ&#038;body=How%20many:%0D%0A%0D%0ANumber%20of%20chords:%0D%0A%0D%0AShort%20description%20of%20the%20application:%0D%0A%0D%0APlease%20find%20attached%20a%20sketch/engineering%20drawing%20of%20the%20application.%0D%0A%0D%0AContact(Name/email/phone/fax/etc):%0D%0A%0D%0ANeeded%20by(Date):" role="button">Get a Quote &raquo;</a></p>
 
 
 

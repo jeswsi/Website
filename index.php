@@ -6,8 +6,9 @@
   $head = file_get_contents('header.html');
   echo $head; 
   ?>
-  <meta name="description" content="Products and Services for Plasma Physics, Fusion, and Pulsed Power">
-  <title>Woodruff Scientific, Inc. | Accelerating the development of commericial fusion energy systems since 2005</title>
+  
+       <meta name="description" content="Products and Services for Plasma Physics, Fusion, and Pulsed Power">
+  <title>Woodruff Scientific, Inc. | Research and development in pulsed power, plasma physics and fusion energy sciences since 2005</title>
   </head>
 
   <body>
@@ -19,30 +20,13 @@
   $navbar = file_get_contents('navbar.html');
   echo $navbar; 
   ?>  
-      
-        
 
 
-      <div class="col-md-10" style="center;"><div class="jumbotron">
-        <h2>Outsource your plasma R&amp;D quickly and affordably to Woodruff Scientific's experienced team</h2>
-        <p>Woodruff Scientific offers assistance with all stages of innovation: concept design,
-engineering design, procurement, fabrication, installation, testing, and
-operations. We can offer support packages to suit your application and
-budget.</p></div>
-    
+  <!-- <div class="col-md-2"><a class="twitter-timeline" height="775" href="https://twitter.com/WS_Inc">Tweets by WS_Inc</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>  -->
 
-    <div class="col-md-4"><a class="black" href="services"><h2>Services</h2></a>
-    <ul>
-    <font size="4.5"><li><a href="physics">Physics</a></li>
-    <li><a href="engineering">Engineering</a></li>
-    <li><a href="purchase">Purchase</a></li>
-    <li><a href="fabrication">Fabrication / Integration</a></li>
-    <li><a href="installation">Installation / Testing</a></li></font>
-    </ul></div>
-  
 
         <!-- Carousel -->
-  <div id="myCarousel" class="carousel slide col-md-8" data-ride="carousel">
+  <div id="myCarousel" class="carousel slide col-md-12 data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -123,19 +107,20 @@ budget.</p></div>
       <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
       <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div><!-- /.carousel -->
-
-
-
-  <h2>Our Mission</h2>
-  <p> Nuclear fusion powers our sun and all the stars in the night sky; if harnessed on earth, it could be the ultimate energy source: safe, clean, and with plentiful fuel. Commercial fusion energy will ultimately provide energy independence, national security, and new jobs in the emerging clean-tech market sector.  For the last decade, Woodruff Scientific has sought to accelerate the development of commercial fusion by tackling critical scientific problems in the <a href="http://science.energy.gov/fes/">US DOE Fusion Energy Sciences program</a>.  What we&#8217;ve learned to do, we can now offer as <a href="services">services</a> or custom <a href="enginerring">products</a>.</p>
-
     
-    </div>  
+    
+<div class="col-md-12 center"></div>
 
-    <div class="col-md-2"><a class="twitter-timeline" height="775" href="https://twitter.com/WS_Inc">Tweets by WS_Inc</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
-    <div class="col-md-12 center"></div>
 
+
+        <div class="col-md-12" style="center;"><div class="jumbotron">
+        <h2>Woodruff Scientific offers assistance with all stages of scientific innovation: concept design, engineering design, procurement, fabrication, installation, testing, and operations.  Call <a href="callto://+2069059477">206 905 9477</a> and let us know how we can help you.</p></div>
+
+  </div>
+
+   
+  
 
     </div> <!-- /container -->
 
