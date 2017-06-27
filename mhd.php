@@ -24,15 +24,55 @@
       	  <li><a href="physics">Physics</a></li>
 	  <li class="active">MHD</li>
   </ol>
-          <ul class="left">
-            <li><a href="#nimrod">NIMROD</a></li>
-            <li><a href="#hifi">HiFi</a></li>
-            <li><a href="#bout">BOUT++</a></li>
-            <li><a href="#openfoam">OpenFOAM</a></li>
-            <li><a href="http://woodruffscientific.com/equilibrium#dcon">DCON</a></li>
-          </ul>
+
 
 	<h1>MHD</h1>
+
+  <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <td class="tg-yw4l"><strong>Products</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
+    <th class="tg-yw4l"></th>
+<tr>
+    <th class="tg-yw4l">NIMROD</th>
+    <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=NIMROD">Request spec sheet</a></th>
+    <th class="tg-yw4l"><a href="https://nimrodteam.org/index.html">NIMROD References</a></th>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=NIMROD" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+  <tr>
+    <th class="tg-yw4l">HiFi</th>
+    <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=HiFi">Request spec sheet</a></th>
+    <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HiFi" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+  <tr>
+    <th class="tg-yw4l">BOUT++</th>
+    <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=BOUT++">Request spec sheet</a></th>
+    <th class="tg-yw4l"><a href="http://www-users.york.ac.uk/~bd512/bout/">BOUT++ References</a></th>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=BOUT++" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+  <tr>
+    <th class="tg-yw4l">OpenFOAM</th>
+    <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=OpenFOAM">Request spec sheet</a></th>
+    <th class="tg-yw4l"><a href="https://openfoam.org/">OpenFOAM References</a></th>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=OpenFOAM" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+</table>
+
+
+
   <p>Our main tools for MHD simulations are NIMROD, HiFi and to a lesser
 extent BOUT++. We have served several contracts with the NIMROD code,
 and we are exploring the use of HiFi for 3D geometries, particularly for

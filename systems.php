@@ -27,6 +27,36 @@
 	
 	<h1>Fusion Systems Code</h1>
 	<p><a href="img/Simulations/Costing.JPG"><img src="img/Simulations/Costing.JPG" alt="cost" width="350" height="425" ALIGN="Left" Hspace="10"></a></p>
+
+
+<div class="col-md-8">
+            <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <td class="tg-yw4l"><strong>Product</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
+    <th class="tg-yw4l"></th>
+  </tr>
+    <tr>
+    <td class="tg-yw4l">Fusion Systems Code</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Fusion Systems Code">Request spec sheet</a></td>
+    <td class="tg-yw4l"><a href="http://woodruffscientific.com/costing.html">References</a></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fusion Systems Code" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+</table>
+
+
+
+
+
 	<p>During the last 5 years, WSI has developed a costing model in collaboration with Decysive Systems and most recently with Bechtel for the costing of most of the major fusion subsystems.  We have worked under contract with ARPA-E to produce the cost analysis for 4 of the ALPHA program fusion concepts.  Report will be released June 1 2017, and otherwise please contact us for more information</p>
 
 

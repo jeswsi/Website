@@ -26,7 +26,44 @@
   </ol>
 
 
-	<h1>MCNP6</h1>
+<div class="col-md-4">
+      <p><a href="img/m.png"><img src="img/m.png" alt="MCNP6" width="300" height="300" /></a><br />
+PIC1</p>
+    </div>
+
+    <div class="col-md-8">
+      <p><a href="img/geometry.png"><img src="img/geometry.png" alt="Geometry" width="600" height="300" /></a><br />
+PIC2</p>
+    </div>
+
+
+
+	<h1>MCNP6</h1
+
+  <div class="col-md-8">
+            <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <td class="tg-yw4l"><strong>Product</strong></td>
+    <td class="tg-yw4l"><strong>Model Number</strong></td>
+    <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
+    <th class="tg-yw4l"></th>
+  </tr>
+    <tr>
+    <td class="tg-yw4l">MCNP6</td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=MCNP6">Request spec sheet</a></td>
+    <td class="tg-yw4l"></td>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=MCNP6" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+</table>
+
   <p>MCNP is a general-purpose Monte Carlo N-Particle code that can be used for neutron, photon, electron, or coupled neutron/photon/electron transport. Specific areas of application include, but are not limited to, radiation protection and dosimetry, radiation shielding, radiography, medical physics, nuclear criticality safety, Detector Design and analysis, nuclear oil well logging, Accelerator target design, Fission and fusion reactor design, decontamination and decommissioning. The code treats an arbitrary three-dimensional configuration of materials in geometric cells bounded by first- and second-degree surfaces and fourth-degree elliptical tori.</p>
 
 
@@ -35,15 +72,7 @@ Get 94\% shine through at 2mm; With composite plates (8mm Be, 2-8mm Cu, 2mm W), 
 
 
 
-    <div class="col-md-12">
-      <p><a href="img/m.png"><img src="img/m.png" alt="MCNP6" width="300" height="300" /></a><br />
-PIC1</p>
-    </div>
-
-    <div class="col-md-12">
-      <p><a href="img/geometry.png"><img src="img/geometry.png" alt="Geometry" width="600" height="300" /></a><br />
-PIC2</p>
-    </div>
+    
     
   
 

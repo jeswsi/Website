@@ -38,18 +38,19 @@
 </strong><span class="text-muted">Physicist</span></h3>
 <p>After a decade of research into innovative fusion concepts at the University of Manchester (PhD), Lawrence Livermore National Lab (Postdoc), UC Berkeley Department of Nuclear Engineering (Visiting Scholar), and the University of Washington (Research Scientist), Dr. Woodruff founded WSI to help accelerate the development of economic fusion energy. Woodruff has performed work under contract to DOE, universities, national labs and to the private sector, building research devices, performing modeling and simulations primarily directed at simply-connected (hence more compact and simpler-to-engineer) fusion systems. Dr. Woodruff hosts an annual Scientific Computing Bootcamp for undergrads, introducing many of the tools in common use for High Performance Computing.  Dr. Woodruff has organized national workshops in fusion energy sciences, and is a current participant in two IAEA initiatives on compact fusion neutron sources and private fusion development.  Dr. Woodruff is a member of the American Physical Society and the Institute of Physics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/Simon_Woodruff/">ResearchGate</a></p>
-
-
+<p>E-mail: <a href="simon@woodruffscientific.com">simon@woodruffscientific.com</a></p>
+<p>Office: (206)905-9477</p>
 <br></br>
 
 
 <img src="img/Headshots/paul.jpg" alt="Image of Paul Melnik" style="width:128px;" align="left" Hspace="10">
 
-<h3><strong><a href="https://www.researchgate.net/profile/P_Melnik">Dr. Paul A. Melnik</a></strong><span class="text-muted"> Physicist</span></h3>
+<h3><strong><a href="https://www.researchgate.net/profile/P_Melnik">Dr. Paul A. Melnik</a></strong><span class="text-muted"> Engineer, Physicist</span></h3>
 
-<p>Dr. Melnik received his MS and Ph.D. degrees from University of Washington while pursuing experimental research in laboratory plasma physics. He has expertise in the theory, design, and application of internal probes and plasma sources. His interests include circuit design, accelerated plasma flow and space propulsion.</p>
+<p>During his time at the Redmond Plasma Physics Laboratory, Dr. Melnik gained experience in the design, assembly, and subsystem integration of a large magnetically confined plasma experiment.  He has designed a variety of high-energy pulsed power systems with safety interlocks, programmable controls, fiber-optic interfaces, electrostatic shielding, and gained working experience of high voltage safety protocol. Engineering work with Vectorworks, Solidworks, ANSYS, PSpice, ExpressPCB. Also built electric probes, magnetic probes, and managed data acquisition and processing. Interactive code developement with LabView, Python, and Matlab.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/P_Melnik">ResearchGate</a></p>
-
+<p>E-mail: <a href="melnik@woodruffscientific.com">melnik@woodruffscientific.com</a></p>
+<p>Office: (206)331-4687</p>
 <br></br>
 <br></br>
 
@@ -69,20 +70,12 @@ automation, and feedback control of plasmas.  His research interests
 include high-beta MHD, accelerated plasma flows, driven magnetic
 reconnection, and plasma dynamos.</p>
 <p>For publications, please visit <a href="https://www.researchgate.net/profile/Paul_Sieck">ResearchGate</a></p>
+<p>E-mail: <a href="paul@woodruffscientific.com">paul@woodruffscientific.com</a></p>
+<p>Office: +1-858-348-4483</p>
 
 <br></br>
 
 
-
-
-<img src="img/Headshots/morgan.jpg" alt="Image of Morgan Quinley" style="width:128px;" align="left" Hspace="10">
-
-<h3><strong><a href="https://www.researchgate.net/profile/Morgan_Quinley/">Morgan Quinley</a></strong><span class="text-muted"> Diagnostics Engineer</span></h3>
-
-<p>Morgan earned a bachelor's degree in aerospace engineering from Saint Louis University, and during that time held internships at NASA and Andrews Space. He then worked for a few years as an R&D engineer in the field of nuclear medicine before starting graduate school in plasma science at the University of Washington. While at UW, Morgan helped to build an astrophysical jet experiment, ultimately writing his master's thesis on the design and implementation of a retarding field analyzer.</p>
-<p>For publications, please visit <a href="https://www.researchgate.net/profile/Morgan_Quinley/">ResearchGate</a></p>
-
-<br></br>
 
 
 
@@ -93,6 +86,9 @@ reconnection, and plasma dynamos.</p>
 
 <p>James Stuber graduated with a bachelor&#8217;s degree in Aeronautics and Astronautics from the University of Washington in 2011. Interests in astronautics include orbital mechanics, propulsion, and satellite design. Other interests are computer science and plasma physics. For his senior class capstone James designed hardware and controls for rendezvous with and capture of non-cooperative orbital debris. At Woodruff Scientific James has assisted in the design and construction of lab devices, developed experiment control code, and managed plasma simulations. James is a member of the American Institute of Aeronautics and Astronautics.</p>
 <p>For publications, please visit <a href="http://www.researchgate.net/profile/James_Stuber/">ResearchGate</a></p>
+<p>E-amil: <a href="james@woodruffscientific.com">james@woodruffscientific.com</a></p>
+<p>Office: +1 (206) 201-2148</p>
+
 
 <br></br>
 

@@ -23,20 +23,11 @@
  	 	<li><a href="services">Services</a></li>
   		<li class="active">Diagnostics</li>
 	</ol>
-				<ul class="left">
-					<li><a href="#magnetic">Magnetic Field</a></li>
-					<li><a href="#electrostatic">Plasma Particle Flux</a></li>
-        	<li><a href="#optical">Refractive-Index Measurements</a></li>
-          <li><a href="#thomson">Scattering</a></li>
-        	<li><a href="#spectroscopy">Radiation</a></li>
-       	</ul>
-
-
-
+				
 
     				<h1>Diagnostics</h1>
     				
-
+          <div class="col-md-8">
     				<style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -45,24 +36,17 @@
 </style>
 <table class="tg">
   <tr>
-    <th class="tg-yw4l"></th>
-    <th class="tg-yw4l"></th>
-    <th class="tg-yw4l"></th>
-    <th class="tg-yw4l"></th>
-    <th class="tg-yw4l"></th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"><strong>Magnetics</strong></td>
+    <td class="tg-yw4l"><strong>Products</strong></td>
     <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
-    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">B-dot probes</td>
     <td class="tg-yw4l">M1-B-Single</td>
     <td class="tg-yw4l"><a href="files/diagnostics/Diagnostics-Magnetics-Single.pdf">Diagnostics-Magnetics-Single</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=B-dot Probes Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -75,7 +59,7 @@ Size constraints. Width of gap behind wall tiles, diameter of port through which
     <td class="tg-yw4l">Linear arrays</td>
     <td class="tg-yw4l">M1-B-Array</td>
     <td class="tg-yw4l"><a href="files/diagnostics/Diagnostics-Magnetics-Arrays.pdf">Diagnostics-Magnetics-Array</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Linear Arrays Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -88,7 +72,7 @@ Size constraints. Width of gap behind wall tiles, diameter of port through which
     <td class="tg-yw4l">Rogowskis</td>
     <td class="tg-yw4l">M1-R</td>
     <td class="tg-yw4l"><a href="files/diagnostics/M1-R-C spec sheet.pdf">Diagnostics-Magnetics-Rogowski</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Rogowskis Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -101,7 +85,7 @@ Size constraints. Width of gap behind wall tiles, diameter of port through which
     <td class="tg-yw4l">Rogowskis for banks</td>
     <td class="tg-yw4l">M1-R-Air</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Rogowskis for banks">Request spec sheet</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Rogowskis for Banks Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -114,7 +98,7 @@ Size constraints. Width of gap behind wall tiles, diameter of port through which
     <td class="tg-yw4l">Insitu calibration jig</td>
     <td class="tg-yw4l">M1-C-IS</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Insitu calibration jig">Request spec sheet</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Insitu Calibration Jig Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -127,7 +111,7 @@ Size constraints. Width of gap behind wall tiles, diameter of port through which
     <td class="tg-yw4l">Calibration jigs</td>
     <td class="tg-yw4l">M1-C </td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Calibration jigs">Request spec sheet</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Calibration Jigs Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -140,7 +124,7 @@ Size constraints. Width of gap behind wall tiles, diameter of port through which
     <td class="tg-yw4l">Insertable rogowskis</td>
     <td class="tg-yw4l">M1-R-Vac</td>
     <td class="tg-yw4l"><a href="files/diagnostics/M1-R-P spec sheet.pdf">Diagnostics-Magnetics-Rogowski</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Insertable Rogowskis Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -150,10 +134,10 @@ Mounting interface. Will the probe be mounted to a vacuum flange, a custom mount
 Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Flux loops</td>
+    <td class="tg-yw4l">Flux loops in Air</td>
     <td class="tg-yw4l">M1-FL-Air</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Flux loops M1-FL-Air">Request spec sheet</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Flux Loops M1-FL-Air Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -163,10 +147,10 @@ Mounting interface. Will the probe be mounted to a vacuum flange, a custom mount
 Size constraints. Width of gap behind wall tiles, diameter of port through which the coil must be inserted, perturbation to the plasma, et cetera." role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Flux loops</td>
+    <td class="tg-yw4l">Flux loops in a Vacuum</td>
     <td class="tg-yw4l">M1-FL-Vac</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=RFlux loops M1-FL-Vac">Request spec sheet</a></td>
-    <td class="tg-yw4l"><a href="magnetics.html">Magnetics References</a></td>
+    <td class="tg-yw4l"><a href="magnetics.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Flux Loops M1-FL-Vac Quote&body=When requesting a quote for a magnetic diagnostic, please consider the following:
 Expected magnitude of the measured quantity and digitizer dynamic range. These determine the minimum and maximum nA of the coil.
 Frequency response. What is the frequency (or range of frequencies) that need to be measured? This determines the required inductance, L, and resistance, R, of the coil.
@@ -298,13 +282,13 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
     <td class="tg-yw4l"><strong>Refractive index</strong></td>
     <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec sheet</strong></td>
-    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">CO2 Interferometer</td>
     <td class="tg-yw4l">R1-CO2</td>
-    <td class="tg-yw4l">Diagnostics-Refractive-CO2</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=CO2 Interferometerg">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CO2 Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
@@ -312,20 +296,20 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
     <td class="tg-yw4l">HeNe interferometer</td>
     <td class="tg-yw4l">R1-HeNe</td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/Diagnostics-Refractive-HeNe.pdf">Diagnostics-Refractive-HeNe</a></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
+    <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HeNe Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Microwave interferometer</td>
     <td class="tg-yw4l">R1-M</td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/Diagnostics-Refractive-Microwave.pdf">Diagnostics-Refractive-Microwave</a></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
+    <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Microwave Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Polarimetry</td>
     <td class="tg-yw4l">R1-P</td>
-    <td class="tg-yw4l">Diagnostics-Refractive-Polarimeter</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Polarimetry">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/polarimeters.html">Refractive Index References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Polarimetry Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
@@ -333,21 +317,21 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
     <td class="tg-yw4l">mmWave Reflectometer</td>
     <td class="tg-yw4l">R1-R</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=mmWave Reflectometer">Request spec sheet</a></td>
-    <td class="tg-yw4l">Refractive Index References</td>
+    <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=mmWave Reflectometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Fiber-Coupled Interferometer</td>
+    <td class="tg-yw4l">R1-F</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Fiber-Coupled Interferometer">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/R1-F_Fiber-based_interferometer.pdf">Spec sheet</a></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiber-Coupled Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
    </tr>
    <tr>
     <td class="tg-yw4l">Fiber-Coupled, Two-Color Interferometer</td>
+    <td class="tg-yw4l">R1-F-2C</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Fiber-Coupled, Two-Color Interferometer">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/files/diagnostics/R1-F-2C_Fiber-based_2-color_interferometer.pdf">Spec sheet</a></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/CO2.html">Refractive Index References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiber-Coupled, Two-Color Interferometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
@@ -361,36 +345,22 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
     <td class="tg-yw4l"><strong>Scattering</strong></td>
     <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec sheet</strong></td>
-    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Profile Thomson Scattering</td>
-    <td class="tg-yw4l">S1-T</td>
-    <td class="tg-yw4l">Diagnostics-Scattering-Thomson</td>
+    <td class="tg-yw4l">Profile Thomson Scattering-YAG</td>
+    <td class="tg-yw4l">S1-T-YAG</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=S1-T-YAG">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Profile Thomson Scattering Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <td class="tg-yw4l">Profile Thomson Scattering</td>
-    <td class="tg-yw4l">S1-T</td>
-    <td class="tg-yw4l">Diagnostics-Scattering-Thomson</td>
+    <td class="tg-yw4l">Profile Thomson Scattering-RUBY</td>
+    <td class="tg-yw4l">S1-T-RUBY</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=S1-T-RUBY">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Profile Thomson Scattering Quote" role="button">Get a Quote &raquo;</a></th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Rayleigh</td>
-    <td class="tg-yw4l">S1-R</td>
-    <td class="tg-yw4l">Diagnostics-Scattering-Rayleigh</td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
-    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Rayleigh Quote" role="button">Get a Quote &raquo;</a></th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Inverse Compton</td>
-    <td class="tg-yw4l">S1-IC</td>
-    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Inverse Compton">Request spec sheet</a></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/PTSrefs.html">Scattering References</a></td>
-    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Inverse Compton Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l"></td>
@@ -403,13 +373,13 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
     <td class="tg-yw4l"><strong>Radiation</strong></td>
     <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec sheet</strong></td>
-    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Photodiode bolometer</td>
     <td class="tg-yw4l">SP1-B</td>
-    <td class="tg-yw4l">Diagnostics-Spectroscopic-Bolometer</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Photodiode bolometer">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Photodiode Bolometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
@@ -430,14 +400,14 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
   <tr>
     <td class="tg-yw4l">Charge exchange particle neutral analyzer</td>
     <td class="tg-yw4l">SP1-NPA</td>
-    <td class="tg-yw4l">Diagnostics-Spectroscopic-NPA</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Charge exchange particle neutral analyzer">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Charge Exchange Particle Neutral Analyzer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Visible spectrometer</td>
     <td class="tg-yw4l">SP1-SP-VIS</td>
-    <td class="tg-yw4l">Diagnostics-Spectroscopic-Spectrometer-visible</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Visible spectrometer">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Visible Spectrometer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
@@ -451,7 +421,7 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
   <tr>
     <td class="tg-yw4l">VUV monochrometers</td>
     <td class="tg-yw4l">SP1-SP-VUV</td>
-    <td class="tg-yw4l">Diagnostics-Spectroscopic-Spectrometer-vuv</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=VUV monochrometers">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=VUV Monochrometers Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
@@ -479,14 +449,14 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
   <tr>
     <td class="tg-yw4l">Scintillator</td>
     <td class="tg-yw4l">SP1-S</td>
-    <td class="tg-yw4l">Diagnostics-Spectroscopic-Scintillator</td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Scintillator">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/scintillators.html">References</td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Scintillator Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <td class="tg-yw4l">Neutral Particle Analyzer</td>
     <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Neutral Particle Analyzer">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/npa.html">References</td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Neutral Particle Analyzer Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
@@ -501,7 +471,7 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
     <td class="tg-yw4l"><strong>Gas</strong></td>
     <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec sheet</strong></td>
-    <td class="tg-yw4l"><strong>Reference</strong></td>
+    <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
   <tr>
@@ -512,10 +482,18 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Gas Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
 </table>
+</div>
+
+<div class="col-md-4">
+            <p class="center"><a href="files/diagnostics1page.pdf"><img src="img/diagnostics1page.JPG" width="200" height="275"></a><br /><br />
+            </p> <p class="center"><a href="files/diagnostics1page.pdf">Diagnostics update for October 2017</a></p>
+          </div>
 
 
 
 <br></br>
+
+<div class="col-md-12">
 
 
 	<p>WSI has nearly a decade of experience designing and manufacturing diagnostics for plasma experiments. Browse our product listings to the left or download a <a href="pdf/Diagnostics.pdf">flyer (pdf)</a>.</p>
@@ -593,6 +571,8 @@ Size constraints. Diameter of port through which the probe must be inserted, dis
           port through which the coil must be inserted, perturbation to the
           plasma, et cetera.</li>
     </ul>
+
+    
 
 <a id="bdot"></a>
 	<h3>Magnetic Field Coils (B-dot)</h3>
@@ -1090,7 +1070,7 @@ here, and to our <a href="http://www.thingiverse.com/woodruffscientific/collecti
 
 
 
-
+</div>
 
 
 
