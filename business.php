@@ -31,7 +31,8 @@
 			<h3><strong><a href="https://www.linkedin.com/in/simonwoodruff">Dr. Simon Woodruff</a>
 </strong><span class="text-muted">President & CEO</span></h3>
 <p>Since 2005, Woodruff has lead the company through initial start-up phases.  He has established advisory boards consisting of  energy industry and scientific leaders, building the company from the ground up and opening the laboratory in Ballard, managing contracts from DOE, national laboratories and universities.  In the last year, under his direction, WSI beat 40 other companies for the opportunity to present to investors for the first time at the Northwest Entrepreneur Network&#8217;s <a href="http://www.nwen.org/index?option=com_events&amp;Itemid=15&amp;id=526">&#8216;First Look Forum&#8217;</a>, and subsequently was able to meet with leading venture capitalists.  He developed the strategy for the business over several years taking in advice at annual strategic planning meetings, inviting local experts and business leaders, following leadership during his employment in the Lawrence Livermore National Laboratory Fusion Energy Program.  Woodruff has ensure that the company maintains strategic partnerships with many organizations locally, nationally and internationally, and aims to continue to grow the business.</p>
-
+<p>E-mail: <a href="simon@woodruffscientific.com">simon@woodruffscientific.com</a></p>
+<p>Office: (206)905-9477</p>
 <br></br>
 
 
@@ -40,7 +41,8 @@
 
 <h3><strong><a href="https://www.linkedin.compub/felicia-edwards/16/447/13a">Felicia Edwards </a></strong><span class="text-muted">Office Manager</span></h3>
 <p>Felicia graduated with a bachelor's degree in Mathematics from the University of Washington. She has held various positions ranging from teaching to finances. She loves traveling along with meeting other people and learning about other cultures. Her pastimes include reading, soccer/football and eating.</p>
-
+<p>E-mail: <a href="felicia@woodruffscientific.com">felicia@woodruffscientific.com</a>
+<p>Office: (206)905-9477</p>
 <br></br>
 <br></br>
 
