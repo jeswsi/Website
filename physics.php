@@ -31,7 +31,7 @@
             <li><a href="mcnp6">MCNP6</a></li>
             <li><a href="cfd">Computational Fluid Dynamics</a></li>
             <li><a href="systems">Fusion Systems Code</a></li>
-            <li><a href="straylight">Stray Light Analysis</a></li>
+            <li><a href="opticalmodeling">Optical Modeling &amp; Ray-Tracing</a></li>
           </ul>
 
 	<h1>Physics</h1>
