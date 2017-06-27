@@ -43,20 +43,17 @@ Dam Break: <a href="img/output.avi">DamBreak.avi</a>, <a href="img/output.wmv">D
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Products</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
 <tr>
     <th class="tg-yw4l">OpenFOAM</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=OpenFOAM">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="https://openfoam.org/">OpenFOAM Referecnces</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=OpenFOAM" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">ElmerFEM</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=ElmerFEM">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="https://www.csc.fi/web/elmer">ElmerFEM References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=OpenFOAM" role="button">Get a Quote &raquo;</a></th>

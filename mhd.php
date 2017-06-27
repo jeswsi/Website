@@ -37,34 +37,29 @@
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Products</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
 <tr>
     <th class="tg-yw4l">NIMROD</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=NIMROD">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="https://nimrodteam.org/index.html">NIMROD References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=NIMROD" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">HiFi</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=HiFi">Request spec sheet</a></th>
-    <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"><a href="http://www.woodruffscientific.com/wiki/doku.php?id=hifi">HiFi References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HiFi" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">BOUT++</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=BOUT++">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://www-users.york.ac.uk/~bd512/bout/">BOUT++ References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=BOUT++" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">OpenFOAM</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=OpenFOAM">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="https://openfoam.org/">OpenFOAM References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=OpenFOAM" role="button">Get a Quote &raquo;</a></th>
@@ -152,7 +147,7 @@ extensive verification studies of the two-dimensional version of the
 code have been previously described [A.H. Glasser &amp; X.Z. Tang, Comp.
 Phys. Comm., 164 (2004); V.S. Lukin, Ph.D. thesis, Princeton University
 (2008)]. </p>
-<p>For more information see <a href="http://faculty.washington.edu/vlukin/HiFi_Framework.html">HiFi's website</a></p>
+<p>For more information see <a href="http://hifi-framework.webnode.com/hifi-framework/">HiFi's website</a></p>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HiFi Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 <a id="bout"></a>

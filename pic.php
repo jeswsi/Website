@@ -26,12 +26,10 @@
   </ol>
           
  <div class="col-md-6">
-      <p><a href="img/Simulations/PICfig.png"><img src="img/Simulations/PICfig.png" alt="iter" width="300" height="184" /></a><br />
-ITER</p>
+      <p><a href="img/Simulations/PICfig.png"><img src="img/Simulations/PICfig.png" alt="iter" width="300" height="184" /></a></p>
     </div>
     <div class="col-md-6">
-      <p><a href="img/Simulations/PICfig2.png"><img src="img/Simulations/PICfig2.png" alt="diiid" width="300" height="185" /></a><br />
-DIII-D</p>
+      <p><a href="img/Simulations/PICfig2.png"><img src="img/Simulations/PICfig2.png" alt="diiid" width="300" height="185" /></a></p>
     </div>
 
           
@@ -48,16 +46,14 @@ DIII-D</p>
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Product</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
     <tr>
     <td class="tg-yw4l">PIC Simulations</td>
-    <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=PIC Simulations">Request spec sheet</a></td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><a href="http://www.orbitalatk.com/magic/FormsPDF/MagicManual.pdf">PIC References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=PIC Simulations Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
 </table>

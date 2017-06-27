@@ -5,8 +5,8 @@
 	$head = file_get_contents('header.html');
 	echo $head;	
 	?>
-	<meta name="description" content="Stray light analysis for fusion, plasma energy, and physics labs. WSI has engineered and built vacuum systems, pulsed power systems, and high field magnets. We can perform basic Thermal and Structural analysis with FEM software.">
-  <title>Stray Light Analysis | Woodruff Scientific, Inc.</title>
+	<meta name="description" content="Optical Modeling & Ray-Tracing for fusion, plasma energy, and physics labs.">
+  <title>Optical Modeling &amp; Ray-Tracing | Woodruff Scientific, Inc.</title>
   </head>
 
   <body>
@@ -21,8 +21,8 @@
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="services">Services</a></li>
- 	 	<li><a href="engineering">Engineering</a></li>
-  		<li class="active">Stray Light Analysis</li>
+ 	 	<li><a href="engineering">Physics</a></li>
+  		<li class="active">Optical Modeling &amp; Ray-Tracing</li>
 	</ol>
 
 
@@ -37,7 +37,7 @@
     </div>
     
 
-	<h1>Stray Light Analysis</h1>
+	<h1>Optical Modeling and Ray-Tracing</h1>
 
 <div class="col-md-8">
     				<style type="text/css">
@@ -49,17 +49,27 @@
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Product</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
-    <tr>
-    <th class="tg-yw4l">Stray Light Analysis</th>
-    <th class="tg-yw4l"></th>
-    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Voltage monitors">Request spec sheet</a></th>
-    <th class="tg-yw4l"></th>
-    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Neutral Particle Analyzer Quote" role="button">Get a Quote &raquo;</a></th>
+  <tr>
+    <th class="tg-yw4l">LightTools</th>
+    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=OpticalModeling">Request spec sheet</a></th>
+    <th class="tg-yw4l"><a href="https://optics.synopsys.com/lighttools/">LightTools</a></th>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Optical Modeling Quote" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+  <tr>
+    <th class="tg-yw4l">Optica</th>
+    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=OpticalModeling">Request spec sheet</a></th>
+    <th class="tg-yw4l"><a href="http://www.opticasoftware.com/">Optica</a></th>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Optical Modeling Quote" role="button">Get a Quote &raquo;</a></th>
+  </tr>
+  <tr>
+    <th class="tg-yw4l">Zemax</th>
+    <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=OpticalModeling">Request spec sheet</a></th>
+    <th class="tg-yw4l"><a href="http://www.zemax.com/">Zemax</a></th>
+    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Optical Modeling Quote" role="button">Get a Quote &raquo;</a></th>
   </tr>
   </table>
 

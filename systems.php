@@ -39,14 +39,12 @@
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Product</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
     <tr>
     <td class="tg-yw4l">Fusion Systems Code</td>
-    <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Fusion Systems Code">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/costing.html">References</a></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fusion Systems Code" role="button">Get a Quote &raquo;</a></th>

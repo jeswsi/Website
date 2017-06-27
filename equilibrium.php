@@ -37,42 +37,36 @@
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Products</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
   <tr>
     <th class="tg-yw4l">CORSICA</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=CORSICA">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://woodruffscientific.com/corsica.html">CORSICA</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CORSICA" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">DCON</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=DCON">Request spec sheet</a></th>
-    <th class="tg-yw4l"></th>
+    <th class="tg-yw4l"><a href="http://aip.scitation.org/doi/abs/10.1063/1.4958328?journalCode=php">Glasser 2016</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=DCON" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">Fiesta</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Fiesta">Request spec sheet</a></th>
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiesta" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">NIMEQ</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=NIMEQ">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://woodruffscientific.com/files/ech_aps08_poster.pdf">Poster</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=NIMEQ" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">EQLFE</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=EQLFE">Request spec sheet</a></th>
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=EQLFE" role="button">Get a Quote &raquo;</a></th>
