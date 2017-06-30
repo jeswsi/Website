@@ -26,9 +26,12 @@
 	</ol>
 	
 	<h1>Fusion Systems Code</h1>
-	<p><a href="img/Simulations/Costing.JPG"><img src="img/Simulations/Costing.JPG" alt="cost" width="350" height="425" ALIGN="Left" Hspace="10"></a></p>
+	<p><a href="pdf/ARPAE_Costing_Report_2017.pdf"><img src="img/Simulations/Costing.JPG" alt="cost" width="350" height="425" Hspace="10"></a></p>
 
+	<h1><a href="pdf/ARPAE_Costing_Report_2017.pdf">ARPA-E Fusion Reactor Costing Report 2017</a></h1>
+	<p>During the last 5 years, WSI has developed a costing model in collaboration with Decysive Systems and most recently with Bechtel for the costing of most of the major fusion subsystems.  We have worked under contract with ARPA-E to produce the cost analysis for 4 of the ALPHA program fusion concepts. <a href="pdf/ARPAE_Costing_Report_2017.pdf">Click here to read the ARPA-E Fusion Reactor Costing Report 2017</a>.</p>
 
+<br />
 <div class="col-md-8">
             <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -53,9 +56,6 @@
 
 
 
-
-
-	<p>During the last 5 years, WSI has developed a costing model in collaboration with Decysive Systems and most recently with Bechtel for the costing of most of the major fusion subsystems.  We have worked under contract with ARPA-E to produce the cost analysis for 4 of the ALPHA program fusion concepts.  Report will be released June 1 2017, and otherwise please contact us for more information</p>
 
 
  
