@@ -43,42 +43,36 @@
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Products</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   </tr>
 <tr>
     <td class="tg-yw4l">Spheromak</td>
-    <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Spheromak">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/spheromaks.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Spheromak" role="button">Get a Quote &raquo;</a ></td>
   </tr>
   <tr>
     <td class="tg-yw4l">Field Reversed Configurations</td>
-    <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Field Reversed Configurations">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/frcs.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Field Reversed Configurations" role="button">Get a Quote &raquo;</a></td>
   </tr>
   <tr>
     <td class="tg-yw4l">Dense Plasma Foci</td>
-    <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Dense Plasma Foci">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/dpfs.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Dense Plasma Foci" role="button">Get a Quote &raquo;</a></td>
   </tr>
   <tr>
     <td class="tg-yw4l">Inertial Electrostatic Confinement</td>
-    <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Inertial Electrostatic Confinement">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Inertial Electrostatic Confinement" role="button">Get a Quote &raquo;</a></td>
   </tr>
   <tr>
     <td class="tg-yw4l">Neutron Source</td>
-    <td class="tg-yw4l"></td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Neutron Source">Request spec sheet</a></td>
     <td class="tg-yw4l"><a href="http://woodruffscientific.com/ns.html">References</a></td>
     <td class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Neutron Source" role="button">Get a Quote &raquo;</a></td>

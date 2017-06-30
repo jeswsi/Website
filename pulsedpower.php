@@ -125,7 +125,7 @@
     <tr>
     <td class="tg-yw4l">Guide Field Bank Module DAY 1</td>
     <td class="tg-yw4l"></td>
-    <<td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Guide Field Bank Module DAY 1">Request spec sheet</a></td>
+    <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Guide Field Bank Module DAY 1">Request spec sheet</a></td>
     <td class="tg-yw4l"></td>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Guide Field Bank Module DAY 1" role="button">Get a Quote &raquo;</a></th>
   </tr>

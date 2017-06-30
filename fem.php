@@ -76,20 +76,17 @@
 <table class="tg">
   <tr>
     <td class="tg-yw4l"><strong>Services</strong></td>
-    <td class="tg-yw4l"><strong>Model Number</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
   <tr>
     <th class="tg-yw4l">Thermal Analysis</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Thermal Analysis">Request spec sheet</a></th>
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Thermal Analysis" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
     <th class="tg-yw4l">Structural Analysis</th>
-    <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Structural Analysis">Request spec sheet</a></th>
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Structural Analysis" role="button">Get a Quote &raquo;</a></th>
