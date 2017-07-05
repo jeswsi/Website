@@ -29,7 +29,9 @@
 	<p><a href="pdf/ARPAE_Costing_Report_2017.pdf"><img src="img/Simulations/Costing.JPG" alt="cost" width="350" height="425" Hspace="10"></a></p>
 
 	<h1><a href="pdf/ARPAE_Costing_Report_2017.pdf">ARPA-E Fusion Reactor Costing Report 2017</a></h1>
-	<p>During the last 5 years, WSI has developed a costing model in collaboration with Decysive Systems and most recently with Bechtel for the costing of most of the major fusion subsystems.  We have worked under contract with ARPA-E to produce the cost analysis for 4 of the ALPHA program fusion concepts. <a href="pdf/ARPAE_Costing_Report_2017.pdf">Click here to read the ARPA-E Fusion Reactor Costing Report 2017</a>.</p>
+	<p>During the last 5 years, WSI has developed a costing model in collaboration with <a href="http://www.decysive.com/index.htm">Decysive Systems</a> and most recently with <a href="http://www.bechtel.com/">Bechtel</a> for the costing of most of the major fusion subsystems.  We have worked under contract with <a href="https://www.arpa-e.energy.gov/?q=arpa-e-programs/alpha">ARPA-E</a> to produce the cost analysis for 4 of the ALPHA program fusion concepts.</p>
+	
+	<p><a href="pdf/ARPAE_Costing_Report_2017.pdf">Click here to read the ARPA-E Fusion Reactor Costing Report 2017</a>.</p>
 
 <br />
 <div class="col-md-8">
@@ -44,13 +46,11 @@
     <td class="tg-yw4l"><strong>Product</strong></td>
     <td class="tg-yw4l"><strong>Spec Sheet</strong></td>
     <td class="tg-yw4l"><strong>References</strong></td>
-    <th class="tg-yw4l"></th>
   </tr>
     <tr>
     <td class="tg-yw4l">Fusion Systems Code</td>
     <td class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Fusion Systems Code">Request spec sheet</a></td>
-    <td class="tg-yw4l"><a href="http://woodruffscientific.com/costing.html">References</a></td>
-    <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fusion Systems Code" role="button">Get a Quote &raquo;</a></th>
+    <td class="tg-yw4l">References: <a href="http://woodruffscientific.com/costing.html">WSI</a>, <a href="http://www.decysive.com/TOK.htm">Decysive</a></td>
   </tr>
 </table>
 
