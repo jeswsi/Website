@@ -3,10 +3,10 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
 		<meta name="description" content="Contact information for Woodruff Scientific, Inc.">
- <title>Contact | Woodruff Scientific, Inc.</title> 
+ <title>Contact | Woodruff Scientific, Inc.</title>
      <!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script>
     //   function initialize() {
@@ -34,14 +34,35 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="company">Company</a></li>
   		<li class="active">Contact</li>
 	</ol>
-	<div class="col-md-12">	
+
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup" class="col-md-5">
+<form action="https://woodruffscientific.us10.list-manage.com/subscribe/post?u=f4b64a3a93dfc6088f685111d&amp;id=92569d866b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Check out what we're doing at WSI! Subscribe to our monthly newsletter:</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f4b64a3a93dfc6088f685111d_92569d866b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+	<div class="col-md-12">
 		<script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
 
 <div id="SkypeButton_Call_si_woodruff_1">
@@ -62,6 +83,8 @@ Skype.ui({
 
 </script>
 </div>
+
+
 	</div>
 	<div class="col-md-5">
 		<h1>Seattle Office</h1>
@@ -82,20 +105,25 @@ Skype.ui({
 
 	<div class="clearfix"></div>
 
-	<div class="col-md-5">
-		<h1>San Diego Office</h1>
-		<blockquote>7950 Silverton Ave, Suite 207<br />
-		San Diego, CA 92121<br />
-		USA<br />
-		</blockquote>
-		<p>(858) 348 4483</p>
-	</div>
+    <div class="col-md-5">
+        <h1>Santa Fe Office</h1>
+        <blockquote>3900 Paseo Del Sol<br />
+        Santa Fe NM 87507<br />
+        USA<br />
+        </blockquote>
+        <p>(206) 905 9477</p>
+        <p>Company Information: <a href="mailto:info@woodruffscientific.com">info@woodruffscientific.com</a> </p>
+        <p>Accounting inquiries: <a href="mailto:accounting@woodruffscientific.com">accounting@woodruffscientific.com</a></p>
+        <p>Job inquiries: <a href="mailto:hr@woodruffscientific.com">hr@woodruffscientific.com</a></p>
+        <p>Sales inquiries: <a href="mailto:sales@woodruffscientific.com">sales@woodruffscientific.com</a></p>
+    </div>
 
-	<div class="col-md-7">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d837.5646660789685!2d-117.1501653!3d32.8913287!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dbf8b62777bd7b%3A0x4e96da6f4a2fb60a!2s7950+Silverton+Ave+%23207%2C+San+Diego%2C+CA+92126!5e0!3m2!1sen!2sus!4v1465236645031" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-	</div>
+    <div class="col-md-7">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.711705451069!2d-106.04715784900372!3d35.63483308010788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87185b948cd9c579%3A0x568d891e6551eca3!2s3900+Paseo+del+Sol%2C+Santa+Fe%2C+NM+87507!5e0!3m2!1sen!2sus!4v1511197147863" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
 
-	<div class="clearfix"></div>
+    <div class="clearfix"></div>
+
 
 
 	<div class="col-md-5">
@@ -120,7 +148,7 @@ Skype.ui({
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>

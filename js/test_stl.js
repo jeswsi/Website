@@ -8,7 +8,7 @@ You are free to use the code in Commercial or non-commercial projects
 
 //Generate Beam Dump Variables
 
-function getStl()
+function getShape()
 {
     
     if (validate_form())
@@ -197,36 +197,6 @@ function validate_form ( )
     // if ( document.dumpform.name.value == "" )
     // {
     //     alert ( "Please fill in the 'Name' box." );
-    //     valid = false;
-    // }
-
-    // else if ( document.dumpform.email.value == "" )
-    // {
-    //     alert ( "Please fill in the 'Email' box." );
-    //     valid = false;
-    // }
-
-    // else if ( document.dumpform.school.value == "" )
-    // {
-    //     alert ( "Please fill in the 'School' box." );
-    //     valid = false;
-    // }
-
-    // else if ( document.dumpform.degree.value == "" )
-    // {
-    //     alert ( "Please fill in the 'Degree' box." );
-    //     valid = false;
-    // }
-
-    // else if ( document.dumpform.languages.value == "" )
-    // {
-    //     alert ( "Please fill in the 'Computer Familiarity' box." );
-    //     valid = false;
-    // }
-
-    // else if ( document.dumpform.math.value == "" )
-    // {
-    //     alert ( "Please fill in the 'Mathematics Familiarity' box." );
     //     valid = false;
     // }
 

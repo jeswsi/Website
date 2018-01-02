@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
   <meta name="description" content="">
   <title>Equilibrium | Woodruff Scientific, Inc.</title>
@@ -16,8 +16,8 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
         <li><a href="index">Home</a></li>
         <li><a href="services">Services</a></li>
@@ -27,6 +27,20 @@
 
 
 	<h1>Equilibrium</h1>
+
+
+    <p>Several tools are in use at WSI for exploring equilibria in magnetic
+fusion systems.  Primarily we use CORSICA for most of the major systems
+under study, however sometimes it is easier to set up an initial
+condition for MHD simulations with NIMEQ.  For the development of new
+magnetic configurations (say we are designing a tokamak from the ground
+up), then we use both FIESTA and CORSICA at the same time, in part to
+give a check of the configuration, and in part because FIESTA is so easy
+to use.  We also got involved with other equilibrium solvers over time,
+so have a small library of Matlab and FORTAN based models (such as
+Leuers EQLFE) which come in handy occasionally when coding up something
+straightforward.</p>
+
 
     <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -42,50 +56,39 @@
     <th class="tg-yw4l"></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">CORSICA</th>
+    <th class="tg-yw4l"><a href="#corsica">CORSICA</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=CORSICA">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://woodruffscientific.com/corsica.html">CORSICA</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CORSICA" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">DCON</th>
+    <th class="tg-yw4l"><a href="#DCON">DCON</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=DCON">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://aip.scitation.org/doi/abs/10.1063/1.4958328?journalCode=php">Glasser 2016</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=DCON" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">Fiesta</th>
+    <th class="tg-yw4l"><a href="#fiesta">Fiesta</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=Fiesta">Request spec sheet</a></th>
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiesta" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">NIMEQ</th>
+    <th class="tg-yw4l"><a href="#NIMEQ">NIMEQ</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=NIMEQ">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://woodruffscientific.com/files/ech_aps08_poster.pdf">Poster</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=NIMEQ" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">EQLFE</th>
+    <th class="tg-yw4l"><a href="#EQLFE">EQLFE</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=EQLFE">Request spec sheet</a></th>
     <th class="tg-yw4l"></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=EQLFE" role="button">Get a Quote &raquo;</a></th>
   </tr>
 </table>
 
-  <p>Several tools are in use at WSI for exploring equilibria in magnetic
-fusion systems.  Primarily we use CORSICA for most of the major systems
-under study, however sometimes it is easier to set up an initial
-condition for MHD simulations with NIMEQ.  For the development of new
-magnetic configurations (say we are designing a tokamak from the ground
-up), then we use both FIESTA and CORSICA at the same time, in part to
-give a check of the configuration, and in part because FIESTA is so easy
-to use.  We also got involved with other equilibrium solvers over time,
-so have a small library of Matlab and FORTAN based models (such as
-Leuers EQLFE) which come in handy occasionally when coding up something
-straightforward.</p>
 
-<a id="corsica"></a>
+<a name="corsica"></a>
 <h3>CORSICA</h3>
 <p>The LLNL CORSICA code provides a comprehensive predictive capability for
 axisymmetric toroidal plasmas.  It has been applied successfully to many
@@ -131,7 +134,7 @@ available transport models.
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CORSICA Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 
-<a id="dcon"></a>
+<a name="DCON"></a>
 <h3>DCON</h3>
 <p> We examine the stability of plasmas with the DCON code (A. H. Glasser Physics of Plasmas 23, 072505 (2016) ).  Shown are: left) Geometry variation for the tilt stability study and right) energies computed by DCON, showing a transition to stable at 14cm. DCON finds all modes stable for nn = 1 up to a stabilizing plate height of 14cm.</p>
 
@@ -144,7 +147,7 @@ available transport models.
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=CORSICA Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
 
-<a id="fiesta"></a>
+<a name="fiesta"></a>
 <h3>Fiesta</h3>
 <p>Fiesta started life as a simple forward equilibrium solver, but since
 then has been expanded into a toolbox for dealing with many equilibrium
@@ -161,7 +164,7 @@ calculate error fields and such like.</p>
 <p><a href="img/fiesta.png"><img src="img/fiesta.png"></a></p>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Fiesta Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
-<a id="nimeq"></a>
+<a name="NIMEQ"></a>
 <h3>NIMEQ</h3>
 <p>A Grad-Shafranov equilibrium solver is developed within the NIMROD
 framework to create plasma profiles for realistic geometry. The
@@ -173,7 +176,7 @@ used to advance the nonlinear iteration.</p>
 <blockquote><a href="files/ech_aps08_poster.pdf">Download Eric Howell's APS Presentation on NIMEQ (pdf)</a></blockquote>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=NIMEQ Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
-<a id="eqlfe"></a>
+<a name="EQLFE"></a>
 <h3>EQLFE</h3>
 <p>EQLFE is a set of Matlab scripts to solve the Grad-Shafranov equation
 for compact torus (CT, no hole through the middle) plasmas, written by
@@ -187,13 +190,13 @@ doublets and other CT configurations can be made at present. The user
 can write and use custom profile routines.</p>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=EQLFE Equilibrium Problem&body=Deadstart? Please submit basic parameters (R, a, Ip, etc):%0D%0A%0D%0AEFIT start? Please attach EFIT file:%0D%0A%0D%0APlease describe problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
- 
+
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>

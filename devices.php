@@ -84,14 +84,14 @@
 	<p>WSI can integrate diagnostics, power, magnets, DAQ, and vacuum to produce turn-key plasma research devices. We can deliver Spheromaks, Field Reversed Configurations, Mirrors, Dense Plasma Foci, Inertial Electrostatic Confinement, and many other devices. Let us know what you want built.</p>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com" role="button">Get a Quote &raquo;</a></p><br />
 
-<blockquote>“Woodruff Scientific Inc. constructed the Florida A&M University (FAMU)/Center for Plasma Science and Technology (CePaST) STPX (Spheromak Turbulent Plasma Experiment) under a subcontract funded by the U.S. Department of Energy… The STPX achieved plasma during the first attempt and CePaST is very pleased with the work performed by Woodruff Scientific Inc.” <a href="Woodruff-Testimonial.pdf">Full Testimonial (pdf)</a>
+<blockquote>“Woodruff Scientific Inc. constructed the Florida A&M University (FAMU)/Center for Plasma Science and Technology (CePaST) STPX (Spheromak Turbulent Plasma Experiment) under a subcontract funded by the U.S. Department of Energy… The STPX achieved plasma during the first attempt and CePaST is very pleased with the work performed by Woodruff Scientific Inc.” <a href="pdf/Woodruff-Testimonial.pdf">Full Testimonial (pdf)</a>
 	<footer>Charles A. Weatherford, Professor of Physics and Director of the Florida A&M University Center for Plasma Science and Technology 2013</footer></blockquote>
 
 <h3>References</h3>
 		<blockquote><a href="spheromaks.html">Spheromak References</a></blockquote>
 		<blockquote><a href="frcs.html">Field Reversed Configurations References</a></blockquote>
 		<blockquote><a href="dpfs.html">Dense Plasma Foci References</a></blockquote>
-		<blockquote><a href="iec.html">Inertial Electrostatic Confinement References</a></blockquote>
+		<blockquote><a href="iec_refs.html">Inertial Electrostatic Confinement References</a></blockquote>
 		<blockquote><a href="ns.html">Neutron Source References</a></blockquote>
 
 

@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
   <meta name="description" content="">
   <title>MCNP6 | Woodruff Scientific, Inc.</title>
@@ -16,8 +16,8 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
        	  <li><a href="index">Home</a></li>
       	  <li><a href="services">Services</a></li>
@@ -26,18 +26,25 @@
   </ol>
 
 
-<div class="col-md-4">
+
+
+
+
+
+
+	<h1>MCNP6</h1>
+
+    <p><a href="https://mcnp.lanl.gov/">MCNP</a> is a general-purpose Monte Carlo N-Particle code that can be used for neutron, photon, electron, or coupled neutron/photon/electron transport. Specific areas of application include, but are not limited to, radiation protection and dosimetry, radiation shielding, radiography, medical physics, nuclear criticality safety, Detector Design and analysis, nuclear oil well logging, Accelerator target design, Fission and fusion reactor design, decontamination and decommissioning. The code treats an arbitrary three-dimensional configuration of materials in geometric cells bounded by first- and second-degree surfaces and fourth-degree elliptical tori.</p>
+
+
+  <div>
       <p><a href="img/m.png"><img src="img/m.png" alt="MCNP6" width="300" height="300" /></a><br />
 </p>
 <p>Thickness of stabilizing plates increased from 2mm to 8mm; 10M particles used
 Get 94\% shine through at 2mm; With composite plates (8mm Be, 2-8mm Cu, 2mm W), get less shine through; Stabilizer needs to be latticed for exposure of sample to neutrons.</p>
     </div>
 
-
-
-
-
-	<h1>MCNP6</h1
+<blockquote><p><a href="https://www.researchgate.net/project/High-Power-Microwave-HPM-Source">View our current High Power Microwave Project on ResearchGate</a></p></blockquote>
 
   <div class="col-md-8">
             <style type="text/css">
@@ -61,23 +68,22 @@ Get 94\% shine through at 2mm; With composite plates (8mm Be, 2-8mm Cu, 2mm W), 
   </tr>
 </table>
 
-  <p><a href="https://mcnp.lanl.gov/">MCNP</a> is a general-purpose Monte Carlo N-Particle code that can be used for neutron, photon, electron, or coupled neutron/photon/electron transport. Specific areas of application include, but are not limited to, radiation protection and dosimetry, radiation shielding, radiography, medical physics, nuclear criticality safety, Detector Design and analysis, nuclear oil well logging, Accelerator target design, Fission and fusion reactor design, decontamination and decommissioning. The code treats an arbitrary three-dimensional configuration of materials in geometric cells bounded by first- and second-degree surfaces and fourth-degree elliptical tori.</p>
 
 
 
 
 
 
-    
-    
-  
+
+
+
 
   </div> <!-- /container -->
     </div> <!-- /wrap -->
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>

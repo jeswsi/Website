@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
   <meta name="description" content="">
   <title>Scientific Computing Bootcamp | Woodruff Scientific, Inc.</title>
@@ -16,17 +16,18 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
- 	 	<li><a href="#">Company</a></li>
+ 	 	<li><a href="physics">Physics</a></li>
   		<li class="active">Scientific Computing Bootcamp</li>
 	</ol>
 	<h1>Scientific Computing Bootcamp<br/>
 		<small>with emphasis on application to plasma physics and nuclear fusion</small></h1>
-	<blockquote>September 19-23, 2016<br/>
-		Location to be announced (Seattle Area)
+	<blockquote>Session A: Feb 26 - Mar 2, 2018<br/>
+		Session B: May 28 - Jun 1, 2018<br />
+		Location to be announced (Santa Fe, NM Area)
 		</blockquote>
 
 	<p>An introduction to some of the scientific computing tools that plasma physicists use regularly in addressing some of today's most pressing challenges. Intended audience: undergraduate students with at least some computing familiarity, energy, and an interest in pursuing high performance computing in their careers.</p>
@@ -49,8 +50,9 @@ interest in pursuing high performance computing in their careers.</p>
 		</ul>
 	</p>
 
+    <p>Cost: $40</p>
 
-	<p>For additional inforamtion, please e-mail <em><a href="mailto:info@woodruffscientific.com"> info@woodruffscientific.com</a></em></p>
+	<p>For additional information, please e-mail <em><a href="mailto:info@woodruffscientific.com"> info@woodruffscientific.com</a></em></p>
 
 	<blockquote>"Attending the Scientific Computing Bootcamp at Woodruff Scientific was an incredible learning experience, and tons of fun! I was able to connect with industry experts and learn many fundamentals of scientific computing – as well as their respective applications. Even if you have no prior knowledge of plasma physics or nuclear fusion, I highly recommend applying to this opportunity!” - Hannah Misenar</blockquote>
 
@@ -65,14 +67,14 @@ interest in pursuing high performance computing in their careers.</p>
  -->	<h4><a href="files/2015-Bootcamp-Summary.pdf">2015 Bootcamp Summary (pdf)</a></h4>
 
 <p class="center"><a class="btn btn-lg btn-primary" href="apply" role="button">Apply Now &raquo;</a></p><br />
-<p class="center"><big>Applications accepted through <strong>Friday, June 24</strong></big></p>
+<p class="center"><big>Applications accepted through <strong>Friday, Feb 16</strong></big></p>
     </div> <!-- /container -->
     </div> <!-- /wrap -->
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>
 

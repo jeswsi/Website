@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
   <meta name="description" content="">
   <title>MHD | Woodruff Scientific, Inc.</title>
@@ -16,8 +16,8 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
        	  <li><a href="index">Home</a></li>
       	  <li><a href="services">Services</a></li>
@@ -27,6 +27,15 @@
 
 
 	<h1>MHD</h1>
+
+  <p>Our main tools for MHD simulations are NIMROD, HiFi and to a lesser
+extent BOUT++. We have served several contracts with the NIMROD code,
+and we are exploring the use of HiFi for 3D geometries, particularly for
+the W7X stellarator. BOUT++ is running, and cross-code verification
+activities are planned.  We added OpenFOAM recently to the list of MHD
+code we run, primarily because of interest in incompressible MHD for
+fluid flows in blankets.  BOUT++ is written with C++, whereas NIMROD and
+HiFi are written in FORTRAN.</p>
 
   <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -41,25 +50,25 @@
     <td class="tg-yw4l"><strong>References</strong></td>
     <th class="tg-yw4l"></th>
 <tr>
-    <th class="tg-yw4l">NIMROD</th>
+    <th class="tg-yw4l"><a href="#nimrod">NIMROD</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=NIMROD">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="https://nimrodteam.org/index.html">NIMROD References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=NIMROD" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">HiFi</th>
+    <th class="tg-yw4l"><a href="#hifi">HiFi</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=HiFi">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://www.woodruffscientific.com/wiki/doku.php?id=hifi">HiFi References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HiFi" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">BOUT++</th>
+    <th class="tg-yw4l"><a href="#bout">BOUT++</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=BOUT++">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="http://www-users.york.ac.uk/~bd512/bout/">BOUT++ References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=BOUT++" role="button">Get a Quote &raquo;</a></th>
   </tr>
   <tr>
-    <th class="tg-yw4l">OpenFOAM</th>
+    <th class="tg-yw4l"><a href="#openfoam">OpenFOAM</a></th>
     <th class="tg-yw4l"><a href="mailto:sales@woodruffscientific.com?subject=OpenFOAM">Request spec sheet</a></th>
     <th class="tg-yw4l"><a href="https://openfoam.org/">OpenFOAM References</a></th>
     <th class="tg-yw4l"><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=OpenFOAM" role="button">Get a Quote &raquo;</a></th>
@@ -68,16 +77,9 @@
 
 
 
-  <p>Our main tools for MHD simulations are NIMROD, HiFi and to a lesser
-extent BOUT++. We have served several contracts with the NIMROD code,
-and we are exploring the use of HiFi for 3D geometries, particularly for
-the W7X stellarator. BOUT++ is running, and cross-code verification
-activities are planned.  We added OpenFOAM recently to the list of MHD
-code we run, primarily because of interest in incompressible MHD for
-fluid flows in blankets.  BOUT++ is written with C++, whereas NIMROD and
-HiFi are written in FORTRAN.</p>
 
-<a id="nimrod"></a>
+
+<a name="nimrod"></a>
   <h3>NIMROD</h3>
   <p> Spectral finite element discretization in two dimensions,
     Finite Fourier series in the third dimension,
@@ -135,7 +137,7 @@ STPX</p>
 
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Nimrod Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
-<a id="hifi"></a>
+<a name="hifi"></a>
 <h3>HiFi</h3>
 <p>
  The distinguishing capabilities of the HiFi code include adaptive
@@ -150,7 +152,7 @@ Phys. Comm., 164 (2004); V.S. Lukin, Ph.D. thesis, Princeton University
 <p>For more information see <a href="http://hifi-framework.webnode.com/hifi-framework/">HiFi's website</a></p>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=HiFi Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
-<a id="bout"></a>
+<a name="bout"></a>
 <h3>BOUT++</h3>
 <p>BOUT++ is a 3D plasma fluid simulation code which has been developed at
 York in collaboration with the MFE group at LLNL and the MCS division at
@@ -175,7 +177,7 @@ also be changed at run-time.</li>
 <p>For more information see <a href="http://www-users.york.ac.uk/~bd512/bout/">Ben Dudson's pages</a></p>
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=BOUT Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Submit Problem &raquo;</a></p>
 
-<a id="openfoam"></a>
+<a name="openfoam"></a>
 <h3>OpenFOAM</h3>
 <p>The OpenFOAM®  (Open Field Operation and Manipulation) CFD Toolbox is a free, open source CFD software package which has a large user base across most areas of engineering and science, from both commercial and academic organisations. The package includes an MHD solver: mhdFoam</p>
 <p>The mhdFoam solver is currently an incompressible magnetohydrodynamic
@@ -205,7 +207,7 @@ formulation</a>
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>

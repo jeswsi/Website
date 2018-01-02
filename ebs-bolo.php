@@ -10,7 +10,7 @@
 
         <?php
         $head = file_get_contents('header.html');
-        echo $head; 
+        echo $head;
         ?>
         <meta name="description" content="Online Bolometer Mount CAD generator">
 
@@ -20,8 +20,8 @@
         <div class="container">
             <?php
     $navbar = file_get_contents('navbar.html');
-    echo $navbar;   
-    ?>  
+    echo $navbar;
+    ?>
         <div class="col-md-6">
             <form action="" name="paramform" id="paramform" onsubmit="return false;">
             <div>
@@ -39,29 +39,37 @@
                   <option value="bolo">Bolometer</option>
                 </select>
                 </p>
-               
+
                 <p>
-                <label class="inlinelabel" for='size1' id='lsize1'>Aperture to base of mounting plate (2-4 in.)</label><br />
+                <label class="inlinelabel" for='size1' id='lsize1'>Aperture to base of mounting plate (2 - 4 in.)</label><br />
                 <input type="number" step="any" min="0" id="size1" name="size1" value="2.375" />
+                </p>
+                <p>
+                <label class="inlinelabel" for='size2' id='lsize2'>Aperture width (0.2 - 0.709 in.)</label><br />
+                <input type="number" step="any" min="0" id="size2" name="size2" value="0.709" />
+                </p>
+                <p>
+                <label class="inlinelabel" for='size3' id='lsize3'>Aperture Height (0.25 - 2.4 in.)</label><br />
+                <input type="number" step="any" min="0" id="size3" name="size3" value="2.4" />
                 </p>
 
 
                 <div id="volume"></div>
-                
+
                 <button onclick="getShape()">Generate Shape</button>
                 </fieldset>
             </div>
         </form>
         </div>
         <div class="col-md-6">
-            <iframe id="viewer" src="http://lowcost-env.ib4x3rx2xe.us-east-1.elasticbeanstalk.com/box/make?size1=1&size2=1&size3=1" width='500px' height='500px'></iframe>
+            <iframe id="viewer" src="http://lowcost-env2.ib4x3rx2xe.us-east-1.elasticbeanstalk.com/box/make?size1=1&size2=1&size3=1" width='500px' height='500px'></iframe>
         </div>
 
     </div><!--End of wrap-->
     </div><!--End of Container-->
     <?php
     $footer = file_get_contents('footer.html');
-    echo $footer;   
-    ?>  
+    echo $footer;
+    ?>
     </body>
 </html>

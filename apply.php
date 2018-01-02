@@ -3,7 +3,7 @@
   <head>
 	<?php
 	$head = file_get_contents('header.html');
-	echo $head;	
+	echo $head;
 	?>
   <meta name="description" content="">
   <title>Apply to Scientific Computing Bootcamp | Woodruff Scientific, Inc.</title>
@@ -18,19 +18,20 @@
 
 	<?php
 	$navbar = file_get_contents('navbar.html');
-	echo $navbar;	
-	?>	
+	echo $navbar;
+	?>
 	<ol class="breadcrumb">
   		<li><a href="index">Home</a></li>
  	 	<li><a href="#">Company</a></li>
   		<li class="active">Apply to Scientific Computing Bootcamp</li>
 	</ol>
 	<h1>Apply to Scientific Computing Bootcamp<br/>
-		<small>September 19-23, 2016 Session</small></h1>
+		<small>Feb 26 - Mar 2, 2018 Session</small></h1>
 
 		<div class="col-md-8">
 		<p><a href="shortcourse">Back to Course information</a></p>
-		<div class="panel panel-default">
+    <p>Application form is currently under construction. Please email <a href="mailto:info@woodruffscientific.com">info@woodruffscientific.com</a> for additional information.</p>
+		<!-- <div class="panel panel-default">
 			<div class="panel-body">
 				<form name="apply" action="finish" onsubmit="return validate_form ( );" method="post">
 				<div class="form-group">
@@ -88,14 +89,14 @@
     				<label for="languages">Anything else you'd like us to know?</label>
     				<textarea rows="3" class="form-control" name="anythingelse" placeholder=""></textarea>
     				<p class="help-block"></p>
-  				</div>	
+  				</div>
 
 
   				<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 			</div>
 		</div>
-		</div>
+		</div> -->
 		<div class="clearfix"></div>
 				<p><a href="course">Back to Course information</a></p>
 
@@ -104,8 +105,8 @@
 
 	<?php
 	$footer = file_get_contents('footer.html');
-	echo $footer;	
-	?>	   
+	echo $footer;
+	?>
   </body>
 </html>
 

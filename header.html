@@ -23,3 +23,30 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Global site tag (gtag.js) - Google AdWords: 828832381 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-828832381"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-828832381');
+</script>
+
+<!-- Event snippet for Click Email Button conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-828832381/h9fzCMit3HkQ_fSbiwM',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
