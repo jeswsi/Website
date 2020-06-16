@@ -19,36 +19,53 @@
 	echo $navbar;
 	?>
 	<ol class="breadcrumb">
-  		<li><a href="index">Home</a></li>
- 	 	<li><a href="services">Services</a></li>
-  		<li class="active">Physics</li>
-	</ol>
+  		<li class="breadcrumb-item"><a href="index">Home</a></li>
+  		<li class="breadcrumb-item active">Physics</li>
+  </ol>
+  
+  <div class="row">
+  <div class="col-md-3">
+  <?php
+  $navbar = file_get_contents('physics-catalog-nav.html');
+  echo $navbar;
+  ?>
+  </div>
 
-          <ul class="left">
-            <li><a href="equilibrium">Equilibrium, Stability &amp; Transport</a></li>
-            <li><a href="mhd">3D Resistive MHD</a></li>
-            <li><a href="pic">PIC Simulations</a></li>
-            <li><a href="mcnp6">MCNP6</a></li>
-            <li><a href="cfd">Computational Fluid Dynamics</a></li>
-            <li><a href="systems">Fusion Systems Code</a></li>
-            <li><a href="opticalmodeling">Optical Modeling &amp; Ray-Tracing</a></li>
-            <li><a href="shortcourse">Scientific Computing Bootcamp</a></li>
-          </ul>
 
-	<h1>Physics</h1>
+	<div class="col-md-9">
+
+
+
+	<h1>Physics Simulations</h1>
 
 <img src="img/Simulations/3DMHDsimulations.png" width="400">
 <img src="img/itersob.jpg" width="300">
 
+</div>
+</div><!-- row -->
+<div class="clearfix">
+  </div>
+
+  <br>
+
 	<p>Since 2005 we have performed simulations using some of the world's fastest supercomputers (using resources at the National Energy Research Scientific Computing Center).  We have also developed R&amp;D codes for specific applications.  We train students to run these large codes in our Scientific Computing Bootcamps.  Our customers for advanced simulations are at National Laboratories, universities and also in the private sector.  We are always keen to take on new simulation challenges, and would be keen to discuss your application.  For proprietary work we use our in-house cluster. We have expertise in problem formulation, pre-processing and post-processing with a small team collectively with over 100 years of experience in physics modeling. For less demanding problems, we also do a lot of analytic work with Matlab, Mathematica and also Excel!</p>
 
+<h4><a href="newsletters/WSI_2pager_Simulations.pdf">Download our Latest Simulations Newsletter</a> (pdf)</h4>
   <p>View our <a href="https://www.researchgate.net/profile/Simon_Woodruff">most recent publications on ResearchGate</a>.</p>
 
 <p><a class="btn btn-lg btn-primary" href="mailto:sales@woodruffscientific.com?subject=Physics Problem&body=Geometry:%0D%0A%0D%0AInitial Conditions:%0D%0A%0D%0ABoundary Conditions:%0D%0A%0D%0ADescription of Problem:%0D%0A%0D%0A" role="button">Email Us &raquo;</a></p>
 
 <p><a href="mailto:sales@woodruffscientific.com">Email us for more information</a>, call one of our scientists at 505 349 5811, or look through our pages on the left for examples of our body of work.</p>
 
-<p><a href="files/2015-Bootcamp-Summary.pdf">2015 Scientific Bootcamp Summary</a></p>
+<blockquote>
+"From plasma physics to high power microwave devices, Woodruff Scientific not only can
+do simulations, but also builds hardware at a reasonable cost and in a short schedule. I
+highly recommend Woodruff Scientific for practical and affordable results from PIC codes
+such as MAGIC."<br>
+Paul Finman, PhDEE<br>
+Technical Director<br>
+LCF Enterprises<br>
+</blockquote>
 
   <div class="clearfix"></div>
 <!--

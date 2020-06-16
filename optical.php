@@ -19,10 +19,10 @@
 	echo $navbar;
 	?>
 	<ol class="breadcrumb">
-  		<li><a href="index">Home</a></li>
- 	 	<li><a href="services">Services</a></li>
-		<li><a href="diagnostics">Diagnostics</a></li>
-  		<li class="active">Refractive-Index Measurements</li>
+  		<li class="breadcrumb-item"><a href="index">Home</a></li>
+ 	 	<li class="breadcrumb-item"><a href="services">Services</a></li>
+		<li class="breadcrumb-item"><a href="diagnostics">Diagnostics</a></li>
+  		<li class="breadcrumb-item active">Refractive-Index Measurements</li>
 	</ol>
 
 

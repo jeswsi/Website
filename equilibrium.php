@@ -19,10 +19,9 @@
 	echo $navbar;
 	?>
 	<ol class="breadcrumb">
-        <li><a href="index">Home</a></li>
-        <li><a href="services">Services</a></li>
-        <li><a href="physics">Physics</a></li>
-	<li class="active">Equilibrium</li>
+        <li class="breadcrumb-item"><a href="index">Home</a></li>
+        <li class="breadcrumb-item"><a href="physics">Physics</a></li>
+	<li class="breadcrumb-item active">Equilibrium</li>
 	</ol>
 
 
